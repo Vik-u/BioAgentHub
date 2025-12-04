@@ -1,0 +1,1047 @@
+1 
+Ancestral reconstruction of polyethylene terephthalate degrading cutinases reveals a 1 
+rugged and unexplored sequence-fitness landscape 2 
+ 3 
+Vanessa Vongsouthi1,2#, Rosemary Georgelin1#, Dana Matthews1,2#, Jake Saunders1, Brendon 4 
+M. Lee1, Jennifer Ton2, Adam M. Damry1, Rebecca L. Frkic1,3, Matthew A. Spence1,2*, Colin J. 5 
+Jackson1,2,3,4* 6 
+  7 
+1 Research School of Chemistry, Australian National University, Canberra, ACT 2601, 8 
+Australia 9 
+2 Samsara Eco, Sydney, NSW 2065, Australia 10 
+3 ARC Centre of Excellence for Innovations in Peptide & Protein Science, Research School 11 
+of Chemistry, Australian National University, Canberra, ACT 2601, Australia 12 
+4 ARC Centre of Excellence for Innovations in Synthetic Biology, Research School of 13 
+Chemistry, Australian National University, Canberra, ACT 2601, Australia 14 
+ 15 
+# These authors contributed equally to this work. 16 
+*To whom correspondence should be addressed: colin.jackson@anu.edu.au 17 
+ 18 
+ 19 
+The enzymatic degradation of polyethylene terephthalate (PET) is a promising method of 20 
+advanced plastic recycling. Traditional protein engineering methods often fall short in 21 
+exploring protein sequence space for optimal enzymes due to structural and rational 22 
+design limitations. Our study addresses this by using multiplexed ancestral sequence 23 
+reconstruction (mASR) to explore the evolutionary sequence space of PET -degrading 24 
+cutinases. With a dataset of 397 cutinase sequences, we created a diverse library of 25 
+ancestral sequences. Experimental characterization of 48 ancestral sequences revealed 26 
+a wide range of PETase activities, highlighting the value of mASR in uncovering functional 27 
+variants when compared to traditional ASR. Our results showed that PETase activity in 28 
+cutinases evolved through diverse pathways involving distal mutations to the active site, 29 
+and is readily accessible within this family. Additionally, our analysis of the PETase fitness 30 
+landscape using one -hot encoding (OHE) and local ancestral sequence embedding 31 
+(LASE) highlighted the effectiveness of LASE in capturing sequence features relevant to 32 
+activity. This work emphasizes the utility of mASR as a protein engineering tool for 33 
+identifying enhanced PET -degrading enzymes, and the advantages of the LASE 34 
+embedding scheme in mapping the PETase fitness landscape. 35 
+ 36 
+  37 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 2 
+Introduction 38 
+ 39 
+Over 350 million tonnes of plastic are produced annually, with the majority being derived from 40 
+petrochemicals1. However, the current global recycling rate of plastics is estimated to be less 41 
+than 10%, partially due to the technological constraints of mechanical (melt -extrusion) 42 
+recycling2. There is a pressing need to develop advanced and scalable recycling methods that 43 
+will enable the transition towards a circular plastic economy. In the last decade, enzymatic 44 
+depolymerization of plastics has emerged as one such advanced recycling method 3. The 45 
+enzymatic degradation of polyethylene terephthalate (PET), a versatile thermoplastic 46 
+commonly found in food and beverage packaging, and polyester textiles has received 47 
+particular interest3. 48 
+ 49 
+PET-degrading enzymes that have been characterized to date, including those classified as 50 
+cutinases4–6 (EC 3.1.1.74),  lipases7 (EC 3.1.1.3), and carboxylesterases8 (EC 3.1.1.1), belong 51 
+to the esterase subclass (EC 3.1) and are characterized by a catalytic triad (Ser -His-Asp) 52 
+typical of the α/β hydrolase fold superfamily. Cutinases have garnered significant interest due 53 
+to their ability to hydrolyse both aromatic and aliphatic polyesters9. Cutinases of bacterial5,9,10, 54 
+fungal7, and metagenomic11–13 origins have been studied for their PETase activity, including 55 
+Thc_Cut1 and Thc_Cut from Thermobifida cellulosilytica5, TfCut2 from Thermobifida fusca5, 56 
+HiC from Humicola insolens14, FsC from Fusarium solani pisi 15, and LCC from leaf -branch 57 
+compost metagenome 16. However, extant cutinases are often unsuitable for direct use in 58 
+industrial processes, necessitating optimisation to improve properties such as catalytic 59 
+efficiency17, stability under harsh conditions18,19, and to alleviate product inhibition 20. For 60 
+example, active site optimisation through rational design 6,10,21 and evolutionarily -guided 61 
+engineering20 has yielded significant improvements in PET hydrolysis across various cutinase 62 
+backgrounds. While structure-guided protein engineering has been effective in improving the 63 
+efficiency of extant PETases, it has provided little insight on the mechanisms by which PETase 64 
+activity emerges or has been optimized by evolution. 65 
+ 66 
+Ancestral sequence reconstruction (ASR), which utilizes a phylogenetic tree and a statistical 67 
+model of evolution to infer the sequences of extinct, ancestral proteins, can provide critical 68 
+insights into molecular evolution and functional diversification within protein families 22. ASR 69 
+has been useful in studying sequence -function relationships over protein families 23,24; such 70 
+insight can shed light on the topologies of fitness landscapes that dictate the adaptive potential 71 
+of proteins25. For example, ASR can give insight into the ruggedness (i.e. complexity) of a 72 
+fitness landscape over large spans of evolutionarily accessible sequence space to reveal 73 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 3 
+fitness peaks that are inaccessible through stepwise mutational approaches 24. In addition to 74 
+this, ASR is also frequently used to engineer enzymes with enhanced industrial properties22,26–75 
+28, making it a valuable tool in both protein engineering and understanding the mechanisms of 76 
+molecular evolution. 77 
+ 78 
+More recently, protein representation learning has become a widely used method in protein 79 
+engineering and evolutionary inference29,30. Protein language models (PLM), which are deep 80 
+neural networks trained to predict the identities of masked residues in a corpus of protein 81 
+sequences29–32, can map information sparse and high dimensional protein sequences to fixed-82 
+length vector representations. These vector representations capture the evolutionary and 83 
+biophysical features of protein sequences in the representation model’s latent embedding 84 
+space29,30. Indeed, PLMs have been used to learn the structure of fitness landscapes33–35, and 85 
+can learn evolutionary features when trained with ancestrally reconstructed sequence data36.  86 
+ 87 
+In this study, we applied ASR to explore the evolutionarily accessible sequence space of PET-88 
+degrading cutinases. Using a dataset of 397 extant cutinase sequences with significant 89 
+homology to known cutinases with PETase activity, we adopted a multiplexed ASR (mASR) 90 
+approach to generate a diverse library of ancestral cutinase sequences. Through experimental 91 
+characterization of 48 ancestral cutinases, we identified a broad range of PETase activities, 92 
+including between equivalent nodes on distinct yet statistically indifferent phylogenetic 93 
+topologies. Such findings highlight the importance of sampling diverse phylogenetic 94 
+backgrounds to uncover functional ancestral variants. Furthermore, our study analyzed the 95 
+topology of the PETase fitness landscape through two sequence embedding schemes: one -96 
+hot encoding (OHE) and the more recently described local ancestral sequence embedding 97 
+(LASE)36. We found that LASE was more effective in capturing cutinase sequence features 98 
+pertinent to PETase activity, demonstrating a clear pattern of iterative improvement in PETase 99 
+functionality throughout the sequence exploration phases of our study. This comprehensive 100 
+approach not only highlights the utility of mASR in uncovering novel PETase variants but also 101 
+emphasizes the role of advanced embedding techniques in mapping PETase fitness 102 
+landscapes. 103 
+ 104 
+ 105 
+ 106 
+ 107 
+ 108 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 4 
+Results 109 
+ 110 
+Multiplexed ASR yields functional PETases from diverse phylogenetic backgrounds. 111 
+ 112 
+We used ASR to explore the PETase functional sequence space of the cutinase family. To 113 
+maximize diversity in the local sequence space around known PETases, such as TfCut2 and 114 
+LCC, we employed the recently described multiplexed ASR (mASR)36. In brief, mASR samples 115 
+multiple statistically indifferent phylogenetic backgrounds from which to reconstruct ancestral 116 
+sequences from. This produces diverse libraries of ancestral proteins that span functional 117 
+sequence space over a distribution of realistic phylogenies. To achieve this, we performed 20 118 
+replicates of maximum likelihood (ML) phylogenetic inference and ASR on a single dataset of 119 
+397 extant cutinases with significant homology to Tfcut2 and LCC (E -value <= 1E -5). 120 
+Consistent with previous phylogenetic studies37, PET hydrolytic cutinases were resolved as a 121 
+polyphyletic group of two monophyletic lineages: the Thermobifida sp. PETases, which include 122 
+Tfcut2, T. cellulosytica cutinase and T. alba esterase 1 and the LCC-like PETases that include 123 
+LCC and BhrPETase. This topology was resolved consistently over all 20 phylogenetic priors 124 
+used for mASR ( Figure 1A). The placement of the PETase clades were supported by high 125 
+ultra-fast bootstrap approximations 38 (>= 0.95) and the ancestral nodes separating these 126 
+groups were reconstructed in CodeML from the PAML 39 suite with relatively high mean 127 
+posterior probability (>0.9; based on ASR statistical benchmarking studies 40). The resulting 128 
+ancestral sequence library comprised approximately 1600 unique sequences that 129 
+encompassed the evolutionarily accessible sequence space of the bacterial cutinase family.  130 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 5 
+ 131 
+Figure 1. Ancestral sequence reconstruction and characterization of ancestral cutinases. (A) 20 132 
+replicates of phylogenetic reconstruction of the cutinase family with fixed extant node locations. All 20 133 
+presented topologies failed rejection by the AU -test and are equally valid representations of the 134 
+underlying sequence alignment. Extant tips of interest ( Thermobifida cutinases, E5BBQ3, D4Q9N1, 135 
+E9LVH9 and metagenomic assembled cutinases A0A2H5ZR95, G9B757 (LCC)) are labeled). 136 
+Degradation of amorphous PET film by. (B) 20 extant and (C) 48 ancestral cutinases. The bulk soluble 137 
+products of PET hydrolysis (TPA, MHET, BHET) are measured by absorbance at 260 nm after 16 hours 138 
+incubation with the enzyme at 60 °C. Data are represented as the mean ± SEM (n = 3). (D) Phylogenetic 139 
+tree 55, ( E) 35 and ( F) 10, with ancestors 35_442, 55_547 and 10_543 highlighted. Each ancestor 140 
+belongs to equivalent nodes from independent phylogenetic topologies, and are the most recent 141 
+common ancestor of LCC and TfCut2, extant cutinases with known PETase activity.  142 
+ 143 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 6 
+We selected 48 ancestral nodes from 20 different trees with homology to the most recent 144 
+common ancestor of LCC and TfCut2 for experimental characterization and comparison to 145 
+extant cutinases. Specifically, these nodes were chosen from the recent ancestors of the LCC 146 
+and TfCut2 lineages (or the most recent common ancestor of both), with at least a single 147 
+sequence sampled from each of the 20 distinct phylogenetic trees. Each ancestral sequence 148 
+was selected as the maximum a posteriori (MAP) sequence that maximizes the posterior 149 
+probability over the full -length of the reconstructed protein. The variants were expressed, 150 
+purified and tested for PETase activity. The soluble expression level of each variant was 151 
+measured using the Bradford assay ( Supplementary Figure 1 ). PETase activity against 152 
+amorphous PET film was measured by UV absorbance at 260 nm to detect the soluble 153 
+products of PET hydrolysis after the removal of undigested film, including terephthalic acid 154 
+(TPA), mono(2 -hydroxyethyl) terephthalate (MHET), and bis(2 -hydroxyethyl) terephthalate 155 
+(BHET) ( Supplementary Figure 2 ). Among the extant cutinases, the highest PETase 156 
+activities were observed for LCC (A 260 nm = 0.34 ± 0.03), BhrPETase from bacterium HR29 157 
+(A260 nm = 0.49 ± 0.01), and a previously engineered variant of LCC with the mutations 158 
+F243I/D238C/S283C/Y127G (LCC ICCG) 6 (A260 nm = 0.54 ± 0.07), with other cutinases 159 
+showing lower activity (Figure 1B). Of the 48 ancestral variants, we observed PETase activity 160 
+for a number of ancestral cutinases from a diverse range of trees (Figure 1C). Several variants 161 
+(1_533, 35_442, 55_547, 70_439, 70_440, and 85_456) exhibited similar activity to the most 162 
+active extant cutinases, LCC and BhrPETase. From this group, we selected ancestors from 163 
+tree 35, node 442 (35_442; A260 nm = 0.37 ± 0.06) and tree 55, node 547 (55_547; A260 nm = 164 
+0.59 ± 0.09), for further investigation. Notably, these two ancestors belonged to equivalent 165 
+positions from two independent phylogenetic trees (Figure 1D-F), representing the most 166 
+recent common ancestor of LCC and TfCut2, and sharing 98.5% sequence identity to one 167 
+another.  168 
+ 169 
+Within the dataset of 48 ancestral sequences, 12 represent the same phylogenetic node (the 170 
+most recent common ancestor of LCC and TfCut2) over 12 different phylogenetic 171 
+backgrounds. Of these, 9 exhibited PETase activity while 3 were inactive on PET. 172 
+Interestingly, the PETase ancestor 55_547 and the inactive ancestor 10_543 both represent 173 
+equivalent positions (the most recent common ancestor of TfCut2 and LCC) in their respective 174 
+phylogenetic backgrounds and differ by only 9/261 positions, yet 55_547 has activity against 175 
+PET and 10_543 does not. The functional differences between these sequences arise solely 176 
+from the topology of the phylogenetic tree used to reconstruct them and drastically alters how 177 
+the evolution of PETase activity could be inferred. For example, in the case of the 55_547 178 
+phylogeny, PETase activity appears to be a promiscuous ancestral trait that existed prior to 179 
+the discovery of extant PETases (such as LCC and Thermobifida cutinases), whereas the 180 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 7 
+10_543 phylogeny supports the contradictory hypothesis that PETase activity emerged 181 
+independently in LCC -like and Thermobifida PETase lineages from an ancestor without 182 
+PETase activity. As both topologies failed rejection by the approximately unbiased (AU)41 test 183 
+and are statistically indifferent at representing the observed alignment data, it is not possible 184 
+to reject one of these hypotheses purely from a phylogenetic perspective. We also observe 185 
+no correlation between the mean posterior probability of an ancestor and its activity 186 
+(Supplementary Figure  5). This observation is somewhat counterintuitive, as the mean 187 
+posterior probability of a sequence, which is the statistical confidence in the identity of a 188 
+reconstructed ancestor, is often used to discriminate between poorly reconstructed sequences 189 
+(and hence likely to be less fit) and those that are likely to be functional and fit 40. Together, 190 
+these results highlight the importance of sampling diverse phylogenetic backgrounds during 191 
+ASR when accessing the functional sequence space of a protein family as minor phylogenetic 192 
+incongruencies can translate into significant functional differences in (equivalent) 193 
+reconstructed ancestral sequences. 194 
+ 195 
+Structural characterization and analysis of ancestral cutinases. 196 
+ 197 
+A comparative structural and sequence analysis of inactive and active ancestors suggests 198 
+that PET hydrolysis appears to be a trait that is evolutionarily accessible from within the 199 
+cutinase background. Unlike the I. sakaiensis PETase, which emerged through conformational 200 
+optimization of the first - and second-shells via obvious selection within the active site 42–44, 201 
+PETase activity in the TfCut2 and LCC PETase lineages appears to emerge through non -202 
+specific and likely neutral mutations that are often distal to the active site ( Figure 2A-C). 203 
+Indeed, analysis of ancestral cutinase sequences reveals virtually no differences in the PET 204 
+binding sites between PETase active and inactive variants ( Supplementary Figure 6 ). 205 
+Furthermore, mutations associated with a gain -of-function vary between the different 206 
+phylogenetic trees used to reconstruct the ancestral sequences. For example, ancestors 207 
+55_547 and 35_442 are each separated by 9 unique mutations from their closest relatives 208 
+without PETase activity (ancestors 10_543  with A15S, A36V, T49S, T92S, N109D, R114S, 209 
+N145R, I180V, S226A and 75_539 with A36V, T49D, T92S, M105Q, R114S, S124N, R167T, 210 
+P199S, A226S, respectively). Of these loss of function mutations, 3 are shared between either 211 
+background, 5 are unique and one is a reversion (S226A for 55_547, A226S for 35_442).   212 
+Intuitively, a combination (with at least one) of these mutations are required to be fixed in 213 
+either respective cutinase background to impart PETase activity. Similarly, ancestor 10_543 214 
+is separated by 8 mutations from its closest  relative with PETase activity (70_439 with E28Q, 215 
+S49D, S124N, R145N, V180I, P199S, S215T, A226S); of the 8 mutations associated with 216 
+gain-of-function in the background of 10_543, only 3 are specifically shared with gain -of-217 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 8 
+function mutations in 55_547. Nearly all functionally consequential mutations across 218 
+backgrounds are distal to the active site and PET binding pocket. This suggests that (i) there 219 
+are numerous (and diverse) molecular mechanisms by which PETase activity can emerge 220 
+from an ancestral cutinase without PETase activity, (ii) these mechanisms are not obviously 221 
+associated with a restructuring of the enzyme active site and (iii) PETase activity is readily 222 
+evolutionarily accessible within the cutinase family, consistent with recent observations of 223 
+PETases that have emerged from cutinase backgrounds11,12.  224 
+ 225 
+ 226 
+Figure 2. Structural characterization of 55_547 and 35_442. A) Positions of gain-of-function (GOF) 227 
+mutations in the inactive ancestor 10_543, and B) loss-of-function (LOF) mutations in the active 228 
+ancestors 55_547 and  C) 35_442. GOF and LOF mutations are shown as teal and red spheres, 229 
+respectively. AlphaFold45,46 was used to generate models of each ancestor. Most GOF/LOF mutations 230 
+are distal from the catalytic site residues (blue), and the putative PET binding site highlighted by the 231 
+docked 2HE-(MHET)3 ligand (black). Structural analysis of the active site residues H2 10, S132 and 232 
+D178 in ancestors 10_543, 55_547, and 35_442 shows uniform alignment, indicating that PETase 233 
+activity does not arise from modifications within the active sites ( SI.  Figure 4 ). D) Domain-swapped 234 
+homodimer observed in the crystal structure of ancestor 55_547 with two C-terminal strands swapped 235 
+(PDB 8ETX). The N- and C- termini of each subunit are indicated. The dimer is coordinated by sodium 236 
+ions (represented as purple spheres) in the crystal lattice. E) Positions on the flexible C -terminus of 237 
+ancestor 55_547 targeted for disulfide engineering, as shown in the crystal structure (left; PDB 8ETX), 238 
+resulting in the disulfide mutant N20 6C/S253C, as generated by AlphaFold 45,46 (right). The predicted 239 
+formation of an additional β-strand at the C-terminus, constrained by the disulfide bond, is shown. F) 240 
+PETase activity of ancestor 55_547 and the disulfide mutant N206C/S253C. The bulk soluble products 241 
+of PET hydrolysis (TPA, MHET, BHET) are measured by absorbance at 260 nm after 16 hours 242 
+incubation with the enzyme at 60 °C. Data are represented as the mean ± SEM (n = 3). 243 
+ 244 
+We next determined the crystal structures of two active ancestors, 35_442 (PDB 8ETY) and 245 
+55_547 (PDB 8ETX), and identified an additional pathway to optimizing PETase activity 246 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 9 
+beyond modification of the active site. Both ancestors crystallized in the C222 space group at 247 
+resolutions of 1.5 - 1.8 Å (Supplementary Table 1). Structural analysis revealed the formation 248 
+of domain-swapped dimers (Figure 2D). The observation of domain swapping, likely induced 249 
+by the high protein concentration in the crystallization conditions, suggests an intrinsic 250 
+flexibility of the C -terminus, a characteristic commonly observed in proteins previously 251 
+characterized to form domain-swapped dimers47. Given the flexible nature of the C-terminus, 252 
+it was hypothesized that introducing a disulfide bond to constrain this region into forming an 253 
+intramolecular β-sheet would enhance enzyme stability (Figure 2E). Furthermore, the chosen 254 
+site for the disulfide bond coincided with the predicted Ca2+/Mg2+ binding site of the ancestors 255 
+based on homology to extant cutinases, a region previously targeted for disulfide bond 256 
+engineering in TfCut2 and LCC for improved thermostability and PETase activity 6,48,49. We 257 
+introduced the disulfide mutation N20 6C/S253C to ancestor 55_547 and experimental 258 
+characterization of the resulting mutant demonstrated an approximately 2 -fold improvement 259 
+in whole-cell activity (A 260 nm  = 1.22 ± 0.22) ( Figure 2F) and a 1.5 -fold increase in soluble 260 
+expression levels compared to the 55_547 background determined by Bradford assay 261 
+(Supplementary Figure 5 ). In combination with our comparative analysis of the selected 262 
+inactive and active ancestors, the successful optimization of PETase activity via the 263 
+introduction of a disulfide bond distal to the active site illustrates that PETase activity within 264 
+the cutinase family can emerge and be enhanced through mechanisms that extend beyond 265 
+the structural reconfiguration of the active site. It is therefore likely that activity optimization is, 266 
+at least in part, being driven by thermodynamic and kinetic stabilization. 267 
+ 268 
+  269 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 10 
+Alternate Reconstructions of Ancestral Cutinases 35_442 and 55_547. 270 
+ 271 
+Figure 3. Alternate reconstructions and random recombinations of ancestral cutinases 35_442 272 
+and 55_547. Activity of alternate reconstructions of A) ancestor 55_547 and B) 35_442 against 273 
+amorphous PET film. The bulk soluble products of PET hydrolysis (TPA, MHET, BHET) are measured 274 
+by absorbance at 260 nm after 16 hours incubation with the enzyme at 60 °C. Data are represented as 275 
+the mean ± SEM (n = 3). C) Posterior probability distributions for ancestors 55_547 and 35_442.  276 
+ 277 
+ 278 
+We next experimentally characterized all alternate sequences of ancestors 55_547 (40 279 
+mutants) and 35_442 (29 mutants) that individually sampled each mutation that had been 280 
+ambiguously reconstructed. Here, we define ambiguity as any site where at least two amino 281 
+acids are reconstructed with a posterior probability of >= 0.2. This provided a high resolution 282 
+mutagenic map of the local sequence space around either of the ancestral PETase variants. 283 
+Ambiguously reconstructed sites were spatially distributed over the protein and not localized 284 
+to any specific functional area ( Supplementary Figure 7). Having already established that 285 
+the mean posterior probability of an ancestral sequence is a poor indicator of PETase activity 286 
+(Supplementary Figure 4B) and that relatively minor changes in the cutinase sequence can 287 
+drastically alter PETase activity, we hypothesized that the neighborhood of evolutionarily 288 
+possible (albeit less probable) sequences may contain mutations that benefit PETase activity. 289 
+This hypothesis was guided by recent ASR studies on the I. sakaiensis PETase branch of the 290 
+cutinase phylogeny where PETase activity appeared to emerge transiently within ancestral 291 
+lineages50. Experimental characterization revealed that all of the alternate reconstructions of 292 
+ancestors 55_547 and 35_442 demonstrated PETase activity that was comparable (or 293 
+reduced) to either respective ancestral background (Figure 3A-B).  294 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 11 
+ 295 
+ 296 
+ 297 
+Figure 4. PETase activities of recombined alternate reconstructions. A) Structure of 35_442 and 298 
+55_547 aligned. Positions selected for recombination are highlighted as spheres. The docked pose of 299 
+2HE-(MHET)3 is shown in a close-up of the binding and catalytic site, and residues that form the putative 300 
+PET binding site based on homology to LCC are shown. Residues comprising subsites -2 (green), -1 301 
+(blue) and +1 (brown) are highlighted. The catalytic residues Ser13 2-His210-Asp178 are also shown 302 
+(purple; red labels). B) Activity of recombined mutations from alternate reconstructions of 35_442 and 303 
+55_547 against amorphous PET film. The bulk soluble products of PET hydrolysis (TPA, MHET, BHET) 304 
+are measured by absorbance at 260 nm after 16 hours incubation with the enzyme at 60 °C. Data are 305 
+represented as the mean ± SEM (n = 3) and grouped based on mutations recombined in the background 306 
+of 55_547 (left) and 35_442 (middle). 307 
+ 308 
+A subset of randomly sampled combinations of single mutations from the alternate 309 
+reconstructions were selected to explore potential epistatic interactions and their impact on 310 
+PETase activity. The 7 selected mutations, E1 4D, E28Q, A36V, S52A (in 55_547), F9 4L, 311 
+S196A, and H247S, were recombined in various combinations from 2 to 5 point mutations in 312 
+the background of 35_442 and 55_547. E28Q, A36V, S52A, S196A, and H247S are surface 313 
+mutations, distal from the catalytic and putative PET binding site ( Figure 4A). In contrast, 314 
+F94L is positioned within the PET binding site, as deduced from docking of 2HE-(MHET)3 into 315 
+both 35_442 and 55_547 (Figure 4A), as well as structural homology to previously predicted 316 
+PET binding sites in LCC. As single mutations, E1 4D, E28Q, A36V, F94L and H247S were 317 
+considered neutral based on PETase activity relative to the 35_442 background, while S52A 318 
+and S19 6A exhibited decreased activity relative to 55_547. In our experimental 319 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 12 
+characterization, we identified 24 recombined variants with increased PETase activity relative 320 
+to their ancestral background ( Figure 4B). Specifically, 10 recombined variants in the 321 
+background of 55_547 showed increased PETase activity, with the most active being 322 
+E14D/E28Q/A36V (A 260 nm = 1.20 ± 0.26), E2 8Q/S196A (A 260 nm = 1.08 ± 0.05), and 323 
+E28Q/S52A/S196A (A260 nm = 1.03 ± 0.09). Similarly, 14 recombinations in the background 324 
+of 35_442 demonstrated increased activity, with the most active being E28Q/S196A (A260 nm 325 
+= 1.42 ± 0.29), E28Q/F94L (A260 nm = 0.99 ± 0.17), and E14D/H247S (A260 nm = 0.77 ± 0.08). 326 
+Interestingly, we identified 17 recombined variants that exhibited improved PETase activity 327 
+relative to LCC ICCG, the most active extant variant in the study, with 35_442 E2 8Q/S196A, 328 
+displaying ~2.5-fold higher activity. 329 
+ 330 
+The mutational analysis of the recombined variants highlighted E2 8Q as a key mutation, 331 
+present in 14 of the 17 variants that demonstrated enhanced activity compared to the 332 
+engineered LCC ICCG variant. This suggests a positive effect of E2 8Q on PETase activity; 333 
+however, this was only observed in the presence of other mutations from the recombinations. 334 
+The context dependence of E2 8Q is especially significant when considering the double 335 
+mutation E28Q/S196A, which was among the most active in both ancestral backgrounds. 336 
+When assessed independently in the 55_547 background, the E2 8Q mutation adversely 337 
+affected activity (A260 nm = 0.00 ± 0.00), and the S19 6A mutation similarly led to a reduction 338 
+in activity relative to the ancestor (A260 nm = 0.16 ± 0.02). However, the combination of these 339 
+mutations resulted in a significant increase in activity beyond the additive effects of the single 340 
+mutations (A260 nm = 1.08 ± 0.05), indicative of positive epistatic interactions. 341 
+ 342 
+Ruggedness analysis reveals epistasis in recombined mutations. 343 
+ 344 
+We next analyzed the topology of the PETase fitness landscape over the 196 cutinase 345 
+sequences characterized in this study. This was done both to build a holistic overview of 346 
+PETase evolution and function in the cutinase family and to assess the effectiveness of this 347 
+approach in exploring new -to-nature fitness peaks across functional sequence space. To 348 
+achieve this, we embedded cutinase sequences as nodes in a network graph where edges 349 
+connect each node to its k nearest (Euclidean) neighbors. The scheme used to embed 350 
+sequences therefore dictates the topology of the network graph. When this is the one -hot 351 
+encoding (OHE), the Euclidean distance between nodes in the network graph is proportional 352 
+to the number of mutations between the sequences they represent. The OHE graph network 353 
+therefore captures PETase activity as a function of the mutations between sequences when 354 
+the signal over the graph is the measured PETase activity (Figure 5A).  355 
+ 356 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 13 
+Encoding protein sequences as the hidden states of a PLM can capture comparatively richer 357 
+features than the OHE 29,30, albeit at the cost of interpretability over the network graph 36. 358 
+Euclidean distances in the latent space of a representation model may share no interpretable 359 
+relationship with equivalent Euclidean distances in the OHE space, therefore confounding the 360 
+interpretation of PETase activity over the network graph to non -linear distances instead of 361 
+simple mutational distances.  362 
+ 363 
+We embedded all characterized cutinases in a OHE basis and visualized the resulting 364 
+landscape in 2 dimensions with t -distributed stochastic neighbor embedding (tSNE) 365 
+dimensionality reduction. In this space, ancestral and extant cutinases form homogenous, 366 
+random clusters (Figure 5A). The alternate reconstructions of ancestors 55_547 and 35_442 367 
+and their recombinations are grouped as closely connected clusters around their respective 368 
+ancestral backgrounds. Despite their comparable PETase activity, sequences in both 369 
+backgrounds are resolved as independent components that share few direct edge 370 
+connections, suggesting that the PETase fitness landscape is multi -modal (i.e. there are 371 
+multiple solution spaces to competent PETase activity) when considering only naive, residue-372 
+wise OHE sequence embeddings.  373 
+ 374 
+We then reconstructed the PETase fitness landscape in a learned representation space. To 375 
+ensure that local features of the cutinase sequence space were captured by a PLM, we used 376 
+a recently described method of local ancestral sequence embedding (LASE)36. In brief, LASE 377 
+trains a small and family-specific deep learning model on ancestrally reconstructed sequence 378 
+datasets. The features learned by LASE capture the functional properties of proteins, such as 379 
+catalytic efficiency, in a non -linear space that is not interpretable with simple mutational 380 
+distances. Embedding in LASE can therefore reveal topological features of the fitness map 381 
+that are obfuscated in an OHE embedding.  382 
+ 383 
+Sequences in the LASE embedding space cluster according to their relative fitness and how 384 
+they were sampled (e.g. extant, ancestral, alternate or recombined; Figure 5B). For example, 385 
+all point mutations from alternate reconstructions and recombinations group together in a 386 
+single connected component in the LASE space, irrespective of the genetic background 387 
+(ancestors 55_547 or 35_442) they were introduced into. Moreso, ancestral and extant 388 
+sequences cluster into disconnected components, despite their often high degree of site-wise 389 
+sequence similarity. Indeed, the LASE representation space is highly structured relative to the 390 
+OHE space, where ancestral and extant sequences co-occur across distinct identity groups in 391 
+the network graph. This indicates that our sequence sampling strategy is highly structured and 392 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 14 
+systematic over an evolutionarily informative representation space, while appearing 393 
+somewhat random in the OHE space. 394 
+ 395 
+Finally, we used a graph signal processing approach to quantify ruggedness in the cutinase 396 
+PET fitness landscape. We define ruggedness as the non -linearity between the fitness of a 397 
+sequence and its neighbors in the network graph. We use the Dirichlet energy of the graph, 398 
+which describes the non-linearity of a signal over a graph, to measure this 36,51,52. In order to 399 
+make the Dirichlet energy interpretable as a node-wise local quantity, we calculate it over each 400 
+subgraph in the network defined by an edge-length of exactly 1, thus reducing its interpretation 401 
+to the deviation from linearity a node demonstrates relative only to its immediate neighbors; 402 
+the fitness signal over the network graph changes as a linear function (i.e. is smooth) over 403 
+nodes of the graph that are characterized by low local DEs. The local Dirichlet energy is 404 
+therefore a descriptor of how confounded by epistasis a sequence is. This analysis revealed 405 
+that the fitness landscape is most rugged over the cutinase variants with the greatest PETase 406 
+activity. Indeed, the node with the single highest local Dirichlet energy is also the fitness peak 407 
+(ancestor 55_547_E28Q/S196A). Importantly, this was true for both OHE and LASE network 408 
+graphs (Figure 5C; Supplementary Figure 9 ), indicating that the combinatorial mutations 409 
+E28Q/S196A in the 55_547 background would be unlikely to be introduced through a stepwise 410 
+mutagenesis approach due to the relatively low activity of each single mutation in isolation. 411 
+Together, these analyses demonstrate that mASR can effectively guide protein engineering 412 
+by discovering evolutionary features that are not immediately apparent, and can help navigate 413 
+rugged regions of sequence space to find fit enzyme variants that are not rationally obvious. 414 
+ 415 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 15 
+ 416 
+Figure 5. Analysis and regression on PETase sequence space. PETase sequences were 417 
+represented in A) OHE- and B) LASE-forms and projected into a 2 -dimensional space with 418 
+tSNE. Colour represents design stage and size represents activity (A 260 nm (a.u.)). The OHE 419 
+and LASE sequence data was then used to train regression models. C) The local Dirichlet 420 
+energy for each variant was determined over subgraphs that include the variant’s immediate 421 
+neighbors as determined by kNN . Edges connect variants that were found to be neighbors 422 
+and color represents the local Dirichlet energy calculated.  423 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 16 
+Discussion 424 
+ 425 
+In our investigation into the evolutionary sequence space of bacterial cutinases with PETase 426 
+activity, we employed multiplexed ASR36 to enhance our exploration. This method allowed us 427 
+to reconstruct and analyze ancestral cutinases across 20 diverse phylogenetic topologies, 428 
+moving beyond the constraints of a single -tree perspective. Our experimental 429 
+characterizations of 20 extant and 48 ancestral cutinases unveiled a wide spectrum of 430 
+activities against amorphous PET film (A260 nm = 0.00 - 0.59). Of particular interest were two 431 
+ancestors, 35_442 (A 260 nm = 0.37 ± 0.06) and 55_547 (A 260 nm = 0.59 ± 0.09), each 432 
+representing the most recent common ancestor of LCC 13 and TfCut25 on independent trees 433 
+and exhibiting similar activity to the most active extant cutinases, LCC (A 260 nm = A260 nm = 434 
+0.34 ± 0.03) and BhrPETase (A260 nm = 0.49 ± 0.01). Notably, the use of mASR was crucial 435 
+in uncovering the variability of ancestrally reconstructed sequences, as it revealed that 436 
+equivalent nodes from independent phylogenetic topologies exhibited highly varied activity 437 
+despite all topologies being equally valid representations of the underlying sequence 438 
+alignment based on the AU -test. While some ancestors were inactive, others showed 439 
+significant PETase activity comparable to characterized extant PETases. These observations 440 
+highlight the utility of the mASR method in improving both the success and robustness of ASR 441 
+applications in protein engineering. By embracing a wider array of evolutionary scenarios, 442 
+mASR allowed for a more comprehensive and reliable identification of functional sequences 443 
+relative to a single -tree approach. Multiplexed ASR may therefore become an important 444 
+component of ASR- and evolutionary-guided enzyme design strategies in the future.  445 
+  446 
+Our sequence and structural analysis of active and inactive ancestral cutinases provided 447 
+insights on the evolutionary emergence of PETase activity in the cutinase family. In particular, 448 
+our findings suggest that PETase activity in the TfCut2 and LCC PETase lineages has 449 
+emerged through neutral mutations that are distal to the active site, rather than specific 450 
+changes localized to the active site itself, as observed in the evolution of I. sakaiensis 451 
+PETase37. Our detailed examination of ancestors 35_442 and 55_547, along with their closest 452 
+inactive counterparts, highlighted unique gain-of-function mutations leading to PETase activity 453 
+from these distinct phylogenetic backgrounds. These findings imply the existence of multiple, 454 
+distinct evolutionary pathways for acquiring PETase functionality and indicate that PETase 455 
+activity is readily accessible within the cutinase family.  456 
+ 457 
+Our structural analysis also revealed the formation of domain -swapped dimers between 458 
+adjacent symmetry mates in the crystal structures of the ancestral variants 35_442 and 459 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 17 
+55_547. While possibly an artifact of the crystallization conditions, this observation suggests 460 
+a certain degree of structural flexibility in the C-terminus of these ancestors even in solution. 461 
+Based on this observation, we introduced a disulfide bond in the C -terminus of ancestor 462 
+55_547 that coincided with the predicted Ca 2+/Mg2+ binding site, a strategy homologous to 463 
+similar successful modifications in TfCut2 and LCC that were observed to improve stability 464 
+and activity6,48,49. Indeed, the introduction of the disulfide N20 6C/S253C resulted in a variant 465 
+of 55_547 with an approximately 2 -fold improvement in whole -cell activity and 1.5 -fold 466 
+improvement in soluble expression relative to the background ancestor. 467 
+ 468 
+We deepened our exploration of the evolutionary sequence space of the cutinase family by 469 
+addressing ambiguously reconstructed positions in the initial mASR. Ambiguous positions 470 
+were identified based on a posterior probability threshold of ≥ 0.2 for the second most probable 471 
+residue. Introducing these 69 alternate reconstructions as single mutations into 35_442 and 472 
+55_547, we observed that most mutations were either neutral or decreased PETase activity 473 
+relative to the ancestral background. However, when we recombined a random subset of the 474 
+alternate reconstructions, we observed several recombinations in the background of both 475 
+35_442 (E2 8Q/S196A) and 55_547 (E1 4D/E28Q/A36V) that displayed increased PETase 476 
+activity, not only relative to the initial ancestors, but also to an engineered variant of LCC with 477 
+enhanced activity, LCC ICCG 6. Notably, the most active recombinations exhibited activity 478 
+improvements that exceeded the additive effects predicted from their individual mutations, 479 
+highlighting positive epistatic interactions that contribute to their PETase activity. 480 
+ 481 
+To complement our experimental investigations, we modeled the sequence-fitness landscape 482 
+of all 196 cutinase sequences characterized in our study, employing a graph signal processing 483 
+approach that elucidates the complex topology of the PETase fitness landscape. This 484 
+methodology involved embedding cutinase sequences as nodes in a network graph, where 485 
+each node was connected to its k nearest (Euclidean) neighbors, thereby enabling a direct 486 
+comparison between two embedding schemes, OHE and LASE. While OHE provides a 487 
+straightforward mutational distance metric between sequences, it often oversimplifies the 488 
+nuanced relationship between sequence variation and function. In contrast, LASE, by training 489 
+a family-specific deep learning model on our dataset of ancestrally reconstructed sequences, 490 
+captures the functional properties of proteins in an abstract manner, revealing non -linear 491 
+sequence-activity relationships that are obscured in OHE representations. 492 
+ 493 
+Using LASE to map the sequence -fitness landscape, we highlighted iterative improvements 494 
+in PETase activity throughout the different phases of our sequence exploration of the cutinase 495 
+family. This embedding not only facilitated a deeper understanding of the functional 496 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 18 
+implications of sequence variation but also allowed us to identify clusters of sequences with 497 
+similar functional profiles, regardless of their evolutionary background. Moreover, our analysis 498 
+of the fitness landscape's ruggedness via LASE provided new insights into the role of epistasis 499 
+in PETase activity. The local Dirichlet energy calculations revealed that sequences with the 500 
+highest PETase activity were associated with the greatest ruggedness, suggesting that the 501 
+most functionally optimized variants emerge from complex interplays of multiple mutations 502 
+rather than from linear accumulations of beneficial single mutations. This observation 503 
+highlights the significance of epistatic interactions in driving the evolutionary innovation of 504 
+PETase activity, illustrating that successful enzyme variants often lie in regions of the fitness 505 
+landscape that are not readily accessed through single mutational steps, but can be accessed 506 
+using evolutionarily-guided approaches, such as mASR. 507 
+ 508 
+  509 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 19 
+Materials and Methods 510 
+ 511 
+Ancestral sequence reconstruction. 1000 sequences were collected from the NCBI non -512 
+redundant (nr) database with blast using LCC (UniProt: G9BY57) as seed and an e -value 513 
+cutoff of 1e-5. Sequence redundancy was removed to 90% ID in CD -HIT53. Signal peptides 514 
+were deleted using SignalP4.0 54. Alignment was performed using the GINSI protocol of 515 
+MAFFT55. 100 replicates of independent model parameterization and tree search (default 516 
+parameters) were performed using IQTREE2 56 on the NCI GADI supercomputer. The 517 
+sequence evolution model was parameterized using ModelFinder 57, as implemented in 518 
+IQTREE2. Branch supports were determined as the ultrafast bootstrap approximation 38 519 
+calculated to 1000 replicates, as implemented in IQTREE2. The Approximately unbiased test41 520 
+was conducted to 10000 replicates for all ML topologies. Empirical Bayesian ASR was 521 
+performed on 20 of the 100 trees that failed rejection by the AU test in CodeML 39 using the 522 
+ML replacement matrix (LG)58 with rates modeled as a discrete gamma parameterized with 4 523 
+rate categories.  524 
+ 525 
+Small-scale protein expression and purification. Plasmids were transformed by heat shock 526 
+into chemically competent BL21(DE3) E. coli cells and plated onto Lysogeny broth (LB) agar 527 
+supplemented with 100 µg/mL kanamycin and incubated at 37 °C overnight. A single colony 528 
+was used to inoculate 1.5 mL autoinduction media supplemented with 100 µg/mL kanamycin 529 
+in a 2.2 mL 96-well deep well block and grown at 1050 rpm at 37 °C for 5 hours, followed by 530 
+room temperature (RT; 25 °C) for 16 hours. 531 
+ 532 
+Cells were harvested by centrifugation at 2000 x g for 15 minutes at RT and resuspended in 533 
+Lysis Buffer (1X BugBuster® Protein Extraction Reagent (Merck -Millipore), 20 mM Tris, 300 534 
+mM NaCl, 1 U/ml Turbonuclease (Sigma) pH 8). The cell suspension was left to incubate at 535 
+RT for 20 minutes with gentle shaking. The lysate was separated from the insoluble cell debris 536 
+by centrifugation at 2250 x g for 1 hour at RT. 537 
+ 538 
+The clarified lysate was then diluted with 100 µl of Equilibration Buffer (20 mM Tris, 300 mM 539 
+NaCl pH 8) and purified by nickel-charged IMAC using a 96-well HisPurTM Ni-NTA Spin Plate 540 
+(ThermoFisher Scientific) equilibrated in Equilibration Buffer, washing the sample three times 541 
+with 250 µl of Wash Buffer (20 mM Tris, 300 mM NaCl, 10 mM imidazole pH 8) and eluting 542 
+with 250 µl of Elution Buffer (20 mM Tris, 300 mM NaCl, 150 mM imidazole pH 8). All 543 
+centrifugation steps following addition of Wash or Elution Buffer were at 1000 x g for 1 minute 544 
+at RT. The eluate was stored at 4 °C. Bradford assay was used to quantify the soluble 545 
+expression levels post-purification (Supplementary Figure 1). 546 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 20 
+ 547 
+UV absorbance assay for PET -degrading activity . For purified protein from 96 -well 548 
+expression and purification, 15 µl of the eluate from the 96 -well Ni-NTA purification and 285 549 
+µl of Reaction Buffer (50 mM Bicine pH 9) was added to a clear 96 -well plate. For purified 550 
+protein from large -scale expression and purification, 300 µl of 100 nM enzyme in Reaction 551 
+Buffer was added to a clear 96 -well plate. A single disk of amorphous PET (Goodfellow 552 
+ES301445) with 4 mm diameter and 0.25 mm thickness was added to each well. The plate 553 
+was incubated at 60 °C for 16 hours. Following incubation, 100 µl of the reaction solution was 554 
+transferred to a clear UV -transparent 96 -well plate and the absorbance was measured 555 
+between 240 to 300 nm in 10 nm steps using the Epoch Microplate Spectrophotometer 556 
+(BioTek) (Supplementary Figure 2). For comparison of activity of all variants, the absorbance 557 
+at 260 nm was used. Assays were repeated in triplicate for each variant.  558 
+ 559 
+Assay data processing. To correct for possible systematic error between replicate data 560 
+points, the mean absorbance at 260 nm for each replicate was determined. Using the mean 561 
+absorbance, a scaling coefficient was assigned to the replicates with the lowest and highest 562 
+mean values such that the mean of the scaled absorbance values equaled the mean of the 563 
+replicate with the mid -range mean value. To ensure scaling improved consistency between 564 
+replicates, correlograms of the data before ( Supplementary Figure 3 ) and after 565 
+(Supplementary Figure 4) scaling were produced to confirm the monotonic (rank) correlation 566 
+between replicates was preserved. 567 
+ 568 
+Cloning of TEV-PETase variants for crystallography studies. Primer pairs containing the 569 
+DNA sequence for the TEV cleavage site (5' -GAAAACCTGTATTTTCAAAGC-3') were 570 
+constructed, specific to each PETase variant. PCR was performed using these primers and 571 
+PETase variant genes to create mutant fragments. These fragments were reassembled using 572 
+Gibson Assembly59 and checked through Sanger sequencing to ensure the TEV cleavage site 573 
+was correctly introduced. 574 
+ 575 
+Large scale protein expression and purification. The TEV -PETase ancestral variants 576 
+plasmids were transformed using electroporation into electrocompetent E. cloni® cells 577 
+(Lucigen) and plated onto LB agar supplemented with 100 µg/mL kanamycin. The plates were 578 
+incubated overnight at 37 °C. A single colony was inoculated into a 10 mL solution of LB media 579 
+with 100 µg/mL kanamycin and incubated overnight at 37 °C and 180 rotations per minute 580 
+(rpm). This liquid starter culture was then added to 1 L of autoinduction media60 (6 g Na2HPO4, 581 
+3 g KH2PO4, 20 g tryptone, 5 g yeast extract, 5 g NaCl, 10 mL of 60% (v/v) glycerol, 5 mL of 582 
+10% (w/v) glucose, and 25 mL of 8% (w/v) lactose) with 100 µg/mL kanamycin and incubated 583 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 21 
+for 24 hours at room temperature and 180 rpm. The cells were separated from the media by 584 
+centrifugation at 5000 × g for 15 minutes at 4 °C and resuspended in lysis buffer (400 mM 585 
+NaCl, 25 mM imidazole, 1 U/mL Turbonuclease (Sigma), and 50 mM Tris -HCl pH 8.0). The 586 
+resuspended cell solution was lysed using two rounds of sonication at 50% power and pulse 587 
+time for 5 minutes, with 5 minutes on ice between sonication steps. Next, the sample was 588 
+centrifuged at 32000 × g for 60 minutes at 4 °C, and the soluble cell solution was separated 589 
+from the insoluble cell material and filtered through a 0.45 μm pore size filter. The filtered 590 
+soluble cell solution was passed through an equilibrated Nickel -charged IMAC using a 5 mL 591 
+HisTrap HP (GE Healthcare Life Sciences) in Lysis Buffer. The protein bound to the column 592 
+was eluted using elution buffer (400 mM NaCl, 500 mM imidazole, and 50 mM Tris -HCl pH 593 
+8.0). The protein sample was buffer exchanged to TEV reaction buffer (100 mM NaCl, 0.5 mM 594 
+EDTA, 1 mM DTT, 1% (v/v) glycerol, and 50 mM Tris -HCl pH 8.0) using a PD -10 desalting 595 
+column and diluted to 50 mL in this buffer. A 1 mL solution containing 1 mg/ml of purified TEV 596 
+protease was added and incubated at room temperature overnight. The cleaved sample was 597 
+passed through an equilibrated Nickel -charged IMAC using a 5 mL HisTrap HP (GE 598 
+Healthcare Life Sciences), and the flowthrough was collected. This flowthrough was 599 
+concentrated using the 3 kDa Amicon® ultra 15 mL centrifugal filters and filtered through a 600 
+0.22 μm filter. Finally, the cleaved protein was purified to homogeneity using size -exclusion 601 
+chromatography, and the HiLoad 26/600 Superdex 200 column (GE Healthcare Life Sciences) 602 
+was equilibrated in size-exclusion buffer (150 mM NaCl, 25 mM HEPES pH 7.5). 603 
+ 604 
+Protein crystallisation and structure determination. Proteins were concentrated using the 605 
+3 kDa Amicon® ultra 15 mL centrifugal filters to 15 -36 mg/ml and crystallized in 20% (w/v) 606 
+PEG 3350 alongside 0.2 M salt and BisTris buffer solution. Specifically, ancestor 55_547 in 607 
+0.2 M sodium/potassium tartrate, 0.1 M BisTris propane pH 7.5 and 20% (w/v) PEG 3350; and 608 
+ancestor 35_442 in 0.2 M sodium malonate, 0.1 M BisTris propane pH 6.5 and 20% (w/v) PEG 609 
+3350. The X -ray diffraction data were collected on the MX2 beamline at the Australian 610 
+Synchrotron61. The data was processed using XDS 62, and the phase problem was resolved 611 
+with molecular replacement using the PETase WT structure (PDB: 6EQE) as the search 612 
+model. The ligands and solvent molecules were removed and then used as the search model 613 
+part of Phaser (CCP4) 63. The structure was refined using phenix.refine 64 through multiple 614 
+iterative steps, and rebuilt each time with Coot 65. The structures of ancestors 55_547 and 615 
+35_442 were deposited in the protein data bank under the PDB ID of 8ETX and 8ETY, 616 
+respectively. 617 
+ 618 
+Protein sequence representations. To analyze PETase sequence space One -hot 619 
+embeddings (OHE) and Learned Ancestral Sequence Embeddings (LASE) were made. To 620 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 22 
+produce OHE, aligned PETase sequences were converted into a (20	 × 	267) vectors where 621 
+gaps were represented as a zero vector of length 20. The LASE embedding model was 622 
+implemented as a Transformer in PyTorch 2.0.1 as previously described36, with three encoder 623 
+blocks with 2-headed multihead attention (64 dimensions) and a feed-forward fully-connected 624 
+layer (128 dimensions). The LASE embedding model was trained with a masking percent of 625 
+15%, over 100 epochs with a batch size of 32 using the Adam optimizer. Loss was determined 626 
+as the categorical cross entropy loss. Performance over training was assessed with perplexity 627 
+and categorical accuracy (Supplementary Figure 8).  628 
+ 629 
+Local Dirichlet energy calculations. 630 
+To estimate the local ruggedness of each PETase variant, the k -nearest neighbors of each 631 
+node were used to produce a KNN sub-graph for each variant with scikit-learn 1.2.1. The kNN 632 
+sub-graphs were made symmetric by defining an edge in either direction to be a single edge. 633 
+The dirichlet energy was calculated as previously described52,66:  634 
+ 635 
+𝜆! = 1/𝑁	𝑦"𝐿𝑦 636 
+ 637 
+Where, λm is normalized dirichlet energy, N, the number of variants in the sub -graph, y, the 638 
+activity (absorbance) of each variant and L the graph Laplacian operator of the adjacency 639 
+matrix of each kNN sub-graph. 640 
+ 641 
+Acknowledgements 642 
+This research was undertaken in part using the MX2 beamline at the Australian Synchrotron, 643 
+part of ANSTO, and made use of the Australian Cancer Research Foundation (ACRF) 644 
+detector. 645 
+ 646 
+Availability 647 
+The code for model training and analysis is available on GitHub: 648 
+https://github.com/RSCJacksonLab/cutinase_lase  649 
+Deposited crystal structures are available on the Protein Data Bank under accession IDs 650 
+8ETY and 8ETX. 651 
+ 652 
+Note 653 
+ 654 
+The authors declare the following competing financial interest(s): C.J.J., V.V., M.A.S., R.G., 655 
+D.M., J.S., A.M.D., and J.T. hold equity in the plastic recycling company, Samsara Eco.  656 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 23 
+References 657 
+ 658 
+(1) Plastic pollution is growing relentlessly as waste management and recycling fall short, 659 
+says OECD. https://www.oecd.org/environment/plastic-pollution-is-growing-relentlessly-660 
+as-waste-management-and-recycling-fall-short.htm (accessed 2023-12-16). 661 
+(2) OECD. Global Plastics Outlook, 2022. https://www.oecd -662 
+ilibrary.org/content/publication/de747aef-en. 663 
+(3) Zhu, B.; Wang, D.; Wei, N. Enzyme Discovery and Engineering for Sustainable Plastic 664 
+Recycling. Trends Biotechnol.  2022, 40 (1), 22 –37. 665 
+https://doi.org/10.1016/j.tibtech.2021.02.008. 666 
+(4) Egmond, M. R.; de Vlieg, J. Fusarium Solani Pisi Cutinase. Biochimie 2000, 82 (11), 667 
+1015–1021. https://doi.org/10.1016/s0300-9084(00)01183-4. 668 
+(5) Herrero Acero, E.; Ribitsch, D.; Steinkellner, G.; Gruber, K.; Greimel, K.; Eiteljoerg, I.; 669 
+Trotscha, E.; Wei, R.; Zimmermann, W.; Zinn, M.; Cavaco-Paulo, A.; Freddi, G.; Schwab, 670 
+H.; Guebitz, G. Enzymatic Surface Hydrolysis of PET: Effect of Structural Diversity on 671 
+Kinetic Properties of Cutinases from Thermobifida. Macromolecules 2011, 44 (12), 672 
+4632–4640. https://doi.org/10.1021/ma200949p. 673 
+(6) Tournier, V.; Topham, C. M.; Gilles, A.; David, B.; Folgoas, C.; Moya -Leclair, E.; 674 
+Kamionka, E.; Desrousseaux, M. -L.; Texier, H.; Gavalda, S.; Cot, M.; Guémard, E.; 675 
+Dalibey, M.; Nomme, J.; Cioci, G.; Barbe, S.; Chateau, M.; André, I.; Duquesne, S.; 676 
+Marty, A. An Engineered PET Depolymerase to Break down and Recycle Plastic Bottles. 677 
+Nature 2020, 580 (7802), 216–219. https://doi.org/10.1038/s41586-020-2149-4. 678 
+(7) Carniel, A.; Valoni, É.; Nicomedes, J.; Gomes, A. da C.; Castro, A. M. de. Lipase from 679 
+Candida Antarctica (CALB) and Cutinase from Humicola Insolens Act Synergistically for 680 
+PET Hydrolysis to Terephthalic Acid. Process Biochem.  2017, 59, 84 –90. 681 
+https://doi.org/10.1016/j.procbio.2016.07.023. 682 
+(8) von Haugwitz, G.; Han, X.; Pfaff, L.; Li, Q.; Wei, H.; Gao, J.; Methling, K.; Ao, Y.; Brack, 683 
+Y.; Mican, J.; Feiler, C. G.; Weiss, M. S.; Bednar, D.; Palm, G. J.; Lalk, M.; Lammers, M.; 684 
+Damborsky, J.; Weber, G.; Liu, W.; Bornscheuer, U. T.; Wei, R. Structural Insights into 685 
+(Tere)Phthalate-Ester Hydrolysis by a Carboxylesterase and Its Role in Promoting PET 686 
+Depolymerization. ACS Catal.  2022, 12 (24), 15259 –15270. 687 
+https://doi.org/10.1021/acscatal.2c03772. 688 
+(9) Gamerith, C.; Vastano, M.; Ghorbanpour, S. M.; Zitzenbacher, S.; Ribitsch, D.; Zumstein, 689 
+M. T.; Sander, M.; Herrero Acero, E.; Pellis, A.; Guebitz, G. M. Enzymatic Degradation 690 
+of Aromatic and Aliphatic Polyesters by P. Pastoris Expressed Cutinase 1 from 691 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 24 
+Thermobifida Cellulosilytica. Front. Microbiol.  2017, 8, 938. 692 
+https://doi.org/10.3389/fmicb.2017.00938. 693 
+(10) Silva, C.; Da, S.; Silva, N.; Matamá, T.; Araújo, R.; Martins, M.; Chen, S.; Chen, J.; Wu, 694 
+J.; Casal, M.; Cavaco-Paulo, A. Engineered Thermobifida Fusca Cutinase with Increased 695 
+Activity on Polyester Substrates. Biotechnol. J.  2011, 6 (10), 1230 –1239. 696 
+https://doi.org/10.1002/biot.201000391. 697 
+(11) Amaral-Zettler, L. A.; Zettler, E. R.; Mincer, T. J. Ecology of the Plastisphere. Nat. Rev. 698 
+Microbiol. 2020, 18 (3), 139–151. https://doi.org/10.1038/s41579-019-0308-0. 699 
+(12) Qi, X.; Ji, M.; Yin, C.-F.; Zhou, N.-Y.; Liu, Y. Glacier as a Source of Novel Polyethylene 700 
+Terephthalate Hydrolases. Environ. Microbiol.  2023, 25 (12), 2822 –2833. 701 
+https://doi.org/10.1111/1462-2920.16516. 702 
+(13) Sulaiman, S.; Yamato, S.; Kanaya, E.; Kim, J. -J.; Koga, Y.; Takano, K.; Kanaya, S. 703 
+Isolation of a Novel Cutinase Homolog with Polyethylene Terephthalate -Degrading 704 
+Activity from Leaf-Branch Compost by Using a Metagenomic Approach. Appl. Environ. 705 
+Microbiol. 2012, 78 (5), 1556–1562. https://doi.org/10.1128/AEM.06725-11. 706 
+(14) Ronkvist, Å. M.; Xie, W.; Lu, W.; Gross, R. A. Cutinase -Catalyzed Hydrolysis of 707 
+Poly(Ethylene Terephthalate). Macromolecules 2009, 42 (14), 5128 –5138. 708 
+https://doi.org/10.1021/ma9005318. 709 
+(15) Vertommen, M. A. M. E.; Nierstrasz, V. A.; Veer, M. van der; Warmoeskerken, M. M. C. 710 
+G. Enzymatic Surface Modification of Poly(Ethylene Terephthalate). J. Biotechnol. 2005, 711 
+120 (4), 376–386. https://doi.org/10.1016/j.jbiotec.2005.06.015. 712 
+(16) Akutsu-Shigeno, Y.; Adachi, Y.; Yamada, C.; Toyoshima, K.; Nomura, N.; Uchiyama, H.; 713 
+Nakajima-Kambe, T. Isolation of a Bacterium That Degrades Urethane Compounds and 714 
+Characterization of Its Urethane Hydrolase. Appl. Microbiol. Biotechnol.  2006, 70 (4), 715 
+422–429. https://doi.org/10.1007/s00253-005-0071-1. 716 
+(17) Ma, Y.; Yao, M.; Li, B.; Ding, M.; He, B.; Chen, S.; Zhou, X.; Yuan, Y. Enhanced 717 
+Poly(Ethylene Terephthalate) Hydrolase Activity by Protein Engineering. Engineering 718 
+2018, 4 (6), 888–893. https://doi.org/10.1016/j.eng.2018.09.007. 719 
+(18) Cui, Y.; Chen, Y.; Liu, X.; Dong, S.; Tian, Y.; Qiao, Y.; Mitra, R.; Han, J.; Li, C.; Han, X.; 720 
+Liu, W.; Chen, Q.; Wei, W.; Wang, X.; Du, W.; Tang, S.; Xiang, H.; Liu, H.; Liang, Y.; 721 
+Houk, K. N.; Wu, B. Computational Redesign of a PETase for Plastic Biodegradation 722 
+under Ambient Condition by the GRAPE Strategy. ACS Catal. 2021, 11 (3), 1340–1350. 723 
+https://doi.org/10.1021/acscatal.0c05126. 724 
+(19) Son, H. F.; Cho, I. J.; Joo, S.; Seo, H.; Sagong, H.-Y.; Choi, S. Y.; Lee, S. Y.; Kim, K.-J. 725 
+Rational Protein Engineering of Thermo -Stable PETase from Ideonella Sakaiensis for 726 
+Highly Efficient PET Degradation. ACS Catal.  2019, 9 (4), 3519 –3526. 727 
+https://doi.org/10.1021/acscatal.9b00568. 728 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 25 
+(20) Wei, R.; Oeser, T.; Schmidt, J.; Meier, R.; Barth, M.; Then, J.; Zimmermann, W. 729 
+Engineered Bacterial Polyester Hydrolases Efficiently Degrade Polyethylene 730 
+Terephthalate Due to Relieved Product Inhibition. Biotechnol. Bioeng. 2016, 113 (8), 731 
+1658–1665. https://doi.org/10.1002/bit.25941. 732 
+(21) Hellesnes, K. N.; Vijayaraj, S.; Fojan, P.; Petersen, E.; Courtade, G. Biochemical 733 
+Characterization and NMR Study of a PET -Hydrolyzing Cutinase from Fusarium Solani 734 
+Pisi. Biochemistry 2023, 62 (8), 1369 –1375. 735 
+https://doi.org/10.1021/acs.biochem.2c00619. 736 
+(22) Spence, M. A.; Kaczmarski, J. A.; Saunders, J. W.; Jackson, C. J. Ancestral Sequence 737 
+Reconstruction for Protein Engineers. Curr. Opin. Struct. Biol.  2021, 69, 131 –141. 738 
+https://doi.org/10.1016/j.sbi.2021.04.001. 739 
+(23) Starr, T. N.; Zepeda, S. K.; Walls, A. C.; Greaney, A. J.; Alkhovsky, S.; Veesler, D.; 740 
+Bloom, J. D. ACE2 Binding Is an Ancestral and Evolvable Trait of Sarbecoviruses. Nature 741 
+2022, 603 (7903), 913–918. https://doi.org/10.1038/s41586-022-04464-z. 742 
+(24) Meger, A. T.; Spence, M. A.; Sandhu, M.; Matthews, D.; Chen, J.; Jackson, C. J.; Raman, 743 
+S. Rugged Fitness Landscapes Minimize Promiscuity in the Evolution of Transcriptional 744 
+Repressors. Cell Syst.  2024, 15 (4), 374 -387.e6. 745 
+https://doi.org/10.1016/j.cels.2024.03.002. 746 
+(25) Hartman, E. C.; Tullman-Ercek, D. Learning from Protein Fitness Landscapes: A Review 747 
+of Mutability, Epistasis, and Evolution. Curr. Opin. Syst. Biol.  2019, 14, 25 –31. 748 
+https://doi.org/10.1016/j.coisb.2019.02.006. 749 
+(26) Livada, J.; Vargas, A. M.; Martinez, C. A.; Lewis, R. D. Ancestral Sequence 750 
+Reconstruction Enhances Gene Mining Efforts for Industrial Ene Reductases by 751 
+Expanding Enzyme Panels with Thermostable Catalysts. ACS Catal. 2023, 13 (4), 2576–752 
+2585. https://doi.org/10.1021/acscatal.2c03859. 753 
+(27) Thomson, R. E. S.; Carrera -Pacheco, S. E.; Gillam, E. M. J. Engineering Functional 754 
+Thermostable Proteins Using Ancestral Sequence Reconstruction. J. Biol. Chem. 2022, 755 
+298 (10). https://doi.org/10.1016/j.jbc.2022.102435. 756 
+(28) Gumulya, Y.; Baek, J.-M.; Wun, S.-J.; Thomson, R. E. S.; Harris, K. L.; Hunter, D. J. B.; 757 
+Behrendorff, J. B. Y. H.; Kulig, J.; Zheng, S.; Wu, X.; Wu, B.; Stok, J. E.; De Voss, J. J.; 758 
+Schenk, G.; Jurva, U.; Andersson, S.; Isin, E. M.; Bodén, M.; Guddat, L.; Gillam, E. M. J. 759 
+Engineering Highly Functional Thermostable Proteins Using Ancestral Sequence 760 
+Reconstruction. Nat. Catal. 2018, 1 (11), 878–888. https://doi.org/10.1038/s41929-018-761 
+0159-5. 762 
+(29) Rives, A.; Meier, J.; Sercu, T.; Goyal, S.; Lin, Z.; Liu, J.; Guo, D.; Ott, M.; Zitnick, C. L.; 763 
+Ma, J.; Fergus, R. Biological Structure and Function Emerge from Scaling Unsupervised 764 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 26 
+Learning to 250 Million Protein Sequences. Proc. Natl. Acad. Sci.  2021, 118 (15), 765 
+e2016239118. https://doi.org/10.1073/pnas.2016239118. 766 
+(30) Lin, Z.; Akin, H.; Rao, R.; Hie, B.; Zhu, Z.; Lu, W.; Smetanin, N.; Verkuil, R.; Kabeli, O.; 767 
+Shmueli, Y.; dos Santos Costa, A.; Fazel-Zarandi, M.; Sercu, T.; Candido, S.; Rives, A. 768 
+Evolutionary-Scale Prediction of Atomic-Level Protein Structure with a Language Model. 769 
+Science 2023, 379 (6637), 1123–1130. https://doi.org/10.1126/science.ade2574. 770 
+(31) Elnaggar, A.; Heinzinger, M.; Dallago, C.; Rehawi, G.; Wang, Y.; Jones, L.; Gibbs, T.; 771 
+Feher, T.; Angerer, C.; Steinegger, M.; Bhowmik, D.; Rost, B. ProtTrans: Toward 772 
+Understanding the Language of Life Through Self -Supervised Learning. IEEE Trans. 773 
+Pattern Anal. Mach. Intell.  2022, 44 (10), 7112 –7127. 774 
+https://doi.org/10.1109/TPAMI.2021.3095381. 775 
+(32) Alley, E. C.; Khimulya, G.; Biswas, S.; AlQuraishi, M.; Church, G. M. Unified Rational 776 
+Protein Engineering with Sequence-Based Deep Representation Learning. Nat. Methods 777 
+2019, 16 (12), 1315–1322. https://doi.org/10.1038/s41592-019-0598-1. 778 
+(33) Chen, L.; Zhang, Z.; Li, Z.; Li, R.; Huo, R.; Chen, L.; Wang, D.; Luo, X.; Chen, K.; Liao, 779 
+C.; Zheng, M. Learning Protein Fitness Landscapes with Deep Mutational Scanning Data 780 
+from Multiple Sources. Cell Syst.  2023, 14 (8), 706 -721.e5. 781 
+https://doi.org/10.1016/j.cels.2023.07.003. 782 
+(34) D’Costa, S.; Hinds, E. C.; Freschlin, C. R.; Song, H.; Romero, P. A. Inferring Protein 783 
+Fitness Landscapes from Laboratory Evolution Experiments. PLOS Comput. Biol. 2023, 784 
+19 (3), e1010956. https://doi.org/10.1371/journal.pcbi.1010956. 785 
+(35) Hie, B. L.; Yang, K. K.; Kim, P. S. Evolutionary Velocity with Protein Language Models 786 
+Predicts Evolutionary Dynamics of Diverse Proteins. Cell Syst. 2022, 13 (4), 274-285.e6. 787 
+https://doi.org/10.1016/j.cels.2022.01.003. 788 
+(36) Matthews, D. S.; Spence, M. A.; Mater, A. C.; Nichols, J.; Pulsford, S. B.; Sandhu, M.; 789 
+Kaczmarski, J. A.; Miton, C. M.; Tokuriki, N.; Jackson, C. J. Leveraging Ancestral 790 
+Sequence Reconstruction for Protein Representation Learning. bioRxiv December 21, 791 
+2023, p 2023.12.20.572683. https://doi.org/10.1101/2023.12.20.572683. 792 
+(37) Joho, Y.; Vongsouthi, V.; Spence, M. A.; Ton, J.; Gomez, C.; Tan, L. L.; Kaczmarski, J. 793 
+A.; Caputo, A. T.; Royan, S.; Jackson, C. J.; Ardevol, A. Ancestral Sequence 794 
+Reconstruction Identifies Structural Changes Underlying the Evolution of Ideonella 795 
+Sakaiensis PETase and Variants with Improved Stability and Activity. Biochemistry 2023, 796 
+62 (2), 437–450. https://doi.org/10.1021/acs.biochem.2c00323. 797 
+(38) Hoang, D. T.; Chernomor, O.; von Haeseler, A.; Minh, B. Q.; Vinh, L. S. UFBoot2: 798 
+Improving the Ultrafast Bootstrap Approximation. Mol. Biol. Evol. 2018, 35 (2), 518–522. 799 
+https://doi.org/10.1093/molbev/msx281. 800 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 27 
+(39) Yang, Z. PAML 4: Phylogenetic Analysis by Maximum Likelihood. Mol. Biol. Evol. 2007, 801 
+24 (8), 1586–1591. https://doi.org/10.1093/molbev/msm088. 802 
+(40) Eick, G. N.; Bridgham, J. T.; Anderson, D. P.; Harms, M. J.; Thornton, J. W. Robustness 803 
+of Reconstructed Ancestral Protein Functions to Statistical Uncertainty. Mol. Biol. Evol. 804 
+2017, 34 (2), 247–261. https://doi.org/10.1093/molbev/msw223. 805 
+(41) Shimodaira, H. An Approximately Unbiased Test of Phylogenetic Tree Selection. Syst. 806 
+Biol. 2002, 51 (3), 492–508. https://doi.org/10.1080/10635150290069913. 807 
+(42) Han, X.; Liu, W.; Huang, J.-W.; Ma, J.; Zheng, Y.; Ko, T.-P.; Xu, L.; Cheng, Y.-S.; Chen, 808 
+C.-C.; Guo, R. -T. Structural Insight into Catalytic Mechanism of PET Hydrolase. Nat. 809 
+Commun. 2017, 8 (1), 2106. https://doi.org/10.1038/s41467-017-02255-z. 810 
+(43) Guo, B.; Vanga, S. R.; Lopez-Lorenzo, X.; Saenz-Mendez, P.; Ericsson, S. R.; Fang, Y.; 811 
+Ye, X.; Schriever, K.; Bäckström, E.; Biundo, A.; Zubarev, R. A.; Furó, I.; Hakkarainen, 812 
+M.; Syrén, P. -O. Conformational Selection in Biocatalytic Plastic Degradation by 813 
+PETase. ACS Catal. 2022, 12 (6), 3397–3409. https://doi.org/10.1021/acscatal.1c05548. 814 
+(44) Crnjar, A.; Griñen, A.; Kamerlin, S. C. L.; Ramírez -Sarmiento, C. A. Conformational 815 
+Selection of a Tryptophan Side Chain Drives the Generalized Increase in Activity of PET 816 
+Hydrolases through a Ser/Ile Double Mutation. ACS Org. Inorg. Au 2023, 3 (2), 109–119. 817 
+https://doi.org/10.1021/acsorginorgau.2c00054. 818 
+(45) Varadi, M.; Anyango, S.; Deshpande, M.; Nair, S.; Natassia, C.; Yordanova, G.; Yuan, 819 
+D.; Stroe, O.; Wood, G.; Laydon, A.; Žídek, A.; Green, T.; Tunyasuvunakool, K.; 820 
+Petersen, S.; Jumper, J.; Clancy, E.; Green, R.; Vora, A.; Lutfi, M.; Figurnov, M.; Cowie, 821 
+A.; Hobbs, N.; Kohli, P.; Kleywegt, G.; Birney, E.; Hassabis, D.; Velankar, S. AlphaFold 822 
+Protein Structure Database: Massively Expanding the Structural Coverage of Protein -823 
+Sequence Space with High-Accuracy Models. Nucleic Acids Res. 2022, 50 (D1), D439–824 
+D444. https://doi.org/10.1093/nar/gkab1061. 825 
+(46) Jumper, J.; Evans, R.; Pritzel, A.; Green, T.; Figurnov, M.; Ronneberger, O.; 826 
+Tunyasuvunakool, K.; Bates, R.; Žídek, A.; Potapenko, A.; Bridgland, A.; Meyer, C.; Kohl, 827 
+S. A. A.; Ballard, A. J.; Cowie, A.; Romera -Paredes, B.; Nikolov, S.; Jain, R.; Adler, J.; 828 
+Back, T.; Petersen, S.; Reiman, D.; Clancy, E.; Zielinski, M.; Steinegger, M.; Pacholska, 829 
+M.; Berghammer, T.; Bodenstein, S.; Silver, D.; Vinyals, O.; Senior, A. W.; Kavukcuoglu, 830 
+K.; Kohli, P.; Hassabis, D. Highly Accurate Protein Structure Prediction with AlphaFold. 831 
+Nature 2021, 596 (7873), 583–589. https://doi.org/10.1038/s41586-021-03819-2. 832 
+(47) Liu, Y.; Eisenberg, D. 3D Domain Swapping: As Domains Continue to Swap. Protein Sci. 833 
+Publ. Protein Soc. 2002, 11 (6), 1285–1299. 834 
+(48) Then, J.; Wei, R.; Oeser, T.; Barth, M.; Belisário-Ferrari, M. R.; Schmidt, J.; Zimmermann, 835 
+W. Ca2+ and Mg2+ Binding Site Engineering Increases the Degradation of Polyethylene 836 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 28 
+Terephthalate Films by Polyester Hydrolases from Thermobifida Fusca. Biotechnol. J. 837 
+2015, 10 (4), 592–598. https://doi.org/10.1002/biot.201400620. 838 
+(49) Then, J.; Wei, R.; Oeser, T.; Gerdts, A.; Schmidt, J.; Barth, M.; Zimmermann, W. A 839 
+Disulfide Bridge in the Calcium Binding Site of a Polyester Hydrolase Increases Its 840 
+Thermal Stability and Activity against Polyethylene Terephthalate. FEBS Open Bio 2016, 841 
+6 (5), 425–432. https://doi.org/10.1002/2211-5463.12053. 842 
+(50) Joho, Y.; Vongsouthi, V.; Spence, M. A.; Ton, J.; Gomez, C.; Tan, L. L.; Kaczmarski, J. 843 
+A.; Caputo, A. T.; Royan, S.; Jackson, C. J.; Ardevol, A. Ancestral Sequence 844 
+Reconstruction Identifies Structural Changes Underlying the Evolution of Ideonella 845 
+Sakaiensis PETase and Variants with Improved Stability and Activity. Biochemistry 2023, 846 
+62 (2), 437–450. https://doi.org/10.1021/acs.biochem.2c00323. 847 
+(51) Daković, M.; Stanković, L.; Sejdić, E. Local Smoothness of Graph Signals. Math. Probl. 848 
+Eng. 2019, 2019, e3208569. https://doi.org/10.1155/2019/3208569. 849 
+(52) Castro, E.; Godavarthi, A.; Rubinfien, J.; Givechian, K.; Bhaskar, D.; Krishnaswamy, S. 850 
+Transformer-Based Protein Generation with Regularized Latent Space Optimization. 851 
+Nat. Mach. Intell. 2022, 4 (10), 840–851. https://doi.org/10.1038/s42256-022-00532-1. 852 
+(53) Fu, L.; Niu, B.; Zhu, Z.; Wu, S.; Li, W. CD -HIT: Accelerated for Clustering the next -853 
+Generation Sequencing Data. Bioinformatics 2012, 28 (23), 3150 –3152. 854 
+https://doi.org/10.1093/bioinformatics/bts565. 855 
+(54) Petersen, T. N.; Brunak, S.; von Heijne, G.; Nielsen, H. SignalP 4.0: Discriminating Signal 856 
+Peptides from Transmembrane Regions. Nat. Methods  2011, 8 (10), 785 –786. 857 
+https://doi.org/10.1038/nmeth.1701. 858 
+(55) Katoh, K.; Standley, D. M. MAFFT Multiple Sequence Alignment Software Version 7: 859 
+Improvements in Performance and Usability. Mol. Biol. Evol.  2013, 30 (4), 772 –780. 860 
+https://doi.org/10.1093/molbev/mst010. 861 
+(56) Minh, B. Q.; Schmidt, H. A.; Chernomor, O.; Schrempf, D.; Woodhams, M. D.; von 862 
+Haeseler, A.; Lanfear, R. IQ -TREE 2: New Models and Efficient Methods for 863 
+Phylogenetic Inference in the Genomic Era. Mol. Biol. Evol.  2020, 37 (5), 1530–1534. 864 
+https://doi.org/10.1093/molbev/msaa015. 865 
+(57) Kalyaanamoorthy, S.; Minh, B. Q.; Wong, T. K. F.; von Haeseler, A.; Jermiin, L. S. 866 
+ModelFinder: Fast Model Selection for Accurate Phylogenetic Estimates. Nat. Methods 867 
+2017, 14 (6), 587–589. https://doi.org/10.1038/nmeth.4285. 868 
+(58) Le, S. Q.; Gascuel, O. An Improved General Amino Acid Replacement Matrix. Mol. Biol. 869 
+Evol. 2008, 25 (7), 1307–1320. https://doi.org/10.1093/molbev/msn067. 870 
+(59) Gibson, D. G.; Young, L.; Chuang, R. -Y.; Venter, J. C.; Hutchison, C. A.; Smith, H. O. 871 
+Enzymatic Assembly of DNA Molecules up to Several Hundred Kilobases. Nat. Methods 872 
+2009, 6 (5), 343–345. https://doi.org/10.1038/nmeth.1318. 873 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint 
+ 
+ 29 
+(60) Studier, F. W. Stable Expression Clones and Auto-Induction for Protein Production in E. 874 
+Coli. Methods Mol. Biol. Clifton NJ  2014, 1091, 17–32. https://doi.org/10.1007/978-1-875 
+62703-691-7_2. 876 
+(61) Aragão, D.; Aishima, J.; Cherukuvada, H.; Clarken, R.; Clift, M.; Cowieson, N. P.; 877 
+Ericsson, D. J.; Gee, C. L.; Macedo, S.; Mudie, N.; Panjikar, S.; Price, J. R.; Riboldi -878 
+Tunnicliffe, A.; Rostan, R.; Williamson, R.; Caradoc -Davies, T. T. MX2: A High -Flux 879 
+Undulator Microfocus Beamline Serving Both the Chemical and Macromolecular 880 
+Crystallography Communities at the Australian Synchrotron. J. Synchrotron Radiat.  881 
+2018, 25 (Pt 3), 885–891. https://doi.org/10.1107/S1600577518003120. 882 
+(62) Kabsch, W. XDS. Acta Crystallogr. D Biol. Crystallogr. 2010, 66 (2), 125 –132. 883 
+https://doi.org/10.1107/S0907444909047337. 884 
+(63) Winn, M. D.; Ballard, C. C.; Cowtan, K. D.; Dodson, E. J.; Emsley, P.; Evans, P. R.; 885 
+Keegan, R. M.; Krissinel, E. B.; Leslie, A. G. W.; McCoy, A.; McNicholas, S. J.; 886 
+Murshudov, G. N.; Pannu, N. S.; Potterton, E. A.; Powell, H. R.; Read, R. J.; Vagin, A.; 887 
+Wilson, K. S. Overview of the CCP4 Suite and Current Developments. Acta Crystallogr. 888 
+D Biol. Crystallogr.  2011, 67 (Pt 4), 235 –242. 889 
+https://doi.org/10.1107/S0907444910045749. 890 
+(64) Adams, P. D.; Afonine, P. V.; Bunkóczi, G.; Chen, V. B.; Davis, I. W.; Echols, N.; Headd, 891 
+J. J.; Hung, L.-W.; Kapral, G. J.; Grosse-Kunstleve, R. W.; McCoy, A. J.; Moriarty, N. W.; 892 
+Oeffner, R.; Read, R. J.; Richardson, D. C.; Richardson, J. S.; Terwilliger, T. C.; Zwart, 893 
+P. H. PHENIX: A Comprehensive Python -Based System for Macromolecular Structure 894 
+Solution. Acta Crystallogr. D Biol. Crystallogr.  2010, 66 (Pt 2), 213 –221. 895 
+https://doi.org/10.1107/S0907444909052925. 896 
+(65) Emsley, P.; Cowtan, K. Coot: Model -Building Tools for Molecular Graphics. Acta 897 
+Crystallogr. D Biol. Crystallogr.  2004, 60 (Pt 12 Pt 1), 2126 –2132. 898 
+https://doi.org/10.1107/S0907444904019158. 899 
+(66) Castro, E.; Benz, A.; Tong, A.; Wolf, G.; Krishnaswamy, S. Uncovering the Folding 900 
+Landscape of RNA Secondary Structure with Deep Graph Embeddings. arXiv March 28, 901 
+2022. https://doi.org/10.48550/arXiv.2006.06885. 902 
+ 903 
+.CC-BY-NC-ND 4.0 International licensemade available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is 
+The copyright holder for this preprintthis version posted June 27, 2024. ; https://doi.org/10.1101/2024.04.25.591214doi: bioRxiv preprint

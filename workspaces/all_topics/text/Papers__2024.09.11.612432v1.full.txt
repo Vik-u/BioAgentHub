@@ -1,0 +1,1217 @@
+Single Distal Mutation Enhances Activity of known PETases via
+Stabilisation of PET-binding
+Xiaozhi Fu1, Oriol Gracia I. Carmona2, Gyorgy Abrusan2, Xiang Jiao1, Alexander Diaciuc1, Mathias
+Gautel2, Franca Fraternali2,3, Aleksej Zelezniak1,2,4*
+1 - Department of Life Sciences, Chalmers University of Technology, Kemivägen 10, SE-412 96,
+Gothenburg, Sweden
+2 - Randall Centre for Cell & Molecular Biophysics, King’s College London, New Hunt's House, Guy's
+Campus, SE1 1UL London, UK
+3 - Institute of Structural and Molecular Biology, University College London, UCL Darwin Building, 604
+Gower Street, London, WC1E 6BT, United Kingdom
+4 - Institute of Biotechnology, Life Sciences Centre, Vilnius University, Sauletekio al. 7, LT10257 Vilnius,
+Lithuania
+*corresponding author (email: aleksej.zelezniak@kcl.ac.uk)
+Abstract
+As a major source of plastic pollution,PEThasattractedsignificantinterestfor biodegradation
+due to its potential inthecircular economy.Finding effectiveenzymesstill remainsachallenge
+as screening methods are limited by either the low throughput or dependence on alternative
+non-PET substrates due to PET’s insolubility. Here, we report a highly active, stable and
+robust enzyme, Fast_2.9, identified while directly screening for PET-degrading activity in
+mesophilic conditions using droplet-based encapsulation of PET nanoparticles with the
+throughput above 1 kHz. We identified a distal S269T mutation that improves activity in the
+majority of all known PETases with up to 400 times over wildtype, and more than twice of
+known engineeredPETases,astestedonuntreatedpost-consumer plastics.Microsecondtime
+scale molecular dynamics analyses indicate that this distant mutation possibly influences
+residues near the substrate-binding cleft via a common mechanism across PETases.
+Compared to the state-of-the-art FastPETase and LCCICCG enzymes,theengineeredFast_2.9
+enzyme requires up to 8 and 42 times lower enzyme concentrations to reach the same
+enzymatic activity, ultimately requiring significantly less enzyme. As such our engineered
+enzyme degrades multiple post-consumer PET substrates, including polyester textiles, within
+as least as just 2 days with up to nearly 100% terephthalic acid conversion using as little as
+0.72 mgenzyme/gPET at 50℃. Our study presents a universal methodology for directscreeningof
+insoluble substrates at ultra-high-throughput and highlights the techno-economic potential of
+Fast_2.9for PETdepolymerisation.
+1
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+Introduction
+Polyethylene terephthalate (PET) is a widely used plastic inour dailylives,and itaccountsfor
+over 10% of the world's solid waste with a major portion originating from polyester textiles1.
+Micro and nano plastics could enter human bodies, and a recent study showed that those
+plastic particles in blood vessels might be linkedtoahigher riskofheartdisease2.Althoughit
+was considered non-biodegradable,thediscoveryof IsPETase3 andcutinases 4 hasshed light
+on its potential biodegradation processes that could potentially be reintegrated into a circular
+carbon economy via rapid enzymatic depolymerization of PET, with subsequent
+repolymerization or transformation into various valuable products5–7. As a consequence, the
+scientific community rushed to search for new PET degrading enzymes8–12 (>100 enzymes
+have been identified according to the Plastics-Active Enzymes Database - PAZy13), and to
+engineer existing ones to enhance the activity, especiallyIsPETase through rational design
+10,14,15 anddirectedevolution 16.For instance,ThermoPETase 17 wasgeneratedthroughrational
+design, FastPETase18 and DuraPETase18,19 were produced using computational methods,
+whileHotPETase 20 andDepoPETase 21 wereidentifiedusingdirectedevolution.
+A traditional methodfor improvingenzymefunctionistousedirected evolutionbystartingfrom
+a natural protein anditerativelymakingasmall number ofmutationsuntil theenzymeacquires
+the desired properties22,23. The combination of microfluidics and fluorescence cytometry has
+proven to be highly successful for this24–28,especially for secretedenzymes 29 andsubstrates
+that cannot cross the cell membrane 30 with sufficient throughput. However, significant
+challenges remain when performing the directed evolution of PET-degradingenzymes.These
+include the extremely low water solubility of the PET substrate and the lack of mapping
+between PETase variants (i.e. genotypes) and absorbance or fluorescence (i.e. phenotypes)
+for easy detection. Few approaches have been developed for the directed evolution of PET
+degradation enzymes to overcome suchobstacles.However,thesemethodsaremostlyoflow
+throughput or use alternative substrates other than PET20,21. InthecaseofHotPETase,solid
+PET discs were used in 96-well plates21, and approximately 2000 samples were laboriously
+analysed using HPLC every two days. Qiao et al 16 developed a microfluidic-based high
+throughput screening approach for PETase discovery but usingsubstratesother thanPET.As
+such, coupling fluorescence signals directly to enzymatic plastic polymer depolymerization in
+high-throughput still poses substantial challenges. For instance, Zurier et al31 developed a
+microplate-basedscreeningmethod for PETasemutantsbyaddingFe(II) inthe PEThydrolysis
+solution and measuring the fluorescence of the 2-hydroxyterephthalic acid (hTA) with a
+spectrophotometer 31. hTA is the product from the coupling reaction of TPA with hydroxyl
+radicals, and it has excitation/emission wavelengths at 310/420 nm32,33, which is out of the
+range of commonly used flow cytometry, thuslimitingitsmeasurementsto spectrophotometry.
+On the other hand, to overcome the obstacles associated withlinkinggenotypetophenotype,
+biosensors 26,34 are frequently employed. Notably, for PET degradation studies, transcription
+factor (TF)-based biosensors35,36 have been developed to detect itsmonomer TPA,offeringa
+promisingtool for monitoringenzymaticactivityandsubstrateinteractiondirectly.
+Here we developed a microfluidics platform to enable high-throughput screening of PETase
+activity directly using PET as a substrate by encapsulating PET nanoparticles into droplets.
+We engineered the Escherichia coli strain to efficiently secrete PETase and convert the
+resulting monomer yield into a measurable GFP signal using a genome-integrated TPA
+2
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+biosensor. We successfully applied our platform to screen a random mutagenesis library of
+IsPETase, resulting in >20% of sorted cells with increased activities, among which a variant
+with single mutation S269T (named as M2.9 in the following context) showed the highest
+increase of catalytic activity of 22-fold compared withIsPETase. We further discovered a
+universal activity enhancing effect of this mutation in various IsPETase variants
+(ThermoPETase, FastPETase, HotPETase and DepoPETase), especially for FastPETase, its
+S269 mutant (named as Fast_2.9 in the following context) exhibited 144% increasement in
+monomer yield using untreated postconsumer PET substrate at 50°C and pH 8.Microsecond
+time scale molecular dynamics analyses suggest that this distant mutation likely stabilises
+conformations accommodating the substrate, by influencing residues near the
+substrate-binding cleft via a common PETase mechanism. When benchmarking against
+non-pretreated postconsumer PET, Fast_2.9 showed up to 8 and 42 times lower of reverse
+Michaelis-Menten kinetic InvKm, compared to FastPETase and LCCICCG 4 respectively, while
+InvKcat values remained similar. Using just 0.72 mg enzyme ・ gPET
+-1 of enzymes towards
+non-pretreated postconsumer PET substrate in 15 ml bioreactor, Fast_2.9 achieved 97.4 ±
+1.43% of depolymerisation and 95.9 ± 1.4% of TPA content by the end of 72 h, compared to
+77.0 ± 4.74% depolymerisation and 55.4 ± 0.1% TPA content for LCCICCG.Finally,weshowed
+that Fast_2.9 is also capable of degrading polyester textiles with over 75% depolymerisation
+rateyieldingupto90%TPAmonomer after 3 days.
+Results
+Engineering the strain for sensing TPA and secreting PETases
+We started by engineering the E.coli BL21 (DE3) strain carrying a transcriptional factor
+(TF)-based TPA biosensor 36 (Supplementary Table 1) that would convert the PET
+depolymerisation catalytic efficiency into a fluorescence signal for subsequent screening(Fig.
+1a). To warrant the stable expression of the biosensor37, instead of using plasmids, we
+integrated the TPA biosensor into eight genomic loci using CRISPR-based multicopy
+chromosomal integration approach 38 (Fig. 1b). After three rounds of transformation, the
+biosensor was combinatorially integrated into four genomic locations resulting in six
+combinations ranging from a single copy (locus 2 and 4) up to four copies integrated intoloci
+2, 4, 5, 6 (loci 2456 strain) (Methods, SupplementaryTable 2).Toensurethatthebiosensor is
+responsive to our defined dynamic range of TPA concentrations, all sixstrainsweretestedby
+submerging them to TPA concentrations of 0, 1 and 5 mM, with the intention to detect even
+minor substrate concentration differences (Fig. 1c). The loci 45 strain showed the most
+significant sensitivity capable of distinguishing 1 mMand5mMconcentrations(Welch'st-test,
+p-value<2.2e-16).
+To corroborate whether theIsPETase enzyme was secreted and active in those strains, we
+transformed eachstrainwith theplasmid-basedT7-inducible IsPETase containingaN-terminal
+secretion signal peptide (Supplementary Table3).In the strainswhereeither locus2or 6was
+targeted, no catalytic activity towards either PET or ρ-nitrophenyl acetate (a substrate for
+esterase activity) was 39 observed in the cell lysate or supernatant (Supplementary Fig. 1).
+This effectwasindependentoftheuse ofexpressionmediums(wetestedIPTG-supplemented
+induction and autoinduction mediums) (Supplementary Fig. 2). With both the TPA biosensor
+3
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+and secretedIsPETase functioning well, we continued with the loci 45 strain harbouring the
+pET21b-IsPETase plasmid,whichisreferredtoasG-TPAsensor strainin thefollowingcontext,
+unlessotherwisespecified.
+We found that the fluorescence shift of the cell populations of G-TPAsensor in 0,1and5mM
+TPA remains significant after 48 hours cultivation (Fig. 1d), which confirms the biosensor’s
+functionality in long-term cultivation with plasticssubstrateandmakesitsuitablefor identifying
+highly active mutants. Next, we cultivated theG-TPAsensor cellsinthepresenceof0,2.5and
+5 g/L PET nanoparticles (PET-NP) (made from amorphous PET, Methods) supplemented
+medium. The accumulations of monomers in 0, 2.5 and 5 g/L PET-NPexhibitedlinear growth
+in the first 48 hours and then increased slowly. 291 ± 2.4 μM and 645 ± 3.97 μM TPA were
+produced after 48 h (2.5 and 5 g/L PET, respectively), furthermore validating the functionality
+oftheengineeredstrain(Fig.1e).
+Figure 1. Co-expression of genomic based TPA biosensor and plasmid expressedIsPETase. a, Schematic
+representation of how the engineered strain converts PETase activity into fluorescence intensity. PETase is
+secreted to degrade PET outside the cell, and the resulting TPA monomer is taken up by the cell, inducing sfGFP
+expression downstream of the biosensor.b, Transposon-based CRISPR method for integrating the TPA biosensor
+into multiple genomic loci in E. coli BL21 (DE3). c, Median fluorescence intensity (MFI) ratio of different
+genomic-based TPA biosensor strains in OnEx System 2 medium supplemented with 1 or 5 mM Na2TPA,
+compared to the same strain cultivated in 0 mM Na2TPA. A strain expressing the TPA biosensor from a p15a ori
+plasmid (pTPAsensor) served as a control. MFI was calculated based on the fluorescence intensity of 5000 single
+cells measured by GUAVA EasyCite flow cytometry (n=3). Data are presented as mean ± SD. Statistical
+comparisons between samples at 1 and 5 mM TPA and the 0 mM TPA control were performed using a two-sided
+t-test with Welch’s correction. P values are indicated above each column, with NS, *, and ** denoting not significant,
+P < 0.05, and P < 0.01, respectively.d, Boxplot of GFP fluorescence distribution in the G-TPAsensor strain after 48
+hours of cultivation in OnEx System 2 medium supplemented with 0, 1, or 5 mM Na2TPA, with 5000 events per
+group analysed by SONY SH800 cell sorter. The boxplot displays the median (line), interquartile range (IQR, box),
+and whiskers (rest of the data distribution). Statistical comparisons between different TPA concentrations were
+performed using a two-sided t-test,with P values <2.2e-16 indicated by ****.e, TPA yield of the G-TPAsensor strain
+when cultivating in the OnEx system 2 medium supplemented with 0, 2.5 and 5 g/L amorphous PET-NP from 0 to
+4
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+96 h. Each group has triplicates. Each sample has triplicates and all data are shown as mean ± SD. Fig.1a and 1b
+were made using BioRender.com.
+Accelerating PETase evolution in droplets
+In order to cultivate the G-TPAsensor cells with PET substrate together within droplets, the
+PET substrate must be made into water-suspended nanoparticles. We first investigated the
+impact of nanoparticlepreparationonPETsubstrate crystallinity 40,crucial for catalyticrates41,
+by employing two methods in the Non-Solvent Induced Phase Separation (NIPS) process
+using hexafluoroisopropanol (HFIP)42 and trifluoroacetic acid (TFA)43 assolvents(Methods).
+We found that the PET nanoparticles obtained with TFA (PET-NP-TFA) method showed over
+double increased crystallinity as measured by differential scanning calorimetry (from 3.8% to
+10.3%), while the PET-NP prepared with HFIP (PET-NP-HFIP) has had only 10% crystallinity
+increase (from 3.8% to 4.2%) comparing to the starting material (GoodFellow PET film,
+Methods). FT-IR analysis 44 also confirmed that the PET-NP-TFA has a higher crystalline
+conformation ratio with 52.5% increase of A1340/A1372 ratio and 20.0% decrease of
+A1475/A1457 ratio (1457 and 1373 cm−1 have been associated withthegauche conformation
+of PET, while 1475 and 1340 cm−1 increase in intensity during crystallisation due totrans)
+(Supplementary Fig. 3a and Supplementary Table 4). Therefore, we continued with the
+PET-NP-HFIPbyencapsulatingnanoparticlesintowater-in-oil-droplets(Methods).
+We then encapsulated PET nanoparticles (diameter <500 nm, Supplementary Fig. 4) in
+water-in-oil droplets as a substrate together with IsPETase library to enable subsequent
+high-throughput PETase activity screening (Fig. 2a). Single cells from IsPETase random
+mutagenesis library (~2 x 106 clones) were encapsulated with PET NP within water-in-oil
+emulsions46 (Fig. 2b top). After 48 hours of droplets cultivation off chip, we observed cells
+grown together with PET-NP substrate exhibiting green fluorescence compared to negative
+control (Fig. 2b). We then de-emulsified the droplets and subsequently sorted cells using a
+fluorescent cell sorter. Initially, 77.1% of the cells were selected basedonsizeand complexity
+criteria to exclude oversized or abnormal cells (Fig. 2c). Then, from this population, we
+isolated 192 cells with the highest green fluorescentprotein(sfGFP) expression(Fig.2d).The
+top-performingcellswerethensorted ontoagar platesina 96-well format.
+5
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+Figure 2. Droplet-based high throughput sorting platform for PET degrading enzymes. a,Single cells from a
+library of mutagenized PET-degrading enzymes were encapsulated in water-in-oil emulsions containing PET
+nanoparticle-supplemented medium. Following encapsulation, the cells were cultured off-chip within the droplets for
+48 hours. After cultivation, the droplets were de-emulsified, and the cells were released for FACS sorting.b, Images
+showing droplets encapsulating both single cells and PET nanoparticles (PET-NP) generated on a co-flow droplet
+generator (top left), 60 μm diameter droplets after generation (top right), droplets from the negative control group
+(G-TPAsensor strain harbouring the pET21b plasmid) after 48 hours of cultivation in the fluorescent field (bottom
+left), and droplets from the library group after 48 hours of cultivation in the fluorescent field (bottom right). Images
+were taken twice, with the representative images shown here.c, The main population of 77.7% of cells was gated
+6
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+by FSC_A and SSC_A (Gate 1).d, The top 1.1% of fluorescent cells from Gate 1 were sorted.e, Boxplot of
+supernatant assay results from 167 selected mutants that grew on the sorting plate, alongside the positive control
+(G-TPAsensor strain harbouring the pET21b-IsPETaseWT plasmid) and the negative control (G-TPAsensor strain
+harbouring the pET21b plasmid). Each sample was run in triplicate, with jittered dots representing the mean value
+of each sample. The boxplot includes the median line, the interquartile range (IQR, box), and the whiskers denoting
+the rest of the data distribution. The top 12 samples, marked in blue, were selected for further purified enzyme
+verification, except for one that failed during purification.f, Barplot of purified enzyme assay results of the 12
+samples selected from supernatant assay. Each sample was run in triplicate, and data are shown as mean ± SD.
+Statistical comparisons with the wild-typeIsPETase (WT) were performed using a two-sided t-test with Welch’s
+correction. P-values are indicated above each column, with NS, *, **, ***, and **** representing not significant, P <
+0.05, P < 0.01, P < 0.001, and P < 0.0001, respectively.g, Catalytic efficiency comparison of 200 nMIsPETase,
+IsPETase_S269T (M2.9) and FastPETase on 19.2 g/L PET-NP at 30, 40, 50 and 60℃conditions. Each sample has
+triplicates and all data are shown as mean ± SD. Mean values of released monomers for each sample are indicated
+above each column.h, Catalytic efficiency of 200 nMIsPETase andIsPETase_S269T (M2.9) on 6 mM-diameter
+postconsumer transparent PET product (yoghourt container lid) under different temperatures (30, 40 and 50℃) and
+in different buffer conditions (100 mM KH2PO4 • NAOH pH 8.0 and 50 mM glycine • NaOH pH 9.0). Each sample
+was run in triplicate, and data are shown as mean ± SD. Mean values of released monomers for each sample are
+indicated above each column. Figure 2a was created using BioRender.com.
+In total 192 variants were sorted out onto the LB agar and, of which 167 (86.9%) grew
+successfully on the sorting plate. Of these, 34 (20.3%) displayed greater catalytic efficiency
+than wildtype (Fig. 2e). We selected the top 12 of these 34 variants for sequencing
+(Supplementary Table 2) and further analysis. These 12 variantswerepurifiedandretestedto
+confirmthattheir increased activitywasdue tohigher catalyticefficiencyandnotmerelydueto
+elevated expression or secretion. Out of these, 6 variants showed significantly enhanced
+catalytic activities, with variant M2.9 (S269T) displaying the highestactivityresultingin 22fold
+increase over WTIsPETase variant (Fig. 2f). Variants M2.3 and M2.8, exhibited enhanced
+activity compared to the wild type in the supernatant assay. Yet, when purified, their activities
+were below that of theIsPETase wild type, likely due to the expression efficiency changes
+causedbythemutations 35,36,47–49.
+To evaluate the catalyticefficiencyofM2.9webenchmarkeditagainstFastPETase 18,whichis
+known for its high efficiency among all IsPETase variants. 200 nM of FastPETase,IsPETase
+and M2.9 were mixed with 19.2 g/L PET nanoparticles at 30, 40, 50 and 60℃for 48 h (Fig.
+2g). M2.9 showed the highest activity at 30 and 40°C, producing 29.0±0.526mMand22.7±
+1.23 mM monomers, respectively. This represented increases of 20% and 13% over
+FastPETase, and 54% and 130% overIsPETase. A decrease in catalyticefficiencyfrom30to
+60°C was noted for all enzymes, withIsPETase and M2.9 displayingfaster declinesat50 and
+60°C compared to FastPETase, indicating that M2.9 is better suitedfor mesophilicconditions.
+Additionally, we tested M2.9’s activity on PET film from non-pretreated lids of postconsumer
+yoghurt containers (Supplementary Table 4). After incubating a 6 mm-diameter PET discwith
+200nMoftheenzymesat30°Cfor 48hours,M2.9 produced2.96±0.753mMofmonomers,a
+219% increase over the wild-typeIsPETase (Fig. 2h). A more severe surface abrasion was
+also observed under optical and scanning electron microscopy analyses (Supplementary Fig.
+5).
+Molecular dynamics and structural analysis of PETases
+Residue 269 is located on the α7 helix of the surface of the protein ~28 Å away opposingly
+from the active site consisting of residues Ser160, Asp206, and His23750 (Fig. 3a). Although
+the substitution of Serine for Threonine atthisdistal siteisnotexpectedtosignificantlyimpact
+7
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+the protein’s stability due to their similar properties, nonetheless, there are cases in other
+enzymes where the distant mutation from Serine to Threonine enhanced enzymatic activity,
+and also PETaseS242T that exhibited up to 2.5 increased activity compared with WTIsPETase
+51,52.
+To investigate the molecular effects of S269T mutation, we performed exhaustive molecular
+dynamics (MD) simulations, running 1 μs per replicate (n=5 per enzyme variant) allowing
+sufficient time for the mutation’s effects to propagate through thesystem(Methods).To locate
+the regions whose dynamics were affected by the mutation, we started by examining per
+residue weighted Root Mean Square Fluctuation (RMSF) profiles of the backbone atoms. As
+expected, most of the RMSF profile overlapped between the wild typeIsPETase and S269T
+mutant simulations, with the exception of the following regions: the loops formed by residues
+88 to 91 (unpaired t-test, BH adj. p-value = 0.0264), residue 112 to 115 (unpaired t-test, BH
+adj. p-value = 0.0287) and residue 238 to 241 (unpaired t-test, BH adj. p-value=0.0102). The
+region formed by residues 88 to 91 is both close to the active site and is involved in the
+formation of the active cleft where the substrate binds and has been shown to be a key
+difference betweenIsPETaseand other membersoftheα/β-foldhydrolases 53 (Fig.3b).
+8
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+Figure 3. Molecular dynamics and structural analysis. a, Structure of IsPETase (cartoon structure) with a
+docked PET dimer (light blue), the catalytic triad (S160, D206 and H237) is highlighted in yellow and residue S269
+is highlighted in orange. α-Helices are shown in cyan, β-sheets in magenta and loops in pink. b, Surface
+representation ofIsPETase with the docked PET dimer in light blue. The loop region (residues 88 to 91) involved in
+the active cleft formation is highlighted in green.c, Average residue weighted Root Mean Square Fluctuation
+(RMSF) of the backbone atoms for the five replicates of PETase (green forIsPETase and blue for FastPETase), and
+the S269T variant (orange) for IsPETase (top) and FastPETase (bottom) simulations. The flexible loop region
+involved in the active cleft formation (residues 88 to 91) is highlighted in green. The S269T variants displayed
+significantly lower fluctuations than the wildtype versions (adj. p-value = 0.0264 and 0.0161 respectively).d,
+Probability density distribution of the RMSD of residues 88 to 91 relative to the crystallographic conformation (PDB
+code 7SH6 18) for FastPETase simulation (orange) and the S269T variant (blue).e, Surface representation of a
+representative structure (estimated from 50 randomly sampled snapshots) of the FastPETase frames displaying low
+RMSD (RMSD ≃1.5 Å) for the loop region formed by residues 88 to 91 (green). The conformation of the PET
+dimer in the docked crystal structure is shown in light blue.f, Surface representation of a representative structure
+(estimated from 50 randomly sampled snapshots) of the FastPETase frames displaying high RMSD (RMSD≃5Å)
+for the loop region formed by residues 88 to 91 (green). The conformation of the PET dimer in the docked crystal
+structure is shown in dark blue.g, Residue correlation paths detected by WISP mapped onto the crystallographic
+structure ofIsPETase. The catalytic triad is highlighted in yellow, residue S269 in orange and the docked PET dimer
+in light blue. Red spheres indicate the C-α of the residues involved in transferring the signal along the top 10
+correlation paths estimated by WISP. The node edges indicate the detected paths, with width proportional to the
+frequency of the connection appearing in the top 10 paths.
+Given the high sequence similarity between IsPETase and FastPETase, particularly the
+identical residues from 88 to 91 in bothenzymes,we hypothesisedthattheS269Tmutationin
+FastPETase might act through the same mechanism and produce similar effects asobserved
+in IsPETase. To investigate this, we performed molecular dynamics (MD) simulations for both
+FastPETase and its mutantFast_2.9,eachlasting1 µswithfivereplicates.The simulationsfor
+both enzymes were prepared and analysed using the same methodology applied to the
+IsPETase simulations, with the sole difference beingtheir optimal temperature(Methods).The
+per residue weighted RMSF profiles of FastPETase and Fast_S269T displayed the same
+stabilising behaviour as the one observed for IsPETase (unpaired t-test, BH adj.
+p-value=0.0161) (Fig.3c).
+To corroborate if the lower fluctuations observed in the region of residues 88 to 91 for the
+S269T mutants are due to a stabilisation of the crystallographic orientation or due to a new
+conformation, the RootMeanSquareDeviation(RMSD) ofthebackboneatomsofresidues88
+to 91 was analysed. To properly capture different conformations with respect to the crystal
+structure and not merely internal orientations of the loop, we aligned all simulation frames to
+the crystal structure using the C-alpha carbons of all residues except for 88 to 91. Following
+this alignment, we computed the RMSD for the backbone of residues 88 to 91 without
+additional realignment. We then generated a probabilitydensitydistributionbycombiningdata
+from all replicates. For bothIsPETase and FastPETase, the S269T mutants showed a higher
+preference for conformations resembling thecrystallographicstructure,suggestingthatS269T
+mutantactsbystabilisingthisconformation(Fig.3d).
+We then aligned the previously reported structure ofIsPETase with a hydroxyethyl-capped
+PET dimer docked53,54 witharepresentativestructureofthe loopconformationsdisplayinglow
+deviations with the crystallographic pose (Fig. 3d, RMSD≃1.5 Å) and a representative
+structure of the loop conformations with a high deviations (Fig. 3d, RMSD≃5 Å). The active
+cleft of thestructurewithlower loopRMSDpreservedtheactive site cavityallowingthePETto
+fit without any major clashes (Fig. 3e) whilethestructureswith highRMSDvaluesblockedthe
+active cleft cavity impeding the substrate from binding (Fig. 3f). Based on these findings, we
+9
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+hypothesise that the increased activity observed in bothIsPETase and FastPETase resulting
+from the S269T mutation is attributed to the stabilisation of conformations that better
+accommodatethepolymer substrate.
+Since S269 is structurally close to C273 (~4.8 Å), which forms a disulfide bond (DS2) with
+C289 (Supplementary Fig. 6a), we also investigated the DS2 and its possible interaction with
+S269. Although we did not find any direct evidence indicating the correlation between S269
+and DS2, instead we found that the DS2 could possibly be partially reduced (Supplementary
+Figs. 6b, 7, 8), and the absence of DS2 did not significantlyaffecttheactivityofIsPETase but
+caused almost complete loss of activity in FastPETase (Supplementary Fig. 6c).Weinfer that
+in the WTIsPETase,theDS2islikelytoplayaregulatoryrather thanstructural roleandfurther
+studieswill beneededtoclarifyfunctions(See also inSupplementarynote).
+To get insights how the effect from S269T mutation may be traversing to ~28 Å away active
+site, we analysed the shortest residue C-alpha fluctuation correlation paths connecting
+mutation to the residues of the active cleft using Weighted Implementation of Suboptimal
+Paths (WISP) method55. As suggested by WISP analysis (Methods), the effect of mutation
+seems to propagate from the α7 helix to the α1 helix, then to the α2 helix and finally to the
+active cleft most commonly involving residues THR88, ALA89, SER93, ILE94 and TRP97
+(blueresiduesinFig.3g).
+S269T enhances enzymatic activity across known PETases
+As suggested by molecular dynamics analysis, we introduced the S269T mutation to
+FastPETase, an enzyme that is known to be active at higher temperatures18, to assess its
+effect on PETase activity. The mutated Fast_S269T variant showed enhanced catalytic
+efficiency across a pH range of 6-10, notably doubling its performance at pH 8 compared to
+FastPETase (Supplementary Fig. 9). Analogously, we applied the same S269T mutation to
+other IsPETase variants, i.e., ThermoPETase, HotPETase and DepoPETase, to see if this
+mutation exhibited universal effects (Fig. 4a). Similarly as with FastPETase, catalytic
+enhancements were observed in ThermoPETase across 30, 40 and 50℃ in pH 8 and 9
+conditions. For HotPETase and DepoPETase, significant increases were only observed for its
+S269T variant at 50 °C pH 9 conditions (Welch's t-test, p-value=0.00324 for HotPETase and
+p-value=0.0295 for DepoPETase), which possibly could be attributed to the structural
+differencesofHotPETaseand DepoPETase,whichcontain21 20 and721 mutationsrespectively,
+compared toIsPETase. The highest effects are observed in FastPETaseoverall showingover
+430-fold increase of activity compared to wild typeIsPETase performance at 50℃and we
+named thisenzyme Fast_2.9 (Fig.4a).
+To access Fast_2.9 performance, we included LCCICCG, a highly efficient enzyme tested in
+industrial scales56. Since FastPETase and Fast_2.9 loses activity at 60°C (data not shown),
+we compared monomer production after 48h at temperatures 30, 40 and 50°C and pH levels
+of 8 or 9, revealing that Fast_2.9 is most effective at milder temperatures of 50 °C and pH 8,
+where it released 2.01 and 2.79 times more monomer FastPETase and LCCICCG, respectively
+(Fig. 4a). Given these results, Fast_2.9 shows promise as a candidate for large-scale
+applications, especially at temperatures around 50°C,aligningwell withthethermal properties
+of polymer, as isothermal crystallisation could possibly occur when the temperature is above
+10
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+the glass transition temperature (Tg) of the PET material41 (Tg is 67 °C for amorphous PET
+and81°Cfor crystallinePET 57).
+Enzymes have varying activities at different substrate concentrations, yet most of the studies
+utilise different enzyme-to-substrate ratios complicating benchmarking of enzyme
+performances. For instance, a non-saturated concentration of 0.2 mg enzyme・gPET
+–1 and a
+saturated concentration of 1 mgenzyme・gPET
+–1 was used in a comparative study of LCCICCG with
+FastPETase and another two PET degradingenzymes56,while200nMand11.9mg PETwas
+used in600μl buffer (equal to0.282mgenzyme・gPET
+–1) tocompareFastPETase withLCCICCG and
+other enzymes 18. To investigate the effects of degradation rates in detail, we compared
+Fast_2.9, FastPETase and LCCICCG kinetics using the inverse Michaelis–Menten approach14
+using a range of enzyme concentrations. For all experiments, we used a unprocessed
+post-consumer PET substrate at 12 g/L across all conditions (Methods), with enzyme
+concentrations ranging from 5 nM to 700 nM (equivalent to 0.01 to 1.66 mgenzyme・gPET
+–1),
+measuredover thefirst7 hata constanttemperatureof50 °CandapHof8.
+11
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+Figure 4. The S269T mutation enhances the catalytic performance ofIsPETase variants.a, Heatmap showing
+the monomer release after incubating 200 nMIsPETase, ThermoPETase, FastPETase, HotPETase, DepoPETase,
+and their S269T variants with 6 mm-diameter postconsumer PET discs under various pH and temperature
+conditions for 48 hours. The experiment was performed in triplicate, and the mean values of released monomers
+are displayed in the heatmap.b, Total monomer release after incubating 200 nM enzymes with a 6 mm-diameter
+yoghourt container lid disc in pH 8 or pH 9 buffer at 30, 40, 50, and 60°C for 48 hours. All samples were run in
+triplicate, and data are shown as mean ± SD. The mean values of released monomers for each sample are
+indicated above each column.c, Inverse Michaelis-Menten plots of Fast_2.9, FastPETase and LCCICCG at 50°C in
+pH 8 buffer. All samples were run in triplicates and all data are shown as mean ± SD.d, Monomer yield and
+depolymerization rate of 12 g/L postconsumer PET disc by 100 nM (equal to 0.24 mg enzyme/g PET) Fast_2.9 and
+LCCICCG in 15 mL 100 mM KH2PO4・NaOH buffer (pH 8) in Pioreactors over 72 hours. Additional enzyme portions
+(0.24 mg enzyme/g PET) were supplemented at 24 and 48 hours. All samples were run in triplicate, and data are
+shown as mean ± SD.e, f, A 40.6 mg piece of non-pretreated green opaque PET plastic was completely degraded
+12
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+by 0.0288 mg Fast_2.9 within 66 hours, with 0.0096 mg (0.24 mg enzyme/g PET) Fast_2.9 added at 0, 24, and 48
+hours. Images were taken twice, and the representative images are shown.g, Images of three kinds of polyester
+textiles (Textile 1: outer skirt of a pink polyester dress; Textile 2: inne skirt of a pink polyester dress; Textile 3: yellow
+polyester T-shirt; top: raw textiles; down: textiles after pretreatment).h, monomer yield, depolymerisation rate and
+weight loss when incubating 12 g/L pretreatment textiles with 100 nM Fast_2.9 (which is equal to 0.24 mg
+enzyme/g PET) in 0.6 mL 100 mM KH2PO4・NaOH buffer (pH 8) in 1.5 mL tubes within 72 hours. Additional
+enzyme portions (0.24 mg enzyme/g PET) were supplemented at 24 and 48 hours. All samples were run in
+triplicate, and data are shown as mean ± SD.
+Table 1. Kinetic parameters of Fast_2.9, FastPETase and LCCICCG derived from the inverse Michaelis‒Menten
+experiments
+Inverse MM kinetics invKM (mgenzyme • gPET
+-1) invVmax /S (μM • s-1 • gPET
+-1)
+Fast_2.9 0.025 0.030
+FastPETase 0.213 0.026
+LCCICCG 1.049 0.026
+As shown in Fig. 4c and Table 1, we observed significant differences among the three
+enzymes. While invVmax /S value of Fast_2.9 is 15.4% higher than both FastPETase and
+LCCICCG, especially striking isInvKm differences, which is 8.5 and over 40timeslower thanthe
+InvKm values of FastPETase and LCCICCG respectively, indicating much less of enzyme for
+Fast_2.9 is needed to fully depolymerise PET. We did notice a slightdecreaseinthevelocity
+when the enzyme concentrations were higher than 0.95 mgenzyme・gPET
+–1 for Fast_2.9 and 1.19
+mgenzyme・gPET
+–1 for FastPETase, which has also been reported forIsPETase before58. This
+concentration-dependent inhibition,likelyduetosurfacecrowding 58–61,isacommonbehaviour
+in the enzymatic degradation of solid substrates, as observed in cellulases and
+polyhydroxyalkanoate (PHA) depolymerases60.Suchphenomenon ismuch lesspronouncedin
+enzymeswithhigher thermal stabilitylikelyduetohigher rigidity 59,whichexplainstheabsence
+ofsuchconcentration-dependentinhibition for LCCICCG (Fig.4c).
+Enzyme costs play a significant part in the economics of industrial enzymatic hydrolysis
+14,35,36,62. The lower ininvKMofFast_2.9indicatesalower amountofenzyme isneeded,thereby
+reducing the overall recycling process costs. We next applied the least saturated enzyme
+concentration of Fast_2.9 (0.24 mgenzyme・gPET
+–1) todegrade7typesofuntreatedpostconsumer
+PET products (Supplementary Table 4), includingtwocoloured- blackandgreenopaque PET
+(Supplementary Fig. 10). We observed that 4 mg of post consumer PET could be completely
+degraded in as little as 22h (Supplementary Fig. 10a). Using the same enzyme amount(0.24
+mgenzyme・gPET
+–1 of enzyme was added at 0, 24, 48 h, which means in total 0.72mgenzyme・gPET
+–1
+of enzyme), analogously, we then compared Fast_2.9 to LCCICCG byscaling the reactionto 15
+mL volume at 50 °C in pH 8 buffer (Fig. 4d). We found that Fast_2.9 exhibited a higher
+depolymerization rate compared with LCCICCG during the entire 72 h incubation period. The
+accumulatedmonomersofTPAandMHETofFast_2.9 reactionsreacheditsplateauataround
+48 h, while for LCCICCG the total monomer concentrations kept increasing until the end of
+experiment without reaching complete depolymerisation even at the final 72 hours point. We
+alsofoundthattheTPAfractionoftotal monomersinFast_2.9reactionskeptincreasingduring
+the last 24 h and reached 95.9 ± 1.4% by the end of 72 h, while the final TPA ratio in total
+monomersinLCC ICCG reactionswas55.4±0.1%.
+13
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+Most transparent PET bottles are mechanically recycled in developed countries, but not
+coloured containers 63. Therefore we also evaluated how Fast_2.9 could degrade untreated
+coloured opaque postconsumer PET containers with just 0.72 mgenzyme・gPET
+–1 of enzyme
+usage. Under identical conditions, 97.6% of PET was degraded within 66 hours leaving only
+the green pigment in the reaction container (Fig. 4e, 4f, Supplementary Video) demonstrating
+Fast_2.9suitabilityfor TPArecoveryfromnon-transparentPETwaste.
+Approximately 60% of the PET produced is usedinthetextileindustry,while~30%isusedin
+thePETbottleindustry 64.Andthereexistnomaturerecyclingsystemfor textilewasteglobally,
+87% of whichendsin incinerationor landfills65.Toexplorethe broader applicationofFast_2.9,
+we pretreated 3 types of polyester textiles with extruding, quenching and grinding (Fig. 4g),
+and then incubated with Fast_2.9. By the end of 72 hours ofincubation,thedepolymerisation
+rate reached77.2±1.6%,77.4±1.1%and75.1 ±1.8%respectively,whichisalsoclose tothe
+substrate weight loss of 79.7 ± 4.0%，81.8 ± 2.8% and 85.9 ± 4.0%, as measured by
+lyophilization weight loss (Fig. 4h). And similar to PET bottle degradation in Fig. 4d, the TPA
+ratio in total monomers increased in the last 24 hours, which reached 89.9 ± 1.8%, 89.2 ±
+9.5%and74.4±4.0%respectively(Fig.4h).
+Discussion
+In this study we presented a novel droplet-based ultra-high throughput screening approach
+that enables direct use of insoluble PET substrates for directed PETase evolution to surpass
+previous limitations of low throughput screening. We engineered the strain using a biosensor
+that is TPA specific35 and transformed PET into nanoparticles to allow directly to sense PET
+degradationwithoutrelyingonalternativesubstratesthatarenotrelatedtodepolymerisationof
+PET16. Through screening a million-sized libraryatmesophilic30°Ctemperature,we identified
+eight mutants that enhancedIsPETaseactivity,with the mostnotableincrease,a22-fold effect
+(Fig. 2f), observed with the single S269T mutation located on the α7helix,thatisdistantfrom
+the active site(Fig.3a).WeintroducedtheS269TmutationintoknownPETasesand observed
+a general trendofactivation,mostpronouncedinFastPETase(Fig.4a).Theresultingenzyme,
+Fast_2.9, achieved a 430-fold increase in activity over the wild type at 50°C using untreated
+post-consumer substrate(Fig 4a).
+To explore the underlying mechanisms, we conducted extensive molecular dynamics
+simulations as distal mutations might influence protein structure and dynamics through
+long-range effects, potentially leading to allosteric impacts on enzymatic catalysis 66–69.
+Molecular trajectory analysis revealed that the ~28Å distance is mediated by interactions
+involving residues that connect to the β3-α2 loop,stabilising residuesY87,T88,and A89(Fig.
+3c, 3g). Notably, Austin et al53 found that the substrate binding cleft ofIsPETaseincludesT88
+and S238, while Guo and colleagues70 demonstrated that T88 and A89 are crucial for
+interacting with the PET polymer, such that mutations Y87H, Y87E, T88H,andA89Hresulted
+in a significant loss of activity, underscoring the critical roles these residues play in enzyme
+function. Similar to IsPETase and M2.9, we found the same global change pattern for
+FastPETaseandFast_2.9(Fig.3c,3d,3e,3f).
+14
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+PET typically has a glass transition temperature (Tg) starting from 67°C for amorphousPET,
+meaning reactions at higher temperatures can lead to increase of PET crystallinity71 thereby
+preventing PETase catalysis.Despite thatadditiveslikeplasticizersandexposureto water can
+lower its Tg 72,73 still it is important to consider these as PET may recrystallize if the
+environmental temperature exceedsitsTg74.For instance,Thomsenandcolleaguesobserved
+that the Tg of amorphous PET disks decreasedfrom75°Cto60°Cafter a24-hour pre-soakin
+water at 65°C41. In fact, Arnal et al testedtheenzymevariantLCCICCG,avariantknownfor its
+high efficiencyinindustrial applications,atalower temperatureof68°Cinsteadof72°C,taking
+into account the thermal properties of PET56. Our results show that Fast_2.9 has higher
+activities thanFastPETaseat30-50 ℃(Fig.4a,4b) andindifferentpH(SupplementaryFig.9),
+also outperforming LCCICCG in temperature ranges 30-50℃(Fig. 4b), and thus aligning well
+with the thermal properties of PET and making overall favourable process economy in
+mesophilictemperatures.
+Inverse Michaelis-Menten kinetics analysis of the three enzymes with 12 g/L postconsumer
+PET plastics showed that Fast_2.9 has the lowestInvKm, which could be attributed to the
+substrate binding cleft stabilisation by S269T for better substrate binding(Fig.3).LowerInvKm
+means lower enzyme usage, lowering costs of enzymaticcatalysis,whereasthelowaffinityof
+LCCICCG, as previously suggested,could potentiallylimititswideindustrial adoption75.Assuch,
+we showed that as little 0.72 mgenzyme・gPET
+–1ofFast_2.9isneededfor nearly100%conversion
+into TPA of multiple postconsumer PET (both transparent and coloured opaque products)
+within just 48hours,which is28%lessenzymeamountthantheoptimised 1mg enzyme・gPET
+–1for
+LCCICCG 56 and 64% less than the recently reported 2 mgenzyme・gPET
+–1 for TurboPETase14.
+Minimising enzyme usage in this process plays a critical role in enhancing the transformation
+of PET waste into high-value products, thereby contributing to the overall valueenhancement
+of this recycling pathway. High conversion rate from raw PET to TPA rather than MHET is
+needed to achieve the circular biorecycling and is preferable to be done by a single enzyme.
+Here we showed the potential of Fast_2.9 acting as MHETase76 and achieved 95.9% TPA
+content in the total monomers. Similar function has been observed in the variant
+IsPETaseS92K/D157E/R251A 77,however theexactcontentvaluewasnotreported. Furthermore,in all
+our experiments except for textile degradation, we used post-consumer PET from
+customer-used bottles and containers directly, without any pre-treatments such as heating,
+grinding 18, acid and base treatments 7879, which underscores the application potential of
+Fast_2.9. In this study, secondhand polyester textiles were the only material subjected to
+pretreatment. These textiles typically exhibit higher crystallinity and contain more additives
+compared to food-grade bottles or containers. Initial attempts to directly degrade the raw
+textile using Fast_2.9 showed limited efficiency (datanotshown).However,byincorporatinga
+pretreatment step followed by enzymatic degradation at 50°C, we demonstrated the
+effectiveness of Fast_2.9 in recycling textile waste. This method achieved over 77%
+depolymerization and 74.4-90% end-to-end TPA production, highlighting its potential for
+sustainabletextilewastemanagement.
+The resulting high activity, low substrate-enzyme ratio of Fast_2.9 and effectiveness at mild
+30-50℃ temperatures makes it a suitable candidate for industrial PET depolymerisation. In
+PET enzymatic processing, a higher concentration of TPA is advantageous because an
+additional hydrolysis step is normally needed to completely convert MHET into TPA either by
+enzymatic 80 or chemical hydrolysis18. TPA can be used as a fundamental building block for
+synthesising recycled virgin-like PET4 as well as for upscaled novel applications7,81. Assuch,
+15
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+~96% TPA yield also justifyadvantageousindustrial suitabilityofFast_2.9over state-of-the-art
+rivals (Fig. 4d). Furthermore, S269 and its derived mutants can be further enhanced through
+iterativecyclesofour presented droplet-basedenzymeevolutionwithsubstratenano-particles.
+Overall, we foresee this technology as a general method that can beappliedfor developing a
+broad range of biocatalysts acting on water insoluble solid substrates including other
+environment polluting plastic polymers 82. Accelerated enzyme evolution has once again
+transformed previously challenging enzymes, now, into potential drivers of the plastic circular
+economy.
+Methods
+Genomic integration of TPA biosensor inE.coli
+The TPA biosensor module (Supplementary Table 1) was synthesised, cloned into pTwist
+Chlor Medium copy number plasmid by TWIST Bioscience (www.twistbioscience.com) and
+named pTPAsensor. Four plasmids (pDonor, pTnsABC, pQcascade-array1 and pCutamp) for
+multicopy chromosomal integration using CRISPR-associated transposases (MUCICAT) were
+purchased from Addgene (https://www.addgene.org). The pDonor-TPAsensor plasmid was
+constructed by inserting the TPA biosensor module into the pDonor plasmid. The TPA
+biosensor biomodule was amplified using the primer pair TPA sensor_pDonor_F and TPA
+sensor_pDonor_R (Supplementary Table 6) and gel-purified with GeneJET Gel Extraction Kit
+(Cat#K0691, Thermo Scientific). The purified PCR product was ligated into the linearized
+pDonor plasmid using Gibson assembly 83, following BamHI and XbaI digestion. The
+pDonor-TPAsensor plasmid was sequence-verified by Eurofins Genomics
+(https://eurofinsgenomics.eu/) using the primer pair pDonor_seq_F and pDonor_seq_R after
+colonyPCR.
+BL21(DE3) competent cells were co-transformed with pDonor-TPAsensor and pTnsABC
+plasmids. After a 1-hour recovery incubation, the transformed cells were plated on LB-agar
+plates containing 100 μg/mLampicillinand50μg/mLkanamycin.TherecombinantBL21(DE3)
+strain carrying pDonor-TPAsensor and pTnsABS was made chemically competent using the
+Hanahan Method84 and then transformed with pQCascade-array1 plasmid. These cells were
+plated on LB-agar containing 100 μg/mL ampicillin, 50 μg/mL kanamycin, and 50 μg/mL
+streptomycin,andincubatedat37°Cfor 16hours,leadingtocolonygrowth.
+These colonies were scraped, suspended in fresh LB medium, and a 100 μl aliquot was
+re-plated on LB-agar plates containing the triple antibiotic combination and 0.1 mM IPTG to
+induce transposition-related protein expression and biofilm formation. The plates were
+incubated at 37 °C for an additional 16 hours. After biofilm formation, the biofilms were
+scraped off, resuspended in LB medium, diluted, and plated on LB-agar with the triple
+antibiotic combination and 1 mM IPTG. These inducing plates were incubated overnightat37
+°C.
+To enhance clonal outgrowth andintegrationefficiency,coloniesfromtheinducingplateswere
+designated as Transfer 1. A subset of these colonies was streaked onto fresh LB-agar plates
+with the triple antibiotics and 1 mM IPTG, then incubated overnight at 37 °C, resulting in
+Transfer 2. Further transfers led to Transfer 3. Copy numbers were identified using colony
+PCR or qPCRwith8primer pairs(cr1-cr8,SupplementaryTable6) targetingthegenomicsites
+integratedbypQCascade-array1.
+16
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+Generation of random mutagenesis library
+The DNA sequence ofIsPETase (excluding signal peptide) wassubjectedtoerror pronePCR
+using varyingconcentrationsofMnCl 2(0,0.1,0.2,0.3mM) tocontrol themutationrate,with10
+ng pET21-PETase as the template ina50μl PCRsystem.The primer pair PETase_RM_SP_F
+and PETase_RM_R (Supplementary Table 6) was used. The PCR products were purified by
+Genejet PCR purification kit (Cat#K0701, ThermoScientific) and subsequently used for the
+amplification of the pET21b-PETase plasmid via the RF cloning method85. This involved
+mixing 100 ng of purified gene fragments with 20 ng of plasmid in a 50 μl PrimeStar HS
+polymerase PCR system (Cat#R010A, Takara) and followingthePCRconditions:98℃for 30
+s, then 15 cycles of 98℃for 10 s and 68℃for 6 min, followed by 72℃for 10 min, with
+incubationat16 ℃.
+Todigestthecircular plasmid,1μl ofDpnI(Cat#FD1704,ThermoScientific) wasaddedtoeach
+10 μl RF cloning PCR product, and the mixture was incubated at 37℃for 30 minutes. The
+digested products were then electroporated into ElectroMAX™ DH5α-E Competent Cells
+(Cat#11319019, ThermoScientific) following the manufacturer's protocol. All clones from each
+plate were pooled and cultured in LB medium, except for a few individual clones from each
+library, which were picked and verified by sequencing at Eurofins Genomics . Plasmids from
+the pooled culture were purified using the GeneJet Plasmid Miniprep kit (Cat#K0503,
+ThermoScientific) andelectroporatedintotheG-TPAsensor straincompetentcells..
+Site directed mutagenesis
+DNA libraries targeting specific residue positions were constructed usingthe Q5Site-Directed
+Mutagenesis Kit (Cat#E0552S, NEB) followingthemanufacturer’sprotocol.TomutateS269to
+T269, the following primer pairs were used: ThermoPETase_S269T_F /
+ThermoPETase_S269T_R for ThermoPETase, FastPETase_S269T_F /
+FastPETase_S269T_R for FastPETase, HotPETase_S269T_F / HotPETase_S269T_R for
+HotPETase, and DepoPETase_S269T_F / DepoPETase_S269T_R for DepoPETase.Tomutat
+C273 to A273, the primer pair IsPETaseC273A_F / IsPETaseC273A_R was used for
+IsPETase, and FastPETase_C273A_F / FastPETase_C273A_R was used for FastPETase. To
+mutate C289 to A289, the primer pair IsPETaseC289A_F / IsPETaseC289A_R was used for
+IsPETase, and FastPETas_C289A_F / FastPETas_C289A_R was used for FastPETase. The
+primer sequences are provided in Supplementary Table 6. All plasmids were sequenced at
+EurofinsGenomicsbeforeproceedingtoproteinexpression."
+Preparation of PET nanoparticles
+For the HFIP method 42, 0.58 g GoodFellow amorphous PET film (Cat#ES30-FM-000145,
+GoodFellow) was dissolved in 35 mL hexafluoroisopropanol (HFIP) (Cat#AAA1274722,
+ThermoFisher) with magnetic stirring. PET solution (10 mL) was added dropwise into500mL
+ultrapure deionized water with vigorous stirring at room temperature, resulting in precipitation
+of PET-NPs. For the TPA method43, one gram of PET particles was dissolved in 10 mL of
+concentrated trifluoroacetic acid solution (TFA) (90% v/v) at 50 °C and stirred until complete
+dissolution, which took approximately 2 h. After dissolution, the solution was left to stand
+overnight. To precipitate the micro/nanoparticles, 10 mL of a diluted aqueous solution of
+trifluoroacetic acid (20% v/v) was added to the initial mixture under vigorous stirring and kept
+stirred for 2 hours, followed by overnight storage. The suspension was centrifuged at 2500g
+17
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+for 1 h, and the supernatant was discharged. The pellet was resuspended in 100 mL of
+ultrapure deionized water with vigorous stirring at room temperature. For both methods, the
+PET NP suspension was placed in a fume hood at 55 °C with magnetic stirring to remove
+residual HFIP. A 1 mL aliquot of resuspened PET nanoparticles were lyophilized for
+concentration analysis and HFIP, DSC analysis. The PET NP suspension was always
+ultrasonicatedfor 10minfreshlybefore use.
+Droplet generation and manipulation
+The cell suspension was diluted with Overnight Express OnEx system 2 (Cat#71300, Merck)
+medium supplemented with 2.5 g/L PET nanoparticles and 200 μg/ml ampicillin. Cells were
+diluted to an OD ~0.1 to achieve an average 0.3 cell per droplet according to Poisson’s
+distribution 45, based on the assumption that 1 mL of thisE. coli suspension at A600 nm = 1
+would contain 5 × 10 8 cells 86. Both the cell suspension and HFE 7500
+(Cat#EU-FLUO-7500-10, Emulseo) with 0.5% FluoSurf Surfactant
+(Cat#EU-FSC-V10-2%-HFE7500, Emulseo) were pumped into a Co-Flow Droplet Generator
+(Cat#DG-CF-35-05, Droplet Genomics) with a flow rate of 10 μL/min by Flow EZ system
+(Fluigent).
+The resulting 2 mL droplets were collected in a 15 mLsterilisedfalcontubeandkeptat30°C,
+200 rpm for 2 days in a shaker. After 48 hours of cultivation at 30 ℃, 500 μL
+1H,1H,2H,2H-perfluoro-1-octanol (Cat#370533-25G, Merck) was added into the emulsions
+and mixed gently until droplets were all de-emulsified. Following this, 1 mL sterilised PBS
+buffer (pH 7.0) was added and the mixture was settled for 5 min. The oil layer settled at the
+bottom, with thePETnanoparticlessedimentedinthe middlelayer.The cell suspension,found
+inthe upper layer,wascollectedfor FACSanalysisandsorting.
+Fluorescent microscopy
+Droplets were suspended with HFE 7500 oil and deposited onto glass slides for microscopic
+analysis. Observations were conducted under both bright and fluorescent fields, using 20x
+and40xobjectivesonaLEICADM2000microscope(LeicaMicrosystemsCMSGmbH).
+Flow cytometry analysis by GUAVA easyCyte Flow Cytometer
+For the functional analysis of plasmid-expressing and genomic-integrated biosensor strains,
+cells were analysed using a GUAVA easyCyte Flow Cytometer (Luminex). Cells were
+cultivated overnight in LB medium supplemented with 100 μg/mL ampicillin and 15 μg/mL
+chloramphenicol (for genomic-integrated biosensor strain, only 100 μg/mL ampicillin was
+added). A 2 μL aliquot of the overnight culture was inoculated into 198 μL OnEx system 2
+medium supplemented with the appropriate antibiotics in a 96-well culture plate. The cultures
+were incubated at 30 °C with shaking at 700 rpm in a thermomixer for 48 hours. After 48 h
+cultivation, 10 μL of each culture was further dilutedinto190μL OnExsystem2mediumin96
+well round-bottom plate (Cat#262162, Nunc). All wells were analysed by GUAVA easyCyte
+Flow Cytometer and 5000 cells from each well were counted. All strains were inoculated in
+triplicate.
+18
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+Flow cytometry analysis and cell sorting by SONY SH800S Cell
+Sorter
+For the flow cytometry analysis ofE.coli BL21(DE3) G-TPAsensor (locus 4 & 5), cells were
+cultivatedinOnExsystem2mediumsupplementedwith0,1and5mMNa 2TPAat37 ℃for 48
+h. Each sample has triplicates. After cultivation, cells were diluted with sterilised PBS and
+5000eventsper samplewereanalysedbySONYSH800SCell Sorter.
+For mutant library analysis and sorting, after droplets cultivation and de-emulsification, the
+cells were diluted with PBS (pH 7.0) to achieve a flow cytometric event rate of approximately
+3000 events/secondinaSONYSH800SCell sorter (SONYBiotechnology) equippedwitha 70
+μm nozzle size sorting chip. Prior to sorting, the cell suspension was filteredthrougha 35μm
+cell strainer. The cell sorter was operated at pressure level 4, utilising 488 nm excitation
+lasers, with emissions measured through the FL1 filter for sfGFP fluorescence. A total of
+10,000 cells from different mutagenesis libraries, along with a positive control group (E. coli
+BL21(DE3) G-TPAsensor (locus 4 &5) with pET21b-IsPETaseplasmid) andanegativecontrol
+group(E. coli BL21(DE3) G-TPAsensor (locus4 &5) withpET21bblankplasmid),wereinitially
+analysed by plotting forward scatter area (FSC-A) against fluorescence. Groups whose
+fluorescence histograms showednoleftshiftcomparedtothepositivecontrol (0.1and0.2 mM
+MnCl2 groups) werepooledandsubjectedtothesortingprocedure..
+The flow cytometric event rate was maintained at ~3000 events/second using the SONY
+SH800S cell sorter with a 70 μm nozzle sorting chip. Cells were firstly gated by FSC-A and
+side scatter area (SSC-A), and the gated cells were then further analysed for GFP
+fluorescence (488 nm excitation), and cells with the fluorescence intensity were sorted onto
+agar plates in a 96-well format. FACS data were processed using FlowJo software v10.8
+(TreeStar). The sorted colonies were recovered in LB medium containing 100 μg/mL
+ampicillin, inoculated separately, and then transferred into induction medium for enzymatic
+assaysor plasmidpurificationfor sequencing.
+Protein expression and purification
+PET degrading enzymes and variants were expressed in chemically competentE.coli BL21
+(DE3). Single colonies from freshly transformed plates were cultured overnight at 37 °C inLB
+mediumcontaining100 µg/mLampicillin.A500 µLaliquotoftheovernightculturewasusedto
+inoculate 50 mL of AIM TB medium (Cat#AIMTB0210, Formedium) supplemented with 100
+µg/mL ampicillin. Cultures were grown at 37 °C with shaking at 200 rpm until reaching an
+OD600 of 0.8-1.0, then incubated at 16 °C for an additional 24 hours. Cell pellets were
+harvested by centrifugation at 5000 rpm for 20 minutes and then fully suspended in
+equilibration / binding buffer (pH 7.4, 50 mM NaH2PO4, 300 mM NaCl). Cell suspension was
+sonicated with 10% amplitude with 1s On / 1s Off for 10-20 min. The lysates were then
+centrifuged at 10,000 g for 20 minutes to separate the supernatant from the cell debris. The
+soluble fraction was subjected to affinity chromatography using Talon Metal Affinity Resin
+(Cat# 635504, Takara). Unbound proteins were washed off with 20 resin-bed volumes of
+equilibration buffer and 5resin-bedvolumesofwashbuffer (pH7.4,50mMNaH 2PO4,300 mM
+NaCl, 10 mM imidazole). Bound proteins were eluted using an elution buffer (pH 7.4, 50 mM
+NaH2PO4,300mMNaCl,250mMimidazole).Theelutedproteinsweredesaltedusinga Hitrap
+Desalting Column (Cat#GE17-1408-01, Merck) and eluted in binding buffer (pH 7.4, 50 mM
+19
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+NaH2PO4, 300 mM NaCl). Protein purity was analysed by SDS-PAGE, and concentrations
+weremeasured usingA280with aNanodrop (ThermoFisher).
+For SDS and western blot, samples were prepared by mixing with 4x NuPage LDS sample
+buffer (Cat#NP0007, ThermoFisher) and boiling for 10-minute boiling at 85°C. Subsequently,
+10 μL samples, along with a Spectra Multicolor Broad Range Protein Ladder (Cat#26634,
+ThermoFisher) were loaded onto 4–20% Mini-PROTEAN TGX stain-free protein gels
+(Cat#4568096, Biorad) for electrophoresis, which was run at 180 V for 40 minutes. Following
+electrophoresis, proteins were transferred to Trans-Blot Turbo Mini PVDF membranes
+(Cat#1704156, Biorad). The membrane wasblockedfor 2hoursatroomtemperatureinPBST
+(PBS + 0.1% Tween 20) with 5% milk, washed with PBST for 3 times (5 min each), and
+incubated for 1 h at room temperature with 6x-His tag monoclonal antibody (HIS.H8)
+(Cat#MA1-21315, ThermoFisher). After three more PBST washes, the membrane was
+incubated for 1 h at room temperature with HRP conjugated anti-mouseIgG(H+L) secondary
+antibodies(Cat#31430,ThermoFisher),andwashedagain withPBSTfor 3times(5 mineach),
+and incubated for 5 min with West Pico plus HRP substrate (Cat#34580, ThermoFisher).
+BlottedproteinswerevisualisedwithaChemiDocXRSimageanalyzer (Bio-Rad).
+HPLC analysis
+UPLC analysis was performed on a Thermo Fisher Dionex UHPLC-PDA-FLD LC system,
+equipped with an autosampler and a PDA detector set to 240 nm. The analysis utilised a
+Zorbax Eclipse Plus C18 Column (Agilent) with a stepped gradient solvent ratio method.
+Mobile phase A consisted of water with 20 mM phosphoric acid, while mobile phase B was
+methanol,withaconstantflowrate of1.2mL/min.A10µLsamplewasinjectedfor analysis.
+Following injection, the mobile phase was initially set to 20% buffer B, then gradually
+increased to 65% over 7.0 minutes toseparateTPAandMHET.Thegradientwasthenrapidly
+decreased back to 20% within 6 seconds, followed by post-equilibration at 20% for 0.9
+minutes, resulting in a total run time of 8.0 minutes. Peakswereidentifiedbycomparingthem
+to chemical standards prepared from commercial TPA (Cat#40818, Sigma) and MHET
+(Cat#BD00777875, BLDPharma). Peak areas were integrated using Dionex Chromeleon
+software. With this method, TPA eluted at approximately 4.72 minutes, MHET at around 5.18
+minutes,andsmall amountsofbis(2-hydroxyethyl) terephthalate(BHET) atapproximately5.80
+minutes. Standards of TPA and MHET were analysed in each batch. TPA and MHET
+concentrations in the samples were estimated using standard curves (Supplementary Figs.
+11a,11bshowstheTPAandMHETstandardcurvesfromone batch).
+Enzymatic assay
+The sortedmutantsunderwenttwoadditional roundsofassayscreening.The firstround wasa
+supernatant assay. After overnight culturing in LB medium, cells were cultured in OnEx
+System 2 medium supplemented with 100 μg/mL ampicillin and 0.2 g/L PET nanoparticles at
+30°C and 700 rpm for 48 hours, with all samples in triplicate. Following cultivation, the cells
+werecentrifuged,andthesupernatantwassubjected toHPLCanalysis
+The second round involved a purified enzyme assay. Variants that showed enhanced activity
+compared to the original IsPETase in the supernatant assay were further purified and
+quantified usingthepreviouslydescribedproteinpurification methods.For thesecondroundof
+20
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+screening, 40 nM of purified enzymes were thoroughly mixed with 4 g/L PETnanoparticlesin
+100 mM KH2PO4-NaOH buffer (pH 8) and incubated at 30°C with shaking at 700 rpm for 48
+hours.Thetotal assayvolumewas600μLina1.5mL Eppendorftube.
+For additional enzymatic assays, 200 nM enzymes were typically used in a 600 μL buffered
+system in a 1.5 mL Eppendorf tube, with the tubes placed inathermomixer settothedesired
+temperature and shaken vigorously at 700 rpm, unless otherwise specified. The buffers used
+inthe assaysincluded100mMKH 2PO4-NaOH(pH8.0) and100mMglycine-NaOH(pH9.0).
+For assaysconductedatdifferentpHlevels,bufferswerepreparedasfollows:pH6.0,6.5,7.0,
+7.5, and 8.0 werepreparedwith100mMKH 2PO4 andNaOH,whilepH9.0,9.5,and10.0were
+preparedwith100mMglycineandNaOH.
+For the preparation of PET substrates, PET nanoparticles were washed 2-3 times with the
+specified buffers and then suspended to achieve the desired concentrations. PET products
+were punched into 6 mm-diameter discs, then washed sequentially with 1% SDS, 70%
+ethanol,anddeionizedwater beforeuse.
+Enzyme Kinetics
+Around 1.5 mg PET disc (equivalent to a quarter of a6mmdiameter-sizedPETdiscfromthe
+postconsumer yoghourt container lid) was added into 125 μl reaction solution in PCR tubes.
+The reaction solution consisted of 100 mM KH 2PO4・NaOH pH8 buffer and varying
+concentrations of enzymes (5, 10, 25, 50, 75, 100, 150, 200, 250, 300, 400, 500 nM). The
+PCR tubes were incubated in a Biorad PCR machine set at 50 °C for both the block and the
+lid. Each enzyme concentration was tested in triplicate. A3μLsampleofthereactionsolution
+was taken at 1, 2, 3, 4, and 7 hours for measurement at 260 nm using aNanoDrop,followed
+by a UV light absorbance method. If necessary, samples weredilutedwith thereactionbuffer.
+The values reported by the NanoDrop 1000 are based on a path length of 1 cm. Standard
+curves for TPA and MHET were also generated (Supplementary Figs. 11c, 11d), and a
+weighted mean coefficient of 965 M–1 cm–1, corresponding to a combination of 30% TPA and
+70% MHET, was used. Reaction velocities atdifferentenzymeconcentrationswerecalculated
+by linear fitting. Inverse MM kinetics of Fast_2.9, FastPETase and LCCICCG data was fitted
+usingtheInverseMichaelis–Mentenmodel,whichis 87.𝑣 = 𝑖𝑛𝑣𝑉𝑚𝑎𝑥𝐸0
+𝐾𝑚 + 𝐸0
+PostConsumerPETdegradationin15mlBioreactor
+Approximately 180 mg of post-consumer PET (yoghourt container lids, as mentioned above)
+was cut into small pieces (<1 cm x 1 cm)andaddedtoa20mLbioreactor(Pioreactor20mL,
+Version 1.0, Pioreactor,2024.Availableat:https://pioreactor.com.AccessedonApril18,2024)
+containing 15 mL of 100 mM KH2PO4-NaOH buffer (pH 8.0) and 100 nM of purified enzyme
+(0.24 mg enzyme/g PET) Fast_2.9, FastPETase, or LCCICCG. Each sample was prepared in
+triplicate. The bioreactors were maintained at 50°Cwithastirringrateof800rpm,andthepH
+wasregulatedbetween8.00and8.40every12hours.
+Samples of 100 µL were taken at various time points for time course analysis. Each sample
+wasdilutedtofallwithinthelineardetectionrangeofTPAandMHETforHPLCanalysis.
+Depolymerization was calculated based on the produced TPA equivalents (TPAeq) using the
+followingformula:
+Depolymerization(%)= *100%88,192 𝑔/𝑚𝑜𝑙  * 𝑉 * (𝐶𝑇𝑃𝐴+𝐶𝑀𝐻𝐸𝑇) 
+𝑀
+21
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+where 192 g/mol is the mass per repeating unit of PET, CTPA and CMHET are the molar
+concentrations of TPA and MHET as measured by HPLC, and M is the initial mass weight,
+approximately180mg,used inthePioreactor.
+Coloured PET degradation
+A piece of 40.2 mg green PET disc (from post consumer meat container product) was added
+into 3 mL 100 mM KH2PO4 ・NaOH (pH 8.0) buffer containing0.0096mg Fast_PETase(equal
+to 0.24 mgenzyme・gPET
+–1) in a glass vial. The experiment was conducted in triplicate. The vials
+were placed in an incubator set at 50°C. An additional 0.0096 mg of Fast_2.9 enzyme was
+supplementedtothesystemevery24hours,andthe pHwasadjustedto~8.0asneeded.
+Samples of 10-50 µL were taken at various time pointsfor timecourse analysis.Each sample
+was diluted to fall within the linear detection range of TPA and MHET for HPLC analysis.
+Imageswerecapturedat2-minuteintervalsandcompiledintoavideo.
+Polyester textile pretreatment and degradation by Fast_2.9
+Approximately 200 g of each of the three types of polyester textiles (the outer skirt of a pink
+dress, the inner skirt of a pink dress, and a yellow T-shirt) were extruded using a capillary
+rheometry set at 280 °C, and immediately quenched in ice-cold water. The extruded material
+wasthengroundintopowder bya cryomil.
+Approximately 7-8 mg (~12 g/L) pretreated polyester textile material was added into 100 mM
+KH2PO4 ・NaOH (pH 8.0) buffer with 100 nM(0.24 mgenzyme・gPET
+–1 ) purifiedFast_2.9enzyme.
+An additional 100 nM of purified Fast_2.9enzymewassupplementedevery24hours,andthe
+pH was adjusted to ~8.0 using 5M NaOHevery24hours.Samplesof50 μLweretaken at24,
+48,and72hoursfor monomer contentmeasurement.
+Depolymerization was calculated based on the produced TPA equivalents (TPAeq) using the
+following formula:
+Depolymerization(%) = * 100%.192 𝑔/𝑚𝑜𝑙  * 𝑉 * (𝐶𝑇𝑃𝐴+𝐶𝑀𝐻𝐸𝑇) 
+𝑀
+At the end of the 72 hours, the residual textiles were weighed usinglyophilizationtomeasure
+weight loss. The overall weight loss after degradation was also calculated by comparing it to
+theinitialmaterialweight.
+Structuralanalysisandmoleculardynamicsmodelling
+The starting coordinates for the IsPETase simulationswereobtainedfromthecrystalstructure
+withPDBcode6EQE53 andforFastPETasefromthecrystalstructurewithPDBcode7SH618.
+The PDB files were pre-processed with the dock-prep tool of Chimera (v1.16)89, to complete
+incomplete side chains (using the Dunbrack 2010 library) and remove the low occupancy
+alternative locations of side chains when present. Residue S269 was mutated with the
+mutate_model.py script of MODELLER (v10.4)90 to T269. For the wild type, S269 was
+maintainedasS269.
+System parameterization was performed using the CHARMM-GUI web interface 91,92.
+Hydrogens were assigned based on physiological pH, and the systems were placed on a
+rectangular water box of TIP3P 93 water molecules extending at least 10 Å from any protein
+22
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+atom. The solvated systems were neutralised using Cl- ions and an additional 150mM NaCl
+wereadded.TheCHARMM36mforcefieldwasusedtoparametrizetheprotein 94.
+The systems were first minimised for a maximum of 5000 steps, using the steepest descent
+algorithm for the first 2500 steps and then switching to the conjugate gradient method. Weak
+positional restraints of 1 kcal mol-1 angstrom-2 were added to all the protein atoms. Following
+minimization, the systems wereequilibratedunder NVTensemblefor 125ps,duringwhich the
+temperature wasraisedto303.15Kfor theIsPETasesimulationsand313Kfor theFastPETase
+ones. Positional restraints were maintained during equilibration, with an integration time step
+of1fs.
+All productionsimulationswereconductedunder theisothermal,isobaricconditions(NPT) with
+1 bar pressure, using the Langevin Thermostat95 (friction coefficient 1 ps-1) and Montecarlo
+Barostat 96. Periodic boundary conditionsandParticleMeshEwald(real spacecutoff12Åand
+grid spacing 1.2Å) wereemployedfor remoteelectrostaticinteractions 97,whileVander Waals
+contacts were truncated at the real space cutoff. Protein bonds involving hydrogens were
+constrained using the SHAKE algorithm, and water molecules were treated with SETTLE,
+allowingfor anintegrationtimestepof2fs.
+Simulations were runusingthesingleprecisionpmemd.cudaimplementationofAmber 2022 98.
+Each system was simulated for a total of 1 µs, with simulation coordinates saved periodically
+for further analysis.Theinitial 500nswerediscardedastheequilibration phase.
+Root mean square fluctuation (RMSF) profiles for eachsystemwere obtained usingcpptraj98.
+Trajectory frames were aligned using the backbone atoms (C, CA, N), and residue weighted
+RMFS profiles were generated using atomic masses as weights. To compare systems, the
+area under the curve (AUC) of the RMSF profile from residues 88 to 91 was calculated, and
+significancewasassessedusingatwo-tailedindependentt-test.
+Root mean square deviations (RMSD) profiles for residues88to91,whichshowedsignificant
+fluctuations between the S269 and S269T variants, was computed using the mdtraj python
+package 99. Frames were aligned to the crystal structure using the backbone atoms and
+excluding the region of residues of interest. The RMSD was computed for C-α atoms from
+residues 88 to 91 without realigning the trajectory to better capture different conformations.
+Results from the differentreplicateswerecombined,andtheprobabilitydensitywascomputed
+with scipy using the default number estimation of bins. Representative structures for each of
+the RMSD peaks of the residues 88 to 91 were determined by randomly sampling 50
+snapshots, computing an averagestructure,aligning itto thedockingstructure,andvisualising
+itinPyMOL(http://www.pymol.org/pymol ).
+Correlation paths were computed using WISP55 by combining all the replicates ofIsPETase
+S269T. Paths were calculated using residue T269 as the source residue and residues T88 to
+S93 as the sink, extending until reaching residue T88. Simulations were converted to PDB
+format and saved 10 times less frequently. The top 10 shortest paths were computed using
+default WISP parameters and visualised in PyMOL, with path thickness representing the
+frequencyofoccurrence..
+23
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+Data and Code Availability
+Data supporting the findings ofthisstudyareavailablewithinthepaper anditsSupplementary
+Information.
+Supplementary information
+Supplementary Methods, Supplementary Figs. 1-11, Supplementary Tables 1-6,
+SupplementaryNote,Supplementaryvideo
+Acknowledgements
+The study was supported by SciLifeLab fellows program (A.Z.), Swedish Research council
+(Vetenskapsrådet) starting grant no. 2019-05356 (A.Z.), Formas early-career research grant
+2019-01403 (A.Z.), WALP Wallenberg Launchpad project 2023.0523 supported by the Knut
+and Alice Wallenberg Foundation (A.Z.). A.Z. is a Marius Jakulis Jason Foundation scholar.
+We thank Roland Kádár and Sajjad Pashazadehgaznagh from Chalmers University of
+Technology for their help with textile pretreatment. We acknowledge Jacob Kindbom from
+Chalmers Mass Spectrometry Infrastructure for providing training and instruction on HPLC
+usage, Stefan Gustafsson from Chalmers Materials Analysis Laboratory on SEM training and
+Katarina Logg on FT-IR guidance. We thank Shuichi Haraguchi from Chalmers University of
+Technology for discussions on DSC results. We thank Mukil Madhusudanan from Technical
+University of Denmark for discussions on nanoparticles. We thank Shanjun Ruan for
+videographyandvideoediting.
+Competing interests
+X.F. and A.Z. submitted a patent application on enzymatic PET depolymerization. A.Z. is a
+co-founder ofElipticaLtd.All other authorshavedeclared non-competinginterests.
+References
+1. George, N. & Kurian, T. Recent Developments in the Chemical Recycling of
+Postconsumer Poly(ethylene terephthalate) Waste. Ind. Eng. Chem. Res. 53,
+14185–14198(2014).
+2. Marfella, R. et al. Microplastics and Nanoplastics in Atheromas and Cardiovascular
+Events.N. Engl. J. Med.390,900–910(2024).
+3. Yoshida, S. et al. A bacterium that degrades and assimilates poly(ethylene
+terephthalate).Science 351,1196–1199(2016).
+4. Tournier, V. et al. An engineered PET depolymerase to break down and recycle plastic
+bottles. Nature vol. 580 216–219 Preprint at https://doi.org/10.1038/s41586-020-2149-4
+(2020).
+5. Simon, N. et al.Abindingglobal agreementto addressthelife cycleofplastics. Science
+373,43–47(2021).
+6. DeFrancesco,L.Closingtherecyclingcircle. Nat. Biotechnol.38,665–668(2020).
+7. Cao, Z. et al. Synthesis of metal–organic frameworks through enzymatically recycled
+polyethylene terephthalate. ACS Sustain. Chem. Eng. (2023)
+24
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+doi:10.1021/acssuschemeng.3c05222.
+8. Hong, H. et al. Discovery and rational engineering of PET hydrolase with both
+mesophilicandthermophilicPEThydrolaseproperties. Nat. Commun.14,4556 (2023).
+9. Eiamthong, B. et al. Discovery and Genetic Code Expansion of a Polyethylene
+Terephthalate (PET) Hydrolase from the Human Saliva Metagenome for the
+Degradation and Bio-Functionalization of PET. Angew. Chem. Int. Ed Engl. 61,
+e202203061 (2022).
+10. Pfaff, L.et al. Multiple Substrate Binding Mode-Guided Engineering of a Thermophilic
+PETHydrolase. ACS Catal.12,9790–9800(2022).
+11. Richter, P. K. et al. Structure and function of the metagenomic plastic-degrading
+polyester hydrolasePHL7boundtoitsproduct. Nat. Commun.14,1905(2023).
+12. Zrimec, J., Kokina, M., Jonasson, S., Zorrilla, F. & Zelezniak, A. Plastic-degrading
+potential across the global microbiome correlates with recent pollution trends.MBio 12,
+e0215521(2021).
+13. Buchholz, P. C. F.et al. Plastics degradation byhydrolyticenzymes:Theplastics-active
+enzymesdatabase-PAZy. Proteins 90,1443–1456(2022).
+14. Cui, Y. et al. Computational redesign of a hydrolase for nearly complete PET
+depolymerization at industrially relevant high-solids loading.Nat. Commun. 15, 1417
+(2024).
+15. Lee, S. H.et al. Three-directional engineering of IsPETasewithenhancedprotein yield,
+activity,anddurability. J. Hazard. Mater.459,132297 (2023).
+16. Qiao, Y.et al.Fluorescence-activated dropletsortingofPETdegradingmicroorganisms.
+J. Hazard. Mater.424,127417(2022).
+17. Son, H. F.et al. Rational Protein Engineering of Thermo-Stable PETase from Ideonella
+sakaiensisfor HighlyEfficientPETDegradation. ACS Catal.9,3519–3526(2019).
+18. Lu, H. et al. Machine learning-aided engineering of hydrolases for PET
+depolymerization.Nature 604,662–667(2022).
+19. Cui, Y. et al. Computational redesign of a PETase for plastic biodegradation under
+ambientconditionbytheGRAPEstrategy. ACS Catal.11,1340–1350(2021).
+20. Bell, E. L.et al. Directed evolution of an efficient and thermostable PETdepolymerase.
+Nat. Catal.5,673–681(2022).
+21. Shi, L.et al. Complete Depolymerization of PET Wastes by an EvolvedPETHydrolase
+fromDirectedEvolution. Angew. Chem. Int. Ed Engl.62,e202218390(2023).
+22. Arnold, F. H. Directed Evolution: Bringing New Chemistry to Life.Angew. Chem. Int. Ed
+Engl. 57,4143–4148(2018).
+23. Jäckel, C., Kast, P. & Hilvert, D. Protein design by directed evolution.Annu. Rev.
+Biophys. 37,153–173(2008).
+24. Packer, M. S. & Liu, D. R. Methods for the directed evolution of proteins.Nat. Rev.
+Genet. 16,379–394(2015).
+25. Debon, A.et al. Ultrahigh-throughput screening enables efficient single-round oxidase
+remodelling.Nat. Catal.2,740–747(2019).
+26. Adolfsen, K. J. et al. Improvement of a synthetic live bacterial therapeutic for
+phenylketonuria with biosensor-enabled enzyme engineering.Nat. Commun. 12, 6215
+(2021).
+27. Stucki, A., Vallapurackal, J., Ward, T. R. & Dittrich, P. S. Droplet Microfluidics and
+Directed Evolution of Enzymes: AnIntertwinedJourney.Angew. Chem. Int. Ed Engl.60,
+24368–24387(2021).
+28. Fu, X., Zhang, Y., Xu, Q., Sun, X. & Meng, F. Recent advances on sorting methods of
+high-throughput droplet-based microfluidics in enzyme directed evolution.Front. Chem.
+9,666867(2021).
+29. Sjostrom, S. L.et al. High-throughput screening for industrial enzyme production hosts
+bydropletmicrofluidics. Lab Chip14,806–813(2014).
+30. Holstein, J. M., Gylstorff, C. & Hollfelder,F.Cell-free DirectedEvolutionofaProteasein
+MicrodropletsatUltrahighThroughput. ACS Synth. Biol.10,252–257(2021).
+31. Zurier, H. S. & Goddard, J. M. A high-throughput expressionand screeningplatformfor
+25
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+applications-drivenPETase engineering.Biotechnol. Bioeng.120,1000–1014 (2023).
+32. Gonzalez,D.H.,Kuang,X.M.,Scott,J.A.,Rocha,G.O.&Paulson,S.E.Terephthalate
+Probe for Hydroxyl Radicals: Yield of 2-Hydroxyterephthalic Acid and Transition Metal
+Interference.Anal. Lett.51,2488–2497(2018).
+33. Linxiang, L.et al. An HPLC assay of hydroxyl radicals by the hydroxylation reaction of
+terephthalicacid. Biomed. Chromatogr.18,470–474(2004).
+34. Yeom, S.-J. et al. A synthetic microbial biosensor for high-throughput screening of
+lactambiocatalysts. Nat. Commun.9,5053(2018).
+35. Li, J., Nina, M. R. H., Zhang, X. & Bai, Y. Engineering Transcription Factor XylS for
+Sensing Phthalic Acid and TerephthalicAcid:AnApplicationfor EnzymeEvolution.ACS
+Synth. Biol.(2022) doi:10.1021/acssynbio.1c00275.
+36. Pardo, I.et al. Gene amplification, laboratory evolution, andbiosensor screeningreveal
+MucK as a terephthalic acid transporter in Acinetobacter baylyi ADP1.Metab. Eng. 62,
+260–274(2020).
+37. Strucko, T. et al. CASCADE, a platform for controlled gene amplification for high,
+tunableand selection-freegeneexpression inyeast. Sci. Rep.7,41431(2017).
+38. Zhang, Y. et al. Multicopy Chromosomal Integration Using CRISPR-Associated
+Transposases.ACS Synth. Biol.9,1998–2008(2020).
+39. Han, X. et al. Structural insight into catalytic mechanism of PET hydrolase. Nat.
+Commun. 8,2106(2017).
+40. Wittmar, A. S. M., Koch, D., Prymak, O. & Ulbricht, M. Factors Affecting the
+Nonsolvent-Induced Phase Separation of Cellulose from Ionic Liquid-Based Solutions.
+ACS Omega5,27314–27322(2020).
+41. Thomsen, T. B., Hunt, C. J. & Meyer, A. S. Influence of substratecrystallinityandglass
+transitiontemperature onenzymaticdegradationofpolyethyleneterephthalate(PET). N.
+Biotechnol. 69,28–35(2022).
+42. Johnson, L. M.et al. Fabrication of polyethylene terephthalate(PET) nanoparticleswith
+fluorescent tracers for studies in mammalian cells.Nanoscale Advances 3, 339–346
+(2021).
+43. Rodríguez-Hernández, A. G., Alejandro Muñoz-Tabares, J., Cristobal Aguilar-Guzmán,
+J. & Vazquez-Duhalt, R. A novel and simple method for polyethylene terephthalate
+(PET) nanoparticleproduction.Environ. Sci.: Nano6,2031–2036(2019).
+44. Chen, Z., Hay, J. N. & Jenkins, M. J. FTIR spectroscopic analysis of poly(ethylene
+terephthalate) oncrystallization.Eur. Polym. J.48,1586–1610(2012).
+45. Collins, D. J., Neild, A., deMello, A., Liu, A.-Q. & Ai, Y. The Poisson distribution and
+beyond: methods for microfluidic droplet production and single cell encapsulation.Lab
+Chip 15,3439–3459(2015).
+46. Schaerli, Y. Bacterial Microcolonies in Gel Beads for High-throughput Screening.Bio
+Protoc 8,(2018).
+47. van den Berg, B. A. et al. Exploring sequence characteristics related to high-level
+productionofsecretedproteinsinAspergillusniger. PLoS One7,e45869(2012).
+48. Buric, F. et al. The amino acid sequence determines protein abundance through its
+conformational stability and reduced synthesis cost. bioRxiv (2023)
+doi:10.1101/2023.10.02.560091.
+49. Johnson, S. R., Fu, X., Viknander, S., Goldin, C. & Monaco, S. Computational Scoring
+and Experimental Evaluation of Enzymes Generated by Neural Networks. bioRxiv
+(2023).
+50. Joo, S.et al.Structural insightintomolecular mechanismofpoly(ethyleneterephthalate)
+degradation.Nat. Commun.9,382(2018).
+51. Son, H. F.et al. Structural bioinformatics-based protein engineering of thermo-stable
+PETasefromIdeonellasakaiensis. Enzyme Microb. Technol.141,109656 (2020).
+52. Tripp, A. E., Burdette, D. S., Zeikus, J. G. & Phillips, R. S. Mutation of Serine-39 to
+threonine in thermostable secondary alcohol dehydrogenasefromThermoanaerobacter
+ethanolicuschangesenantiospecificity. J. Am. Chem. Soc.120,5137–5141 (1998).
+53. Austin, H. P.et al. Characterization and engineering of a plastic-degrading aromatic
+26
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+polyesterase.Proc. Natl. Acad. Sci. U. S. A.115,E4350–E4357(2018).
+54. Burgin, T.et al. The reaction mechanism of the Ideonella sakaiensis PETase enzyme.
+Commun Chem7,65(2024).
+55. Van Wart, A. T., Durrant, J., Votapka, L. & Amaro, R. E. Weighted Implementation of
+Suboptimal Paths (WISP): An Optimized Algorithm and Tool for Dynamical Network
+Analysis.J. Chem. Theory Comput.10,511–517(2014).
+56. Arnal, G.et al. Assessment of Four Engineered PET Degrading Enzymes Considering
+Large-ScaleIndustrial Applications.ACS Catal.13,13156–13166(2023).
+57. Torres-Huerta, A. M.et al. Morphological and Mechanical Properties Dependence of
+PLA Amount in PET Matrix Processed by Single-Screw Extrusion. Polym. Plast.
+Technol. Eng.55,672–683(2016).
+58. Zhong-Johnson, E. Z. L., Voigt, C. A. & Sinskey, A. J. An absorbance method for
+analysis of enzymatic degradation kinetics of poly(ethylene terephthalate) films.Sci.
+Rep. 11,928(2021).
+59. Avilan, L. et al. Concentration-Dependent Inhibition of Mesophilic PETases on
+Poly(ethylene terephthalate) Can Be Eliminated by Enzyme Engineering.
+ChemSusChem 16,e202202277(2023).
+60. Linda Zhong-Johnson, E. Z.et al. Analysis of Poly(ethylene terephthalate) Degradation
+Kinetics of Evolved IsPETase Variants Using a Surface CrowdingModel.J. Biol. Chem.
+105783(2024).
+61. Bååth, J. A., Borch, K., Jensen, K., Brask, J. & Westh, P. Comparative Biochemistry of
+Four Polyester (PET) Hydrolases*.Chembiochem 22,1627–1637(2021).
+62. Yang, B., Dai, Z., Ding, S.-Y. & Wyman, C. E. Enzymatic hydrolysis of cellulosic
+biomass.Biofuels 2,421–449(2011).
+63. Allen, R.D.&James,M.I.Chemical recyclingofPET.in ACS Symposium Series61–80
+(AmericanChemical Society,Washington,DC,2021).
+64. Majumdar, A., Shukla, S., Singh, A.A.&Arora,S.Circular fashion:Propertiesoffabrics
+made from mechanically recycled poly-ethylene terephthalate (PET) bottles.Resour.
+Conserv. Recycl.161,104915(2020).
+65. Radev, R. & Marinova, V. Textile wasteinthecontextofthe circular economy.E3S Web
+Conf. 402,08048(2023).
+66. Gu, J., Xu, Y. & Nie, Y. Role of distal sites in enzyme engineering.Biotechnol. Adv.63,
+108094(2023).
+67. Vanella, R. et al. Understanding activity-stability tradeoffs in biocatalysts by enzyme
+proximitysequencing. Nat. Commun.15,1807(2024).
+68. Faure, A. J.et al. Mapping the energetic and allosteric landscapes of protein binding
+domains.Nature 604,175–183(2022).
+69. Casilli, F., Canyelles-Niño, M., Roelfes, G. & Alonso-Cotchico, L. Computation-guided
+engineering of distal mutations in an artificial enzyme. Faraday Discuss. (2024)
+doi:10.1039/d4fd00069b.
+70. Guo, B.et al. Conformational Selection in Biocatalytic Plastic Degradation by PETase.
+ACS Catal.12,3397–3409(2022).
+71. Awaja,F.&Pavel,D.RecyclingofPET. Eur. Polym. J.41,1453–1477(2005).
+72. Lim, H. & Hoag, S. W. Plasticizer effects on physical-mechanical properties of solvent
+castSoluplus®films. AAPS PharmSciTech14,903–910(2013).
+73. Vieira, M. G. A., da Silva, M. A., dos Santos, L. O. & Beppu, M. M. Natural-based
+plasticizersand biopolymer films:Areview. Eur. Polym. J.47,254–263(2011).
+74. Jog, J. P. Crystallization of polyethyleneterephthalate. Journal of Macromolecular
+Science, Part C: Polymer Reviews35,531–553(1995).
+75. Chen, Y.et al. Construction of Fusion Protein with Carbohydrate-Binding Module and
+Leaf-Branch Compost Cutinase to Enhance the Degradation Efficiency of Polyethylene
+Terephthalate.Int. J. Mol. Sci.24,(2023).
+76. Palm, G. J. et al. Structure of the plastic-degrading Ideonella sakaiensis MHETase
+boundtoasubstrate. Nat. Commun.10,1717(2019).
+77. Yin, Q., You, S., Zhang, J., Qi, W. & Su, R. Enhancement of the polyethylene
+27
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint 
+terephthalate and mono-(2-hydroxyethyl) terephthalate degradation activity of Ideonella
+sakaiensis PETase by an electrostatic interaction-based strategy.Bioresour. Technol.
+364,128026(2022).
+78. Yoshioka, T., Motoki, T. & Okuwaki, A. Kinetics of hydrolysis of poly(ethylene
+terephthalate) powder in sulfuric acid by a modified shrinking-core model.Ind. Eng.
+Chem. Res.40,75–79(2001).
+79. Giraldo-Narcizo, S., Guenani, N., Sánchez-Pérez, A. M. & Guerrero, A. Accelerated
+Polyethylene Terephthalate (PET) Enzymatic Degradation by Room Temperature Alkali
+Pre-treatmentfor ReducedPolymer Crystallinity.Chembiochem 24,e202200503 (2023).
+80. Li, T., Menegatti, S. & Crook, N. Breakdown ofpolyethylenetherepthalate microplastics
+under saltwater conditionsusingengineeredVibrio natriegens.AIChE J.69,(2023).
+81. Sadler, J. C. & Wallace, S. Microbial synthesis of vanillin from waste poly(ethylene
+terephthalate). Green Chemistry vol. 23 4665–4672 Preprint at
+https://doi.org/10.1039/d1gc00931a(2021).
+82. Pabortsava, K. & Lampitt, R. S. High concentrations of plastic hidden beneath the
+surfaceoftheAtlanticOcean. Nat. Commun.11,4073(2020).
+83. Gibson, D. G. et al. Enzymatic assembly of DNA molecules up to several hundred
+kilobases.Nat. Methods6,343–345(2009).
+84. Green, M. R. & Sambrook, J. The HanahanMethodfor PreparationandTransformation
+of Competent Escherichia coli: High-Efficiency Transformation. Cold Spring Harb.
+Protoc. 2018,(2018).
+85. van den Ent, F. & Löwe, J. RF cloning: a restriction-free method for inserting target
+genesinto plasmids.J. Biochem. Biophys. Methods67,67–74(2006).
+86. Zinchenko, A.et al. One in a million: flow cytometric sorting ofsinglecell-lysateassays
+in monodisperse picolitre double emulsion droplets for directed evolution.Anal. Chem.
+86,2526–2533(2014).
+87. Kari, J., Andersen,M.,Borch,K.&Westh,P.AninverseMichaelis–Mentenapproachfor
+interfacial enzymekinetics.ACS Catal.7,4904–4914 (2017).
+88. Frank, R., Krinke, D., Sonnendecker, C., Zimmermann, W. & Jahnke, H.-G. Real-time
+noninvasiveanalysisofbiocatalyticPETdegradation. ACS Catal.12,25–35(2022).
+89. Pettersen, E. F.et al. UCSF Chimera—A visualization system for exploratory research
+andanalysis. J. Comput. Chem.25,1605–1612(2004).
+90. Webb, B. & Sali, A. Comparative Protein Structure Modeling Using MODELLER.Curr.
+Protoc. Bioinformatics54,5.6.1–5.6.37(2016).
+91. Jo, S.,Kim,T.,Iyer,V.G.&Im,W.CHARMM-GUI:aweb-basedgraphical user interface
+for CHARMM.J. Comput. Chem.29,1859–1865(2008).
+92. Lee,J. et al.CHARMM-GUIInputGenerator for NAMD,GROMACS,AMBER,OpenMM,
+and CHARMM/OpenMM Simulations Using the CHARMM36 Additive Force Field.J.
+Chem. Theory Comput.12,405–413(2016).
+93. Jorgensen, W. L., Chandrasekhar, J., Madura, J. D., Impey, R. W. & Klein, M. L.
+Comparison of simple potential functions for simulating liquid water.J. Chem. Phys.79,
+926–935(1983).
+94. Huang, J. et al. CHARMM36m: an improved force field for folded and intrinsically
+disorderedproteins. Nat. Methods14,71–73(2017).
+95. Loncharich, R. J., Brooks, B. R. & Pastor, R. W. Langevin dynamics of peptides: the
+frictional dependence of isomerization rates of N-acetylalanyl-N’-methylamide.
+Biopolymers 32,523–535(1992).
+96. Molecular dynamics simulations of water andbiomoleculeswithaMonteCarlo constant
+pressurealgorithm. Chem. Phys. Lett.384,288–294(2004).
+97. Darden, T.,York,D.&Pedersen,L.ParticlemeshEwald:An N⋅log(N) methodfor Ewald
+sumsinlargesystems. J. Chem. Phys.98,10089–10092(1993).
+98. Case,D.A. et al. Amber 2023.(UniversityofCalifornia,SanFrancisco,2023).
+99. McGibbon, R. T.et al. MDTraj: A Modern Open Library for the Analysis of Molecular
+DynamicsTrajectories. Biophys. J.109,1528–1532 (2015).
+28
+.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a
+preprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in 
+The copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint

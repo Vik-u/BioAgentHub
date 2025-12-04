@@ -1,0 +1,317 @@
+L
+ABCYTE ® ECHO ™  
+LIQUID HANDLER  
+ 
+         USER GUIDE  
+ 
+ 
+AUTOMATED SOLUTIONS  
+Release History 
+Part Number Release Publication Date 
+HH20001099 A August 2010 
+ 
+Customer Support 
+Support information: http://www.perkinelmer.com 
+Support portal: http://evoportal.perkinelmer.com 
+Support Email: evosupport@perkinelmer.com 
+ 
+The information contained in this document is subject to change without notice. 
+Except as specifically set forth in its terms and c onditions of sale, PerkinElmer makes no 
+warranty of any kind with regard to this document, including, but not limited to, the implied 
+warranties of merchantability and fitness for a particular purpose. 
+PerkinElmer shall not be liable for errors containe d herein for incidental consequential 
+damages in connection with furnishing, performance or use of this material. 
+Copyright Information 
+This document contains proprietary information that is protected by copyright. 
+All rights are reserved. No part of this publicatio n may be reproduced in any form whatso- 
+ever or translated into any language without prior written permission of PerkinElmer, Inc. 
+Copyright © 2010 PerkinElmer, Inc. 
+Printed in Germany. 
+Trademarks 
+Registered names, trademarks etc. used in this docu ment, even when not specifically 
+marked as such, are protected by law. 
+PerkinElmer is a registered trademark of PerkinElmer, Inc. 
+plate::works is a trademark of PerkinElmer, Inc. 
+plate::handler is a trademark of PerkinElmer, Inc. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Labcyte Echo liquid handler  Contents 
+  
+ 
+ 
+ I 
+Contents 
+1 Introduction ...................................... ................................................... .............. 2 
+2 Basic Settings ....................................................................................... ............. 3 
+3 Cherry Picking ....................................................................................... ............ 5 
+4 Assay Functions ...................................................................................... .......... 7 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Labcyte Echo liquid handler 1  Introduction 
+ 
+ 
+ 
+ 
+2  
+1 Introduction 
+This document describes how to configure a Labcyte Echo liquid handler for use within a 
+plate::works™ run.  
+Please refer to the plate::works™ and the Echo manu al for details on general 
+plate::works™ handling and liquid handling.  
+ 
+ 
+ 
+ 
+ 
+Labcyte Echo liquid handler 2  Basic Settings 
+ 
+ 
+ 
+ 3 
+2 Basic Settings 
+Use the function of the Device Tool (see plate::wor ks™ manual for details on how to lo- 
+cate and open the Device Tool) to test the basic functions of the Labcyte Echo.  
+ 
+ 
+•  Open door 
+Open the door. 
+ 
+•  Close door 
+Close the door. 
+ 
+•  Home 
+Home All Axes. 
+ 
+•  Safe 
+Bring device to safe position and turn off pump. 
+ 
+•  Show 
+Open Echo software dialog for direct access to hard ware. Dialog appears on comput- 
+er where the plate::works™ driver is running, so it  is possibly not shown on screen of 
+Device Tool computer. 
+ 
+ 
+ 
+ 
+ 
+Labcyte Echo liquid handler 2  Basic Settings 
+ 
+ 
+ 
+ 
+4  
+ 
+ 
+•  Gripper out (Source plate) 
+Move the gripper for source plate out of the device. 
+ 
+•  Gripper in (Source plate) 
+Move the gripper for source plate into the device (plate type must be specified). 
+   Enable no plate  to disable the plate sensor while moving in. 
+ 
+•  Gripper out (Destination plate) 
+Move the gripper for destination plate out of the device. 
+ 
+•  Gripper in (Destination plate) 
+Move the gripper for destination plate into the device (plate type must be specified).  
+   Enable no plate  to disable the plate sensor while moving in. 
+ 
+•  Flip up  
+Turn gripper to up position. 
+ 
+•  Flip down 
+Turn gripper to down position. 
+ 
+•  Survey 
+Perform a survey. Enable Store to disk  to save data of survey to local disc.  
+ 
+•  Transfer 
+Start liquid transfer with entered liquid volume (m ust be multiple of 2.5) to selected 
+partition of destination plate where the partition A1 of source plate should be trans- 
+ferred. Enable Survey before transfer  to perform a survey before the liquid transfer, 
+enable Store to disk  to save data of survey to local disc. 
+ 
+•  Get status 
+Get status of device. 
+ 
+•  Instrument 
+Get status of instrument. 
+ 
+ 
+ 
+ 
+ 
+Labcyte Echo liquid handler 3  Cherry Picking 
+ 
+ 
+ 
+ 5 
+3 Cherry Picking 
+For cherry picking plate::works™ accepts csv-files containing all hits of all source plates 
+for one assay run. 
+ 
+The picking list has the following format: 
+SourceBC, SourceWell, DestBC, Vol1, DestWell1, Vol2, DestWell2, … 
+SourceBC  Barcode of the source plate. 
+SourceWell  Well to pick on the source plate. 
+DestBC  Barcode of the destination plate. If this column i s empty, plate::works™  
+will dispense into the destination plate currently on the deck without 
+checking the barcode. 
+Vol1  First dispense volume. 
+DestWell1  Well to dispense on the destination plate. If this  column is empty, 
+plate::works™ will fill the destination plate accor ding to the properties 
+Dispensing_area of the Pick function. 
+Volx  Additional volume for multiple dispense from one p ick (optional). 
+DestWellx  Well on destination plate for multiple dispense (o ptional). 
+ 
+Picking list example (first lines of PickList.csv): 
+MAP_C2010_14050, G5,  , 200 
+MAP_C2010_14050, N18, , 200 
+MAP_C2010_14051, B2,  , 200 
+MAP_C2010_14054, E9,  , 200 
+MAP_C2010_14055, L12, , 200 
+MAP_C2010_14059, K14, , 200 
+... 
+ 
+ 
+ 
+ 
+ 
+Labcyte Echo liquid handler 3  Cherry Picking 
+ 
+ 
+ 
+ 
+6  
+If there are values for the destination wells in th e picking list, the settings for the dispens- 
+ing area, the dispensing direction and the fill direction will be ignored. 
+After every Pick function the plate::works™ driver for Echo™ gives a feedback if the 
+source plate, the destination plate or both plates must be exchanged. To interprete this 
+feedback there must be the programming element Repe at in the method after the Pick 
+function. 
+   
+  
+ 
+ 
+ 
+ 
+ 
+ 
+Labcyte Echo liquid handler 4  Assay Functions 
+ 
+ 
+ 
+ 7 
+4 Assay Functions 
+Echo (Labcyte Echo)  
+Functions Properties Meaning / Settings 
+SURVEY Store to disk Store data of survey to local disc 
+(yes / no). 
+Default: yes  
+TRANSFER Survey Perform survey before transfer 
+(yes / no). 
+Default: yes  
+Store to disk Store data of survey to local disc 
+(yes / no). 
+Default: yes  
+Destination partition Partition of destination plate to which the 
+partition A1 of source plate should be 
+transferred 
+(A1 / A2 / B1 / B2).  
+Default: A1  
+Volume Volume to transfer for each well 
+(should be multiple of 2.5).  
+Default: 5 
+PICK Source_plate The plate name of source plate. 
+Destination_plate The plate name of destination plate. 
+Picking_list Full path of picking list or file in i ni-folder 
+Picking_direction The direction for sorting the pic k steps 
+contained in the picking list. 
+FromList unsorted from picking list  
+ByRow sort list by row  
+ByColumn sort list by column 
+ Dispensing_area Number of dispensing areas to defi ne with 
+the range of: 
+0 … 10 
+    Start_row First row of dispensing area with the  
+range of:   
+A ... AF  
+ 
+ 
+ 
+ 
+ 
+Labcyte Echo liquid handler 4  Assay Functions 
+ 
+ 
+ 
+ 
+8  
+Functions Properties Meaning / Settings 
+    Start_column First column of  dispensing area w ith the 
+range of: 
+1 … 48 
+    End_Row Last row of dispensing area with the ra nge 
+of:       
+A … AF 
+    End_column Last  column of  dispensing area wit h the 
+range of: 
+1 … 48  
+Dispensing_direction The direction for dispensing t he areas on 
+the destination plate.  
+ByColumn dispense by column  
+ByRow dispense by row 
+Fill_direction The direction for dispensing the are as on 
+the destination plate if there will remain 
+empty wells.  
+ByColumn dispense by column  
+ByRow dispense by row 
+Pick duration The estimated duration for one pick i n 
+seconds with the range of: 
+0 … 1000 
+Store to disk Store data of survey to local disc 
+(yes / no). 
+Default: yes  
+DELAY Duration Time to wait with the range of: 
+1 ... 100000 s  
+[UNREADABLE_PAGE]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+PerkinElmer 
+Schnackenburgallee 114 
+22525 Hamburg 
+Germany 
+Internet: http://www.perkinelmer.com 
+email: info@perkinelmer.com

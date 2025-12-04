@@ -1,0 +1,1737 @@
+Carter et al. Microbial Cell Factories          (2024) 23:319  
+https://doi.org/10.1186/s12934-024-02585-w
+RESEARCH
+Increased cytoplasmic expression of PETase 
+enzymes in E. coli
+Luke M. Carter1†, Chris E. MacFarlane1†, Samuel P . Karlock1, Tridwip Sen1, Joel L. Kaar2, Jason A. Berberich1* and 
+Jason T. Boock1* 
+Abstract 
+Background Depolymerizing polyethylene terephthalate (PET) plastics using enzymes, such as PETase, offers a sus-
+tainable chemical recycling route. To enhance degradation, many groups have sought to engineer PETase for faster 
+catalysis on PET and elevated stability. Considerably less effort has been focused toward expressing large quantities 
+of the enzyme, which is necessary for large-scale application and widespread use. In this work, we evaluated several 
+E. coli strains for their potential to produce soluble, folded, and active IsPETase, and moved the production to a bench-
+top bioreactor. As PETase is known to require disulfide bonds to be functional, we screened several disulfide-bond 
+promoting strains of E. coli to produce IsPETase, FAST-PETase and Hot-PETase.
+Results We found expression in SHuffle T7 Express results in higher active expression of IsPETase compared 
+to standard E. coli production strains such as BL21(DE3), reaching a purified titer of 20 mg enzyme per L of culture 
+from shake flasks using 2xLB medium. We characterized purified IsPETase on 4-nitrophenyl acetate and PET micro-
+plastics, showing the enzyme produced in the disulfide-bond promoting host has high activity. Using a complex 
+medium with glycerol and a controlled bioreactor, IsPETase titer reached 104 mg per L for a 46-h culture. FAST-PETase 
+was found to be produced at similar levels in BL21(DE3) or SHuffle T7 Express, with purified production reaching 
+65 mg per L culture when made in BL21(DE3). Hot-PETase titers were greatest in BL21(DE3) reaching 77 mg per L 
+culture.
+Conclusions We provide protein expression methods to produce three important PETase variants. Importantly, 
+for IsPETase, changing expression host, medium optimization and movement to a bioreactor resulted in a 50-fold 
+improvement in production amount with a per cell dry weight productivity of 0.45  mgPETase  gCDW
+−1  h−1, which is ten-
+fold greater than that for K. pastoris. We show that the benefit of using SHuffle T7 Express for expression only extends 
+to IsPETase, with FAST-PETase and Hot-PETase better produced and purified from BL21(DE3), which is unexpected 
+given the number of cysteines present. This work represents a systematic evaluation of protein expression and purifi-
+cation conditions for PETase variants to permit further study of these important enzymes.
+Keywords PETase, Protein expression, Protein purification, SHuffle, Bioreactor
+Open Access
+© The Author(s) 2024. Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which 
+permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the 
+original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or 
+other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line 
+to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory 
+regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this 
+licence, visit http://creativecommons.org/licenses/by/4.0/.
+Microbial Cell Factories
+†Luke M. Carter and Chris E. MacFarlane contributed equally to this work.
+*Correspondence:
+Jason A. Berberich
+berberj@miamioh.edu
+Jason T. Boock
+boockj@miamioh.edu
+Full list of author information is available at the end of the article
+Page 2 of 18Carter et al. Microbial Cell Factories          (2024) 23:319 
+Background
+More than 370 million metric tons of plastic are pro -
+duced worldwide each year with approximately 10% of it 
+being polyethylene terephthalate (PET) [1, 2]. Plastics are 
+versatile, inexpensive, lightweight, strong, and durable 
+with wide use in packaging, consumer products, build -
+ing and construction materials, and textiles. Many plastic 
+products have short functional lifetimes, such as PET in 
+water bottles and food packaging, which is often single 
+use. The properties of plastics also make their remedia -
+tion challenging due to long natural decay times, leading 
+to estimates of 12,000 million metric tons in landfills and 
+the environment by 2050 [2]. Creating a circular economy 
+for plastics [1] as well as breaking down current plastic 
+waste is paramount to avoiding such high accumulation.
+Enzymatic hydrolysis of plastics has emerged over 
+the past 20 years as a promising strategy to break down 
+plastics into monomers that can be resynthesized into 
+high quality plastics [3, 4]. Enzyme-based conversion is 
+advantageous over mechanical and traditional chemi -
+cal recycling as reactions take place at low temperature 
+and in water; however, turnover is slow and often incom -
+plete. While esterases, specifically cutinases, have shown 
+activity on plastics, the discovery of a naturally-evolved 
+enzyme [5], called Is PETase, ushered in a new wave of 
+research due to its higher propensity to act upon PET, 
+earning its own enzyme classification number: 3.1.1.101. 
+While IsPETase is active on real PET substrates, its 
+low catalytic rate and moderate thermostability have 
+prompted numerous engineering efforts to improve its 
+properties to make it more industrially useful [3]. In par -
+ticular, two variants, FAST-PETase [6] and Hot-PETase 
+[7], have become widely used. FAST-PETase combined 
+previously engineered PETase variants with machine 
+learning to develop an enzyme that breaks down plastic 
+in under a week [6]. Hot-PETase resulted from numerous 
+rounds of directed evolution and enzyme activity screen -
+ing at elevated temperatures as well as rational design to 
+produce an enzyme with substantially improved ther -
+mostability and performance on plastics [7]. Compara -
+tive performance has revealed the advantages of evolved 
+enzymes, yet  unfortunately, low conversions (< 20%) are 
+still observed at bioreactor-scale conditions for reactions 
+with PETases [8].
+While enzyme engineering and evaluation of reactor 
+conditions, including substrate processing and proper -
+ties, have received much attention [8, 9], considerably 
+less effort has been given to sourcing the PETase enzyme. 
+Techno-economic analysis has found enzyme cost to 
+account for approximately 4% of total plastic recycling 
+cost [10, 11]; however, cost per kilogram enzyme were 
+estimated using production values similar to that of cel -
+lulases, which have yet to be realized for recombinant 
+enzymes such as PETase and can vary widely [12]. Addi -
+tionally, scanning the literature reveals a wide array of 
+protein production strategies for PETases, including dif -
+fering organisms, strains, genetic sequences and expres -
+sion strategies. Most reports which produce and study 
+PETases do not list the enzyme titers achieved. Develop -
+ing a standard production method at a moderate scale for 
+IsPETase and variants serves to benefit researchers work-
+ing with this class of enzymes as they move from protein 
+engineering and characterization studies requiring small 
+quantities of protein to process development and scale-
+up requiring more protein for larger reactor studies that 
+better predict performance at an industrial scale [8].
+E. coli remains a common expression host for recom -
+binant proteins, including IsPETase and variants. Many 
+studies use the gene for Is PETase encoded with its native 
+signal peptide that can be sourced from Addgene (# 
+112202) combined with the E. coli strain C41(DE3) for 
+expression [13]. Using this strategy and 2-YT medium, 
+purified production amounts of 15 mg IsPETase per liter 
+culture were achieved [14]. Secretion of recombinant 
+proteins is beneficial for downstream processing and 
+native IsPETase is secreted from Ideonella sakaiensis [5], 
+potentially making it a strong candidate for extracellular 
+production. Secretion from E. coli and Bacillus subtilis 
+for IsPETase and variants have been explored using dif -
+ferent signal sequences and promoters; however, most 
+report titers below 15  mg per liter [15–18]. The most 
+successful prokaryotic secretion method used an aprE 
+signal sequence and protease-knockout strain of B. sub -
+tilis, finding Is PETase titers reaching 80  mg per liter as 
+determined by activity in the supernatant [19]. High-den-
+sity fermentations of Komagataella pastoris (previously 
+Pichia pastoris) combined with secretion and glycosyla -
+tion have proven the most successful for Is PETase pro-
+duction, reaching 1.2  g per liter as measured by total 
+protein in the supernatant [20]. Using a similar strategy, 
+researchers secreted FAST-PETase from K. pastoris using 
+high-density fermentations and intracellular chaperones 
+to achieve a titer of 3.23 g enzyme per liter culture [21].
+Our approach to increasing PETase production amount 
+involved screening E. coli expression hosts, specifically 
+those designed to promote disulfide bond formation in 
+the cytoplasm. PETase contains four cysteine residues, 
+which are expected to form two disulfide bonds. The 
+disulfide between C203 and C239 is interesting since it 
+is evolutionarily distinct from other cutinases that have 
+activity on PET, it is near the active site, and it has been 
+shown to be required for activity [22, 23]. Additionally, 
+PETase is naturally secreted from the Gram-negative 
+I. sakaiensis [5], likely using the general secretory path -
+way to arrive in the oxidizing periplasm, which would 
+permit disulfide bonds to form properly. RosettaGami B 
+Page 3 of 18
+Carter et al. Microbial Cell Factories          (2024) 23:319 
+ 
+has an oxidizing cytoplasm due to mutations to gor and 
+trxB (termed Origami) as well as contains a plasmid that 
+encodes rare tRNAs and a T7 RNA polymerase (RNAP) 
+gene under control of a lacUV5 promoter. SHuffle has 
+a similar set of mutations to gor and trxB to promote 
+disulfide bond formation as well as a cytoplasmic copy of 
+the chaperone disulfide bond isomerase (dsbC ), which is 
+naturally used to rearrange misconnected disulfides [24]. 
+Similar to RosettaGami B, SHuffle T7 Express has a T7 
+RNAP gene to permit use with ubiquitous pET plasmid 
+series for high level expression; however, the T7 RNAP 
+gene has been inserted in place of lacZ and as such 
+is under the control of the lac promoter. Others have 
+used Origami or SHuffle T7 Express for production of 
+IsPETase [25] and variants, but few report amounts pro -
+duced. A mutant PETase was produced with chaperones 
+and autoinduction media in SHuffle T7 Express at 80 mg 
+per liter as measured by activity in lysate. Hot-PETase 
+was found to be made and purified at 12 mg per liter and 
+110 mg per liter when produced from SHuffle T7 Express 
+[9] and Origami II [7] cells, respectively.
+To better understand the impact of a reducing or oxi -
+dizing cytoplasm, we measured the soluble production 
+of IsPETase and variants FAST-PETase and Hot-PETase 
+in several E. coli strains. Comparisons were made to 
+other strategies that have been used to make PETase in 
+E. coli. Media optimization and culturing in a controlled 
+benchtop bioreactor was performed for Is PETase to fur-
+ther elevate production. Few studies have moved SHuf -
+fle T7 Express to even the benchtop bioreactor scale 
+[26–29], representing an important step to utilizing this 
+strain that has shown promise in making proteins with 
+multiple disulfides. We also provide characterization 
+of the enzymes using the soluble, colorimetric esterase 
+substrate 4-nitrophenyl acetate (4-NPA) as well as PET 
+microparticles to show the enzymes produced using our 
+methods have similar activity to those made elsewhere. 
+Taken together, this study represents an important stand-
+ardization for the soluble production of PETase enzymes 
+using common E. coli strains, which benefits both labo -
+ratory researchers and those working to transition enzy -
+matic recycling to an industrial scale.
+Methods
+Plasmid construction and strains
+The gene encoding PETase from Ideonella sakaiensis 
+(IsPETase) was codon optimized for expression in E. coli 
+without its 26 base pair signal sequence as was done pre -
+viously [5] (Supplemental Information). The gene was 
+added to a pET21b or pET24a plasmid between ndeI and 
+xhoI cutsites, which appends the protein with a C-termi -
+nal hexa-histidine tag. Traditional restriction enzyme-
+based cloning followed by ligation were used to generate 
+all plasmids (all supplies from NEB). Assembled plasmids 
+were transformed into DH5α chemically competent E. 
+coli cells for plasmid amplification and cryogenic stor -
+age at -80  ºC in 15% (v/v) glycerol. After plasmid DNA 
+isolation (Zymo), Sanger or whole-plasmid sequenc -
+ing was performed to verify assembly (Azenta). Genes 
+encoding FAST-PETase (S121E, D186H, R224Q, N233K, 
+R280A) [6] and Hot-PETase (S58A, S61V, R90T, K95N, 
+Q119K, S121E, M154G, P181V, Q182M, D186H, S207R, 
+N212K, S213E, S214Y, R224L, N233C, N241C, K252M, 
+T270Q, R280A, S282C) [7] were synthesized as gBlocks 
+(IDT) with identical codons as wild-type Is PETase used 
+in this study, except internal ncoI, bsaI, and sphI sites 
+were removed with synonymous codons (Supplemen -
+tal Information). Note, all numbering for PETase amino 
+acids used in this paper is based on the primary sequence 
+with the signal peptide as this is what is commonly used 
+in the literature; to determine the amino acid number 
+for the proteins in this study, subtract 26. Genes were 
+added between ndeI and xhoI sites of pET21b. Select 
+plasmids from this study are available upon request from 
+Addgene. Additionally, pET21b( +)-Is-PETase with a sig -
+nal sequence was purchased from Addgene (# 112202) 
+and pGro7 from Takara.
+After sequence verification, isolated plasmids were 
+transformed into chemically competent BL21(DE3) 
+(Novagen), Rosetta Gami B(DE3) (Novagen), Shuffle 
+T7 Express (NEB), C41(DE3) (Lucigen), or C43(DE3) 
+(Lucigen), and were plated on Luria Bertani (LB) 
+agar containing 100  µg   mL−1 ampicillin (pET21b) or 
+50  µg   mL−1 kanamycin (pET24a). Strains with pGro7 
+were also grown in the presence of 34 µg   mL−1 chloram-
+phenicol. Cultures from colonies were grown at 37 ºC at 
+250 RPM in LB medium with the same concentration of 
+antibiotics prior to cryostorage in 15% (v/v) glycerol at 
+-80 ºC.
+Medium preparation and protein expression
+2xLB medium contained: 10  g  L−1 yeast extract, 20  g 
+ L−1 tryptone, and 5  g  L−1 NaCl. TB medium (Difico) 
+was prepared according to manufacturer directions. 
+Defined medium [30] contained:13.3  g  L−1  KH2PO4, 
+4  g  L−1  (NH4)2HPO4•H2O, 1.7  g  L−1 citrate, 1.2  g  L−1 
+ MgSO4•7H2O, 4.5  mg  L−1 thiamine HCl, and 1 × trace 
+metals mix. The 100 × trace metals mix contained: 
+10  mg  L−1  H3BO3, 10  mg  L−1  CoCl2•6H2O, 2.5  g  L−1 
+ ZnSO4•7H2O, 400  mg  L−1  MnCl2•4H2O, 10  mg  L−1 
+ Na2MoO4•2H2O, 180  mg  L−1  CuSO4•5H2O, 2  g  L−1 
+ FeSO4•7H2O, 10  mg  L−1  NiSO4•6H2O. Semi-defined 
+medium [30] contained: 13  g  L−1  KH2PO4, 10  g  L−1 
+ K2HPO4, 4.6 g  L−1  NaH2PO4, 3 g  L−1  (NH4)2HPO4•H2O, 
+2  g  L−1  MgSO4•7H2O, 73.8  mg  L−1  CaCl2•2H2O, and 
+1 × trace metals mix. Complex medium [30] contained: 
+Page 4 of 18Carter et al. Microbial Cell Factories          (2024) 23:319 
+5  g  L−1 yeast extract, 10  g  L−1 tryptone, 10  g  L−1 NaCl, 
+8.34  g  L−1  KH2PO4, 6.74  g  L−1, 0.5  g  L−1  MgSO4•7H2O, 
+50  mg  L−1  CaCl2•2H2O, and 1 × trace metals mix. Non-
+defined components with base salts as well as 580  g 
+ L−1 glycerol were autoclaved prior to use. Stock 1  M 
+ MgSO4•7H2O, 1  M  CaCl2•2H2O, 1  M isopropyl ß-D-
+1-thiogalactopyranoside (IPTG), 1 g   mL−1 thiamine HCl, 
+200 g  L−1 glucose, 200 g  L−1 L-arabinose, and 100 × trace 
+metals mix were sterile filtered (0.2  µm) prior to use. 
+Defined, semi-defined, and complex medias were pre -
+pared fresh prior to use.
+Overnight cultures were started in identical medium as 
+was used for expression using cells from freezer stocks. 
+Final antibiotic concentration were 100  µg   mL−1 ampi -
+cillin (pET21b), 50  µg   mL−1 kanamycin (pET24a), or 
+34  µg   mL−1 chloramphenicol (pGro7). Overnight cul -
+tures were grown at 37  ºC at 250 RPM for 16 to 20  h. 
+Optical density at 600 nm  (OD600) (Genesys) was meas -
+ured. Subcultures were normalized to an optical density 
+of 0.05 A.U.. Small-scale expression experiments were 
+carried out in 25 mL of medium in 125 mL baffled shake 
+flasks (Kimble KIMAX). Cell growth occurred at 37 ºC at 
+250 RPM in a shaker incubator (New Brunswick Innova 
+42) until an  OD600 of 0.6 A.U. to 0.8 A.U. was reached. 
+At that time, protein production was initiated by the 
+addition of IPTG to 0.5  mM final concentration. For 
+cells with pGro7, chaperone expression was induced for 
+with 5 g  L−1 arabinose at the same time IPTG was added. 
+After inducers were added, incubator temperature was 
+dropped to 20 ºC and protein expression was carried out 
+for 24  h unless otherwise noted. An  OD600 reading was 
+taken prior to centrifuging 5 mL or 10 mL of culture at 
+4000 rcf for 10  min. The supernatant was removed and 
+cell pellet stored at -80 ºC prior to further analysis.
+Cell lysis and active PETase quantification
+Frozen cell pellets were defrosted at room temperature 
+prior to resuspension in 20 mM sodium phosphate buffer 
+(pH 7.4). For lysis per unit volume, 50 µL volume of buffer 
+was added per 1  mL of culture harvested. For lysis per 
+unit optical density, cells were resuspended in buffer to 
+achieve an  OD600 of 100 A.U.. Resuspended pellets were 
+transferred to a 1.5  mL centrifuge tube, and lysozyme 
+was added to 1 mg   mL−1 and Triton 100 × was added to 
+1μL  mL−1. Lysis occurred on a multi-tube rocker-rotator 
+(VWR) set to 15  rpm for 20  min at room temperature. 
+After initial lysis, DNA disruption was achieved by addi -
+tion of DNase (Invitrogen) to 5 U  mL−1 total lysis volume. 
+Tubes were rotated for an additional 20 min at room tem-
+perature. Crude lysate-containing tubes were centrifuged 
+for 30  min at 4  °C and 22,000 rcf, and the supernatant 
+was retained as clarified lysate.
+PETase activity was measured in soluble clarified 
+lysates by activity on 4-nitrophenyl acetate (4-NPA) 
+(Sigma). Samples were set up in a clear 96-well plate with 
+each well containing 100 μL total volume with: 80 μL of 
+100  mM potassium phosphate buffer (pH 7), 10 μL of 
+lysate, and 10 μL of 10 mM 4-NPA. Stock 10 mM 4-NPA 
+was prepared in acetonitrile. Lysates were diluted over a 
+wide range using 100  mM potassium phosphate buffer 
+(pH 7), targeting a diluted activity of ~ 0.025 to 0.05 units 
+per well. A unit (U) is defined as 1  μmol 4-NPA turno -
+ver to 4-nitrophenol per minute. The extinction coeffi -
+cient for 4-nitrophenol was determined by dilution into 
+100 mM potassium phosphate buffer (pH 7) (Fig. S1) and 
+was found to be 11,627.5   M−1  cm−1 (assumed pathlength 
+of 2  mm). Controls without PETase (10 μL additional 
+buffer) were similarly set up to subtract off background 
+rate due to non-enzymatic hydrolysis of 4-NPA. Absorb -
+ance at a wavelength of 405  nm was measured on a 
+microplate reader (Biotek) every 15  s for 10  min at 
+25  °C. Active PETase concentration, expressed as units 
+of PETase per liter of total culture, was determined by 
+analysis of the initial rate of absorbance change over 
+time, subtraction of a blank rate, and multiplication by 
+appropriate dilution factors. Absorbances below 0.8 A.U. 
+(~ 300 µM product) were used for initial rate calculations. 
+Samples with rates above 0.14 A.U.  min−1 (6 mU   min−1) 
+were eliminated and further diluted to ensure sufficient 
+data points to determine a catalytic rate and that the rate 
+was linear with PETase concentration. Additionally, ini -
+tial rate was divided by total protein concentration and 
+appropriate dilution factors to calculate units of PETase 
+per gram of total protein. Statistical analysis used a two-
+tailed Student’s t-test assuming equal variance.
+Total protein quantification
+Total protein quantification was carried out using a 
+Pierce BCA kit according to manufacturer specifications 
+and absorbance quantified using a microplate reader 
+(Biotek) at 562 nm. For each set of buffers used, a buffer 
+blank was included and the resulting absorbance was 
+subtracted from that of the sample. Total protein amount 
+was determined through comparison to bovine serum 
+albumin standards (0.025 mg   mL−1 to 2.0 mg   mL−1) with 
+buffer blank subtracted. A linear fit equation through all 
+standard absorbances with a set intercept of 0 A.U. was 
+used to quantify total protein concentration.
+Protein purification
+For quantitative protein purification, PETase expression 
+was scaled up to 500  mL culture in a 2-L baffled flask 
+(Pyrex). All other protein production steps were identi -
+cal to those used for small-scale experiments. Cell rup -
+ture occurred as previously described where the amount 
+Page 5 of 18
+Carter et al. Microbial Cell Factories          (2024) 23:319 
+ 
+of lysis buffer was scaled by final culture optical density, 
+resulting in an  OD600 of 100 A.U.. An additional sonica -
+tion step was performed after the DNase treatment of 
+30% duty cycle for 1.5 min on ice (3x). To clarify lysates, 
+samples were centrifuged at 18,500 rcf for 30 min at 4 °C. 
+Samples were filtered through a 0.2  µm filter prior to 
+purification.
+Proteins were purified with an AKTA Go FPLC using 
+two chromatography steps: immobilized metal affin -
+ity chromatography (IMAC) followed by desalting into 
+storage buffer. For IMAC, the binding buffer (A) was 
+20 mM sodium phosphate buffer (pH 7.4) with 500 mM 
+NaCl and 20  mM imidazole, and elution buffer (B) was 
+20  mM sodium phosphate (pH 7.4), 500  mM NaCl, 
+500  mM imidazole. Imidazole and NaCl were added to 
+clarified lysates to final concentrations of 20  mM and 
+500  mM, respectively, to eliminate non-specific inter -
+actions. A 1  mL HisTrap HP (Cytiva) column was used 
+with a flow rate of 1 mL   min−1, unless otherwise noted. 
+After clarified lysate was applied to the column, the col -
+umn was washed with 100% A buffer until absorbance 
+readings were lower than 100  mA.U.. A single step elu -
+tion, unless otherwise noted, was carried out using 50% 
+B buffer (250  mM imidazole) and 0.5  mL fractions col -
+lected. Activity on 4-NPA was used to identify high activ-
+ity fractions. Proteins were desalted into 50 mM sodium 
+phosphate (pH 7), 30  mM NaCl, 0.01% (w/v) sodium 
+azide using a 5 mL HiTrap PD-10 column (Cytiva). Puri -
+fied samples were stored at 4 °C until use.
+Total protein concentration was measured using BCA 
+and comparison to BSA standard curve, as described 
+above. Protein purity was assessed by SDS-PAGE (all sup-
+plies from BioRAD). Samples were denatured in 1 × Lae-
+mmli buffer with β-mercaptoethanol at 95 °C for 10 min. 
+Samples containing 2.5  µg of total protein were loaded 
+on a Stain-free Any kDa gel and separation occurred 
+for 35  min at 150  V using 1 × tris/glycine/SDS buffer. 
+Precision plus unstained molecular weight standards 
+were used to assess molecular weight and semi-quan -
+tify amount. To visualize proteins, Stain-free activation 
+occurred for 5 min followed by visualization using a Gel 
+Doc XR + and gel analysis used Image Lab.
+Specific activity and Michaelis–Menten constant 
+determination
+Specific activity, kcat, and KM were determined for PETase 
+and variants using 4-NPA at 25  °C, similar to [31, 32]. 
+Samples were set up in a clear 96-well plate with each 
+well containing 100 μL total volume with: 80 μL of 
+100  mM potassium phosphate buffer (pH 7), 10 μL of 
+sample, and 10 μL of 4-NPA. Controls without PETase 
+(10 μL additional buffer) were similarly set up to subtract 
+off background rate due to non-enzymatic hydrolysis of 
+4-NPA. After initial mixing, absorbance at a wavelength 
+of 405 nm was measured on a microplate reader (Biotek) 
+every 15  s for 10  min. All characterized proteins were 
+produced in SHuffle T7 Express.
+For specific activity, the final concentration of 4-NPA 
+was 1 mM and various PETase concentrations were eval -
+uated (0.5  μg   mL−1 to 20  μg   mL−1 final concentration), 
+each in triplicate. Initial rate was determined until an 
+absorbance of 0.8 A.U. was reached. Samples with activ -
+ity similar to background buffer or which reached an 
+absorbance of 0.8 A.U. before 5 min were eliminated. A 
+unit (U) is defined as 1 μmol 4-NPA turnover to 4-nitro -
+phenol per minute. Subtracted units were plotted against 
+total protein concentration to determine the specific 
+activity by fitting a linear line through all data and set -
+ting the y-intercept to 0 (Kaleidagraph). To determine kcat 
+and KM, samples contained approximately 1 μM PETase 
+(actual concentrations listed for each variant). 4-NPA 
+concentrations were tested between 1 and 20 mM, each 
+in triplicate. Background hydrolysis was measured at 
+each 4-NPA concentration to be subtracted from the ini -
+tial rate with enzyme. Subtracted initial rates were plot -
+ted as a function of 4-NPA concentration and fit to the 
+Michaelis–Menten equation (Kaleidagraph).
+Microparticle assay
+PETase catalysis of insoluble PET microparticles (Good -
+fellow, ES30-PD-000131, < 300 µm, 40% crystallinity) was 
+performed as proof of activity on real substrates using 
+a method adapted from [9]. Samples were prepared in 
+15-mL polypropylene tubes (Falcon), with each contain -
+ing 5 mL of sodium phosphate buffer (pH 9), 150 mg PET 
+particles (final concentration 30  mg   mL−1), and PETase 
+at a desired ratio to PET particles (0.34  mgPETase  gPET
+−1, 
+0.69  mgPETase  gPET
+−1, 1  mgPETase  gPET
+−1). Blank samples 
+contained no PETase. HiC (Strem) concentration was 
+determined by BCA to be 28 mg   mL−1 and was assumed 
+pure after analysis by SDS-PAGE. Reactions were carried 
+out in an Eppendorf ThermoMixer C at 1000  rpm and 
+37 °C. At each timepoint, 500 μL of sample was removed 
+and centrifuged at 13,000 rcf for 5 min to pellet insoluble 
+remaining PET. The supernatant was removed and reac -
+tion was quenched using 2 N HCl at a ratio of 10 μL HCl 
+to 200 μL of sample supernatant. Samples with high con -
+centration of products were cloudy, requiring acetonitrile 
+addition to become clear (up to two-times the final vol -
+ume). Samples were stored at -20 °C prior to analysis by 
+HPLC.
+High performance liquid chromatography
+Standards of terephthalic acid (TPA) (Sigma), 2-hydroxy-
+ethyl terephthalic acid (MHET), and bis(2-hydroxyethyl) 
+terephthalic acid (BHET) (Sigma) were prepared in order 
+Page 6 of 18Carter et al. Microbial Cell Factories          (2024) 23:319 
+to quantify reaction products from microparticle cataly -
+sis. TPA was dissolved in 20  mM sodium phosphate 
+buffer (pH 7.4) to a concentration of 2  mM. The pH of 
+the solution was adjusted to 7 by dropwise addition of 
+1.25 N NaOH until the solution became clear and volu -
+metric flask used to achieve the final desired volume. 
+BHET was dissolved to a concentration of 2 mM in 24% 
+(v/v) acetonitrile and 76% (v/v) 100 mM potassium phos -
+phate (pH 7) buffer as BHET has poor solubility in water 
+[33]. Further dilution of the 2  mM BHET solution used 
+the 24% acetonitrile-buffer solvent to maintain BHET 
+solubility.
+MHET was not commercially available, requiring pro -
+duction by enzymatic hydrolysis of BHET using Humi -
+cola insolens cutinase (HiC, product Novozym ® 51,032). 
+BHET was dissolved in 24% (v/v) acetonitrile and 76% 
+(v/v) 100 mM potassium phosphate (pH 7) buffer before 
+addition of 0.1  gHiC  gBHET
+−1. The reaction volume was 
+30  mL. Reactions were carried out at 40°C and mixed 
+at 600  rpm using a Chemglass heated magnetic mixer. 
+A negative control reaction without HiC addition was 
+included in the experimental setup. Samples of reaction 
+contents were drawn at 0, 3, 24, 48, and 72 h to determine 
+the extent of reaction from BHET to MHET as measured 
+by HPLC peak area. The reaction was quenched by addi -
+tion of 50 µL 2 N HCl per 1 mL sample. After 77 h, an 
+additional 0.1   gHiC  gBHET
+−1 was added to complete the 
+reaction, which took 144 total hours. The purest MHET 
+sample was determined to be 1.89 mM by HPLC analysis 
+comparing peak areas of BHET to MHET, representing 
+94% percent conversion. Further dilution of the 1.89 mM 
+MHET solution to desired concentrations used the 24% 
+acetonitrile-buffer solvent.
+Soluble aromatic products TPA, MHET, and BHET 
+produced from reaction of PETase on PET microparti -
+cles were separated using high performance liquid chro -
+matography (HPLC). Reverse phase chromatography 
+was performed using Agilent Polaris 3 C18-A column 
+(150 × 3.0  mm, 3  µm) and Thermo HPLC system. Sol -
+vents were: (A) water with 0.1% (v/v) formic acid and (B) 
+acetonitrile with 0.1% (v/v) formic acid. Equilibration 
+occurred with 5% B at 0.5 mL  min−1 and the column oven 
+was set to 60°C. Sample injections were 5 µL. Gradient 
+profile was adapted from [34], consisting of: 5% B for 
+2 min, 5% B to 17% B from 2 to 4 min, 17% B to 25% B 
+from 4 to 6 min, 25% B to 40% B from 6 to 10 min, hold 
+at 40% B from 10 to 12  min and 5% B re-equilibration 
+from 12 to 16 min. Retention times, peak separation, and 
+peak area to concentration correlations for TPA, MHET, 
+and BHET were determined for range of concentrations 
+from 0.05 to 1 mM (Fig. S2). Linear regression with a set 
+y-intercept of 0 was used to determine an equation for 
+converting peak area to analyte concentration.
+Size exclusion chromatography
+Size exclusion chromatography (SEC) was used to assess 
+the oligomerization state of PETase. An AKTA Go out -
+fitted with a Superdex 75 Increase 10/300 GL column 
+(Cytiva) was used for the separation. The method was 
+isocratic using 50 mM sodium phosphate (pH 7), 30 mM 
+NaCl, 0.01% (w/v) sodium azide flowing at 1 mL   min−1. 
+UV absorbance was measured to determine protein 
+retention times. A 100 µL sample of purified PETase was 
+separated and 0.5 mL fractions were collected for further 
+analysis of esterase activity on 4-NPA. Only IsPETase was 
+analyzed and it was purified from SHuffle T7 Express cul-
+tures. Blue dextran (Promega) was used to determine the 
+void volume and protein standards (Sigma) were used to 
+create a standard curve to determine molecular weight.
+Circular dichroism
+Far UV circular dichroism (CD) scans of purified PETase 
+proteins were used to determine secondary structure. 
+PETase samples were made to 0.03  mg   mL−1 in 10  mM 
+sodium phosphate buffer (pH 8) and placed in a clean 
+1  cm quartz cuvette (Fisher Scientific). Scans between 
+195 and 260  nm were made using an Aviv Biomedi -
+cal Model 435 circular dichroism spectrophotometer. 
+Wavelength step size was 1  nm and three scans were 
+completed per sample. Scans were averaged and a buffer 
+blank subtracted prior to calculating mean residue ellip -
+ticity [35].
+Bioreactor
+Bioreactor trials were carried out in an Eppendorf 2-L 
+benchtop bioreactor connected to BioFlo 120 control 
+unit. A 25  mL starter culture in a 125  mL baffled flask 
+(Kimble KIMEX) was inoculated from a freezer stock and 
+grown at 37 °C and 250 rpm for 16 to 20 h. Starter cul -
+tures were made in identical media to that used the bio -
+reactor. A volume of the overnight culture was added to 
+the 1.5 L of medium in the reactor to achieve an  OD600 
+of 0.05 A.U.. Cells were grown at 37  °C until an  OD600 
+between 0.6 A.U. and 0.8 A.U. was reached, at which time 
+protein production was induced with 0.5 mM IPTG and 
+the reactor temperature was dropped to 20 °C. Agitation 
+speed was initially set to 300 rpm and air flow rate to 1.5 
+L  min−1. Cascade control was used to keep the dissolved 
+oxygen amount greater than 30% of saturation by varying 
+impeller speed (max 800 rpm) and air flow rate (max 15 L 
+ min−1). A pH window was set between 6.8 and 7.2 using 
+addition of either ammonium hydroxide or hydrochloric 
+acid. In addition to the bioreactor, a 100 mL shake flask 
+culture in a 500  mL baffled flask (Kimble KIMEX) was 
+grown using similar setpoints (temperature and induc -
+tion) as the bioreactor to compare scales and impact of 
+control of process variables. The culture in the shake flask 
+Page 7 of 18
+Carter et al. Microbial Cell Factories          (2024) 23:319 
+ 
+did not have pH or dissolved oxygen control, and was 
+mixed at 250 rpm in a shaker incubator (New Brunswick 
+Innova 42).
+At each timepoint following induction, 1.5  mL sam -
+ples were removed for analysis. After measuring  OD600, 
+samples were centrifuged at 20,000 rcf for 5 min at room 
+temperature. The supernatant was removed to deter -
+mine glycerol substrate consumption and acetate product 
+buildup. Glycerol and acetate were separated using HPLC 
+and an Aminex HPX-87H column (BioRad) at 30 °C with 
+isocratic 0.5  mM  H2SO4 flowing at 0.6  mL   min−1 [36]. 
+Compounds were quantified using refractive index and 
+comparisons to standards of pure glycerol and acetate 
+at known concentrations. Culture pellets were stored at 
+-80 °C for activity analysis in lysate as described above.
+A second bioreactor run was carried out for complex 
+medium with 35  g  L−1 glycerol to determine reproduc -
+ibility as well as harvest culture for purification. Time to 
+harvest was determined by taking samples once per hour 
+to track the accumulation of acetate and PETase activity 
+to determine when the peak activity occurred. Once a 
+measurement was made that had decreased activity, the 
+final volume of the reactor was measured (1.3 L) and split 
+into two centrifuge bottles to harvest. The cell pellet from 
+one of the bottles was lysed and Is PETase purified using 
+identical procedures as above except a 5 mL HisTrap HP 
+column and 53 mL HiPrep 26/10 Desalting column were 
+used due to the larger scale. Final protein concentration 
+was determined using BCA and purity assessed by SDS-
+PAGE, both described above.
+Results:
+Screening IsPETase production hosts
+Production using a codon-optimized Is PETase without 
+a signal sequence and with a C-terminal hexa-histidine 
+tag (Supporting Information) was initially carried out 
+in BL21(DE3) as it is a common laboratory protein pro -
+duction strain. The medium used was 2xLB and protein 
+expression was induced with 0.5  mM IPTG for 24  h 
+at 20  °C as similar protocols have proven successful for 
+IsPETase in the past [8]. We found approximately 14 units 
+(U, μmolproduct  min−1) of Is PETase produced per liter of 
+culture volume as measured on the soluble substrate 
+4-nitrophenol acetate (4-NPA) (Table S1). A control was 
+performed where an empty pET21b plasmid was used in 
+place of pET21b Is PETase, finding 2.6 units per liter cul -
+ture, suggesting that IsPETase is in fact being made. We 
+screened several parameters including induction tem -
+perature (37 °C), inducer concentration (0.05 mM IPTG), 
+and expression time (48  h), none of which led to large 
+improvements in soluble and active enzyme production, 
+and in the case of raising the induction temperature, sig -
+nificantly less enzyme activity (Table S1).
+We hypothesized the limitation we observed in pro -
+duction of Is PETase in BL21(DE3) was due to the lack 
+of disulfide bond formation in the reducing cytoplasm, 
+and thus potentially Is PETase instability. We evaluated 
+two common cytoplasmic disulfide bond forming E. coli 
+hosts, RosettaGami B(DE3) and SHuffle T7 Express, for 
+their ability to produce IsPETase. Using the same expres-
+sion conditions as before, Is PETase production was 
+enhanced when produced in RosettaGami B and SHuffle 
+T7 Express, reaching 159 ± 34 and 367 ± 58 units per liter 
+culture, respectively (Fig.  1a). To ensure that the SHuf -
+fle T7 Express was not causing the activity difference, an 
+empty pET21b plasmid was added to SHuffle T7 Express. 
+The background activity of lysates without Is PETase on 
+4-NPA was 2.8 ± 0.6 units per liter culture. These results 
+suggest a vast improvement of cytoplasmic IsPETase pro-
+duction when a disulfide bond forming host was used and 
+further enhancement by including a cytoplasmic copy of 
+dsbC. We also measured the total protein present in each 
+lysate sample in order to normalize activity to total pro -
+tein to control for growth and lysis differences finding 
+similar improvement (Fig.  1b). We attempted to further 
+increase IsPETase production by utilizing a different plas-
+mid, pET24a, as well as co-expressing with chaperones 
+GroEL/ES, finding neither resulted in more Is PETase 
+production (Supplementary Note 1, Table S2).
+Cell growth was monitored by optical density to ensure 
+differences in production due to the alternate strains 
+were not due to growth. The SHuffle T7 Express cells 
+grew to a lower optical density of 4.0 ± 0.3 A.U. compared 
+to 6.8 ± 0.2 A.U. for BL21(DE3). Rosetta-Gami B(DE3) 
+grew to an even lower optical density of 1.7 ± 0.1 A.U.. 
+The BL21(DE3) cultures consistently grew to almost dou-
+ble the optical density of the SHuffle T7 Express cultures 
+as measured at 24  h post induction. To ensure that the 
+cell rupture step was not limiting, BL21(DE3) and SHuf -
+fle T7 Express samples were also lysed with the volume 
+of lysis buffer scaled by optical density. When analyz -
+ing active protein using this method, the SHuffle T7 
+Express samples were found to have 493 ± 55 units per 
+liter culture and BL21(DE3) had 37 ± 4 units per liter 
+culture (Table  S2). When normalizing by total protein, 
+BL21(DE3) had 47 ± 10. units per gram, and SHuffle T7 
+Express had 603 ± 3 units per gram. Using results from 
+the optical density normalized lysis, SHuffle T7 Express 
+produced approximately 13-fold more active Is PETase 
+than BL21(DE3).
+We next sought to compare the SHuffle T7 Express 
+host to other E. coli strains that are commonly used 
+to produce Is PETase, mainly C41(DE3) [13]. C41 
+and C43 OverExpress strains have genetic mutations 
+that enhance the production of toxic proteins. Using 
+the plasmid assembled for this study, we found the 
+Page 8 of 18Carter et al. Microbial Cell Factories          (2024) 23:319 
+C41(DE3) and C43(DE3) strains to produce 2.9 and 
+1.3 units per liter culture, much lower than that of 
+BL21(DE3) and similar to that of cells without petase  
+(Fig.  1a). Surprised by this result, we screened 8 
+C41(DE3) colonies to ensure all had low activity, which 
+was verified with the highest activity being 3.1 units per 
+liter culture (Table  S3). Compared to the commonly 
+used plasmid for Is PETase production from the plasmid 
+repository Addgene, the petase Is gene used in this study 
+has different codon optimization and does not contain 
+a signal sequence. The Addgene plasmid was purchased 
+and tested in C41(DE3) and SHuffle T7 Express, finding 
+the C41(DE3) cells produced 107 units per liter culture 
+and SHuffle T7 Express only made 10.0 units per liter 
+culture, both significantly different than when the sig -
+nal sequence was removed (Table S4). This is unsurpris -
+ing given the ability of signal sequences to be utilized 
+across species and the benefit to using SHuffle is tied to 
+cytoplasmic expression. We did not measure activity in 
+the supernatant to see if the enzyme was secreted out -
+side the cells. Although commonly used C41(DE3) did 
+have much more intracellular expression when a ver -
+sion of petase Is with a signal sequence was produced, it 
+was still 3.4-fold lower than when SHuffle T7 Express 
+was used with a construct that does not contain a signal 
+sequence.
+Purification and characterization of IsPETase
+IsPETase was purified to determine the amount of pro -
+tein produced (Table  1). Purification from BL21(DE3) 
+resulted in 1.6  mg of protein at a purity of approxi -
+mately 50 to 65% as measured by densitometry (Fig. 
+0
+100
+200
+300
+400
+500
+Activity (U/Lculture)
+A.
+Strain:
+petase: +++ -+ ++
+BL21
+(DE3)
+Rosetta
+Gami B
+SHuffle
+T7 Exp.
+SHuffle
+T7 Exp.
+C41
+(DE3)
+C43
+(DE3)
+C43
+(DE3)
+0
+200
+400
+600
+800
+1000Activity (U/gTotal Protein )
+Strain:
+petase: +++ -+ ++
+BL21
+(DE3)
+Rosetta
+Gami B
+SHuffle
+T7 Exp.
+SHuffle
+T7 Exp.
+C41
+(DE3)
+C43
+(DE3)
+C43
+(DE3)
+B.
+***
+**
+*
+**
+Fig. 1 IsPETase production in various strains of E. coli. Production of IsPETase as measured by enzyme activity on 4-NPA in clarified cell lysates. Lysis 
+amount was based on culture volume. Activity was normalized to A culture volume and B total protein. Activity unit (U) is defined as 1 μmol  min−1 
+product formed using 1 mM 4-NPA at room temperature in 100 mM potassium phosphate buffer (pH 7). Strains contained pET21b PETase ( +) 
+or pET21b Empty (–). Average of at least 3 independent cultures shown and error bars represent the standard deviation. Shown are selected 
+Student’s t-test results, * (p < 0.05), ** (p < 0.005), *** (p < 0.0005); statistical comparisons between all samples can be found in the Supplementary 
+Data File
+Table 1 IsPETase Purification
+a Amount of IsPETase after purification from 0.5 L of culture. Amount for the 
+IMAC and desalted steps were measured by BCA and comparison to BSA 
+standard. Amount for lysate step was estimated using the 4-NPA activity and 
+specific activity (see Fig. S6). Error represents standard deviation of three 
+replicate assay samples. Amount was scaled to 1 L culture volume
+b Amount yield represents the retention of amount in each purification step and 
+error is propagated
+c Purity is estimated from gel analysis of Fig. S3
+d Amount yield for BL21(DE3) is overestimated due to the purity of the IMAC 
+step only being approximately 50% pure and total protein concentration being 
+used for this calculation
+Step Production 
+amount
+(mg/Lculture)a
+Amount
+Yieldb
+Purityc
+BL21(DE3) Lysate 2.34 ± 0.16 – –
+IMAC 2.25 ± 0.01 0.96 ± 0.06d 0.52
+Desalted 2.17 ± 0.02 0.97 ± 0.01 0.66
+SHuffle T7 Express Lysate 82.8 ± 5.5 – –
+IMAC 21.7 ± 0.5 0.26 ± 0.02 0.99
+Desalted 21.0 ± 0.5 0.96 ± 0.03 0.99
+Page 9 of 18
+Carter et al. Microbial Cell Factories          (2024) 23:319 
+ 
+S3). The lack of purity from BL21(DE3) is not surprising 
+given its low production and is likely due to non-spe -
+cific binding during the IMAC step. Production from 
+SHuffle T7 Express was 10.5 mg from a 500 mL culture 
+at an estimated 99% purity. Taken together, the purifi -
+cation results suggest a 13-fold improvement upon use 
+of the disulfide bond promoting host, identical to the 
+values found when comparing activities in lysate. Few 
+reports list the purified titer of the original Is PETase, 
+with one finding 15 mg of purified protein per L culture 
+when produced from C41(DE3) [14]. Here, we were 
+able to produce 21  mg per L, which represents a 25% 
+improvement. Circular dichroism confirmed that the 
+soluble protein was well-folded (Fig. S4). Size exclusion 
+chromatography showed that Is PETase is monomeric, 
+as has been found previously (Fig. S5) [23]. Further, 
+activity on 4-NPA was measured for SEC fractions 
+(Fig. S5), confirming the single peak has all the esterase 
+activity.
+To ensure the Is PETase produced from SHuffle had 
+similar activity to the enzyme produced in other hosts, 
+catalysis was measured on soluble 4-NPA and insoluble 
+PET microparticle substrates. Initial characterization was 
+performed using 1 mM of 4-NPA at a variety of PETase 
+concentrations to determine the specific activity for the 
+enzyme as well as ensure that activity measurements are 
+linearly dependent on protein concentration. Using these 
+conditions, we found that PETase had a specific activity 
+of 5.26 ± 0.14 U/mg or 0.151 ± 0.035 U/nmol (Fig. S6), 
+with a linear dependence. Michaelis–Menten parameters 
+were determined for 4-NPA (Fig. S7), providing values 
+of 8.16 ± 0.66 mM for Km and 30.3 ± 1.1  s−1 for kcat. These 
+values compare similarly to the literature values of K m of 
+4.6 mM and kcat of 27  s−1 for wild-type PETase on 4-NPA, 
+albeit their characterization was done at 30 °C and ours 
+at 25 °C, both in pH 7 buffer [31].
+IsPETase activity was determined using PET micropar -
+ticles to represent realistic substrates. Samples were pre -
+pared with three ratios of IsPETase to PET particles: 0.34, 
+0.69, and 1.0  mgPETase/gPET and soluble TPA, MHET and 
+BHET were measured over time (Fig. 2). After 96 h, reac-
+tions containing 0.34  mg   g−1, 0.69  mg   g−1, or 1  mg   g−1 
+IsPETase released approximately 1.3, 2.1, and 2.5  mM 
+product, over a thousand times higher than the sam -
+ple without Is PETase. For 1 mg   g−1 at 48 h, 1.76 mM of 
+soluble aromatic products were formed, which compares 
+quite similarly to 1.72 mM released when measured in a 
+previous study using similar reaction conditions (40  °C, 
+29 mg   mL−1 PET loading, 1 mg IsPETase per gram PET) 
+[9]. These results suggest that the Is PETase produced in 
+this study without a signal sequence and in a disulfide-
+bond promoting host has similar activity as those pro -
+duced using other methods.
+Medium optimization for IsPETase production
+Given the success of SHuffle T7 Express to increase the 
+production of Is PETase, we next performed a medium 
+optimization. While using a non-defined, complex 
+medium such as 2xLB is possible, moving to a more 
+defined medium with additional carbon and nitrogen 
+sources could benefit both economics and expression 
+[37]. As such, six different medias were assessed at 25 mL 
+scale for active Is PETase production with varying carbon 
+sources and inducer molecules (Table  S5). For defined 
+[38] and semi-defined [39] medias, recipes were selected 
+that have previously shown success in increasing biomass 
+and recombinant protein production in E. coli [30]. Three 
+non-defined medias were tested, 2xLB, TB, and complex 
+medium [30, 40].
+Comparing the Is PETase activity in 2xLB and Terrific 
+Broth (TB), more than double the activity was observed 
+with 2xLB despite cells growing to double the optical 
+density in TB (Table  2). When defined, semi-defined 
+or complex media was tested with glucose as a carbon 
+source, cells all reached higher optical densities than 
+2xLB, but the best producing complex medium sam -
+ple only had half of the activity of 2xLB (Table  2). Due 
+to the placement of the T7 RNAP gene in the lac operon 
+in SHuffle [24], production of T7 RNAP is catabolite 
+repressed resulting only in expression of desired protein 
+when glucose levels are depleted, providing a reason why 
+IsPETase levels were low even after complete consump -
+tion of glucose. Additionally, the genetic construction of 
+SHuffle does not permit lactose to be used as an inducer 
+due to the knockout of lacZ [24]. Given the partial suc -
+cess of the complex medium, 35 g  L−1 glycerol was substi-
+tuted for glucose as a carbon source. Using this medium 
+in 25-mL batch cultures, production reached 980 U per 
+L culture with an optical density of almost 10 A.U., both 
+improvements over 2xLB.
+Production of IsPETase in a bioreactor
+Production of Is PETase was moved to a 2-L bench -
+top bioreactor with a 1.5 L working volume in order to 
+have a larger culture volume as well as take advantage of 
+increased aeration, better mixing, and pH control com -
+pared to the shake flasks. In addition to the bioreactor, a 
+100 mL culture in a 500 mL baffled shake flask was run 
+simultaneously to determine the impact of improved aer-
+ation and pH control in the bioreactor. Complex media 
+with glycerol was selected as it had the highest produc -
+tion in shake flasks (Table 2).
+Culturing in the controlled bioreactor yielded fur -
+ther improvements in PETase production (Fig.  3). 
+The optical density of cultures grown in this medium 
+reached 19 A.U. at 48 h of total culture time. The cul -
+ture in the 500 mL shake flask grew similarly to that in 
+Page 10 of 18Carter et al. Microbial Cell Factories          (2024) 23:319 
+the bioreactor, reaching a maximum cell density of 16.7 
+A.U. (Fig. S8a). Peak activity in the bioreactor occurred 
+at 45  h post induction, reaching a value of 1992 units 
+per L. Similarly, the scaled-up shake flask reached 1749 
+units per L culture at 45  h post induction (Fig. S8a). 
+Enzyme activity dropped significantly over the next 
+24 h of culturing, with approximately 66% lost for the 
+bioreactor culture (Fig.  3). An even more precipitous 
+loss was found for the culture in the shake flask cul -
+ture, where the difference of 2 h between sample times 
+resulted in 94% loss (Fig. S8a).
+To determine a reason for the decline in activity, glyc -
+erol consumption as well as fermentation product accu -
+mulation was tracked using HPLC. Glycerol showed 
+steady consumption throughout the fermentation trial 
+with increased rate as the cells reached higher cell den -
+sities. This matches the agitation and aeration rates as 
+they were elevated to compensate for more cells in the 
+bioreactor. Glycerol consumption continued through -
+out the bioreactor run and was not fully exhausted, with 
+over 11 g  L−1 glycerol remaining after 75-h of culturing, 
+suggesting limitation of carbon source is not an issue. 
+Time (hr)
+[TPA] (mM)
+A.
+0 mg/g
+0.34 mg/g
+0.69 mg/g
+1.0 mg/g
+PETase Loading
+B.
+Time (hr)
+[MHET] (mM)
+[BHET] (mM)
+C.
+Time (hr)
+[Soluble Aromatics] (mM)
+Time (hr)
+D.
+0
+0.5
+1.0
+1.5
+2.0
+02 44 87 29 6
+0
+0.5
+1.0
+1.5
+2.0
+02 44 87 29 6
+0
+0.02
+0.04
+0.06
+0.08
+0.1
+02 44 87 29 6
+0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+02 44 87 29 6
+Fig. 2 IsPETase Activity on PET microparticles. IsPETase activity was measured by accumulation of soluble aromatic products over time: A TPA, 
+B MHET, C BHET, and D total soluble aromatics. Individual series in each plot represent PETase loadings of 0 (orange circles, n = 2), 0.34 (green 
+squares, n = 2), 0.69 (red diamonds, n = 2), and 1.0 (black triangles, n = 1) milligrams of enzyme per gram of PET (mg  g−1). Reactions occurred at 37 °C 
+in 50 mM sodium phosphate buffer (pH 9), contained 30 mg PET per mL reaction, and were mixed at 1000 rpm using an Eppendorf thermomixer. 
+Error bars represent the standard deviation of samples
+Page 11 of 18
+Carter et al. Microbial Cell Factories          (2024) 23:319 
+ 
+Fermentation product analysis revealed an accumula -
+tion of acetate starting at 48 h and rising throughout the 
+remainder of the culturing time. The same was found 
+for the shake flask sample. This suggests a metabolic 
+imbalance at these late culture times leading to overflow 
+metabolism of glycerol to acetate [41]. The production of 
+acetate at 48 h seems strongly correlated with the loss of 
+recombinant PETase activity. Since the shake flask cul -
+ture did not have pH control, the accumulation of ace -
+tate and likely drop in pH might explain the large loss of 
+active enzyme.
+Excited by the increase in PETase production upon 
+moving to the bioreactor, we sought to reproduce the 
+data as well as purify the protein to quantify the amount 
+produced. A repeated bioreactor run largely followed 
+the first one, with an optical density of 13.5 and a peak 
+activity of 2109 units per L at 43  h post induction (Fig. 
+S8b). A time point one hour later indicated a decline in 
+active protein amount to 1859 units per L as well as ace -
+tate accumulation to 80  mg  L−1. At this time the entire 
+bioreactor was harvested for purification. Using the same 
+purification procedure as previous, we found a total of 
+Table 2 Medium optimization for IsPETase production in shake flasks
+a Medium recipes are found in Table S5
+b Activity unit (U) measured for 1 mM 4-NPA at room temperature in 100 mM potassium phosphate buffer (pH 7). Activity is normalized to culture volume or mass of 
+total protein as determined using a BCA
+2xLB TB 2xLB Glucose Defineda Semi-defineda Complexa 
+Glucose
+IPTG
+Complexa 
+Glycerol
+IPTG
+Carbon source – – 5 g/L glucose 5 g/L glucose 5 g/L glucose 5 g/L glucose 35 g/L glycerol
+Inducer 0.5 mM IPTG 0.5 mM IPTG 0.5 mM IPTG 0.5 mM IPTG 0.5 mM IPTG 0.5 mM IPTG 0.5 mM IPTG
+Induction  OD600nm (A.U.) 0.76 ± 0.09 0.83 ± 0.03 0.85 ± 0.05 0.61 ± 0.01 0.64 ± 0.04 0.73 ± 0.02 0.62 ± 0.02
+Harvest  OD600nm (A.U.) 4.67 ± 0.16 10.52 ± 0.60 7.30 ± 0.10 6.79 ± 0.10 5.23 ± 0.04 8.36 ± 0.06 9.88 ± 0.17
+Activityb
+(U  Lculture
+−1)
+441 ± 112 353 ± 58 24 ± 4 6 ± 0.2 36 ± 6 210 ± 93 980 ± 24
+Activityb
+(U  gprotien
+−1)
+499 ± 107 222 ± 30 58 ± 5 27 ± 3 58 ± 14 247 ± 107 627 ± 220
+2500
+2000
+1500
+1000
+0
+Activity (U/Lculture)
+500
+OD600nm (A.U.)
+22
+0
+20
+18
+16
+14
+12
+10
+8
+6
+4
+2
+01 02 0 50 60
+Time (hr)
+30 40 70
+Agitation (RPM)
+300
+400
+500
+600
+700
+0
+20
+40
+60
+80
+100
+Dissolved Oxygen (%)
+0
+10
+20
+30
+40
+50
+[Glycerol] (g/L)
+0
+0.5
+1.0
+1.5
+2.0
+3.0
+[Acetate] (g/L)
+2.5
+Fig. 3 Scale-up production of IsPETase. IsPETase was produced in a 2-L bioreactor at a 1.5 L working volume scale from SHuffle T7 Express cells. 
+Bioreactor runs used complex media with glycerol. Initial growth occurred at 37 °C followed by protein production at 20 °C after induction 
+with 0.5 mM IPTG. Induction occurred at 3 h. Activity unit (U) were determined on 1 mM 4-NPA at room temperature in 100 mM potassium 
+phosphate buffer (pH 7) and is normalized to culture volume (black squares). Also measured was optical density at 600 nm (red circles), agitation 
+(purple), and dissolved oxygen (orange). Cascade control of dissolved oxygen was utilized for both reactor runs. pH was controlled between 6.8 
+and 7.2. Glycerol substrate (blue diamonds) and acetate product (green triangle) concentrations were measured by HPLC
+Page 12 of 18Carter et al. Microbial Cell Factories          (2024) 23:319 
+104 ± 6 mg of PETase protein produced per L bioreactor 
+volume, which is an almost five-fold increase from our 
+earlier purifications using cultures grown on 2xLB, with 
+similar protein purity (Fig. S8c). This gave us a volumetric 
+productivity of 2.21 ± 0.13 mg  L−1  h−1 for our process.
+Production and purification of PETase variants
+Given the success of using SHuffle T7 Express as a pro -
+tein production host, we sought to confirm if a similar 
+benefit would be found for some of the recently evolved 
+PETase variants. Using identical codons to the origi -
+nal petaseIs, genes encoding for FAST-PETase and Hot-
+PETase were ordered and added to pET21b plasmid with 
+a C-terminal hexa-histidine tag. In addition to SHuffle 
+T7 Express, BL21(DE3) was also explored for production 
+to see if the benefit of including disulfide bond forming 
+machinery was beneficial for the evolved variants. Pro -
+duction experiments were carried out in 2xLB and shake 
+flasks as was done for the WT IsPETase and enzyme 
+activity was determined in soluble cell lysates.
+Surprisingly, PETase variants did not demonstrate the 
+same advantage of SHuffle T7 Express, with Hot-PETase 
+showing improved production in BL21(DE3) (Fig.  4a). 
+As before, SHuffle T7 Express produced a statistically 
+significant amount more Is PETase than BL21(DE3) 
+(p = 1.38 ×  10–4). The highest observed activities were 
+for FAST-PETase in both BL21(DE3) and SHuffle T7 
+Express, with activities reaching 896 and 866 units per 
+liter of culture, respectively. The lack of statistical sig -
+nificance between these values (p = 0.49) indicates that 
+the disulfide bond forming machinery in SHuffle T7 
+Express cells has no observable impact on the expression 
+of FAST PETase. Further, Hot-PETase was expressed sig-
+nificantly less effectively (p = 0.004) in SHuffle T7 Express 
+cells than in BL21(DE3) cells, with 717 and 382 units per 
+liter of culture, respectively. This is surprising because 
+Hot-PETase has seven cysteine residues rather than four 
+for IsPETase. Similar trends in production amount were 
+found when normalizing activity in lysate to total protein 
+amount (Fig. 4b).
+Enzyme purification followed by characterization 
+was carried out to determine the amount of PETase 
+variants produced as well as ensure high enzyme activ -
+ity. Production experiments were carried out in both 
+BL21(DE3) and SHuffle T7 express to validate the activ -
+ity differences seen in lysates (Table  3). FAST-PETase 
+and Hot-PETase were better produced and purified in 
+BL21(DE3) than SHuffle T7 Express, reaching titers of 
+66  mg per L and 78  mg per L, respectively. Analysis 
+of protein purity, revealed that all proteins were puri -
+fied to greater than 90% purity (Fig. S9). A reported 
+titer of 12  mg per L was found for Hot-PETase when 
+produced in SHuffle T7 Express [14], similar to the 
+19  mg per L here. Using BL21(DE3), we found a 6.5-
+fold improvement over what was previously observed. 
+Another study found the amount of Hot-PETase to be 
+Activity (U/Lculture)
+A.
+IsPETase
+B.
+0
+200
+400
+600
+800
+1000
+FAST-PETase Hot-PETase
+0
+200
+400
+600
+800
+1000Activity (U/gTotal Protein )
+IsPETase FAST-PETase Hot-PETase
+BL21(DE3)
+SHuffle T7 Exp.
+***
+ns
+**
+***
+*
+ns
+Fig. 4 Variant PETase production in BL21(DE3) and SHuffle T7 Express. Production of PETase as measured by enzyme activity on 4-NPA in clarified 
+cell lysates from BL21(DE3) (light blue) or SHuffle T7 Express (orange). Lysis amount was based on culture optical density. Activity was normalized 
+to A culture volume and B total protein as measured by BCA. Activity unit (U) were measured on 1 mM 4-NPA at room temperature in 100 mM 
+sodium phosphate buffer (pH 7.4). Average of at least 3 independent cultures shown and error bars represent the standard deviation. Shown are 
+Student’s t-test results, ns (p > 0.05), * (p < 0.05), ** (p < 0.005), *** (p < 0.0005)
+Page 13 of 18
+Carter et al. Microbial Cell Factories          (2024) 23:319 
+ 
+roughly 110 mg per L when made in Origami 2 cells [7 ], 
+a bit higher than what we achieved. Far UV CD analy -
+sis revealed that purified FAST-PETase and Hot-PETase 
+were similarly well folded regardless of whether they 
+were produced in BL21(DE3) or SHuffle T7 Express 
+(Fig. S10).
+Characterization of PETase variants
+Specific activity was determined on 4-NPA as was 
+done for the Is PETase, revealing that FAST-PETase had 
+slightly higher activity at 25 °C compared to the other 
+variants (Table  S6, Fig. S11a). This would explain the 
+elevated activity of the FAST-PETase compared to the 
+other variants in lysate activity analysis, while simi -
+lar purified protein amounts were found. Likewise, 
+FAST-PETase had an increased k cat compared to the 
+other variants on 4-NPA at 25 °C (Table S6, Fig. S11b). 
+However, when looking at catalytic efficiency, k cat/KM, 
+on 4-NPA, all the variants were statistically similar to 
+the IsPETase, suggesting the improvement of the vari -
+ants is only relevant at higher temperatures and on PET 
+substrates.
+Finally, activity on PET microparticles was assessed 
+by measuring soluble aromatic product generation over 
+time at 37 °C for all the variants in this study (Fig.  5). 
+Additionally, the commercially-available cutinase from 
+Humicola isolens, HiC, was included in the study. Anal -
+ysis of total released soluble analytes after 24 h revealed 
+that FAST-PETase liberated over 6  mM products, the 
+most amongst any enzyme type tested in this study. 
+Comparatively, Hot-PETase, WT PETase, HiC, and the 
+no enzyme control liberated 5 mM, 1.8 mM, 0.28 mM, 
+and 2  μM products, respectively at 24  h. Other works 
+have found HiC to have low activity on PET relative to 
+other enzymes [33]. Reacting on real PET substrates 
+revealed the benefit of the evolved variants even at 
+a modest reaction temperature of 37  °C. Converting 
+all soluble products to BHET equivalents, the FAST-
+PETase percent conversion to soluble products was 
+6.84 ± 0.16%, similar to the approximately 8% from 
+another comparative PETase study [8 ], albeit at differ -
+ent reaction conditions. From the same study, we would 
+expect better performance for Hot-PETase at elevated 
+temperatures.
+Discussion
+We have found that Is PETase is optimally produced in a 
+disulfide bond promoting host which is capable of rear -
+rangement of improperly formed disulfide bonds due 
+to inclusion of a cytoplasmic copy of dsbC. In contrast, 
+evolved PETase variants FAST-PETase and Hot-PETase 
+were better produced in BL21(DE3) with a reducing 
+cytoplasm, even though FAST-PETase has the same 
+two disulfides and Hot-PETase a third as well as a free 
+cysteine. Despite the promise of SHuffle for making pro -
+teins that require complex disulfide bonding patterns for 
+activity, we have found some limitations working with 
+this host, specifically around genetic construction and 
+purification yield. Medium screening and moving cul -
+tures to a controlled and well-mixed bioreactor further 
+elevated the production of Is PETase to overcome these 
+limitations. Accumulation of acetate in our bioreactor 
+trials seems to be correlated with recombinant enzyme 
+activity loss, suggesting careful monitoring of cultures to 
+ensure titer is maximized.
+Comparing our bioreactor results to produce Is PETase 
+with those for K. pastoris, although we purified a lower 
+protein amount per reactor volume, our strategy resulted 
+in better per mass productivities. For our bioreactor 
+trial with complex medium with glycerol, a CDW of 
+5.02 g per liter was achieved (2.69 g of CDW per L cul -
+ture per  OD600), with IsPETase representing 2.1% of total 
+cell mass. Comparing to K. pastoris cultures, CDW was 
+approximately 270 g per L with 1.2 g PETase per L pro -
+duced [20], or just 0.4% of the total cell mass. Further, 
+converting to a per cell mass productivity, PETase pro -
+duced in SHuffle was 0.45  mgPETase  gCDW
+−1  h−1, while it 
+was 0.037  mgPETase  gCDW
+−1  h−1 when made in K. pastoris. 
+While the substrates are different for E. coli (glucose and 
+Table 3 PETase variant purification
+a Amount of PETase after purification from 0.5 L of culture. Amount was measured by BCA and comparison to BSA standard. Error represents standard deviation of two 
+or three replicate assay samples. Resulting amount was scaled to a 1 L culture volume
+b Purity is estimated from gel analysis of Fig. S9
+c Amount yield represents the retention of amount in from lysate to final purified protein. Error is propagated
+Production Amount (mg/Lculture)a Purityb Amount  Yieldc
+Variant BL21(DE3) SHuffle T7 Express BL21(DE3) SHuffle T7 
+Express
+BL21(DE3) SHuffle T7 Express
+FAST 65.6 ± 0.5 31.9 ± 0.4 0.95 0.97 0.89 ± 0.07 0.40 ± 0.04
+Hot 77.6 ± 1.7 19.3 ± 1.1 0.96 0.91 0.73 ± 0.09 0.29 ± 0.08
+Page 14 of 18Carter et al. Microbial Cell Factories          (2024) 23:319 
+glycerol) and K. pastoris (methanol), yield and per mass 
+productivities are important for economic considera -
+tions as they incorporate the cost to produce biomass as 
+well as reactor size. If a similar per mass yield was kept 
+for SHuffle, the optical density would have to approach 
+130 to produce 1 g per liter, which may be possible after 
+further fermentation process optimization (i.e. medium 
+selection, induction strategy, substrate and nutrient 
+feeding, dissolved oxygen level, and mixing) [27]. An 
+advantage of K. pastoris is its ability to secrete enzyme 
+which should streamline downstream processing. Lastly, 
+glycosylation using K. pastoris may be both advantageous 
+and detrimental to PETase performance. While stability 
+is increased due to glycosylation, depending on the loca -
+tion of glycosylation, the active PET-binding site could 
+be blocked, lowering the specific activity. Both increased 
+stability and loss of activity were found for Is PETase 
+made in K. pastoris due to glycosylation [20].
+An unexpected finding of this work is that the evolved 
+variants FAST-PETase and Hot-PETase were better pro -
+duced and purified from BL21(DE3) than SHuffle T7 
+Express. It is known that both variants have a higher 
+Time (hr)
+[TPA] (mM)
+A. B.
+Time (hr)
+[MHET] (mM)
+[BHET] (mM)
+C.
+Time (hr)
+[Soluble Aromatics] (mM)
+Time (hr)
+D.
+No Enzyme
+IsPETase
+FAST-PETase
+Hot-PETase
+HiC
+0.0
+1.0
+2.0
+3.0
+4.0
+5.0
+6.0
+02 44 87 29 6
+0
+1.0
+2.0
+3.0
+4.0
+5.0
+6.0
+02 44 87 29 6
+0
+0.05
+0.1
+0.15
+0.2
+02 44 87 29 6
+0
+2.0
+4.0
+6.0
+8.0
+10.0
+02 44 87 29 6
+Fig. 5 Variant PETase activity on PET microparticles. PETase activity was measured by accumulation of soluble aromatic products over time: A TPA, 
+B MHET, C BHET, and D total soluble aromatics. Individual series in each plot represent PETase variants: IsPETase (black triangles, n = 1), FAST-PETase 
+(red squares, n = 2), Hot-PETase (green diamonds, n = 2), or no enzyme (orange circles, n = 1). Also tested was HiC (light blue triangles, n = 1). All 
+samples loaded at 1.0 mg of enzyme per gram of PET (mg  g−1). Reactions occurred at 37 °C in 50 mM sodium phosphate buffer (pH 9), contained 
+30 mg PET per mL reaction, and were mixed at 1000 rpm using an Eppendorf thermomixer. Error bars represent the standard deviation of samples
+Page 15 of 18
+Carter et al. Microbial Cell Factories          (2024) 23:319 
+ 
+ Tm than Is PETase, due to more interactions in their 
+folded structure, especially the extra disulfide bond in 
+Hot-PETase. It is possible that these stabilized enzymes 
+do not require disulfides to achieve the correct fold -
+ing state, keeping them from forming inclusion bodies 
+and permitting disulfide bond formation after cell lysis. 
+This is most likely for FAST-PETase as its disulfides are 
+formed between consecutive cysteines, with the same 
+being true for Is PETase. For FAST- and Hot-PETase it is 
+unknown if the extra disulfide bond in PETase (C203 and 
+C239) compared to other cutinases is necessary for activ -
+ity as is true for Is PETase [23]. Hot-PETase has an extra 
+disulfide bond, rationally added between C233 and C282, 
+as well as one free cysteine, C242. Of any of the variants, 
+this enzyme would be expected to benefit most from a 
+disulfide bond promoting host as well as disulfide bond 
+isomerase to properly form as the two disulfides since 
+they are relatively close to one another in the primary 
+sequence and they are not formed between consecutive 
+cysteines.
+Hot-PETase production as measured after purifica -
+tion was much lower from SHuffle T7 Express (19  mg 
+per liter culture) compared to BL21(DE3) (77  mg per 
+liter). Another study found that Hot-PETase production 
+reached 110 mg per liter using Origami 2 [7], which has 
+an oxidizing cytoplasm but lacks the DsbC chaperone. 
+While they used different media and expression condi -
+tions, this potentially shows the benefit of disulfide bond 
+formation and negative impact of DsbC. A similar finding 
+was found for luciferase, which has 10 cysteines, where 
+less active enzyme was produced in cells with an oxidiz -
+ing cytoplasm and cytoplasmic DsbC compared to cells 
+with just an oxidizing cytoplasm [24]. The authors sug -
+gest oxidized DsbC could impact the folding of a reduced 
+protein. Alternatively, since the extra disulfide bond in 
+Hot-PETase was not evolutionarily derived, it is possible 
+that that the disulfide bond isomerase does not correctly 
+recognize the designed fold to chaperone the protein to 
+the correct confirmation, leading to misfolding and the 
+drop off in production observed for SHuffle T7 Express.
+In our work we found that purification of IsPETase dur-
+ing the IMAC step resulted in a low yield. Active protein 
+was not found in the flow through due to exceeding the 
+binding capacity of the column. For the bioreactor trial 
+and scaled-up purification, we found a similar yield for 
+IsPETase to the small-scale expression trials (~ 30%). 
+Likewise, FAST-PETase and Hot-PETase had low yields 
+for purification of 40% and 29%, respectively, when pro -
+duced in SHuffle T7 Express (Table  3). The yield was 
+much higher for proteins produced in BL21(DE3), 89% 
+for FAST-PETase and 72% for Hot-PETase, which is more 
+in line with expectations for the purifications performed. 
+This suggests something in the SHuffle lysate is causing 
+a negative impact on the purification process. Possibly, 
+as the PETase is interacting with the IMAC resin, it is 
+changing structure causing interaction with the over -
+expressed DsbC. Alternatively, the DsbC could become 
+oxidized and cause unintended reduction of the oxidized 
+PETase product [24]. A similar yield of between 18 and 
+51% was observed for production and IMAC purification 
+of a chaperone from SHuffle [27], possibly a wide spread 
+problem using SHuffle as a host.
+Since glycerol is inexpensive and less likely to suffer 
+from overflow metabolism into acetate compared with 
+glucose [42, 43], its utilization as a carbon source has 
+more advantages than simply bypassing catabolite repres-
+sion [44]. At low cell densities, acetate formation does not 
+seem to occur in ours or other studies [41] when glycerol 
+is used as a carbon source. However, we do see acetate 
+accumulation starting approximately 45  h after bioreac -
+tor inoculation, ultimately reaching 1 g  L−1 (Fig.  3). Ace-
+tate accumulation is known to be toxic to cells, even at 
+concentrations of 0.5 g  L−1 [42], resulting in decrease bio-
+mass and recombinant protein production [43] as well as 
+prompting reassimilation [45]. Acetate is hypothesized 
+to have a negative impact on growth due to energetics 
+to maintain intracellular pH or inhibition of methionine 
+synthesis which impacts protein translation [46]. Acetate 
+has also been proposed to have a negative effect on the 
+stability of intracellular proteins [43] and alter transcrip -
+tion [47]; however, it is unknown how general the tran -
+scription changes are. We see a dramatic loss of Is PETase 
+activity, even at low acetate concentrations of 0.05 g  L−1, 
+with over 90% loss of activity in just 3 h for a shake flask 
+culture with uncontrolled pH. It is unknown whether 
+acetate buildup is the cause of the loss of active PETase 
+or if acetate accumulation happens simultaneously with 
+the loss of recombinant protein activity. Co-factor imbal-
+ance or metabolite flux limitation likely cause the shift in 
+glycerol metabolism to acetate at these later cell culture 
+times. It is somewhat surprising to see such a precipitous 
+loss of enzyme activity unless it is being scavenged for 
+resource utilization, the enzyme has a short half-life and 
+expression becomes limiting, or it is unfolding and mov -
+ing to inclusion bodies. Regardless, our results suggest 
+close monitoring of protein activity is necessary to catch 
+a tight window of high production.
+Our work focused on the expression and purifica -
+tion of soluble and active PETase. It is well established 
+that overexpressed proteins often end up in the inclu -
+sion bodies of E. coli [48]. It is possible that strategies 
+we evaluated such as higher temperature expression, 
+increased inducer concentration, and even host selection 
+led to increased cytoplasmic production of the enzyme 
+into insoluble inclusion bodies. However, while purifica -
+tion of denatured proteins is possible, refolding to active 
+Page 16 of 18Carter et al. Microbial Cell Factories          (2024) 23:319 
+conformations can be a challenge, especially for proteins 
+with complex disulfide patterns [48]. This has led us to 
+focus efforts only on soluble production in this work.
+This study focused on the development of expression 
+conditions and scale-up for Is PETase as well as produc -
+tion of recently evolved variants. Since the discovery 
+of IsPETase in 2016, considerable work has gone into 
+protein engineering this enzyme for higher stability 
+and activity at elevated temperatures [3]. Based on the 
+Arrhenius relationship, reaction rate should exponen -
+tially increase as the temperature is elevated. Addition -
+ally, it has been argued that as reaction temperatures 
+approach the glass transition temperature, 60 ºC to 70 ºC 
+for PET, catalysis is enhanced [7]. It has been established 
+that PETase has higher activity on amorphous PET than 
+crystalline PET [6]. However, PET re-crystallization also 
+occurs near the glass transition temperature which is 
+counterproductive to enzymatic breakdown [8]. From a 
+cost standpoint, increasing temperature of reactions is 
+not desired, rather catalysis near ambient conditions is 
+preferred. This is especially true for remediation of plas -
+tics in the environment where temperature cannot be 
+controlled [49]. In our work, we have found that FAST-
+PETase and Hot-PETase outperformed Is PETase based 
+on soluble aromatics formed from PET microparticles at 
+37 ºC, but reaction rates on 4-NPA were nearly the same 
+at 25 ºC. Is PETase has been shown to be quite active at 
+low temperatures, producing a high degree of ester bonds 
+hydrolyzed in just minutes [50]. At lower temperatures, 
+the advantages of the evolved PETases might not be as 
+extreme as at higher temperatures where Is PETase, or 
+even FAST-PETase are not stable [8].
+Conclusions
+Through this work we have shown that wild-type 
+IsPETase is better produced in the cytoplasm of E. coli 
+using a disulfide bond forming host with disulfide bond 
+isomerase. Production was increased by 13-fold over 
+often used BL21(DE3) and purity was enhanced due to 
+overexpression. IsPETase was purified from SHuffle T7 
+Express as a soluble, well-folded protein with activity 
+on PET microparticles that is on par with other stud -
+ies. Moving to another complex medium that was sup -
+plemented with glycerol and to a controlled bioreactor, 
+protein production reached 104 mg per liter after 46 h of 
+culturing, with per cell mass productivities greater than 
+what has been achieved with K. pastoris. The production 
+benefit of SHuffle T7 Express was not found for evolved 
+FAST-PETase and Hot-PETase, which were better made 
+and purified from BL21(DE3). These results are expected 
+to benefit researchers who need to produce signifi -
+cant quantities of Is PETase and related variants in a lab 
+environment for process engineering studies to degrade 
+PET plastics at large scale.
+Abbreviations
+4-NPA  4-Nitrophenyl acetate
+BCA  Bicinchoninic acid assay
+BHET  Bis(2-hydroxyethyl) terephthalic acid
+BSA  Bovine serum albumin
+CDW  Cell dry weight
+FPLC  Fast-protein liquid chromatography
+HiC  Cutinase from Humicola insolens
+HPLC  High-performance liquid chromatography
+IMAC  Immobilized metal affinity chromatography
+IPTG  Isopropyl ß-D-1-thiogalactopyranoside
+LB  Luria Bertani
+MHET  2-Hydroxyethyl terephthalic acid
+OD600  Optical density measured at 600 nm
+PET  Polyethylene terephthalate
+RCF  Relative centrifugal force
+RNAP  RNA polymerase
+RPM  Revolutions per minute
+SDS-PAGE:  Sodium dodecyl sulfate polyacrylamide gel electrophoresis
+TB  Terrific broth
+TPA  Terephthalic acid
+U  Unit of enzyme activity
+UV  Ultraviolet
+v/v  Volume per volume
+w/v  Weight per volume
+YT  Yeast tryptone
+Supplementary Information
+The online version contains supplementary material available at https:// doi. 
+org/ 10. 1186/ s12934- 024- 02585-w.
+Supplementary Material 1.
+Supplementary Material 2.
+Acknowledgements
+pET21b( +)-Is-PETase was a gift from Gregg Beckham and Christopher 
+Johnson (Addgene plasmid # 112202). pGro7 was generously supplied by 
+Dr. J. Andrew Jones. Supplies for the Eppendorf Thermomixer were provided 
+by the Miami University Center for Bioinformatics and Functional Genomics. 
+Eppendorf BioFlo 120 Bioreactor was provided through Miami University Stu-
+dent Technology Fee program. Additional support was provided by the Miami 
+University Committee for Faculty Research and a Research, Scholarship, and 
+Artistry Grant. LMC and SPK were supported by the Miami University Summer 
+Scholars Program.
+Author contributions
+LMC, CEM, JAB, JTB were responsible for conceptualization of experiments, 
+design of methodology, and data analysis and presentation. LMC conducted 
+host expression screening, protein purification, and enzyme characteriza-
+tion. CEM performed medium optimization and bioreactor experiments. 
+SPK cloned and characterized PETase variants. TS was responsible for circular 
+dichroism data. JLK provided comments on the manuscript and assisted 
+in designing experiments. JAB and JTB were responsible for manuscript 
+preparation and project organization. All authors read and approved the final 
+manuscript.
+Funding
+This work was partially supported by NSF Award Number: CBET-2309899. 
+Additional support was provided by the Miami University Committee for 
+Faculty Research and a Research, Scholarship, and Artistry Grant. LMC and SPK 
+were supported by the Miami University Summer Scholars Program.
+Availability of data and materials
+Data is provided within the manuscript or supplementary information files.
+Page 17 of 18
+Carter et al. Microbial Cell Factories          (2024) 23:319 
+ 
+Declarations
+Competing interests
+The authors declare no competing interests.
+Author details
+1 Department of Chemical, Paper and Biomedical Engineering, Miami Univer-
+sity, 650 E. High St., Engineering Building 64, Oxford, OH 45056, USA. 2 Depart-
+ment of Chemical and Biological Engineering, University of Colorado, Boulder, 
+CO 80309, USA. 
+Received: 1 July 2024   Accepted: 9 November 2024
+References
+ 1. Melchor-Martinez EM, Macias-Garbett R, Alvarado-Ramirez L, Araujo RG, 
+Sosa-Hernandez JE, Ramirez-Gamboa D, Parra-Arroyo L, Alvarez AG, Mon-
+teverde RPB, Cazares KAS, et al. Towards a circular economy of plastics: an 
+evaluation of the systematic transition to a new generation of bioplastics. 
+Polymers (Basel). 2022;14:1203.
+ 2. Geyer R, Jambeck JR, Law KL. Production, use, and fate of all plastics ever 
+made. Sci Adv. 2017;3: e1700782.
+ 3. Liu F, Wang T, Yang W, Zhang Y, Gong Y, Fan X, Wang G, Lu Z, Wang J. 
+Current advances in the structural biology and molecular engineering of 
+PETase. Front Bioeng Biotechnol. 2023;11:1263996.
+ 4. Vertommen MA, Nierstrasz VA, Veer M, Warmoeskerken MM. Enzymatic 
+surface modification of poly(ethylene terephthalate). J Biotechnol. 
+2005;120:376–86.
+ 5. Yoshida S, Hiraga K, Takehana T, Taniguchi I, Yamaji H, Maeda Y, Toyohara 
+K, Miyamoto K, Kimura Y, Oda K. A bacterium that degrades and assimi-
+lates poly(ethylene terephthalate). Science. 2016;351:1196–9.
+ 6. Lu H, Diaz DJ, Czarnecki NJ, Zhu C, Kim W, Shroff R, Acosta DJ, Alexander 
+BR, Cole HO, Zhang Y, et al. Machine learning-aided engineering of hydro-
+lases for PET depolymerization. Nature. 2022;604:662–7.
+ 7. Bell EL, Smithson R, Kilbride S, Foster J, Hardy FJ, Ramachandran S, Ted-
+stone AA, Haigh SJ, Garforth AA, Day PJR, et al. Directed evolution of an 
+efficient and thermostable PET depolymerase. Nat Catal. 2022;5:673.
+ 8. Arnal G, Anglade J, Gavalda S, Tournier V, Chabot N, Bornscheuer UT, 
+Weber G, Marty A. Assessment of four engineered PET degrading 
+enzymes considering large-scale industrial applications. ACS Catal. 
+2023;13:13156–66.
+ 9. Erickson E, Shakespeare TJ, Bratti F, Buss BL, Graham R, Hawkins MA, Konig 
+G, Michener WE, Miscall J, Ramirez KJ, et al. Comparative performance 
+of PETase as a function of reaction conditions, substrate properties, and 
+product accumulation. Chemsuschem. 2022;15: e202101932.
+ 10. Tournier V, Topham CM, Gilles A, David B, Folgoas C, Moya-Leclair E, 
+Kamionka E, Desrousseaux ML, Texier H, Gavalda S, et al. An engineered 
+PET depolymerase to break down and recycle plastic bottles. Nature. 
+2020;580:216–9.
+ 11. Singh A, Rorrer NA, Nicholson SR, Erickson E, DesVeaux JS, Avelino 
+AFT, Lamers P , Bhatt A, Zhang Y, Avery G, et al. Techno-economic, life-
+cycle, and socioeconomic impact analysis of enzymatic recycling of 
+poly(ethylene terephthalate). Joule. 2021;5:2479–503.
+ 12. Ferreira RDG, Azzoni AR, Freitas S. Techno-economic analysis of the 
+industrial production of a low-cost enzyme using E. coli: the case of 
+recombinant beta-glucosidase. Biotechnol Biofuels. 2018;11:81.
+ 13. Austin HP , Allen MD, Donohoe BS, Rorrer NA, Kearns FL, Silveira RL, Pollard 
+BC, Dominick G, Duman R, El Omari K, et al. Characterization and engi-
+neering of a plastic-degrading aromatic polyesterase. Proc Natl Acad Sci 
+U S A. 2018;115:E4350–7.
+ 14. Avilan L, Lichtenstein BR, Konig G, Zahn M, Allen MD, Oliveira L, Clark M, 
+Bemmer V, Graham R, Austin HP , et al. Concentration-dependent inhibi-
+tion of mesophilic PETases on Poly(ethylene terephthalate) can be elimi-
+nated by enzyme engineering. Chemsuschem. 2023;16: e202202277.
+ 15. Seo H, Kim S, Son HF, Sagong HY, Joo S, Kim KJ. Production of extracellu-
+lar PETase from Ideonella sakaiensis using sec-dependent signal peptides 
+in E. coli. Biochem Biophys Res Commun. 2019;508:250–5.
+ 16. Shi L, Liu H, Gao S, Weng Y, Zhu L. Enhanced extracellular production of 
+IsPETase in Escherichia coli via engineering of the pelB signal peptide. J 
+Agric Food Chem. 2021;69:2245–52.
+ 17. Huang X, Cao L, Qin Z, Li S, Kong W, Liu Y. Tat-independent secretion of 
+polyethylene terephthalate hydrolase PETase in Bacillus subtilis 168 medi-
+ated by its native signal peptide. J Agric Food Chem. 2018;66:13217–27.
+ 18. Wang N, Guan F, Lv X, Han D, Zhang Y, Wu N, Xia X, Tian J. Enhancing 
+secretion of polyethylene terephthalate hydrolase PETase in Bacillus sub-
+tilis WB600 mediated by the SP(amy) signal peptide. Lett Appl Microbiol. 
+2020;71:235–41.
+ 19. Xi X, Ni K, Hao H, Shang Y, Zhao B, Qian Z. Secretory expression in Bacillus 
+subtilis and biochemical characterization of a highly thermostable poly-
+ethylene terephthalate hydrolase from bacterium HR29. Enzyme Microb 
+Technol. 2021;143: 109715.
+ 20. Deng B, Yue Y, Yang J, Yang M, Xing Q, Peng H, Wang F, Li M, Ma L, Zhai 
+C. Improving the activity and thermostability of PETase from Ideonella 
+sakaiensis through modulating its post-translational glycan modification. 
+Commun Biol. 2023;6:39.
+ 21. Chen C-C, Li X, Min J, Zeng Z, Ning Z, He H, Long X, Niu D, Peng R, Liu X, 
+et al. Complete decomposition of poly(ethylene terephthalate) by crude 
+PET hydrolytic enzyme produced in Pichia pastoris. Chem Eng J. 2024;481: 
+148418.
+ 22. Han X, Liu W, Huang JW, Ma J, Zheng Y, Ko TP , Xu L, Cheng YS, Chen CC, 
+Guo RT. Structural insight into catalytic mechanism of PET hydrolase. Nat 
+Commun. 2017;8:2106.
+ 23. Joo S, Cho IJ, Seo H, Son HF, Sagong HY, Shin TJ, Choi SY, Lee SY, Kim KJ. 
+Structural insight into molecular mechanism of poly(ethylene terephtha-
+late) degradation. Nat Commun. 2018;9:382.
+ 24. Lobstein J, Emrich CA, Jeans C, Faulkner M, Riggs P , Berkmen M. SHuffle, 
+a novel Escherichia coli protein expression strain capable of correctly 
+folding disulfide bonded proteins in its cytoplasm. Microb Cell Fact. 
+2012;11:56.
+ 25. Palm GJ, Reisky L, Bottcher D, Muller H, Michels EAP , Walczak MC, Berndt 
+L, Weiss MS, Bornscheuer UT, Weber G. Structure of the plastic-degrading 
+Ideonella sakaiensis MHETase bound to a substrate. Nat Commun. 
+2019;10:1717.
+ 26. Chung WJ, Huang CL, Gong HY, Ou TY, Hsu JL, Hu SY. Recombinant 
+production of biologically active giant grouper (Epinephelus lanceolatus) 
+growth hormone from inclusion bodies of Escherichia coli by fed-batch 
+culture. Protein Expr Purif. 2015;110:79–88.
+ 27. Schmuck B, Chen G, Pelcman J, Kronqvist N, Rising A, Johansson J. 
+Expression of the human molecular chaperone domain Bri2 BRICHOS on 
+a gram per liter scale with an E. coli fed-batch culture. Microb Cell Fact. 
+2021;20:150.
+ 28. da Silva AJ, Horta AC, Velez AM, Iemma MR, Sargo CR, Giordano RL, Novo 
+MT, Giordano RC, Zangirolami TC. Non-conventional induction strategies 
+for production of subunit swine erysipelas vaccine antigen in E. coli fed-
+batch cultures. Springerplus. 2013;2:322.
+ 29. Khalilvand AB, Aminzadeh S, Sanati MH, Mahboudi F. Media optimiza-
+tion for SHuffle T7 Escherichia coli expressing SUMO-Lispro proinsulin by 
+response surface methodology. BMC Biotechnol. 2022;22:1.
+ 30. Barros T, Brumano L, Freitas M, Pessoa AJ, Parachin N, Magalhaes PO. 
+Development of processes for recombinant L-asparaginase II production 
+by Escherichia coli Bl21 (De3): from shaker to bioreactors. Pharmaceutics. 
+2020;13:14.
+ 31. Ma Y, Yao MD, Li BZ, Ding MZ, He B, Chen S, Zhou X, Yuan YJ. Enhanced 
+poly(ethylene terephthalate) hydrolase activity by protein engineering. 
+Engineering. 2018;4:888–93.
+ 32. Wang S-z, Fang B-s. Microplate bioassay for determining substrate selec-
+tivity of Candida rugosa lipase. J Chem Educ. 2012;89:409–11.
+ 33. Baath JA, Borch K, Jensen K, Brask J, Westh P . Comparative biochemistry of 
+four polyester (PET) hydrolases*. ChemBioChem. 2021;22:1627–37.
+ 34. Lusty Beech J, Clare R, Kincannon WM, Erickson E, McGeehan JE, Beckham 
+GT, DuBois JL. A flexible kinetic assay efficiently sorts prospective biocata-
+lysts for PET plastic subunit hydrolysis. RSC Adv. 2022;12:8119–30.
+ 35. Greenfield NJ. Using circular dichroism spectra to estimate protein sec-
+ondary structure. Nat Protoc. 2006;1:2876–90.
+ 36. Xie R, Tu M, Wu Y, Adhikari S. Improvement in HPLC separation of acetic 
+acid and levulinic acid in the profiling of biomass hydrolysate. Biores 
+Technol. 2011;102:4938–42.
+Page 18 of 18Carter et al. Microbial Cell Factories          (2024) 23:319 
+ 37. Cardoso VM, Campani G, Santos MP , Silva GG, Pires MC, Goncalves VM, 
+et al. Cost analysis based on bioreactor cultivation conditions: produc-
+tion of a soluble recombinant protein using Escherichia coli BL21(DE3). 
+Biotechnol Rep (Amst). 2020;26: e00441.
+ 38. Riesenberg D, Schulz V, Knorre WA, Pohl HD, Korz D, Sanders EA, Ross A, 
+Deckwer WD. High cell density cultivation of Escherichia coli at controlled 
+specific growth rate. J Biotechnol. 1991;20:17–27.
+ 39. Studier FW. Protein production by auto-induction in high density shaking 
+cultures. Protein Expr Purif. 2005;41:207–34.
+ 40. Santos J: Cultivation of Escherichia coli BL21 (DE3) For Production of 
+L-Asparaginase II. University of Sao Paulo São Paulo, Brazil2017.
+ 41. Martinez-Gomez K, Flores N, Castaneda HM, Martinez-Batallar G, 
+Hernandez-Chavez G, Ramirez OT, Gosset G, Encarnacion S, Bolivar F. New 
+insights into Escherichia coli metabolism: carbon scavenging, acetate 
+metabolism and carbon recycling responses during growth on glycerol. 
+Microb Cell Fact. 2012;11:46.
+ 42. Eiteman MA, Altman E. Overcoming acetate in Escherichia coli recombi-
+nant protein fermentations. Trends Biotechnol. 2006;24:530–6.
+ 43. De Mey M, De Maeseneire S, Soetaert W, Vandamme E. Minimizing 
+acetate formation in E. coli fermentations. J Ind Microbiol Biotechnol. 
+2007;34:689–700.
+ 44. Yang F, Hanna MA, Sun R. Value-added uses for crude glycerol–a byprod-
+uct of biodiesel production. Biotechnol Biofuels. 2012;5:13.
+ 45. Wolfe AJ. The acetate switch. Microbiol Mol Biol Rev. 2005;69:12–50.
+ 46. Pinhal S, Ropers D, Geiselmann J, de Jong H: Acetate Metabolism and the 
+Inhibition of Bacterial Growth by Acetate. J Bacteriol 2019, 201.
+ 47. Orr JS, Christensen DG, Wolfe AJ, Rao CV: Extracellular Acidic pH Inhibits 
+Acetate Consumption by Decreasing Gene Transcription of the Tricarbox-
+ylic Acid Cycle and the Glyoxylate Shunt. J Bacteriol 2019, 201.
+ 48. Singh A, Upadhyay V, Upadhyay AK, Singh SM, Panda AK. Protein recovery 
+from inclusion bodies of Escherichia coli using mild solubilization process. 
+Microb Cell Fact. 2015;14:41.
+ 49. Bergeson AR, Silvera AJ, Alper HS. Bottlenecks in biobased approaches to 
+plastic degradation. Nat Commun. 2024;15:4715.
+ 50. Schubert S, Schaller K, Baath JA, Hunt C, Borch K, Jensen K, Brask J, Westh 
+P . Reaction pathways for the enzymatic degradation of poly(ethylene 
+terephthalate): what characterizes an efficient PET-hydrolase? ChemBio-
+Chem. 2023;24: e202200516.
+Publisher’s Note
+Springer Nature remains neutral with regard to jurisdictional claims in pub-
+lished maps and institutional affiliations.

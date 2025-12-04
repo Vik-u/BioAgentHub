@@ -1,0 +1,1122 @@
+Molecular Details of Polyester Decrystallization via Molecular
+Simulation
+Daria Lazarenko, Graham P. Schmidt, Michael F. Crowley, Gregg T. Beckham, and Brandon C. Knott*
+Cite This: Macromolecules 2025, 58, 1795−1803
+ Read Online
+ACCESS
+Metrics & More
+ Article Recommendations *
+sı Supporting Information
+ABSTRACT: Waste polyesters are a potential feedstock for recycled and
+upcycled products. These polymers are generally semicrystalline, which presents a
+challenge for chemical and biological recycling to monomers, and thus the
+thermodynamic work associated with polyester decrystallization is an important
+consideration in some depolymerization strategies. Here, we use molecular
+dynamics simulations to calculate the free energy required to decrystallize a single
+chain from the crystal surface of five commercially and scientifically important,
+semiaromatic polyesters (PET, PTT, PBT, PEN, and PEF) in water. Our results
+indicate the decrystallization work ranges from approximately 15 kcal/mol (PEN)
+to 8 kcal/mol (PEF) per repeat unit for chains in the middle of a crystal surface.
+The insight gained into the molecular interactions that form the structural basis of
+semicrystalline synthetic polyesters can guide the pursuit of more efficient plastic
+processing, which could include catalyst development, optimizing recycling
+conditions including pretreatment, enzyme and solvent selections, and design of new materials.
+■
+INTRODUCTION
+Poly(ethylene terephthalate) (PET) is the world’s most
+consumed polyester
+1
+and constitutes a potentially promising
+carbon source for recycled and upcycled products.
+2
+In many
+cases, PET deconstruction strategies rely on surface-driven
+phenomena at a liquid−solid interface. For instance, biocatalytic
+depolymerization of PET has been demonstrated since 2005,
+3,4
+and research efforts in this area have substantially increased since
+Yoshida et al. reported the hydrolytic degradation and
+assimilation of PET and its monomers, respectively, by Ideonella
+sakaiensis.
+5
+Innovative nonbiological approaches have also
+demonstrated depolymerization of PET via heterogeneous
+6−9
+and homogeneous
+9−11
+interfacial catalysis.
+PET is generally semicrystalline, with a spatial distribution of
+amorphous, crystalline, and rigid amorphous regions.
+12,13
+While
+the overall crystalline fraction depends upon processing
+conditions, PET crystallinity is typically reported between
+10% and 40%
+14−18
+and can be as high as 50%,
+15,19
+a range that
+enables its wide use in applications requiring structural integrity,
+high heat resistance, and low permeability (e.g., beverage
+bottles) and applications where tunable flexibility is necessary
+(e.g., packaging films) as well as prevalent incorporation into
+textiles.
+14−18,20
+The reported crystallinity of other polyesters
+also varies significantly, which strongly influences performance,
+especially mechanical and barrier properties. For example,
+reported crystallinity for poly(butylene terephthalate) (PBT)
+and poly(ethylene naphthalate) (PEN) varies from 20 to
+50%,
+20−24
+while poly(trimethylene terephthalate) (PTT) has a
+slightly lower range of 15 to 40%.
+21
+PTT and PBT exhibit more
+flexibility and faster crystallization rates than PET, properties
+that are advantageous for elastic fiber production.
+25,26
+PEN is
+also used in industrial fiber production,
+27
+exhibiting favorable
+UV and chemical resistance, melt temperature, barrier proper-
+ties, and tensile modulus.
+28
+Compared to PET, poly(ethylene
+furanoate) (PEF) has an order-of-magnitude lower permeability
+to both oxygen
+29,30
+and carbon dioxide,
+31
+a 10 °C-higher glass
+transition temperature,
+29
+and can be sourced from biomass;
+31,32
+the reported crystallinity range for PEF is comparatively lower
+and narrower at 10 to 20%.
+33,34
+Given their generally high
+crystalline content, strategies for the complete and efficient
+deconstruction of polyesters in solid form thus necessitate
+interfacial catalysis,
+35
+and high crystallinity content can be a
+hindrance, particularly to complete enzymatic deconstruction
+because the ability of hydrolase enzymes to degrade the
+crystalline regions is significantly lower than that of the
+amorphous regions.
+19,36−45
+Molecular dynamics (MD) simulations are well-suited to
+characterize the complex solid-solution interfacial interactions
+for recalcitrant, semicrystalline polymers. This has been
+demonstrated in the context of cellulose deconstruction by
+cellulase enzymes, a scenario with strong analogy to that of PET
+deconstruction. Therein, MD simulations have provided
+Received: September 5, 2024
+Revised: January 27, 2025
+Accepted: January 31, 2025
+Published: February 7, 2025
+Articlepubs.acs.org/Macromolecules
+© 2025 The Authors. Published by
+American Chemical Society
+1795
+https://doi.org/10.1021/acs.macromol.4c02130
+Macromolecules 2025, 58, 1795−1803
+This article is licensed under CC-BY 4.0
+
+detailed, quantitative insights, including rates and mechanisms,
+of the full reaction cycle including chain binding
+46−48
+and
+processivity,
+49
+catalysis,
+50
+and dissociation
+51
+at spatiotemporal
+scales not readily available experimentally. MD simulations have
+also enabled a deeper understanding of the molecular roots of
+biopolymer recalcitrance via detailed understanding of the
+polymer−solution interface, including decrystallization
+work
+52−54
+and the effect of catalytically induced surface
+restructuring.
+55
+In the context of biologically based deconstruc-
+tion approaches, high throughput MD simulations have also
+been leveraged to effectively prescreen for highly active
+enzymes. For example, Westh and co-workers have developed
+workflows that exploit linear free energy relationships between
+properties that are difficult to measure experimentally (e.g.,
+enzymatic activity on semicrystalline polymeric substrate) and
+those that are estimable via atomistic MD simulation (e.g.,
+substrate binding energy).
+56−59
+Here, we have developed crystalline molecular models of five
+polyesters with either current industrial importance or favorable
+properties for potential future markets. MD simulations of these
+models enable estimation of the thermodynamic work required
+to decrystallize a single chain from the polymer crystal surface in
+water, and analysis of these trajectories provides insight into the
+molecular interactions that form the structural basis of
+semicrystalline synthetic polyesters. The computational meth-
+odology presented here can also be considered a framework to
+quantify the effect on decrystallization of various alternative
+processing conditions and can inspire the development of
+targeted deconstruction strategies.
+■
+COMPUTATIONAL METHODS
+The atomic coordinates for the unit cells of PET, PTT, PBT, PEN, and
+PEF (Figure 1) were downloaded from the Cambridge Structural
+Database (CSD)
+60
+or manually extracted from the original publications
+presenting the crystal structures.
+34,61−64
+Further details, including
+original references, CSD database identifiers, and unit cell parameters
+are available in Supporting Information Table S1 and unit cell images
+are available in Supporting Information Figure S1.
+Initial system setup was performed in CHARMM version 44
+65
+and
+subsequent minimization and dynamics were performed with NAMD
+2.13.
+66
+The CHARMM C36 force field
+67,68
+was utilized for the
+polymers with topologies and additional force field parameters
+generated via the CHARMM generalized force field (CGenFF)
+program version 2.5.
+69,70
+Further information is given in the Supporting
+Information Methods. The TIP3P model was utilized for water.
+71,72
+In CHARMM, crystals were built with dimensions of 16 chains by 7
+chains, and each chain had degree of polymerization (DP) equal to 12
+with periodic boundary conditions in all three dimensions. Chain ends
+were covalently bonded across the periodic boundaries. The “vertical”
+dimension of 16 chains for a sufficient solvation region to decrystallize a
+chain into once 12 layers are removed to leave four layers in a
+subsequent step. A “width” of 7 chains allows for decrystallizing chains
+while avoiding edge effects as the crystal edges are beyond the nonbond
+cutoff. A DP of 12 also ensures that the repeat units removed from the
+crystal surface (once it has been created, vida infra) are beyond the
+nonbond cutoff distance from the opposite end of the chain at all times.
+Following system construction, NAMD was used for minimization
+and MD simulations. First, a conjugate gradient minimization was
+performed for 3000 steps on the initial “infinite” crystal. The box
+volume and atomic positions were then equilibrated for 1 ns at constant
+pressure (1 atm) and temperature (300 K). During NPT dynamics,
+each dimension of the simulation box was allowed to fluctuate
+independently. A Langevin thermostat with a collision frequency of 1.0
+ps
+−1
+was used to maintain temperature at the target of each simulation.
+Pressure was maintained at 1 atm using a modified Nose ́−Hoover
+method
+73
+in which Langevin dynamics are used to control fluctuations
+in the barostat
+74,75
+with a damping time of 100 fs and a period of 200 fs.
+A nonbonded cutoff distance of 12 Å was utilized, with a switching
+distance applied between 10 and 12 Å, and a nonbonded pair list
+distance of 16 Å. The long-range electrostatics were described via the
+particle mesh Ewald (PME) method
+76
+with a sixth-order β-spline and 1
+Å grid spacing. The velocity Verlet timestepping integration method
+was used, with the full nonbonded and electrostatics interactions
+evaluated on every time step. For all dynamics simulations, a time step
+of 2 fs was used. The SETTLE algorithm
+77
+was used to keep bond
+Figure 1. Chemical structures of polyesters under investigation shown as molecular images created in PyMol (top) and ChemDraw (bottom).
+Figure 2. Crystal structures for PET, PTT, PBT, PEN, and PEF. Each polymer chain is 11 repeat units long (DP = 11, horizontal dimension in the
+images on the left), and each crystal is seven chains wide (left to right in the images on the right). The crystals shown have undergone MD equilibration
+of 10 ns in water.
+Macromolecules pubs.acs.org/Macromolecules Article
+https://doi.org/10.1021/acs.macromol.4c02130
+Macromolecules 2025, 58, 1795−1803
+1796
+lengths to hydrogen atoms fixed for water molecules and SHAKE
+78
+for
+all others.
+Following NPT equilibration, chains were slightly shortened
+(resulting in chains with 11 repeat units) and capped with aliphatic
+alcohol motifs (Figure 2), and the crystal was trimmed to 7 chains wide
+by 4 chains deep and solvated in sufficient water to ensure a large
+solvated gap between each periodic images of the crystal (Supporting
+Information Figure S2). NAMD was again utilized to perform a
+conjugate gradient minimization for 3000 steps on the solvated system,
+followed by 1 ns density equilibration in the NPT ensemble at 300 K.
+Starting with this NPT simulation, restraints were placed on the bottom
+two layers of the crystal. Specifically, a harmonic restraint is applied to
+the heavy (non-hydrogen) atoms of the bottom two layers with force
+constants of 4.0 kcal/mol/Å
+2
+(bottom layer) and 1.0 kcal/mol/Å
+2
+(second layer from bottom); the top two layers of the crystal were
+completely unrestrained. A 10 ns NVT run followed the NPT
+equilibration.
+■
+RESULTS AND DISCUSSION
+The initial 10 ns NVT simulation for each polyester served both
+as equilibration in preparation for decrystallization simulations
+and also gave the opportunity to characterize various dynamical
+traits of the crystalline phase for these polyesters. Root mean
+square deviation (RMSD, Supporting Information Figure S3)
+analysis demonstrates the rapid equilibration of the solvated
+polymer crystals, and general trends from the atom-by-atom
+root mean squared fluctuations (RMSF, Supporting Information
+Figure S4) include that, as expected, the mobility of edge chains
+is greater than that of middle chains and the mobility of chain
+ends is greater than that of chain interiors. In this regard, PBT
+displays the largest difference between edge and middle chains,
+whereas PTT edge chains display similar RMSF to middle
+chains. All polyesters considered here lack intracrystalline
+“strong” hydrogen bonds, because the polyesters lack hydrogen
+atoms bonded to oxygens, with the exception of at the chain
+ends. However, each polyester participates as a receptor in
+hydrogen bonds with water molecules (Supporting Information
+Figure S5a,b), with approximately one strong hydrogen bond
+per repeat unit for middle chains and 1.5 per repeat unit for edge
+chains on average. PEF is an outlier to this trend, having
+considerably fewer hydrogen bonds with water. A significant
+number of weak hydrogen bonds (defined as O···H−C, oxygen
+to carbon distance ≤3.5 Å and the O−H−C angle ≤60°) are
+present, and more prominent differentiation between the
+different polyesters (Supporting Information Figure S5c−f).
+Solvent accessible surface area (SASA, Supporting Information
+Figure S6) can serve as an indicator of polymer accessibility to
+catalysts, including enzymes. For both middle and edge chains,
+PEN has the highest accessible surface area to water, though its
+naphthalene moiety also produces the largest repeat unit of the
+five polyesters. In contrast, PEF has a smaller aromatic ring, yet
+has the highest number of weak hydrogen bond interactions for
+both middle and edge chains.
+Before proceeding with decrystallization simulations, the
+particular crystalline faces from which to decrystallize a chain
+need to be identified. We aimed to identify the most
+hydrophobic face because this is the most likely face for
+adsorption of hydrolytic enzymes, which have been shown to
+adsorb with high affinity to the PET surface.
+79,80
+The
+hydrophobicity of polyesters also has a strong impact on
+processing, performance, and end-of-life recycling strategies.
+Water contact angle is an efficient method for estimating surface
+hydrophobicity, which we determined with the following
+procedure. The water contact angle for PET was examined via
+MD (Figure 3) on the 100, 010, and 001 crystalline faces, the
+normal vectors of which are related to the thickness, width, and
+length of crystallites, respectively.
+13,81
+Following the method of
+Kanduc,
+82
+a cylindrical water droplet, infinite along the axis of
+the droplet, was prepared. This approach involves three phase
+contact lines whose lengths are independent of droplet size, thus
+reducing their influence on the contact angle estimate. The
+details of the analysis of these simulations are described in
+Supporting Information Figure S7.
+The contact angle results (Figure 3) indicated that the 100
+face of PET has the highest contact angle of those examined and
+is thus the most hydrophobic. For subsequent decrystallization,
+we thus target this face, which is parallel to the aromatic ring of
+the PET repeat unit, and for consistency, we chose for each of
+the other polyesters the face whose plane normal is parallel to
+the aromatic ring normal. For PTT, PBT, PEN, and PEF, these
+faces are the 100, 100, 100, and 010, respectively (Supporting
+Information Figure S1). The contact angle estimated here via
+MD for the 100 face of PET is slightly lower but in reasonable
+agreement with experimental measurements
+83−85
+and computa-
+tional predictions
+86
+for PET water contact angle, which are
+generally in the range of 72 to 83°. In addition, the finding that
+the most hydrophobic face for PET is parallel to the plane of the
+aromatic ring is analogous to the situation for cellulose,
+87
+whose
+hydrophobic 100 face (parallel to the plane of surface glucose
+rings) has been shown to be the preferential binding face for
+carbohydrate binding modules.
+88−90
+The free energy to decrystallize a single chain from the
+selected hydrophobic face was calculated for each polyester via
+umbrella sampling in NAMD.
+91,92
+The order parameter used to
+describe the decrystallization process is the fraction of contacts
+between the extracted chain and the crystal, ranging from 1
+(intact crystal) to 0 (complete decrystallization).
+52
+The number
+of contacts was calculated via the NAMD colvars module as the
+number of heavy atoms in the first four repeat units of the
+decrystallizing chain with all other heavy atoms in the rest of the
+crystal, excluding atoms in the rest of the partially decrystallized
+chain. The cutoff distance for two atoms to be considered in
+contact was 12.0 Å. This value was chosen because it
+corresponds to the nonbond cutoff distance such that the four
+repeat units in the fully decrystallized state have no dispersive
+Figure 3. Water contact angle on crystal faces of PET. (a) Definition of the water contact angle, and MD-equilibrated structures for (b) 100, (c) 010,
+and (d) 001 crystal faces of PET. The starting configuration for each water droplet is an infinite half-cylinder (as shown in (a)) with axis perpendicular
+to the plane of the page. In panels (a−c), the axis of the PET chains is also into the page; the 001 surface (d) exposes the chain ends (hydroxyl groups),
+which are in contact with the water. Overlaid on panels (a−c) are the average and standard deviation for water contact angle for the final 50 ns of a 100
+ns MD simulation (Supporting Information Figure S7).
+Macromolecules pubs.acs.org/Macromolecules Article
+https://doi.org/10.1021/acs.macromol.4c02130
+Macromolecules 2025, 58, 1795−1803
+1797
+interactions with the remaining crystal. The potential of mean
+force (PMF) could be affected by the choice of the contacts
+cutoff if it is less than the nonbonded cutoff distance because the
+decrystallized chain would have dispersive interactions with the
+surface in that case. Further details on this order parameter are
+available Supporting Information Figure S8. This choice of four
+repeat units was inspired by the structure and size of the binding
+channel of the I. sakaiensis PETase enzyme.
+5,93,94
+Induced fit
+docking results have demonstrated that four repeat units of PET
+can fit into this binding channel (Figure 4a).
+94,95
+We also note
+that decrystallizing four repeat units actually pulls more than
+four repeat units out of the surface because these four repeat
+units have to be at least 12 Å away from the surface when the
+contacts order parameter goes to zero (Figure 4b).
+The above procedure was applied to decrystallizing both a
+middle chain and an edge chain; Figure 4b shows examples for
+both decrystallization scenarios of four repeat units decrystall-
+izing from the 100 face of PET. Edge chains are expected to be
+among the easiest to digest while middle chains are likely the
+most difficult, thus most other chain scenarios within the
+polymer crystals will likely fall within these limits. As shown in
+Figure S4, the chain ends are significantly more mobile than the
+chain interiors, and thus more accessible to solvent (and likely to
+enzyme active sites) as their position fluctuates into solution.
+Increased chain flexibility and water accessibility (characteristic
+of chain ends in our simulations) have been previously
+correlated with enhanced PET degradation rates by polyester
+hydrolases.
+96,97
+In addition, mass loss of PET samples when
+incubated with polyester hydrolases is indicative of the release of
+oligomers or monomers via a degradation mechanism initiated
+at chain ends.
+39
+For these reasons, we focused on decrystalliza-
+tion from chain ends, which also enables direct comparison with
+prior biopolymer decrystallization results.
+52,53
+The initial number of contacts in the fully intact crystal for
+each polyester was calculated from the unrestrained 10 ns NVT
+simulation described above. The initial configurations for each
+umbrella sampling window were generated via a subsequent
+steered MD simulation from this initial number of contacts to
+zero contacts. During steered MD trajectory, the pulling force
+constant applied to the collective variable was equal to 0.75 kcal/
+mol/(contacts)
+2
+and the total pulling trajectory length was 30
+ns. Atomic coordinates saved every 0.6 ns were used as the initial
+configurations for the umbrella sampling windows.
+During umbrella sampling simulations, a harmonic restraint
+was applied to heavy atoms on the bottom layer of the polymeric
+crystal to prevent them from drifting (force constant of 1.0 kcal/
+mol/Å
+2
+). We utilized a total of 50 windows, with a biasing
+potential force constant of 0.0001 kcal/mol/(contacts)
+2
+. Each
+umbrella sampling window was simulated for 30 ns total at 300 K
+in the NVT ensemble. Supporting Information Figure S9
+presents a representative example of overlapping umbrella
+sampling histograms for PET. Probability distributions from the
+final 10 ns were utilized for free energy calculations. The PMF is
+obtained from the umbrella sampling simulations via the
+variational free energy perturbation (vFEP) method.
+98
+The
+bootstrapping
+99
+method was used for free energy error
+estimation.
+Umbrella sampling simulations were performed for middle
+and edge chains for each polyester, as illustrated in Figure 4b.
+For both scenarios, each PMF monotonically increased from the
+fully intact crystal (scaled contacts equal to 1) to a maximum
+near zero contacts (i.e., 4 repeat units fully decrystallized) in all
+systems (Figure 5). For middle chains, the trend in
+decrystallization work is as follows: PEN (∼62 kcal/mol) >
+PTT (∼58 kcal/mol) > PBT (∼55 kcal/mol) > PET (∼45 kcal/
+mol) > PEF (∼32 kcal/mol) (Figure 5a); each value is for
+decrystallization of four repeat units.
+For edge chains (Figure 5b), the PMFs monotonically
+increase as with the middle chain, but with significantly lower
+decrystallization work. The observed trend of PEN > PTT >
+Figure 4. (a) I. sakaiensis PETase enzyme with PET tetramer bound, as determined by induced fit docking results.
+94,95
+(b) Schematic of the
+decrystallization of four repeat units from the 100 surface of PET for a middle and edge chain.
+Figure 5. Potential mean force (PMF) as a function of number of atomic contacts for (a) middle and (b) edge chains with the rest of the crystal. PMFs
+were computed with umbrella sampling, and error bars were estimated via the bootstrapping error analysis technique.
+Macromolecules pubs.acs.org/Macromolecules Article
+https://doi.org/10.1021/acs.macromol.4c02130
+Macromolecules 2025, 58, 1795−1803
+1798
+PBT > PET > PEF holds for the edge chain scenario, and the
+decrystallization work for each is roughly half that of the middle
+chain case. For both middle and edge chains, four “shoulders”
+are seen for each system; these represent the stepwise
+detachment of repeat units from the crystal surface. For middle
+chains, PEN has the highest decrystallization work (Figure 5a)
+as well as the highest number of weak intracrystalline hydrogen
+bonds (Supporting Information Figure S5c). However, PEN
+also displays the highest decrystallization work for edge chains
+(Figure 5b), but the least number of weak hydrogen bonds
+(Supporting Information Figure S5d). This is suggestive that
+polymer−polymer hydrogen bonds are not the key driver in the
+recalcitrance of polyesters to decrystallization. In Figure 6, the
+decrystallization work per repeat unit is computed for each
+scenario as the maximum in the PMF divided by the number of
+repeat units that were decrystallized.
+Generally, the net change in free energy for the process of
+decrystallization is due to all thermodynamic changes of all
+species, i.e. all energetic and entropy contributions including
+pulling apart a crystal, creating a void in the solvent, as well as
+new energetic interactions and entropies of water-crystal and
+water-dissolved polymer. The PMF profiles in this study for each
+polyester can be correlated to some extent with distinct chemical
+and physical attributes of the polymers. For example, the
+naphthalene moieties in the PEN backbone could lead to
+stronger π−π stacking interactions compared to the single
+aromatic rings in PET, PTT, and PBT, and may contribute to
+PEN’s exceptionally high decrystallization work. Naphthalene
+groups have larger conjugated systems compared to simple
+benzene rings, and this extended aromatic system can result in
+stronger interactions with the crystal surface during decrystal-
+lization. Also, PBT contains a longer aliphatic chain (butylene)
+in its backbone compared to PET (ethylene), which may
+contribute to larger hydrophobic regions that are harder to
+dissolve in water and thus translate into higher decrystallization
+free energies. By the same logic, PTT may be expected to fall in
+between PET and PBT given its three-carbon aliphatic region,
+yet it shows a decrystallization work that is higher than all
+studied polyesters except PEN. We surmise that PTT’s high
+decrystallization work may be related to the physical arrange-
+ment of chains within its crystal structure, which displays a
+unique zigzag pattern (Figure 2) quite different from PET and
+PBT, both of which display roughly planar chain configurations.
+Aromatic stacking interactions is another important factor in
+the decrystallization work. PEF, with the lowest decrystallization
+work, contains furan rings in its backbone. A density functional
+theory (DFT) study calculated energy landscapes for various
+aromatic heterocyclic molecules with benzene,
+100
+and although
+furan−furan stacking interactions were not calculated, furan’s
+stacking interaction with benzene was shown to be the weakest
+interaction of all molecules considered. Benzene has a
+symmetric, nonpolar structure, whereas furan, with its
+heteroatom, has slightly weaker stacking interactions due to
+the influence of its polar nature and the electronic effects of ring
+oxygen.
+100
+PEF also has a unique crystal structure in which
+chains display furan rings of alternating orientation as well as
+shifting longitudinally from neighbors in adjacent layers.
+34
+We
+note also that the classical force field utilized here accounts for
+π−π stacking only implicitly through nonspecific van der Waals
+forces and electrostatic interactions between aromatic systems.
+This approximation may not fully capture the directionality and
+strength variations seen in actual π−π interactions, but the
+present results, in combination with experimental observations
+and DFT modeling, can give additional insights into how these
+interactions may affect polymer decrystallization.
+The results for decrystallization work shown in Figures 5 and
+6 demonstrate the stability of synthetic polyesters. This can be
+illustrated by comparison to cellulose, the world’s most
+abundant biopolymer and itself a recalcitrant semicrystalline
+polymer.
+101
+A previous study estimated the decrystallization free
+energies for various cellulose polymorphs
+52
+and calculated the
+decrystallization work for a middle chain of cellulose Iβ as 6.7
+kcal/mol per cellobiose (the repeat unit of cellulose, a β,1-4
+linked glucose dimer). The current study indicates significantly
+higher decrystallization work for synthetic polyesters. For
+example, PET exhibits a decrystallization energy of approx-
+imately 11.5 kcal/mol per repeat unit for a middle chain,
+indicating a decrystallization work per repeat unit that is 1.72×
+higher for PET middle chains as compared to cellulose. This
+contrast is even more drastic when one considers that the repeat
+unit of cellulose contains two “ring units” (i.e., glucose) whereas
+that of PET has only one, indicating a “per ring” decrystallization
+work that is 3.43× higher for PET than cellulose. Interestingly,
+the energy needed to decrystallize edge chains for the two
+polymers is more similar (cellulose Iβ 5.4 kcal/mol per
+cellobiose; PET 5 kcal/mol per repeat unit). For the polyesters
+presented here, the free energy required to decrystallize an edge
+chain is roughly half that for the middle chain case. Unrestrained
+MD trajectories indicate that edge chains generally exhibit
+higher RMSF, less frequent polymer−polymer hydrogen
+bonding, and higher SASA than middle chains (Supporting
+Information Figures S4, S5c-d, and S6), any or all of which may
+contribute to their more facile decrystallization. Since the edge
+chains of the polymeric crystal surface require less free energy to
+detach than middle chains, they are likely to be detached
+preferentially, a conclusion also reached for recalcitrant
+biopolymers.
+52,53
+Additionally, when a middle chain is removed,
+two new edge chains are created, thereby reinforcing the
+predominance of edge chain removal in the process. A detailed
+understanding of the surface morphology of polyester crystals,
+when coupled with the current quantitative results for
+decrystallization work, would enable the construction of kinetic
+models describing the full catalytic cycle of polyester hydrolase
+enzymes.
+Figure 6. Decrystallization free energy per repeat unit for middle and
+edge chains. Data for this plot are available in Supporting Information
+Table S2.
+Macromolecules pubs.acs.org/Macromolecules Article
+https://doi.org/10.1021/acs.macromol.4c02130
+Macromolecules 2025, 58, 1795−1803
+1799
+Our findings on the work required to decrystallize a single
+polyester chain may help rationalize certain trends in
+experimentally determined polyester hydrolase activity. PETase
+enzymes generally have much lower activity on crystalline
+substrates than amorphous,
+36−43,102−104
+and the exceptionally
+high decrystallization work required for polyesters reported here
+may provide a rationale for this: perhaps PETases are not able to
+depolymerize the crystalline regions efficiently because they are
+unable to decrystallize them. The relative inability of PETase
+enzymes to decrystallize the crystalline regions has important
+implications for process choices, notably substrate pretreat-
+ment
+105,106
+and economics of recycling strategies.
+107,108
+Under-
+standing the relative free energies for the full catalytic cycles of
+PETase enzymes, including decrystallization, is an important
+consideration in further biocatalyst development.
+■
+CONCLUSIONS
+In conclusion, this study provides a comparative analysis of the
+work to decrystallize synthetic polyesters into water, thereby
+enhancing our understanding of their behavior under conditions
+that may mimic the early stages of enzymatic and chemical
+recycling processes under mild conditions. The present study
+can be conceived of as a framework wherein the effect of
+alternative processing conditions can be quantified, including
+the effect of decrystallizing the polymer into an organic solvent,
+solutions with varying salt content, or even into the active site of
+an enzyme. Such studies are promising topics for future studies
+and could spur development of targeted deconstruction
+strategies, potentially eliminating the need for melt-amorphiza-
+tion before enzymatic depolymerization of PET and other
+energy-intensive pretreatments for various polymers. Finally,
+this framework can also be applied to other plastics (e.g., nylons)
+or may even drive the design of novel materials tailored for more
+efficient decrystallization and recycling.
+■
+ASSOCIATED CONTENT
+*
+sı
+Supporting Information
+The Supporting Information is available free of charge at
+https://pubs.acs.org/doi/10.1021/acs.macromol.4c02130.
+Supplemental methods, figures, and tables including
+additional background on analysis methods and charac-
+terization (PDF)
+pet-prm-top.txt (TXT)
+ptt-prm-top.txt (TXT)
+pbt-prm-top.txt (TXT)
+pen-prm-top.txt (TXT)
+pef-prm-top.txt (TXT)
+■
+AUTHOR INFORMATION
+Corresponding Author
+Brandon C. Knott − Renewable Resources and Enabling
+Sciences Center, National Renewable Energy Laboratory,
+Golden, Colorado 80401, United States;
+ orcid.org/0000-
+0003-3414-3897; Email: brandon.knott@nrel.gov
+Authors
+Daria Lazarenko − Renewable Resources and Enabling Sciences
+Center, National Renewable Energy Laboratory, Golden,
+Colorado 80401, United States
+Graham P. Schmidt − Renewable Resources and Enabling
+Sciences Center, National Renewable Energy Laboratory,
+Golden, Colorado 80401, United States
+Michael F. Crowley − Renewable Resources and Enabling
+Sciences Center, National Renewable Energy Laboratory,
+Golden, Colorado 80401, United States;
+ orcid.org/0000-
+0001-5163-9398
+Gregg T. Beckham − Renewable Resources and Enabling
+Sciences Center, National Renewable Energy Laboratory,
+Golden, Colorado 80401, United States;
+ orcid.org/0000-
+0002-3480-212X
+Complete contact information is available at:
+https://pubs.acs.org/10.1021/acs.macromol.4c02130
+Notes
+The authors declare no competing financial interest.
+■
+ACKNOWLEDGMENTS
+This work was authored by the National Renewable Energy
+Laboratory, operated by Alliance for Sustainable Energy, LLC,
+for the U.S. Department of Energy (DOE) under Contract no.
+DE-AC36-08GO28308. Funding provided by U.S. Department
+of Energy Office of Energy Efficiency and Renewable Energy
+Bioenergy Technologies Office. The views expressed in the
+article do not necessarily represent the views of the DOE or the
+U.S. Government. The U.S. Government retains and the
+publisher, by accepting the article for publication, acknowledges
+that the U.S. Government retains a nonexclusive, paid-up,
+irrevocable, worldwide license to publish or reproduce the
+published form of this work, or allow others to do so, for U.S.
+Government purposes.
+■
+REFERENCES
+(1) Nicholson, S. R.; Rorrer, N. A.; Carpenter, A. C.; Beckham, G. T.
+Manufacturing Energy and Greenhouse Gas Emissions Associated with
+Plastics Consumption. Joule 2021, 5 (3), 673−686.
+(2) Rorrer, N. A.; Nicholson, S.; Carpenter, A.; Biddy, M. J.; Grundl,
+N. J.; Beckham, G. T. Combining Reclaimed PET with Bio-based
+Monomers Enables Plastics Upcycling. Joule 2019, 3 (4), 1006−1027.
+(3) Mu ̈ ller, R. J.; Schrader, H.; Profe, J.; Dresler, K.; Deckwer, W. D.
+Enzymatic Degradation of Poly (ethylene terephthalate): Rapid
+Hydrolyse Using a Hydrolase from T. fusca. Macromol. Rapid Commun.
+2005, 26 (17), 1400−1405.
+(4) Silva, C. M.; Carneiro, F.; O’Neill, A.; Fonseca, L. P.; Cabral, J. S.
+M.; Guebitz, G.; Cavaco-Paulo, A. Cutinase-A New Tool for
+Biomodification of Synthetic Fibers. J. Polym. Sci., Part A: Polym.
+Chem. 2005, 43 (11), 2448−2450.
+(5) Yoshida, S.; Hiraga, K.; Takehana, T.; Taniguchi, I.; Yamaji, H.;
+Maeda, Y.; Toyohara, K.; Miyamoto, K.; Kimura, Y.; Oda, K. A
+Bacterium that Degrades and Assimilates Poly(ethylene terephthalate).
+Science 2016, 351 (6278), 1196−1199.
+(6) Bai, X.; Aireddy, D. R.; Roy, A.; Ding, K. Solvent-Free
+Depolymerization of Plastic Waste Enabled by Plastic-Catalyst
+Interfacial Engineering. Angew. Chem., Int. Ed. 2023, 62 (46),
+No. e202309949.
+(7) Viana, M. E.; Riul, A.; Carvalho, G. M.; Rubira, A. F.; Muniz, E. C.
+Chemical Recycling of PET by Catalyzed Glycolysis: Kinetics of the
+Heterogeneous Reaction. Chem. Eng. J. 2011, 173 (1), 210−219.
+(8) Selvam, E.; Luo, Y.; Ierapetritou, M.; Lobo, R. F.; Vlachos, D. G.
+Microwave-assisted Depolymerization of PET over Heterogeneous
+Catalysts. Catal. Today 2023, 418, 114124.
+(9) Chu, M.; Liu, Y.; Lou, X.; Zhang, Q.; Chen, J. Rational Design of
+Chemical Catalysis for Plastic Recycling. ACS Catal. 2022, 12 (8),
+4659−4679.
+(10) Chen, Q.; Wu, S.; Zhang, P.; Song, X.-M.; Song, Z. Hot Pickering
+Emulsion Interfacial Catalysis Accelerates Polyethylene Terephthalate
+(PET) Glycolysis. Green Chem. 2023, 25 (22), 9146−9155.
+Macromolecules pubs.acs.org/Macromolecules Article
+https://doi.org/10.1021/acs.macromol.4c02130
+Macromolecules 2025, 58, 1795−1803
+1800
+(11) Chen, X.; Cheng, L.; Gu, J.; Yuan, H.; Chen, Y. Chemical
+Recycling of Plastic Wastes via Homogeneous Catalysis: A Review.
+Chem. Eng. J. 2024, 479, 147853.
+(12) Wunderlich, B. Reversible Crystallization and the Rigid−
+amorphous Phase in Semicrystalline Macromolecules. Prog. Polym.
+Sci. 2003, 28 (3), 383−450.
+(13) Hamonic, F.; Miri, V.; Saiter, A.; Dargent, E. Rigid Amorphous
+Fraction versus Oriented Amorphous Fraction in Uniaxially Drawn
+Polyesters. Eur. Polym. J. 2014, 58, 233−244.
+(14) Groeninckx, G.; Berghmans, H.; Overbergh, N.; Smets, G.
+Crystallization of Poly(ethylene terephthalate) Induced by Inorganic
+Compounds. I. Crystallization Behavior from the Glassy State in a Low-
+temperature Region. J. Polym. Sci., Polym. Phys. Ed. 1974, 12 (2), 303−
+316.
+(15) Fu, Y.; Annis, B. K.; Boller, A.; Jin, Y.; Wunderlich, B. K. Analysis
+of Structure and Properties of Poly(ethylene terephthalate) Fibers. J.
+Polym. Sci., Part B:Polym. Phys. 1994, 32, 2289−2306.
+(16) Tomisawa, R.; Ikaga, T.; Kim, K. H.; Ohkoshi, Y.; Okada, K.;
+Masunaga, H.; Kanaya, T.; Masuda, M.; Maeda, Y. Effect of Melt
+Spinning Conditions on the Fiber Structure Development of
+Polyethylene Terephthalate. Polymer 2017, 116, 367−377.
+(17) Ronkay, F.; Molnár, B.; Nagy, D.; Szarka, G.; Iván, B.; Kristály, F.;
+Mertinger, V.; Bocz, K. Melting Temperature versus Crystallinity: New
+Way for Identification and Analysis of Multiple Endotherms of
+Poly(ethylene terephthalate). J. Polym. Res. 2020, 27 (12), 372.
+(18) Kaabel, S.; Therien, J. P. D.; Desche ̂nes, C. E.; Duncan, D.;
+Fris ̌c ̌ic ́, T.; Auclair, K. Enzymatic Depolymerization of Highly
+Crystalline Polyethylene Terephthalate enabled in Moist-solid
+Reaction Mixtures. Proc. Natl. Acad. Sci. U.S.A. 2021, 118 (29),
+No. e2026452118.
+(19) Chen, Z.; Duan, R.; Xiao, Y.; Wei, Y.; Zhang, H.; Sun, X.; Wang,
+S.; Cheng, Y.; Wang, X.; Tong, S.; et al. Biodegradation of Highly
+Crystallized Poly(ethylene terephthalate) Through Cell Surface
+Codisplay of Bacterial PETase and Hydrophobin. Nat. Commun.
+2022, 13 (1), 7138.
+(20) Bornschlegl, E.; Bonart, R. Small Angle X-ray Scattering Studies
+of Poly(ethylene terephthalate) and Poly(butylene terephthalate).
+Colloid Polym. Sci. 1980, 258 (3), 319−331.
+(21) Zhang, J. Study of Poly(trimethylene terephthalate) as an
+Engineering Thermoplastics Material. J. Appl. Polym. Sci. 2004, 91 (3),
+1657−1666.
+(22) van den Heuvel, C. J. M.; Klop, E. A. Relations between Spinning,
+Molecular Structure and End-use Properties of Polyethylene
+Naphthalate Tyre Yarns. Polymer 2000, 41 (11), 4249−4266.
+(23) Jager, J.; Juijn, J. A.; van den Heuvel, C. J. M.; Huijts, R. A.
+Poly(ethylene-2,6-naphthalenedicarboxylate) Fiber for Industrial
+Applications. J. Appl. Polym. Sci. 1995, 57 (12), 1429−1440.
+(24) Abdi, C.; Khemici, M. W.; Doulache, N. Crystallinity Effect on
+the Structural Relaxation of Polyethylene naphtalate (PEN) by TSDC
+and DSC Experiments. IEEE Trans. Dielectr. Electr. Insul. 2015, 22 (3),
+1406−1414.
+(25) Kim, J. H.; Yang, S. S.; Hudson, S. M. Comparison of the
+Structure-property Relationships for PTT and PET Fibers Spun at
+Various Take-up Speeds. Fibers Polym. 2011, 12, 771−777.
+(26) Vasanthan, N.; Manne, N. J.; Krishnama, A. Effect of Molecular
+Orientation on the Cold Crystallization of Amorphous−crystallizable
+Polymers: the Case of Poly (trimethylene terephthalate). Ind. Eng.
+Chem. Res. 2013, 52 (50), 17920−17926.
+(27) Lechat, C.; Bunsell, A. R.; Davies, P.; Piant, A. Mechanical
+Behaviour of Polyethylene Terephthalate & Polyethylene Naphthalate
+Fibres under Cyclic Loading. J. Mater. Sci. 2006, 41 (6), 1745−1756.
+(28) Sakellarides, S. L. Poly(ethylene naphthalate) (PEN). In
+Encyclopedia of Polymer Science and Technology; John Wiley & Sons,
+Inc., 2004.
+(29) Burgess, S. K.; Leisen, J. E.; Kraftschik, B. E.; Mubarak, C. R.;
+Kriegel, R. M.; Koros, W. J. Chain Mobility, Thermal, and Mechanical
+Properties of Poly(ethylene furanoate) Compared to Poly(ethylene
+terephthalate). Macromolecules 2014, 47 (4), 1383−1391.
+(30) Burgess, S. K.; Karvan, O.; Johnson, J. R.; Kriegel, R. M.; Koros,
+W. J. Oxygen Sorption and Transport in Amorphous Poly(ethylene
+furanoate). Polymer 2014, 55 (18), 4748−4756.
+(31) Burgess, S. K.; Kriegel, R. M.; Koros, W. J. Carbon Dioxide
+Sorption and Transport in Amorphous Poly(ethylene furanoate).
+Macromolecules 2015, 48 (7), 2184−2193.
+(32) Eerhart, A.; Faaij, A.; Patel, M. Replacing Fossil Based PET with
+Biobased PEF; Process Analysis, Energy and GHG Balance. Energy
+Environ. Sci. 2012, 5 (4), 6407−6422.
+(33) Loos, K.; Zhang, R.; Pereira, I.; Agostinho, B.; Hu, H.; Maniar,
+D.; Sbirrazzuoli, N.; Silvestre, A. J. D.; Guigo, N.; Sousa, A. F. A
+Perspective on PEF Synthesis, Properties, and End-Life. Front. Chem.
+2020, 8, 585.
+(34) Mao, Y.; Kriegel, R. M.; Bucknall, D. G. The Crystal Structure of
+Poly(ethylene furanoate). Polymer 2016, 102, 308−314.
+(35) Ellis, L. D.; Rorrer, N. A.; Sullivan, K. P.; Otto, M.; McGeehan, J.
+E.; Román-Leshkov, Y.; Wierckx, N.; Beckham, G. T. Chemical and
+Biological Catalysis for Plastics Recycling and Upcycling. Nat. Catal.
+2021, 4 (7), 539−556.
+(36) Erickson, E.; Gado, J. E.; Avilán, L.; Bratti, F.; Brizendine, R. K.;
+Cox, P. A.; Gill, R.; Graham, R.; Kim, D.-J.; König, G.; et al. Sourcing
+Thermotolerant Poly(ethylene terephthalate) Hydrolase Scaffolds
+from Natural Diversity. Nat. Commun. 2022, 13 (1), 7850.
+(37) Ronkvist, Å. M.; Xie, W.; Lu, W.; Gross, R. A. Cutinase-Catalyzed
+Hydrolysis of Poly(ethylene terephthalate). Macromolecules 2009, 42
+(14), 5128−5138.
+(38) Furukawa, M.; Kawakami, N.; Tomizawa, A.; Miyamoto, K.
+Efficient Degradation of Poly(ethylene terephthalate) with Thermobi-
+fida fusca Cutinase Exhibiting Improved Catalytic Activity Generated
+using Mutagenesis and Additive-based Approaches. Sci. Rep. 2019, 9
+(1), 16038.
+(39) Wei, R.; Breite, D.; Song, C.; Gräsing, D.; Ploss, T.; Hille, P.;
+Schwerdtfeger, R.; Matysik, J.; Schulze, A.; Zimmermann, W.
+Biocatalytic Degradation Efficiency of Postconsumer Polyethylene
+Terephthalate Packaging Determined by Their Polymer Micro-
+structures. Adv. Sci. 2019, 6 (14), 1900491.
+(40) Zimmermann, W.; Billig, S. Enzymes for the Biofunctionalization
+of Poly(Ethylene Terephthalate). In Biofunctionalization of Polymers
+and their Applications; Nyanhongo, G. S., Steiner, W., Gu ̈ bitz, G., Eds.;
+Springer Berlin Heidelberg, 2011; pp 97−120.
+(41) Vertommen, M. A. M. E.; Nierstrasz, V. A.; Veer, M. v. d.;
+Warmoeskerken, M. M. C. G. Enzymatic Surface Modification of
+Poly(ethylene terephthalate). J. Biotechnol. 2005, 120 (4), 376−386.
+(42) Wei, R.; Oeser, T.; Barth, M.; Weigl, N.; Lu ̈ bs, A.; Schulz-
+Siegmund, M.; Hacker, M. C.; Zimmermann, W. Turbidimetric
+Analysis of the Enzymatic Hydrolysis of Polyethylene Terephthalate
+Nanoparticles. J. Mol. Catal. B: Enzym. 2014, 103, 72−78.
+(43) Brizendine, R. K.; Erickson, E.; Haugen, S. J.; Ramirez, K. J.;
+Miscall, J.; Salvachu ́a, D.; Pickford, A. R.; Sobkowicz, M. J.; McGeehan,
+J. E.; Beckham, G. T. Particle Size Reduction of Poly(ethylene
+terephthalate) Increases the Rate of Enzymatic Depolymerization But
+Does Not Increase the Overall Conversion Extent. ACS Sustain. Chem.
+Eng. 2022, 10 (28), 9131−9140.
+(44) Tarazona, N. A.; Wei, R.; Brott, S.; Pfaff, L.; Bornscheuer, U. T.;
+Lendlein, A.; Machatschek, R. Rapid depolymerization of poly-
+(ethylene terephthalate) thin films by a dual-enzyme system and its
+impact on material properties. Chem Catal. 2022, 2 (12), 3573−3589.
+(45) Akram, E.; Cao, Y.; Xing, H.; Ding, Y.; Luo, Y.; Wei, R.; Zhang, Y.
+On the temperature dependence of enzymatic degradation of
+poly(ethylene terephthalate). Chin. J. Catal. 2024, 60, 284−293.
+(46) GhattyVenkataKrishna, P. K.; Alekozai, E. M.; Beckham, G. T.;
+Schulz, R.; Crowley, M. F.; Uberbacher, E. C.; Cheng, X. Initial
+Recognition of a Cellodextrin Chain in the Cellulose-Binding Tunnel
+May Affect Cellobiohydrolase Directional Specificity. Biophys. J. 2013,
+104 (4), 904−912.
+(47) Nakamura, A.; Tsukada, T.; Auer, S.; Furuta, T.; Wada, M.;
+Koivula, A.; Igarashi, K.; Samejima, M. The Tryptophan Residue at the
+Active Site Tunnel Entrance of Trichoderma reesei Cellobiohydrolase
+Macromolecules pubs.acs.org/Macromolecules Article
+https://doi.org/10.1021/acs.macromol.4c02130
+Macromolecules 2025, 58, 1795−1803
+1801
+Cel7A Is Important for Initiation of Degradation of Crystalline
+Cellulose. J. Biol. Chem. 2013, 288 (19), 13503−13510.
+(48) Payne, C. M.; Bomble, Y. J.; Taylor, C. B.; McCabe, C.; Himmel,
+M. E.; Crowley, M. F.; Beckham, G. T. Multiple Functions of Aromatic-
+Carbohydrate Interactions in a Processive Cellulase Examined with
+Molecular Simulation. J. Biol. Chem. 2011, 286 (47), 41028−41035.
+(49) Knott, B. C.; Crowley, M. F.; Himmel, M. E.; Sta ̊hlberg, J.;
+Beckham, G. T. Carbohydrate−Protein Interactions That Drive
+Processive Polysaccharide Translocation in Enzymes Revealed from a
+Computational Study of Cellobiohydrolase Processivity. J. Am. Chem.
+Soc. 2014, 136 (24), 8810−8819.
+(50) Knott, B. C.; Haddad Momeni, M.; Crowley, M. F.; Mackenzie,
+L. F.; Götz, A. W.; Sandgren, M.; Withers, S. G.; Sta ̊hlberg, J.; Beckham,
+G. T. The Mechanism of Cellulose Hydrolysis by a Two-Step,
+Retaining Cellobiohydrolase Elucidated by Structural and Transition
+Path Sampling Studies. J. Am. Chem. Soc. 2014, 136 (1), 321−329.
+(51) Vermaas, J. V.; Kont, R.; Beckham, G. T.; Crowley, M. F.;
+Gudmundsson, M.; Sandgren, M.; Sta ̊hlberg, J.; Väljamäe, P.; Knott, B.
+C. The Dissociation Mechanism of Processive Cellulases. Proc. Natl.
+Acad. Sci. U.S.A. 2019, 116 (46), 23061−23067.
+(52) Beckham, G. T.; Matthews, J. F.; Peters, B.; Bomble, Y. J.;
+Himmel, M. E.; Crowley, M. F. Molecular-Level Origins of Biomass
+Recalcitrance: Decrystallization Free Energies for Four Common
+Cellulose Polymorphs. J. Phys. Chem. B 2011, 115 (14), 4118−4127.
+(53) Beckham, G. T.; Crowley, M. F. Examination of the α-Chitin
+Structure and Decrystallization Thermodynamics at the Nanoscale. J.
+Phys. Chem. B 2011, 115 (15), 4516−4522.
+(54) Payne, C. M.; Himmel, M. E.; Crowley, M. F.; Beckham, G. T.
+Decrystallization of Oligosaccharides from the Cellulose Iβ Surface
+with Molecular Simulation. J. Phys. Chem. Lett. 2011, 2 (13), 1546−
+1550.
+(55) Uchiyama, T.; Uchihashi, T.; Ishida, T.; Nakamura, A.; Vermaas,
+J. V.; Crowley, M. F.; Samejima, M.; Beckham, G. T.; Igarashi, K. Lytic
+Polysaccharide Monooxygenase Increases Cellobiohydrolases Activity
+by Promoting Decrystallization of Cellulose Surface. Sci. Adv. 2022, 8
+(51), No. eade5155.
+(56) Kari, J.; Molina, G. A.; Schaller, K. S.; Schiano-di-Cola, C.;
+Christensen, S. J.; Badino, S. F.; Sørensen, T. H.; Røjel, N. S.; Keller, M.
+B.; Sørensen, N. R.; et al. Physical Constraints and Functional Plasticity
+of Cellulases. Nat. Commun. 2021, 12 (1), 3847.
+(57) Schaller, K. S.; Kari, J.; Molina, G. A.; Tidemand, K. D.; Borch,
+K.; Peters, G. H. J.; Westh, P. Computing Cellulase Kinetics with a
+Two-Domain Linear Interaction Energy Approach. ACS Omega 2021, 6
+(2), 1547−1555.
+(58) Schaller, K. S.; Molina, G. A.; Kari, J.; Schiano-di-Cola, C.;
+Sørensen, T. H.; Borch, K.; Peters, G. H. J.; Westh, P. Virtual
+Bioprospecting of Interfacial Enzymes: Relating Sequence and Kinetics.
+ACS Catal. 2022, 12 (12), 7427−7435.
+(59) Kari, J.; Olsen, J. P.; Jensen, K.; Badino, S. F.; Krogh, K. B. R. M.;
+Borch, K.; Westh, P. Sabatier Principle for Interfacial (Heterogeneous)
+Enzyme Catalysis. ACS Catal. 2018, 8 (12), 11966−11972.
+(60) Groom, C. R.; Bruno, I. J.; Lightfoot, M. P.; Ward, S. C. The
+Cambridge Structural Database. Acta Crystallogr., Sect. B 2016, 72 (2),
+171−179.
+(61) Daubeny, R. d. P.; Bunn, C. W.; Brown, C. J.; Bragg, W. L. The
+Crystal Structure of Polyethylene Terephthalate. Proc. R. Soc. A 1954,
+226 (1167), 531−542.
+(62) Desborough, I. J.; Hall, I. H.; Neisser, J. Z. The Structure of
+Poly(trimethylene terephthalate). Polymer 1979, 20 (5), 545−552.
+(63) Yokouchi, M.; Sakakibara, Y.; Chatani, Y.; Tadokoro, H.; Tanaka,
+T.; Yoda, K. Structures of Two Crystalline Forms of Poly(butylene
+terephthalate) and Reversible Transition between Them by Mechanical
+Deformation. Macromolecules 1976, 9 (2), 266−273.
+(64) Mencik, Z. The Crystal Structure of Poly(tetramethylene
+terephthalate). J. Polym. Sci., Polym. Phys. Ed. 1975, 13 (11), 2173−
+2181.
+(65) Brooks, B. R.; Brooks, C. L.; Mackerell, A. D.; Nilsson, L.;
+Petrella, R. J.; Roux, B.; Won, Y.; Archontis, G.; Bartels, C.; Boresch, S.;
+et al. CHARMM: The Biomolecular Simulation Program. J. Comput.
+Chem. 2009, 30 (10), 1545−1614.
+(66) Phillips, J. C.; Hardy, D. J.; Maia, J. D. C.; Stone, J. E.; Ribeiro, J.
+V.; Bernardi, R. C.; Buch, R.; Fiorin, G.; Hénin, J.; Jiang, W.; et al.
+Scalable Molecular Dynamics on CPU and GPU Architectures with
+NAMD. J. Chem. Phys. 2020, 153 (4), 044130.
+(67) Guvench, O.; Greene, S. N.; Kamath, G.; Brady, J. W.; Venable,
+R. M.; Pastor, R. W.; Mackerell, A. D. Additive Empirical Force Field for
+Hexopyranose Monosaccharides. J. Comput. Chem. 2008, 29 (15),
+2543−2564.
+(68) Guvench, O.; Hatcher, E.; Venable, R. M.; Pastor, R. W.;
+MacKerell, A. D. CHARMM Additive All-atom Force Field for
+Glycosidic Linkages Between Hexopyranoses. J. Chem. Theory Comput.
+2009, 5 (9), 2353−2370.
+(69) Vanommeslaeghe, K.; Hatcher, E.; Acharya, C.; Kundu, S.;
+Zhong, S.; Shim, J.; Darian, E.; Guvench, O.; Lopes, P.; Vorobyov, I.;
+et al. CHARMM General Force Field: A Force Field for Drug-like
+Molecules Compatible with the CHARMM All-atom Additive
+Biological Force Fields. J. Comput. Chem. 2010, 31 (4), 671−690.
+(70) Yu, W.; He, X.; Vanommeslaeghe, K.; MacKerell, A. D. Extension
+of the CHARMM General Force Field to Sulfonyl-containing
+Compounds and Its Utility in Biomolecular Simulations. J. Comput.
+Chem. 2012, 33 (31), 2451−2468.
+(71) Jorgensen, W. L.; Chandrasekhar, J.; Madura, J. D.; Impey, R. W.;
+Klein, M. L. Comparison of Simple Potential Functions for Simulating
+Liquid Water. J. Chem. Phys. 1983, 79 (2), 926−935.
+(72) Durell, S. R.; Brooks, B. R.; Ben-Naim, A. Solvent-Induced
+Forces between Two Hydrophilic Groups. J. Phys. Chem. 1994, 98 (8),
+2198−2202.
+(73) Frenkel, D.; Smit, B. Understanding Molecular Simulation: From
+Algorithms to Applications; Elsevier, 2023.
+(74) Martyna, G. J.; Tobias, D. J.; Klein, M. L. Constant Pressure
+Molecular Dynamics Algorithms. J. Chem. Phys. 1994, 101 (5), 4177−
+4189.
+(75) Feller, S. E.; Zhang, Y.; Pastor, R. W.; Brooks, B. R. Constant
+Pressure Molecular Dynamics Simulation: The Langevin Piston
+Method. J. Chem. Phys. 1995, 103 (11), 4613−4621.
+(76) Essmann, U.; Perera, L.; Berkowitz, M. L.; Darden, T.; Lee, H.;
+Pedersen, L. G. A Smooth Particle Mesh Ewald Method. J. Chem. Phys.
+1995, 103 (19), 8577−8593.
+(77) Miyamoto, S.; Kollman, P. A. Settle: An Analytical Version of the
+SHAKE and RATTLE Algorithm for Rigid Water Models. J. Comput.
+Chem. 1992, 13 (8), 952−962.
+(78) Kräutler, V.; van Gunsteren, W. F.; Hu ̈ nenberger, P. H. A Fast
+SHAKE Algorithm to Solve Distance Constraint Equations for Small
+Molecules in Molecular Dynamics Simulations. J. Comput. Chem. 2001,
+22 (5), 501−508.
+(79) Badino, S. F.; Ba ̊a ̊th, J. A.; Borch, K.; Jensen, K.; Westh, P.
+Adsorption of Enzymes with Hydrolytic Activity on Polyethylene
+Terephthalate. Enzyme Microb. Technol. 2021, 152, 109937.
+(80) Ba ̊a ̊th, J. A.; Borch, K.; Jensen, K.; Brask, J.; Westh, P.
+Comparative Biochemistry of Four Polyester (PET) Hydrolases.
+ChemBioChem 2021, 22 (9), 1627−1637.
+(81) Marco, Y.; Chevalier, L.; Chaouche, M. WAXD Study of Induced
+Crystallization and Orientation in Poly(ethylene terephthalate) during
+Biaxial Elongation. Polymer 2002, 43 (24), 6569−6574.
+(82) Kanduc ̌, M. Going Beyond the Standard Line Tension: Size-
+dependent Contact Angles of Water Nanodroplets. J. Chem. Phys. 2017,
+147 (17), 174701.
+(83) Donelli, I.; Taddei, P.; Smet, P. F.; Poelman, D.; Nierstrasz, V. A.;
+Freddi, G. Enzymatic Surface Modification and Functionalization of
+PET: A Water Contact Angle, FTIR, and Fluorescence Spectroscopy
+Study. Biotechnol. Bioeng. 2009, 103 (5), 845−856.
+(84) Junkar, I.; Vesel, A.; Cvelbar, U.; Mozetic ̌, M.; Strnad, S.
+Influence of Oxygen and Nitrogen Plasma Treatment on Polyethylene
+Terephthalate (PET) Polymers. Vacuum 2009, 84 (1), 83−85.
+(85) Gotoh, K.; Yasukawa, A.; Taniguchi, K. Water Contact Angles on
+Poly(ethylene terephthalate) Film Exposed to Atmospheric Pressure
+Plasma. J. Adhes. Sci. Technol. 2011, 25 (1−3), 307−322.
+Macromolecules pubs.acs.org/Macromolecules Article
+https://doi.org/10.1021/acs.macromol.4c02130
+Macromolecules 2025, 58, 1795−1803
+1802
+(86) Fayon, P.; Devémy, J.; Emeriau-Viard, C.; Ballerat-Busserolles,
+K.; Goujon, F.; Dequidt, A.; Marty, A.; Hauret, P.; Malfreyt, P.
+Energetic and Structural Characterizations of the PET−Water Interface
+as a Key Step in Understanding Its Depolymerization. J. Phys. Chem. B
+2023, 127 (15), 3543−3555.
+(87) Trentin, L. N.; Pereira, C. S.; Silveira, R. L.; Hill, S.; Sorieul, M.;
+Skaf, M. S. Nanoscale Wetting of Crystalline Cellulose. Biomacromo-
+lecules 2021, 22 (10), 4251−4261.
+(88) Lehtiö, J.; Sugiyama, J.; Gustavsson, M.; Fransson, L.; Linder, M.;
+Teeri, T. T. The Binding Specificity and Affinity Determinants of
+Family 1 and Family 3 Cellulose Binding Modules. Proc. Natl. Acad. Sci.
+U.S.A. 2003, 100 (2), 484−489.
+(89) Beckham, G. T.; Matthews, J. F.; Bomble, Y. J.; Bu, L.; Adney, W.
+S.; Himmel, M. E.; Nimlos, M. R.; Crowley, M. F. Identification of
+Amino Acids Responsible for Processivity in a Family 1 Carbohydrate-
+Binding Module from a Fungal Cellulase. J. Phys. Chem. B 2010, 114
+(3), 1447−1453.
+(90) Bu, L.; Beckham, G. T.; Crowley, M. F.; Chang, C. H.; Matthews,
+J. F.; Bomble, Y. J.; Adney, W. S.; Himmel, M. E.; Nimlos, M. R. The
+Energy Landscape for the Interaction of the Family 1 Carbohydrate-
+Binding Module and the Cellulose Surface is Altered by Hydrolyzed
+Glycosidic Bonds. J. Phys. Chem. B 2009, 113 (31), 10994−11002.
+(91) Torrie, G. M.; Valleau, J. P. Nonphysical Sampling Distributions
+in Monte Carlo Free-energy Estimation: Umbrella Sampling. J. Comput.
+Phys. 1977, 23 (2), 187−199.
+(92) Kottalam, J.; Case, D. A. Dynamics of Ligand Escape from the
+Heme Pocket of Myoglobin. J. Am. Chem. Soc. 1988, 110 (23), 7690−
+7697.
+(93) Joo, S.; Cho, I. J.; Seo, H.; Son, H. F.; Sagong, H.-Y.; Shin, T. J.;
+Choi, S. Y.; Lee, S. Y.; Kim, K.-J. Structural Insight into Molecular
+Mechanism of Poly(ethylene terephthalate) Degradation. Nat.
+Commun. 2018, 9 (1), 382.
+(94) Austin, H. P.; Allen, M. D.; Donohoe, B. S.; Rorrer, N. A.; Kearns,
+F. L.; Silveira, R. L.; Pollard, B. C.; Dominick, G.; Duman, R.; El Omari,
+K.; et al. Characterization and Engineering of a Plastic-degrading
+Aromatic Polyesterase. Proc. Natl. Acad. Sci. U.S.A. 2018, 115 (19),
+E4350−E4357.
+(95) Burgin, T.; Pollard, B. C.; Knott, B. C.; Mayes, H. B.; Crowley, M.
+F.; McGeehan, J. E.; Beckham, G. T.; Woodcock, H. L. The Reaction
+Mechanism of the Ideonella sakaiensis PETase Enzyme. Commun.
+Chem. 2024, 7 (1), 65.
+(96) Sui, B.; Wang, T.; Fang, J.; Hou, Z.; Shu, T.; Lu, Z.; Liu, F.; Zhu,
+Y. Recent advances in the biodegradation of polyethylene terephthalate
+with cutinase-like enzymes. Front. Microbiol. 2023, 14, 1265139.
+(97) Kawai, F.; Kawabata, T.; Oda, M. Current knowledge on
+enzymatic PET degradation and its possible application to waste stream
+management and other fields. Appl. Microbiol. Biotechnol. 2019, 103
+(11), 4253−4268.
+(98) Lee, T.-S.; Radak, B. K.; Pabis, A.; York, D. M. A New Maximum
+Likelihood Approach for Free Energy Profile Construction from
+Molecular Simulations. J. Chem. Theory Comput. 2013, 9 (1), 153−164.
+(99) Hub, J. S.; de Groot, B. L.; van der Spoel, D. g_wham�A Free
+Weighted Histogram Analysis Implementation Including Robust Error
+and Autocorrelation Estimates. J. Chem. Theory Comput. 2010, 6 (12),
+3713−3720.
+(100) Huber, R. G.; Margreiter, M. A.; Fuchs, J. E.; von Grafenstein,
+S.; Tautermann, C. S.; Liedl, K. R.; Fox, T. Heteroaromatic π-Stacking
+Energy Landscapes. J. Chem. Inf. Model. 2014, 54 (5), 1371−1379.
+(101) Himmel, M. E.; Ding, S.-Y.; Johnson, D. K.; Adney, W. S.;
+Nimlos, M. R.; Brady, J. W.; Foust, T. D. Biomass Recalcitrance:
+Engineering Plants and Enzymes for Biofuels Production. Science 2007,
+315 (5813), 804−807.
+(102) Schubert, S. W.; Thomsen, T. B.; Clausen, K. S.; Malmendal, A.;
+Hunt, C. J.; Borch, K.; Jensen, K.; Brask, J.; Meyer, A. S.; Westh, P.
+Relationships of Crystallinity and Reaction Rates for Enzymatic
+Degradation of Poly (ethylene terephthalate), PET. ChemSusChem
+2024, 17, No. e202301752.
+(103) Thomsen, T. B.; Schubert, S.; Hunt, C. J.; Borch, K.; Jensen, K.;
+Brask, J.; Westh, P.; Meyer, A. S. Rate Response of Poly(Ethylene
+Terephthalate)-Hydrolases to Substrate Crystallinity: Basis for Under-
+standing the Lag Phase. ChemSusChem 2023, 16 (13),
+No. e202300291.
+(104) Zheng, M.; Li, Y.; Dong, W.; Zhang, Q.; Wang, W. Hydrolase-
+Catalyzed Depolymerization Mechanism toward Crystalline and
+Amorphous Polyethylene Terephthalate. ACS Sustain. Chem. Eng.
+2024, 12, 10252−10259.
+(105) Tournier, V.; Topham, C. M.; Gilles, A.; David, B.; Folgoas, C.;
+Moya-Leclair, E.; Kamionka, E.; Desrousseaux, M. L.; Texier, H.;
+Gavalda, S.; et al. An Engineered PET Depolymerase to Break Down
+and Recycle Plastic Bottles. Nature 2020, 580 (7802), 216−219.
+(106) Carniel, A.; Waldow, V. d. A.; Castro, A. M. d. A Comprehensive
+and Critical Review on Key Elements to Implement Enzymatic PET
+Depolymerization for Recycling Purposes. Biotechnol. Adv. 2021, 52,
+107811.
+(107) Uekert, T.; DesVeaux, J. S.; Singh, A.; Nicholson, S. R.; Lamers,
+P.; Ghosh, T.; McGeehan, J. E.; Carpenter, A. C.; Beckham, G. T. Life
+Cycle Assessment of Enzymatic Poly(ethylene terephthalate) Recy-
+cling. Green Chem. 2022, 24 (17), 6531−6543.
+(108) Singh, A.; Rorrer, N. A.; Nicholson, S. R.; Erickson, E.;
+DesVeaux, J. S.; Avelino, A. F. T.; Lamers, P.; Bhatt, A.; Zhang, Y.;
+Avery, G.; et al. Techno-economic, Life-cycle, and Socioeconomic
+Impact Analysis of Enzymatic Recycling of Poly(ethylene tereph-
+thalate). Joule 2021, 5 (9), 2479−2503.
+Macromolecules pubs.acs.org/Macromolecules Article
+https://doi.org/10.1021/acs.macromol.4c02130
+Macromolecules 2025, 58, 1795−1803
+1803

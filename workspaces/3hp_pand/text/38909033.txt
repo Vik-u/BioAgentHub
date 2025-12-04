@@ -1,0 +1,1852 @@
+Article https://doi.org/10.1038/s41467-024-49642-x
+Tunable translation-level CRISPR
+interference by dCas13 and engineered gRNA
+in bacteria
+Giho Kim1, Ho Joon Kim1, Keonwoo Kim 1,H y e o nJ i nK i m2,J i n aY a n g3 &
+Sang Woo Seo 1,2,4,5,6
+Although CRISPR-dCas13, the RNA-guided RNA-binding protein, was recently
+exploited as a translation-level gene expression modulator, it has still been
+difﬁcult to precisely control the level due to the lack of detailed character-
+ization. Here, we develop a synthetic tunable translation-level CRISPR inter-
+ference (Tl-CRISPRi) system based onthe engineered guide RNAs that enable
+precise and predictable down-regulation of mRNA translation. First, we opti-
+mize the Tl-CRISPRi system for speciﬁc and multiplexed repression of genes at
+the translation level. We also show thatthe Tl-CRISPRi system is more suitable
+for independently regulating each gene in a polycistronic operon than the
+transcription-level CRISPRi (Tx-CRISPRi) system. We further engineer the
+handle structure of guide RNA for tunable and predictable repression of var-
+ious genes inEscherichia coliand Vibrio natriegens. This tunable Tl-CRISPRi
+system is applied to increase the production of 3-hydroxypropionic acid (3-
+HP) by 14.2-fold via redirecting the metabolicﬂux, indicating the usefulness of
+this system for theﬂux optimization in the microbial cell factories based on the
+RNA-targeting machinery.
+Developing synthetic gene expression modulators such as CRISPR-Cas
+system and synthetic sRNA enabled high-throughput screening of
+genes to systematically understand the microbial system and engineer
+the metabolic pathways of microorganisms
+1– 5. Catalytically dead Cas9
+(dCas9) or dead Cas12 (dCas12) can speci ﬁcally bind to target
+sequences in double-stranded DNA (dsDNA), block the transcription of
+RNAP, and silence gene expression
+6,7. Synthetic sRNA has been har-
+nessed to suppress gene expression at the translation level since it can
+efﬁciently bind to the mRNA together with the Hfq protein
+8.
+The Type VI CRISPR-Cas nuclease, called Cas13, is different from
+Cas9 or Cas12 in that it can speciﬁcally target and cleave single-
+stranded RNA9,10. Unlike Cas9 and Cas12, which require strict
+protospacer-adjacent motif sequences for targeting, Cas13 requires
+minimal or no protospacer ﬂanking sequences, allowing ﬂexible
+targeting of mRNA
+11. Unfortunately, when the nuclease-active state of
+Cas13 binds to the target RNA and forms the ternary ribonucleoprotein
+(RNP) complex, it causes non-speciﬁc degradation of adjacent RNA,
+thereby signiﬁcantly limiting cell growth
+9. This phenomenon has
+confounded the utilization of Cas13 as a speciﬁc gene knockdown tool
+in bacteria. Thus, the nuclease-inactive state of Cas13, called dead
+Cas13 (dCas13), has been repurposed to repress the gene expression at
+the translation level without causing growth retardation by seques-
+tering the translation initiation region of mRNA
+12. Also, gene activation
+at the translation level was achieved by fusing the translation initiation
+factor to the dCas13
+13. However, the dCas13-based gene knockdown or
+activation was only tested for a simple ON/OFF regulation of a
+monocistronic gene. The characteristics of dCas13 as a synthetic gene
+expression modulator, such as the speciﬁcity or the multiplexity, are
+Received: 15 November 2023
+Accepted: 13 June 2024
+Check for updates
+1School of Chemical and Biological Engineering, Seoul National University, Seoul, Republic of Korea.2Interdisciplinary Program in Bioengineering, Seoul
+National University, Seoul, South Korea.3Department of Chemical Engineering, Jeju National University, Jeju-si, South Korea.4Institute of Chemical Processes,
+Seoul National University, Seoul, South Korea.5Bio-MAX Institute, Seoul National University, Seoul, South Korea.6Institute of Bio Engineering, Seoul National
+University, Seoul, South Korea. e-mail: swseo@snu.ac.kr
+Nature Communications|         (2024) 15:5319 1
+1234567890():,;
+1234567890():,;
+not yet investigated in detail. The lack of aﬁne-tuning strategy that can
+moderately regulate the gene expression by the dCas13 has conﬁned
+its usage in bacterial cells compared to other well-characterized syn-
+thetic gene regulation systems.
+In this study, we develop the dCas13-based tunable Tl-CRISPRi
+system that can precisely tune the translation level of diverse genes in
+two different bacteria. We apply the Tl-CRISPRi to the reporter genes in
+the chromosome or plasmid, revealing its titratable, speciﬁc, and
+multiplexed gene knockdown capability. Comparing the Tl-CRISPRi
+with transcription-level CRISPRi (Tx-CRISPRi) under regulating the
+expression of a polycistronic operon, we highlight the distinctiveness
+of the Tl-CRISPRi system in that it can independently down-regulate
+each gene in the synthetic and native operons. Furthermore, we
+develop a strategy toﬁne-tune the expression level of a target gene by
+modifying the sequence and structure of the guide RNA handle. The
+library of attenuated guide RNAs allows uniformly distributed target
+gene expression levels ranging from 2.6% to 86.3% and predictable
+expression tuning across other genes. We verify that these attenuated
+guide RNAs robustly work in bothEscherichia coliand Vibrio natrie-
+gens, suggesting their expandability toward the other bacterial strains.
+Finally, we adopt this tunable Tl-CRISPRi system to redirect the
+metabolicﬂux for improving the bioproduction of 3-hydroxypropionic
+acid (3-HP). We repress 48 target genes across metabolic pathways to
+identify the effective knockdown targets. We utilize attenuated guide
+RNAs to balance the bacterial growth and bioproduction, resulting in a
+14.2-fold enhancement of 3-HP titer. Our tunable Tl-CRISPRi system
+has the potential to be a robust and predictable translation-level gene
+regulation system in bacteria.
+Results
+Design and characterization of the dCas13-based Tl-
+CRISPRi system
+Several previous studies have discovered hundreds of Cas13 orthologs
+that can bind to target RNAs across a wide range of bacterial species
+with the help of genome mining and classiﬁed into four subtypes
+(Cas13a, Cas13b, Cas13c, and Cas13d) depending on the existence of
+accessory proteins or the primary amino acid sequences of the Cas13
+effectors
+14– 17. We selected LbuCas13a, BzCas13b, PbCas13b, and
+RfxCas13d, of which several biochemical properties and the critical
+catalytic residues involved in non-speciﬁc nuclease activity are already
+well characterized
+15,18,19.W es o u g h tt oc o m p a r et h ee fﬁciency of
+translation repression when these orthologs became catalytically
+inactive. The catalytic residues were mutated to eliminate non-speciﬁc
+RNA cleavage activity, generating the dCas13 proteins (Supplementary
+Fig. 1a). In our experimental design, the expression of dCas13 protein
+was induced by anhydrotetracycline (aTc), and the guide RNA target-
+ing the 5’-untranslated region (5’-UTR) of mCherry mRNA was con-
+stitutively expressed inE. coliK-12 MG1655 harboring the expression
+cassette of mCherry (Fig.1a). While three dCas13 orthologs did not
+show signiﬁcant gene knockdown upon the addition of aTc, the cata-
+lytically dead version of RfxCas13d (dRfxCas13d) decreased the
+expression level of the reporter gene to 2.8% compared to the non-
+targeted control (Supplementary Fig. 1b). The bacterial growth was not
+signiﬁcantly perturbed upon the mRNA knockdown of dRfxCas13d
+(Supplementary Fig. 1c, d), which exhibits robustness as a synthetic
+gene expression modulator. When we investigated the expression of
+each dCas13 ortholog by western blotting and coomassie blue staining,
+only the dRfxCas13d was clearly detected in both the total and soluble
+fraction of bacterial cells (Supplementary Fig. 1e, f). This result
+emphasizes the appropriate choice of dCas13 ortholog to be expressed
+in the functional form for efﬁcient gene knockdown. Therefore, we
+chose the dRfxCas13d and its cognate guide RNA to construct the
+synthetic Tl-CRISPRi system.
+We ﬁrst examined whether the binding of dCas13 indeed medi-
+ated the knockdown of targeted mRNA since only the formation of
+RNA duplex could knock down the mRNA as in the case of antisense
+RNA
+20– 22. We tested various concentrations of aTc, thereby differing
+the expression level of dCas13, to evaluate the correlation between the
+intracellular amount of dCas13 and the target gene expression. Nota-
+bly, the decrease in mCherry level upon the addition of aTc was more
+remarkable when themCherry-targeting guide RNA was expressed,
+compared to the non-target strain (Supplementary Fig. 2). The corre-
+lation between the concentration of dCas13 inducer and the target
+gene expression level suggests that dCas13 is a critical component for
+efﬁcient gene repression via Tl-CRISPRi, which can efﬁciently seques-
+ter the translation initiation site of target mRNA. This result also shows
+the possible usefulness of this system for biosensor-associated
+dynamic regulation as performed in the previous CRISPRi studies
+23,24.
+Since the knockdown by the Tl-CRISPRi was saturated with more than
+100 ng/mL of aTc, and some extent of growth retardation was
+observed over 200 ng/mL of aTc (Supplementary Fig. 2), possibly due
+to the metabolic burden from the expression of large Cas protein
+25,w e
+determined to induce the expression of dCas13 with 100 ng/mL of aTc
+for the following experiments.
+To validate that Tl-CRISPRi could robustly knockdown genes in
+the various locations of the chromosome, we preparedE. colistrains,
+each harboring reporter gene expression cassette (mCherry, GFP,
+nanoluciferase) integrated into different loci of the chromosome. Six
+spacers (sp1– sp6) spanning from 5’-UTR to the N-terminal region of the
+coding sequence were designed and applied for the knockdown of
+each reporter gene. We found that Tl-CRISPRi robustly knocked down
+each gene regardless of its integrated location (Fig.1b). However, it
+should be noted that each spacer’sk n o c k d o w ne fﬁciency was some-
+what different. We reasoned that the accessibility toward targeted RNA
+sequence or local AU and GC distribution, previously revealed as sig-
+niﬁcant factors determining the targeting efﬁciency of Cas13
+26,27,c o u l d
+affect the binding efﬁciency of the dCas13-guide RNA complex toward
+the target RNA to some degree. Nevertheless, all the spacers targeting
+near the translation initiation region of mRNA showed remarkable
+gene knockdown compared to the non-targeted strain. We applied the
+sp1 spacer of each reporter gene to guarantee the robust repression of
+gene expression for the following experiments. We next investigated
+whether the Tl-CRISPRi could speciﬁcally and simultaneously repress
+multiple gene expressions. We found that two or three reporter genes
+were successfully knocked down by introducing multiple guide RNA
+expression cassettes (Fig.1c, d). This result demonstrates the speciﬁ-
+city and the multiplexity of the Tl-CRISPRi system.
+Next, we tested whether the Tl-CRISPRi could efﬁciently inhibit
+the translation of mRNA transcribed from the plasmid and whether the
+amount of the target mRNA could affect the knockdown efﬁciency.
+Four constitutive promoters with different transcription strengths
+were adopted to express the mCherry on the plasmid (Supplementary
+Fig. 3a). We found that the translation of mCherry mRNAs transcribed
+from the plasmid could also be efﬁciently repressed by the Tl-CRISPRi
+(Supplementary Fig. 3b). Additionally, the resulted relative expression
+of the mCherry by the Tl-CRISPRi did not signiﬁcantly ﬂuctuate
+regardless of the transcription rate of themCherry (Supplementary
+Fig. 3c), showing from 3.8% (P
+J23100)t o6 . 4 %( PJ23113).
+Since optimizing the spacer length could reduce the possibility of
+forming a secondary structure inside itself and enhance the RNA-
+targeting efﬁciency
+28,w es o u g h tt oﬁnd the minimum length of the
+spacer that can retain the knockdown efﬁciency. To this end, we
+changed the lengths of complementary sequences to the mCherry
+mRNA in spacers by introducing mismatches. We found that the
+expression level of mCherry gradually increased when the length of the
+spacer-protospacer complementarity was lower than 22 nts (Supple-
+mentary Fig. 4a). This result is consistent with the previous study
+where the gene knockdown efﬁciency of RfxCas13d was maintained
+over the 23-nt length of the spacer in the mammalian cell
+28,29.T r u n -
+cated spacers with a length of 27 nts, 23 nts, and 20 nts were also tested
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 2
+for further validation, anchoring the position of the 3’ end of the
+spacer. Indeed, tight knockdown of the reporter gene was observed
+when the length of the spacer was reduced to 23 nts, conﬁrming that
+the minimal size of the spacer should be 23 nts (Supplemen-
+tary Fig. 4b).
+We next investigated whether the amount of targeted mRNA
+could also be affected by Tl-CRISPRi. Because of the co-localized and
+coordinated transcription/translation processes in a prokaryotic cell,
+suppressing the translation of the mRNA could lead to its degradation
+and premature transcription termination due to the absence of ribo-
+somes protecting the mRNA
+30. We found that the Tl-CRISPRi decreased
+the quantity of all three reporter mRNA, although it was less signiﬁcant
+than the decrease in protein level (Supplementary Fig. 5). This result
+suggests that excluding the ribosome by blocking translation initiation
+via Tl-CRISPRi could moderately decrease the amount of targeted
+mRNA, even though the dCas13 lacks the function of blocking
+a
+dCas13
+Ptet
+rrnB T1
+terminator
+p15A ori
+guide RNA
+PJ23119 L3S2P21
+CloDF13 ori
+dCas13-guide RNA
+binary complex target
+mRNA
+ribosome
+ternary complex;
+translation blocking
+< Tl-CRISPRi system >
+b ybhC::GFP
+PJ23119
+sp1
+sp2
+sp3
+sp4
+sp5
+sp6
+L3S3P12
+NT sp1 sp2 sp3 sp4 sp5 sp6
+relative expression (%)
+0
+20
+40
+60
+80
+100
+120
+torS::nanoluc
+PJ23100
+sp1
+sp2
+sp3
+sp4
+sp5
+sp6
+L3S2P52
+NT sp1 sp2 sp3 sp4 sp5 sp6
+relative expression (%)
+0
+20
+40
+60
+80
+100
+120
+nupG::mCherry
+POXB20
+sp1
+sp2
+sp3
+sp4
+sp5
+sp6
+L3S2P56
+NT sp1 sp2 sp3 sp4 sp5 sp6
+relative expression (%)
+0
+20
+40
+60
+80
+100
+120
+****
+****
+****
+**** **** ****
+****
+**** ****
+**** **** ****
+****
+****
+****
+****
+**** ****
+relative expression (%)
+0
+20
+40
+60
+80
+100
+120
+140
+mCherry sp1 –+ –+
+GFP sp1 –+ +–
+nupG::
+POXB20-mCherry
+ybhC::
+PJ23119-GFP
+c
+NS
+******** **** ****
+NS
+d
+0
+20
+40
+60
+80
+100
+120
+140relative expression (%)
+mCherry sp1
+GFP sp1
+nanoluc sp1
+–
+–
+–
+–
+–
++
+–
++
+–
++
+–
+–
++
++
+–
++
+–
++
+–
++
++
++
++
++
+nupG::
+POXB20-mCherry
+ybhC::
+PJ23119-GFP
+torS::
+PJ23100-nanoluc
+mCherry
+GFP
+nanolucNS
+NS
+NS NS NS
+* *
+NS
+NS
+**** ***
+***
+******** **** ****
+***
+****
+****
+****
+****
+mCherry
+GFP
+5` 3`
+spacer
+protospacer
+DR
+(direct repeat)
+Fig. 1 | Fundamental characterization of Tl-CRISPRi in theE. coliK-12 MG1655.
+a A scheme of dCas13-based translation repression. The dCas13 protein and its
+cognate guide RNA are assembled, forming a RNP binary complex. We redirected it
+to bind to the translation initiation site of speciﬁc mRNA to block the translation of
+the ribosome and turn off the expression of a target gene.b Adopting the Tl-
+CRISPRi for three different reporter genes (mCherry, GFP, nanoluc) with six dif-
+ferent spacers for each gene. NT represents the strain with the non-target guide
+RNA (RfxgRNA-NT).c, d Simultaneous and speciﬁc reporter gene knockdown by
+the Tl-CRISPRi. Each guide RNA with the effective spacer (mCherry sp1, GFP sp1,
+nanoluc sp1) speciﬁcally down-regulated the target gene. Simultaneous gene
+knockdown was achieved by introducing multiple guide RNAs. The relative
+expression (b–d) was determined based on the speciﬁc ﬂuorescence or lumines-
+cence level (RFU or RLU/OD
+600) and normalized by setting the value of the NT
+strain as 100%. The error bar represents the mean ± standard deviation from the
+biologically independent cell cultures (n = 3), and the white dots indicate the actual
+data points. TheP-value of each strain’s dataset was determined by the two-tailed
+Student’s t-test compared to the dataset of the NT strain. The asterisk above the bar
+indicates theP-value. NS not signiﬁcant; *P <0 . 0 5 ,* *P < 0.01, ***P < 0.001,
+****P < 0.0001. Source data are provided as a source dataﬁle.
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 3
+transcription by targeting the double-stranded DNA9,15 or recruiting
+endogenous RNases as sRNA-Hfq does31,32.
+Regulating the polycistronic operon expression via the Tl-
+CRISPRi
+When targeting a polycistronic operon, the conventional dCas9-based
+Tx-CRISPRi turns off the expression of all cistrons located downstream
+of a target gene33, known as the polar effect34 (Fig. 2a). We assumed
+that Tl-CRISPRi would independently repress each gene in an operon,
+unlike the Tx-CRISPRi, since Tl-CRISPRi could be speciﬁcally directed
+to the translation initiation site of each cistron without disturbing the
+translation of neighboring cistrons in the same transcript (Fig.2b). To
+test this hypothesis, we introduced Tx-CRISPRi or Tl-CRISPRi, both
+targeting near the N-terminal region of each gene in a polycistronic
+operon comprised ofmCherry and GFP. When the upstreammCherry
+was targeted, the Tx-CRISPRi led to far reduced expression of the
+downstream GFP (19.6%) compared to that (63.1%) by the Tl-CRISPRi
+(Fig. 2c, d). When the downstreamGFP was targeted, the Tx-CRISPRi
+and the Tl-CRISPRi successfully down-regulated the expression ofGFP
+(Fig. 2e, f). This result suggests that the Tl-CRISPRi could be harnessed
+for a more speciﬁc knockdown of each cistron in the operon than the
+conventional Tx-CRISPRi, which was also validated in tri-cistronic
+reporter operon comprised ofGFP, nanoluciferase,a n dmCherry in
+series (Supplementary Fig. 6). However, it should be noted that the Tl-
+CRISPRi also showed some degree of polar effect. We reasoned that
+the accelerated mRNA degradation due to the decoupled transcription
+and translation could be responsible for the polar effect (Supple-
+mentary Fig. 5). Since a similar polar effect from translation inhibition
+was also observed in a previous study utilizing Hfq-sRNA
+35,i ts h o u l db e
+considered that some extent of the polar effect is unavoidable under
+the translation-level gene knockdown. Nevertheless, the expression of
+downstream genes was not signiﬁcantly turned off when Tl-CRISPRi
+targeted the upstream gene.
+Beyond the reporter genes, we next compared the Tl-CRISPRi with
+Tx-CRISPRi by targeting the native operons ofE. coli,c o n s i s t i n go f
+upstream non-essential genes and downstream essential genes, to
+evaluate the inﬂuence of polar effect in bacterial growth. In the pre-
+vious study, Tx-CRISPRi toward non-essential upstream genes in these
+operons hampered bacterial growth owing to the polar effect
+34.W e
+anticipated that Tl-CRISPRi would less impede cellular growth when
+targeting these genes due to the diminished polar effect (Fig.3a). Five
+endogenous operons were selected for the proof of concept, and the
+Tx-CRISPRi or the Tl-CRISPRi targeted upstream non-essential genes
+(Fig. 3b). As expected, introducing the Tx-CRISPRi targeting upstream
+non-essential genes caused remarkable growth retardation (Fig.3c). In
+contrast, strains with the Tl-CRISPRi targeting the same genes exhib-
+ited normal cellular growth (Fig.3d). When we quantiﬁed the mRNA
+level of these genes, it was observed that the Tl-CRISPRi induced only a
+moderate or weak decrease of mRNA level, which ranges from 40% to
+70% compared to the non-target control strain (Supplementary
+Fig. 7a). We speculated that this moderate decrease of mRNA con-
+tributed to a less signiﬁcant polar effect in contrast to the Tx-CRISPRi.
+Additionally, to verify that Tl-CRISPRi efﬁciently knocked down tar-
+geted endogenous genes in the translation level, we fusednanoluci-
+ferase with aﬂexible linker to the C-terminal region of the target gene
+to measure the expression level. When the Tl-CRISPRi was adopted, the
+luminescence level remarkably decreased compared to the non-
+targeted control (Supplementary Fig. 7b), conﬁrming that Tl-CRISPRi
+robustly and speciﬁcally knocked down the expression of these genes
+while circumventing the polar effect. Overall, our Tl-CRISPRi system
+could be exploited for the speciﬁc down-regulation of each cistron in
+the synthetic and native bacterial operons, exerting diminished inter-
+ference with the expression of neighboring genes in the same tran-
+scription unit.
+Engineering the handle sequence of guide RNA for tunable
+repression by Tl-CRISPRi
+S e v e r a lg e n ee x p r e s s i o nm o d u l a t o r s ,s u c ha sd C a s 9o rs y n t h e t i cs R N A -
+Hfq, have been engineered forﬁne-tuning gene expression levels
+rather than ON/OFF control, especially for metabolic engineering
+applications
+36– 40. We considered establishing an appropriate ﬁne-
+tuning strategy for Tl-CRISPRi could be beneﬁcial to expand its usage.
+Although modulating the expression level of dCas13 could be one way
+of achieving dose-dependent gene knockdown41 (Supplementary
+Fig. 2), the gene regulation dynamics could be inherently affected by
+the promoter strength ofdCas13 or cell-to-cell variation of the indu-
+c i b l eg e n ee x p r e s s i o ns y s t e m
+38,42. Introducing mismatch to the spacer
+dCas9
+DNA
+RNAP
+OFF OFF
+dCas13
+mRNA
+ribosome
+OFF ?
+mCherry GFP
+relative expression (%)
+0
+20
+40
+60
+80
+100
+mCherry GFP
+a b
+c d
+e f
+mCherry GFP
+dCas13
+mCherry GFP
+mRNA
+mCherry GFP
+relative expression (%)
+0
+20
+40
+60
+80
+100
+relative expression (%)
+0
+20
+40
+60
+80
+100
+relative expression (%)
+0
+20
+40
+60
+80
+100
+dCas13
+mCherry GFP
+mRNA
+POXB20
+dCas9
+mCherry GFP
+DNA
+(genome)
+POXB20
+mCherry GFP
+DNA
+(genome)
+dCas9
+Fig. 2 | Comparing the Tx-CRISPRi and the Tl-CRISPRi on regulating the poly-
+cistronic gene expression (mCherry-GFP). The reporter gene operon consisting of
+mCherryand GFP was expressed from the chromosome ofE. coli. a, b The expected
+difference between transcription-level control and translation-level control toward
+polycistronic gene expression. If the dCas9 blocks the upstream gene in the
+operon, all downstream genes are simultaneously turned off, called the polar
+effect. We reasoned that dCas13-based translation-level knockdown on the
+upstream gene would not intrinsically down-regulate the expression of down-
+stream genes in the operon if each cistron is independently translated from its
+ribosome binding site.c– f The relative expression level when each reporter gene
+was targeted by the Tx- or Tl-CRISPRi. For the Tl-CRISPRi, the spacer mCherry sp1 or
+GFP sp1 was applied to knock down the expression of mCherry or GFP, respectively.
+The relative expression was determined based on the speciﬁc ﬂuorescence level
+(RFU/OD
+600) and normalized by setting the value of the NT (non-targeted) strain as
+100%. The error bar represents the mean ± standard deviation from the biologically
+independent cell cultures (n = 3), and the white dots indicate the actual data points.
+Source data are provided as a source dataﬁle.
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 4
+region was another strategy forﬁne-tuning the repression strength in
+the Tx-CRISPRi43,44. However, estimating the activity of mismatched
+guide RNA is complicated due to the differed tolerance of mismatch
+position across the spacer, requiring massive experimental datasets
+and modeling45. In our previous study, a library of sgRNA of dCas9
+generated by mutating tetraloop andﬂanking regions yielded sgRNA
+variants with diversiﬁed repression efﬁciencies39.T h i ss t u d ys u g g e s t e d
+that modulating the efﬁciency of RNP complex formation by mutating
+the handle sequence of the guide RNA could control the repression
+efﬁciency of CRISPRi. In line with this approach, we explored whether
+mutating the direct repeat (DR) sequences of the guide RNA, known to
+be recognized by the Cas13 protein
+29,46, could achieve tunable
+expression of a target gene in the Tl-CRISPRi system (Fig.4a). From the
+structure study, it was revealed that the stem distal from the spacer
+and the terminal loop is solvent-exposed and does not interact with the
+residues of Cas13d, while the stem proximal to the spacer and
+nucleotides comprising theﬂanking sequences directly interact with
+the Cas13d
+29,46.B a s e do nt h e s eﬁndings, we selected potential sites of
+mutations in the guide RNA handle by dividing it into three parts: stem,
+bulge, andﬂanking sequence (Fig.4b). These parts were systematically
+mutated, creating guide RNAs with diverse DR sequences. We applied
+them to knock downmCherry and measured the relative expression
+level derived from each mutated guide RNA (Fig.4a).
+For the mutations in the stem of DR, disrupting base pairings
+yielded plenty of attenuated guide RNAs inducing diverse expression
+levels of mCherry (Supplementary Fig. 8a). However, replacing GC
+base pairing into AU did not perturb the repression strength, albeit
+increasing the minimum free energy of the stem-loop (Supplementary
+Fig. 8b). When the length of the stem was varied from 4 bp to 9 bp,
+shortening and extending the stem for more than 2 bp from the ori-
+ginal DR signi ﬁcantly weakened the repression of mCherry
+(Supplementary Fig. 8c). Considering that extending the stem duplex
+helps to stabilize the RNA and increases the knockdown efﬁciency in
+the case of antisense RNA
+47, it was surprising that the stem longer than
+8 bp strongly attenuated the knockdown ofmCherry compared to the
+original DR. This suggests that the folding energy and the stability of
+guide RNA itself is not the sole factor that affects the repression
+strength of Tl-CRISPRi. Indeed, the minimum free energy of each stem-
+mutated DR and the relative expression level of mCherry derived from
+DR-mutated guide RNAs did not show a remarkable correlation (Sup-
+plementary Fig. 9). Instead, we reasoned that the interaction between
+DR of guide RNA and the residues of dCas13 would play an important
+role determining the knockdown strength of Tl-CRISPRi, which should
+be explored in further studies. Unlike the mutations on the stem,
+modifying the bulge did not generate signiﬁcantly attenuated guide
+RNAs, implying that these bases would not or weakly interact with the
+residues of dCas13 (Supplementary Fig. 10). Substituting the base of
+ﬂanking sequences adjacent to the stem (U25, G26) also generated
+attenuated guide RNAs (Supplementary Fig. 11), suggesting that they
+could be the potential targets for guide RNA attenuation. We obtained
+51 different handle-mutated guide RNAs that can derive target gene
+expression levels in a uniform distribution from 2.6% to 86.3% com-
+pared to the non-target control (Fig.4c).
+To investigate whether the mutated DR derives a similar relative
+expression level across other genes, we targetedGFP and nanoluci-
+ferase with the DR-mutated guide RNAs. The relative expression
+derived from the same mutated DR showed strong positive correla-
+tions across different reporter genes (Fig.4d). These results validate
+that our tunable Tl-CRISPRi system could be adapted toﬁne-tune the
+expression level of various genes inE. coli.W et h e na p p l i e do u rt u n a b l e
+Tl-CRISPRi system inVibrio natriegens, a fast-growing and metaboli-
+cally versatile bacterial strain
+48.W h e nt h eg u i d eR N Aw i t ht h eo r i g i n a l
+Fig. 3 | Diminished polar effect and growth retardation by the Tl-CRISPRi while
+targeting the endogenous operons ofE. coli.a A diagram shows the difference
+between the Tx-CRISPRi and the Tl-CRISPRi while targeting the operon of non-
+essential genes and essential genes in series. Though the non-essential gene was
+targeted, the polar effect causes Tx-CRISPRi to block the expression of downstream
+essential genes, thus hindering bacterial growth. We speculated that the Tl-CRISPRi
+would not cause growth retardation while targeting the same non-essential genes.
+b Five different endogenous operons on theE. coliK-12 MG1655 chromosome were
+selected as examples, and their transcription unit is presented.c, d The cellular
+growth while performing Tx-CRISPRi (c)o rT l - C R I S P R i(d) toward the upstream
+non-essential genes was compared with the strain harboring the non-target guide
+RNA (NT). The error bar represents the mean ± standard deviation from the bio-
+logically independent cell cultures (n = 3), and the white dots indicate the actual
+data points. TheP-value of each strain’s dataset was determined by the two-tailed
+Student’s t-test compared to the dataset of the NT strain. The asterisk above the bar
+indicates theP-value. NS: not signiﬁcant; *P <0 . 0 5 ,* *P < 0.01, ***P < 0.001,
+****P < 0.0001. Source data are provided as a source dataﬁle.
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 5
+DR was used to target mCherry mRNA, the expression level of mCherry
+decreased to 6.0%, showing that the Tl-CRISPRi could effectively
+repress genes inV. natriegens(Fig. 4e). Furthermore, the guide RNAs
+containing mutated DR sequences regulated the expression of
+mCherry at various levels, with a positive correlation to that ofE. coli
+(Fig. 4e). Our tunable Tl-CRISPRi system based on the engineered
+guide RNAs has the potential to precisely down-regulate the gene
+expression in other microbial systems beyondE. coliand V. natriegens.
+Applying Tl-CRISPRi to optimize the metabolicﬂux
+Optimizing the metabolicﬂux toward producing valuable compounds
+by speciﬁc knockdown or knockout of genes is one of the common
+approaches in metabolic engineering8,49. We examined whether the Tl-
+CRISPRi could enhance metabolite production by adjusting the
+endogenous gene expression level and, thus, intracellular metabolic
+ﬂux. We selected the pathway converting malonyl-CoA into 3-HP
+50,a
+valuable industrial platform chemical51. This pathway is advantageous
+in that the malonyl-CoA is a universal metabolic intermediate, which
+allows the utilization of diverse carbon sources
+52,53.W ee m p l o y e dE. coli
+W (ATCC 9637) for the bacterial host, possessing several beneﬁcial
+characteristics for metabolite production, such as acid tolerance and
+reduced byproduct54.W es e l e c t e d4 8g e n e sa n dt a r g e t e dt h e mu s i n g
+the guide RNAs with the original DR sequence to ensure effective gene
+repression and determine which gene target knockdown could
+enhance the titer of 3-HP (Fig.5a).
+Since this pathway consumes 2 moles of NADPH per 1 mol of
+malonyl-CoA to produce 3-HP, we reasoned that targeting genes
+related to the NADPH or malonyl-CoA pool could affect the biopro-
+duction of 3-HP. Indeed, repressing genes comprising the fatty acid
+synthesis cycle, a competitive pathway for consuming malonyl-CoA,
+signiﬁcantly increased the 3-HP production (Fig.5b). The knockdown
+of thefabI gene showed the most prominent increase of 3-HP titer up
+to 1.87 g/L, which was 11.1-fold higher than the non-targeted strain
+(0.17 g/L). This result could be attributed to the characteristics of the
+enoyl-acyl carrier protein reductase encoded byfabI, which holds the
+most crucial step for completing the fatty acid synthesis cycle
+55.I n
+glycolysis, the knockdown ofaceE, pfkA,a n dpfkB enhanced the 3-HP
+titer (Fig.5b). Atﬁrst, it seemed controversial that the knockdown of
+aceE encoding one of the subunits of pyruvate dehydrogenase com-
+plex (PDC) was bene ﬁcial for the 3-HP production since the
+a
+dCas13
+Ptet
+rrnB T1
+terminator
+DR-mutated guide RNA
+(mCherry sp1)
+PJ23119 L3S2P21
+nupG::mCherry
+POXB20 L3S2P56
+transcription
+mCherry
+mRNA
+tunable
+Tl-CRISPRi
+translation
+b
+bulge (U7, C18)
+stem
+flanking sequence
+A
+A
+C
+C
+C
+C
+U
+U
+G
+G
+G
+G
+U
+A
+C
+U
+CG
+CG
+A
+AC
+U
+U GAAA -3`5`-
+spacer
+C
++1
++30
++7 +18
+Handle (DR) structure of
+RfxCas13d guide RNA
+GC base pair
+AU base pair
+relative expression (%) in
+Vibrio natriegens
+relative expression (%) in 
+Escherichia coli
+E. coli
+V. natriegens
+e mCherry
+tunable
+Tl-CRISPRi
+ρ = 0.88, P < 10-4
+original DR
+mutated DR
+10 100
+10
+100
+relative expression (%) of 
+GFP or nanoluciferase
+relative expression (%) of mCherry
+E. coli GFP
+tunable
+Tl-CRISPRi
+nanoluc
+d
+GFP mRNA
+nanoluc mRNA
+GFP
+ρ = 0.98, P < 10-3
+nanoluciferase
+ρ = 0.83, P < 10-2
+11 0 1 0 0
+1
+10
+100
+bulge-mutated
+stem-mutated
+flanking sequence-mutated
+control
+(original DR or NT)
+F06
+S05
+NT
+S25
+S09
+S19
+S17
+S26
+S24
+S20
+S27
+F02
+S08
+F01
+S18
+S15
+S22
+S14
+S10
+S16
+S13
+S12
+B06
+F03
+F09
+S07
+B05
+S21
+B02
+B04
+F05
+F08
+B01
+F18
+B03
+F10
+F15
+F13
+S11
+S04
+org. DR
+S01
+F17
+S03
+S02
+F04
+F11
+F14
+F07
+F16
+S06
+F12
+relative expression (%)
+10
+100
+mutated DR candidates
+c
+tunable 
+expression of
+mCherry
+Fig. 4 | Development and application of tunable Tl-CRISPRi based on the
+handle-engineered guide RNAs. aGenetic components for the validation of tun-
+able Tl-CRISPRi system. The DR sequence was mutated to modulate the interaction
+between the dCas13 and the guide RNA. This tunable Tl-CRISPRi was directed to
+inhibit the translation of mCherry mRNA in diverse levels, leading to the tunable
+expression of mCherry.b The secondary structure of the guide RNA handle. This
+structure was divided into bulge, stem, andﬂanking sequence. Each part’sb a s e s
+were mutated, creating candidate DR sequences for the attenuated guide RNA.
+c The resulting expression levels of mCherry derived from the guide RNAs har-
+boring diverse DR sequences are shown in the graph.d Relative GFP and nanolu-
+ciferase expression level against the mCherry while using the guide RNA with the
+same mutated DR sequence. GFP sp2 and nanoluc sp1 were each adopted for the
+knockdown ofGFP and nanoluciferaseas a spacer sequence. All of the reporter
+genes were expressed from the chromosome ofE. coli. e T h er e l a t i v ee x p r e s s i o n
+level of mCherry in theV. natriegenscompared to that ofE. coliwhen the same
+attenuated guide RNAs were adopted. The Spearman’s correlation coefﬁcient (ρ)
+and the relatedP-value determined by the two-tailed Student’s t-test are annotated
+in each graph (d, e). The relative expression was determined based on the speciﬁc
+ﬂuorescence level (RFU/OD
+600) and normalized by setting the value of the NT (non-
+targeted) strain as 100%. The error bar represents the mean ± standard deviation
+from the biologically independent cell cultures (n = 3), and the white dots indicate
+the actual data points. Source data are provided as a source dataﬁle.
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 6
+knockdown or knockout of PDC reduces theﬂux toward the acetyl-
+CoA56,57. However, in one previous study, it was revealed that the
+knockout of thelpdA gene encoding another component of PDC could
+shift the carbonﬂux of glycolysis from the Embden– Meyerhof– Parnas
+(EMP) pathway to the Entner– Doudoroff (ED) pathway or Pentose
+Phosphate (PP) pathway, thereby increasing the intracellular level of
+NADPH
+58. The knockdown of thepfkA or pfkBgene would also enhance
+the 3-HP titer by redirecting the carbonﬂux toward ED and PP
+pathway59,60. Among the knockdown targets in amino acid biosynthesis
+pathways, the knockdown of metB related to the generation of
+methionine resulted in 3-HP titer enhancement (Fig.5b). We reasoned
+that the knockdown ofmetB would increase the intracellular NADPH
+pool since the synthesis of methionine consumes the most NADPH
+molecule per one amino acid
+61,62. In a comprehensive approach, we
+employed combinatorial gene knockdown to investigate the collective
+effect of these knockdown targets on enhancing 3-HP production
+(Fig. 5c). However, the simultaneous knockdown offabI with other
+genes did not increase the 3-HP titer against the single knockdown of
+fabI. Repressing theaceE and fabZ showed combinatorial enhance-
+ment of 3-HP production from 0.70 g/L and 0.80 g/L under the single
+knockdown to 1.23 g/L under the double knockdown without causing
+growth retardation.
+Notably, the knockdown offabI signiﬁcantly decreased microbial
+growth (Fig.5c, d). Although blocking the synthesis of fatty acid and
+preserving the pool of malonyl-CoA was beneﬁcial for 3-HP produc-
+tion, fully repressing this pathway could hamper microbial growth and
+limit the optimal fermentation process
+63. Therefore, we tried to adopt
+the attenuated guide RNAs for the moderate repression of thefabI
+gene and the optimal bioproduction of 3-HP. To implement diverse
+knockdown strength on thefabI, we designed another spacer (fabI
+spv2) targeting more upstream of thefabI mRNA than the original
+spacer (fabI spv1) and adopted mutant DR sequences to both spacers,
+zwf
+pgi
+pfkA
+pfkB
+gapA
+Pentose
+Phosphate
+Pathway
+serC 3PG
+G3P
+eno
+pykF ppsA
+aroG
+pflBldhA
+aceE
+aceF
+Serine
+Shikimate
+PathwayFormate
+Lactate
+gltA
+ackAAcetate
+poxB
+sucC
+sdhC
+mdh
+fumC
+Ace-CoA
+mcr
+3-HP
+Glucose
+Alanine
+yfbQ
+aspC
+TCA cycle
+murE
+Peptidoglycan
+metBMethionine
+ilvM
+ilvC
+ilvD
+Isoleucine
+2 NADPH 2 NADP +
+leuC
+leuD
+leuB
+Leucine
+Fatty acid
+synthesis cycle
+fabD
+fabB
+fabF
+fabG
+fabH
+fabA
+fabZ
+fabI
+Others
+fadR, cytR, fmt, purB, 
+araA, pyrF, hycI
+Mal-CoA
+G6P
+F6P
+F1,6P
+d
+3-HP [g/L]
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+NT
+metB
+leuC
+serC
+leuD
+yfbQ
+leuB
+aspC
+fumC
+mdh
+ilvC
+murE
+ilvD
+ilvM
+gltA
+sucC
+sdhC
+NA
+TCA cycle & amino acid synthesis
+b
+c
+3-HP [g/L]
+0.0
+0.4
+0.8
+1.2
+1.8
+2.0
+NT
+fabI
+fabZ
+fabF
+fabH
+fabD
+fabB
+fabA
+fabG
+Fatty acid
+synthesis cycle
+3-HP [g/L]
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+NT
+purB
+fadR
+pyrF
+araA
+hycI
+fmt
+cytR
+Others
+3-HP [g/L]
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+NT
+aceE
+pfkB
+pfkA
+aceF
+pgi
+aroG
+pykF
+ackA
+pflB
+pps
+poxB
+gapA
+zwf
+eno
+ppc
+ldhA
+acnB
+Glycolysis & byproduct pathwaysa
+knockdown strength of DR
+strong weak
+NT org.DR S12 S10 S22 S15 S19 S25 S05
+NT org.DR S12 S10 S22 S15 S19 S25 S05
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0
+2
+4
+6
+8
+10
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+0
+2
+4
+6
+8
+10
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0
+2
+4
+6
+8
+10
+12
+aceE
+fabI
+NT aceE
+fabZ
+aceE
+metB
+pfkB
+fabI
+pfkB
+fabZ
+pfkB
+metB
+metB
+fabZ
+metB
+fabI
+targeted gene: 
+specific growth rate [1/h]
+OD600
+3-HP [g/L]
+3-HP OD600
+specific
+growth rate
+specific growth rate [1/h]
+OD600
+3-HP [g/L]
+specific growth rate [1/h]
+OD600
+3-HP [g/L]
+< spacer: fabI spv2 >
+3-HP OD600
+specific growth rate
+< spacer: fabI spv1 >
+Fig. 5 | Metabolic pathway redirection via tunable Tl-CRISPRi for enhancing the
+production of 3-HP.All of the experiments shown in thisﬁgure were performed
+based on the acid-resistant strainE. coliW. a Overall pathway for synthesizing 3-HP
+from the glucose by utilizing malonyl-CoA reductase (mcr) and its neighboring
+pathways (TCA cycle, fatty acid synthesis cycle, etc.). All of the target genes of the
+Tl-CRISPRi were annotated in thisﬁgure.b The 3-HP titer of each strain when the Tl-
+CRISPRi knocked down each gene target. We selectedﬁve genes (fabI, fabZ, aceE,
+pfkB, metB), of which the knockdown exhibits a notable improvement of 3-HP titer,
+for further experiments.c The Tl-CRISPRi simultaneously knocked down two genes
+from theﬁve selected candidates in (b). d To ﬁne-tune the expression level of the
+fabI gene, 16 different guide RNAs consisting of eight different DR sequences and
+the twofabI spacers (spv1 and spv2) were adopted. The 3-HP titer and the OD
+600
+were measured after 24 h of the induction of themcr gene. The error bar represents
+the mean ± standard deviation from the biologically independent cell cultures
+(n = 3), and the white dots indicate the actual data points. Source data are provided
+as a source dataﬁle.
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 7
+yielding 16 different guide RNAs to repressfabI in total. We found that
+the cellular growth gradually increased as the weaker DR sequence was
+utilized in both spacers (Fig.5d). It was also noticeable that the optimal
+DR sequence reaching a maximal 3-HP production differed in these
+two spacers (S19 infabI spv2 and S10 infabI spv1). In total, the titer of
+3-HP reached the maximum of 2.42 g/L when the guide RNA with S10
+DR and fabI spv1 spacer was used, which was 14.2-fold improved
+against the strain with non-target guide RNA (Fig.5d). However, the
+titer of 3-HP was suddenly dropped as the weaker DR sequence was
+adopted for both spacers. These results demonstrate that adjusting
+the expression level offabI in a ﬁne-tuned manner for securing an
+adequate amount of malonyl-CoA was critical for diminishing growth
+retardation and achieving the optimal production of 3-HP. Since the
+malonyl-CoA serves as a versatile precursor for the biosynthesis of
+diverse value-added compounds such as polyphenols and
+polyketides
+64, we anticipate that our tunable Tl-CRISPRi system cap-
+able of modulating the fatty acid synthesis could be further expanded
+toward the production of these compounds.
+Since all of these Tl-CRISPRi experiments on optimizing 3-HP
+production were conducted based on the small-scale test tube culture
+with a small amount of glucose (8 g/L), we investigated whether the
+effect of the Tl-CRISPRi repression could be maintained for a larger
+scale of culture and a higher concentration of carbon source. We
+performed ﬂask-scale fed-batch culture using the best-regulated
+strains from the Tl-CRISPRi screening, starting from 20 g/L of glu-
+cose. We observed that the 3-HP titers were also remarkably increased
+in these strains compared to the non-targeted strain, which was 16.4-
+fold higher in strain with S10-fabI spv1 guide RNA (Supplementary
+Fig. 12). This result suggests that our tunable Tl-CRISPRi could robustly
+function and redirect the native metabolicﬂux of microbial cell
+factories.
+Discussion
+Repurposing the CRISPR-Cas systemas a robust synthetic biology tool
+has boosted genome engineering, metabolicﬂux redirection, and the
+discovery of genotype-phenotype relationships in numerous microbial
+systems
+33,34,65. The innate programmability of the CRISPR-Cas system
+allowsﬂexible targeting of genes and expansion of functions by fusing
+diverse protein effectors6,66,67. The advent of dCas13 from the Type VI
+CRISPR-Cas system holds new promise as a synthetic bacterial gene
+regulation tool, as it speciﬁcally recognizes and binds to the RNA of
+interest rather than the DNA-targeting dCas9 or dCas12
+9,10,19.
+In this study, we showed that detailed characterization of the Tl-
+CRISPRi system with dose-dependent, speciﬁc, multiplexed gene
+knockdown in translation level would accelerate the construction of a
+dCas13-based genetic circuit. We observed that only the reporter
+genes targeted by the guide RNAs were speciﬁcally knocked down in
+multiplexed gene targeting, which suggests the high speciﬁcity of our
+system. However, due to the difﬁculties in performing proteome
+analysis, we could not inspect the genome-wide off-target perturba-
+tions of translational inhibition under the application of Tl-CRISPRi.
+Further investigation on proteome-level perturbation caused by Tl-
+CRISPRi could suggest a detailed understanding of the off-target effect
+and propose design rules of guide RNA to enhance speciﬁcity.
+While targeting polycistronic operons, we also showed that Tl-
+CRISPRi could overcome the polar effect and independently repress
+the expression of each cistron in an operon, validated in the reporter
+gene operons and native bacterial operons. The polar effect
+caused by the Tx-CRISPRi is one of the obstacles to the accurate
+identiﬁcation of the role of each gene in a polycistronic operon while
+performing pooled genome-wide Tx-CRISPRi screening
+34.W ea n t i c i -
+pate that additional genome-wide Tl-CRISPRi screening could
+reveal unprecedented information about the genotype-phenotype
+relationships in bacterial cells not discovered in the Tx-CRISPRi-based
+screening.
+Based on the well-characterized Tl-CRISPRi system, we developed
+a ﬁne-tuning strategy by engineering the handle structure of the guide
+RNA and modulating the interaction between the guide RNA and
+dCas13. Though we focused on the down-regulation of gene expres-
+sion level, our attenuated guide RNAs might be applied to achieve
+diverse magnitudes of gene activation if the dCas13 is fused with
+translational activators
+13. With the tunable Tl-CRISPRi system, we
+achieved a 14.2-fold improvement of 3-HP production by precisely
+redirecting metabolicﬂux without laborious genome engineering and
+replacing genetic parts. Since ourﬁne-tuning strategy does not require
+adjusting the expression level of the dCas13 or the guide RNA, we
+expect that our tunable Tl-CRISPRi would help tune gene expression
+and optimize the metabolic network in biological systems where the
+usage of inducible gene expression systems or precisely characterized
+genetic parts are limited
+68. Also, targeting multiple pathways with
+different down-regulation strengths by assembling multiple guide
+RNAs with diverse mutant DR sequences could be applied to diversi-
+fying the expression of genetic circuits and metabolicﬂux. Analyzing
+the resulting bioproduction via machine learning could suggest fur-
+ther design rules to guide RNAs and accelerate automated genetic
+engineering to approach the optimum of the genetic circuit and
+metabolicﬂux
+69,70.
+While we applied the tunable Tl-CRISPRi in two gram-negative
+bacterial strains, detailed characterization on bacterial strains other
+than E. colishould proceed to validate the expandability of our system
+toward diverse strains. We believe that further investigation and
+optimization could enable the usage of this tool in diverse bacterial
+systems, including gram-positive bacteria, as other CRISPR-based tools
+have been successfully adopted and widely utilized in diverse
+strains
+71,72.
+To summarize, we developed a tunable Tl-CRISPRi system based
+on the dCas13 and systematically engineered guide RNAs. We
+demonstrated successful knockdown of target genes transcribed from
+the chromosome and the plasmid, together with the sequence-
+speciﬁcity and multiplexity of gene repression. We also highlighted
+the uniqueness of Tl-CRISPRi versus Tx-CRISPRi in that it allows
+context-independent regulation of each cistron in an operon. To
+expand the scope of gene regulation, we established aﬁne-tuning
+strategy for the Tl-CRISPRi by engineering the handle sequence of the
+guide RNA. This tunable Tl-CRISPRi exhibited its usefulness for redir-
+ecting the metabolicﬂux in aﬁne-tuned manner and optimizing the
+bioproduction of a valuable compound, 3-HP. Further expansion of the
+tunable Tl-CRISPRi to optimize the production of diverse metabolites
+in non-model bacterial strains would expedite the engineering and
+development of undomesticated microorganisms with versatile and
+unique metabolic traits
+2,72.
+Methods
+Bacterial strains, plasmids, primers, and reagents
+The plasmids and the bacterial strains used in this study are listed in
+Supplementary Data 1. Oligonucleotides used in this study were syn-
+thesized by Bionics, and the names and the sequences are listed in
+Supplementary Data 2. Luria– Bertani (LB) broth and Bacto-agar for
+bacterial culture were purchased from BD Bioscience. Plasmid DNA
+from cloning cells was prepared using the Exprep™ Plasmid SV mini kit
+(GeneAll). Polymerase chain reaction (PCR) fragments were puriﬁed
+using DNA Clean & Concentrator Kit (Zymo Research) or the Expin™
+Gel or PCR SV Kit (GeneAll). For the gene cloning, Q5 polymerase,
+Quick ligase, T4 PNK, and restriction enzymes were purchased from
+New England Biolabs, and Pfu polymerase was purchased from Bio-
+neer. Gibson assembly was performed using Gibson Assembly® HiFi
+master mix from CODEX DNA.
+The bacterial strains harboring reporter gene expression cassette
+(GFP, mCherry, nanoluciferase) were prepared using the λ-Red
+recombination system
+73. After overnight culture and refreshing,E.
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 8
+coli K-12 MG1655 harboring pSIM573 plasmid was grown for 2 h at 30 °C
+with shaking (250 revolutions per min (rpm)). It was shifted to 42 °C for
+15 min to induce the expression of theλ-Red recombinases. After that,
+the cells were centrifuged and washed to make electro-competent
+cells. Four hundred microgram of DNA editing template containing
+FRT-kanR-FRT and the reporter gene expression cassette was elec-
+troporated into these cells for recombination. Thekan
+R gene should be
+removed from the chromosome for subsequent recombination of the
+other reporter genes. To this end, the pCP20 plasmid was transformed
+into recombinantE. coli,a n dt h eﬂippase was induced at 37 °C during
+overnight culture to remove FRT-kan
+R from the chromosome.
+Construction of genetic components for the Tl-CRISPRi system
+Mach-T1R cells were used for plasmid construction and cultured in LB
+medium containing appropriate antibiotics. To construct the plasmids
+with different dCas13 orthologs, the backbone plasmid containing aTc
+inducible gene expression cassette was prepared by assembling two
+PCR fragments. One fragment containingtetR, bidirectional P
+tet pro-
+moter, and the ribosome binding site of thedCas13gene was ampliﬁed
+by tetR_BciVI_F and Ptet_RBS_GA_R. The other fragment containing the
+rrnB T1 terminator was ampliﬁed by rrnBT1_RBS_F and rrnBT1_pA-
+CYC_GA_R. These fragments were assembled into the pACYCDuet
+backbone digested by BciVI and Bsu36I, yielding the pACYC_tetR
+plasmid. SeveraldCas13 genes were incorporated between the ribo-
+s o m eb i n d i n gs i t ea n dt h er r n BT 1t e r m i n a t o ro ft h ep A C Y C _tetR.F o r
+generating a catalytically dead version of BzCas13b and PbCas13b,
+three separate PCR products, each containing alanine substitution
+mutations in the catalytic residues of the HEPN domain, were assem-
+bled and incorporated into the pACYC backbone using Gibson
+assembly. The originalCas13or dCas13genes are ampliﬁed from p2CT-
+His-MBP-Lbu_C2c2_R472 A_H477A_R1048A_H1053A (Addgene
+#83485), pBzcas13b (Addgene #89898), pPbCas13b (Addgene
+#89906), and pXR002: EF1a-dCasRx-2A-EGFP (Addgene #109050).
+The precursor CRISPR-RNA (pre-crRNA) expression plasmid was
+constructed based on pCDF_sgRNA-BsaI. To construct the LbuCas13a
+crRNA expression plasmid, two different PCR fragments were pre-
+pared; one is ampliﬁed by using SmR_BclI_F and crRNA_LbuCa-
+s13a_DR1_R, and the other is ampliﬁed by using SmR_BclI_R and
+crRNA_LbuCas13a_DR2_F. These two fragments were cut by BclI and
+ligated, yielding pCDF_precrRNA(Lbu)-NT. The other pre-crRNA
+expression cassettes were constructed similarly. For creating the vec-
+tor containing a matured version of RfxCas13d guide RNA,
+pCDF_sgRNA-BsaI was PCR ampli ﬁed with RfxCas13d_mature-
+RNA_BsaI_F and RfxCas13d_matureRNA_BsaI_R and self-ligated. To add
+a strong terminator downstream of mature guide RNA, the L3S2P21
+terminator
+74 was ampliﬁed by L3S2P21_Bsu36I_F and L3S2P21_AgeI_R
+and inserted between the Bsu36I and AgeI sites of pCDF_RfxgRNA-NT.
+Fragments harboring spacer sequences with appropriate 4-bp over-
+hang were prepared by PNK treatment followed by oligo annealing,
+and they were cloned into the pCDF_RfxgRNA-NT vector cut by BsaI.
+For the effective targeting of dCas13, the spacer sequences were
+rationally selected to form the least secondary structure inside itself
+while targeting the translation initiation region spanning from the
+Shine-Dalgarno sequence to the start codon of a target gene. The
+spacer sequences used in this study are listed in Supplementary Data 3.
+The pACYC plasmid harboring dRfxCas13d and constitutively
+expressedmCherry was prepared from the pACYC_dRfx. ThemCherry
+gene expression cassettes with four different constitutive promoters
+were ampliﬁed by TJmT_pACYC_GA_F and mCherryRBS_J231XX_GA_R.
+The PCR fragment harboring the L3S2P21 terminator was ampliﬁed by
+TJmT_Pr_GA_F and L3S2P21_TJmT_GA_R. These two PCR fragments
+were assembled with the backbone plasmid using Gibson assembly
+and cloned into the downstream oftetR gene. The plasmids carrying
+dRfxCas13d, mCherry, and the guide RNA, which was utilized for the
+validation of tunable Tl-CRISPRi inV. natriegens, were prepared from
+the pACYC_dRfx_P
+J23100_mCherry. The guide RNA expression cassette
+was ampliﬁed from pCDF-RfxgRNA vectors harboring the guide RNA of
+interest by L3S2P21_pACYC_GA_R and UPJ23119_TJmT_GA_F and was
+assembled into the pACYC_dRfx_P
+J23100_mCherry digested by BamHI.
+The mutated DR sequences of attenuated guide RNAs were
+altered by site-directed mutagenesis. For example, the pCDF_RfxgRNA-
+mCherry sp1 was PCR ampliﬁed using PJ23119_DRvariant (S01– F18)_R
+containing the mutant DR sequence, and mChsp1_invPCR_F, followed
+by PNK treatment and self-ligation by Quick Ligase. Other attenuated
+guide RNAs with different spacer sequences were prepared using the
+corresponding primers for each spacer and the mutated DR. The
+mutated DR sequences used in this study are listed in Supplemen-
+tary Data 3.
+The pET_Ptac-mcr for the IPTG-inducible expression of themcr
+gene inE. coliW was prepared by the following steps. The functionally
+enhanced mutantmcr gene
+75 encoding MCRN940V/K1106W/S1114R was ampli-
+ﬁed from pET-mcr* plasmid52 with the Ptac_EcoNI_F and mcr_AvrII_R.
+This PCR fragment was digested by EcoNI and AvrII and ligated into
+p E T D u e tp l a s m i dc u tb yt h es a m er e s t r i c t i o ne n z y m e s .
+Measuring relative expression levels of reporter genes and the
+speciﬁcg r o w t hr a t e si nE. coli
+All culture experiments measuringﬂuorescence or luminescence inE.
+coli were performed using an LB medium containing appropriate
+antibiotics (34μg/mL for chloramphenicol and 50μg/mL for specti-
+nomycin). The overnight inoculum from a single colony was diluted 1/
+100 into the fresh media with 100 ng/mL of aTc except in the experi-
+ment of Supplementary Fig. 2, which was performed by varying the
+c o n c e n t r a t i o no fa T c .A f t e ri n c u b a t i n gf o r8 ha t3 7 ° Cw i t h2 5 0 r p m
+shaking, 100μL of culture was sampled and washed with the PBS
+buffer, and the ﬂuorescence was detected using a Hidex Sense
+microplate reader (Hidex). The luminescence from nanoluciferase was
+generated using the Nano-Glo® Luciferase Assay System from Promega
+and was detected by Hidex. For dilution, the nanoluciferase buffer,
+PBS, cell culture, and the nanoluciferase substrate were mixed with a
+ratio of 50:40:10:1. OD
+600 was measured from culture broth using the
+Jenway 7300 spectrophotometer. The relative expression was deter-
+mined by dividing ﬂuorescence or luminescence units into OD600
+values and setting the value for the non-target control strain as 100%.
+For measuring the maximum speciﬁc growth rate ofE. coliunder dif-
+ferent conditions, the overnight culture of each colony was refreshed
+into a ratio of 1:100 with 100 ng/mL of aTc and loaded on the 96-well
+microplate, which was incubated at 37 °C with 600 rpm shaking using a
+Hidex. The maximum speciﬁc growth rate was quantiﬁed from linear
+regression of logarithmic OD
+600 during the exponential phase. The
+OD600 data of time points between 1 h and 3 h after refreshing the
+culture were used to calculate speciﬁc growth rates, except for the
+experiment of Fig.5,w h i c hu s e dt h ed a t ao f2– 4 h after refreshing.
+Analyzing protein expression by western blotting and coo-
+massie blue staining
+To analyze the expression of four different dCas13 orthologs, the 6x
+His-tag was inserted at the N-terminal of each dCas13 protein by site-
+directed mutagenesis using Lb, Bz, Pb, Rfx_NHis(6x)_F and dCas13_N-
+His(6x)_R. The NHis-dCas13 plasmid and the cognate guide RNA plas-
+mid expressing pre-crRNA targeting mCherry mRNA were transformed
+into EcM-mCherry cells. Culture conditions were the same for mea-
+suring the ﬂuorescence of mCherry. After 8 h of induction, cells
+reached the density of 1.8 OD
+600 were collected by centrifugation and
+resuspended into a 300μLv o l u m eo fe i t h e rl y s i sb u f f e r( 1 0 0 m M
+NaH2PO4, 10 mM Tris-HCl, and 8 M urea, pH 8.0) for the total fraction
+or BugBuster® Protein Extraction Reagent (Merck Millipore) for the
+soluble fraction. The lysates were sonicated by Q800R Sonicator
+(Qsonica) and were loaded in SurePAGE™ 4– 1 2 %B i s - T r i sg e l s( G e n -
+Script) with MOPS SDS Running Buffer (Thermo). In order to visualize
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 9
+whole protein, the gel was incubated with SimplyBlue™ SafeStain
+(Invitrogen) for 1 h and destained with deionized water overnight. For
+the visualization of His-tagged dCas13, western blotting was per-
+formed using the invitrolon PVDF/ﬁlter paper sandwiches (Invitrogen),
+6×-His tag monoclonal antibody (eBioscience), anti-mouse IgG (whole
+molecule)-alkaline phosphatase antibody produced in goat (Sigma)
+and 1-step™ NBT/BCIP substrate solution (Thermo) following the
+instruction of manufacturers. The 6×-His tag monoclonal antibody was
+diluted to 3:10,000, and the anti-mouse IgG (whole molecule)-alkaline
+phosphatase antibody was dilutedt o1 : 1 0 , 0 0 0d u r i n gt h ea n t i b o d y
+incubation steps.
+Measuring relative expression levels of mCherry inV. natriegens
+All culture experiments measuringﬂuorescence inV. natriegenswere
+performed using an LBv2 medium (LB medium supplemented with
+11.9 g/L of NaCl, 2.2 g/L of MgCl2, and 0.31 g/L of KCl) containing
+appropriate antibiotics (10μg/mL for chloramphenicol). The over-
+night inoculum from a single colony was diluted to the OD600 of 0.05
+into the fresh media with 100 ng/mL of aTc. After incubating for 18 h at
+30 °C with 250 rpm shaking, 100μL of culture was sampled and
+washed with the PBS buffer, and theﬂuorescence was detected using a
+Hidex Sense microplate reader (Hidex). OD
+600 was measured from
+culture broth using the Jenway 7300 spectrophotometer. The relative
+expression was determined by dividing relativeﬂuorescence units into
+OD
+600 and setting the value for the non-target control strain as 100%.
+RNA extraction and one-step reverse transcription and
+quantitative PCR
+The relative amount of mRNA of mCherry, GFP, and nanoluci-
+ferase was determined by real-time quantitative PCR (RT-qPCR).
+The total RNA of each strain was prepared from the cell culture by
+t h es a m ec o n d i t i o na p p l i e df o rﬂuorescence and luminescence
+measurements. The RNeasy Plus Mini Kit (Qiagen) was used for
+RNA extraction, and the on-column DNase treatment was fol-
+lowed by the RNase-free DNase set (Qiagen). The concentration of
+the total RNA sample was measured by NanoDrop One (Thermo
+Scientiﬁc), and the extraction quality was veriﬁed using DNA 5K/
+RNA/CZE24 LabChip (PerkinEl mer) on a LabChip GX Touch 24
+(PerkinElmer). The one-step reverse transcription and quantita-
+tive PCR were performed using Luna® Universal one-step RT-
+qPCR kit (New England Biolabs) and StepOnePlus real-time PCR
+system (Applied Biosystems). 180 ng of total RNA sample was
+used for 10μL of qPCR mixture. The oligonucleotide primers used
+for the RT-qPCR experiment are listed in Supplementary Data 2.
+Three reference genes, cysG, idnT,a n dhcaT, were combinato-
+rially used as internal standards of RT-qPCR experiments
+76.T h e
+relative target mRNA quantity was calculated by the ddCt
+method
+77 with the help of StepOnePlus Software (Applied
+Biosystems).
+Measuring knockdown efﬁciencies of endogenous operons ofE.
+coli by the Tl-CRISPRi
+The strains harboring thenanoluciferase-fused endogenous gene were
+prepared using pCas_CDF for scar-less recombination78.A f t e ro v e r -
+night culture and refreshing, theE. coliK-12 MG1655 strain harboring
+pCas_CDF was grown for 2 h at 30 °C with 0.2% arabinose to induce the
+expression ofλ-Red recombinases. The cells were washed with distilled
+deionized water for making electro-competent cells and electro-
+porated with 200 ng of the appropriate pCDF_sgRNA and 600 ng of
+dsDNA editing template. After checking successful recombination and
+detecting the activity of luciferase, subsequent curing of the pCDF
+plasmid was performed by culturing in LB with 50μg/mL of kanamycin
+and 200μM of IPTG at 30 °C. pCas_CDF was cured by culturing in LB at
+37 °C. Subsequently, pACYC_dRfx and pCDF plasmid containing
+appropriate guide RNA were electroporated for the Tl-CRISPRi
+experiment. The time point of sampling was 6 h after refreshing the
+culture and induction of the dCas13. The luminescence was generated
+using the Nano-Glo® Luciferase Assay System from Promega and was
+detected by Hidex. The nanoluciferase buffer, PBS, cell culture, and the
+nanoluciferase substrate were mixed with a ratio of 50:40:10:1.
+Analysis of 3-HP production inE. coliW
+We transformed pACYC_dRfx, pCDF_RfxgRNAs with the effective
+spacer, and pET_Ptac-mcr in theE. coliW (ATCC 9637) cell. The cell
+culture and 3-HP production was performed in modiﬁed M9 media
+(8 g/L of glucose, 2 g/L of NaCl, 2 g/L of NH4Cl, 10.7 g/L of K2HPO4,
+5.2 g/L of KH2PO4, 0.5 g/L of MgSO47H20, and 1 g/L of yeast extract)
+containing appropriate antibiotics (34μg/mL for chloramphenicol,
+50 μg/mL for spectinomycin, and 75μg/mL for ampicillin), at 37 °C
+with 250 rpm shaking. For the experiments in Fig.5, we conducted the
+b a c t e r i a lc u l t u r ei nt h et e s tt u b ew i t ha2 m Lv o l u m eo fm e d i a .T h e
+overnight culture was diluted at an OD600 of 0.05 and induced with
+100 ng/mL of aTc for the expression of dCas13. Subsequently, when
+the OD
+600 of the culture was reached at 0.8, 20μM of IPTG was added
+to induce themcr gene. After 24 h of shaking incubation, the culture
+broth was centrifuged, and the supernatant was sampled to measure
+the concentration of 3-HP. The fed-batch fermentations in Supple-
+mentary Fig. 12 were performed in the 25 mL of culture volume in the
+250 mL bafﬂed ﬂask and a 20 g/L initial concentration of glucose. The
+overall scheme of fermentation was the same with the test tube culture
+except for the concentration of IPTG, which was 200μMi nt h ef e d -
+batch fermentation. The HPLC analysis for the samples was performed
+by a 1260 Inﬁnity II LC system (Agilent) equipped with a Hi-Plex-H
+column (Agilent). Theﬂow rate, mobile phase, and column tempera-
+ture were 0.6 mL/min, 5 mM of H
+2SO4,a n d4 0° C ,r e s p e c t i v e l y .
+Reporting summary
+Further information on research design is available in the Nature
+Portfolio Reporting Summary linked to this article.
+Data availability
+All data supporting theﬁndings of this work are available within the
+paper and its Supplementary Informationﬁle. Bacterial strains and
+plasmids used in this study, and the other datasets generated and
+analyzed during this study are available from the corresponding
+author upon request. Source data are provided with this paper.
+References
+1. Zhang, R., Xu, W., Shao, S. & Wang, Q. Gene silencing through
+CRISPR interference in bacteria: current advances and future pro-
+spects. Front. Microbiol.12,1 –8 (2021).
+2. Han, Y. H., Kim, G. & Seo, S. W. Programmable synthetic biology
+tools for developing microbial cell factories.Curr. Opin. Biotechnol.
+79, 102874 (2023).
+3. Lv, X. et al. New synthetic biology tools for metabolic control.Curr.
+Opin. Biotechnol.76, 102724 (2022).
+4. Kent, R. & Dixon, N. Contemporary tools for regulating gene
+expression in bacteria.Trends Biotechnol.38,3 1 6–333 (2020).
+5. Ren, J., Lee, J. & Na, D. Recent advances in genetic engineering
+tools based on synthetic biology.J. Microbiol.58,1 –10 (2020).
+6. Qi, L. S. et al. Repurposing CRISPR as an RNA-guided platform for
+sequence-speciﬁcc o n t r o lo fg e n ee x p r e s s i o n .Cell 152, 1173–1183
+(2013).
+7. Zhang, X. et al. Multiplex gene regulation by CRISPR-ddCpf1.Cell
+Discov. 3,1 –9( 2 0 1 7 ) .
+8. Na, D. et al. Metabolic engineering ofEscherichia coliusing syn-
+thetic small regulatory RNAs.Nat. Biotechnol.31,1 7 0–174 (2013).
+9. Abudayyeh, O. O. et al. C2c2 is a single-component programmable
+RNA-guided RNA-targeting CRISPR effector.Science 353, aaf5573
+(2016).
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 10
+1 0 . E a s t - S e l e t s k y ,A .e ta l .T w od i s t inct RNase activities of CRISPR-C2c2
+enable guide-RNA processing and RNA detection.Nature 538,
+270–273 (2016).
+11. O ’Connell, M. R. Molecular mechanisms of RNA targeting by Cas13-
+containing type VI CRISPR–Cas systems.J. Mol. Biol.431,6 6–87
+(2019).
+12. Charles, E. J. et al. Engineering improved Cas13 effectors for tar-
+geted post-transcriptional regulation of gene expression. Preprint
+bioRxiv https://doi.org/10.1101/2021.05.26.445687(2021).
+13. Otoupal, P. B., Cress, B. F., Doudna, J. A. & Schoeniger, J. S. CRISPR-
+RNAa: targeted activation of translation using dCas13 fusions to
+translation initiation factors.Nucleic Acids Res. https://doi.org/10.
+1093/nar/gkac680(2022).
+14. Shmakov, S. et al. Discovery and functional characterization of
+diverse class 2 CRISPR-Cas systems.Mol. Cell 60,3 8 5–397
+(2015).
+15. Smargon, A. A. et al. Cas13b is a type VI-B CRISPR-associated RNA-
+guided rnase differentially regulated by accessory proteins Csx27
+and Csx28.Mol. Cell65,6 1 8–630.e7 (2017).
+16. Yan, W. X. et al. Cas13d is a compact RNA-targeting type VI CRISPR
+effector positively modulated by a WYL-domain-containing acces-
+sory protein.Mol. Cell70,3 2 7–339.e5 (2018).
+17. Hu, Y. et al. Metagenomic discovery of novel CRISPR-Cas13 sys-
+tems. Cell Discov.8, 107 (2022).
+18. Liu, L. et al. The molecular architecture for RNA-guided RNA clea-
+vage by Cas13a.Cell 170,7 1 4–726.e10 (2017).
+19. Konermann, S. et al. Transcriptome engineering with RNA-targeting
+type VI-D CRISPR effectors.Cell 173,6 6 5–676.e14 (2018).
+20. Eichner, H., Karlsson, J. & Loh, E. The emerging role of bacterial
+regulatory RNAs in disease.Trends Microbiol.30,9 5 9–972 (2022).
+21. Fujita, S., Tsumori, Y., Makino, Y., Saito, M. & Kawano, M. Develop-
+ment of multiplexing gene silencing system using conditionally
+induced polycistronic synthetic antisense RNAs inEscherichia coli.
+Biochem. Biophys. Res. Commun.556,1 6 3–170 (2021).
+22. Yang, Y., Lin, Y., Li, L., Linhardt, R. J. & Yan, Y. Regulating
+malonyl-CoA metabolism via synthetic antisense RNAs for
+enhanced biosynthesis of natural products.Metab. Eng. 29,
+217–226 (2015).
+23. Wu, Y. et al. Design of a programmable biosensor-CRISPRi genetic
+circuits for dynamic and autonomous dual-control of metabolicﬂux
+in Bacillus subtilis. Nucleic Acids Res.48, 996–1009 (2020).
+24. Tian, J. et al. Developing an endogenous quorum-sensing based
+CRISPRi circuit for autonomous and tunable dynamic regulation of
+multiple targets inStreptomyces. Nucleic Acids Res.48,8 1 8 8–8202
+(2020).
+25. Vento, J. M., Crook, N. & Beisel, C. L. Barriers to genome editing with
+CRISPR in bacteria.J. Ind. Microbiol. Biotechnol.46,1 3 2 7–1341
+(2019).
+26. Wessels, H.-H. et al. Prediction of on-target and off-target activity of
+CRISPR–Cas13d guide RNAs using deep learning.Nature Bio-
+technol.https://doi.org/10.1038/s41587-023-01830-8(2023).
+27. Cheng, X. et al. Modeling CRISPR-Cas13d on-target and off-target
+effects using machine learning approaches.Nat. Commun. 14,
+752 (2023).
+28. Wessels, H. H. et al. Massively parallel Cas13 screens reveal prin-
+ciples for guide RNA design.Nat. Biotechnol.38,7 2 2–727 (2020).
+29. Zhang, C. et al. Structural basis for the RNA-guided ribonuclease
+activity of CRISPR-Cas13d.Cell 175,2 1 2–223.e17 (2018).
+30. Irastortza-Olaziregi, M. & Amster-Choder, O. Coupled transcription-
+translation in prokaryotes: an old couple with new surprises.Front.
+Microbiol. 11, 624830 (2021).
+31. De Lay, N., Schu, D. J. & Gottesman, S. Bacterial small RNA-based
+negative regulation: Hfq and its accomplices.J. Biol. Chem.288,
+7996–8003 (2013).
+32. Prévost, K., Desnoyers, G., Jacq u e s ,J . - F . ,L a v o i e ,F .&M a s s é ,E .
+Small RNA-induced mRNA degradation achieved through both
+translation block and activated cleavage.Genes Dev.25,3 8 5–396
+(2011).
+33. Tian, T., Kang, J. W., Kang, A. &Lee, T. S. Redirecting metabolic
+ﬂux via combinatorial multiplex CRISPRi-mediated repression
+for isopentenol production inEscherichia coli. ACS Synth. Biol.8,
+391–402 (2019).
+34. Rousset, F. et al. Genome-wide CRISPR-dCas9 screens inE. coli
+identify essential genes and phage host factors.
+PLoS Genet.14,
+1–28 (2018).
+35. Dwijayanti, A., Storch, M., Stan, G.-B. & Baldwin, G. S. A modular
+RNA interference system for multiplexed gene regulation.Nucleic
+Acids Res.50,1 7 8 3–1793 (2022).
+36. Noh, M., Yoo, S. M., Kim, W. J. & Lee, S. Y. Gene expression
+knockdown by modulating synthetic small RNA expression in
+Escherichia coli. Cell Syst.5,4 1 8–426.e4 (2017).
+37. Noh, M., Yoo, S. M., Yang, D. & Lee, S. Y. Broad-spectrum gene
+repression using scaffold engineering of synthetic sRNAs.ACS
+Synth. Biol.8,1 4 5 2–1461 (2019).
+38. Vigouroux, A., Oldewurtel, E., Cui, L., Bikard, D. & Teeffelen, S.
+Tuning dCas9’s ability to block transcription enables robust,
+noiseless knockdown of bacterial genes.Mol. Syst. Biol.14,
+1–14 (2018).
+39. Byun, G., Yang, J. & Seo, S. W. CRISPRi-mediated tunable control of
+gene expression level with engineered single-guide RNA in
+Escherichia coli. Nucleic Acids Res.51, 4650–4659 (2023).
+4 0 . F o n t a n a ,J . ,D o n g ,C . ,H a m ,J .Y . ,Z a l a t a n ,J .G .&C a r o t h e r s ,J .M .
+Regulated expression of sgRNAs tunes CRISPRi inE. coli. Bio-
+technol. J.13, 1800069 (2018).
+41. Li, X. T. et al. TCRISPRi: tunable and reversible, one-step control of
+gene expression.Sci. Rep.6,1 –12 (2016).
+4 2 . E l o w i t z ,M .B . ,L e v i n e ,A .J . ,S i g g i a ,E .D .&S w a i n ,P .S .S t o c h a s t i c
+gene expression in a single cell.Science 297, 1183–1186 (2002).
+43. Wang, J., Li, C., Jiang, T. & Yan, Y. Biosensor-assisted titratable
+CRISPRi high-throughput (BATCH) screening for over-production
+phenotypes.Metab. Eng.75,5 8–67 (2023).
+4 4 . H a w k i n s ,J .S .e ta l .M i s m a t c h-CRISPRi reveals the co-varying
+expression-ﬁtness relationships of essential genes inEscherichia
+coli and Bacillus subtilis. Cell Syst.11,5 2 3–535.e9 (2020).
+45. Jost, M. et al. Titrating gene expression using libraries of system-
+atically attenuated CRISPR guide RNAs.Nat. Biotechnol.
+38,
+355–364 (2020).
+46. Zhang, B. et al. Two HEPN domains dictate CRISPR RNA maturation
+and target cleavage in Cas13d.Nat. Commun. 10, 2544 (2019).
+47. Nakashima, N., Tamura, T. & Good, L. Paired termini stabilize anti-
+sense RNAs and enhance conditional gene silencing inEscherichia
+coli. Nucleic Acids Res.34,e 1 3 8–e138 (2006).
+48. Hoffart, E. et al. High substrate uptake rates EmpowerVibrio
+natriegensas production host for industrial biotechnology.Appl.
+Environ. Microbiol. 83,e 0 1 6 1 4–e01617 (2017).
+4 9 . K i m ,S .K . ,S e o n g ,W . ,H a n ,G .H . ,L e e ,D .H .&L e e ,S .G .C R I S P R
+interference-guided multiplex repression of endogenous compet-
+ing pathway genes for redirecting metabolicﬂux inEscherichia coli.
+Microb. Cell Fact.16,1 –15 (2017).
+50. Hügler, M., Menendez, C., Schägger, H. & Fuchs, G. Malonyl-
+coenzyme A reductase fromChloroﬂexus aurantiacus,ak e y
+enzyme of the 3-hydroxypropionate cycle for autotrophic CO2
+ﬁxation. J. Bacteriol.184,2 4 0 4–2410 (2002).
+51. Kumar, V., Ashok, S. & Park, S. Recent advances in biological pro-
+duction of 3-hydroxypropionic acid.Biotechnol. Adv.31,9 4 5–961
+(2013).
+5 2 . L e e ,J .H .e ta l .E fﬁcient conversion of acetate to 3-hydroxypropionic
+acid by engineeredEscherichia coli. Catalysts8,5 2 5( 2 0 1 8 ) .
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 11
+5 3 . L a i ,N . ,L u o ,Y . ,F e i ,P . ,H u ,P .&W u ,H .O n es t o n et w ob i r d s :b i o -
+synthesis of 3-hydroxypropionic acid from CO2 and syngas-derived
+acetic acid inEscherichia coli. Synth. Syst. Biotechnol.6,1 4 4–152
+(2021).
+54. Park, J. H., Jang, Y.-S., Lee, J. W. & Lee, S. Y.Escherichia coliWa sa
+new platform strain for the enhanced production of
+L-valine by
+systems metabolic engineering.Biotechnol. Bioeng.108, 1140–1147
+(2011).
+55. Heath, R. J. & Rock, C. O. Enoyl-acyl carrier protein reductase
+(fabI) plays a determinant role in completing cycles of fatty acid
+elongation inEscherichia coli. J. Biol. Chem.270, 26538–26542
+(1995).
+5 6 . M o x l e y ,W .C . ,B r o w n ,R .E .&E i t e m a n ,M .A .Escherichia coliaceE
+variants coding pyruvate dehydrogenase improve the generation of
+pyruvate‐derived acetoin.Eng. Life Sci. 23, e2200054 (2023).
+57. Ziegler, M., Hägele, L., Gäbele, T. & Takors, R. CRISPRi enables fast
+growth followed by stable aerobic pyruvate formation inEscher-
+ichia coliwithout auxotrophy.Eng. Life Sci.22,7 0–84 (2022).
+58. Li, M., Ho, P. Y., Yao, S. & Shimizu, K. Effect oflpdA gene knockout
+on the metabolism inEscherichia colibased on enzyme activities,
+intracellular metabolite concentrations and metabolicﬂux analysis
+by 13C-labeling experiments.J. Biotechnol.122,2 5 4–266 (2006).
+5 9 . H o l l i n s h e a d ,W .D .e ta l .E x a m i n i n gEscherichia coliglycolytic
+pathways, catabolite repression, and metabolite channeling using
+Δpfk mutants.Biotechnol. Biofuels9, 212 (2016).
+6 0 . K i m ,Y .E .e ta l .C h a r a c t e r i z a t i o no fa nE n t n e r–Doudoroff pathway-
+activatedEscherichia coli. Biotechnol. Biofuels Bioprod.15,1 2 0
+(2022).
+61. Li, Y. et al. Metabolic engineering ofCorynebacterium glutamicum
+for methionine production by removing feedback inhibition and
+increasing NADPH level.Antonie Van. Leeuwenhoek109,1 1 8 5–1197
+(2016).
+62. Kaleta, C., Schäuble, S., Rinas, U. & Schuster, S. Metabolic costs of
+amino acid and protein production inEscherichia coli. Biotechnol. J.
+8, 1105–1114 (2013).
+63. Ji, X. et al. CRISPRi/dCpf1-mediated dynamic metabolic switch to
+enhance butenoic acid production inEscherichia coli. Appl.
+Microbiol. Biotechnol.104,5 3 8 5–5393 (2020).
+64. Milke, L. & Marienhagen, J. Engineering intracellular malonyl-CoA
+availability in microbial hosts and its impact on polyketide and fatty
+acid synthesis.A p p l .M i c r o b i o l .B i o t e c h n o l .104,6 0 5 7–6065 (2020).
+65. Ran, F. A. et al. Genome engineering using the CRISPR-Cas9 sys-
+tem. Nat. Protoc.8, 2281–2308 (2013).
+6 6 . H o ,H . ,F a n g ,J .R . ,C h e u n g ,J .&W a n g ,H .H .P r o g r a m m a b l eC R I S P R‐
+Cas transcriptional activation in bacteria.Mol. Syst. Biol.16,1 –12
+(2020).
+67. Dong, C., Fontana, J., Patel, A., Carothers, J. M. & Zalatan, J. G.
+Synthetic CRISPR-Cas gene activators for transcriptional repro-
+gramming in bacteria.Nat. Commun. 9,2 4 8 9( 2 0 1 8 ) .
+68. Mougiakos, I., Bosma, E. F., Ganguly, J., van der Oost, J. & van
+Kranenburg, R. Hijacking CRISPR-Cas for high-throughput bacterial
+metabolic engineering: advances and prospects.Curr. Opin. Bio-
+technol.50,1 4 6–157 (2018).
+69. Cheng, Y. et al. Machine learning for metabolic pathway optimiza-
+tion: a review.Comput. Struct. Biotechnol. J.21,2 3 8 1–2393 (2023).
+7 0 . B o o b ,A .G . ,C h e n ,J .&Z h a o ,H .E n a b l i n gp a t h w a yd e s i g nb ym u l -
+tiplex experimentation and machine learning.Metab. Eng.81,
+70–87 (2024).
+71. Lu, L. et al. CRISPR-based metabolic engineering in non-model
+microorganisms.Curr. Opin. Biotechnol.75, 102698 (2022).
+7 2 . V o l k e ,D .C . ,O r s i ,E .&N i k e l ,P .I .E m e r g e n tC R I S P R–Cas-based
+technologies for engineering non-model bacteria.Curr. Opin.
+Microbiol.75, 102353 (2023).
+73. Datta, S., Costantino, N. & Court, D. L. A set of recombineering
+plasmids for gram-negative bacteria.Gene 379,1 0 9–115 (2006).
+74. Chen, Y. J. et al. Characterization of 582 natural and synthetic ter-
+minators and quantiﬁcation of their design constraints.Nat. Meth-
+ods 10,6 5 9–664 (2013).
+75. Liu, C., Wang, Q., Xian, M., Ding, Y. & Zhao, G. Dissection of malonyl-
+coenzyme A reductase ofChloroﬂexus aurantiacusresults in
+enzyme activity improvement.PLoS One8,e 7 5 5 5 4( 2 0 1 3 ) .
+76. Zhou, K. et al. Novel reference genes for quantifying transcriptional
+responses ofEscherichia colito protein overexpression by quanti-
+tative PCR.BMC Mol. Biol.12,1 8( 2 0 1 1 ) .
+7 7 . L i v a k ,K .J .&S c h m i t t g e n ,T .D .A n a l y s i so fr e l a t i v eg e n ee x p r e s s i o n
+data using real-time quantitative PCR and the 2−ΔΔCT method.
+Methods 25,4 0 2–408 (2001).
+78. Jiang, Y. et al. Multigene editing in theEscherichia coligenome via
+the CRISPR-Cas9 system.Appl. Environ. Microbiol.81,2 5 0 6–2514
+(2015).
+Acknowledgements
+This work was supported by the Bio& Medical Technology Development
+Program (NRF-2021M3A9I4024737, NRF-2021M3A9I5023245, and RS-
+2024-00352569) and a grant (RS-2024-00345885) of the National
+Research Foundation (NRF) fundedby the Korean government (MSIT).
+We also acknowledge that this work was supported by the Korea Insti-
+tute of Marine Science & Technology Promotion (KIMST) funded by the
+Ministry of Oceans and Fisheries [20220258]. Hyeon Jin Kim was sup-
+ported by the Hyundai Motor Chung Mong-Koo fellowship.
+Author contributions
+G.K. and S.W.S. designed this project and overall experiments. G.K. and
+H.J.K1. constructed genetic systems and microbial strains. G.K. per-
+formed theﬂuorescence and luminescence measurements, RT-qPCR,
+and HPLC analysis ofE. coli. K.K. culturedV. natriegensstrains and
+analyzed theﬂuorescence of them. G.K., Ho Joon Kim, K.K., Hyeon Jin
+Kim, J.Y., and S.W.S. participated in the data analysis and discussions.
+G.K. and S.W.S. wrote the manuscript, and all authors read and
+approved theﬁnal manuscript.
+Competing interests
+G.K. and S.W.S. are inventors on Korean patent application 10-2023-
+0151135 and PCT patent application PCT/KR2024/006932,ﬁled by Seoul
+National University Research and Development Foundation. This patent
+covers the tunable Tl-CRISPRi technology via mutating the DR of guide
+RNA. All other authors declare no competing interests.
+Additional information
+Supplementary informationThe online version contains
+supplementary material available at
+https://doi.org/10.1038/s41467-024-49642-x.
+Correspondenceand requests for materials should be addressed to
+Sang Woo Seo.
+Peer review informationNature Communicationsthanks Rodrigo
+Amaro, Yongjin Zhou, and the other, anonymous, reviewer(s) for their
+contribution to the peer review of this work. A peer reviewﬁle is avail-
+able.
+Reprints and permissions informationis available at
+http://www.nature.com/reprints
+Publisher’s noteSpringer Nature remains neutral with regard to jur-
+isdictional claims in published maps and institutional afﬁliations.
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 12
+Open AccessThis article is licensed under a Creative Commons
+Attribution 4.0 International License, which permits use, sharing,
+adaptation, distribution and reproduction in any medium or format, as
+long as you give appropriate credit to the original author(s) and the
+source, provide a link to the Creative Commons licence, and indicate if
+changes were made. The images or other third party material in this
+article are included in the article’s Creative Commons licence, unless
+indicated otherwise in a credit line to the material. If material is not
+included in the article’s Creative Commons licence and your intended
+use is not permitted by statutory regulation or exceeds the permitted
+use, you will need to obtain permission directly from the copyright
+holder. To view a copy of this licence, visithttp://creativecommons.org/
+licenses/by/4.0/.
+© The Author(s) 2024
+Article https://doi.org/10.1038/s41467-024-49642-x
+Nature Communications|         (2024) 15:5319 13

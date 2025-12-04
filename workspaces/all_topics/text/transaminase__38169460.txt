@@ -1,0 +1,1170 @@
+Article https://doi.org/10.1038/s41467-023-44218-7
+Reprogramming biocatalytic futile cycles
+through computational engineering of
+stereochemical promiscuity to create an
+amine racemase
+Sang-Woo Han 1,2, Youngho Jang1,J i h y u nK o o k1, Jeesu Jang1 &
+Jong-Shik Shin 1
+Repurposing the intrinsic properties of natural enzymes can offer a viable
+solution to current synthetic challenges through the development of novel
+biocatalytic processes. Although aminoacid racemases are ubiquitous in living
+organisms, an amine racemase (AR) has not yet been discovered despite its
+synthetic potential for producing chiralamines. Here, we report the creation of
+an AR based on the serendipitous discovery that amine transaminases (ATAs)
+can perform stereoinversion of 2-aminobutane. Kinetic modeling revealed that
+the unexpected off-pathway activity results from stereochemically pro-
+miscuous futile cycles due to incomplete stereoselectivity for 2-aminobutane.
+This ﬁnding motivated us to engineer anS-selective ATA through in silico
+alanine scanning and empirical combinatorial mutations, creating an AR with
+broad substrate speciﬁcity. The resulting AR, carrying double point mutations,
+enables the racemization of both enantiomers of diverse chiral amines in the
+presence of a cognate ketone. This strategy may be generally applicable to a
+wide range of transaminases, paving the way for the development of new-to-
+nature racemases.
+Chirality of organic compounds is a universal chemical code that
+underlies the biomolecular basis of living organisms1. Chiral symmetry
+breaking has been established in the construction of biosynthetic
+networks after the emergence of life by adopting a speciﬁcs t e r e o -
+preference for biological building blocks, e.g.
+L-amino acids for pro-
+teins andD-sugars for nucleic acids2,3. However, living organisms have
+also found a way to enrich metabolic and physiological diversity by
+allocating biochemical tasks to the non-preferred enantiomers that are
+readily available from the major chiral pool through stereoinversion
+4.
+For example, serine racemase suppliesD-serine to mammalian brains
+as a signaling molecule5,6. This may explain why living organisms have
+evolved the enzymes specialized for racemizing certain chiral com-
+pounds, includingα-amino acids andα-hydroxy acids7.
+The biological signiﬁcance of chirality becomes crucial when
+ligand binding is controlled in a stereospeciﬁc way to target receptor
+proteins that are homochiral underL-conﬁguration4,8.I nf a c t ,t h e
+chirality of small-molecule pharmaceuticals plays a pivotal role in
+exhibiting desirable therapeutic efﬁcacy, and therefore the chiral
+antipode of the effective enantiomer often causes serious side effects,
+as seen with Thalidomide
+9. Consequently, it is essential for the phar-
+maceutical industry to develop synthetic methods affording facile
+preparation of enantiopure chiral drugs
+9.
+Among the chiral building blocks present in active pharma-
+ceutical ingredients, chiral amines constitute one of the essential
+stereogenic motifs and are found in approximately 40% of ther-
+apeutic drugs, including sertraline (Zoloft, depression), sitagliptin
+Received: 22 May 2023
+Accepted: 5 December 2023
+Check for updates
+1Department of Biotechnology, Yonsei University, 50 Yonsei-Ro, Seodaemun-Gu, Seoul 03722, South Korea.2Present address: Department of Biotechnology,
+Konkuk University, Chungju, South Korea.e-mail: enzymo@yonsei.ac.kr
+Nature Communications|           (2024) 15:49 1
+1234567890():,;
+1234567890():,;
+( Januvia, type 2 diabetes), rivastigmine (Exelon, Alzheimer’sd i s -
+ease), tadala ﬁl (Cialis, erectile dysfunction), and oseltamivir
+(Tamiﬂu, inﬂuenza)10–12. In addition, chiral amines are widely used
+for agrochemical synthesis10. As a result, extensive studies have
+been conducted on chemocatalytic enantioselective synthesis of
+chiral amines using organocatalysts and transition-metal catalysts
+via reductive amination of ketones or hydrogenation of imines and
+enamines
+11–13. It is also notable that traditional resolution methods
+through diastereomeric crystallization are still widely used despite
+a 50% yield limit
+14. However, growing social demands for sustainable
+and green processes have prioritized the development of biocata-
+lytic methods
+10.
+Depending on the substrate type and the desired product
+outcome, the biocatalytic strategies available for chiral amine pro-
+duction are classi ﬁed into kinetic resolution (KR), asymmetric
+synthesis, and deracemization, which exploit lipase, amine transa-
+minase (ATA), monoamine oxidase, imine reductase, amine dehy-
+drogenase, and reductive aminase
+15. Lipase is the only enzyme that
+does not act on the stereogenic C-N bond of the amine substrates
+and thus permits only KR
+16. However, despite the 50% yield penalty
+of KR, the lipase process is the most robust technology owing to its
+reliable scalability
+16,17. The yield limit problem of KR can be over-
+come by coupling in situ amine racemization with the enzymatic
+resolution, which has been the focus of extensive research
+efforts
+16,18–21. However, amines are rather recalcitrant to chemical
+racemization22,23, and thus the resulting harsh reaction conditions
+are largely incompatible with biocatalysis16,19,24,25.A sar e s u l t ,t h e
+current lipase process relies on racemization and recycling of the
+unwanted amine leftover after KR
+16.
+An amine racemase (AR) would provide an ideal solution to
+address the biocompatibility issues associated with the chemical
+racemization. However, to date, such an enzyme, either natural or
+engineered, has not yet been reported
+26. Motivated by the potential
+utility of AR, we hypothesized that creating an AR might be possible
+by rerouting a native reaction pathway of ATAs, also known asω-
+transaminases, as most racemases are evolutionarily and catalyti-
+cally related to transaminases
+27. We serendipitously discovered that
+racemization of 2-aminobutane commenced at near equilibrium of
+ATA reactions, which piqued our interest in exploring the feasibility
+of creating an AR by engineering ATAs. In this study, we report on
+the computational active-site remodeling of an ATA to confer ste-
+reochemical promiscuity and demonstrate the racemization of both
+enantiomers of structurally diverse chiral amines using the
+engineered ATA.
+Results and discussion
+Theoretical feasibility of AR by engineering natural enzymes
+To explore a plausible strategy for creating an AR, we compared two
+catalytically related enzymes: amino acid racemase (AAR) and ATA,
+both of which are pyridoxal 5′-phosphate (PLP)-dependent (Fig.1a)
+27.
+AAR displays the desired reaction speciﬁcity, i.e. stereoinversion of Cα
+chirality, but does not accept amine substrates. On the other hand,
+ATA exhibits the matching substrate speciﬁcity but catalyzes a differ-
+ent reaction. Both enzymes share an initial reaction pathway leading to
+a carbanionic intermediate, and the ensuing steps bifurcate depending
+on the electron sink capacity of PLP (Fig.1b)
+28. Unlike AAR, the pro-
+tonated PLP of ATA enables negative charge delocalization and thus
+promotes protonation at C4′ of the carbanionic intermediate stabi-
+lized by a quinonoid structure (Supplementary Fig. 1)
+28.
+Based on mechanistic considerations, engineering of AAR to AR
+seems more feasible because it requires modiﬁcation of only the
+substrate bias. However, the carboxylate group of amino acid sub-
+strates has been suggested to play a crucial role in the proton relay
+between catalytic bases of AAR
+29. This led us to discard the AAR
+strategy because an alternative proton transfer would be difﬁcult to
+realize. On the other hand, engineering of ATA also poses challenges
+because it requires extensive mutations to shunt the canonical ATA
+pathway leading to the pyridoxamine 5′-phosphate form of enzyme (E-
+PMP), including adjusted electron sink capacity, complementary cat-
+alytic bases, and stereochemical promiscuity.
+Discovery of AR activity from native ATAs
+We serendipitously discovered a clue to the engineering strategy
+when we found that theS-selective ATA fromOchrobactrum anthropi
+(ATA-OA)
+30 converted S-2-aminobutane (S-D2) to the chiral antipode.
+We carried out transamination between equimolarS-α-methylbenzy-
+lamine (S-D1) and 2-butanone (A2), and monitored the generation of
+S-D2 by chiral HPLC over a prolonged reaction time (Fig.2a). Sur-
+prisingly, we found that S-D2 produced by ATA-OA underwent a
+gradual reduction after 3 h, whereasR-D2 was built up by the same
+amount of theS-D2 decrement, with the totalD2 kept constant. This
+led to a continuous decrease in the enantiomeric excess (ee)o fS-D2
+from >99% at 0.5 h to 62% at 24 h. We also examined the reverse
+reaction and observed the stereoinversion ofS-D2 again after reach-
+ing equilibrium (Fig.2b), ending up with 58%eeS at 24 h. In contrast,
+stereoinversion ofS-D1 was not observed in both reactions (Supple-
+mentary Fig. 2).
+To investigate whether the stereoinversion was independent of
+the cosubstrate, we tested seven additional amino donors (D3-D9)f o r
+AR
+AAR
+engineering of reaction specificityre
+engineering of substrate specificity 
+a b
+racemization
+external aldimine
+N CH3
+O
+-
+NH
++
+COO
+-R
+N CH3
+O
+-
++
+HN
+Lys
+internal aldimine (E-PLP)
+NH2
+COO
+-R
+H
+PO4
+2- PO4
+2-
+H
+carbanionic intermediate
+N CH3
+O
+-
+NH
++
+COO
+-R
+PO4
+2-
+H
+N CH3
+O
+-
++
+HN
+Lys
+NH2
+COO
+-R
+H
+PO4
+2-
+internal aldimine (E-PLP)
+R1
+R2
+NH2
+R1
+R2
+NH2
+R COOH
+NH2
+R COOH
+NH2
+L-amino acid
+N CH
+PO4
+nic inte
+O
+NH
++
+CR
+H
+PO4
+2-
+N CH
+O4
+2-PO
+transaldimination deprotonation
+protonation at C/g68
+protonation at C4´
+ATA
++R1
+R2
+NH2
+R3
+O
+COOH
++R1
+R2
+O
+R3
+H2N
+COOH
+H+
+N CH3
+O
+-
+NH
++
+COO
+-R
+PO4
+2-
+C/g68
+C/g23´
+transamination
+N CH3
+O
+-
+NH
++
+COO
+-R
+PO4
+2-
+ketimine
+O
+COO
+-R
+H2O
+O
+-
+NH
+O 2
+protonation at C4´H+
+O
+-
+NH
+2
+C/g23´
+PO 2
+N
+etimin
+hydrolysis
+H
+N CH3
+O
+-
+NH2
+PO4
+2-
+E-PMP
+H
+D-amino acid
+/g68-keto acid
+-
+transaldimination
+H+
+H+
+Fig. 1 | Schematics of the engineering strategy and the reaction pathways.
+a Conceptual design of constructing AR using AAR and ATA as an engineering
+template. b Comparison of the whole reaction pathways of AAR and ATA as
+exempliﬁed by aL-amino acid substrate of which Hα is colored red. The pyridine
+nitrogen is shown as an unprotonated form found in AAR.
+Article https://doi.org/10.1038/s41467-023-44218-7
+Nature Communications|           (2024) 15:49 2
+reductive amination ofA2 (Fig. 2c). All the reactions resulted in pro-
+gressive decreases ineeS of D2 (Supplementary Fig. 3), leading to less
+than 30% eeS after 3 days. Even near-racemic outcomes ofD2 were
+attained withD3, D5,a n dD7-D9. It should be noted that the equili-
+brium position is dependent on the amino donor, resulting in different
+total D2 concentrations.
+The stereoinversion ofS-D2, but notS-D1, suggests that the off-
+pathway activity results from incomplete stereoselectivity forD2.
+All ATAs are known to be strictly stereoselective for chiral amines
+and catalyze reductive amination of prochiral ketones with >99%ee,
+explained by a two-binding-site model consisting of a large (L) and a
+small (S) pocket (Fig. 2d)
+31. The S pocket has been proposed to
+accommodate up to an ethyl group, which is a crucial determinant
+for the stereospeciﬁc substrate recognition
+31. For example, pro-
+ductive binding ofR-D1 to S-selective ATAs is forbidden due to a
+steric clash of the phenyl group in the S pocket. Nevertheless, as we
+observed previously32, the active-site model does not rule out the
+possibility that ATA-OA can marginally acceptR-D2 because both
+Cα-ﬂanking substituents are no larger than an ethyl group. Con-
+sistent with this,S-3-methyl-2-butylamine did not show the stereo-
+inversion due to an isopropyl substituent (Supplementary Fig. 4).
+However, the incomplete stereoselectivity for D2 alone cannot
+explain the gradual changes in the chiral composition, because the
+stereoselectivity should remain constant regardless of the reaction
+progress.
+Kinetic dissection of ATA-OA
+We conducted kinetic analysis of ATA-OA with each enantiomer ofD1
+and D2 to investigate the stereochemical properties (Fig.2e). ATAs
+mediate two half reactions, namely oxidative deamination (OD) of an
+amino donor (D) and reductive amination (RA) of an acceptor (A), by
+shuttling between E-PLP and E-PMP
+33. Taking into account the reaction
+reversibility and substrate chirality, we examined four elemental
+reactions denoted by I
+S,I R,I IS,a n dI IR where I and II representD1-A1 and
+D2-A2 pairs, respectively. Note that going back and forth within each
+elemental reaction results in a futile cycle involving no overall change.
+A complete reaction can be expressed by coupling two elemental
+reactions. For example,S-D1 + A2 ↔A1 + S-D2 is denoted by I
+S/IIS which
+represents IS coupled with the reverse of IIS.
+Instead of using complicated nonlinear kinetics, we approximated
+that the OD and RA reactions follow second-order kinetics. For
+e x a m p l e ,t h er e a c t i o nr a t e(v)f o rI
+S
+OD is kOD;Is [S-D1][E-PLP]. The strict
+S-selectivity forD1 is manifested by the absence of generation ofA1
+from R-D1 and vice versa, leading tokOD;IR ≈ 0a n dkRA;IR ≈ 0. It is worth
+noting that aS-D1 impurity in the commercially availableR-D1 stock
+(determined to be 99.1%eeR) initially resulted in generation ofA1
+during OD ofR-D1,b u tt h e nA1 plateaued at the same concentration as
+the S-D1 impurity (Supplementary Fig. 5). In contrast, the incomple-
+te stereoselectivity forD2 enabled us to measure bothkOD;IIR and
+kRA;IIR , and we could determine the enantiomeric ratio (i.e.,ES deﬁned
+as kS/kR)34 to be 20 for both OD and RA. The result ofES
+OD = ES
+RA indi-
+cates that ATA-OA achieves the same stereocontrol over either direc-
+tion of the reaction pathway.
+The equilibrium constant (K
+eq) of the elemental reactions can be
+determined by Keq = kOD/kRA because vOD = vRA at equilibrium. The
+similar values ofKeq;IIs and Keq;IIR in Fig. 2e are consistent with the
+notion that chemical equilibrium is irrespective of chirality. To verify
+this, we analyzed distribution changes in the enzyme intermediates
+upon exposure to each enantiomer ofD2 using spectral analysis
+(Fig.2f). Incubation of the E-PLP form of ATA-OA with eitherS-D2 or R-
+D2 resulted in decreases in band 1, centered at 408 nm, and con-
+comitant increases in band 2 corresponding to E-PMP
+(λ
+max = 339 nm)35. The spectral change induced byS-D2 was faster
+than that by R-D2, consistent with kOD;IIs > kOD;IIR .B o t hs a m p l e s
+reached equilibrium within 10 min as no further changes were detec-
+ted. The identical spectra of ATA-OA equilibrated withS-D2 and R-D2
+clearly indicate that population distributions of E-PLP and E-PMP are
+the same irrespective of theD2 chirality, corroboratingK
+eq;IIs = KOD;IIR .
+Computational simulations of the stereoinversion
+To understand how ATA-OA achieves racemization ofS-D2 even with
+E S =2 0c o m p a r e dt oE ≈ 1 of AARs, we carried out kinetic modeling of
+t h er e a c t i o ni nF i g .2a by considering IS,I IS,a n dI IR. The simulation was
+initially carried out under suppressed futile cycle conditions by
+excluding v
+Is ,RA, vIIs ,OD,a n dvIIR ,OD, leading to a constanteeS of D2
+throughout the reaction (Fig.3a). This result had been thought to be an
+expected product outcome from stereochemically incomplete ATA
+reactions until we discovered the stereoinversion phenomenon.
+Fig. 2 | Discovery and biochemical characterization of innate AR activity of
+ATA-OA for D2. aStereoinversion of theS-D2 product fromS-D1 and A2.
+b Stereoinversion of theS-D2 substrate in the reaction withA1. The red arrow in
+a and b indicates the time when the totalD2 starts to plateau.c Chiral composition
+of theD2 product after 3-day reactions betweenA2 and D3-D9. Numbers in the
+ﬁgure representeeS (%) ofD2. d Schematics of the active-site model ofS-selective
+ATAs. e Stereochemical properties of ATA-OA examined by kinetic analysis for
+elemental reactions.f Spectral changes of the E-PLP form of ATA-OA inducedS-D2
+and R-D2. Source data are provided as a Source Dataﬁle.
+Article https://doi.org/10.1038/s41467-023-44218-7
+Nature Communications|           (2024) 15:49 3
+H o w e v e r ,w h e nt h ef u t i l ec y c l e sw e r ei n c l u d e di nt h es i m u l a t i o n ,
+reaction proﬁles resembled the experimental results and the predicted
+eeS was in reasonable agreement with the actual measurements
+(Fig. 3b). The simulation shows thatS-D2 begins to decrease at 3.8 h
+and complete racemization (i.e., eeS < 1%) occurs at 188 h (inset
+of Fig.3b).
+To better understand how the stereoinversion proceeds, we
+compare vOD and vRA of IS,I IS,a n dI IR (Fig. 3c). IS
+OD,I IS
+RA,a n dI IR
+RA
+initially overwhelm the respective reverse reactions, and thenvOD and
+vRA become closer to each other toward equilibrium. To trace how fast
+the three elemental reactions approach equilibrium, net reaction rates
+(i.e., v = v
+OD – vRA) are visualized in inset of Fig.3c. As expected, IS
+approaches equilibrium (i.e.,v = 0) most rapidly, seemingly because
+kOD;Is is much higher thankRA;IIs and kRA;IIR . In contrast, IIS cannot
+approach equilibrium alone due to the chemical perturbation caused
+by the far-from-equilibrium state of IIR which is occurring most slowly.
+As IIR consumesA2 under vIIR ,OD < vIIR ,RA,I IS keeps adjustingvIIs ,OD and
+vIIs ,RA to compensate for the equilibrium perturbation. Eventually,vIIs
+changes the sign at 3.8 h and IIS begins to convertS-D2 into A2 to fuel
+vRA;IIR . Hence, stereoinversion via IIS/IIR,i . e .S-D2 ↔R-D2,b e g i n sa t3 . 8h
+and proceeds untilS-D2 = R-D2 to meetkeq;IIs =IIR =1 .
+Direct racemization of D2 by coupling IIS and IIR
+As shown in Fig.2b, the stereoinversion ofS-D2 in the presence of a
+non-cognate acceptor cannot lead to 100% yield ofrac-D2.W ep o s i t e d
+that racemization ofD2 without the yield loss could be implemented
+by running only IIS and IIR in the presence ofA2. Indeed, in agreement
+with the model prediction, both enantiomers ofD2 underwent desired
+racemization without concentration changes in totalD2 (Fig.3d). Note
+that coupling IIS and IIR represents a futile cycle involving changes in
+chiral composition only. Intriguingly, the racemization ofS-D2 (top
+panel in Fig.3d, IIS/IIR) was slower than that ofR-D2 (bottom panel, IIR/
+IIS) despite theS-preference of ATA-OA. This can be explained by the
+rate-determining step (RDS) of IIS/IIR being slower than that of IIR/IIS
+(Fig. 2e). TheS-to-R inversion proceeds via IIS
+OD and IIR
+RA, and thus is
+limited by IIR
+RA becausekOD;IIs » kRA;IIR .H o w e v e r ,t h eR-to-S inversion is
+similarly limited by IIR
+OD and IIS
+RA as kOD;IIR and kRA;IIs are not very
+different. Therefore,kRA;IIR much lower than bothkOD;IIR and kRA;IIs
+explains vIIR =IIS > vIIS=IIR .
+To corroborate the RDS analysis, initial rates of IIS/IIR and IIR/
+IIS were measured at varying substrate concentrations (Supple-
+mentary Fig. 6). Indeed, vIIS=IIR was independent of S-D2 but
+showed a positive correlation with A2,w h e r e a svIIR=IIS was
+dependent on both R-D2 and A2. Likewise, an increase in A2
+promotes racemization of both S-D2 and R-D2 with IIR/IIS being
+faster than IIS/IIR at the sameA2 level (Fig. 3e). This result led us
+to examine whether DMSO might augment the racemization
+reaction because RA of ketones by ATAs is known to be enhanced
+by DMSO
+36. Indeed, 15% (v/v) DMSO turned out to promote the
+racemization of both S-D2 and R-D2 (Supplementary Fig. 7).
+To examine whether the racemization ofD2 is generally occurring
+among ATAs, we tested four additional enzymes, i.e. twoS-selective
+(ATA-PD31 and ATA-CV37)a n dt w oR-selective (ATA-AR38 and ATA-AF39)
+ATAs cloned fromParacoccus denitriﬁcans, Chromobacterium viola-
+ceum, Arthrobactersp., andAspergillus fumigatus, respectively. Indeed,
+all the ATAs exhibit AR activity for bothS-D2 and R-D2 with the race-
+mization of a preferred enantiomer being slower than that of the chiral
+antipode (Fig.3f).
+In silico engineering of ATA-OA to acceptR-D1
+The AR activity discovered with natural ATAs results from incomplete
+stereoselectivity and thus can only be applied to a few amines with Cα-
+ﬂanking substituents not larger than an ethyl group. Therefore, we set
+out to engineer ATA-OA usingD1 as a model substrate to create a
+generally applicable AR. We reasoned that racemization ofD1 by
+coupling IS and IR is thermodynamically feasible owing tokeq;IS=IR =1 ,
+but kinetically trapped due tokIR ≈ 0. To reprogram the latent futile
+cycle, we opted to reduce the kinetic barrier of I R.N u m e r i c a l
+Fig. 3 | Revealing kinetic basis of stereoinversion and demonstrating direct AR
+reactions by native ATAs. aKinetic modeling of the ATA-OA reaction in Fig.2ab y
+consideringvIs ,OD, vIIs ,RA,a n dvIIR ,RA only. b Kinetic modeling of the same reaction
+by additionally includingvIs ,RA, vIIs ,OD,a n dvIIR ,OD. Closed circles represent experi-
+mentaleeS adapted from Fig.2a. The insetﬁgure represents the reaction proﬁles up
+to 200 h.c Individual rate proﬁles of OD and RA for IS,I IS,a n dI IR for the simulation
+result of Fig.3b. The insetﬁgure represents the net rate proﬁles over an extended
+time.d Direct racemization ofS-D2 (top panel) andR-D2 (bottom panel) by ATA-OA
+in the presence ofA2. Solid lines represent simulation results.e Dependency of
+ATA-OA-catalyzed racemization ofS-D2 (top panel) andR-D2 (bottom panel) on the
+A2 concentration (0.1– 2 molar equivalent toD2). f AR activity of various ATAs for
+S-D2 (top panel) andR-D2 (bottom panel) withA2. Source data are provided as a
+Source Dataﬁle.
+Article https://doi.org/10.1038/s41467-023-44218-7
+Nature Communications|           (2024) 15:49 4
+simulations using a hypothetical ATA-OA with tunableES ranging from
+1 to 1000 show that both IS/IR and IR/IS proceed faster at lowerES and
+converge to an identical result atES = 1 (Supplementary Fig. 8).
+In a previous study, we demonstrated computational engineering
+of ATA-OA to improve activities for ketones by exploiting mechanistic
+analysis of the nucleophilic attack trajectory (NAT)31.H e r ew ea p p l i e d
+the NAT analysis to identify an active-site residue whose mutation
+could allow productive binding ofR-D1 without hindering the native
+binding ofS-D1. ATA-OA forms a homodimeric structure harboring
+two active sites on the subunit interface (inset of Fig.4a). The residue
+R417, colored red, serves as a conformational switch that shifts
+between an outward structure to accept a bulky group and an inward
+one to recognize a carboxylate group
+31. The top docking pose ofS-D1,
+ranked by binding energy, outlines the L and S pockets where the
+phenyl and methyl groups are accommodated, respectively (Fig.4a).
+The asterisks of F86*, F323*, and T324* indicate that the residues are
+from the other subunit. The S pocket is located adjacent to PLP and is
+end-capped by S119, V154, and F323. The amino group ofS-D1 forms
+hydrogen bonds with the phenolic oxygen of PLP andπ orbitals of
+Y151, seemingly increasing nucleophilicity of the substrate required for
+the nucleophilic attack on C4′ of PLP (Fig.4b). The NAT length (i.e., Nα-
+C4′) of 3.1 Å is similar to 3.0 Å found with the reactive acceptor, e.g.
+benzaldehyde, in the previous study
+31. The angular orientation of NAT
+is represented by two characteristic angles (Fig.4c), namely a dihedral
+angle (θDH) and a Bürgi-Dunitz angle (θBD), which are known to be
+optimal at 90o and 105o, respectively40. The docking pose ofS-D1
+shows θDH =7 8o and θBD =9 1o, close to the optimal orientations.
+Another crucial aspect to consider is the orientation of Hα relative to
+Nε of the catalytic lysine. After the nucleophilic attack, theε-amino
+group of K287 released from the internal aldimine should be available
+to Hα for proton abstraction which is known to be a RDS
+41.T h i s
+explains why R-D1 is completely non-reactive despite having a top
+docking pose similar to that ofS-D1 (Fig. 4d). Indeed, the NAT length,
+θDH,a n dθBD of R-D1 are 3.1 Å, 70o,a n d7 9o, respectively. However, the
+spatial positioning assumes the relative orientation of Hα of R-D1
+opposite to that ofS-D1. Therefore, the Hα of R-D1 points away from
+Nε, making it inaccessible for proton abstraction. We inspected all the
+R-D1 docking poses, but none of them showed theS-D1-like position-
+ing of both Nα and Hα (Supplementary Fig. 9).
+We also conducted docking simulations withS-D2 and R-D2 to
+investigate whether the NAT analysis could explain the incomplete
+stereoselectivity forD2. Among the docking poses ofS-D2,t h ef o u r t h
+one assumes desirable positioning of Nα and Hα (Fig. 4e), whereas the
+top three poses show limited accessibility of Hα to Nε.R e g a r d i n gR-D2,
+the sixth pose allows productive binding where the ethyl and methyl
+substituents are accommodated in a reverse manner by the S and L
+pockets, respectively (Fig.4f).
+Taken together, we posit that productive binding ofR-D1 may
+occur if the S pocket is excavated large enough to accept a phenyl
+group. To explore this possibility, we performed in silico alanine
+substitution of the nine active-site residues shown in Fig.4a, except for
+S119, A230, and R417, and then carried out docking simulations withR-
+D1. Note that the residues surrounding the methyl group ofS-D1 are
+Y20, L57, F86*, Y151, and T324*. Docking simulations predict that only
+the F86*A mutation allows for productive binding ofR-D1 (8th pose),
+considering spatial positioning of Nα and Hα (Fig. 4g). Truncation of
+the phenyl group from F86* upon the alanine substitution creates an
+enlarged S pocket with additional room indicated by a gray surface.
+This enables the reverse binding ofR-D1,w i t ht h eLa n dSp o c k e t s
+accommodating the methyl and phenyl groups ofR-D1,r e s p e c t i v e l y ,
+similar to the binding ofR-D2 in the wild type. However, such a reverse
+binding ofR-D1 was not found with the other eight mutants, despite
+Fig. 4 | Computational engineering of ATA-OA for stereochemical promiscuity
+toward D1. aThe top docking pose ofS-D1 in ATA-OA. Color use of the active-site
+residues is consistent with that of labels. The internal aldimine andS-D1 are shown
+as thick-stick and ball-and-stick representations, respectively. The L and S pockets
+are enclosed by dotted circles colored green and cyan, respectively. The insetﬁgure
+shows a surface representation of the homodimeric structure whose subunits are
+colored differently. The active-site entrance is marked by an orange square, with
+R417 highlighted in red.b A close-up view of theS-D1 docking pose showing
+H-bonds (dotted lines) and the NAT length (green solid line).c Graphical depiction
+of NAT angular orientations. The green dotted arrow represents NAT. Docking
+poses of (d) R-D1,( e) S-D2,a n d(f ) R-D2 in ATA-OA are shown as thick sticks, in
+comparison to that ofS-D1 (thin sticks).g Docking pose ofR-D1 (cyan) in the F86*A
+mutant of ATA-OA relative to that ofS-D1 in the wild type (magenta). Yellow and
+gray surfaces show the original active site and the expanded room created by
+F86*A, respectively. The Nα and Hα atoms ofD1 are shown as a ball representation
+and are colored blue and yellow, respectively. This coloring is consistent acrossa to
+g. h Activities of the F86*A mutant forS-D1 and R-D1 in comparison with those of
+the wild type. Note a hundred-fold difference in scale between the left and right
+y-axis. Source data are provided as a Source Dataﬁle. Data inh are mean values of
+quadruplicate experiments with error bars indicating the s. d. (n =4 ) .
+Article https://doi.org/10.1038/s41467-023-44218-7
+Nature Communications|           (2024) 15:49 5
+thorough inspection of all the docking poses. The binding pose ofS-D1
+in the F86*A mutant is almost identical to that in the wild type, sug-
+gesting that F86*A would not affect the native binding ofS-D1 (Sup-
+plementary Fig. 10).
+To verify the model prediction, we carried out activity assays for
+R-D1 with puriﬁed enzymes of all the nine mutants. Indeed, only the
+F86*A mutant exhibited a detectable activity forR-D1 (Supplementary
+Table 1). Thev
+S/vR ratio was determined to be 16 (Fig.4h). However, the
+F86*A mutation was found to eliminate most of the native activity,
+resulting in only 4% residual activity for S-D1 compared to the
+wild type.
+Considering the undetectable activity of the wild-type enzyme
+toward R-D1, the dramatic alteration in stereoselectivity induced by
+F86*A indicates that the bulky aromatic side chain of F86* serves as a
+structural gatekeeper against stereochemical promiscuity. To explore
+whether this stereocontrol strategy is shared among ATAs, we con-
+ducted a partial multiple sequence alignment of 14S-selective ATAs
+whose X-ray structures have been determined (Supplementary
+Table 2). Indeed, the F86* residue of ATA-OA is conserved and repre-
+sented by aromatic amino acids, speciﬁcally eleven Phe, two Tyr, and
+one Trp.
+To verify whether the reduction in size of the gatekeeper residue
+could lead to deteriorated stereocontrol in other ATAs, we measured
+the stereoselectivity of an F85*A mutant of ATA-PD forD1 in compar-
+ison with the parental enzyme (Supplementary Fig. 11). Unlike ATA-OA,
+ATA-PD displayed a detectable basal activity forR-D1 and the resulting
+v
+S/vR ratio of the wild-type enzyme was determined to be 4100 ± 400.
+As observed with ATA-OA/F86*A, the F85*A mutation introduced to
+ATA-PD led to a drastic loss of stereocontrol forD1, representing a 15-
+fold reduction inv
+S/vR. Notably, the ATA-PD/F85*A mutant showed
+signiﬁcantly reduced activity forS-D1, at only 9% residual activity,
+similar to ATA-OA/F86*A.
+In addition to ATA-OA and ATA-PD in this study, it was reported
+elsewhere that ATA-CV underwent a remarkable reduction in stereo-
+selectivity forD1 due to F88*A mutation, resulting in a change in theE
+value from 150 to 7
+42. In line with these results, Ao et al. recently
+reported that a point mutation to leucine at the same position resulted
+in ATA fromRuegeria sp. TM1040 exhibiting substantial activity for
+R-D143.
+Combinatorial mutations to restore native activity
+The drastic loss of the native activity of ATA-OA caused by F86*A,
+despite the intended stereochemical promiscuity, prompted us to
+carry out a second round of enzyme engineering to restore the activity.
+The active site of ATA-OA is mostly constructed by a single subunit and
+is completed by recruiting a loop region of another subunit from F82*
+to R89* (Fig.5a). Notably, F86* directly participates in the active site by
+ﬁlling in the breach between L57 and Y20 (Fig.5b). Therefore, we
+suspected that F86*A might be detrimental to the structural stability of
+the active site. To verify this presumption, we tested F86*L forD1,
+anticipating a milder structural perturbation and, consequently, a
+lower loss of activity compared to what was observed with F86*A
+(Supplementary Fig. 12). Indeed, the F86*L mutant showed only a 20%
+reduction in native activity forS-D1. It is worth noting that F86*L allows
+for substantial activity forR-D1,r e s u l t i n gi nv
+S/vR = 91, reminiscent of
+the Y87*L mutant of ATA fromRuegeria sp. TM104043.
+In a previous study, four active-site residues, i.e. L57, W58, V154,
+and I261, were identiﬁed as activity-improving spots upon alanine
+substitution, and their combinatorial mutations were found to be
+additive
+44. Thus, we expected that incorporating a second alanine
+substitution might offset the F86*A-induced structural perturbation.
+Indeed, the additional mutation led to the desired activity recovery,
+and W58A and V154A elicited remarkable activity improvements forS-
+D1 by 48- and 14-folds, respectively, compared to the F86*A mutant
+(Fig. 5c). We chose the F86*A/V154A mutant for further study because
+of the undesirably highv
+S/vR of the W58A/F86*A mutant. Notably,
+stereochemical promiscuity of the F86*A mutant is reinforced by the
+addition of V154A.
+Kinetic study of the F86*A/V154A mutant, named AR-OA, reveals
+similar E
+S for IOD and IRA (Fig. 5d). Likewise,ES for IIOD and IIRA are
+similar, as observed with ATA-OA. All the fourES values are not very
+different from unity, reminiscent of AARs. It is also noteworthy that the
+K
+eq values for the chirally opposite reactions are in reasonable agree-
+ment. The similarKeq values for IS and IR were veriﬁed by the spectral
+population analysis of AR-OA equilibrated withS-D1 and R-D1 (Sup-
+plementary Fig. 13).
+As expected, AR-OA is capable of catalyzing racemization ofS-D1
+which is not observed at all with ATA-OA (Fig.5e). Supplementation of
+the reaction mixture with 15% DMSO promoted the racemization ofS-
+D1 (Fig. 5f), as observed with that ofD2 by ATA-OA (Supplementary
+Fig. 7). AR-OA affords racemization ofS-D2 even faster than ATA-OA
+does (Supplementary Fig. 14), seemingly owing to the 4.5-fold increase
+in k
+RA;IIR .
+As shown in Fig.1b, racemization of amino acids by AARs pro-
+ceeds through a direct proton transfer, shuttling between E-PLP and a
+carbanionic intermediate. In contrast, racemization of amines by AR-
+OA necessitates supplementation of a cognate ketone to iterate futile
+cycles between E-PLP and E-PMP, although the formulation of the net
+chemical equation cancels out the ketone term (e.g.,S-D1 ↔R-D1 for I
+S/
+IR). Therefore, the cognate ketone acts like a cocatalyst, and the reac-
+tion rate should be affected by the ketone level. Indeed, as observed
+with IIS/IIR and IIR/IIS by ATA-OA in Supplementary Fig. 6b, increasing
+supplementation ofA1 expedited the racemization ofS-D1 by AR-OA
+(Supplementary Fig. 15). However, a catalytic amount of the cognate
+ketone can be generated in the absence of external supply upon
+mixing only AR-OA and the amine substrate, as oxidative deamination
+should rapidly proceed until reaching equilibrium of the correspond-
+ing elemental reaction. We conjectured that this cosubstrate-free
+racemization, mimicking the AAR reactions, should be theoretically
+sound, and indeed, we observed that AR-OA enabled the racemization
+of S-D1 without the external supply ofA1 (Supplementary Fig. 16).
+Synthetic applications of AR-OA
+To demonstrate the catalytic utility of AR-OA, we carried out the
+racemization of both enantiomers of 14 chiral amines (10 mM), in the
+presence of a sub-equimolar cognate ketone (0.5 eq.) and 300μMA R -
+OA (Fig.6a). D5, D16,a n dD17 underwent racemization most rapidly,
+leading to less than 5%ee after 1 day. It took 3 days forD2 and D14 to
+reach <10%ee and 7 days forD1, D3, D6,a n dD18. D10-D13 and D15
+showed slower racemization. These results demonstrate the broad
+substrate speciﬁcity of AR-OA, although the ketone and enzyme levels
+we used were substantially higher than what is ideal for practical
+applications. However, we anticipate that further engineering of AR-
+OA to increasev
+RA for the cognate ketone would enable the use of a
+reasonable enzyme dosage in conjunction with a catalytic amount of
+the cognate ketone.
+To verify the synthetic potential of AR-OA, we decided to carry
+out a preparative-scale racemization of 100 mMS-D5 in the pre-
+sence of a catalytic amount of a cognate ketone (i.e., 0.1 molar eq.).
+Prior to the preparative-scale reaction, we examined how the race-
+mization was affected by varying enzyme dosages (30–100 μM) with
+100 mM S-D5 and 10 mM benzylacetone (A5), showing gradual
+increases in the reaction rate as anticipated (Fig.6b). Considering
+cost-efﬁcient enzyme use, we opted to use 45μM AR-OA, corre-
+sponding to 4 U/mL, for the preparative-scale reaction. After char-
+ging a reaction vessel with 224 mgS-D5, 22.2 mgA5, and 60 U AR-
+OA, the reaction mixture was periodically sampled for chiral ana-
+lysis ofD5 (Fig. 6c). Theee
+S value reached 5.6% at 36 h and further
+decreased to 3.3% after an additional 11-h reaction. The resulting
+rac-D5 was subjected to product isolation. The puriﬁed rac-D5
+Article https://doi.org/10.1038/s41467-023-44218-7
+Nature Communications|           (2024) 15:49 6
+(53 mg, 23.7% recovery yield,ee S = 3.4%) was structurally conﬁrmed
+by 1HN M R ,13C NMR, and LC/MS (Supplementary Fig. 17).
+Our results suggest that unleashing the stereochemical trap could
+activate the dormant AR activity of ATAs for any substrates. As a proof
+of concept, we tested the racemization of alanine using an ATA-OA
+mutant that was previously constructed to lose the inherent carbox-
+ylate recognition but to improve other native activities through R417A
+and W58L substitutions
+31. We reasoned that R417A in the L pocket
+might marginally allow productive binding of D-alanine, whereas the
+wild type exclusively accepts L-alanine. Indeed, the mutant displayed
+racemase activity for both enantiomers of alanine (Supplemen-
+tary Fig. 18).
+In summary, this study has uncovered the innate racemase
+activity of transaminases that is normally under a kinetic trap but
+can be triggered upon stereochemical relaxation. This might pro-
+vide insights into the presence of D-amino acids in vivo despite the
+lack of a speciﬁc racemase, e.g. D-aspartate in mammalian brains at
+nanomolar levels
+45. Our results suggest that transaminases could
+exhibit racemase activity through iterative futile cycles if enough
+acceptor is available under certain physiological conditions indu-
+cing the stereochemical relaxation. We also demonstrated that
+stereoselectivity of ATA is amenable to computational engineering
+and the loss-free racemization of diverse amines can be achieved
+with a cognate ketone. To the best of our knowledge, this study
+presents theﬁrst example of AR in which the synthetic potential is
+manifested as the two-base mechanism of natural AARs is not
+readily applicable to amines
+29. We anticipate that AR-OA or
+improved variants can offer greaterﬂexibility in the process design
+for biocatalytic production of chiral amines. Furthermore, our
+strategy might potentially be extended to a broad range of transa-
+minases beyond ATAs.
+Methods
+Site-directed mutagenesis
+Alanine scanning mutants of ATA-OA were previously constructed in a
+pET28(+) vector
+44. Four mutants, carrying double point mutations,
+were constructed by a QuikChange Lightning site-directed mutagen-
+esis kit (Agilent Technologies) using the F86*A mutant as a template.
+PCR primers used for the mutagenesis were the same as those used for
+the alanine scanning mutations
+44. The F86*L mutant of ATA-OA and the
+F85*A mutant of ATA-PD were generated using the same mutagenesis
+kit with PCR primers designed by the manufacturer’sp r i m e rd e s i g n
+program. Sequences of the mutagenesis primers are provided in
+Supplementary Table 3. The intended mutagenesis was veriﬁed by
+DNA sequencing.
+Preparation of puriﬁed enzymes
+For protein expression, we used Escherichia coli BL21(DE3) cells
+transformed with pET28a(+) vectors, harboring ATA-OA30, ATA-PD31,
+ATA-CV31,A T A - A R46,a n dA T A - A F46 genes, as described elsewhere. Cell
+cultivation and puriﬁcation of the His-tagged ATAs were performed as
+described previously31. Detailed experimental procedures are pre-
+sented in the Supplementary Methods. Molar concentrations of the
+puriﬁed ATAs were determined by UV absorbance at 280 nm using
+molar extinction coefﬁcients obtained athttp://www.biomol.net/en/
+tools/proteinextinction.htm.
+Enzyme activity assay
+Unless otherwise speciﬁed, all the enzyme assays to measure ATA
+activity were carried out at 37 °C and pH 7 (50 mM potassium phos-
+phate buffer) under initial rate measurement conditions (i.e., conver-
+sion <20%). One unit of ATA is deﬁned as the enzyme amount required
+to produce 1μmol ofA1 in 1 min at 10 mMS-D1 and 10 mM pyruvate.A1
+produced was analyzed by HPLC. Microsoft Excel was used for ana-
+lyzing enzyme activities.
+Stereoinversion ofS-D2 by ATA-OA in the presence of a non-
+cognate cosubstrate
+Unless otherwise speciﬁed, all reactions were carried out with 50 mM
+amino donor, 50 mM acceptor, and 750μMA T A - O Aa t3 7° Ca n dp H7
+(50 mM phosphate buffer supplemented with 0.5 mM PLP). Regarding
+the reactions betweenA2 and D3-D9,6 5 0μMe n z y m ew a su s e da n d
+the reaction mixture contained 15% (v/v) DMSO. Racemic forms ofD3-
+D9,e x c e p tf o rD8 and D9, were used as the amino donor. At pre-
+determined reaction times, the reaction samples were taken for chiral
+HPLC analysis ofD2.
+Fig. 5 | Creation and characterization of AR-OA. aHomodimeric structure of ATA-
+OA showing the structural role of F86* in the active-site formation. The subunit
+comprising most of the active site is shown in surface and the other in ribbon
+representation. The loop region from F82* to R89* is colored red and F86* is shown
+in CPK representation.b A close-up view of F86* sandwiched between Y20 and L57.
+c Activities of the second-round engineered mutants forS-D1 and R-D1.N o t eat e n -
+fold difference in scale between the left and right y-axis.d Stereochemical
+properties of AR-OA for elemental reactions.e, Racemization ofS-D1 by AR-OA in
+comparison with that by ATA-OA. Reaction conditions were 50 mMS-D1,5 0m MA1,
+and 100μMe n z y m e .f Effect of DMSO on the racemization ofS-D1 by AR-OA.
+Reaction conditions were 10 mMS-D1,5m MA1, 0 or 15 % (v/v) DMSO, and 100μM
+AR-OA. Source data are provided as a Source Dataﬁle. Data inc are mean values of
+triplicate experiments with error bars indicating the s. d. (n =3 ) .
+Article https://doi.org/10.1038/s41467-023-44218-7
+Nature Communications|           (2024) 15:49 7
+Kinetic analysis
+To determine second-order rate constants, a pseudo-one-substrate
+kinetic model used in a previous study30 was further simpliﬁed
+under limiting conditions (see Supplementary Methods for details).
+Brieﬂy, reaction conditions were set to meet the limiting conditions
+where the concentrations of substrate and cosubstrate were lower
+and higher, respectively, than the correspondingK
+M values. The
+resulting equation, i.e.k ≈ vi/([E][S]), was used to determinek with
+three independent initial rate data ( vi)m e a s u r e da tﬁxed con-
+centrations of enzyme (E) and substrate (S). Linear regression of the
+product formation against time was used to determine thev
+i values.
+The cosubstrates used to determinekOD and kRA were pyruvate and
+D8, respectively. Speciﬁc reaction conditions and products ana-
+lyzed for the kinetic measurements are listed in Supplementary
+Table 4. Initial rates for the kinetic analysis were determined at
+<20% conversion. Kinetic analysis and preparation of charts were
+carried out using Sigmaplot.
+Spectral analysis
+The E-PLP form of ATA-OA was prepared by incubation of the puriﬁed
+enzyme with 10 mM pyruvate for 1 h at 24oC and then desalting on a
+HiTrap column (GE healthcare) using a 20 mM sodium phosphate
+buffer (pH 7) supplemented with 75 mM NaCl. The resulting E-PLP (11
+μM) was mixed with each enantiomer ofD2 (50 mM), followed by
+incubation at 24
+oC until the aliquot was sampled for spectral mea-
+surement under a wavelength scanning mode of a UV-1650PC spec-
+trophotometer (Shimadzu) using UVProbe 2.62. The scanning
+performed immediately after the mixing was designated by 0.1-min
+incubation.
+Mathematical modeling of enzyme reactions
+Numerical simulations of the ATA-OA reaction require mass balance
+equations for related chemical species and enzyme intermediates
+whose time derivatives can be expressed using a second-order kinetics
+as described previously
+47. Brieﬂy, simulations of the reaction between
+S-D1 and A2 involve IS,I IS,a n dI IR, and thus should include balance
+equations forS-D1, A1,S-D2, R-D2, A2,E - P L P ,a n dE - P M P .T h er e s u l t i n g
+seven differential equations were numerically solved using Mathema-
+tica 12 (Wolfram Research). Regarding the AR reaction betweenD2 and
+A2,o n l yI I
+S and IIR are included in the simulation using time derivatives
+of S-D2,R-D2, A2, E-PLP, and E-PMP. Detailed experimental procedures
+are presented in the Supplementary Methods.
+Direct racemization of D2 with A2 by native ATAs
+Unless otherwise speciﬁed, all reactions were carried out with 50 mM
+S-D2 or R-D2,5 0m MA2,a n d1 0 0μM ATA at 37 °C and pH 7 (50 mM
+phosphate buffer containing 0.5 mM PLP). The reactions at varying
+concentrations ofA2 were carried out at 10 mMS-D2 or R-D2,1 -2 0m M
+A2,a n d5 0μM ATA-OA. Regarding ATAs other than ATA-OA, we used
+100 μMe n z y m ef o rt h er e a c t i o n s .
+Molecular modeling
+Molecular modeling was performed with the Discovery Studio package
+(version 4.5, Accelrys). Docking simulations require an E-PLP structure
+harboring the active-site arginine in an outward conformation. How-
+ever, the crystal structure of ATA-OA available (PDB ID: 5GHF) is an
+E-PMP form assuming an inward R417
+31. Therefore, we conducted
+structural modiﬁcations of 5GHF to construct the desired structure by
+recruiting the PLP and the arginine structures from ATA-CV and
+Fig. 6 | Synthetic utility of AR-OA. aRacemization of diverse chiral amines using
+AR-OA in the presence of a cognate ketone.b Effect of the enzyme concentration
+on the initial formation rate ofR-D5 from S-D5. c Preparative-scale conversion ofS-
+D5 to rac-D5. Source data are provided as a Source Dataﬁle. Data inb are mean
+values of triplicate experiments with error bars indicating the s. d. (n =3 ) .
+Article https://doi.org/10.1038/s41467-023-44218-7
+Nature Communications|           (2024) 15:49 8
+ATA-PD, respectively, as described elsewhere44. The resulting structure
+was further modiﬁed to a tautomeric structure of the internal aldimine
+where the Nε and the phenolic oxygen were protonated and depro-
+tonated, respectively, as shown in Fig.1b. Protonated forms ofD1 and
+D2 were used as ligands for docking simulations on the CDOCKER
+module under a default setting (2,000 steps at 700 K for a heating
+step; 5000 steps at 300 K for a cooling step; 8 Å grid extension) within
+t h ea c t i v es i t ed eﬁned by the Binding Site module. The alanine scan-
+ning mutants of ATA-OA were generated by the Design Protein module
+of the Discovery Studio package without additional energy
+minimization.
+Racemization of various chiral amines using AR-OA
+All reactions were carried out with 10 mMS-o rR-amine, 5 mM cognate
+ketone, and 300μM AR-OA at 37 °C and pH 7 (50 mM Tris buffer
+containing 0.5 mM PLP). DMSO (15% (v/v)) was included in the reac-
+tions withS-amines.R-D6 could not be tested due to the unavailability
+of the chemical stock. Reaction mixtures were incubated in reaction
+vials which were kept tightly sealed to avoid evaporation of ketone.
+Aliquots of the reaction mixture were sampled after 1, 3, and 7 days,
+and then subjected to chiral HPLC analysis of the amine substrates.
+Preparative-scale racemization ofS-D5 and product isolation
+Reaction conditions were 100 mMS-D5,1 0m MA5,a n d4 5μMA R - O Ai n
+50 mM potassium phosphate (pH 7) supplemented with 0.5 mM PLP
+(total reaction volume = 15 mL) at 37oC under magnetic stirring. For
+product isolation, the pH of the reaction mixture was adjusted to 1.9
+after a 47-h reaction by adding 5 N HCl solution (110μL), and the protein
+precipitate formed was removed by centrifugation (13,000 × g, 40 min).
+The resulting supernatant was treated with two extractions of 40 mL
+hexane each to removeA5. The pH of the ketone-free reaction mixture
+was adjusted to 12 by adding 1.4 mL of 5 N NaOH solution, and the
+deprotonatedD5w a se x t r a c t e dt h r e et i m e s ,e a c hw i t h4 0m Lo fh e x a n e .
+The extractant pool was vacuum evaporated at 50 °C and 450 hPa,
+resulting in liquidD5.T h ei s o l a t e dD5 was characterized by
+1HN M R ,13C
+NMR, and LC/MS.1Ha n d13C NMR spectra were recorded on an Avance
+III HD 400 spectrometer (Bruker Co.). Mass spectral data were obtained
+with a Thermo Q-Exactive Orbitrap mass spectrometer connected to a
+Dionex Ultimate 3000 Nano HPLC (Thermo Fisher ScientiﬁcI n c . ) .
+HPLC analysis
+HPLC analysis was performed using an Alliance system (Waters) or a
+1260 Inﬁnity II LC System (Agilent Technologies).A1 was analyzed on a
+Symmetry C18 column (Waters) using isocratic elution of 60/40/0.1%
+(v/v) MeOH/water/triﬂuoroacetic acid at aﬂow rate of 1 mL/min under
+UV detection tuned at 254 nm. Chiral analysis of alkylamines and ala-
+nine was carried out after derivatization with a Marfey’sr e a g e n ta s
+described previously
+46. Detailed experimental procedures are pre-
+sented in the Supplementary Methods. A Crownpak CR(-) column
+(Daicel) was used for chiral analysis of arylalkylamines. HPLC data were
+collected by EMPOWER Pro and OpenLAB for Waters and Agilent
+HPLC, respectively. Detailed chiral analysis conditions are provided in
+Supplementary Table 5.
+Other related methods
+ChemDraw and Adobe illustrator were used to draw chemical struc-
+tures and to combineﬁgures, respectively. Detailed descriptions of
+chemicals information, kinetic analysis, cell cultivation and enzyme
+puriﬁcation, mathematical modeling, and chiral analysis using a Mar-
+fey’s reagent are provided as Supplementary Methods in the Supple-
+mentary Information.
+Reporting summary
+Further information on research design is available in the Nature
+Portfolio Reporting Summary linked to this article.
+Data availability
+The data supporting theﬁndings of this study are included in the
+article and the Supplementary Information. The structural data of ATA-
+OA used in this study is from Protein Data Bank under accession code
+5GHF. All unique biological materials (plasmids and strains) are readily
+available from the corresponding authors upon request. Source data
+are provided with this paper and have been deposited inﬁgshare
+under https://doi.org/10.6084/m9.ﬁgshare.24217176. Source data are
+provided with this paper.
+References
+1. Brewer, A. & Davis, A. P. Chiral encoding may provide a simple
+solution to the origin of life.Nat. Chem.6,5 6 9–574 (2014).
+2. Bada, J. L. Origins of homochirality.Nature 374,5 9 4–595 (1995).
+3. Ozturk, S. F. & Sasselov, D. D. On the origins of life’s homochirality:
+inducing enantiomeric excess with spin-polarized electrons.Proc.
+Natl Acad. Sci. USA119, e2204765119 (2022).
+4. Bitchagno, G. T. M., Nchiozem-Ngnitedem, V.-A., Melchert, D. &
+Fobofou, S. A. Demystifying racemic natural products in the
+homochiral world.Nat. Rev. Chem.6,8 0 6–822 (2022).
+5. Wolosker, H., Blackshaw, S. & Snyder, S. H. Serine racemase: a glial
+enzyme synthesizing D-serine to regulate glutamate-N-methyl-D-
+aspartate neurotransmission.Proc. Natl Acad. Sci. USA96,
+13409–13414 (1999).
+6. Fujii, N. & Saito, T. Homochirality and life.Chem. Rec.4,
+267–278 (2004).
+7. Yoshimura, T. & Esak, N. Amino acid racemases: functions and
+mechanisms.J. Biosci. Bioeng.96,1 0 3–109 (2003).
+8 . N g u y e n ,L .A . ,H e ,H .&P h a m - H u y ,C .C h i r a ld r u g s :a no v e r v i e w .Int.
+J. Biomed. Sci.2,8 5–100 (2006).
+9 . A g r a n a t ,I . ,C a n e r ,H .&C a l d w e l l ,J .P u t t i n gc h i r a l i t yt ow o r k :t h e
+strategy of chiral switches.Nat. Rev. Drug Discov.1,
+753–768 (2002).
+1 0 . G h i s l i e r i ,D .&T u r n e r ,N .J .B i o c a t a l y t i ca p p r o a c h e st ot h es y n t h e s i s
+of enantiomerically pure chiral amines.Top. Catal.57,
+284–300 (2014).
+11. Reshi, N. U. D., Saptal, V. B., Beller, M. & Bera, J. K. Recent progress
+in transition-metal-catalyzed asymmetric reductive amination.ACS
+Catal. 11,1 3 8 0 9–13837 (2021).
+12. Cabré, A., Verdaguer, X. & Riera, A. Recent advances in the enan-
+tioselective synthesis of chiral amines via transition metal-catalyzed
+asymmetric hydrogenation.Chem. Rev.122,2 6 9–339 (2022).
+13. Hönig, M., Sondermann, P., Turner, N. J. & Carreira, E. M. Enantio-
+selective chemo- and biocatalysis: partners in retrosynthesis.
+Angew. Chem. Int. Ed.56,8 9 4 2–8973 (2017).
+1 4 . S i n g h ,S .K . ,G o g o i ,P . ,D e b ,A .&G o o hP a t t a d e r ,P .S .C h i r a lr e s o -
+lution of racemic amines in µ-reactor-crystallizer.C h e m .E n g .S c i .
+256, 117686 (2022).
+15. Höhne, M. & Bornscheuer, U. T. Biocatalytic routes to optically
+active amines.ChemCatChem1,4 2–51 (2009).
+16. de Miranda, A. S., Miranda, L. S. M. & de Souza, R. O. M. A. Lipases:
+valuable catalysts for dynamic kinetic resolutions.Biotechnol. Adv.
+33,3 7 2–393 (2015).
+17. Balkenhohl, F., Ditrich, K., Hauer, B. & Ladner, W. Optisch aktive
+amine durch lipase-katalysierte methoxyacetylierung.J. Prakt.
+Chem. 339,3 8 1–384 (1997).
+18. Kim, M.-J., Ahn, Y. & Park, J. Dynamic kinetic resolutions and
+asymmetric transformations by enzymes coupled with metal cata-
+lysis. Curr. Opin. Biotechnol.13,5 7 8–587 (2002).
+19. Verho, O. & Bäckvall, J.-E. Chemoenzymatic dynamic kinetic reso-
+lution: a powerful tool for the preparation of enantiomerically pure
+alcohols and amines.J. Am. Chem. Soc.137,3 9 9 6–4009 (2015).
+20. Adriaensen, K. et al. Novel heterogeneous ruthenium racemization
+catalyst for dynamic kinetic resolution of chiral aliphatic amines.
+Green. Chem.22,8 5–93 (2020).
+Article https://doi.org/10.1038/s41467-023-44218-7
+Nature Communications|           (2024) 15:49 9
+21. Jin, Q., Jia, G., Zhang, Y. & Li, C. Modiﬁcation of supported Pd cat-
+alysts by alkalic salts in the selective racemization and dynamic
+kinetic resolution of primary amines.Catal. Sci. Technol.4,
+464–471 (2014).
+22. Ahn, Y., Ko, S.-B., Kim, M.-J. & Park, J. Racemization catalysts for the
+dynamic kinetic resolution of alcohols and amines.Coord. Chem.
+Rev. 252, 647–658 (2008).
+23. Musa, M. M. Enzymatic racemization of alcohols and amines: an
+approach for bi-enzymatic dynamic kinetic resolution.Chirality32,
+147–157 (2020).
+2 4 . S t i r l i n g ,M . ,B l a c k e r ,J .&P a g e ,M .I .C h e m o e n z y m a t i cd y n a m i c
+kinetic resolution of secondary amines.Tetrahedron Lett.48,
+1247–1250 (2007).
+25. Lee, J. H., Han, K., Kim, M.-J. & Park, J. Chemoenzymatic dynamic
+kinetic resolution of alcohols and amines.Eur. J. Org. Chem.2010,
+999–1015 (2010).
+26. Femmer, C., Bechtold, M., Roberts, T. M. & Panke, S. Exploiting
+racemases.Appl. Microbiol. Biotechnol.100,7 4 2 3–7436
+(2016).
+27. Liang, J., Han, Q., Tan, Y., Ding, H. & Li, J. Current advances on
+structure-function relationships of pyridoxal 5′-phosphate-depen-
+dent enzymes.Front. Mol. Biosci.6,4( 2 0 1 9 ) .
+28. Toney, M. D. Controlling reaction speciﬁcity in pyridoxal phosphate
+enzymes.Biochim. Biophys. Acta - Proteins Proteom.1814,
+1407–1418 (2011).
+29. Watanabe, A. et al. Reaction mechanism of alanine racemase from
+Bacillus stearothermophilus: X-ray crystallographic studies of the
+enzyme bound withN-(5′-phosphopyridoxyl)alanine.J. Biol. Chem.
+277,1 9 1 6 6–19172 (2002).
+30. Park, E.-S. & Shin, J.-S.ω-Transaminase fromOchrobactrum
+anthropiis devoid of substrate and product inhibitions.Appl.
+Environ. Microbiol.79,4 1 4 1–4144 (2013).
+3 1 . H a n ,S . - W . ,K i m ,J . ,C h o ,H . - S .&S h i n ,J . - S .A c t i v es i t ee n g i n e e r i n go f
+ω-transaminase guided by docking orientation analysis and virtual
+activity screening.ACS Catal.7,3 7 5 2
+–3762 (2017).
+32. Park, E.-S., Malik, M. S., Dong, J.-Y. & Shin, J.-S. One-pot production
+of enantiopure alkylamines and arylalkylamines of opposite chir-
+ality catalyzed byω-transaminase.ChemCatChem5,1 7 3 4–1738
+(2013).
+33. Toney, M. D. Aspartate aminotransferase: an old dog teaches new
+tricks. Arch. Biochem. Biophys.544, 119–127 (2014).
+34. Chen, C. S., Fujimoto, Y., Girdaukas, G. & Sih, C. J. Quantitative
+analyses of biochemical kinetic resolutions of enantiomers.J. Am.
+Chem. Soc.104,7 2 9 4–7299 (1982).
+35. Malashkevich, V. N., Toney, M. D. & Jansonius, J. N. Crystal structure
+of true enzymic reaction intermediates: aspartate and glutamate
+ketimines in aspartate aminotransferase.Biochemistry32,
+13451–13462 (1993).
+36. Guo, F. & Berglund, P. Transaminase biocatalysis: optimization and
+application.Green. Chem.19, 333–360 (2017).
+3 7 . K a u l m a n n ,U . ,S m i t h i e s ,K . ,S m i t h ,M .E .B . ,H a i l e s ,H .C .&W a r d ,J .M .
+Substrate spectrum ofω-transaminase fromChromobacterium
+violaceumDSM30191 and its potential for biocatalysis.Enzym.
+Microb. Technol.41,6 2 8–637 (2007).
+38. Iwasaki, A., Matsumoto, K., Hasegawa, J. & Yasohara, Y. A novel
+transaminase, (R)-amine:pyruvate aminotransferase, fromArthro-
+bacter sp. KNK168 (FERM BP-5228): puriﬁcation, characterization,
+and gene cloning.A p p l .M i c r o b i o l .B i o t e c h n o l .93,1 5 6 3–1573
+(2012).
+39. Höhne, M., Schätzle, S., Jochens, H., Robins, K. & Bornscheuer, U. T.
+Rational assignment of key motifs for function guides in silico
+enzyme identiﬁcation. Nat. Chem. Biol.6,8 0 7–813 (2010).
+4 0 . R a d i s k y ,E .S .&K o s h l a n d ,D .E .J r .Ac l o g g e dg u t t e rm e c h a n i s mf o r
+protease inhibitors.P r o c .N a t lA c a d .S c i .U S A99,1 0 3 1 6–10321
+(2002).
+41. Cassimjee, K. E., Manta, B. & Himo, F. A quantum chemical study of
+the ω-transaminase reaction mechanism.Org. Biomol. Chem.13,
+8453–
+8464 (2015).
+42. Humble, M. S., Cassimjee, K. E., Abedi, V., Federsel, H.-J. & Ber-
+glund, P. Key Amino acid residues for reversed or improved enan-
+tiospeciﬁcity of anω-transaminase.ChemCatChem4, 1167–1172
+(2012).
+43. Ao, Y.-F. et al. Structure- and data-driven protein engineering of
+transaminases for improving activity and stereoselectivity.Angew.
+Chem. Int. Ed.62, e202301660 (2023).
+44. Kim, H.-G., Han, S.-W. & Shin, J.-S. Combinatorial mutation analysis
+of ω-transaminase to create an engineered variant capable of
+asymmetric amination of isobutyrophenone.Adv. Synth. Catal.361,
+2594–2606 (2019).
+45. Errico, F., Nuzzo, T., Carella, M., Bertolino, A. & Usiello, A. The
+emerging role of altered D-aspartate metabolism inSchizophrenia:
+new insights from preclinical models and human studies.Front.
+Psychiatry9,5 5 9( 2 0 1 8 ) .
+46. Park, E.-S., Dong, J.-Y. & Shin, J.-S. Biocatalytic asymmetric synth-
+esis of unnatural amino acids through the cascade transfer of amino
+groups from primary amines onto keto acids.ChemCatChem5,
+3538–3542 (2013).
+47. Han, S.-W., Jang, Y. & Shin, J.-S. In Vitro and In Vivo One-Pot Dera-
+cemization of chiral amines by reaction pathway control of enan-
+tiocomplementaryω-transaminases.ACS Catal.9, 6945–6954
+(2019).
+Acknowledgements
+This work was supported by the National Research Foundation of Korea
+(NRF) funded by the Korea government (MSIT) (Grant No.
+2021R1A2C2013069). S.-W. Han wasﬁnancially supported by Initiative
+for Biological Function & Systems under the BK21 PLUS program of
+Korean Ministry of Education. We thank Jimin Song for assistance during
+molecular modeling.
+Author contributions
+J.-S.S. conceived the idea, supervised the project, and wrote the
+manuscript. S.-W.H. developed the idea and undertook most experi-
+ments and data analysis. Y.J. carried out the ketone-free racemization of
+S-D1, wavelength scanning of AR-OA, and racemization of alanine. J.K.
+carried out the activity measurements of ATA-OA mutants carrying
+double point mutations. J.J. performed preparation of the ATA-OA/F86*L
+mutant.
+Competing interests
+The authors declare no competing interests.
+Additional information
+Supplementary informationThe online version contains
+supplementary material available at
+https://doi.org/10.1038/s41467-023-44218-7.
+Correspondenceand requests for materials should be addressed to
+Jong-Shik Shin.
+Peer review informationNature Communicationsthanks Ioannis Pavli-
+dis, Nicholas Turner, and the other, anonymous, reviewer(s) for their
+contribution to the peer review of this work. A peer reviewﬁle is avail-
+able.
+Reprints and permissions informationis available at
+http://www.nature.com/reprints
+Publisher’s noteSpringer Nature remains neutral with regard to jur-
+isdictional claims in published maps and institutional afﬁliations.
+Article https://doi.org/10.1038/s41467-023-44218-7
+Nature Communications|           (2024) 15:49 10
+Open AccessThis article is licensed under a Creative Commons
+Attribution 4.0 International License, which permits use, sharing,
+adaptation, distribution and reproduction in any medium or format, as
+long as you give appropriate credit to the original author(s) and the
+source, provide a link to the Creative Commons licence, and indicate if
+changes were made. The images or other third party material in this
+article are included in the article’s Creative Commons licence, unless
+indicated otherwise in a credit line to the material. If material is not
+included in the article’s Creative Commons licence and your intended
+use is not permitted by statutory regulation or exceeds the permitted
+use, you will need to obtain permission directly from the copyright
+holder. To view a copy of this licence, visithttp://creativecommons.org/
+licenses/by/4.0/.
+© The Author(s) 2024
+Article https://doi.org/10.1038/s41467-023-44218-7
+Nature Communications|           (2024) 15:49 11

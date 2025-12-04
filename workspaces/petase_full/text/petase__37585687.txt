@@ -1,0 +1,1688 @@
+Insights into the Enhancement of the Poly(ethylene terephthalate)
+Degradation by FAST-PETase from Computational Modeling
+Rafael García-Meseguer, Enrique Ortí, In ̃ aki Tun ̃ ón, J. Javier Ruiz-Pernía, and Juan Aragó*
+Cite This: J. Am. Chem. Soc. 2023, 145, 19243−19255
+ Read Online
+ACCESS
+Metrics & More
+ Article Recommendations *
+sı Supporting Information
+ABSTRACT: Polyethylene terephthalate (PET) is the most
+abundant polyester plastic, widely used in textiles and packaging,
+but, unfortunately, it is also one of the most discarded plastics after
+one use. In the last years, the enzymatic biodegradation of PET has
+sparked great interest owing to the discovery and subsequent
+mutation of PETase-like enzymes, able to depolymerize PET.
+FAST-PETase is one of the best enzymes hitherto proposed to
+efficiently degrade PET, although the origin of its efficiency is not
+completely clear. To understand the molecular origin of its
+enhanced catalytic activity, we have carried out a thorough
+computational study of PET degradation by the FAST-PETase
+action by employing classical and hybrid (QM/MM) molecular
+dynamics (MD) simulations. Our findings show that the rate-
+limiting reaction step for FAST-PETase corresponds to the
+acylation stage with an estimated free energy barrier of 12.1 kcal mol
+−1
+, which is significantly smaller than that calculated for
+PETase (16.5 kcal mol
+−1
+) and, therefore, supports the enhanced catalytic activity of FAST-PETase. The origin of this enhancement
+is mainly attributed to the N233K mutation, which, although sited relatively far from the active site, induces a chain folding where
+the Asp206 of the catalytic triad is located, impeding that this residue sets effective H-bonds with its neighboring residues. This effect
+makes Asp206 hold a more basic character compared to the wild-type PETase and boosts the interaction with the protonated
+His237 of the catalytic triad in the transition state of acylation, with the consequent decrease of the catalytic barrier and acceleration
+of the PET degradation reaction.
+■
+INTRODUCTION
+Plastics are ubiquitous materials in our daily lives due to their
+excellent durability, lightness, and low cost. The total
+production of plastics reached 390.7 million tons in 2021.
+1
+However, only 14% of produced plastics is recycled, and the
+rest is incinerated (14%), deposited in a landfill (40%), or
+leaked to the environment (32%).
+2
+Considering that plastics
+have a high chemical and biological stability, they can remain
+in the environment for hundreds of years,
+3
+becoming a threat
+to terrestrial and marine ecosystems. Moreover, in recent
+studies, the presence of microplastics in seafood and foodstuff
+has been clearly documented, exposing humans to contami-
+nated food with an impact on human health that is not fully
+understood yet.
+4
+For all this, the development of new
+technologies that allow us to reduce, reuse, and recycle our
+plastic residues efficiently is a worldwide challenge for our
+current society.
+Polyethylene terephthalate (PET), obtained from the
+polycondensation of terephthalic acid (TPA) and ethylene
+glycol (EG), is likely to be the most common thermoplastic
+polymer whose ester group confers superior resistance to
+(bio)degradation (Figure 1a). PET is widely used in the food
+industry as liquid and food containers but also as clothing
+fibers.
+5
+Unfortunately, it is also one of the most discarded
+plastics after one use (e.g., plastic bottles for water).
+6
+Currently, the recycling of PET is partially achieved by
+employing a mechanical transformation from which clothing
+fibers can be obtained and reused for the textile industry.
+Nevertheless, the complete degradation or depolymerization of
+PET to its original components (TPA and EG) by chemical
+methods (chemical recycling) is an expensive (both econom-
+ically and energetically) industrial process compared to its
+production from fossil fuel monomers.
+7,8
+Faced with this
+problem, a more ecological alternative is the enzymatic
+biodegradation of PET.
+9,10
+This biotechnological recycling
+route uses biocatalysts (i.e., enzymes) to hydrolyze the ester-
+type bonds present in PET and thus recover the starting TPA
+and EG monomers for further re-polymerization. This green
+Received: April 28, 2023
+Published: August 16, 2023
+Articlepubs.acs.org/JACS
+© 2023 American Chemical Society
+19243
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+This article is licensed under CC-BY 4.0
+
+technology is, therefore, very attractive since it allows us not
+only to reach the desired closed-loop recycling of PET
+(circular economy) but also to meet the Sustainable Develop-
+ment Goals. Although the initial degradation yields for PET-
+hydrolyzing enzymes were low for industrial implementa-
+tion,
+9,11−13
+new scientific advances in recent years foresee a
+promising future for enzymatic biorecycling of PET and other
+plastics.
+10,14−21
+An important breakthrough was achieved by Yoshida and
+collaborators with the discovery of a bacterium (Ideonella
+Sakaiensis 201-F6) able to degrade and assimilate PET as its
+sole source of carbon and energy.
+14
+Two enzymes (PETase
+and MHETase) were identified to be responsible for the
+depolymerization of PET into its original building blocks, TPA
+and EG (Figure 1a). Among the two enzymes, PETase is the
+enzyme that does the hardest work by recurrently decompos-
+ing the PET polymeric chain into the mono (2-hydroxyethyl)
+terephthalate (MHET), with trace amounts of TPA and bis(2-
+hydroxyethyl) terephthalate (BHET) as secondary products.
+Closing the catalytic process, MHETase then hydrolyzes
+Figure 1. (a) Schematic representation of the polymerization of PET by its constituting monomers TPA and EG and its degradation by PETase
+and MHETase to the MHET, BHET, TPA, and EG products. (b) Structure of PETase (PDB ID: 6EQE). The enzyme exhibits nine β-strands
+(yellow) and seven α-helices (purple) in line with other hydrolases. A magnification of the active site highlighting the most important amino acids
+involved in the PET-degrading mechanism.
+Scheme 1. Schematic Representation of the PETase’s Reaction Mechanism
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19244
+MHET into TPA and EG monomers. In particular, PETase
+from Ideonella Sakaiensis is an interesting target due to its
+capability of degrading PET at moderate temperatures (30 °C)
+more efficiently than other PET-hydrolyzing enzymes,
+14
+and
+has received considerable attention in the scientific commun-
+ity. Initially, scientific efforts were focused on the character-
+ization of the PETase structure and its underlying PET-
+degrading mechanism. Almost in parallel, Han et al.
+22
+and Joo
+et al.
+23
+were able to identify the active site of PETase, in which
+the PET substrate was accommodated, as well as the relevant
+amino acids responsible for the enzyme:PET complex and the
+biocatalytic process (Figure 1b). Both studies revealed that the
+active site of PETase holds a typical catalytic triad (Ser160-
+His237-Asp206), in line with other hydrolases,
+24
+two amino
+acids (Met161 and Tyr87), able to stabilize the oxygen of the
+PET carbonyl group by H-bonds (oxyanion hole), and an
+aromatic amino acid (Trp185), which can interact by π-
+stacking with a benzene ring of PET (Figure 1b). Austin et al.
+further confirmed the initial structural analysis after crystalizing
+the structure of the PETase enzyme at a more accurate
+resolution (0.92 Å).
+25
+From this structural information, it was
+proposed that PETase follows the typical catalytic mechanism
+for cutinases, which comprises two steps (Scheme 1): an
+acylation process, with the formation of an intermediate acyl-
+enzyme complex and the release of a hydroxyethyl(HE)-
+terminal PET fragment, and deacylation, with the enzyme
+returning to its initial state and the formation of a TPA-
+terminal PET chain. This biocatalytic mechanism has been
+investigated at the molecular level by using quantum
+mechanics/molecular mechanics (QM/MM) simulations.
+26−29
+First, Boneta et al.,
+26
+by using semiempirical AM1/MM
+umbrella-sampling calculations with further corrections from
+density functional theory (DFT) with the M06-2X functional,
+described the mechanism as a two-step process in both
+acylation and deacylation via a tetrahedral enzyme-substrate
+intermediate and two transition states for each stage. In
+contrast, Jerves et al.,
+27
+using a larger QM region described at
+the PBE level, predicted a single-step catalytic mechanism for
+both stages (acylation and deacylation) through a tetrahedral
+transition state. Although it is not relevant to this work,
+scientific advances concerning the elucidation of the structure
+and catalytic mechanism of MHETase have also been recently
+achieved.
+30−32
+Apart from the mechanistic aspects of the PET biode-
+gradation, the scientific spotlight has also been put on PETase
+engineering to obtain novel variants capable of working more
+efficiently and at a higher range of temperatures. Note that the
+PET biodegradation rate drops with the rising degree of
+crystallinity and, thus, the quest for thermostable PETase
+scaffolds able to maintain their PET-degrading activity at
+temperatures higher than 60 °C�temperature in which the
+glass transition of PET from a (semi)crystalline to amorphous
+phase occurs�is highly attractive for large-scale industrial
+applications. Likewise, efficient PETase scaffolds functioning at
+mild conditions, even with a pretreatment of PET, are also
+highly interesting for industrial recycling processes. With this
+in mind, several efficient PETase and cutinase-like variants
+have already been proposed in the last few years.
+16,17,33,34
+Regarding the PETase mutants, Son et al. proposed, by using
+the structural information of the wild-type PETase, a rational
+protein engineering strategy to increase the thermostability and
+the PET degradation activity of the enzyme.
+33
+In particular,
+they obtained a PETase scaffold (known as ThermoPETase),
+with only three mutations with respect to the wild-type
+homolog (S121E/D186H/R280A), in which the thermal
+stability was enhanced by ca. 9 °C and the PET degradation
+activity improved by 14-fold at 40 °C. From a different
+approach, Cui et al.
+34
+computationally redesigned PETase to
+provide a new variant (DuraPETase) which, after its synthesis,
+exhibited a high melting temperature (a T
+m
+value of 77 °C
+compared to that reported for PETase, T
+m
+= 46 °C) and
+strikingly enhanced degradation toward semicrystalline PET
+films at mild temperatures (over 300-fold). Despite these
+interesting PETase mutants, the recent discovery of the variant
+proposed by Lu et al. (known as FAST-PETase) has meant an
+important breakthrough.
+16
+The FAST-PETase enzyme, initially
+designed by machine learning techniques, contains only five
+mutations with respect to wild-type PETase and exhibits a
+superior catalytic activity in the 30−50 °C range compared to
+wild-type PETase and all other so far proposed mutants.
+Interestingly, FAST-PETase is able to completely biodegrade
+untreated and postconsumer PET waste from different
+products in 1 week. More challenging, it depolymerizes PET
+in the amorphous domains of untreated commercial water
+bottles and, under thermal pretreatment, an entire water bottle
+at 50 °C. This promising study opens the door for a closed-
+loop PET recycling process at the industrial scale, where the
+FAST-PETase enzyme is used to depolymerize PET and the
+recovered monomers are employed to resynthesize PET again.
+Despite FAST-PETase’s success, the origin of its enhanced
+catalytic activity is not completely understood at the molecular
+level. Note that the five mutations in FAST-PETase, all of
+them out of the active site, seem to enhance the stability of the
+enzyme by extending the H-bonding network and establishing
+a favorable electrostatic salt bridge interaction. Therefore, it is
+not clear how these mutations can stabilize the initial
+enzyme:PET complex or the intermediate structures (tran-
+sition states) that determine the catalytic mechanism and the
+reaction rate for PET biodegradation. That mechanistic
+information at the molecular level can be very helpful for the
+design of novel and enhanced FAST-PETase mutants but also
+for other PET-hydrolyzing enzymes. Herein, we seek to shed
+light on this knowledge gap from a computational perspective.
+Classical molecular dynamics (MD) simulations for the mutant
+FAST-PETase and the wild-type PETase enzymes and their
+respective enzyme:PET complexes were first performed to gain
+insight into the structural changes induced by the mutations in
+the FAST-PETase scaffold that might be important for the
+PET depolymerization. In a second step, multiscale QM/MM
+simulations were employed to characterize the catalytic
+mechanism of FAST-PETase in comparison with wild-type
+PETase to unveil the enhancement of the FAST-PETase
+activity. The free energy profiles (FEPs) calculated for the PET
+degradation (acylation and deacylation processes) allowed us
+to connect all intermediates and transition states from
+reactants to products.
+■
+COMPUTATIONAL METHODS
+Building of (FAST-)PETase:PET Systems. The initial coordi-
+nates of the PETase enzyme were taken from the highest-resolved X-
+ray crystal structure (0.92 Å) of the apoenzyme available in the
+Protein Data Bank, with code 6EQE.
+25
+For the FAST-PETase mutant,
+the structure available with code 7SH6 was selected.
+16
+To calculate
+the adequate protonation states of titratable residues at pH 7.0, the
+PROPKA3.0 software tool was employed.
+35,36
+We introduced the
+PET substrate model (a trimer) into the enzyme systems using the
+alignment with a PETase-substrate crystal structure (5XH3),
+22
+in
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19245
+which the substrate corresponds to the 1-(2-hydroxyethyl) 4-methyl
+terephthalate. The PET trimer model used here is 2-hydroxyethyl-
+(mono-hydroxyethyl terephthalate)
+3
+, abbreviated as 2-HE(MHET)
+3
+(Scheme 2). The PET model was described by the GAFF37
+parameters using the Antechamber module of the AMBER20 software
+package
+37
+and employing the RESP atomic point charges calculated at
+the HF/6-31G(d) level with the Gaussian 09 program.
+38
+Once the
+enzyme:PET systems were built, the PET substrate was minimized by
+2000 steps of the steepest descent method followed by the conjugate
+gradient method until the root mean square of the gradient was below
+50 kcal mol
+−1
+Å
+−1
+in order to accommodate the substrate into the
+active site of both enzymes (FAST-PETase and PETase). Afterward,
+both systems were prepared using the tleap tool implemented in the
+AMBER20 software.
+37
+The enzyme scaffolds (both the FAST-PETase
+mutant and wild-type PETase), described with the ff14SB force field
+implemented in AMBER20,
+37
+were solvated into a box of TIP3P
+39
+water molecules, with a buffer region of at least 12 Å from any protein
+substrate atom to the limits of the simulation box. We added six Cl
+−
+anions to neutralize the total charge of the systems. Then, the
+resulting FAST-PETase:PET (PETase:PET) system was composed of
+37,243 (37,247) total atoms: 3795 (3799) protein atoms, 76 PET
+atoms, 6 counterions, and 11,122 water molecules.
+For both enzyme:PET systems, the protocol was the same. The
+entire system was minimized using 5000 steps of the steepest descent
+method followed by the conjugate gradient method. Initially, only the
+water molecules and counterpoise ions were minimized, keeping the
+rest of the system fixed. Then, the entire system, except for the
+protein’s backbone, was minimized. Finally, the entire system without
+restrictions was fully minimized until the root mean square of the
+gradient was below 10 kcal mol
+−1
+Å
+−1
+. The system was later heated
+from 0 to 300 K using a heating rate of 1.7 K·ps
+−1
+. In order to
+equilibrate the system, 100 ns of classical MD simulations at 300 K
+with periodic boundary conditions were performed. The time step of
+the classical simulation was 1 fs using the SHAKE algorithm.
+40
+The
+Particle Mesh Ewald method was employed to describe the long-range
+electrostatic interactions
+41,42
+with a cutoff of 15 Å. We used the
+Berendsen barostat
+43
+and the Langevin thermostat
+44
+to control the
+simulation’s pressure and temperature, respectively. Free protein
+versions of FAST-PETase and PETase (i.e., without the PET
+substrate) were generated from the respective X-ray structures
+following the same computational procedure.
+Classical MD Simulations. To analyze the structural properties
+of the enzymes (FAST-PETase and PETase with and without the
+PET model), we run 1 μs of classical MD simulations with the same
+characteristics as the relaxation described in the previous section but
+with a time step of 2 fs (also using SHAKE) and saving points every
+100 ps. By using the CPPTRAJ program,
+45
+included in AMBER20,
+the root-mean-square deviation (RMSD) and the root-mean-square
+fluctuation (RMSF) for each protein were calculated.
+From the simulations over the (FAST)-PETase:PET complexes,
+the binding energies of the PET model with the FAST-PETase and
+PETase enzymes were estimated by using the GBSA implicit solvent
+model
+46
+using 1000 frames spaced by 1 ns from the trajectory with
+the MM-PBSA.py tool
+47
+included in the AMBER20 program. The
+same program used to estimate the enzyme-substrate binding energy
+(MM-PBSA.py) also allowed us to split the binding energy into its
+fundamental contributions (internal and solvation).
+The electrostatic potential felt by a selected atom was obtained by
+calculating the total energy of the whole system and subtracting the
+total energy of the system but with the charge of the selected atom set
+to zero, and the difference divided by its original charge.
+QM/MM MD Simulations. Finally, a QM/MM molecular
+dynamic simulation of 100 ps for the stable structures of the reaction
+mechanism (i.e., RS, I1, I2, and PS, Scheme 1) was performed. For
+acylation, the QM region was composed of a total of 129 atoms: (i)
+the full PET trimer, (ii) the catalytic triad (His237, Ser160, and
+Asp206), and (iii) the Tyr87 and Met161 residues (oxyanion hole)
+(Scheme 2, top). The semiempirical DFTB3 Hamiltonian
+48
+implemented in AMBER20 was used for the QM part. For
+deacylation, the PET trimer was substituted by the dimer bonded
+to Ser160’s oxygen, and a water molecule (WAT) was introduced in
+the QM region to react with the acyl-enzyme complex in the active
+site (Scheme 2, bottom).
+In order to explore the free energy landscapes associated with the
+chemical reaction, our implementation of the adaptive string method
+(ASM) was employed.
+49
+In this method, N replicas of the system (the
+nodes of the string) evolve according to the averaged forces and stay
+equidistant, converging in such a way to the minimum free energy
+path (MFEP) in the space of arbitrary dimensionality. Once the string
+has converged, we define a single path using a path Collective Variable
+(path-CV) that measures the advance of the system along the MFEP.
+This path-CV represents the reaction coordinate used to trace the
+FEPs along the chemical reaction. We explored the MFEPs on a free
+energy hypersurface defined by a set of CVs formed by those variables
+(distances, angles, or torsions), showing relevant changes during the
+process under study. QM/MM MD simulations to define the
+beginning/end of our initial/final string guesses were performed. In
+line with the reaction mechanism, we divided the process into two
+strings: acylation and deacylation. Scheme 2 shows the relevant
+distances used to define the CV for each reaction stage. Note that we
+also included point-plane distances (to the plane formed by C
+2
+, O
+1
+,
+O
+2
+, and C
+3
+atoms for acylation and C
+2
+, O
+2
+, C
+3
+, and O
+γ
+for
+deacylation) in the CV to facilitate the string convergence. These
+distances were removed from the analysis, for clarity purposes, as they
+do not provide relevant mechanistic information.
+Once the MFEP was converged, the CV reaction coordinate was
+defined and MD simulations (at least for 100 ps) were run at each
+node on the string using an umbrella potential automatically defined.
+Then, with the aid of the weighted histogram analysis method
+(WHAM),
+50
+the potential of mean force (PMF) profiles were
+calculated.
+We anticipate that the free energy barriers calculated with the
+current approximation for both acylation and deacylation in wild
+PETase are in good accord with other theoretical studies (Boneta et
+al.
+26
+and Jerves et al.,
+27
+see below). This indicates that the selected
+computational approximation is trustworthy for further studies of
+other PETase-like mutants. Nevertheless, the comparison between the
+different QM/MM MD schemes can highlight some differences
+Scheme 2. Subsystem Described at the Quantum-
+Mechanical Level (QM Part)
+a
+a
+The PET substrate is highlighted in green and purple. The relevant
+distances used to define the CV of the string method are depicted for
+both the acylation (top) and deacylation (bottom) steps of the
+mechanism.
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19246
+interesting for future theoretical treatments of novel PETase-like
+variants. Jerves et al.
+27
+accurately studied the PET degradation by the
+wild-type PETase by means of a robust QM/MM umbrella-sampling
+method with a large QM region at the PBE level including 146 atoms
+(a PET dimer; the catalytic tSer131-Hist208-Asp177 triad; the Tyr58
+and Met132 residues responsible for the oxyanion hole; Trp156 to set
+π−π interactions with the PET fragment; and the extra residues
+Ser178, Ile179 and Ala180). This study predicted a single-step
+catalytic mechanism for both stages (acylation and deacylation)
+through a tetrahedral transition state consistent with the experimental
+mechanism initially proposed by Han et al.
+22
+and Joo et al.
+23
+Our
+approximation, with a reduced QM region (a PET trimer, the catalytic
+triad Ser160-His237-Asp206 and the Tyr87 and Met161 residues)
+and the ASM, also predicts a single-step catalytic mechanism in line
+with the most accurate theoretical and experimental studies. In
+contrast, Boneta et al.
+26
+obtained a two-step mechanism for both
+acylation and deacylation, which seems not to be totally in accord
+with the previous studies. They employed semiempirical AM1/MM
+umbrella-sampling calculations with further corrections from DFT
+(M06-2X functional) for a small QM region (a PET dimer and the
+catalytic triad). This comparison reveals that the medium-size QM
+region selected here (treated at the DFTB3 level) in combination
+with the ASM for the free energy landscapes is a good approach with a
+reasonable balance between precision and computational cost.
+■
+RESULTS AND DISCUSSION
+Structural Analysis and Binding Energies from
+Classical Simulations. The crystal structure of the FAST-
+PETase enzyme reveals that the structure of FAST-PETase is
+quite similar to that found for the wild-type PETase variant,
+being organized in a set of nine β-strands and seven α-helices
+(Figure 2). Similar to PETase, the active site of FAST-PETase
+is located on the enzyme surface (in a surface cleft) and holds
+the canonical catalytic Ser-His-Asp triad (hereafter, Ser160-
+His237-Asp206), which is essential for the catalytic activity.
+24
+FAST-PETase also maintains the two characteristic disulfide
+bonds (Cys203-Cys239 and Cys289-Cys273) of PETase,
+which endows the enzyme with additional stability. Although
+the disulfide bond Cys203-Cys239 is located near the active
+site, it is still flexible enough to effectively accommodate the
+rigid PET substrate.
+As mentioned above, the FAST-PETase variant only
+contains five mutations with respect to the wild-type PETase
+(S121E/D186H/R224Q/N233K/R280A). In the crystal
+structure, the first two mutations (the replacement of Ser121
+and Asp186 by Glu and His, respectively) are located relatively
+close to the active site (ca. 7 Å), enabling to establish a more
+extended H-bond network between Glu121, H186, and
+Figure 2. (a) Structure of FAST-PETase where the secondary structure’s features are colored for β-strands (yellow) and α-helices (purple). The
+active site is depicted with the most relevant residues (labeled as sticks colored by element). Mutations and disulfide bonds are colored in green and
+yellow sticks, respectively, and labeled in the right close-ups. (b) Close-up view of the FAST-PETase active site with the PET substrate.
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19247
+Asn172 through two water molecules.
+16
+The substitution of
+Arg224 by Gln did not cause any impact in terms of H-bonds;
+i.e., the H-bond between Arg224 and Ser193 for PETase is
+lost, and a new bond is formed between the shorter Gln224
+peptide and Ser192 in FAST-PETase. The N233K mutation,
+which substitutes the neutral Asn233 by a positively charged
+Lys, gives rise to an intramolecular salt bridge with the close
+Glu204 by an optimal electrostatic interaction. Note that
+N233K is sited relatively near the His237 and Asp206 of the
+catalytic triad (ca. 11 Å) although it is still far from the active
+site. Interestingly, N233K is likely to be the most important
+mutation for the PET-degrading reaction since that mutation
+has been incorporated in several PET-degrading enzymes (e.g.,
+LCC, ICCM, and Cut190) and, in all of these mutants, the
+hydrolytic activity has improved compared to their respective
+previous scaffolds.
+16
+Finally, the R280A mutation, where
+Arg280 is replaced by Ala, is found to be close to the
+N233K mutation (ca. 5 Å) and at ca. 15 Å of the active site.
+That mutation is present not only in FAST-PETase but also in
+the ThermoPETase variant,
+33
+and its role was ascribed to a
+better binding with the PET substrate.
+All the mutations described above are found to be relatively
+distant from the active site (>7 Å) and, in principle, their direct
+impact on the biocatalytic mechanism is not evident. To gain
+insight into the structural changes induced by the mutations
+that can be relevant to the reaction, classical MD simulations of
+1 μs were performed for the free enzymes and their respective
+enzyme:PET complexes. In particular, the changes caused by
+the mutations in their local environments (intermolecular
+contacts) were analyzed along the dynamics and, to get a
+broader perspective, the mobility of each protein residue
+(RMSF analysis) was also examined (see below).
+As mentioned above, mutations D186H and S121E seem to
+promote an extended H-bonding network between Glu121,
+H186, and Asn172 through two bridging water molecules.
+Note that the Glu121, H186, and Asn172 residues are sited on
+the enzyme surface and, thereby, are easily accessible to the
+water solvent. Our classical MD simulations reveal that this H-
+bonding network is highly dynamic, with a steady formation/
+breaking of the intermolecular H-bonds between the respective
+peptides and close water molecules. From our analysis of the
+H-bonds over the classical trajectories, we can observe that the
+solvent-mediated-bridge between Glu121 and His186 is
+maintained and slightly increased (the fraction of frames
+forming the bridge is 0.12 compared to the bridge formed by
+Ser121 and Asp186 in the wild-type variant which is 0.10).
+Likewise, the solvent-mediated-bridge between Glu121 and
+Asn172 is strengthened in FAST-PETase (fraction of 0.10)
+compared to PETase, where there is hardly any solvent-
+mediated-bridge between Ser121 and Asn172 (fraction of
+Figure 3. Plot of the RMSF calculated for each residue of PETase:PET and FAST-PETase:PET complexes (top) and its difference ΔRMSF
+(ΔRMSF = RMSF
+FAST‑PETase:PET
+−RMSF
+PETase:PET
+) (bottom). For the ΔRMSF plot, only the residues with differences greater than 0.3 Å in absolute
+value are shown along the abscissa axis. The catalytic triad residues are marked with red lines.
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19248
+0.002). Interestingly, the effective interaction between Glu121,
+H186, and Asn172 via water-mediated H-bonds strengthens
+the interaction between two β-strands and an α-helix. Our
+simulations, in line with the X-ray structure, therefore support
+that the D186H and S121E mutations may be responsible for
+the enhanced thermal stability due to the more extended H-
+bonding network.
+The previously discussed mutations (D186H and S121E)
+together with R280A are indeed the mutations incorporated in
+the wild-type enzyme to give rise to the ThermoPETase
+variant.
+33
+The new and small-sized Ala280 forms an effective
+H-bond within the β-strand with Asn277 with an averaged
+distance of 2.3 ± 0.4 Å. This H-bond is not observed between
+Arg280 and Asn277 for the wild-type PETase (6.1 ± 0.2 Å)
+because Arg280 is interacting with the vicinal residues of the
+contiguous α-helix. As briefly mentioned above, the enhanced
+PET-degrading activity caused by the R280A mutation was
+associated with an extension of a subsite (subsite IIc) to
+accommodate the PET polymer more easily.
+33
+That was
+explained because the incorporation of the short Ala280
+residue generates a hydrophobic and nonprotruding cleft.
+Unfortunately, we cannot evaluate the enhancement of the
+enzyme-PET interaction due to this mutation because our PET
+model (a trimer) is not large enough to reach the subsite
+where the Ala280 residue is placed.
+For the R224Q mutation, our simulations, in good accord
+with the crystal structure analysis, display that Gln224 is able
+to establish a weak H-bond (2.9 ± 0.2 Å) with Ser192 along
+the trajectory. Gln224 seems not to promote the formation of
+extra H-bonds with other neighboring residues. It is therefore
+difficult to unveil the role of this mutation from the
+computational results since, on the one hand, the mutation
+is far from the active site (ca. 22 Å) to have a direct influence
+on the PET-degrading reaction and, on the other hand, the
+lack of extra H-bonds with vicinal residues would not improve
+the thermostability of the enzyme. This conclusion is however
+in line with the experimental outcomes since all the PETase-
+like variants (wild-type, ThermoPETase, and DuraPETase)
+with only this mutation hardly improve the PET degradation,
+and thus, this mutation seems to be less relevant.
+We now turn our attention to the N233K mutation, which is
+by far the key mutation for the enhanced PET degradation
+ability not only in FAST-PETase but also in other related
+variants.
+16
+Previously, Lu et al. claimed that the incorporation
+of Lys233 (positively charged) upon the N233K mutation
+favored an attractive electrostatic interaction (salt bridge) with
+the Glu204 residue (negatively charged). Our simulations
+clearly indicate an opposite behavior; i.e., the salt bridge
+between Lys233 and Glu204 is not preserved along the
+dynamics. Lys233 and Glu204 are significantly separated with
+an average distance between the two oxygen atoms of Glu204
+and the positively charged nitrogen of Lys233 of 11.0 ± 3.0 Å
+(Figure S1). We have also analyzed the potential H-bonds
+between the hydrogens attached to the positively charged
+nitrogen of Lys233 with any of the two oxygen atoms of
+Glu204 for FAST-PETase, and only a small fraction of frames
+with H-bonds (6%) is predicted, which contrasts to the
+fraction (34%) calculated for the wild-type enzyme between
+Asn233 and Glu204. What actually occurs along the dynamics
+is that Lys233, which is placed on the enzyme surface, is highly
+stabilized by effectively interacting with the accessible water
+molecules of the solvent.
+Since the previous structural analysis throughout the
+dynamics for the free enzymes did not provide conclusive
+insights concerning the enhanced catalytic activity of FAST-
+PETase, the dynamics of the enzyme:PET complexes were also
+analyzed. Interestingly, the N233K mutation causes two
+important effects that can be visualized by representing the
+RMSF of each residue for the FAST-PETase:PET and
+PETase:PET complexes and the difference (ΔRMSF) between
+both enzyme:PET complexes (Figure 3). The main effect is the
+decreased mobility of the residues that are directly linked to
+Lys233 (residues 232−246) except for His237, which is
+accompanied by the increased mobility of the residues bonded
+to Glu204, among which is Asp206. The increased mobility of
+Asp206 in the FAST-PETase:PET complex is associated with a
+change in the chain folding (residues 206−210, Figure S2),
+causing less effective H-bonds interactions of the Asp206 with
+its neighboring residues (Ile208 and Ala209) compared to the
+PETase:PET complex (Figure S3). We anticipate that the
+difficulty of Asp206 to set H-bonds with its vicinal residues in
+the FAST-PETase:PET complex makes Asp206 hold a more
+basic character supported by the higher electrostatic potential
+felt by the O
+δ1
+and O
+δ2
+atoms (141.0 ± 8.0 and 140.0 ± 8.0
+kcal mol
+−1
+|e|
+−1
+, respectively) compared to the PETase:PET
+complex (135.0 ± 7.0 and 129.0 ± 7.0 kcal mol
+−1
+|e|
+−1
+,
+respectively, Figure S4). As explained below, the increased
+basicity of Asp206 in FAST-PETase:PET is crucial to
+strengthen the interaction with His237 and stabilize the
+transition state during the acylation stage (next section).
+Therefore, the mutation N233K, which is relatively far from
+the active site, has an effect on the residues of the catalytic
+triad, in particular over His237 and Asp206, after removing the
+interaction with Glu204.
+For the enzyme:PET complexes, the binding energies
+between the PET model and the enzyme scaffolds were also
+computed from the classical simulations (see the Computa-
+tional Details). The five mutations inserted in FAST-PETase
+seem to have a small impact on the enzyme-PET interaction.
+The predicted binding energies are similar for the mutant and
+the wild-type, the binding energy being slightly smaller for the
+FAST-PETase:PET complex (−28.0 ± 5.0 kcal mol
+−1
+) than
+that for PETase:PET (−32.0 ± 4.0 kcal mol
+−1
+). Nevertheless, a
+further analysis by decomposing the binding energy into two
+contributions (enzyme:substrate and solvation) reveals that the
+interaction between the PET fragment and the enzyme is
+stronger for FAST-PETase (−49.4 ± 10.1 kcal mol
+−1
+) than for
+PETase (−37.5 ± 4.4 kcal mol
+−1
+). The contribution from
+solvation indeed equilibrates the binding energies for both
+enzyme:PET systems with a more unfavorable solvation energy
+for the FAST-PETase:PET complex compared to PETase:PET
+(21.0 ± 5.0 and 5.0 ± 0.9 kcal mol
+−1
+, respectively). These
+findings suggest that the PET substrate is better accommo-
+dated inside the active site for FAST-PETase but less exposed
+to the solvent. These energetic results can be explained by the
+structural analysis. The insertion of PET in FAST-PETase is
+accompanied by a cleft narrowing of the active site (13.0 ± 0.4
+Å) compared to the wild-type enzyme (14.5 ± 0.5 Å, Figure
+S5). Additionally, this shrinkage of the active cleft in FAST-
+PETase also reduces the number of water molecules accessible
+in the active site. This is supported by the radial distribution
+function of water molecules around Ser160 (Figure S6) and
+the number of water molecules within the cavity formed by the
+catalytic triad (Figure S7) for both FAST-PETase:PET and
+PETase:PET complexes. The smaller number of water
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19249
+molecules surrounding Ser160 and also within the cavity of the
+catalytic triad for FAST-PETase indicates a more favorable
+preorganized state compared to PETase, which would be
+favorable for the rate of the PET-degrading reaction as occurs
+in other biocatalysts. Desolvation of the Michaelis complex
+may contribute to a decrease in the activation free energy of
+the catalytic process.
+51
+Finally, it should be noted that the
+reduction of accessible water molecules for FAST-PETase is
+not due to a significant change in the hydrophobicity of the
+active site as no mutation is present in the site (Figure S8).
+Biocatalytic Mechanism of the PET Degradation.
+Umbrella-sampling simulations along the path-CV defined by
+the ASM were performed to estimate the FEPs for the mutant
+FAST-PETase and the wild-type PETase enzymes for the
+acylation and deacylation stages (Figures 4 and 5, respec-
+tively). Figures 4 and 5 also display the evolution of the most
+important structural parameters (distances) involved in the
+path-CV along MFEPs, whereas Table 1 gathers the average
+values of those selected distances for the most relevant species
+along the reaction paths.
+Prior to the detailed analysis of the PET degradation by
+FAST-PETase, it is convenient to briefly describe the reaction
+mechanism obtained for the wild-type PETase and compare
+our findings with those reported in the literature to validate our
+computational approach. The FEP calculated for wild-type
+PETase clearly indicates that acylation occurs through a single
+and concerted step involving a single transition state (TS1)
+(Figure 4). The free energy barrier was estimated to be 16.5 ±
+0.2 kcal mol
+−1
+in good accord with that experimentally
+determined for BHET (18.0−18.6 kcal·mol
+−1
+) and with those
+theoretically predicted for PET-like dimer models at different
+quantum-chemical levels (17.0 and 20 kcal·mol
+−1
+, respec-
+tively).
+26,27
+For the deacylation step (Figure 5), a free energy
+barrier of 10.0 ± 0.2 kcal·mol
+−1
+was predicted, which again is
+in line with the values calculated by similar methods (14.0 and
+15.1 kcal·mol
+−1
+).
+26,27
+These outcomes suggest that the selected
+computational approach is reliable for further studies of
+PETase-like variants.
+Turning our attention to FAST-PETase, the predicted FEP
+for the acylation stage is significantly different compared to
+that obtained for PETase (Figure 4) with an important
+reduction of the energy barrier (12.1 ± 0.1 kcal mol
+−1
+).
+Starting from RS, the structure for the FAST-PETase:PET
+complex shows optimal contacts for the initiation of the
+chemical reaction; i.e., the distance between oxygen O
+γ
+(Ser160) and carbon C
+2
+(PET) is calculated to be relatively
+close (2.62 ± 0.06 Å) for a further nucleophilic attack and the
+Ser160 H
+γ
+and His237 N
+ε
+are also well oriented (distance of
+1.87 ± 0.09 Å) for a proton transfer. H-bonds between oxygen
+O
+2
+(PET) and hydrogen atoms of Tyr87 and Met161 are
+already set (Table 1 and Figure 4b). These distances are
+predicted to be similar for the wild-type PETase enzyme
+(Table 1 and Figure S9). The main difference between the
+enzyme:PET structures for the mutant and wild-type enzymes
+Figure 4. (a) (Top) Free energy profiles calculated along the CV for the acylation mechanism of FAST-PETase (left) and PETase (right). The
+values of the free energy barriers (ΔG
+‡
+) are given. (Bottom) Evolution of the most relevant variables used in the definition of the CV along the
+MFEP. (b) Representative structures (atom distances in Å) of the active site at the relevant points (RS, TS1, and I1) for FAST-PETase. Structures
+at the relevant points for PETase are similar and shown in Figure S9.
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19250
+in RS lies in the O
+δ1
+−H
+δ
+and O
+δ2
+−H
+δ
+distances (Asp206 and
+His237), for which the fluctuation is higher in FAST-PETase
+compared to PETase in line with the previous analysis of the
+mobility of Asp206 (Figure 3).
+From RS to the acyl-enzyme intermediate (I1), the reaction
+occurs through a broad transition state (TS1), which is
+significantly stabilized compared to the wild-type PETase
+(Figure 4). The TS1 region comprises a wide variety of
+energetically-similar structures and begins when the H
+γ
+is
+equally shared by Ser160 and His237 (ca. 1.2 Å) and the
+nucleophilic attack of oxygen O
+γ
+(Ser160) to C
+2
+(PET) is
+initiated (average C
+2
+−O
+γ
+distance of 2.01 Å). From this point,
+the Ser160 gradually transfers its proton to the His237 with a
+clear H
+γ
+−O
+γ
+(H
+γ
+−N
+ε
+) distance increase (decrease), whereas
+the C
+2
+−O
+γ
+distance undergoes a steady shortening until it
+reaches a covalent bond of 1.35 ± 0.03 Å. On the other hand,
+the ester C
+2
+−O
+1
+bond of the PET model exhibits a continuous
+lengthening from 1.35 ± 0.03 to 4.21 ± 0.08 Å. This C
+2
+−O
+1
+lengthening is accompanied by a progressive shortening of the
+distance of the H
+γ
+proton (now bound to His237) to the PET
+oxygen O
+1
+due to a favorable electrostatic interaction between
+both atoms as a consequence of the C
+2
+−O
+1
+bond cleavage. In
+all this TS1 region, a tetrahedral structure for the PET C
+2
+is
+predicted. Unlike the extended TS1 region found for FAST-
+PETase, the wild-type PETase exhibits a well-defined
+tetrahedral TS1 with C
+2
+−O
+γ
+and C
+2
+−O
+1
+distances of 1.40 ±
+0.03 and 1.96 ± 0.06 Å, respectively. In addition, H
+γ
+is bound
+to His237 and oxygen O
+1
+of the PET model with similar
+distances (1.21 ± 0.11 and 1.34 ± 0.14 Å for H
+γ
+−N
+ε
+and H
+γ
+−
+O
+1
+distances, respectively).
+For both FAST-PETase and PETase enzymes, the TS1 state
+seems to be stabilized, in line with other experimental and
+computational studies,
+24,27
+by the formation of an oxyanion
+hole between the amine groups of Met161 and Tyr87 and the
+oxygen O
+2
+of the PET with short H−O
+2
+contacts in the 1.8−
+1.9 Å range (Table 1, Figures 4b, and S9). The additional
+stabilization of TS1 for the FAST-PETase mutant compared to
+the wild-type enzyme comes from the higher basicity of
+Asp206 within the FAST-PETase:PET complex as a
+consequence of the N233K mutation as previously discussed
+(Figure 3). This higher basicity (lower stabilization of the
+negative charge due to the lack of vicinal H-bonds) promotes a
+stronger electrostatic interaction with the protonated His237
+in FAST-PETase (−47.0 ± 4.0 kcal mol
+−1
+) compared to
+PETase (−44.0 ± 3.0 kcal mol
+−1
+). A structural signature of this
+optimal electrostatic interaction for FAST-PETase is the
+bifurcated H-bond interaction established between the two
+Asp206 oxygen atoms (Ο
+δ1
+and O
+δ2
+) and the His237 H
+δ
+along
+the TS1 region with average distances in the 2.0−2.5 Å range
+in both cases (Table 1 and Figure S10). In contrast, only one
+H-bond (O
+δ1
+−H
+δ
+) can be set for PETase during the acylation
+(Table 1 and Figure S10). Therefore, the higher basicity of
+Asp206 and, consequently, the more favorable His237-Asp206
+Figure 5. (a) (Top) Free energy profiles calculated along the CV for the deacylation stage of FAST-PETase (left) and PETase (right). The values
+of the free energy barriers (ΔG
+‡
+) are given. (Bottom) Evolution of the most relevant variables used in the definition of the CV along the MFEP. (b)
+Representative structures (atom distances in Å) of the active site at the relevant points (I2, TS2, and PS) for FAST-PETase. Structures at the
+relevant points for PETase are similar and shown in Figure S9.
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19251
+electrostatic interaction predicted for FAST-PETase is the
+origin of the free energy barrier decrease.
+Finally, TS1 evolves to the I1 intermediate through the
+breaking of the ester C
+2
+−O
+1
+bond (4.21 ± 0.08 Å for I1) and
+the H
+γ
+−O
+1
+bond formation (0.97 ± 0.02 Å) for FAST-PETase.
+In I1, the acyl-enzyme complex is also stabilized due to the H-
+bonds between oxygen O
+2
+of PET and the amine groups of
+Tyr87 and Met161 (contacts in the 2.0−2.1 Å range, Table 1).
+A similar I1 structure is found for PETase (Table 1 and Figure
+S9). The difference arises from the fact that the I1
+intermediate is predicted to be slightly exergonic for FAST-
+PETase and endergonic for PETase.
+For the deacylation stage (Scheme 1), a water molecule,
+introduced in the active site and well oriented with respect to
+the catalytic triad and the acyl-enzyme complex, can initiate
+the reaction (starting from I2) by a simultaneous proton
+transfer to His237 and a nucleophilic attack to the PET
+carbonyl (C
+2
+) of the enzyme:substrate adduct. This would
+generate a new tetrahedral transition state (TS2), which would
+evolve toward the product (PS) by means of a proton transfer
+from His237 to Ser160 (regenerating the enzyme scaffold) and
+the release of the TPA-terminal PET fragment (Scheme 1).
+Note that, as the active site of the PETase-like variants is
+located on the enzyme surface, water molecules are easily
+accessible for the deacylation step, in particular when one of
+the substrate fragments has left the active site.
+For FAST-PETase, the active water in the I2 intermediate is
+found to be relatively far from the acyl-enzyme adduct (Table
+1 and Figure 5) with distances between the water oxygen (O
+w
+)
+and carbon C
+2
+(PET) of 3.68 ± 0.05 Å. The water H
+w
+and the
+His237 N
+ε
+are computed to be at 4.65 ± 0.15 Å, which is also
+rather remote for a direct proton transfer. On the other hand,
+the I2 intermediate does not preserve short contacts between
+Asp206 and His237 (O
+δ1
+−H
+δ
+and Ο
+δ2
+−H
+δ
+distances of 3.6 ±
+1.1 and 3.5 ± 1.1 Å, respectively). I2 also exhibits a favorable
+H-bonding interaction between oxygen O
+2
+(PET) and the
+Tyr87 and Met161 hydrogen atoms with similar distances (2.2
+± 0.3 Å for both). For the wild-type PETase, the structure of
+I2 is similar to that obtained for FAST-PETase (Table 1 and
+Figure S9).
+As the reaction advances from I2, we can differentiate three
+relevant regions (Figure 5a): an initial stable intermediate, the
+transition state (TS2), and the products (PS) together with
+the enzyme recovering. The deacylation reaction presents a
+free energy barrier for FAST-PETase (PETase) of 11.2 ± 0.1
+kcal mol
+−1
+(10.0 ± 0.2 kcal mol
+−1
+) and an exergonic free
+energy of −6.7 ± 0.1 kcal mol
+−1
+(−4.4 ± 0.2 kcal mol
+−1
+).
+Unlike the acylation stage, the deacylation shows clear minima
+for both enzymes, which can be ascribed to the favorable
+interaction between the TPA-terminal PET fragment and the
+enzyme in the active sites. As can be inferred from Figure 5a,
+the initial intermediate for FAST-PETase is steadily destabi-
+lized (∼2.5 kcal mol
+−1
+), whereas there is almost no energy
+penalty to reach this intermediate (a tiny energy barrier of
+∼0.9 kcal mol
+−1
+) for PETase. For both enzymes, this initial
+and stable intermediate results from an optimal orientation of
+the active water molecule for the nucleophilic attack and
+proton transfer; in particular, a disposition with a significant
+shorter distance compared to I2 between the active water and
+His237 (N
+ε
+−H
+w
+of ca. 2.0 Å). The energetic destabilization of
+this intermediate for FAST-PETase is in line with the higher
+electrostatic interaction felt by the reactive water molecule as it
+approaches the PET fragment compared to PETase (Figure
+S11). These findings reveal that the free energy barrier for the
+deacylation step in FAST-PETase can be decomposed in two
+processes with different energy costs: i) the insertion and
+orientation of the reactive water molecule (∼2.5 kcal mol
+−1
+)
+and ii) the formation of the tetrahedral transition state (∼8.7
+Table 1. Average Distances (Å) Calculated for the most Relevant Species (RS, TS1, I1, I2, TS2, and PS) along the Acylation-
+Deacylation Mechanism
+acylation
+FAST-PETase PETase
+distances RS TS1 I1 RS TS1 I1
+C
+2
+(PET)−O
+γ
+(Ser160) 2.62 ± 0.06 1.44 ± 0.04 1.35 ± 0.03 2.67 ± 0.09 1.40 ± 0.04 1.35 ± 0.03
+C
+2
+(PET)−O
+1
+(PET) 1.35 ± 0.03 1.86 ± 0.07 4.21 ± 0.08 1.35 ± 0.03 1.96 ± 0.06 4.6 ± 0.2
+O
+γ
+(Ser160)−H
+γ
+(Ser160) 1.00 ± 0.03 2.01 ± 0.13 5.1 ± 0.2 0.99 ± 0.03 2.6 ± 0.2 5.3 ± 0.3
+N
+ε
+(His237)−H
+γ
+(Ser160) 1.87 ± 0.09 1.04 ± 0.03 5.4 ± 0.2 1.92 ± 0.14 1.21 ± 0.11 6.8 ± 0.6
+H
+γ
+(Ser160)−O
+1
+(PET) 3.3 ± 0.2 2.04 ± 0.14 0.97 ± 0.02 3.3 ± 0.2 1.34 ± 0.14 0.98 ± 0.03
+O
+δ1
+(Asp206)−H
+δ
+(His237) 3.0 ± 1.2 2.2 ± 0.3 3.1 ± 0.6 2.2 ± 0.3 2.0 ± 0.2 2.8 ± 0.7
+O
+δ2
+(Asp206)−H
+δ
+(His237) 3.0 ± 1.0 2.2 ± 0.3 2.4 ± 0.7 3.1 ± 0.3 2.8 ± 0.3 3.1 ± 0.6
+H(Met161)−O
+2
+(PET) 2.2 ± 0.2 1.83 ± 0.10 2.0 ± 0.2 2.2 ± 0.2 1.89 ± 0.13 2.1 ± 0.2
+H(Tyr87) −O
+2
+(PET) 1.87 ± 0.13 1.85 ± 0.11 2.1 ± 0.2 1.94 ± 0.14 1.83 ± 0.11 2.0 ± 0.2
+deacylation
+FAST-PETase PETase
+distances I2 TS2 PS I2 TS2 PS
+C
+2
+(PET) −O
+γ
+(Ser160) 1.34 ± 0.03 1.49 ± 0.05 2.78 ± 0.05 1.34 ± 0.03 1.44 ± 0.04 2.55 ± 0.04
+C
+2
+(PET) −O
+w
+(water) 3.68 ± 0.05 1.49 ± 0.05 1.33 ± 0.03 3.67 ± 0.07 1.80 ± 0.05 1.34 ± 0.03
+O
+w
+(Water)−H
+w
+(water) 0.97 ± 0.02 2.11 ± 0.13 2.7 ± 0.2 0.97 ± 0.03 1.93 ± 0.13 2.96 ± 0.17
+N
+ε
+(His237)−H
+w
+(Water) 4.65 ± 0.15 1.03 ± 0.03 1.96 ± 0.10 4.57 ± 0.14 1.04 ± 0.03 1.85 ± 0.09
+O
+γ
+(Ser160)−H
+w
+(Water) 4.01 ± 0.11 2.32 ± 0.06 0.99 ± 0.03 4.06 ± 0.18 2.06 ± 0.11 0.99 ± 0.03
+O
+δ1
+(Asp206)−H
+δ
+(His237) 3.6 ± 1.1 2.0 ± 0.3 2.4 ± 0.5 2.4 ± 0.5 1.9 ± 0.2 2.3 ± 0.4
+O
+δ2
+(Asp206)−H
+δ
+(His237) 3.5 ± 1.1 2.7 ± 0.4 3.1 ± 0.5 3.3 ± 0.5 2.9 ± 0.5 3.4 ± 0.4
+H(Met161)−O
+2
+(PET) 2.2 ± 0.3 1.9 ± 0.13 1.91 ± 0.13 1.97 ± 0.17 1.88 ± 0.15 2.05 ± 0.18
+H(Tyr87) −O
+2
+(PET) 2.2 ± 0.3 1.9 ± 0.2 1.93 ± 0.15 1.95 ± 0.14 1.81 ± 0.11 1.88 ± 0.11
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19252
+kcal mol
+−1
+). For PETase, the free energy barrier comes mainly
+from the tetrahedral transition state formation (∼10.0 kcal
+mol
+−1
+). Therefore, there is even a slight energy stabilization of
+the transition state for FAST-PETase during the deacylation
+stage, which, in line with acylation, also comes from the
+favorable electrostatic interaction between the protonated
+His237 and Asp206.
+From the I2 intermediate, the reaction progresses until TS2.
+Note that, for convenience and comparison purposes, we have
+kept the label TS2 in Table 1 and Figure 5 for a structure that,
+in the case of FAST-PETase, is not a proper transition state but
+a stable high-energy intermediate. For FAST-PETase, TS2
+exhibits a clear tetrahedral structure similar to TS1. The C
+2
+−
+O
+γ
+distance (C
+2
+of PET and O
+γ
+of Ser160) has undergone a
+slight lengthening (1.49 ± 0.05 Å), whereas a short contact
+between the PET fragment and water hydroxyl has appeared
+(C
+2
+−O
+W
+of 1.49 ± 0.05 Å). At TS2, the proton transfer from
+the active water to His237 has totally occurred with a N
+ε
+−H
+w
+distance of 1.03 ± 0.03 Å and a significant lengthening of O
+w
+−
+H
+w
+(2.11 ± 0.13 Å). Likewise, a reorientation of Ser160 and
+His237 for a subsequent proton transfer (now from His237 to
+Ser160) has taken place in TS2 with an O
+γ
+−H
+w
+contact of ca.
+2.3 Å (Figure 5b). For the wild-type PETase, TS2 shows a
+slightly weaker tetrahedral character with longer C
+2
+−O
+W
+distances (1.80 ± 0.05 Å) compared to FAST-PETase (1.49
+± 0.05 Å). The proton transfer from the active water to His237
+has also happened (1.04 ± 0.03 Å), although the lengthening
+of O
+w
+−H
+w
+is smaller (1.93 ± 0.13 Å). Regarding the oxyanion
+hole H-bonds, and in line with what was found for I2, two
+significant H-bonds between the oxygen PET O
+2
+and Tyr87
+and Met161 H atoms are predicted and slightly strengthened
+for both FAST-PETase and PETase (in the 1.8−1.9 Å range).
+Our findings, in contrast to those reported by Jerves et al.,
+therefore indicate that the nucleophilic water attack and
+deprotonation processes are asynchronous, being the His237
+protonation the first important event for the deacylation stage
+for both enzymes.
+In the products (PS), the bond between the PET fragment
+and Ser160 (C
+2
+−O
+γ
+) has significantly lengthened (2.78 ± 0.05
+Å) for FAST-PETase, and the Ser160 has been regenerated
+due to the proton transfer from His237 to Ser160 (O
+γ
+−H
+w
+and
+N
+ε
+−H
+w
+distances of 0.99 ± 0.03 and 1.96 ± 0.10 Å,
+respectively). Additionally, the relevant C
+2
+−O
+w
+covalent
+bond has been formed (1.33 ± 0.03 Å), generating the TPA-
+terminal PET fragment. Compared to FAST-PETase, a
+comparable PS structure for PETase is calculated with similar
+distances (Table 1 and Figure S9).
+■
+CONCLUSIONS
+In this article, we perform a detailed computational study to
+gain insights into the enhancement of the PET degradation
+biocatalyzed by the promising FAST-PETase enzyme. In
+particular, we seek to disentangle the role that the five
+mutations incorporated in the FAST-PETase scaffold (S121E/
+D186H/R224Q/N233K/R280A), all of them far from the
+active site, play on the stabilization of the initial PET-enzyme
+complex or other important intermediates (transition states)
+determining the catalytic reaction rate for the PET
+biodegradation. With this aim, we have applied classical and
+hybrid (QM/MM) MD simulations for the wild-type PETase
+and mutant FAST-PETase as the enzyme scaffolds and a PET
+model (trimer) as the substrate to understand the catalytic
+mechanism. The free energy landscapes for the reaction
+mechanism have been predicted by using the ASM together
+with umbrella-sampling simulations.
+Our outcomes support that the FAST-PETase variant
+follows the canonical reaction mechanism of the wild-type
+PETase and other hydrolases with two stages (acylation and
+deacylation), in which a Ser-His-Asp triad is actively involved
+in the biocatalytic process. FAST-PETase displays a catalytic
+mechanism in which both acylation and deacylation exhibit
+broad transition state-like regions, the acylation stage being the
+rate-limiting reaction step with a free energy barrier of 12.1
+kcal mol
+−1
+. That free energy barrier is significantly smaller than
+that predicted for PETase (16.5 kcal mol
+−1
+), confirming that
+FAST-PETase is a better biocatalyst for PET degradation. Our
+study reveals that the origin of the enhanced activity of FAST-
+PETase mainly comes from the N233K mutation, and is not
+due to the formation of a salt bridge interaction, as previously
+suggested,
+16
+but rather to an opposite effect. In particular, the
+lack of a salt bridge interaction between Lys233 and Glu204
+gives rise to a change of the chain folding of the residues
+around Glu204, among which is Asp206 of the catalytic triad.
+This folding hinders that Asp206 establishes effective H-bonds
+with its vicinal residues (Ile208 and Ala209) compared to
+PETase and, as a consequence, Asp206 acquires a more basic
+character favoring the interaction with the protonated His237
+in the transition state of the acylation stage. This improved
+His237-Asp206 interaction lowers the free energy barrier of
+acylation and, consequently, accelerates the PET depolymeri-
+zation.
+The results here presented therefore rationalize the
+molecular origin of the improvement of the catalytic activity
+of FAST-PETase in PET degradation. Additionally, we believe
+that the enhanced basicity of Asp206, indirectly caused by the
+N233K mutation, might also be the reason why other PET-
+degrading enzymes incorporating the N233K mutation show
+an increased catalytic activity. Overall, our study contributes to
+an in-depth comprehension of the PET biodegradation process
+and can help for the rational design of novel PET-hydrolyzing
+enzymes for feasible industrial applications.
+■
+ASSOCIATED CONTENT
+*
+sı
+Supporting Information
+The Supporting Information is available free of charge at
+https://pubs.acs.org/doi/10.1021/jacs.3c04427.
+Evolution of the selected distances between Lys233 and
+Glu204; representation of the Asp206 loop change;
+evolution of the H-bond distances between Asp206 and
+Ile208 and Ala209; probability distribution function of
+the electrostatic potential felt by Asp206 oxygen atoms;
+representation of the cleft distance measurement; radial
+distribution function of water molecules around Ser160
+and number of water molecules within a cavity created
+from the catalytic triad for both enzyme:PET complexes;
+hydrophobic surface areas for both enzyme:PET
+complexes; representative structures of the active site
+at the relevant points for PETase; O
+δ1
+(Asp206)−
+H
+δ
+(His237) and O
+δ2
+(Asp206)−H
+δ
+(His237) distances
+along the MFEP; evolution of the electrostatic
+interaction (ΔE
+Elec
+) of the reactive water during the
+first stage of deacylation (PDF)
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19253
+■
+AUTHOR INFORMATION
+Corresponding Author
+Juan Aragó − Instituto de Ciencia Molecular (ICMol),
+Universitat de Vale ̀ncia, 46980 Paterna, Spain;
+ orcid.org/
+0000-0002-0415-9946; Email: juan.arago@uv.es
+Authors
+Rafael García-Meseguer − Instituto de Ciencia Molecular
+(ICMol), Universitat de Vale ̀ncia, 46980 Paterna, Spain;
+orcid.org/0000-0002-3091-3164
+Enrique Ortí − Instituto de Ciencia Molecular (ICMol),
+Universitat de Vale ̀ncia, 46980 Paterna, Spain;
+ orcid.org/
+0000-0001-9544-8286
+In ̃ aki Tun ̃ ón − Departamento de Química Física, Universitat
+de Vale ̀ncia, 46100 Burjassot, Spain;
+ orcid.org/0000-
+0002-6995-1838
+J. Javier Ruiz-Pernía − Departamento de Química Física,
+Universitat de Vale ̀ncia, 46100 Burjassot, Spain;
+orcid.org/0000-0002-4640-0419
+Complete contact information is available at:
+https://pubs.acs.org/10.1021/jacs.3c04427
+Author Contributions
+The manuscript was written through the contributions of all
+authors. All authors have given approval for the final version of
+the manuscript.
+Notes
+The authors declare no competing financial interest.
+■
+ACKNOWLEDGMENTS
+Financial support by the MCIN/AEI of Spain (projects
+CNS2022-135187, PID2021-128569NB-I00, PID2021-
+123332OB-C22, and CEX2019-000919-M, funded by
+MCIN/AEI/10.13039/501100011033, by “ERDF A way of
+making Europe”, and by the “European Union NextGener-
+ationEU/PRTR”) and the Generalitat Valenciana (PROM-
+ETEO/2020/077, CIPROM/2021/079 and MFA/2022/017)
+is acknowledged. The MFA/2022/017 project forms part of
+the Advanced Materials programme supported by MCIN with
+funding from European Union NextGenerationEU (PRTR-
+C17.I1) and by Generalitat Valenciana. J.A. is indebted to the
+MCIN/AEI for his Ramón-y-Cajal (RyC-2017-23500) fellow-
+ship funded by MCIN/AEI/10.13039/501100011033 and by
+“ESF Investing in your future”.
+■
+REFERENCES
+(1) Plastics Europe Market data. https://plasticseurope.org/
+resources/market-data/ (accessed April 09, 2023).
+(2) Ellen MacArthur Foundation and World Economic Forum The New
+Plastics Economy: Rethinking the future of plastics. https://
+ellenmacarthurfoundation.org/the-new-plastics-economy-rethinking-
+the-future-of-plastics (accessed April 09, 2023).
+(3) Chamas, A.; Moon, H.; Zheng, J.; Qiu, Y.; Tabassum, T.; Jang, J.
+H.; Abu-Omar, M.; Scott, S. L.; Suh, S. Degradation Rates of Plastics
+in the Environment. ACS Sustainable Chem. Eng. 2020, 8, 3494−3511.
+(4) De-la-Torre, G. E. Microplastics: an emerging threat to food
+security and human health. J. Food Sci. Technol. 2020, 57, 1601−1608.
+(5) De Vos, L.; Van de Voorde, B.; Van Daele, L.; Dubruel, P.; Van
+Vlierberghe, S. Poly(alkylene terephthalate)s: From current develop-
+ments in synthetic strategies towards applications. Eur. Polym. J. 2021,
+161, No. 110840.
+(6) Gopalakrishna, K. G.; Reddy, N. Regulations on Recycling PET
+Bottles. In Recycling of Polyethylene Terephthalate Bottles, Thomas, S.;
+Rane, A.; Kanny, K.; Abitha, V. K.; Thomas, M. G., Eds.; William
+Andrew Publishing, 2019; pp 23−35.
+(7) Sinha, V.; Patel, M. R.; Patel, J. V. Pet Waste Management by
+Chemical Recycling: A Review. J. Polym. Environ. 2010, 18, 8−25.
+(8) Hiraga, K.; Taniguchi, I.; Yoshida, S.; Kimura, Y.; Oda, K.
+Biodegradation of waste PET. EMBO Rep. 2019, 20, No. e49365.
+(9) Kawai, F.; Kawabata, T.; Oda, M. Current State and Perspectives
+Related to the Polyethylene Terephthalate Hydrolases Available for
+Biorecycling. ACS Sustainable Chem. Eng. 2020, 8, 8894−8908.
+(10) Zhu, B.; Wang, D.; Wei, N. Enzyme discovery and engineering
+for sustainable plastic recycling. Trends Biotechnol. 2022, 40, 22−37.
+(11) Wei, R.; Zimmermann, W. Biocatalysis as a green route for
+recycling the recalcitrant plastic polyethylene terephthalate. Microb.
+Biotechnol. 2017, 10, 1302−1307.
+(12) Wei, R.; Breite, D.; Song, C.; Gräsing, D.; Ploss, T.; Hille, P.;
+Schwerdtfeger, R.; Matysik, J.; Schulze, A.; Zimmermann, W.
+Biocatalytic Degradation Efficiency of Postconsumer Polyethylene
+Terephthalate Packaging Determined by Their Polymer Micro-
+structures. Adv. Sci. 2019, 6, No. 1900491.
+(13) Zimmermann, W. Biocatalytic recycling of polyethylene
+terephthalate plastic. Philos. Trans. R. Soc., A 2020, 378,
+No. 20190273.
+(14) Yoshida, S.; Hiraga, K.; Takehana, T.; Taniguchi, I.; Yamaji, H.;
+Maeda, Y.; Toyohara, K.; Miyamoto, K.; Kimura, Y.; Oda, K. A
+bacterium that degrades and assimilates poly(ethylene terephthalate).
+Science 2016, 351, 1196−1199.
+(15) Tournier, V.; Topham, C. M.; Gilles, A.; David, B.; Folgoas, C.;
+Moya-Leclair, E.; Kamionka, E.; Desrousseaux, M. L.; Texier, H.;
+Gavalda, S.; Cot, M.; Guémard, E.; Dalibey, M.; Nomme, J.; Cioci, G.;
+Barbe, S.; Chateau, M.; André, I.; Duquesne, S.; Marty, A. An
+engineered PET depolymerase to break down and recycle plastic
+bottles. Nature 2020, 580, 216−219.
+(16) Lu, H.; Diaz, D. J.; Czarnecki, N. J.; Zhu, C.; Kim, W.; Shroff,
+R.; Acosta, D. J.; Alexander, B. R.; Cole, H. O.; Zhang, Y.; Lynd, N.
+A.; Ellington, A. D.; Alper, H. S. Machine learning-aided engineering
+of hydrolases for PET depolymerization. Nature 2022, 604, 662−667.
+(17) Bell, E. L.; Smithson, R.; Kilbride, S.; Foster, J.; Hardy, F. J.;
+Ramachandran, S.; Tedstone, A. A.; Haigh, S. J.; Garforth, A. A.; Day,
+P. J. R.; Levy, C.; Shaver, M. P.; Green, A. P. Directed evolution of an
+efficient and thermostable PET depolymerase. Nat. Catal. 2022, 5,
+673−681.
+(18) Sanluis-Verdes, A.; Colomer-Vidal, P.; Rodriguez-Ventura, F.;
+Bello-Villarino, M.; Spinola-Amilibia, M.; Ruiz-Lopez, E.; Illanes-
+Vicioso, R.; Castroviejo, P.; Aiese Cigliano, R.; Montoya, M.;
+Falabella, P.; Pesquera, C.; Gonzalez-Legarreta, L.; Arias-Palomo,
+E.; Sola ̀, M.; Torroba, T.; Arias, C. F.; Bertocchini, F. Wax worm
+saliva and the enzymes therein are the key to polyethylene
+degradation by Galleria mellonella. Nat. Commun. 2022, 13, 5568.
+(19) Chen, C.-C.; Han, X.; Li, X.; Jiang, P.; Niu, D.; Ma, L.; Liu, W.;
+Li, S.; Qu, Y.; Hu, H.; Min, J.; Yang, Y.; Zhang, L.; Zeng, W.; Huang,
+J.-W.; Dai, L.; Guo, R.-T. General features to enhance enzymatic
+activity of poly(ethylene terephthalate) hydrolysis. Nat. Catal. 2021,
+4, 425−430.
+(20) Ellis, L. D.; Rorrer, N. A.; Sullivan, K. P.; Otto, M.; McGeehan,
+J. E.; Román-Leshkov, Y.; Wierckx, N.; Beckham, G. T. Chemical and
+biological catalysis for plastics recycling and upcycling. Nat. Catal.
+2021, 4, 539−556.
+(21) Chen, C.-C.; Dai, L.; Ma, L.; Guo, R.-T. Enzymatic degradation
+of plant biomass and synthetic polymers. Nat. Rev. Chem. 2020, 4,
+114−126.
+(22) Han, X.; Liu, W.; Huang, J.-W.; Ma, J.; Zheng, Y.; Ko, T.-P.;
+Xu, L.; Cheng, Y.-S.; Chen, C.-C.; Guo, R.-T. Structural insight into
+catalytic mechanism of PET hydrolase. Nat. Commun. 2017, 8, 2106.
+(23) Joo, S.; Cho, I. J.; Seo, H.; Son, H. F.; Sagong, H.-Y.; Shin, T. J.;
+Choi, S. Y.; Lee, S. Y.; Kim, K.-J. Structural insight into molecular
+mechanism of poly(ethylene terephthalate) degradation. Nat.
+Commun. 2018, 9, 382.
+(24) Rauwerdink, A.; Kazlauskas, R. J. How the Same Core Catalytic
+Machinery Catalyzes 17 Different Reactions: the Serine-Histidine-
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19254
+Aspartate Catalytic Triad of α/β-Hydrolase Fold Enzymes. ACS Catal.
+2015, 5, 6153−6176.
+(25) Austin, H. P.; Allen, M. D.; Donohoe, B. S.; Rorrer, N. A.;
+Kearns, F. L.; Silveira, R. L.; Pollard, B. C.; Dominick, G.; Duman, R.;
+El Omari, K.; Mykhaylyk, V.; Wagner, A.; Michener, W. E.; Amore,
+A.; Skaf, M. S.; Crowley, M. F.; Thorne, A. W.; Johnson, C. W.;
+Woodcock, H. L.; McGeehan, J. E.; Beckham, G. T. Characterization
+and engineering of a plastic-degrading aromatic polyesterase. Proc.
+Natl. Acad. Sci. U. S. A. 2018, 115, E4350−E4357.
+(26) Boneta, S.; Arafet, K.; Moliner, V. QM/MM Study of the
+Enzymatic Biodegradation Mechanism of Polyethylene Terephthalate.
+J. Chem. Inf. Model. 2021, 61, 3041−3051.
+(27) Jerves, C.; Neves, R. P. P.; Ramos, M. J.; da Silva, S.; Fernandes,
+P. A. Reaction Mechanism of the PET Degrading Enzyme PETase
+Studied with DFT/MM Molecular Dynamics Simulations. ACS Catal.
+2021, 11, 11626−11638.
+(28) Feng, S.; Yue, Y.; Zheng, M.; Li, Y.; Zhang, Q.; Wang, W.
+IsPETase- and IsMHETase-Catalyzed Cascade Degradation Mecha-
+nism toward Polyethylene Terephthalate. ACS Sustainable Chem. Eng.
+2021, 9, 9823−9832.
+(29) Shrimpton-Phoenix, E.; Mitchell, J. B. O.; Bu ̈ hl, M. Computa-
+tional Insights into the Catalytic Mechanism of Is-PETase: An
+Enzyme Capable of Degrading Poly(ethylene) Terephthalate. Chem.
+− Eur. J. 2022, 28, No. e202201728.
+(30) Palm, G. J.; Reisky, L.; Böttcher, D.; Mu ̈ ller, H.; Michels, E. A.
+P.; Walczak, M. C.; Berndt, L.; Weiss, M. S.; Bornscheuer, U. T.;
+Weber, G. Structure of the plastic-degrading Ideonella sakaiensis
+MHETase bound to a substrate. Nat. Commun. 2019, 10, 1717.
+(31) Knott, B. C.; Erickson, E.; Allen, M. D.; Gado, J. E.; Graham,
+R.; Kearns, F. L.; Pardo, I.; Topuzlu, E.; Anderson, J. J.; Austin, H. P.;
+Dominick, G.; Johnson, C. W.; Rorrer, N. A.; Szostkiewicz, C. J.;
+Copié, V.; Payne, C. M.; Woodcock, H. L.; Donohoe, B. S.; Beckham,
+G. T.; McGeehan, J. E. Characterization and engineering of a two-
+enzyme system for plastics depolymerization. Proc. Natl. Acad. Sci. U.
+S. A. 2020, 117, 25476−25485.
+(32) Pinto, A. V.; Ferreira, P.; Neves, R. P. P.; Fernandes, P. A.;
+Ramos, M. J.; Magalha ̃es, A. L. Reaction Mechanism of MHETase, a
+PET Degrading Enzyme. ACS Catal. 2021, 11, 10416−10428.
+(33) Son, H. F.; Cho, I. J.; Joo, S.; Seo, H.; Sagong, H.-Y.; Choi, S.
+Y.; Lee, S. Y.; Kim, K.-J. Rational Protein Engineering of Thermo-
+Stable PETase from Ideonella sakaiensis for Highly Efficient PET
+Degradation. ACS Catal. 2019, 9, 3519−3526.
+(34) Cui, Y.; Chen, Y.; Liu, X.; Dong, S.; Tian, Y.; Qiao, Y.; Mitra,
+R.; Han, J.; Li, C.; Han, X.; Liu, W.; Chen, Q.; Wei, W.; Wang, X.; Du,
+W.; Tang, S.; Xiang, H.; Liu, H.; Liang, Y.; Houk, K. N.; Wu, B.
+Computational Redesign of a PETase for Plastic Biodegradation
+under Ambient Condition by the GRAPE Strategy. ACS Catal. 2021,
+11, 1340−1350.
+(35) Olsson, M. H. M.; Søndergaard, C. R.; Rostkowski, M.; Jensen,
+J. H. PROPKA3: Consistent Treatment of Internal and Surface
+Residues in Empirical pKa Predictions. J. Chem. Theory Comput. 2011,
+7, 525−537.
+(36) Søndergaard, C. R.; Olsson, M. H. M.; Rostkowski, M.; Jensen,
+J. H. Improved Treatment of Ligands and Coupling Effects in
+Empirical Calculation and Rationalization of pKa Values. J. Chem.
+Theory Comput. 2011, 7, 2284−2295.
+(37) Case, D. A.; Aktulga, H. M.; Belfon, K.; Ben-Shalom, I. Y.;
+Berryman, J. T.; Brozell, S. R.; Cerutti, D. S.; Cheatham, T. E., III;
+Cisneros, G. A.; Cruzeiro, V. W. D.; Darden, T. A.; Duke, R. E.;
+Giambasu, G.; Gilson, M. K.; Gohlke, H.; Goetz, A. W.; Harris, R.;
+Izadi, S.; Izmailov, S. A.; Kasavajhala, K.; Kaymak, M. C.; King, E.;
+Kovalenko, A.; Kurtzman, T.; Lee, T. S.; LeGrand, S.; Li, P.; Lin, C.;
+Liu, J.; Luchko, T.; Luo, R.; Machado, M.; Man, V.; Manathunga, M.;
+Merz, K. M.; Miao, Y.; Mikhailovskii, O.; Monard, G.; Nguyen, H.;
+O’Hearn, K. A.; Onufriev, A.; Pan, F.; Pantano, S.; Qi, R.;
+Rahnamoun, A.; Roe, D. R.; Roitberg, A.; Sagui, C.; Schott-
+Verdugo, S.; Shajan, A.; Shen, J.; Simmerling, C. L.; Skrynnikov, N.
+R.; Smith, J.; Swails, J.; Walker, R. C.; Wang, J.; Wang, J.; Wei, H.;
+Wolf, R. M.; Wu, X.; Xiong, Y.; Xue, Y.; York, D. M.; Zhao, S.;
+Kollman, P. A. Amber 2020; University of California: San Francisco,
+2020.
+(38) Frisch, M. J.; Trucks, G. W.; Schlegel, H. B.; Scuseria, G. E.;
+Robb, M. A.; Cheeseman, J. R.; Scalmani, G.; Barone, V.; Mennucci,
+B.; Petersson, G. A.; Nakatsuji, H.; Caricato, M.; Li, X.; Hratchian, H.
+P.; Izmaylov, A. F.; Bloino, J.; Zheng, G.; Sonnenberg, J. L.; Hada, M.;
+Ehara, M.; Toyota, K.; Fukuda, R.; Hasegawa, J.; Ishida, M.;
+Nakajima, T.; Honda, Y.; Kitao, O.; Nakai, H.; Vreven, T.;
+Montgomery, Jr., J. A.; Peralta, J. E.; Ogliaro, F.; Bearpark, M. J.;
+Heyd, J.; Brothers, E. N.; Kudin, K. N.; Staroverov, V. N.; Kobayashi,
+R.; Normand, J.; Raghavachari, K.; Rendell, A. P.; Burant, J. C.;
+Iyengar, S. S.; Tomasi, J.; Cossi, M.; Rega, N.; Millam, N. J.; Klene,
+M.; Knox, J. E.; Cross, J. B.; Bakken, V.; Adamo, C.; Jaramillo, J.;
+Gomperts, R.; Stratmann, R. E.; Yazyev, O.; Austin, A. J.; Cammi, R.;
+Pomelli, C.; Ochterski, J. W.; Martin, R. L.; Morokuma, K.;
+Zakrzewski, V. G.; Voth, G. A.; Salvador, P.; Dannenberg, J. J.;
+Dapprich, S.; Daniels, A. D.; Farkas, O
+̈
+.; Foresman, J. B.; Ortiz, J. V.;
+Cioslowski, J.; Fox, D. J. Gaussian 09; Gaussian, Inc.: Wallingford, CT,
+USA, 2009.
+(39) Jorgensen, W. L.; Chandrasekhar, J.; Madura, J. D.; Impey, R.
+W.; Klein, M. L. Comparison of simple potential functions for
+simulating liquid water. J. Chem. Phys. 1983, 79, 926−935.
+(40) Ryckaert, J.-P.; Ciccotti, G.; Berendsen, H. J. C. Numerical
+Integration of the Cartesian Equations of Motion of a System with
+Constraints: Molecular Dynamics of n-Alkanes. J. Comput. Phys. 1977,
+23, 327−341.
+(41) Darden, T.; York, D.; Pedersen, L. Particle mesh Ewald: An N·
+log(N) method for Ewald sums in large systems. J. Chem. Phys. 1993,
+98, 10089−10092.
+(42) Essmann, U.; Perera, L.; Berkowitz, M. L.; Darden, T.; Lee, H.;
+Pedersen, L. G. A smooth particle mesh Ewald method. J. Chem. Phys.
+1995, 103, 8577−8593.
+(43) Berendsen, H. J. C.; Postma, J. P. M.; van Gunsteren, W. F.;
+DiNola, A.; Haak, J. R. Molecular dynamics with coupling to an
+external bath. J. Chem. Phys. 1984, 81, 3684−3690.
+(44) Grønbech-Jensen, N.; Farago, O. A simple and effective Verlet-
+type algorithm for simulating Langevin dynamics. Mol. Phys. 2013,
+111, 983−991.
+(45) Roe, D. R.; Cheatham, T. E. PTRAJ and CPPTRAJ: Software
+for Processing and Analysis of Molecular Dynamics Trajectory Data. J.
+Chem. Theory Comput. 2013, 9, 3084−3095.
+(46) Gohlke, H.; Kiel, C.; Case, D. A. Insights into Protein−Protein
+Binding by Binding Free Energy Calculation and Free Energy
+Decomposition for the Ras−Raf and Ras−RalGDS Complexes. J. Mol.
+Biol. 2003, 330, 891−913.
+(47) Miller, B. R.; McGee, T. D.; Swails, J. M.; Homeyer, N.;
+Gohlke, H.; Roitberg, A. E. MMPBSA.py: An Efficient Program for
+End-State Free Energy Calculations. J. Chem. Theory Comput. 2012, 8,
+3314−3321.
+(48) Gaus, M.; Cui, Q.; Elstner, M. DFTB3: Extension of the Self-
+Consistent-Charge Density-Functional Tight-Binding Method (SCC-
+DFTB). J. Chem. Theory Comput. 2011, 7, 931−948.
+(49) Zinovjev, K.; Tun ̃ ón, I. Adaptive Finite Temperature String
+Method in Collective Variables. J. Phys. Chem. A 2017, 121, 9764−
+9772.
+(50) Kumar, S.; Rosenberg, J. M.; Bouzida, D.; Swendsen, R. H.;
+Kollman, P. A. The Weighted Histogram Analysis Method for Free-
+Energy Calculations on Biomolecules I. The Method. J. Comput.
+Chem. 1992, 13, 1011−1021.
+(51) Richard, J. P.; Amyes, T. L.; Goryanova, B.; Zhai, X. Enzyme
+architecture: on the importance of being in a protein cage. Curr. Opin.
+Chem. Biol. 2014, 21, 1−10.
+Journal of the American Chemical Society pubs.acs.org/JACS Article
+https://doi.org/10.1021/jacs.3c04427
+J. Am. Chem. Soc. 2023, 145, 19243−19255
+19255

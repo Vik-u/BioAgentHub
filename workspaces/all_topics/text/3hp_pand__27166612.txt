@@ -1,0 +1,782 @@
+Biotechnol.	J.	2016,	11,	1110–1117	 DOI	10.1002/biot.201600147
+www.biotechnology-journal.com
+Biotechnology
+Journal
+1110
+© 2016 The Authors. Biotechnology Journal published by Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim.  
+This is an open access article under the terms of the Creative Commons Attribution License, which permits use,  
+distribution and reproduction in any medium, provided the original work is properly cited.
+1    Introduction
+The yeast S. cerevisiae is widely applied in industrial bio-
+technology for production of fuels, chemicals, and pharma-
+ceutical ingredients and it is also used for fundamental 
+research as a eukaryotic model organism [1–3]. Genetic 
+manipulation of S. cerevisiae is greatly facilitated by its 
+efficient inherent homologous recombination (HR) machin-
+ery for DNA double-strand break (DSB) repair [4]. As a 
+result, many genome engineering tools have been devel-
+Biotech Method
+EasyClone-MarkerFree: A vector toolkit for marker-less 
+integration of genes into Saccharomyces cerevisiae  
+via CRISPR-Cas9
+Mathew M. Jessop-Fabre1,*, Tadas Jakoc ˇiu ¯nas1,*, Vratislav Stovicek1, Zongjie Dai2,3, Michael K. Jensen1,  
+Jay D. Keasling1,4,5,6 and Irina Borodina1
+1 The Novo Nordisk Foundation Center for Biosustainability, Technical University of Denmark, Hørsholm, Denmark
+2 The Novo Nordisk Foundation Center for Biosustainability, Chalmers University of Technology, Gothenburg, Sweden
+3 Department of Biology and Biological Engineering, Chalmers University of Technology, Gothenburg, Sweden
+4 Joint BioEnergy Institute, Emeryville, CA, USA 
+5 Physical Biosciences Division, Lawrence Berkeley National Laboratory, Berkeley, CA, USA
+6  Department of Chemical and Biomolecular Engineering & Department of Bioengineering University of California, Berkeley,  
+CA, USA
+Saccharomyces cerevisiae is an established industrial host for production of recombinant proteins, 
+fuels and chemicals. To enable stable integration of multiple marker-free overexpression cassettes 
+in the genome of S. cerevisiae, we have developed a vector toolkit EasyClone-MarkerFree. The 
+integration of linearized expression cassettes into defined genomic loci is facilitated by CRISPR/
+Cas9. Cas9 is recruited to the chromosomal location by specific guide RNAs (gRNAs) expressed 
+from a set of gRNA helper vectors. Using our genome engineering vector suite, single and triple 
+insertions are obtained with 90–100% and 60–70% targeting efficiency, respectively. We demon-
+strate application of the vector toolkit by constructing a haploid laboratory strain (CEN.PK113-7D) 
+and a diploid industrial strain (Ethanol Red) for production of 3-hydroxypropionic acid, where we 
+tested three different acetyl-CoA supply strategies, requiring overexpression of three to six genes 
+each. Among the tested strategies was a bacterial cytosolic pyruvate dehydrogenase complex, 
+which was integrated into the genome in a single transformation. The publicly available EasyClone-
+MarkerFree vector suite allows for facile and highly standardized genome engineering, and should 
+be of particular interest to researchers working on yeast chassis with limited markers available.
+Keywords: CRISPR-Cas9 · 3-Hydroxypropionic acid · Metabolic engineering · Saccharomyces cerevisiae
+Correspondence: Dr. Irina Borodina, The Novo Nordisk Foundation 
+ Center for Biosustainability, Technical University of Denmark, Kogle allé 6, 
+DK-2970, Hørsholm, Denmark 
+E-mail: irbo@biosustain.dtu.dk 
+Abbreviations: Cas9, CRISPR associated protein 9; CRISPR, clustered regu-
+larly interspaced short palindromic repeats; DSB, double strand break (of 
+DNA); gRNA, guide RNA; 3HP, 3-hydroxypropionic acid; HR, homologous 
+recombination; PAM, protospacer adjacent motif; USER, uracil-specific 
+excision reaction
+Received 14 MAR 2016
+Revised 14 MAR 2016
+Accepted 03 MAY 2016
+Accepted  
+article online 11 MAY 2016
+Supporting information  
+available online
+* These authors contributed equally to this work.
+www.biotecvisions.comwww.biotechnology-journal.com
+Biotechnology
+Journal
+Biotechnol. J. 2016, 11, 1110–1117
+© 2016 The Authors. Biotechnology Journal published by Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim
+1111
+oped that take advantage of HR for targeted integration of 
+heterologous DNA into the yeast genome [5, 6]. Chromo-
+somal gene integration has several benefits over plasmid-
+based approaches, such as increased strain stability, bet-
+ter control of gene expression level and lower population 
+heterogeneity [5]. However, though the HR machinery has 
+a high fidelity, selection is still necessary to identify the 
+colonies that have been successfully engineered. This has 
+the fundamental drawback that selection markers need to 
+be recycled if multiple genome edits are needed. Also, 
+both dominant and auxotrophic markers have been report-
+ed to have an effect on cell physiology [7, 8]. Moreover 
+antibiotic-based selection markers are undesirable in 
+industrial strains due to the risk of spreading drug resist-
+ance. A way to improve homology-directed chromosomal 
+integration of heterologous gene fragments is by using 
+DNA endonucleases for targeted DSB as this has been 
+shown to increase recombination events by approximate-
+ly three orders of magnitude [9–12]. Recently, the Clus-
+tered Regularly Interspaced Short Palindromic Repeats 
+(CRISPR) Type II system from bacteria has been adopted 
+for genetic engineering of yeast [13]. This system consists 
+of two components: guide RNA (gRNA) and CRISPR-
+associated endonuclease (Cas9). Upon expression in the 
+cell, the gRNA/Cas9 complex is recruited to DNA by base-
+pairing of the gRNA recognition sequence (typically 20 bp) 
+and the complementary DNA stand, after which the Cas9 
+introduces a DSB break. The target DNA sequence must 
+be immediately followed by a protospacer adjacent motif 
+(PAM) (i.e. NGG for Streptococcus pyogenes-derived 
+Cas9); Cas9 makes a blunt cut three nucleotides upstream 
+of the PAM site [14]. There have been many recently pub-
+lished examples of CRISPR-Cas9-based tools for yeast 
+genome engineering [15–21] that are reviewed in 
+Jakoc ˇiu ˉ nas et al. [22]. The work presented here builds on 
+the previously reported method EasyClone for single-step 
+targeted integration of multiple expression cassettes [5, 6]. 
+The EasyClone method allows targeted genomic integra-
+tion of up to three vectors in a single transformation event 
+using auxotrophic or dominant selection markers. These 
+target sites are located in the intergenic regions and are 
+interspaced by essential genes to ensure that the inte-
+grated DNA fragments are not at risk of being removed by 
+HR [23]. Moreover it has been confirmed that integration 
+into these sites ensures a high-level of expression and 
+does not interfere with cellular growth [23]. The selection 
+markers can be removed via Cre-LoxP-mediated recombi-
+nation, which requires one extra transformation with 
+CreA-vector, cultivation to induce the CreA expression 
+and finally screening of the resulting clones on selection 
+plates to confirm the loss of the marker; the marker remov-
+al procedure has a turnaround time of about five days. 
+Once the selection markers are eliminated, the strain is 
+ready for the next integration event or for other genetic 
+modifications. Marker removal, as well as being time con-
+suming, can also cause genome instability [24, 25]. 
+Here we present the EasyClone-MarkerFree method, 
+which takes advantage of CRISPR-Cas9 for introduction 
+of double-strand DNA breaks in the defined integration 
+sites, which causes very efficient integration of expres-
+sion cassettes and thus bypasses the need for selection. 
+The gRNA helper vectors, expressing gRNA molecules 
+that recruit Cas9 to the particular chromosomal locations, 
+can be easily removed from the strain by growth on non-
+selective medium, after which the strain is ready for the 
+next modification. This shortens the turnaround time to 
+only one or two days. Additional advantages are: simpli-
+fied experimental design for cloning, because the choice 
+of selection markers does not need to be taken into con-
+sideration; elimination of the effect of the selection mark-
+ers on strain physiology; and moreover a possibility to 
+iterate gene integrations with other edits guided by 
+CRISPR/Cas9, e.g. gene deletions. The use of predefined 
+and characterized chromosomal target sites dispenses 
+with the need for the experimenter to identify suitable 
+regions in which to integrate their genes of interest. Fur-
+thermore, we demonstrate the utility of the method by 
+engineering 3-hydroxypropionic acid producing strains 
+with improved precursor supply strategies. 
+2    Materials and methods
+2.1    Strains
+Two different strains of S. cerevisiae were used: the hap-
+loid laboratory strain CEN.PK113-7D (MAT a URA3 HIS3 
+LEU2 TRP1 MAL2-8 c SUC2; obtained from Peter Kötter, 
+Johann Wolfgang Goethe University Frankfurt, Germany), 
+and the diploid industrial Ethanol Red strain (MAT a/α; 
+obtained from Fermentis, A Lesaffre division). E. coli 
+strain DH5α alpha was used to clone, propagate, and store 
+the plasmids.
+2.2    Construction of plasmids
+The codon-optimized genes, encoding the pyruvate 
+dehydrogenase complex and lipoate-protein ligase from 
+Enterococcus faecalis, were ordered from GenScript 
+(sequences can be found in Supporting information, 
+Table  S5). The genes encoding ATP-dependent citrate 
+lyase and the mitochondrial citrate transport protein, 
+were amplified from the genomic DNA of Yarrowia lipol-
+ytica DSM-8218, obtained from the DSMZ collection 
+(www.dsmz.de). All of the primers, biobricks and plas-
+mids constructed and used in this study can be found in 
+Supporting information, Tables S1–S3.
+The EasyClone-MarkerFree vectors were created by 
+amplifying the EasyClone 2.0 vectors [6] with primers that 
+were designed to attach to either side of the selection 
+markers, creating a fragment that no longer contained the 
+marker. These fragments were then ligated to form the 
+www.biotechnology-journal.com www.biotecvisions.com
+Biotechnology
+Journal
+Biotechnol. J. 2016, 11, 1110–1117
+1112 © 2016 The Authors. Biotechnology Journal published by Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim
+marker-less vectors. Seven of the resulting vectors (named 
+“Intermediate vectors” in Table S3) contained PAM sites 
+in the integration regions, which were removed by site-
+directed mutagenesis using the QuikChange II XL Site-
+Directed Mutagenesis Kit (Agilent Technologies) accord-
+ing to the manufacturers’ protocol. 
+gRNA cassettes targeting particular integration loci 
+(chromosomal coordinates can be found in Supporting 
+information, Table S4) were ordered as double-stranded 
+gene blocks from IDT DNA. These cassettes were ampli-
+fied using primers 10525(TJOS-62 [P1F]) and 10529(TJOS-
+65 [P1R]) and USER-cloned into pCfB2926 (pTAJAK-71) 
+[15] to give single gRNA helper vectors. For construction 
+of triple gRNA helper vectors, three gRNA cassettes were 
+amplified using three primer pairs (10525(TJOS-62 [P1F]) 
+and 10530(TJOS-66 [P2R]) for the first, 10526(TJOS-63 
+[P2F]) and 10531(TJOS-67 [P3R]) for the second, and 
+10527(TJOS-64 [P3F]) and 10529(TJOS-65 [P1R]) for the 
+third gRNA cassette) and cloned into pCfB2926 
+(p-TAJAK-71) [15]. Single gRNA helper vectors for Etha-
+nol Red were constructed by PCR amplification of the 
+template plasmid pCfB3041 using primers indicated in 
+Supporting information, Table S1 as described in [17]. All 
+of the cloning steps for creating gRNA helper vectors and 
+EasyClone-MarkerFree vectors were performed in E. coli. 
+Correct cloning was confirmed by Sanger sequencing. 
+For expression of the Cas9 gene we used an episomal 
+vector pCfB2312 with CEN-ARS replicon and KanMX 
+resistance marker [17].
+The EasyClone-MarkerFree vectors for expression of 
+fluorescent protein or 3HP pathway genes were cloned as 
+described in [5, 26]. The vectors were linearized with NotI, 
+the integration fragment (part of the expression vector 
+without E. coli ori and Amp
+R) was gel-purified and trans-
+formed, along with a gRNA helper vector, into yeast car-
+rying the Cas9 plasmid (pCfB2312) via the lithium acetate 
+method [27]. After the heat shock the cells were recovered 
+for two hours in YPD medium and then plated on YPD agar 
+containing 200 mg/L G418 and 100 mg/L nourseothricin. 
+For yeast transformations with a single vector we rou-
+tinely use 500 ng of the linear integration fragment along 
+with 500  ng of the relevant gRNA helper plasmid. For 
+yeast transformations with three vectors we use 1 µg of 
+linear integration fragments and 1  µg of triple gRNA 
+helper plasmid. Correct integration of the vectors into the 
+genome was verified by colony PCR using primers listed 
+in Supporting information, Table S1. 
+2.3    Media and growth conditions
+The E. coli strains containing the plasmids were grown in 
+Luria–Bertani (LB) media supplemented with 100 µg/mL 
+ampicillin. Yeast strains were grown in liquid YPD media, 
+or on YPD agar plates with 20 g/L glucose (Sigma-
+Aldrich). When needed the medium was supplemented 
+with antibiotics G418 (200 mg/L) for the selection of the 
+Cas9 plasmid, and/or nourseothricin (100 mg/L) for selec-
+tion of the gRNA plasmid. Synthetic complete medium 
+with 20 g/L glucose was prepared using drop-out powder 
+from Sigma-Aldrich.
+The strains were screened for production of 3HP as 
+following. Single colonies were grown in 500 µL synthetic 
+complete media in 96 deep-well plates with air-penetra-
+ble lids (EnzyScreen, Germany) at 30°C with 250  rpm 
+shaking overnight. The overnight cultures were then 
+inoculated into 50 mL of either mineral media (MM) with 
+60 g/L glucose [5], or a simulated fed-batch media (feed-
+in-time, FIT) in 500 mL-shake flasks with baffles to a start-
+ing OD
+600 of 0.1. The feed-in-time (FIT) medium M-Sc.
+syn-1000 synthetic FIT was purchased from M2P labs 
+GmbH (Germany). All the media for 3HP cultivations were 
+supplemented with 500 ng/mL of DL-α-lipoic acid (Sigma 
+Aldrich). The strains were cultivated in MM or FIT media 
+at 30°C with 250 rpm for 168 h. Samples were taken every 
+12 h (every 1–2 h during the exponential phase in MM), 
+with the optical density OD
+600 being measured on a 
+20-fold diluted culture broth. Samples were then centri-
+fuged at 3000  ×g for 30  min and the supernatant was 
+stored at -20°C until HPLC analysis. Cultivations were 
+carried out in triplicate.
+2.4    Analytical procedures
+Strains expressing gfp were analyzed using a BioTek Syn-
+ergy MX microplate reader. Excitation wavelength was 
+set at 485 nm, and emission was read at 530 nm. Optical 
+density was measured at 600  nm. Concentration of 
+3-hydroxypropionic acid in the broth was measured by 
+HPLC, using a method previously reported in [28]. 
+2.5    Integration Stability
+Strains that had been transformed with gfp-containing 
+vectors were grown in 500  µL of YPD in 96 deep-well 
+plates with air-penetrable lids at 30°C with 250 rpm shak-
+ing overnight. The following morning, 50 µL of each cul-
+ture was passed to 500 µL of fresh YPD. This was repeated 
+for a total of five passages. At the end of the passages, the 
+culture was plated onto YPD agar, and the fluorescent 
+colonies were counted.
+2.6    Determination of gene copy number by qPCR
+Quantitative PCR was performed on the Ethanol Red 
+strain containing the genes from Enterococcus faecalis. 
+Primers were designed using the PrimerQuest ® tool 
+ (https://eu.idtdna.com/Primerquest/Home/Index). Details 
+of the primers used can be found in Supporting informa-
+tion, Table S1. Genomic DNA was prepared using the ZR 
+Fungal/Bacterial DNA MiniPrep™ kit (Zymo Research) 
+according to the manufacturer’s protocol. Each reaction 
+contained 10 µL of 2xSYBR Green qPCR MasterMix (Life 
+www.biotecvisions.comwww.biotechnology-journal.com
+Biotechnology
+Journal
+Biotechnol. J. 2016, 11, 1110–1117
+© 2016 The Authors. Biotechnology Journal published by Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim
+1113
+Technologies), 1 µL of each primer, 0.1 µL of diluted refer-
+ence dye, and 7.7 µL of genomic DNA. Reactions were 
+carried out in triplicate, with 5  pg of gDNA present in 
+each reaction. ALG9 was used as a control, as well as a no 
+template control where the gDNA was replaced with 
+nuclease-free PCR grade water. The experiment was car-
+ried out using a Stratagene Mx3005P qPCR system with 
+the following settings; 10  min pre-incubation at 95°C, 
+40 cycles of denaturation at 95°C for 20 s and annealing 
+and elongation at 60°C for 22 s, and the final step of 95°C 
+for 1  min, 55°C for 30  s, 95°C for 30  s. The Stratagene 
+MxPro software was used to quantify the original amount 
+of DNA present for each gene, which could then be 
+related to the copy number.
+3    Results and discussion
+To enable rapid iterative cycles of metabolic engineering, 
+we developed a new vector toolkit EasyClone-Marker-
+Free, which allows integration of genes into specific sites 
+of the yeast chromosome without integration of a selec-
+tion marker. This simplifies strain design and reduces the 
+turnaround time in comparison to the previously pub-
+lished EasyClone methods [5, 6]. The method employs 
+CRISPR-Cas9 to introduce one or several DSBs into the 
+host chromosome, ensuring efficient integration. For this 
+system to be active in S. cerevisiae, it is necessary to have 
+a Cas9 expression plasmid, as well as a gRNA helper vec-
+tor. The DSB is repaired by the host cell using the native 
+HR machinery, which incorporates the EasyClone-Mark-
+erFree vector(s) into the target loci via double cross-over. 
+3.1     Construction of EasyClone-MarkerFree vector 
+toolkit
+Construction of the EasyClone vector set required that 
+11 gRNA helper vectors were built, one to target each of 
+the EasyClone chromosomal integration sites in the 
+S.  cerevisiae CEN.PK strain. Furthermore, three triple 
+gRNA helper vectors were built that can target three sites 
+simultaneously. The EasyClone 2.0 vectors were modified 
+to remove the selection markers and, where necessary, to 
+mutate the PAM sites in the integration sites. The vectors 
+contain a USER cloning site surrounded by bi-directional 
+terminators. Genes and promoters can be cloned into the 
+vectors using USER cloning as described below or other 
+methods, such as Gibson assembly, in-fusion, MoClo, etc. 
+[29].
+3.2    Workflow
+The suggested workflow is illustrated on Fig. 1. For USER 
+cloning, the EasyClone-MarkerFree vectors are prepared 
+by linearization with AsiSI and nicking with Nb.BsmI in 
+order to obtain vector backbones with sticky ends. The 
+treated vector backbones are stored at -20°C. Compatible 
+biobricks, encoding genes and promoters, are prepared 
+by PCR amplification using oligos with a uracil base, 7–10 
+bases downstream of the 5’ end of the primers (Fig. 1a). 
+We routinely use the overhangs as specified in [5] for all of 
+our genes and promoters, which simplifies standardiza-
+tion and exchange of biobricks between scientists in our 
+laboratory. We store the library of ready-to-use genes and 
+promoters at -20°C. 
+To clone promoters and genes into the expression vec-
+tor, the AsiSI/Nb.BsmI-treated vector backbones are 
+mixed with the desired promoter(s) and gene(s) and 
+treated with USER enzyme. The USER enzyme excises 
+uracils in the overhangs of genes and promoters, thus 
+producing sticky ends compatible with the EasyClone 
+vectors (Fig. 1b). The USER reaction mix is transformed 
+into E. coli, which ligates the expression vector (Fig. 1c). 
+The plasmids can then be isolated, confirmed by sequenc-
+ing and linearized with NotI (or another suitable) restric-
+tion enzyme to produce linear integration fragments 
+containing expression cassettes flanked with ~500-bp-
+long integration regions (Fig. 1d). The linear integration 
+fragment(s) and the corresponding helper vector are then 
+transformed into the yeast host cell already carrying a 
+Cas9 expression plasmid (Fig. 1e). The transformants are 
+selected on medium with G418 and nourseothricin to 
+select for the Cas9 and gRNA helper vector, respectively. 
+If further CRISPR-Cas9 mediated engineering rounds are 
+desired, the gRNA helper vector is removed by cultivating 
+the cells in liquid or solid medium containing G418 to 
+maintain the selection for Cas9 (Fig. 1f). gRNA helper vec-
+tors are 2µ-based and according to our experience are 
+easily lost by growing the cells overnight in liquid medi-
+um with G418 only. The resulting culture is diluted and 
+plated on G418 plates to obtain single colonies. The loss 
+of the gRNA helper vector is confirmed by replica plating 
+onto nourseothricin agar plates. The strains are then 
+ready for the next round of Cas9-mediated gene insertions 
+or other manipulations (e.g. knock-outs, etc.). If no further 
+genetic modifications are desired, the strains can be cul-
+tivated on non-selective medium to eliminate both Cas9 
+and gRNA helper vectors. 
+3.3    Validation of the vector toolkit
+To verify the integration efficiency and gene expression 
+levels at each site, gfp was cloned into each of the Easy-
+Clone vectors and transformed into the CEN.PK113-7D 
+strain. The integrations were tested by colony PCR for 20 
+randomly picked clones, and 95–100% correct integra-
+tions were obtained for all the integration sites (Fig. 2). 
+This is comparable with the previous versions of Easy-
+Clone, where the targeting efficiency was 80–100% [5, 6]. 
+However, we should note that wrong clones in the Easy-
+Clone-MarkerFree system were not fluorescent and hence 
+they did not contain the designed integration cassettes in 
+www.biotechnology-journal.com www.biotecvisions.com
+Biotechnology
+Journal
+Biotechnol. J. 2016, 11, 1110–1117
+1114 © 2016 The Authors. Biotechnology Journal published by Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim
+Figure 1.  An overview of the EasyClone-MarkerFree method. The BioBricks encoding genes and promoters are generated by PCR-amplification with uracil-
+containing primers (a). The BioBricks are assembled with the integration vectors via USER cloning (b) and the reaction mixture is transformed into E. coli 
+(c). The resulting plasmids are isolated from E. coli and confirmed by sequencing, then they are linearized and transformed into Cas9-expressing S. cerevisi-
+ae along with a helper gRNA vector, which causes double-stranded breaks at the designated integration sites (d–e). Yeast cells are selected on plates with 
+G418 and nourseothricin and correct integration of the vector(s) is confirmed by PCR. The helper gRNA vector can be eliminated by growth in the absence 
+of nourseothricin selection and the resulting strain, which still expresses Cas9, can be further engineered. Once the desired genetic modifications are 
+accomplished the Cas9 vector is removed by growth on non-selective medium and the final strain, not containing selection markers, is obtained (f).  
+G, gene; P, promoter; T, terminator; H, homology region. A detailed protocol is provided in Supporting information.
+www.biotecvisions.comwww.biotechnology-journal.com
+Biotechnology
+Journal
+Biotechnol. J. 2016, 11, 1110–1117
+© 2016 The Authors. Biotechnology Journal published by Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim
+1115
+their genomes, while for the EasyClone system with 
+selection markers, the integration cassette would always 
+be integrated in the genome, however sometimes it 
+would not be targeted to the designed integration site. 
+Further, the transformed colonies were each checked for 
+fluorescence, with 99% of the colonies showing fluores-
+cence (84–559 colonies were obtained and tested per 
+transformation). Fluorescence levels showed some small-
+er variations for different integration sites (Fig. 2) as we 
+also observed previously [6]. Another observation was 
+that among those clones with an integrated fragment, all 
+clones were fluorescent, which differs from the results we 
+obtained with CRISPR-Cas9-mediated insertion of expres-
+sion fragments with short homology arms (40 bp), where 
+only half of the clones were fluorescent [17]. We suggest 
+that the high fidelity of correct integration is due to the 
+long homology arms of ~0.5 kb present in the EasyClone 
+vectors.
+We further tested the stability of the integrations of 
+the gfp gene in each of the sites. After five passages, the 
+population retained 100% of fluorescent colonies, reinforc-
+ing the notion that these sites are stable due to their loca-
+tion in-between essential genes.
+The simultaneous targeting of three integration sites, 
+assisted with triple gRNA helper vectors, resulted in 
+60–70% targeting efficiencies, which is also comparable 
+with previously reported efficiencies for CRISPR-Cas9 
+methods for multi-loci integration [16, 18]. We previously 
+observed for the EasyClone system with selection mark-
+ers that targeting efficiency into the same chromosome 
+was only 44%, however the efficiency is higher for simul-
+taneous integration into different chromosomes (unpub-
+lished results). We believe that simultaneous targeting of 
+three sites that are closely positioned on the same chro-
+mosome, may lead to genome instability. Therefore to 
+achieve the best targeting efficiencies, triple gRNA help-
+er vectors were designed to target distinct chromosomes.
+3.4     Application of EasyClone-MarkerFree vector 
+toolkit for engineering of precursor supply  
+for 3-hydroxypropionic acid production
+As a test case, a pathway to produce 3HP was inserted 
+into two different S. cerevisiae strains, CEN.PK113-7D 
+and Ethanol Red, and the strains were further engineered 
+for improved acetyl-CoA supply. The basic pathway 
+strains were constructed by inserting a modified acetyl-
+CoA carboxylase ACC1
+S659A,S1157A and a malonyl-CoA 
+reductase MCR from Chloroflexus aurantiacus. Three dif-
+ferent strategies to boost acetyl-CoA production in the 
+cytosol were compared (Fig.  3A). One of the strategies 
+relied on expression of a functional bacterial pyruvate 
+dehydrogenase complex from Enterococcus faecalis in 
+the cytoplasm, which required expression of genes encod-
+ing subunits E1α, E1β, E2, and E3 of PDH complex, as well 
+as two genes involved in lipoylation of E2 [30]. Another 
+strategy was based on overexpression of the pyruvate 
+dehydrogenase bypass, namely pyruvate decarboxylase 
+PDC1, aldehyde dehydrogenase ALD6 and acetyl-CoA 
+synthase from Salmonella enterica ACS
+SE [31]. The third 
+strategy encompassed overexpression of ATP-dependent 
+citrate lyase, consisting of two subunits ACL1 and ACL2, 
+and a mitochondrial citrate transporter protein from 
+Y.  lipolytica. The genes required for different strategies 
+were cloned into three EasyClone-MarkerFree plasmids 
+and transformed into yeast strains expressing basic 3HP 
+pathway along with the triple gRNA helper vector 
+(pCfB3052 for CEN.PK and pCfB4668 for Ethanol Red). 
+Overexpression of the cytoplasmic PDH complex 
+proved to be the most successful strategy in CEN.PK, with 
+an improvement in 3HP final titer of 19% over the basic 
+strain in mineral medium, and 95% in the simulated fed-
+batch medium (Fig.  3). The PDH bypass showed no 
+improvement. The ACL strategy performed worse than 
+the basic pathway in MM, but interestingly showed an 
+improvement of 60% in FIT (Fig. 3B). Growth profiles can 
+be found in Supporting information, Fig. S1.
+In the diploid industrial strain (Ethanol Red), the PDH 
+complex also performed well, with an improvement of 23% 
+over the basic strain (Supporting information, Fig.  S2). 
+These results confirm that the bacterial PDH complex 
+from Enterococcus faecalis is a robust and efficient way to 
+improve cytosolic acetyl-CoA levels in yeast. We con-
+firmed that EasyClone-MarkerFree method integrates the 
+expression cassettes on both homologous chromosomes, 
+when applied in diploid strains. We performed qPCR on 
+the diploid industrial strain (Ethanol Red) carrying the 
+genes for the PDH complex. All of the six genes were 
+shown to have a copy number of 2. The PDH bypass 
+seems to have performed poorly, contradicting previous 
+Figure 2.  Validation of the EasyClone-MarkerFree vector toolkit. The labo-
+ratory strain, CEN.PK 117-7D, was transformed with the EasyClone-Mark-
+erFree vectors carrying gfp gene under control of a constitutive PTEF1 pro-
+moter. Specific fluorescence was measured to evaluate the expression 
+ level at each of the eleven integration sites. The error bars show standard 
+deviation between nine or ten replicates. The percentage of clones with 
+correct integration is shown for each site n = 20. 
+www.biotechnology-journal.com www.biotecvisions.com
+Biotechnology
+Journal
+Biotechnol. J. 2016, 11, 1110–1117
+1116 © 2016 The Authors. Biotechnology Journal published by Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim
+works. This may be due to the low activity of the 3HP 
+biosynthetic genes in this work, as we only integrated 
+ACC1 and MCR in single copies. In other studies, where 
+we expressed ACC1 and MCR from either a high-copy 
+episomal vector or integrated them in multiple copies into 
+the genome, the overexpression of PDH bypass did have 
+a positive effect on the 3HP production [32–34]. 
+4    Concluding remarks
+The EasyClone-MarkerFree vector toolkit can be used to 
+simultaneously introduce one to three integration cas-
+settes into the genome of S. cerevisiae without the use of 
+selection markers. Using standardized BioBricks, the 
+integration cassettes can be constructed for overexpres-
+sion of one or two genes per integration site. In this study 
+we successfully integrated up to six genes in a single 
+transformation with 60–70% targeting efficiency. The 
+system is well suited for strain construction via multiple 
+iterative metabolic engineering cycles. We have shown 
+that it performs well in both the haploid laboratory CEN.
+PK strain, and also in the diploid industrial Ethanol Red 
+strain. The EasyClone-MarkerFree vector toolkit can be 
+obtained from AddGene. 
+The work was funded by the Novo Nordisk Foundation. 
+VS and IB acknowledge funding for the BioREFINE-2G 
+project by the European Commission in the 7th Frame-
+work Programme (Project no. FP7-613771). 
+The authors declare no financial or commercial conflict of 
+interest.
+5    References
+ [1]  Botstein, D., Chervitz, S. A., Cherry, J. M., Yeast as a model organ-
+ism. Science 1997, 277, 1259–1260.
+ [2]  Borodina, I., Nielsen, J., Advances in metabolic engineering of yeast 
+Saccharomyces cerevisiae for production of chemicals. Biotechnol. 
+J. 2014, 9, 609–620.
+ [3]  Jensen, M. K., Keasling, J. D., Recent applications of synthetic biol-
+ogy tools for yeast metabolic engineering. FEMS Yeast Res. 2015, 15, 
+DOI: 10.1111/1567-1364.12185.
+ [4]  Schiestl, R. H., Petes, T. D., Integration of DNA fragments by ille-
+gitimate recombination in Saccharomyces cerevisiae. Proc. Natl. 
+Acad. Sci. USA 1991, 88, 7585–7589.
+ [5]  Jensen, N. B., Strucko, T., Kildegaard, K. R., David, F. et al., Easy-
+Clone: Method for iterative chromosomal integration of multiple 
+genes in Saccharomyces cerevisiae. FEMS Yeast Res. 2014, 14, 
+238–248.
+ [6]  Stovicek, V., Borja, G. M., Forster, J., Borodina, I., EasyClone 2.0: 
+Expanded toolkit of integrative vectors for stable gene expression in 
+industrial Saccharomyces cerevisiae strains. J. Ind. Microbiol. Bio-
+technol. 2015, 42, 1519–1531.
+ [7]  Pronk, J. T., Auxotrophic yeast strains in fundamental and applied 
+research. Appl. Environ. Microbiol. 2002, 68, 2095–2100.
+ [8]  Alam, M. T., Zelezniak, A., Mülleder, M., Shliaha, P. et al., The meta-
+bolic background is a global player in Saccharomyces gene expres-
+sion epistasis. Nat. Microbiol. 2016, 1, 1–10.
+ [9]  Storici, F., Durham, C. L., Gordenin, D. A., Resnick, M. A., Chromo-
+somal site-specific double-strand breaks are efficiently targeted for 
+repair by oligonucleotides in yeast. Proc. Natl. Acad. Sci. USA 2003, 
+100, 14994–14999. 
+[10]  Wingler, L. M., Cornish, V. W., Reiterative recombination for the in 
+vivo assembly of libraries of multigene pathways. Proc. Natl. Acad. 
+Sci. USA 2011, 108, 15135–15140.
+[11]  Kuijpers, N. G., Chroumpi, S., Vos, T., Solis-Escalante, D. et al., One-
+step assembly and targeted integration of multigene constructs 
+assisted by the I-SceI meganuclease in Saccharomyces cerevisiae. 
+FEMS Yeast Res. 2013, 13, 769–781.
+[12]  Kuijpers, N. G., Solis-Escalante, D., Bosman, L., van den Broek, M. et 
+al., A versatile, efficient strategy for assembly of multi-fragment 
+Figure 3. Effect of acetyl-CoA supply 
+strategies on the production of 
+3-hydroxypropionic acid. (A) Three dif-
+ferent pathways taken to produce acetyl-
+CoA in the cytosol; 1. The PDH bypass, 
+2. The PDH complex of E. faecalis, 3. 
+The ATP-dependent citrate lyase strate-
+gy from Y. lipolytica. Colored arrows 
+denote which promoter was used, and 
+the direction of the arrow indicates in 
+which direction the gene is transcribed. 
+A left facing arrow signifies that the 
+gene is translated on the anti-sense 
+strand and vice versa. The box at the 
+end of the gene represents which termi-
+nator sequence is used. (B) Production 
+of 3-hydroxypropionic acid over time in 
+the engineered laboratory strain in min-
+eral or simulated fed-batch medium. 
+The cultivations were carried out in trip-
+licate, the error bars show standard 
+deviation.
+www.biotecvisions.comwww.biotechnology-journal.com
+Biotechnology
+Journal
+Biotechnol. J. 2016, 11, 1110–1117
+© 2016 The Authors. Biotechnology Journal published by Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim
+1117
+expression vectors in Saccharomyces cerevisiae using 60 bp syn-
+thetic recombination sequences. Microb. Cell Fact. 2013, 12, 47.
+[13]  DiCarlo, J. E., Norville, J. E., Mali, P., Rios, X. et al., Genome engi-
+neering in Saccharomyces cerevisiae using CRISPR-Cas systems. 
+Nucleic Acids Res. 2013, 41, 4336–4343.
+[14]  Jinek, M., Chylinski, K., Fonfara, I., Hauer, M. et al. A programmable 
+dual-RNA-guided DNA endonuclease in adaptive bacterial immu-
+nity. Science 2012, 337, 816–821.
+[15]  Jakoc ˇiu ˉ nas, T., Bonde, I., Herrgård, M. J., Harrison S. J. et al., Multi-
+plex metabolic pathway engineering using CRISPR/Cas9 in Sac-
+charomyces cerevisiae. Metab. Eng. 2015, 28, 213–222.
+[16]  Jakoc ˇiu ˉ nas, T., Rajkumar, A. S., Zhang, J., Arsovska, D. et al. 
+CasEMBLR: Cas9-facilitated multiloci genomic integration of in vivo 
+assembled DNA parts in Saccharomyces cerevisiae. ACS Synth. 
+Biol. 2015, 4, 1226–1234.
+[17]  Stovicek, V., Borodina, I., Forster, J., CRISPR–Cas system enables 
+fast and simple genome editing of industrial Saccharomyces cerevi-
+siae strains. Metab. Eng. Commun. 2015, 2, 13–22.
+[18]  Ronda, C., Maury, J., Jakoc ˇiu ˉ nas, T., Jacobsen, S. A. et al., CrEdit: 
+CRISPR mediated multi-loci gene integration in Saccharomyces 
+cerevisiae. Microb. Cell Fact. 2015, 14, 97.
+[19]  Mans, R., van Rossum, H. M., Wijsman, M., Backx, A. et al. CRISPR/
+Cas9: A molecular Swiss army knife for simultaneous introduction of 
+multiple genetic modifications in Saccharomyces cerevisiae. FEMS 
+Yeast Res. 2015, 15, DOI: 10.1093/femsyr/fov004.
+[20]  Laughery, M. F., Hunter, T., Brown, A., Hoopes, J. et al. New vectors 
+for simple and streamlined CRISPR-Cas9 genome editing in Sac-
+charomyces cerevisiae. Yeast 2015, 32, 711–720.
+[21]  Horwitz, A. A., Walter, J. M., Schubert, M. G., Kung S. H. et al., Effi-
+cient multiplexed integration of synergistic alleles and metabolic 
+pathways in yeasts via CRISPR-Cas. Cell Systems 2015, 1, 88–96.
+[22]  Jakoc ˇiu ˉ nas, T., Jensen, M. K., Keasling, K. D., CRISPR/Cas9 advanc-
+es engineering of microbial cell factories. Metab. Eng. 2016, 34, 
+44–59.
+[23]  Mikkelsen, M. D., Buron, L. D., Salomonsen, B., Olsen, C. E. et al., 
+Microbial production of indolylglucosinolate through engineering of 
+a multi-gene pathway in a versatile yeast expression platform. 
+Metab. Eng. 2012, 14, 104–111.
+[24]  Delneri, D., Tomlin, G. C., Wixon, J. L, Hutter, A. et al., Exploring 
+redundancy in the yeast genome: An improved strategy for use of 
+the cre-loxP system. Gene. 2000, 252, 127–135.
+[25]  Solis-Escalante, D., Kuijpers, N. G. A., van der Linden, F. H., Pronk, 
+J. T. et al., Efficient simultaneous excision of multiple selectable 
+marker cassettes using I-SceI-induced double-strand DNA breaks in 
+Saccharomyces cerevisiae. FEMS Yeast Res. 2014, 14, 741–754.
+[26]  Nour-Eldin, H. H., Geu-Flores, F., Halkier, B. A., USER cloning and 
+USER fusion: The ideal cloning techniques for small and big labora-
+tories. Methods Mol. Biol. 2010, 643, 185–200.
+[27]  Gietz, R. D., Schiestl, R. H., High-efficiency yeast transformation 
+using the LiAc/SS carrier DNA/PEG method. Nat. Protoc. 2007, 2, 
+31–34.
+[28]  Borodina, I., Kildegaard, K. R., Jensen, N. B., Blicher, T. H. et al., 
+Establishing a synthetic pathway for high-level production of 
+3-hydroxypropionic acid in Saccharomyces cerevisiae via beta-ala-
+nine. Metab. Eng. 2015, 27, 57–64.
+[29]  Li, M., Borodina, I., Application of synthetic biology for production 
+of chemicals in yeast Saccharomyces cerevisiae. FEMS Yeast Res. 
+2014, DOI: 10.1111/1567-1364.12213.
+[30]  Kozak, B. U., van Rossum, H. M., Luttik, M. A., Akeroyd, M. et al., 
+Engineering acetyl coenzyme A supply: Functional expression of a 
+bacterial pyruvate dehydrogenase complex in the cytosol of Sac-
+charomyces cerevisiae. MBio 2014, 5, e01696–e01614.
+[31]  Shiba, Y., Paradise, E. M., Kirby, J., Ro, D. K., Keasling, J. D., Engi-
+neering of the pyruvate dehydrogenase bypass in Saccharomyces 
+cerevisiae for high-level production of isoprenoids. Metab. Eng. 
+2007, 9, 160–168.
+[32]  Chen, Y., Bao, J., Il-Kwon, K., Siewers, V., Nielsen, J., Coupled incre-
+mental precursor and co-factor supply improves 3-hydroxypropionic 
+acid production in Saccharomyces cerevisiae. Metab. Eng. 2014, 22, 
+104–109.
+[33]  Jensen, N. B., Borodina, I., Chen, Y., Maury, J. et al., Microbial pro-
+duction of 3-hydroxypropionic acid. WO Patent 198831 A1, 2014.
+[34]  Kildegaard, K. R., Wang, Z. Chen, Y., Nielsen, J., Borodina, I., Produc-
+tion of 3-hydroxypropionic acid from glucose and xylose by meta-
+bolically engineered Saccharomyces cerevisiae. Metab. Eng. Comm. 
+2015, 2, 132–136. 
+[UNREADABLE_PAGE]
+© 2016 Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim www.biotechnology-journal.com
+Meeting report
+Metabolic Engineering Summit Beijing
+Xiangbin Chen
+http://dx.doi.org/10.1002/biot.201500664
+Commentary
+Toward improved host cell protein impurity assessment
+Jong Youn Baik, Kelvin H. Lee
+http://dx.doi.org/10.1002/biot.201600223
+Review
+Recent advances in exploiting ionic liquids for biomolecules: 
+Solubility, stability and applications
+Magaret Sivapragasam, Muhammad Moniruzzaman  
+and Masahiro Goto
+http://dx.doi.org/10.1002/biot.201500603
+Research Article
+Quantitative definition and monitoring of the host cell protein 
+proteome using iTRAQ – a study of an industrial  
+mAb producing CHO-S cell line
+Lesley M. Chiverton, Caroline Evans, Jagroop Pandhal, 
+Andrew R. Landels, Byron J. Rees, Peter R. Levison,  
+Phillip C. Wright and C. Mark Smales
+http://dx.doi.org/10.1002/biot.201500550
+Research Article
+Generic HPLC platform for automated enzyme reaction 
+monitoring: Advancing the assay toolbox for transaminases  
+and other PLP-dependent enzymes
+Tim Börner, Carl Grey and Patrick Adlercreutz
+http://dx.doi.org/10.1002/biot.201500587
+Research Article
+Hyperosmotic stimulus study discloses benefits in ATP supply 
+and reveals miRNA/mRNA targets to improve recombinant 
+protein production of CHO cells
+Jennifer Pfizenmaier, Lisa Junghans, Attila Teleki  
+and Ralf Takors
+http://dx.doi.org/10.1002/biot.201500606
+Research Article 
+Stirred tank bioreactor culture combined with serum-/
+xenogeneic-free culture medium enables an efficient expansion 
+of umbilical cord-derived mesenchymal stem/stromal cells
+Amanda Mizukami, Ana Fernandes-Platzgummer,  
+Joana G. Carmelo, Kamilla Swiech, Dimas T. Covas,  
+Joaquim M. S. Cabral and Cláudia L. da Silva
+http://dx.doi.org/10.1002/biot.201500532
+Research Article
+Mono- and dichromatic LED illumination leads to enhanced 
+growth and energy conversion for high-efficiency cultivation  
+of microalgae for application in space
+Ines Wagner, Christian Steinweg and Clemens Posten
+http://dx.doi.org/10.1002/biot.201500357
+Research Article
+Improving carbohydrate production of Chlorella sorokiniana 
+NIES-2168 through semi-continuous process coupled with 
+mixotrophic cultivation
+Yue Wang, Sheng-Yi Chiu, Shih-Hsin Ho, Zhuo Liu, 
+Tomohisa Hasunuma, Ting-Ting Chang, Kuan-Fu Chang,  
+Jo-Shu Chang, Nan-Qi Ren and Akihiko Kondo
+http://dx.doi.org/10.1002/biot.201500270
+Biotechnology Journal – list of articles published in the August 2016 issue.
+Cover illustration
+This regular issue of BTJ includes articles on biocatalysis, biochemical engineering, and 
+ bioprocess engineering. This cover page highlights the applications of biomolecules (e.g., 
+ proteins, enzymes, and DNA) in ionic liquids (ILs). The technological utility of biomolecules 
+can be enhanced significantly by combining them with ILs. Image is provided by Magaret 
+Sivapragasam, Muhammad Moni ruzzaman, and Masahiro Goto authors of  “Recent advances 
+in exploiting ionic liquids for biomolecules: Solubility, stability and applications”  
+(http://dx.doi.org/10.1002/biot.201500603).
+Research Article
+A dual enzyme system composed of a polyester hydrolase  
+and a carboxylesterase enhances the biocatalytic degradation  
+of polyethylene terephthalate films 
+Markus Barth, Annett Honak, Thorsten Oeser, Ren Wei, 
+Matheus R. Belisário-Ferrari, Johannes Then,  
+Juliane Schmidt and Wolfgang Zimmermann
+http://dx.doi.org/10.1002/biot.201600008
+Research Article
+Disulfide-bridging PEGylation during refolding for the more 
+efficient production of modified proteins
+Claire Ginn, Ji-won Choi and Steve Brocchini
+http://dx.doi.org/10.1002/biot.201600035
+Research Article
+Identifying and retargeting transcriptional hot spots  
+in the human genome
+Joseph K. Cheng, Amanda M. Lewis, Do Soon Kim,  
+Timothy Dyess and Hal S. Alper
+http://dx.doi.org/10.1002/biot.201600015
+Biotech Method
+EasyClone-MarkerFree: A vector toolkit for marker-less 
+integration of genes into Saccharomyces cerevisiae via  
+CRISPR-Cas9
+Mathew M. Jessop-Fabre, Tadas Jakoc ˇiu ¯nas,  
+Vratislav Stovicek, Zongjie Dai, Michael K. Jensen,  
+Jay D. Keasling and Irina Borodina
+http://dx.doi.org/10.1002/biot.201600147
+© 2016 Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim www.biotechnology-journal.com

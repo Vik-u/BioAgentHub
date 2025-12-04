@@ -1,0 +1,543 @@
+Cinematic
+Simulation of Substrate-to-Product
+Chemical Reactions with Chemical Accuracy
+Using QuantaMind MD
+Song Xia and Deqiang Zhang∗
+MoleculeMind
+E-mail: deqiangzhang@moleculemind.com
+Abstract
+Polyethylene terephthalate hydrolases (PETases) are enzymes that catalyze the
+breakdown of PET plastic. Previous studies have employed classical molecular dy-
+namics (MD) and quantum mechanical/molecular mechanical (QM/MM) simulations
+to probe the catalytic mechanisms of the PETase-catalyzed reaction. In this work,
+we apply QuantaMind, a deep learning-based machine learning force ﬁeld (MLFF)
+trained on diverse chemical systems and transition-state energies at density functional
+theory (DFT)-level, to simulate the complete catalytic cycle of the PETase reaction.
+Our simulations capture key proton transfer events and the stabilization role of the
+oxyanion hole in PETase, in agreement with previous computational studies, without
+introducing artiﬁcial biases to the interactions. The simulations also provide estimates
+of free energy barriers for each reaction step with uncertainty estimation, consistent
+with experimental values and previous QM/MM studies. To our knowledge, this work
+represents the ﬁrst complete DFT-level MD simulation of a biomolecular enzymatic
+reaction using DL-based MLFFs.
+1
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+In troduction
+Polyethylene terephthalate (PET) is the most common thermoplastic polymer of the polyester
+family, widely used in textiles and food and beverage containers. 1 As a result, vast quantities
+of PET waste accumulate in the environment, posing a severe threat to global ecosystems. In
+2016, a PET-assimilating bacterium, Ideonella sakaiensis 201-F6, was isolated from a PET
+recycling facility. This bacterium secretes a cutinase-like enzyme, IsPETase, that degrades
+PET to mono (2-hydroxyethyl) terephthalic acid (MHET), terephthalate (TPA), and ethy-
+lene glycol at ambient temperature. 2 Since then, eﬀorts have been devoted to engineering
+this enzyme, resulting in numerous improved variants. 3–13
+The catalytic mechanisms of serine hydrolases, including PETase, have been extensively
+studied. Conﬂicting hypotheses have been proposed with particular disagreement regarding
+proton transfer events during the catalytic cycle. 14–18 While QM/MM studies have provided
+valuable insights, these methods have inherent limitations, such as boundary issues and lim-
+ited accuracy in the MM component, and therefore introduce artifacts and produce diﬀerent
+results.19–26 Additionally, QM/MM simulations often require a large QM region for converged
+results, which is computationally expensive. 27
+Machine learning force ﬁelds (MLFFs) provide a promising alternative by mapping chem-
+ical descriptors to the quantum mechanical energy of systems, 28 combining the eﬃciency of
+classical force ﬁelds with the accuracy of QM methods. As deep learning (DL) 29 transforms
+computational chemistry, several DL-based MLFFs have been developed for MD simula-
+tions.30–33 Previously, we developed QuantaMind, 34 a DL-based MLFF trained on diverse
+biomolecular fragments with an emphasis on transition-state geometries, shown to be eﬀec-
+tive in simulating reactions in aqueous solutions.
+In this work, we demonstrate the application of QuantaMind in simulating the complete
+catalytic cycle of PETase. Our simulations elucidate key proton transfer events that are
+consistent with previous QM/MM studies. We estimate free energy barriers of 22 and 20
+kcal/mol for the acylation and deacylation steps, respectively, along the lower bound path.
+2
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+These
+values are close to the estimated experimental value of 18.7 kcal/mol 2,24 and the
+calculated value of 21.1 kcal/mol by Boneta et al. 24 To our knowledge, this research represents
+the ﬁrst complete DFT-level MD simulation of a biomolecular enzymatic reaction enabled
+by a DL-based MLFF.
+Results and discussion
+Figure 1 provides an overview of the enzymatic reaction simulated in this study. The simu-
+lation box (Figure 1A) contains 17,792 atoms in total, comprising the PETase protein (257
+residues), one MHET substrate molecule, and 4,898 water molecules. Figure 1B illustrates
+the chemical reaction simulated: the hydrolysis of MHET to produce terephthalic acid and
+ethylene glycol.
+Figures 1C1-6 present representative frames from the simulation trajectories, highlight-
+ing key intermediates along the catalytic pathway. Figure 1C1 shows in the initial state
+the substrate MHET positioned within the enzyme’s active site. After a nucleophilic attack
+by residue S165, a covalent intermediate forms between S165 and the reactant, as shown
+in Figure 1C2. Subsequent cleavage of the carbon-oxygen bond yields one of the reaction
+products, ethylene glycol and the acyl-enzyme intermediate (AEI) (Figure 1C3). As ethy-
+lene glycol departs, a water molecule enters the catalytic center (Figure 1C4) and performs a
+nucleophilic attack, forming a second tetrahedral intermediate (Figure 1C5). Finally, cleav-
+age of the carbon-S165 oxygen bond results in the formation of terephthalic acid, restoring
+the catalytic triad to its original protonation state (Figure 1C6). Detailed analyses of the
+simulation trajectories are presented in the following subsections.
+PETase Acylation Reaction
+During the acylation step of the PETase catalytic cycle, the serine residue S165 performs a
+nucleophilic attack on the ester bond of the MHET substrate, leading to its cleavage and
+3
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+Figure
+1: Overview of the PETase catalytic cycle simulated in this work. ( A.) The sim-
+ulation box used in this work. (B.) The chemical reaction studied in this work. ( C1-6.)
+Representative frames from the simulation, indicating signiﬁcant intermediates and prod-
+ucts. For clarity, only the water molecule directly involved in the reaction is shown, while
+other solvent molecules are hidden.
+4
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+the
+formation of ethylene glycol and the AEI. This acylation process proceeds through two
+distinct steps, depicted in Figures 2 and 3.
+Figure 2A presents representative snapshots from the nucleophilic attack simulation.
+Key interactions during this 100 ps simulation are quantiﬁed by monitoring several relevant
+distances (Figure 2B). The hydrogen bonds labeled as H-bond M166 and H-bond Y95 refer
+to the distances between the carbonyl oxygen and the backbone amide nitrogens of M166 and
+Y95, respectively. These atoms form the "oxyanion hole," which stabilizes the tetrahedral
+intermediate during the reaction. Early in the trajectory, when S165 is distant from the
+MHET substrate, these hydrogen bond distances ﬂuctuate substantially, particularly for
+H-bond M166. As the reaction proceeds, both distances stabilize around 3 Å, indicating
+stronger hydrogen bonds.
+Another critical event is the proton transfer from S165 to H242 (denoted as H242 NE-
+S165 H). A proton jump is noted at approximately 80 ps. Prior to the jump, the distance
+between the N ϵ of H242 and the S165 proton is around 2 Å, typical for a non-covalent
+hydrogen bond. At approximately 80 ps, this distance decreases and stabilizes around 1 Å,
+indicating the formation of a covalent N-H single bond.
+QuantaMind MD also provides free energy barriers during the simulation, along with
+uncertainty estimates. As shown in Figure 2C, the red dots represent the average free energy
+diﬀerence relative to the initial state, with error bars indicating the estimated standard
+deviations. The free energy barrier for this step ranges from 22 kcal/mol (lower bound path)
+to 47 kcal/mol (upper bound path).
+It is important to note that only the S165 O-MHET C distance–the distance between the
+S165 oxygen and the carbonyl carbon in MHET–is constrained using our enhanced sampling
+technique (Section QuantaMind MD Simulation), with no additional biases applied during
+the simulation.
+In Figure 3A, representative snapshots from the ester bond cleavage simulation are shown.
+Key interactions are similarly analyzed by plotting relevant distances over this 100 ps sim-
+5
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+Figure
+2: Simulation of the nucleophilic attack during PETase acylation reaction. ( A)
+Visualization of the nucleophilic attack by the oxygen atom in S165 on the carbonyl carbon.
+(B) Key distances during the simulation. H-bond M166 and H-bond Y95 are the hydrogen
+bond distances between the carbonyl oxygen and the backbone nitrogen atoms of M166 and
+Y95, respectively. H242 NE-S165 H represents the distance between the N ϵ of H242 and the
+S165 proton. S165 O-MHET C is the distance between the S165 oxygen and the carbonyl
+carbon in MHET. D175-H242 HND is the minimum distance between the two oxygen atoms
+in D175 and the hydrogen atom on N δ of H242. (C ) Free energy diﬀerence during the
+reaction, with red dots showing the average free energy diﬀerence relative to the initial state
+and error bars representing estimated standard deviations.
+6
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+ulation
+(Figure 3B). The hydrogen bonds, H-bond M166 and H-bond Y95, function as the
+"oxyanion hole," stabilizing the tetrahedral intermediate and the AEI carbonyl oxygen.
+A critical event during this simulation is the proton transfer from H242 to the nascent
+ethylene glycol product. As the ester bond breaks, the oxygen atom of the partially formed
+ethylene glycol requires an additional proton to become stable, capturing the proton from
+HIP242 (originating from S165) to form stable ethylene glycol. The Glycol O-H242 HNE
+and H242 NE-H242 HNE distance plots in Figure 3B illustrate this event: at around 35 ps,
+the proton migrates from H242 to the ethylene glycol oxygen, stabilizing at around 1 Å,
+indicative of a covalent O-H bond. Concurrently, the original covalent O-H bond elongates
+to approximately 1.8 Å, consistent with the non-covalent hydrogen bond distance.
+Figure 3C shows free energy changes and uncertainty estimation during the simulation.
+The red dots represent the average free energy diﬀerence relative to the initial state, with
+error bars indicating the estimated standard deviations. The free energy barrier for this step
+ranges from 14 kcal/mol (lower bound path) to 37 kcal/mol (upper bound path).
+During the enhanced sampling, only the MHET: C-O distance–the ester bond within the
+MHET molecule–is constrained (Section QuantaMind MD Simulation), with no additional
+biases applied.
+PETase Deacylation Reaction
+During the deacylation reaction of PETase, a water molecule attacks the ester bond of the
+AEI, followed by cleavage of the ester bond between the reactant and S165. This regenerates
+the catalytic triad and releases terephthalic acid. The process proceeds through two steps,
+illustrated in Figures 4 and 5.
+Figure 4A shows representative snapshots from the simulation of the water molecule’s
+nucleophilic attack. Key interactions are examined by plotting distances over this 100 ps
+simulation (Figure 4B). H-bond M166 and H-bond Y95 denote the hydrogen bond distances
+from the carbonyl oxygen to the backbone amide nitrogens of M166 and Y95, respectively.
+7
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+Figure
+3: Simulation of the C-O bond cleavage during the PETase acylation reaction. ( A)
+Visualization of the ester bond cleavage, leading to the formation of ethylene glycol and the
+AEI. ( B) Key distances during the simulation. H-bond M166 and H-bond Y95 represent the
+hydrogen bond distances between the carbonyl oxygen and the backbone atoms of M166 and
+Y95, respectively. H242 NE-H242 HNE denotes the distance between the N ϵ of H242 and
+the proton transferred from S165 in the previous step (Figure 2). MHET C-Water O is the
+ester bond distance in MHET. Glycol O-H242 HNE indicates the distance between H242’s
+proton and the glycol oxygen. D175-H242 HND is the minimum distance between the two
+oxygen atoms in D175 and the hydrogen atom on N δ of H242. (C ) Free energy diﬀerence
+during the reaction, with red dots showing the average free energy diﬀerence relative to the
+initial state and error bars representing estimated standard deviations.
+8
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+These
+nitrogen atoms form the "oxyanion hole," stabilizing the tetrahedral intermediate
+during the reaction. Notably, ﬂuctuations in these distances are larger than those observed
+for the similar tetrahedral intermediate in Figure 2B.
+Another signiﬁcant event is the transfer of the excess proton from the water molecule to
+H242 at approximately 70 ps, resulting in a protonated H242 (N ϵ).
+Figure 4C shows free energy changes and uncertainty estimation during the simulation.
+The red dots represent the average free energy diﬀerence relative to the initial state, with
+error bars indicating the estimated standard deviations. The free energy barrier for this step
+ranges from 20 kcal/mol (lower bound path) to 41 kcal/mol (upper bound path).
+During this simulation step, only the distance between the water oxygen and the carbonyl
+carbon in the covalent intermediate (MHET C-Water O) is constrained using our enhanced
+sampling technique (Section QuantaMind MD Simulation), with no additional biases applied.
+In the ﬁnal step, cleavage of the ester bond in the AEI intermediate (Figure 5A) produces
+terephthalic acid and the original catalytic triad. This transition is accompanied by increased
+ﬂuctuations in the M166 and Y95 hydrogen bonds (Figure 5B), indicating weaker hydrogen
+bonds between the product and the "oxyanion hole." A notable event is the proton transfer
+from HIP242 to S165, completing restoration of the original catalytic triad.
+Figure 5C shows free energy changes and uncertainty estimation during the simulation.
+The red dots represent the average free energy diﬀerence relative to the initial state, with
+error bars indicating the estimated standard deviations. The free energy barrier for this step
+ranges from 5 kcal/mol (lower bound path) to 17 kcal/mol (upper bound path).
+During this simulation step, only the distance of the ester bond in the covalent inter-
+mediate (MHET C-S165 O) is constrained using our enhanced sampling technique (Section
+QuantaMind MD Simulation), with no additional biases applied.
+9
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+Figure
+4: Simulation of the nucleophilic attack by a water molecule during the PETase
+deacylation reaction. (A) Visualization of the nucleophilic attack by a water molecule on
+the carbonyl carbon. ( B) Key distances during the simulation. H-bond M166 and H-bond
+Y95 denote the hydrogen bond distances between the carbonyl oxygen and the backbones
+of M166 and Y95, respectively. H242 NE-Water H is the distance between the N ϵ of H242
+and the proton of water. MHET C-Water O is the distance between the water oxygen and
+the carbonyl carbon in the covalent intermediate. D175-H242 HND is the minimum distance
+between the two oxygen atoms in D175 and the hydrogen atom on N δ of H242. (C ) Free
+energy diﬀerence during the reaction, with red dots showing the average free energy diﬀerence
+relative to the initial state and error bars representing estimated standard deviations.
+10
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+Figure
+5: Simulation of the C-O bond cleavage during the PETase deacylation reaction.
+(A) Visualization of the ester bond cleavage, forming terephthalic acid and restoring the
+original catalytic triad. (B) Key distances during the simulation. H-bond M166 and H-bond
+Y95 represent the hydrogen bond distances between the carbonyl oxygen and the backbones
+of M166 and Y95, respectively. S165-Proton is the distance between the oxygen of S165
+and the proton transferred from H242 in the previous step (Figure 4). MHET C-S165 O
+is the distance of the ester bond in the covalent intermediate. D175-H242 HND is the
+minimum distance between the two oxygen atoms in D175 and the hydrogen atom on N δ of
+H242. (C ) Free energy diﬀerence during the reaction, with red dots showing the average free
+energy diﬀerence relative to the initial state and error bars representing estimated standard
+deviations.
+11
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+Discussion and Future Work
+In this study, we employed QuantaMind MD, a MLFF trained on diverse high-level quantum
+mechanical (QM) data with an emphasis on transition-state regimes, to simulate the complete
+catalytic cycle of the PETase enzyme over 400 ps of simulation time. Our simulations capture
+key proton transfer events throughout the reaction, consistent with mechanisms reported in
+previous studies. 19–26 Distance analysis underscores the critical role of the backbone amide
+nitrogens of Y95 and M166, which function as the "oxyanion hole" by forming hydrogen
+bonds that stabilize the carbonyl oxygen atom throughout the reaction.
+The free energy analysis provides quantitative insights into the reaction activation ener-
+gies. Our simulations estimate free energy barriers of 22 and 20 kcal/mol for the acylation
+and deacylation steps, respectively, following the lower bound path. These values are rela-
+tively close to the estimated experimental value of 18.7 kcal/mol 2,24 and the calculated value
+of 21.1 kcal/mol by Boneta et al. 24 Nevertheless, we acknowledge several limitations aﬀect-
+ing the accuracy of the free energy barrier estimation. The large error bars primarily stem
+from the relatively short simulation time, necessitating longer simulations for QuantaMind to
+sample suﬃcient conﬁgurations and converge the mean force. Additionally, in the acylation
+step, the nucleophilic attack and C-O bond cleavage may proceed in a concerted rather than
+sequential fashion. 19 Thus, a two-dimensional distance scan is required to construct the full
+potential energy surface and determine the lowest energy path. A similar approach applies
+to the deacylation reaction’s two sub-steps.
+Finally, as a DL-based model, QuantaMind relies heavily on its training data. While
+the training of QuantaMind signiﬁcantly considers transition-state geometries, 34 additional
+training data would be beneﬁcial, particularly for estimating energy barriers. The transition-
+state structures sampled in this work provide a valuable source of geometries that can be
+further optimized at the DFT level. These calculations can serve as additional training data
+to iteratively enhance the QuantaMind model, improving its accuracy and applicability to
+serine hydrolase-related biomolecular systems.
+12
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+Ov
+erall, this work demonstrates the versatility of QuantaMind MD as a powerful tool for
+simulating enzymatic reactions in explicit water solvents with ab initio accuracy. Beyond
+PETase, this framework can be readily extended to a wide range of enzyme classes. Looking
+forward, we envision that this MLFF-based methodology will not only complement but
+ultimately supersede traditional QM/MM approaches, eliminating the need for artiﬁcial
+system partitioning while retaining quantum-level accuracy at accessible computational cost.
+With continued reﬁnement, QuantaMind MD has the potential to establish a new paradigm
+for studying enzymatic catalysis and biomolecular reactivity.
+Materials and Methods
+Simulation System Preparation
+We began with the crystal structure of the leaf-branch compost cutinase (LCC) variant
+(PDB ID: 7W44), 13 retaining only the protein structure after removing small molecules and
+solvents. To incorporate the MHET molecule, we used the crystal structure from PDB ID:
+7VVE, which includes MHET and a mutant S165A. Speciﬁcally, we aligned the backbone
+atoms of the catalytic triad from PDB 7VVE to PDB 7W44 and applied this transforma-
+tion matrix to the MHET molecule in 7VVE. The transformed MHET molecule was then
+processed with OpenBabel 35 to add hydrogen atoms.
+We utilized AmberTools 36 for further processing of the protein and MHET structure.
+Initially, we used the pdb4amber tool to clean the PDB ﬁle and add any missing hydrogen
+atoms. Subsequently, tLEAP was employed to combine the protein PDB and the MHET
+molecule, followed by solvation with TIP3P water using a 5 Å buﬀer distance.
+QuantaMind MD Simulation
+Following system preparation, we optimized the structure using QuantaMind with the Limited-
+memory Broyden-Fletcher-Goldfarb-Shanno (L-BFGS) optimizer, performing 1,000 opti-
+13
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+mization
+steps.37,38 The optimized system was then simulated with QuantaMind under pe-
+riodic boundary conditions within the NVT ensemble, employing a 0.5 fs time step at 300
+K.
+To enhance the simulation process, we introduced a biased potential in addition to the
+potential energy surface predicted by QuantaMind. The biased potential is deﬁned as follows:
+Ubias(Ri, Rj, t) = 1
+2k[||Ri − Rj||
+− x(t)]2
+Here, i and j represent the indices of the atom pairs of interest in the system. The atom
+pairs are dependent on the speciﬁc reaction simulated, as elaborated below. Ri and Rj are
+the 3D coordinates of the respective atoms. The constant k = 10.0 eVÅ
+−2
+is a strong force
+constant, ensuring the distance ||Ri − Rj|| throughout the simulation. The target distance
+x(t) evolves according to:
+x(t) =xstart + ⌊ t
+10ps⌋
+· xend − xstart
+10
+Here xstart is
+the initial distance between atoms i and j, and xend is the desired ﬁnal
+distance. The values i, j and xend are determined based on prior chemical knowledge,
+detailed as follows:
+Acylation reaction-nucleophilic attack: i and j are indices for the oxygen atom of S165
+and the carbonyl carbon of the reactant, respectively, with xend = 1.45Å.
+Acylation reaction-bond breaking: i and j are indices for the oxygen atom of the partially
+formed ethylene glycol and the carbonyl carbon of the reactant, respectively, with xend =
+3.0Å.
+Deacylation reaction-nucleophilic attack: i and j are indices for the oxygen atom of the
+water reactant and the carbonyl carbon of the reactant, respectively, with xend = 1.45Å.
+Deacylation reaction-bond breaking: i and j are indices for the oxygen atom of S165 and
+the carbonyl carbon of the reactant, respectively, with xend = 3.5Å.
+14
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+F
+ree Energy Barriers Estimation
+Inspired by thermodynamic integration, 39 we estimate free energy changes using the equa-
+tion:
+Aa→b =
+∫ rij =b
+rij =a
+⟨ ∂U
+∂
+rij
+⟩drij
+Here, Aa→b represents the free energy change as the distance between two atoms of
+interest, rij transitions from a to b. The term ∂U
+∂
+rij
+is approximated by:
+∂U
+∂
+rij
+≈ ∂U
+∂Ri
+· Ri − Rj
+rij
++ ∂
+U
+∂Rj
+· Rj − Ri
+rij
+This
+approximation involves the sum of the projections of the unbiased forces on atoms
+i and j onto the vector Ri − Rj , where Ri and Rj are the 3D coordinates of the respective
+atoms. Using multiple frames obtained from QuantaMind MD simulations, we calculate
+averages ( ⟨ ∂U
+∂
+rij
+⟩avg) and standard deviations (⟨ ∂U
+∂
+rij
+⟩std), approximating the distribution of
+(⟨ ∂U
+∂
+rij
+⟩) with a Gaussian distribution:
+⟨ ∂U
+∂
+rij
+⟩ ∼ N (⟨ ∂U
+∂
+rij
+⟩avg, ⟨ ∂U
+∂
+rij
+⟩std)
+The Gaussian distributions at each rij are then propagated through numerical integration
+to estimate the distribution of the free energy change Aa→b.
+Data Availability
+The source code used to perform QuantaMind MD simulation is available at https://
+github.com/MoleculeMindOpenSource/QuantaMind. The molecular dynamics trajectories
+generated in this work are accessible via Zenodo at https://zenodo.org/records/17217376.
+15
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+Comp eting Interests
+The authors declare the following competing interests: A patent application related to the
+QuantaMind training workﬂow has been submitted (Application No. 202510725979.7, pend-
+ing); A patent application related to the QuantaMind structure optimization has been
+submitted (Application No. 202510725999.4, pending). A patent application related to
+the QuantaMind training using transition-state data has been submitted (Application No.
+202511174067.1, pending). The applications are ﬁled by MoleculeMind and includes con-
+tributions from Deqiang Zhang, Song Xia and Jinbo Xu. The authors declare no other
+competing interests.
+References
+(1) De Vos, L.; Van de Voorde, B.; Van Daele, L.; Dubruel, P.; Van Vlierberghe, S. Poly
+(alkylene terephthalate) s: From current developments in synthetic strategies towards
+applications. European Polymer Journal 2021, 161, 110840.
+(2) Yoshida, S.; Hiraga, K.; Takehana, T.; Taniguchi, I.; Yamaji, H.; Maeda, Y.; Toy-
+ohara, K.; Miyamoto, K.; Kimura, Y.; Oda, K. A bacterium that degrades and assimi-
+lates poly (ethylene terephthalate). Science 2016, 351, 1196–1199.
+(3) Knott, B. C.; Erickson, E.; Allen, M. D.; Gado, J. E.; Graham, R.; Kearns, F. L.;
+Pardo, I.; Topuzlu, E.; Anderson, J. J.; Austin, H. P.; others Characterization and
+engineering of a two-enzyme system for plastics depolymerization. Proceedings of the
+National Academy of Sciences 2020, 117, 25476–25485.
+(4) Palm, G. J.; Reisky, L.; Böttcher, D.; Müller, H.; Michels, E. A.; Walczak, M. C.;
+Berndt, L.; Weiss, M. S.; Bornscheuer, U. T.; Weber, G. Structure of the plastic-
+degrading Ideonella sakaiensis MHETase bound to a substrate. Nature communications
+2019, 10, 1717.
+16
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+(5) A
+ustin, H. P.; Allen, M. D.; Donohoe, B. S.; Rorrer, N. A.; Kearns, F. L.; Silveira, R. L.;
+Pollard, B. C.; Dominick, G.; Duman, R.; El Omari, K.; others Characterization and
+engineering of a plastic-degrading aromatic polyesterase. Proceedings of the National
+Academy of Sciences 2018, 115, E4350–E4357.
+(6) Bell, E. L.; Smithson, R.; Kilbride, S.; Foster, J.; Hardy, F. J.; Ramachandran, S.;
+Tedstone, A. A.; Haigh, S. J.; Garforth, A. A.; Day, P. J.; others Directed evolution of
+an eﬃcient and thermostable PET depolymerase. Nature Catalysis 2022, 5, 673–681.
+(7) Cui, Y.; Chen, Y.; Liu, X.; Dong, S.; Tian, Y.; Qiao, Y.; Mitra, R.; Han, J.; Li, C.;
+Han, X.; others Computational redesign of a PETase for plastic biodegradation under
+ambient condition by the GRAPE strategy. Acs Catalysis 2021, 11, 1340–1350.
+(8) Lu, H.; Diaz, D. J.; Czarnecki, N. J.; Zhu, C.; Kim, W.; Shroﬀ, R.; Acosta, D. J.;
+Alexander, B. R.; Cole, H. O.; Zhang, Y.; others Machine learning-aided engineering
+of hydrolases for PET depolymerization. Nature 2022, 604, 662–667.
+(9) Son, H. F.; Cho, I. J.; Joo, S.; Seo, H.; Sagong, H.-Y.; Choi, S. Y.; Lee, S. Y.; Kim, K.-
+J. Rational protein engineering of thermo-stable PETase from Ideonella sakaiensis for
+highly eﬃcient PET degradation. Acs Catalysis 2019, 9, 3519–3526.
+(10) Tournier, V.; Topham, C.; Gilles, A.; David, B.; Folgoas, C.; Moya-Leclair, E.;
+Kamionka, E.; Desrousseaux, M.-L.; Texier, H.; Gavalda, S.; others An engineered PET
+depolymerase to break down and recycle plastic bottles. Nature 2020, 580, 216–219.
+(11) Zhong-Johnson, E. Z. L.; Voigt, C. A.; Sinskey, A. J. An absorbance method for anal-
+ysis of enzymatic degradation kinetics of poly (ethylene terephthalate) ﬁlms. Scientiﬁc
+Reports 2021, 11, 928.
+(12) Sagong, H.-Y.; Seo, H.; Kim, T.; Son, H. F.; Joo, S.; Lee, S. H.; Kim, S.; Woo, J.-S.;
+Hwang, S. Y.; Kim, K.-J. Decomposition of the PET ﬁlm by MHETase using Exo-
+PETase function. ACS Catalysis 2020, 10, 4805–4812.
+17
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+(13) Zeng,
+W.; Li, X.; Yang, Y.; Min, J.; Huang, J.-W.; Liu, W.; Niu, D.; Yang, X.; Han, X.;
+Zhang, L.; others Substrate-binding mode of a thermophilic PET hydrolase and engi-
+neering the enzyme to enhance the hydrolytic eﬃcacy. Acs Catalysis 2022, 12, 3033–
+3040.
+(14) Hedstrom, L. Serine protease mechanism and speciﬁcity. Chemical reviews 2002, 102,
+4501–4524.
+(15) Ash, E. L.; Sudmeier, J. L.; Day, R. M.; Vincent, M.; Torchilin, E. V.; Haddad, K. C.;
+Bradshaw, E. M.; Sanford, D. G.; Bachovchin, W. W. Unusual 1H NMR chemical shifts
+support (His) C1H O C H-bond: Proposal for reaction-driven ring ﬂip mechanism in
+serine protease catalysis. Proceedings of the National Academy of Sciences 2000, 97,
+10371–10376.
+(16) Bachovchin, W. W. Contributions of NMR spectroscopy to the study of hydrogen bonds
+in serine protease active sites. Magnetic resonance in chemistry 2001, 39, S199–S213.
+(17) Topf, M.; Várnai, P.; Richards, W. G. Ab initio QM/MM dynamics simulation of the
+tetrahedral intermediate of serine proteases: insights into the active site hydrogen-
+bonding network. Journal of the American Chemical Society 2002, 124, 14780–14788.
+(18) Kidd, R. D.; Sears, P.; Huang, D.-H.; Witte, K.; Wong, C.-H.; Farber, G. K. Breaking
+the low barrier hydrogen bond in a serine protease. Protein science 1999, 8, 410–417.
+(19) Burgin, T.; Pollard, B. C.; Knott, B. C.; Mayes, H. B.; Crowley, M. F.; McGeehan, J. E.;
+Beckham, G. T.; Woodcock, H. L. The reaction mechanism of the Ideonella sakaiensis
+PETase enzyme. Communications Chemistry 2024, 7, 65.
+(20) Shrimpton-Phoenix, E.; Mitchell, J. B.; Bühl, M. Computational Insights into the
+Catalytic Mechanism of Is-PETase: An Enzyme Capable of Degrading Poly (ethylene)
+Terephthalate. Chemistry–A European Journal 2022, 28, e202201728.
+18
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+(21) Magalhães,
+R. P.; Fernandes, H. S.; Sousa, S. F. The critical role of Asp206 stabiliz-
+ing residues on the catalytic mechanism of the Ideonella sakaiensis PETase. Catalysis
+Science & Technology 2022, 12, 3474–3483.
+(22) Aboelnga, M. M.; Kalyaanamoorthy, S. QM/MM investigation to identify the hallmarks
+of superior PET biodegradation activity of PETase over cutinase. ACS Sustainable
+Chemistry & Engineering 2022, 10, 15857–15868.
+(23) Feng, S.; Yue, Y.; Zheng, M.; Li, Y.; Zhang, Q.; Wang, W. Is PETase-and Is MHETase-
+catalyzed cascade degradation mechanism toward polyethylene terephthalate. ACS Sus-
+tainable Chemistry & Engineering 2021, 9, 9823–9832.
+(24) Boneta, S.; Arafet, K.; Moliner, V. QM/MM study of the enzymatic biodegradation
+mechanism of polyethylene terephthalate. Journal of Chemical Information and Mod-
+eling 2021, 61, 3041–3051.
+(25) Jerves, C.; Neves, R. P.; Ramos, M. J.; da Silva, S.; Fernandes, P. A. Reaction mecha-
+nism of the PET degrading enzyme PETase studied with DFT/MM molecular dynamics
+simulations. ACS Catalysis 2021, 11, 11626–11638.
+(26) García-Meseguer, R.; Ortí, E.; Tuñón, I.; Ruiz-Pernía, J. J.; Aragó, J. Insights into
+the enhancement of the poly (ethylene terephthalate) degradation by FAST-PETase
+from computational modeling. Journal of the American Chemical Society 2023, 145,
+19243–19255.
+(27) Kulik, H. J.; Zhang, J.; Klinman, J. P.; Martinez, T. J. How large should the QM region
+be in QM/MM calculations? The case of catechol O-methyltransferase. The Journal of
+Physical Chemistry B 2016, 120, 11381–11394.
+(28) Unke, O. T.; Chmiela, S.; Sauceda, H. E.; Gastegger, M.; Poltavsky, I.; Schutt, K. T.;
+Tkatchenko, A.; Muller, K.-R. Machine learning force ﬁelds. Chemical Reviews 2021,
+121, 10142–10186.
+19
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+(29) LeCun,
+Y.; Bengio, Y.; Hinton, G. Deep learning. nature 2015, 521, 436–444.
+(30) Unke, O. T.; Meuwly, M. PhysNet: A neural network for predicting energies, forces,
+dipole moments, and partial charges. Journal of chemical theory and computation 2019,
+15, 3678–3693.
+(31) Unke, O. T.; Chmiela, S.; Gastegger, M.; Schütt, K. T.; Sauceda, H. E.; Müller, K.-
+R. SpookyNet: Learning force ﬁelds with electronic degrees of freedom and nonlocal
+eﬀects. Nature communications 2021, 12, 7273.
+(32) Unke, O. T.; Stöhr, M.; Ganscha, S.; Unterthiner, T.; Maennel, H.; Kashubin, S.;
+Ahlin, D.; Gastegger, M.; Sandonas, L. M.; Berryman, J. T.; Tkatchenko, A.;
+Müller, K.-R. Biomolecular dynamics with machine-learned quantum-mechanical force
+ﬁelds trained on diverse chemical fragments. Science Advances 2024, 10, eadn4397.
+(33) Wang, T.; He, X.; Li, M.; Li, Y.; Bi, R.; Wang, Y.; Cheng, C.; Shen, X.; Meng, J.;
+Zhang, H.; others Ab initio characterization of protein molecular dynamics with
+AI2BMD. Nature 2024, 1–9.
+(34) Xia, S.; Zhang, D.; Shang, X.; Xu, J. QuantaMind MD enables protein modeling with
+ab initio accuracy. bioRxiv 2025, 2025–09.
+(35) O’Boyle, N. M.; Banck, M.; James, C. A.; Morley, C.; Vandermeersch, T.; Hutchi-
+son, G. R. Open Babel: An open chemical toolbox. Journal of cheminformatics 2011,
+3, 33.
+(36) Case, D. A.; Aktulga, H. M.; Belfon, K.; Cerutti, D. S.; Cisneros, G. A.; Cruzeiro, V.
+W. D.; Forouzesh, N.; Giese, T. J.; Gotz, A. W.; Gohlke, H.; others AmberTools.
+Journal of chemical information and modeling 2023, 63, 6183–6191.
+(37) Liu, D. C.; Nocedal, J. On the limited memory BFGS method for large scale optimiza-
+tion. Mathematical programming 1989, 45, 503–528.
+20
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint 
+(38) Fletc
+her, R. Practical methods of optimization ; John Wiley & Sons, 2000.
+(39) Tuckerman, M. E. Statistical mechanics: theory and molecular simulation ; Oxford uni-
+versity press, 2023.
+21
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint

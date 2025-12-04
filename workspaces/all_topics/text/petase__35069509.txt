@@ -1,0 +1,1299 @@
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 1
+ORIGINAL RESEARCH
+published: 05 January 2022
+doi: 10.3389/fmicb.2021.803896
+Edited by:
+Kian Mau Goh,
+University of Technology Malaysia,
+Malaysia
+Reviewed by:
+Fusako Kawai,
+Okayama University Japan, Japan
+Lukasz Jaroszewski,
+University of California, Riverside,
+United States
+Alessandro Pellis,
+University of Genoa, Italy
+*Correspondence:
+Wolfgang R. Streit
+wolfgang.streit@uni-hamburg.de
+Specialty section:
+This article was submitted to
+Microbiotechnology,
+a section of the journal
+Frontiers in Microbiology
+Received: 28 October 2021
+Accepted: 22 November 2021
+Published: 05 January 2022
+Citation:
+Zhang H, Perez-Garcia P ,
+Dierkes RF, Applegate V,
+Schumacher J, Chibani CM,
+Sternagel S, Preuss L, Weigert S,
+Schmeisser C, Danso D, Pleiss J,
+Almeida A, Höcker B, Hallam SJ,
+Schmitz RA, Smits SHJ, Chow J and
+Streit WR (2022) The Bacteroidetes
+Aequorivita sp. and Kaistella jeonii
+Produce Promiscuous Esterases With
+PET-Hydrolyzing Activity.
+Front. Microbiol. 12:803896.
+doi: 10.3389/fmicb.2021.803896
+The Bacteroidetes Aequorivita sp.
+and Kaistella jeoniiProduce
+Promiscuous Esterases With
+PET-Hydrolyzing Activity
+Hongli Zhang1, Pablo Perez-Garcia1,2, Robert F. Dierkes1, Violetta Applegate3,
+Julia Schumacher3, Cynthia Maria Chibani2, Stefanie Sternagel4, Lena Preuss1,
+Sebastian Weigert5, Christel Schmeisser1, Dominik Danso1, Juergen Pleiss6,
+Alexandre Almeida7,8, Birte Höcker5, Steven J. Hallam4,9,10,11,12, Ruth A. Schmitz2,
+Sander H. J. Smits3,13, Jennifer Chow1 and Wolfgang R. Streit1*
+1 Department of Microbiology and Biotechnology, University of Hamburg, Hamburg, Germany, 2 Molecular Microbiology,
+Institute for General Microbiology, Kiel University, Kiel, Germany,3 Center for Structural Studies, Heinrich-Heine-University,
+Düsseldorf, Germany, 4 Department of Microbiology and Immunology, University of British Columbia, Vancouver, BC,
+Canada, 5 Department of Biochemistry, University of Bayreuth, Bayreuth, Germany, 6 Institute of Biochemistry and Technical
+Biochemistry, University of Stuttgart, Stuttgart, Germany, 7 European Bioinformatics Institute (EMBL-EBI), Hinxton,
+United Kingdom, 8 Wellcome Sanger Institute, Hinxton, United Kingdom, 9 Graduate Program in Bioinformatics, University of
+British Columbia, Vancouver, BC, Canada, 10 Genome Science and Technology Program, University of British Columbia,
+Vancouver, BC, Canada, 11 Life Sciences Institute, University of British Columbia, Vancouver, BC, Canada, 12 ECOSCOPE
+Training Program, University of British Columbia, Vancouver, BC, Canada,13 Institute of Biochemistry,
+Heinrich-Heine-University, Düsseldorf, Germany
+Certain members of the Actinobacteria and Proteobacteria are known to degrade
+polyethylene terephthalate (PET). Here, we describe the ﬁrst functional PET-active
+enzymes from the Bacteroidetes phylum. Using a PETase-speciﬁc Hidden-Markov-
+Model- (HMM-) based search algorithm, we identiﬁed several PETase candidates from
+Flavobacteriaceae and Porphyromonadaceae. Among them, two promiscuous and
+cold-active esterases derived from Aequorivita sp. (PET27) and Kaistella jeonii (PET30)
+showed depolymerizing activity on polycaprolactone (PCL), amorphous PET foil and on
+the polyester polyurethane Impranil
+R⃝
+DLN. PET27 is a 37.8 kDa enzyme that released
+an average of 174.4 nmol terephthalic acid (TPA) after 120 h at 30◦C from a 7 mg PET
+foil platelet in a 200 µl reaction volume, 38-times more than PET30 (37.4 kDa) released
+under the same conditions. The crystal structure of PET30 without its C-terminal Por-
+domain (PET30 1PorC) was solved at 2.1 Å and displays high structural similarity
+to the IsPETase. PET30 shows a Phe-Met-Tyr substrate binding motif, which seems
+to be a unique feature, as IsPETase, LCC and PET2 all contain Tyr-Met-Trp binding
+residues, while PET27 possesses a Phe-Met-Trp motif that is identical to Cut190.
+Microscopic analyses showed thatK. jeonii cells are indeed able to bind on and colonize
+PET surfaces after a few days of incubation. Homologs of PET27 and PET30 were
+detected in metagenomes, predominantly aquatic habitats, encompassing a wide range
+of different global climate zones and suggesting a hitherto unknown inﬂuence of this
+bacterial phylum on man-made polymer degradation.
+Keywords: metagenomics, metagenomic screening, PET degradation, polyethylene terephthalate (PET), PETase,
+Bacteroidetes, Flavobacteriaceae
+Frontiers in Microbiology | www.frontiersin.org 1 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 2
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+INTRODUCTION
+PET is one of the major plastic pollutants found in landﬁlls,
+oceans and other environments (Jambeck et al., 2015; Geyer
+et al., 2017). Our knowledge of microbial degradation of most
+plastics is rather limited, but recent research has demonstrated
+that some bacteria are able to degrade PET (Yoshida et al., 2016).
+Although it is unclear if larger crystalline ﬁbers are degraded
+by bacteria, it is well known that some cutinases (EC 3.1.1.74),
+lipases (EC 3.1.1.3) and carboxylesterases (EC 3.1.1.1) can act
+on amorphous and low crystalline PET. These enzymes, often
+referred to as “PETases, ” cleave the ester bond of the polymer
+to either produce bis-(2-hydroxyethyl) terephthalate (BHET),
+mono-hydroxyethyl terephthalate (MHET) or they complete
+degradation to terephthalic acid (TPA) and ethylene glycol (EG).
+TPA monomers can be further degraded via cleavage of the
+aromatic ring structure using known aryl pathways and can then
+enter the β-ketoadipate pathway (Wei and Zimmermann, 2017;
+Danso et al., 2019; Wright et al., 2021).
+To date, only a limited number of bacterial and fungal
+species have been identiﬁed that are capable of breaking down
+PET to either its oligomers or monomers, TPA and EG. Most
+bacterial isolates with veriﬁed enzymatic PET-degrading activity
+are aﬃliated with the Gram-positive phylum Actinobacteria
+(Acero et al., 2011). The best characterized examples belong to
+the genera Thermobiﬁda or Thermomonospora (Kleeberg et al.,
+1998; Chen et al., 2008; Hu et al., 2010; Acero et al., 2011; Ribitsch
+et al., 2012; Wei et al., 2014). Further, the leaf compost-derived
+cutinase LCC is closely related to Actinobacterial enzymes and
+is currently one of the best described and most active PETases
+(Sulaiman et al., 2012, 2014). Regarding Proteobacteria, the
+Gram-negative Betaproteobacterium Ideonella sakaiensis 201-F6
+is capable of using amorphous PET as a major energy and
+carbon source (Yoshida et al., 2016). I. sakaiensis’ genome also
+encodes a tannase which is designated MHETase as it is capable
+of degrading MHET. Besides, a number of other PETases aﬃliated
+with the Proteobacteria have been identiﬁed originating from e.g.,
+Pseudomonas aestusnigri and Vibrio gazogenes (Ronkvist et al.,
+2009; Haernvall et al., 2017; Danso et al., 2018; Bollinger et al.,
+2020).
+In a previous study, we identiﬁed potential PET esterases
+aﬃliated with the Bacteroidetes phylum using HMM proﬁle
+database searches (Danso et al., 2018, 2019). These enzyme
+hits mainly occurred in metagenomes and genomes from
+marine environments and were annotated solely on the
+basis of homology. However, their enzymatic function and
+environmental distributions have not been studied within that
+framework, and we target these questions in the present study.
+Bacteroidetes representatives can be found in nearly all ecological
+niches including soils, oceans and fresh water and are part of
+the microbiome of many animals, especially as inhabitants of the
+intestinal tract (Wexler, 2007; Krieg et al., 2015; Hahnke et al.,
+2016; Munoz et al., 2016). The Bacteroidetes phylum, however,
+is highly heterogeneous and contains at least four classes of
+bacteria (e.g., Bacteroidia, Flavobacteria, Sphingobacteria, and
+Cytophagia), with each class having several thousand described
+species. The phylum contains non-spore forming and rod shaped
+microorganisms, some aerobic, but often anerobic, with an
+enormous metabolic diversity (Krieg et al., 2015). The global
+distribution of Bacteroidetes representatives is likely due to their
+ability to decompose a very wide variety of bio-based polymers
+such as cellulose, chitin or algal cell walls. In particular, the
+decomposition of polysaccharides (cellulose and hemicellulose)
+by Bacteroidetes inhabiting the intestinal tract of humans and
+animals has been well-studied in gut microbiome research
+(Thomas et al., 2011).
+Here, we provide the ﬁrst experimental evidence that
+diﬀerent Bacteroidetes representatives have evolved promiscuous
+esterases that degrade the PET polymer. We show that at least
+two Bacteroidetes genera, Aequorivita and Kaistella (formerly
+Chryseobacterium), harbor PET-active enzymes and elucidated
+the crystal structure of PET30. These enzymes have relatively
+low turnover rates, indicating that PET hydrolysis may be a side
+reaction. Still, given their abundance and diversity, we speculate
+that the described bacteroidetal PET-active enzymes could have
+considerable impact on long-term degradation of PET in the
+marine environment.
+MATERIALS AND METHODS
+Bacterial Strains, Plasmids, and Primers
+Bacterial strains, plasmids and primers used in this study
+are listed in Supplementary Tables 1 , 2. If not mentioned
+otherwise, Escherichia coli clones were grown in LB medium (1%
+tryptone/peptone, 0.5% yeast extract, 1% NaCl) supplemented
+with appropriate antibiotics (25 µg/ml kanamycin, or 100 µg/ml
+ampicillin) at 37◦C for 18 h.
+Databases Used in This Study and
+Bioinformatic Analyses
+Nucleotide and amino acid sequences of putative and conﬁrmed
+PETases were acquired from databases integrated into the NCBI1,
+UniProt2 and IMG (JGI) 3 servers (Markowitz et al., 2012; NCBI
+Resource Coordinators, 2017; The UniProt Consortium, 2017).
+Human gut sequences were retrieved from the Uniﬁed Human
+Gastrointestinal Protein (UHGP) catalog (PMID: 32690973).
+Sequences were compared to others deposited in the NCBI
+databases using BLAST alignment tools (Agarwala et al., 2016).
+Amino acid sequence HMM search was carried out using the
+HMMER4 webpage or a local version of the software (v3.1b2)
+(Mistry et al., 2013) with downloaded datasets. Structural
+information on the enzymes was retrieved from the RCSB-PDB
+(Berman et al., 2000) database.
+Sequence data were processed and analyzed using
+ChromasPro 2.1.8 (Technelysium, Brisbaine Australia) or
+SnapGene (GSL Biotech LLC, San Diego CA, United States).
+Amino acid alignment was constructed using structural
+alignments with T-Coﬀee (Notredame et al., 2000) and was
+1https://www.ncbi.nlm.nih.gov/
+2http://www.uniprot.org/
+3http://jgi.doe.gov/
+4http://hmmer.org
+Frontiers in Microbiology | www.frontiersin.org 2 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 3
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+TABLE 1 | Key traits of predicted bacteroidetal PET esterases.
+Predicted
+PETase
+GenBank entry/MGY identiﬁer Phylogenetic
+Afﬁliation
+aa/MW
+(kDa)
+Derived from Expression
+level/solubility
+Active on
+pNP-C6/-
+C10
+TBT Impranil R⃝
+DLN
+PCL BHET PET-foil PET
+particles
+PET27 WP_111881932 Aequorivita sp.
+CIP111184
+364/37.8 Antarctic source (Li
+et al., 2017)
+High/majority in
+inclusion
+bodies
++ + + + + + +
+PET28 WP_073216622 Aequorivita viscosa 365/38.3 Seaweed (Li et al.,
+2017)
+High/majority in
+inclusion
+bodies
++ + + + + - -
+PET29 WP_052671284 Aequorivita
+vladivostokensis
+365/39.3 Troitsa bay, Sea of
+Japan (Li et al., 2017)
+High/majority in
+inclusion
+bodies
++ + + + + - -
+PET30 WP_039353427 Kaistella jeonii 366/37.4 Antarctic moss (Li
+et al., 2017)
+High/majority
+soluble
++ + + + + + +
+PET38 WP_083800582.1/GCA_
+000194605.1
+Fluviicola taffensis 447/40.4 River, United Kingdom
+(Woyke et al., 2011)
+Low - - N.D. - - - -
+PET53 k99_709705_13 Aequorivita sp. 294/37.8 Marine aquaculture ﬁsh
+tank metagenome/
+unpublished data
+University of Hamburg
+Low - - N.D. - N.D. N.D. N.D.
+PET57 GUT_GENOME137663_00143 Porphyromonas sp. 323/36.3 Human gut (Mitchell
+et al., 2019; Almeida
+et al., 2021)
+High/majority
+soluble
+- - + + N.D. N.D. N.D.
+PET58 GUT_GENOME065712_01381 Porphyromonas
+bennonis
+338/37.6 Human gut (Mitchell
+et al., 2019; Almeida
+et al., 2021)
+High/majority in
+inclusion
+bodies
+- - - + N.D. N.D. N.D.
+PET59 GUT_GENOME243617_00165 Porphyromonas sp. 345/38.4 Human gut (Mitchell
+et al., 2019; Almeida
+et al., 2021)
+High/majority
+soluble
+- - + N.D. N.D. N.D.
+TBT, tributyrin; BHET, bis-(2-hydroxyethyl) terephthalate; PCL, polycaprolactonate; pNP-C6/C10, para-nitrophenyl esters with chain length C6 or C10; aa, amino acids; MW, molecular weight. N.D. not determined. +,
+active; -, not active.
+PET57-59 were extracted from the gut genomes available at: https://www.ebi.ac.uk/metagenomics/genomes/MGYG-HGUT-01059 (PET57); https://www.ebi.ac.uk/metagenomics/genomes/MGYG-HGUT-01060
+(PET58) and https://www.ebi.ac.uk/metagenomics/genomes/MGYG-HGUT-00764 (PET59).
+Frontiers in Microbiology | www.frontiersin.org 3 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 4
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+further visualized with Bioedit (Hall, 1999). The model structures
+of bacteroidetal PETase-candidates were modeled with the
+Robetta server (Kim et al., 2004) using the IsPETase crystal
+structure (6EQE) as a backbone. A phylogenetic tree was
+constructed using the RAxML-NG autoMRE algorithm (Kozlov
+et al., 2019) with the treesapp create command implemented in
+TreeSAPP (Morgan-Lang et al., 2020) with maximum bootstraps
+set at 1,000. RAxML-MG has recently been shown to return
+the best scoring tree for highest number of datasets when
+compared against other fast maximum likelihood (ML) methods
+(Kozlov et al., 2019), allowing a large number of maximum
+bootstraps to be used to produce as conservative a tree as
+possible. Sequences were assigned NCBI lineages according to
+source organisms listed in Table 1 and Supplementary Table 3,
+and colors were assigned to the tree at the phylum level using
+the treesapp color command. The tree was visualized in iTOL
+(Letunic and Bork, 2019).
+Scanning IMG/M was completed on 19/November/2020
+for PET30 and on 14/January/2021 for PET27. Geo locations
+were used as provided whenever available. In case no Geo
+location was available, whenever possible, information about
+isolation source/location/city/country were used to look up Geo
+coordinates on GeoHack. 5 The map representing the frequency
+and geographical distribution of PET hydrolases in metagenomes
+(Figure 1) was constructed using QGis Desktop 2.18.56.
+Heterologous Expression of Putative
+Polyethylene Terephthalate Esterase
+Genes in Escherichia coliBL21 (DE3)
+The putative PETases were extracted from metagenomic datasets
+(Table 1 ), therefore the gene sequences were optimized for
+expression in E. coli and synthesized into pET21a( +) vector at
+Biomatik (Wilmington, United States). The obtained constructs
+were sequenced at Microsynth Seqlab GmbH (Goettingen,
+Germany) and checked for correctness by comparing to the
+original sequences. E. coli T7-Shuﬄe or E. coli BL21 (DE3) cells
+were used for heterologous expression of possible PETases. The
+IsPETase gene in pMAL-p4x was expressed in E. coli BL21 and
+puriﬁed by its maltose-binding tag. The cultures were grown
+aerobically in auto-induction medium (ZYM-5052) (Studier,
+2005) containing 100 µg/ml ampicillin at 37◦C until they reached
+an OD 600 of 1.0. The proteins were expressed afterward at
+22◦C for 16–20 h. The cells were harvested and lysed with
+pressure using a French press. Afterward, the proteins harboring
+a sixfold C-terminal histidine tag were puriﬁed with nickel-ion
+aﬃnity chromatography using Ni-NTA agarose (Qiagen, Hilden,
+Germany) and analyzed by SDS-PAGE. The elution buﬀer was
+exchanged against 0.1 mM potassium phosphate buﬀer pH 8.0 in
+a 10 kDa Amicon Tube (GE Health Care, Solingen, Germany).
+Biochemical Characterization of PET27
+and PET30
+For activity tests, both enzymes were assayed using puriﬁed
+recombinant protein. bis-(2-hydroxyethyl) terephthalate (BHET)
+5https://geohack.toolforge.org
+6http://www.qgis.org
+and polycaprolactone (PCL) agar plates were prepared as
+described elsewhere (Pérez-García et al., 2021). The polyester
+polyurethane Impranil DLN containing LB agar plates were
+prepared according to Molitor et al. (2020) with LB medium.
+For the pNP-assay, unless otherwise indicated, a total amount
+of 0.1–1 µg of the enzymes were added to a substrate solution
+containing 190 µl of either 0.2 M sodium phosphate buﬀer or
+0.1 M potassium phosphate with a deﬁned pH between 7 and
+8 and 10 µl of 0.1 mM pNP-substrate dissolved in isopropanol.
+After incubating the samples for 10 min, the assay was stopped
+by adding 200 mM of Na 2CO3. Afterward, the samples were
+centrifuged at 4 ◦C, 13,000 rpm for 3 min. As substrates, pNP-
+esters with chain lengths of C4, C6, C8, C10, C12, C14, C16
+and C18 were tested. After incubation at deﬁned temperatures,
+the color change from colorless to yellow was measured at
+405 nm in a plate reader (Biotek, Winooski, United States). All
+samples were measured in triplicate. To determine the optimal
+temperature, samples were incubated between 10 and 90 ◦C
+for 10 min. The inﬂuence of pH conditions on the activity
+of each enzyme was measured in citrate phosphate (pH 3.0,
+4.0, and 5.0), potassium phosphate (pH 6.0, 7.0, and 8.0) and
+carbonate bicarbonate buﬀer (pH 9.2 and 10.2). The impact
+of cofactors, solvents, detergents, and inhibitors was assayed
+at diﬀerent concentration levels. The possible cofactors Ca 2+,
+Co2+, Cu2+, Fe3+, Mg2+, Mn2+, Rb2+, and Zn 2+with a ﬁnal
+concentration of 1 and 10 mM were used. Detergent stability was
+assayed with sodium dodecyl sulfate (SDS), Triton X-100 and
+Tween 80 at 1 and 5% (w/v, v/v) concentration. The inhibitory
+eﬀect of ethylenediaminetetraacetic acid (EDTA), dithiothreitol
+(DTT) and phenylmethanesulfonyl ﬂuoride (PMSF) was tested
+at 1 and 10 mM concentration. After 1 h incubation in the
+presence of these substances, the residual activity was determined
+after 10 min incubation at the optimal temperature with para-
+nitrophenol- (pNP-) C6 and at the optimal pH.
+For the veriﬁcation of enzymatic PET hydrolysis, a 7 mg
+platelet (Ø 5 mm) of low-crystallinity PET ﬁlm (Goodfellow
+GmbH, Bad Nauheim, Germany), which corresponds to 36.4
+µmol of the terephthalic acid-ethylene glycol (TPA-EG) unit,
+was folded in half and used as substrate together with 200 µg
+of enzyme in 200 µl of 100 mM potassium phosphate buﬀer at
+pH 8.0. Incubation was carried out under continuous shaking
+at 400 rpm in 1.5 ml microcentrifuge tubes at 30 ◦C, if not
+stated otherwise.
+Analysis of breakdown products was performed with an
+UltiMateTM 3000 UHPLC system from Thermo Fisher Scientiﬁc
+(Waltham, MA, United States) using a Triart C18 column
+(YMC Europe GmbH, Dinslaken, Germany) with a dimension
+of 100 ×2.0 mm containing particles with 1.9 µm diameter.
+Isocratic elution was performed using a mobile phase consisting
+of 20:80 (v/v) acetonitrile and water (acidiﬁed with 0.1% vol
+triﬂuoroacetic acid) at a ﬂowrate of 0.4 ml min −1. UHPLC
+samples were prepared by mixing 50µl of incubation supernatant
+with 200 µl acetonitrile (acidiﬁed with 1% vol triﬂuoroacetic
+acid), followed by centrifugation at 10,000 × g for 3 min
+and transferring 200 µl of the supernatant into 600 µl water.
+Fifteen microliter of sample were injected per measurement
+and detection was performed at 254 nm with a VWD-3400
+Frontiers in Microbiology | www.frontiersin.org 4 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 5
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+FIGURE 1 | Global distribution of PET27 and PET30 homologs. (A) PET27 and PET30 homologs containing metagenomes were visualized on a world map
+containing circles for the different metagenomes. The cut-off in the similarity searches was set to 50%. Data depicted include only hits to bacteria afﬁliated with the
+Flavobacteria-Cytophaga-Bacteroidetes (FCB) group. The metagenomes searched and included in this ﬁgure are listed inSupplementary Table 2. (B) Number of
+hits observed in the same global metagenomes. Color code indicates the type of habitat: air, aquatic, terrestrial host-associated and/or engineered.
+detector from Thermo Scientiﬁc (Waltham, MA, United States).
+The UHPLC proﬁles were plotted and edited using the software
+MATLAB version R2020b [The MathWorks, Inc., Natick, MA,
+United States (Matlab, 2012)]. Quantiﬁcation of peak areas
+was performed using data analysis software supplied with
+the Compass HyStar software package from Bruker (Billerica,
+MA, United States).
+Crystallization and Data Collection
+Crystallization of PET30 1PorC was achieved by sitting-drop
+vapor-diﬀusion at 12 ◦C. 0.2 µl of 10.2 mg/ml PET30 1PorC
+in 100 mM phosphate buﬀer pH 8.0 and 0.1 µl reservoir
+solution consisting of 0.1 M sodium aetate pH 4.6 and 25%
+(w/v) PEG 4000 were mixed. This drop was equilibrated against
+reservoir solution and crystals formed after several weeks.
+Crystallization drops were overlayed with mineral oil and the
+crystals were dragged through it for cryoprotection, ﬂash frozen
+and diﬀraction data were collected at beamline P13 (DESY ,
+Hamburg, Germany). The PET30 1PorC crystals had the space
+group P 43 21 2 and diﬀracted to 2.1 Å resolution.
+Structure Determination
+A complete data set of the PET30 1PorC was collected at
+beamline P13 (DESY , EMBL, Hamburg, Germany) at 100 K
+and wavelength 0.9795 Å up to 2.1 Å resolution. All data were
+processed using the automated pipeline at the EMBL HAMBURG
+and reprocessed afterward using XDS (Kabsch, 2014). The
+above obtained model for PET30 1PorC by TOPMODEL was
+successfully used to phase the 2.1 Å data set of PET30 1PorC
+using the PHASER program from the PHENIX program suite
+(Afonine et al., 2012; Mulnaes et al., 2020). The structure was then
+reﬁned in iterative cycles of manual building and reﬁnement in
+coot followed by software-based reﬁnements using the program
+suite Phenix (Emsley and Cowtan, 2004; Liebschner et al., 2019).
+All residues were in the preferred and additionally allowed
+regions of the Ramachandran plot. The data collection and
+reﬁnement statistics are listed in Supplementary Table 4 . The
+images of the models were prepared using PyMOL (DeLano,
+2002) and UCSF Chimera X.7 The structure was deposited at the
+worldwide protein data bank under the accession code 7PZJ.
+7www.cgl.ucsf.edu/chimera
+Frontiers in Microbiology | www.frontiersin.org 5 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 6
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+Confocal Laser Scanning Microscopy of
+Polyethylene Terephthalate Foil Platelets
+The starter culture of K. jeonii was grown in R2A medium
+at 22 ◦C and 130 rpm to a cell density of 0.2. 1% of the
+starter culture was inoculated into 30 ml fresh R2A medium
+and PET foil platelets were put into the cultures. PET
+platelets were removed after 5-7 days, washed three times
+with PBS and subsequently given into µ-Slide 8 wells plates
+from ibidi GmbH (Martinsried, Germany). Cells were stained
+using 100 µl of LIVE/DEAD stain BacLight Viability Kit
+(Thermo Fisher Scientiﬁc). The stain is composed of propidium
+iodide (PI) dying dead cells with a damaged membrane and
+causing red ﬂuorescence and green ﬂuorescence SYTO 9 TM
+dying all bacterial membranes of living cells. Therefore, 10
+µl PI and 10 µl SYTO 9 TM were mixed. 15 µl of the
+nucleic acid-binding stains were pipetted into 5 ml PBS. The
+PET platelets were incubated for 1 h in the dark at room
+temperature. Afterward, the samples were investigated under
+the microscope Axio Observer Z1/7, LSM 800 using objective
+C-Apochromat 63x/1.20 W Korr UV VisIR (both Carl Zeiss
+Microscopy GmbH, Jena, Germany) using the Channels Syto
+09 (528/20 nm emission wavelength) and PI (645/20 nm
+emission wavelength).
+RESULTS
+Proﬁle Hidden Markov Model Searches
+Identify Potential Bacteroidetal PETases
+Protein sequences from both genomes and metagenomes were
+screened using the previously described Hidden Markov Model
+(HMM) (Danso et al., 2018) to enrich the diversity of PET-
+active enzymes from Bacteroidetes. The global searches were
+performed in publicly available datasets of NCBI GenBank
+and additionally in several private datasets harboring human-
+associated and environmental Bacteroidetes sequences (Table 1).
+Searches were conducted from January until March 2019.
+This global search initially resulted in the identiﬁcation of
+37 potential PETase sequences from Bacteroidetes with a bit
+score above 298.7. After sequence comparison, nine distinct
+hits were chosen. These candidates belonged to bacteroidetal
+genomes originating from either Seaweed (Li et al., 2017),
+Antarctic moss (Li et al., 2017), river sediment (Woyke et al.,
+2011), an aquaculture (own unpublished dataset) or human
+gut microbiomes (Mitchell et al., 2019; Almeida et al., 2021;
+Table 1 ). Most of these candidates were aﬃliated with the
+Flavobacteriaceae genus Aequorivita sp. (PET27-29, PET31 and
+PET53). PET29 and PET31 were highly similar on amino
+acid level ( < 98% identity) but diﬀered in the length of
+their sequence by 10 amino acids (aa). PET30, annotated as
+a potential lipase, was derived from the published genome
+sequence of Kaistella jeonii NCTC 13459. The predicted PETases
+PET57-59 were derived from bacteria aﬃliated with the genus
+Porphyromonas sp. (Porphyromonadaceae), while the predicted
+enzyme PET38 was derived from the species Fluviicola taﬀensis
+(Cryomorphaceae).
+Recombinant PET27 and PET30
+Hydrolyze Polycaprolactone,
+Impranil
+R⃝
+-DLN and Polyethylene
+Terephthalate Foil
+The nine candidate genes of the predicted PETases were
+synthesized, cloned into the expression vector pET21a( +)
+(Biomatik, Wilmington, DA, United States) and transformed
+in E. coli BL21 and T7-Shuﬄe cells ( Supplementary Table 1 ).
+Initial tests using recombinant puriﬁed proteins and tributyrin
+(TBT)-containing agar plates indicated that the genes PET27-
+30 coded for active esterases. The remaining enzymes PET38,
+PET53, PET57, and PET58 were inactive and were either
+produced as insoluble proteins and/or only at very low amounts
+(Table 1 ). Because of these obvious diﬃculties facing their
+expression, these four predicted enzymes were not further
+characterized. Additional tests with PET27-PET30 indicated that
+these enzymes hydrolyzed the esters pNP-hexanoate (C6), and
+pNP-decanoate (C10, Table 1). All four recombinant enzymes
+were able to hydrolyze the polymeric polycaprolactone (PCL),
+the PET-constituent BHET, and the polyester polyurethane
+Impranil
+R⃝DLN (Covestro AG, Leverkusen, Germany) ( Table 1
+and Figure 2A ). The enzymes produced clear halos on agar
+plates containing these substrates after overnight incubation at
+30◦C (Figure 2A and Table 1). PET-hydrolyzing activities were
+conﬁrmed for the enzymes PET27 and PET30 on amorphous PET
+foil as substrate in a 200 µl reaction volume by UHPLC analyses.
+In these tests, 1 mg ml −1 PET27 released 871.8 ±200.4 µM
+(corresponds to 174.4 ±40.0 nmol in 200 µl reaction volume) of
+TPA in 120 h at 30◦C from a 7 mg PET platelet. PET foil (7 mg)
+corresponds to 36.4µmol of a TPA-EG monomer unit (Figure 2B
+and Table 2). Surprisingly, under the same conditions, PET30
+released only 15.9 ±9.5 µM TPA (corresponds to 3.2±1.9 nmol;
+Figure 2C and Table 2). These results were directly benchmarked
+with recombinant IsPETase, of which 1 mg ml −1 released under
+the same conditions 4,055.7 ±516.9 µM of TPA (corresponds
+to 811.1 ±103.4 nmol). Thus, IsPETase is 4.7-fold more active
+compared to PET27 and approximately 253-fold more active
+compared to PET30. Because of the relatively low turnover rates
+observed for PET27 and PET30 on PET foil, it can be assumed
+that PET is not the preferred substrate of both enzymes.
+Biochemical Characterization and
+Activity of PET27 and PET30 on Esterase
+Substrates
+Both recombinant enzymes were characterized in more detail
+with pNP-esters. A substrate spectrum was recorded with pNP-
+esters, which had acyl chain lengths of 4–18 C-atoms. PET27
+and PET30 revealed a relatively narrow spectrum of substrates
+they could hydrolyze. The highest activities were observed with
+pNP-hexanoate (-C6) for PET30 and pNP-octanoate (-C8) for
+PET27 (Figure 3A). The optimal temperature of PET30 is 30 ◦C,
+but 80% activity was observed at 20 ◦C and between 40 and 50◦C
+(Figure 3B ). In contrast to that, PET27 shows a better activity
+at higher temperatures with an optimum at 40 ◦C and even 45%
+activity at 90◦C. Surprisingly, at 10◦C, both enzymes still showed
+Frontiers in Microbiology | www.frontiersin.org 6 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 7
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+FIGURE 2 | Hydrolytic activities of PET27-PET30 on PCL, BHET, ImpranilR⃝DLN and PET foil. Activities on PCL, BHET and Impranil R⃝DLN were visible by
+halo-formation on agar plates (A). 10 µl of puriﬁed enzyme (10-100 µg) were applied to agar plates containing either 500 mg/l PCL, 5 mM BHET or 1%
+Impranil R⃝DLN. Clearing zones were observed after 12 h at 30◦C. Control indicates plates without enzymes but treated with 10 µl buffer. UHPLC proﬁles of PET27
+(B) and PET30 (C) after incubation on PET foil for 120 h. Two hundred microliter of recombinant and puriﬁed enzymes (1 mg/ml) were applied to amorphous foil and
+incubated over 120 h at 30◦C. The IsPETase was included for reasons of benchmarking in (B) at 1 mg/assay (upper right corner). Graphs shown are representative
+graphs and were repeated at least three times.
+TABLE 2 | Amount of TPA released by different PET active enzymes.
+Enzyme Released TPA-EG unit Av. weight loss of PET foil [%]
+[µM] [nmol] [ µg]
+PET27 871.8 ±200.4 174.4 ±40.0 33.5 ±7.7 0.45
+PET30 15.9 ±9.5 3.2 ±1.9 0.6 ±0.3 0.01
+PET301PorC 23.3 ±9.2 4.7 ±1.8 0.9 ±0.3 0.01
+IsPETase 4,055.7 ±516.9 811.1 ±103.4 155.8 ±19.9 2.23
+The different recombinant and puriﬁed enzymes were incubated at a concentration of 1 mg ml−1 for a time period of 120 h at 30◦C. For the tests a circular piece of 7 mg
+PET foil which corresponds to 36.4 µmol of the TPA-EG unit (Ø 5 mm, and as speciﬁed in section “Materials and Methods”) was employed and folded once in the middle.
+Incubations were carried out in a reaction volume of 200 µl. Data are mean values with standard deviations of a minimum of 3 and up to 6 measurements per sample.
+a relative activity of 65% (PET30) and 73% (PET27). PET30
+remained active at 4 ◦C showing a relative activity of 42% on
+pNP-C6. Concerning the optimal pH, PET27 was most active
+between pH 7–8 and PET30 between pH 6-8 when tested in 0.1
+M potassium phosphate (Figure 3C).
+To further characterize the eﬀects of metal ions, diﬀerent ions
+(Ca2+, Co2+, Cu2+, Fe3+, Mg2+, Mn2+, Ni2+, and Zn2+) were
+added to the assays at 1 and 10 mM ﬁnal concentrations. Metal
+ions have a minor inﬂuence on PET27. Addition of Ca2+resulted
+in a 1.4-fold increase of the activity (Supplementary Figure 1A).
+In case of PET30, addition of Zn 2+, Ni2+, and Co2+resulted in
+an up to threefold increase of activity.
+The kinetic parameters for PET27 and PET30 were
+determined with pNP-C6 at 30 ◦C and pH 8 according to
+Michaelis-Menten. Thereby, PET27 revealed a vmax of 4.9 nmol
+min−1, a kcat of 19.08 s−1, a Km of 1.37 mM and a kcat/Km value
+of 13,859.27 M −1 s−1. For PET30, we calculated a vmax of 2.3
+nmol min −1, a kcat of 8.9 s −1, a Km of 0.3 mM and a kcat/Km
+value of 26,136.11 M−1 s−1.
+Further, PET30 was investigated in more detail. To assess
+thermostability, the enzyme was incubated at 50 and 60◦C for 3 h,
+after which the enzyme retained only 23 and 5% of its original
+activity, respectively ( Supplementary Figure 1B ). As inhibiting
+substances, EDTA, DTT and PMSF were applied in ﬁnal
+concentrations of 1 and 10 mM (Supplementary Figure 1C). The
+presence of DTT and PMSF (1 and 10 mM) inactivated PET30
+almost completely, whereas EDTA at 1 and 10 mM had no large
+impact on the enzyme’s activity. A concentration of 1 and 5 %
+of the detergents Triton X-100, Tween 80 and SDS decreased
+PET30’s activities (Supplementary Figure 1D).
+As both enzymes were active at lower temperatures, PET
+foil degradation was assayed at 4 ◦C. Over a time of 30 days in
+Frontiers in Microbiology | www.frontiersin.org 7 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 8
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+a 200 µl reaction volume, TPA release was measured. Under
+these conditions, 1 mg ml −1 of PET30 released an average
+of 6.1 µM of TPA (corresponds to 1.2 nmol). Interestingly,
+IsPETase released under the same conditions a similar amount
+(5.9 µM TPA corresponds to 1.2 nmol). Notably, under these
+conditions, no detectable amounts of TPA were released with
+PET27 after 30 days.
+Amino Acid Sequence and Structural
+Analyses Identify Unique Traits of
+Bacteroidetal Polyethylene
+Terephthalate-Hydrolyzing Enzymes
+While all four enzymes PET27-PET30 were able to hydrolyze
+PCL, BHET and Impranil
+R⃝DLN, only PET27 and PET30 were
+able to depolymerize PET. To identify the key diﬀerences that
+confer this activity on PET, all predicted PETases were studied
+on sequence and structural level. With an average of 330 aa, the
+predicted molecular weights of the enzymes ranged from 36 to
+48 kDa. Each candidate contained a C-terminal signal domain
+for protein transport to the periplasm as predicted with SignalP
+5.0 (Almagro Armenteros et al., 2019), supporting the notion that
+these are secreted proteins ( Table 3). Remarkably, the predicted
+PETases PET27-PET30 and PET38 showed a type IX secretion
+system (T9SS)/PorC-type sorting domain-containing part at the
+C-terminus. It has been described earlier by a proﬁle HMM from
+the TIGRFAM database (TIGR04183). T9SS sorting domains
+are involved in protein transport across the bacterial outer
+membrane and have so far been described as a Bacteroidetes-
+speciﬁc secretion system (Sato et al., 2010; Shoji et al., 2011;
+de Diego et al., 2016). The predicted domain encompassed 62–
+64 aa in the cases of PET27-PET30 and PET38. PET57 and 58
+carried truncated sorting domains of 42 and 55 aa in length.
+This observation also implies that these enzymes are most likely
+exoenzymes ( Table 3 and Supplementary Figures 3 , 4). To
+ensure that this C-terminus does not aﬀect catalytic activity, a
+deletion mutant designated PET301PorC was created that lacked
+the sorting sequence between the amino acids 300–366. Activity
+tests conﬁrmed that it was not aﬀected in its activities using pNP-
+C6 or PET foil ( Supplementary Figure 1E and Table 2). The
+enzyme released similar amounts of TPA as it was observed for
+the native PET30 (Table 2).
+Further analyses of the amino acid sequences identiﬁed a
+G-x-S-x-G motif which is typical for α/β serine hydrolases
+(Ollis et al., 1992) and a catalytic triad that consists of the
+residues Asp-His-Ser ( Figure 4 and Supplementary Figure 4 ).
+Potential substrate binding sites in all bacteroidetal enzymes were
+identiﬁed containing the aa Phe-Met-(Trp/Tyr/Ala). The latter
+diﬀered from the known IsPETase, the LCC and PET2 binding
+sites, in which a Tyr-Met-Trp motif is present ( Table 3). PET57
+is the only exception with a Trp-Met-Tyr binding site. PET27,
+however, has the Tyr replaced with a Phe that is identical to
+Cut190, while PET30 has in addition the Trp in position 3
+replaced with a Tyr (Table 3). This single amino acid substitution
+in the predicted substrate binding pocket of PET30, however, is
+not solely responsible for PET-degrading activity. The mutants
+PET30_F80Y and PET30_Y178W as well as a version containing
+FIGURE 3 | Biochemical characterization of PET27 and PET30 using
+pNP-substrates. Data represent mean values of at least three independent
+samples. Substrate preference (A) was tested with pNP-butyrate (-C4)
+to –stearate (-C18). Temperatures (B) and pH (C) were tested with
+pNP-octanoate (-C8) for PET27 and with pNP-hexanoate (-C6) for PET30. All
+assays except B were conducted at 40◦C for PET27 and at 30◦C for PET30.
+Both enzymes have their highest activity at cold to moderate temperatures (B)
+and at slightly acidic to alkaline pH (C).
+both of these point mutations even lost BHET- and PET-
+degrading activity (data can be shown upon request).
+Structure Determination of PET30 and
+Structural Modeling of the Other Putative
+PETases
+For structural insights into the mechanism of polymer
+degradation, the structures of all predicted PETases, except
+PET30, were modeled using the IsPETase (PDB code 6EQE)
+as template. Crystallization was conducted with puriﬁed
+PET301PorC and X-ray structure determination using a model
+of PET30 for molecular replacement. The structure was solved
+at 2.1 Å resolution, containing one monomer in the asymmetric
+Frontiers in Microbiology | www.frontiersin.org 8 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 9
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+unit, with 16.2% for R work and 21.9% for R free. Data collection
+and structure reﬁnement statistics are given in Supplementary
+Table 4 . Coordinates of PET30 1PorC were deposited under
+the PDB accession code 7PZJ. The PET30 1PorC protein shows
+a canonical α/β-fold consisting of a central twisted β-sheet
+composed of 9 β-strands ﬂanked by 7 α-helices on both sides
+(Figure 4A ), as already reported for homologous structures,
+i.e., PETases and cutinases (Han et al., 2017; Numoto et al.,
+2018). The structure of PET30 1PorC revealed an extra β-sheet
+(β10) which is located at the C-terminus and connects the PorC
+domain which has been deleted in this construct. PET30 1PorC
+represents the overall fold of several PETases as revealed by
+a similarity search performed by PDBeFold. 8 Here, especially
+the known structures of the PETase from Ideonella sakaiensis
+(for example PDB code 5XH3; Han et al., 2017), show high
+consistency indicated by the rmsd of 1.3-1.5 Å. Also, high
+structural similarity can be seen with the structure of PE-H from
+Pseudomonas aestusnigri (PDB code 6SCD rmsd 1.3) and the
+cutinase from a member of the Burkhoderiales bacteria family
+(PDB code 7CWQ, rmsd of 1.32 (Bollinger et al., 2020; Chen
+et al., 2021). One disulﬁde bond is present in PET30 1PorC
+(C262-C285), a common feature for Type II PET-degrading
+enzymes (Joo et al., 2018). In the PETase from I. sakaiensis (PDB
+code 5YNS), a second disulﬁde bond is present which is located
+closely to the active site. Mutational analysis revealed that this
+disulﬁde bond plays a crucial role in activity since mutation of
+the involved cysteine to serine completely abolished activity,
+likely due to a destabilizing eﬀect on the active site. The sequence
+in PET30 1PorC at this position deviates, and here, G195 and
+V232 are present. In the PE-H structure, also no disulﬁde
+bridge can be found, although one cysteine residue remained
+(G195 and C251). From the many structures of the PETase from
+I. sakaiensis , one was solved in complex with 2-hydroxyethyl
+methyl terephthalate (HEMT; PDB code 5XH3). Here, HEMT is
+bound via interactions with W156, I179, H208, A131, W130, Y58,
+and M132. We looked into the active site and overlaid the HEMT
+molecule with our PET30 1PorC structure ( Supplementary
+Figure 2). Here similar interactions of the HEMT molecule by
+the PET30 1PorC protein can be deduced mediated by Y178,
+T200, H230, W152, F80, and M154 (Figure 4B).
+The largest diﬀerences can be seen in the C-terminal part
+aﬃliated with the T9SS-domain. It diﬀered largely from the
+IsPETase and consisted of up to seven predicted β-sheets and,
+occasionally, a few α-helices ( Supplementary Figure 3A and
+Table 3). Another diﬀerence between PET27, PET30, IsPETase
+and LCC is the surface hydrophobicity of the region channeling
+the substrates to the active site ( Figure 4C ). PET30 shows
+a less hydrophobic surrounding of the catalytic pocket when
+compared to the structures of Type I and Type II PET-degrading
+enzymes (Joo et al., 2018). PET27 contains a bulkier hydrophobic
+domain on one of the sides of the channel. This feature might
+inﬂuence accommodation of the substrate and activity on the
+polymers. A similar catalytic pocket was predicted for PET28
+and PET29 (Supplementary Figure 3). Although active on BHET
+and PCL, these enzymes showed no measurable activity on PET.
+8www.ebi.ac.uk/msd-srv/ssm/
+The enzymes derived from the human gut present a larger
+hydrophobic surface around the catalytic site, especially PET58
+and PET59 (Supplementary Figure 3B).
+Bacteroidetal Polyethylene
+Terephthalate-Degrading Esterases
+Forming Two Phylogenetic Subclusters
+Are Globally Occurring Enzymes
+Using the amino acid sequences of published and functionally
+veriﬁed PETases and employing the RAxML-NG autoMRE
+algorithm via TreeSAPP (Morgan-Lang et al., 2020),
+aphylogenetic analysis was performed. Multiple phylogenetic
+clusters formed that roughly corresponded to Actinobacteria,
+Proteobacteria, Firmicutes and Ascomycota ( Figure 5A). While
+the putative and now conﬁrmed Bacteroidetal PET-degrading
+hydrolases appear to be polyphyletic when added into the tree,
+distinct subclusters were formed. Notably, the two enzymes
+PET27 and PET30, shown to be active on PET foil, were
+grouped as part of subcluster that consisted of predicted
+and functional enzymes aﬃliated with genera Aequorivita
+and Kaistella. Furthermore, the predicted but functionally not
+veriﬁed enzymes from the genusPorphyromonas (PET57-PET59)
+formed a separate subcluster. Interestingly, these two subclusters
+harbored only sequences of aquatic and environmental origin
+orgut-aﬃliated sequences, respectively. Overall, sequences
+derived from Bacteroidetes seem to group by both taxonomy
+and environment, though low bootstrap values do not show
+a high degree of conﬁdence. However, the interleaving of
+Bacteroidetal sequences from both a Firmicute, B. subtilis ,
+and the eukaryotic Ascomycota sequences may suggest that
+PET-active enzymes are widely distributed phylogenetically, and
+further characterization studies resulting in additions to the tree
+are likely to provide better phylogenetic resolution. Additionally,
+the pairwise distance on the level computed in MEGAX with the
+p-distance model ( Figure 5B) conﬁrmed these groupings, with
+the highest similarity, as indicated by low pairwise distanced,
+occurring within the subclusters described. This analysis also
+indicated rather low similarity between the putative bacteroidetal
+PETases and the known PETases ( IsPETase, LCC, PE-H, and
+PET2), mounting further evidence for the wide phylogenetic
+distribution of these enzymes.
+The diversity of bacteroidetal enzymes acting on PET raised
+the question to what extent these enzymes could impact plastic
+degradation in the environment. To address this question in part,
+we analyzed the global distribution of PET27 and PET30 and
+their homologs. The protein sequences of PET27 and PET30
+were analyzed for their occurrence and frequency in global
+databases available in IMG/M ER (Woyke et al., 2011; Mukherjee
+et al., 2020). Using both enzymes for a BLASTp-based search
+(cutoﬀs 50% identity; 80% coverage), we were initially able to
+identify very few (<10) possible homologs in the global databases
+analyzed and aﬃliated with the genera Aequorivita and Kaistella
+(Figure 1A). Interestingly, when we extended our search to the
+Flavobacterium-Cytophaga-Bacteroidetes (FCB), we were able to
+identify 98 possible homologs in our global searches including
+single-cell ampliﬁed genomes (SAGs) from the Baltic Sea
+Frontiers in Microbiology | www.frontiersin.org 9 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 10
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+TABLE 3 | Conserved motifs and structural features identiﬁed in the predicted bacteroidetal PET-hydrolyzing esterases.
+Enzyme N-terminus Catalytic triad Substrate
+binding site
+Disulf. bridge* C-terminus
+Aln 1st aa Length [N] SP cleavage
+site
+Aln last aa Length [N] Secondary
+structure
+CD
+IsPETase A47 47 27–28 D-H-S Y-M-W 2x C273 18 N/A N/A
+LCC D53 53 21–22 D-H-S Y-M-W 1x L274 19 N/A N/A
+Cut190 R64 64 N/A D-H-S F-M-W 2x L278 29 N/A N/A
+PET27 P36 36 23–24 D-H-S F-M-W 1x L265 99 7x β PorC
+PET28 P36 36 23–24 D-H-S F-M-W 1x L265 100 6x β PorC
+PET29 P36 36 23–24 D-H-S F-M-W 1x L265 100 α, 4xβ, α, 2xβ PorC
+PET30 P36 36 23–24 D-H-S F-M-Y 1x A266 100 7x β PorC
+PET38 S7 7 19–20 D-H-S F-M-A 1x I279 168 5x β, α, 2xβ PorC
+PET53 T36 36 22–23 D-H-S F-M-W 1x V268 86 4x β N/A
+PET57 N35 35 25–26 D-H-S W-M-Y N/A F289 34 α +loops N/A
+PET58 I34 34 24–25 D-H-S F-M-Y N/A F293 45 loops +α N/A
+PET59 Y48 48 24–25 D-H-S F-M-Y N/A Y294 51 α +semi-α N/A
+The Ideonella sakaiensis PETase (IsPETase, PDB: 6EQE; Yoshida et al., 2016; Austin et al., 2018), the LCC (4EB0; Sulaiman et al., 2014) and the Cut190 (4WFI; Miyakawa
+et al., 2015) were included for benchmarking purposes.
+Aln: Alignment; SP: Signal Peptide; α, α -helix; ß, ß-sheet; N/A, not identiﬁed; *, veriﬁed and predicted disulﬁde bonds; CD: Conserved Domain; PorC, Por secretion
+system C-terminal sorting domain.
+(Supplementary Table 5). 47 hits were aﬃliated with the genus
+of the Marinimicrobia (candidate phylum of the FCB group),
+indicating a potential role for these ubiquitous and abundant
+marine microorganisms in PET-degradation. Others were more
+closely associated with Bacteroidetes (Austin et al., 2018). As
+expected, the majority of these homologs were associated with
+marine and aquatic samples (Figure 1B).
+Kaistella jeoniiIs Able to Colonize
+Polyethylene Terephthalate Surfaces
+These metagenomic analyses showed that K. jeonii, the organism
+from which PET30 originates, exists primarily in aquatic habitats.
+To illustrate that it not only exists there, but is also able
+to actively colonize PET surfaces, a culture of this organism
+was incubated with PET foil platelets. The foil sections were
+incubated for up to 1 week in R2A medium with K. jeonii ,
+removed from the culture, and washed three times with buﬀer
+before staining with LIVE/DEAD staining solution. Samples
+were investigated under the confocal laser scanning microscope
+Axio Observer Z1/7, LSM 800 by Carl Zeiss Microscopy GmbH
+(Jena, Germany). Cells visible in Supplementary Figure 5
+resisted repeated washing, indicating that they adhere under
+these laboratory conditions to the surface and an increasing
+number of cells was visible on the amorphous PET-foil after
+5–7 days. The exact mechanism of attachment is not known.
+Nonetheless, it can be speculated that SusD binding modules,
+which are crucial for sugar polymer binding, could be involved.
+They can be found in both genomes of K. jeonii (GenBank acc.
+no. WP_039349586.1; RagB/SusD family nutrient uptake outer
+membrane protein) and Aequorivita sp. CIP111184 (GenBank
+acc. no. WP_111879847.1; SusD/RagB family nutrient-binding
+outer membrane lipoprotein).
+DISCUSSION
+Currently, only a handful of known bacterial phyla are known
+to produce active PET-esterases ( Figure 5 and Supplementary
+Table 3). Here, we have identiﬁed and partially characterized
+two novel functional PET-hydrolyzing enzymes aﬃliated with
+the Kaistella and Aequorivita genera within the Bacteroidetes
+phylum. Bacteria belonging to the genus Kaistella are globally
+occurring aerobic organisms colonizing a wide range of diﬀerent
+habitats including plants, soil, ﬁsh, the human gut, and sea
+water. Within the genus Kaistella, over one hundred species
+have been described of which few are pathogens, but many are
+beneﬁcial and host-associated (Bernardet et al., 2005; Loch and
+Faisal, 2015). Only a few species have been identiﬁed within the
+genus Aequorivita, mainly belonging to marine or fresh-water
+organisms that are mostly psychrotolerant and aerobic (Bowman
+and Nichols, 2002). Notably, Bacteroidetes have been described as
+very potent degraders of polymers, and they harbor a multitude
+of hydrolases and binding modules (Dodd et al., 2011; Thomas
+et al., 2011; Foley et al., 2016).
+The enzymes PET27 and PET30 characterized here are both
+typical esterases (i.e., serine hydrolases) belonging to the EC
+3.1. Both appear to be secreted enzymes as they carry an
+C-terminal secretion signal linked to the transport into the
+periplasm (Desvaux et al., 2009) and one secretion PorC-
+like motif which is related to the type IX secretion system
+(T9SS) (Sato et al., 2010; de Diego et al., 2016). The T9SS is
+composed of several outer membrane, periplasmic and inner
+membrane proteins, whereby it is responsible for the secretion of
+pathogenicity factors, hydrolases and also for gliding motility in
+the Bacteroidetes phylum (Sato et al., 2010; de Diego et al., 2016).
+PET27 and PET30 were active on PET foil, but diﬀered
+strongly in their overall activities. PET27 contains a Phe-Met-Trp
+Frontiers in Microbiology | www.frontiersin.org 10 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 11
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+FIGURE 4 | Crystal structure of the PET-hydrolyzing bacteroidetal PET301PorC including active site and hydrophobicity comparison. (A) Overall structure of
+PET301PorC. The structure was solved by X-ray crystallography to a resolution of 2.1 Å and is shown as cartoon representation. Helices are colored in light
+turquoise and the beta-sheets are shown in purple. The number of the secondary structure elements are numbered according to the occurrence in the sequence.
+(B) Comparison of active site residues. All three enzymes PET301PorC (light blue), PET27 (orange) and IsPETase (light yellow) have the typical residues of
+Ser-hydrolases at the catalytically active positions (Ser, His, and Asp), but PET27 and PET301PorC differ in some of the amino acids associated with PET-binding.
+The residues of IsPETase are indicated in black. PET30 and PET27 lack a disulﬁde bridge in the proximity of a catalytic loop.Supplementary Figure 4 provides the
+positions of these residues in details on the amino acids level. The 3D structure of PET27 was modeled using the Robetta server (Kim et al., 2004) using the
+IsPETase crystal structure (6EQE) as a backbone.(C) Surface hydrophobicity around the tunnel leading to the active site of four PET-degrading enzymes. Hydrophilic
+regions are displayed in turquoise and hydrophobic in gold.
+motif and PET30 a Phe-Met-Tyr. The most active enzymes
+such as LCC and IsPETase both carry a Tyr-Met-Trp consensus
+binding motif while the non-active enzymes PET38, PET53,
+PET57 PET58 and PET59 revealed either a Phe-Met-Ala,
+a Phe-Met-Trp or a Trp-Met-Tyr substrate binding motif.
+PET30 mutants, in which the amino acids were adjusted
+according to the active PETases, did not show the expected
+increase in activity. Therefore, we assume that not only
+individual amino acids are decisive, but rather that an
+interplay of hydrophobicity, location and accessibility of
+the catalytic triad is crucial for whether polymers can be
+degraded (Figure 4).
+Benchmarking activities of polymer active enzymes with
+literature values is not trivial since most studies use diﬀerent types
+of foils with diﬀerent degrees of crystallinity and distinct assay
+conditions. To partially overcome this challenge, we produced
+our own recombinant wildtype enzymes of the IsPETase and
+compared its activities with PET27 and PET30. As expected,
+IsPETase was 4.7-fold more active at 30 ◦C than PET27 and
+up to 253-fold more active than PET30. With respect to the
+overall activity of the IsPETase, however, our data are in line with
+published data for this enzyme (Son et al., 2019). The observation
+here that the activities of the PET27 and PET30 enzymes are
+relatively low compared to the IsPETase and certainly with
+Frontiers in Microbiology | www.frontiersin.org 11 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 12
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+FIGURE 5 | Phylogenetic tree and pairwise comparison of known PETases and bacteroidetal PET-hydrolyzing enzymes.(A) The tree was constructed using the
+RAxML-NG autoMRE algorithm (Kozlov et al., 2019) with the treesapp create command implemented in TreeSAPP (Morgan-Lang et al., 2020) with maximum
+bootstraps set at 1,000. GenBank entries of the putative and veriﬁed PET-active enzymes afﬁliated with the Bacteroidetes phylum are listed inTable 1; the entries of
+all other PETases included in the tree are indicated inSupplementary Table 3. The term “uncultured bacterium” refers to a not further speciﬁed microorganism
+derived from a metagenome or a mixed microbial consortium. (B) Heatmap representation of pairwise similarities between all enzymes afﬁliated with the
+Bacteroidetes phylum in comparison with four known PETases (IsPETase, LCC, PE-H, and PET2). The pairwise comparison was performed in MEGAX with the
+p-distance model. High values indicating low similarity are colored in red, low values indicating high similarity are colored in green.
+respect to the published values of the even more active LCC imply
+that PET27 and PET30 are not PET esterases in sensu strictu.
+However, our data imply that both are short-chain fatty acid
+acting esterases revealing promiscuity in their substrate proﬁle
+(Table 3 and Figure 3).
+Intriguingly, the observation that both enzymes were
+catalytically active on PET foil could imply a wider role in the
+degradation of PET and especially PET nanoparticles. Because
+of the signiﬁcant activities even at 4 ◦C, these enzymes may
+in fact play a yet unknown role in long-term degradation of
+PET microparticles in cold environments. This hypothesis is
+supported by our observations that homologs of both enzymes
+can be found on a global level covering a wide range of climate
+zones (Figure 1) and that at least the cultivable K. jeonii is able to
+attach to PET surfaces.
+In summary, our biochemical results signiﬁcantly extend
+the knowledge of PET-degrading enzymes and provide
+promising candidates for biotechnological applications at
+low temperatures. Furthermore, the data presented here will
+help to advance our knowledge on the ecological role of the
+Frontiers in Microbiology | www.frontiersin.org 12 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 13
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+Bacteroidetes in the decomposition of marine PET litter and
+enable the development of an expanded phylogenetic framework
+for identifying the diversity of putative PETases in diverse marine
+microbial groups throughout the global ocean.
+DATA AVAILABILITY STATEMENT
+The original contributions presented in the study are included
+in the article/ Supplementary Material, further inquiries can be
+directed to the corresponding author/s.
+AUTHOR CONTRIBUTIONS
+WS, JC, and PP-G designed the study, contributed to manuscript
+writing and designing bioassays. HZ and RD conducted
+experiments and contributed to planning and writing. PP-G,
+JC, and HZ were involved in enzyme structural work,
+bioinformatics, and initial phylogenetic analyses. V A, JS, and
+SSm conducted crystallization and structure determination. CS
+and JP contributed to planning and corrections. RS and CC
+were involved in global data base searches. DD performed
+HMM searches. SW and BH delivered clone producing the
+IsPETase. LP did microscopic analyses. AA was involved in
+gut microbiome data mining. SSt and SH were involved in
+phylogenetic analysis. All authors contributed to manuscript
+writing and editing.
+FUNDING
+This work was in part supported by the BMBF within the
+programs MarBiotech (031B0562A) MetagenLig (031B0571B),
+MethanoPEP (031B0851B), LipoBiocat (031B0837B), PlastiSea
+(031B867B), and MetagenLig (031B0571A) at the Universities
+of Hamburg, Kiel, Düsseldorf and Stuttgart. The support
+for the University of Bayreuth was given by the
+Deutsche Forschungsgemeinschaft (DFG, German Research
+Foundation)óProject Number 391977956óSFB 1357. Further
+funding came from the US Department of Energy (DOE) Joint
+Genome Institute, an Oﬃce of Science User Facility, supported
+by the Oﬃce of Science of the U.S. Department of Energy
+under Contract DE-AC02-05CH11231, the Natural Sciences
+and Engineering Research Council (NSERC) of Canada, the G.
+Unger Vetlesen and Ambrose Monell Foundations, the Canada
+Foundation for Innovation (CFI) and Compute Canada through
+grants awarded to SH. AA was funded by EMBL core funds.
+The Center for Structural Studies was funded by the Deutsche
+Forschungsgemeinschaft (DFG Grant number 417919780; INST
+208/740-1 FUGG; INST 208/761-1 FUGG).
+ACKNOWLEDGMENTS
+The synchrotron MX data were collected at beamline P13
+operated by EMBL Hamburg at the PETRA III storage ring
+(DESY , Hamburg, Germany). We thank Dr. Michael Agthe for
+the assistance in using the beamline. We also thank the staﬀ of the
+ID23-eh1 at the ESRF , Grenoble for help with initial screening of
+the crystal quality.
+SUPPLEMENTARY MATERIAL
+The Supplementary Material for this article can be found
+online at: https://www.frontiersin.org/articles/10.3389/fmicb.
+2021.803896/full#supplementary-material
+Supplementary Figure 1 | Further biochemical characterization of PET27 and
+PET30 using pNP-substrates. Cofactor requirements were tested for PET27 with
+pNP-C8 at 40◦C and for PET30 with pNP-C6 at 30◦C (A). For PET30, all other
+tests were carried out with pNP-C6 and all assays except (B) were conducted at
+30◦C. Thermostability of PET30 was assessed at 50 and 60◦C over 3 h with
+pNP-C6 (B). Inhibitors (C) and detergents (D) generally decrease the activity of
+PET30, particularly with higher concentrations. Activity of PET30 and
+PET301PorC were compared under the same conditions using pNP-C6 (E). Data
+represent mean values of at least three independent measurements.
+Supplementary Figure 2 | Zoom into the active site of PET301PorC. Overlaid
+are the structures of PET301PorC (blue) with the PETase from I. sakaiensis (light
+yellow, black labeling) in complex with HEMT (purple; PDB code 5XH3). The
+residues involved in binding are highlighted and numbered according to their
+structure. *The structure 5XH3 is a mutant where the catalytic Serine was mutated
+to an Alanine.
+Supplementary Figure 3 | Structure prediction models of veriﬁed and predicted
+PETases afﬁliated with the phylum of the Bacteroidetes.(A) 3D structures were
+modeled using the Robetta server using the IsPETase crystal structure (light
+yellow, 6EQE) as a backbone. For PET30, the crystal structure was shown. (B)
+Surface hydrophobicity around the tunnel leading to the active site of putative
+bacteroidetal PETases and functionally veriﬁed PET-degrading enzymes.
+Hydrophilic regions are displayed in turquoise and hydrophobic in gold.
+Supplementary Figure 4 | Amino acid alignment of 9 potential PETases afﬁliated
+with the Bacteroidetes phylum. The original sequences were used for the
+structural alignment and the alignment was constructed with T-Coffee. Alignment
+was visualized with Bioedit version 7.0.5. The IsPETase was included for reasons
+of benchmarking. Blue arrows indicate the start and the end of the active PET27
+and PET30 clones. We introduced a methionine as the ﬁrst aa of the protein
+sequences. The signal peptide deleted version of the enzymes was functionally
+veriﬁed. The red arrow labeled with CS indicates the predicted cleavage site of
+C-terminal PorC domain (Lasica et al., 2017). The gray arrow indicates the
+C-terminus of the truncated version of PET30 (PET301300-366), number
+indicates the position of amino acid). PET301300-366 was active
+on PCL and BHET.
+Supplementary Figure 5 | Confocal microscopic pictures of K. jeonii colonizing
+PET foil. The pictures were taken after 5–7 days of incubation of K. jeonii in R2A
+medium. Cells are dyed with LIVE/DEADTM stain. Green ﬂuorescence shows living
+cells, red ﬂuorescence indicates dead cells. 2D front pictures were taken with Axio
+Observer Z1/7, LSM 800 (Carl Zeiss, Jena, Germany) of a 3D Z-stack image.
+REFERENCES
+Acero, E. H., Ribitsch, D., Steinkellner, G., Gruber, K., Greimel, K.,
+Eiteljoerg, I., et al. (2011). Enzymatic surface hydrolysis of PET:
+eﬀect of structural diversity on kinetic properties of cutinases from
+Thermobiﬁda. Macromolecules 44, 4632–4640. doi: 10.1021/ma200
+949p
+Afonine, P. V., Grosse-Kunstleve, R. W., Echols, N., Headd, J. J.,
+Moriarty, N. W., Mustyakimov, M., et al. (2012). Towards automated
+crystallographic structure reﬁnement with phenix. reﬁne. Acta
+Frontiers in Microbiology | www.frontiersin.org 13 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 14
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+Crystallogr. D Biol. Crystallogr. 68, 352–367. doi: 10.1107/S090744491200
+1308
+Agarwala, R., Barrett, T., Beck, J., Benson, D. A., Bollin, C., Bolton, E., et al. (2016).
+Database resources of the national center for biotechnology information.
+Nucleic Acids Res. 44, D7–D19.
+Almagro Armenteros, J. J., Tsirigos, K. D., Sønderby, C. K., Petersen, T. N.,
+Winther, O., Brunak, S., et al. (2019). SignalP 5.0 improves signal peptide
+predictions using deep neural networks. Nat. Biotechnol. 37, 420–423. doi:
+10.1038/s41587-019-0036-z
+Almeida, A., Nayfach, S., Boland, M., Strozzi, F., Beracochea, M., Shi, Z. J., et al.
+(2021). A uniﬁed catalog of 204,938 reference genomes from the human gut
+microbiome. Nat. Biotechnol. 39, 105–114. doi: 10.1038/s41587-020-0603-3
+Austin, H. P., Allen, M. D., Donohoe, B. S., Rorrer, N. A., Kearns, F. L., Silveira,
+R. L., et al. (2018). Characterization and engineering of a plastic-degrading
+aromatic polyesterase. Proc. Natl. Acad. Sci. U.S.A. 115, E4350–E4357. doi:
+10.1073/pnas.1718804115
+Berman, H. M., Westbrook, J., Feng, Z., Gilliland, G., Bhat, T. N., Weissig, H. I,
+et al. (2000). The protein data bank. Nucleic Acids Res. 28, 235–242.
+Bernardet, J. F., Vancanneyt, M., Matte-Tailliez, O., Grisez, L., Tailliez, P., Bizet,
+C., et al. (2005). Polyphasic study of Chryseobacterium strains isolated from
+diseased aquatic animals. Syst. Appl. Microbiol. 28, 640–660. doi: 10.1016/j.
+syapm.2005.03.016
+Bollinger, A., Thies, S., Knieps-Grunhagen, E., Gertzen, C., Kobus, S., Hoppner,
+A., et al. (2020). A novel polyester hydrolase from the marine bacterium
+Pseudomonas aestusnigri–structural and functional insights. Front. Microbiol.
+11:114. doi: 10.3389/fmicb.2020.00114
+Bowman, J. P., and Nichols, D. S. (2002). Aequorivita gen. nov., a member of the
+family Flavobacteriaceae isolated from terrestrial and marine Antarctic habitats.
+Int. J. Syst. Evol. Microbiol. 52, 1533–1541. doi: 10.1099/00207713-52-5-1533
+Chen, C.-C., Han, X., Li, X., Jiang, P., Niu, D., Ma, L., et al. (2021). General features
+to enhance enzymatic activity of poly (ethylene terephthalate) hydrolysis. Nat.
+Catal. 4, 425–430. doi: 10.1038/s41929-021-00616-y
+Chen, S., Tong, X., Woodard, R. W., Du, G., Wu, J., and Chen, J. (2008).
+Identiﬁcation and characterization of bacterial cutinase. J. Biol. Chem. 283,
+25854–25862. doi: 10.1074/jbc.m800848200
+NCBI Resource Coordinators (2017). Database resources of the national center for
+biotechnology information. Nucleic Acids Res. 45, D12–D17.
+Danso, D., Chow, J., and Streit, W. R. (2019). Plastics: microbial degradation,
+environmental and biotechnological perspectives. Appl. Environ. Microbiol. 85,
+1–14. doi: 10.1007/978-3-030-48973-1_1
+Danso, D., Schmeisser, C., Chow, J., Zimmermann, W., Wei, R., Leggewie, C., et al.
+(2018). New insights into the function and global distribution of polyethylene
+terephthalate (PET)-degrading bacteria and enzymes in marine and terrestrial
+metagenomes. Appl. Environ. Microbiol. 84:e02773-17. doi: 10.1128/AEM.
+02773-17
+de Diego, I., Ksiazek, M., Mizgalska, D., Koneru, L., Golik, P., Szmigielski, B., et al.
+(2016). The outer-membrane export signal ofPorphyromonas gingivalis type IX
+secretion system (T9SS) is a conserved C-terminalβ-sandwich domain. Sci. Rep.
+6:23123. doi: 10.1038/srep23123
+DeLano, W. L. (2002). Pymol: an open-source molecular graphics tool. CCP4
+Newslett. Protein Crystallogr. 40, 82–92.
+Desvaux, M., Hébraud, M., Talon, R., and Henderson, I. R. (2009). Outer
+membrane translocation: numerical protein secretion nomenclature in
+question in mycobacteria. Trends Microbiol. 17, 338–340. doi: 10.1016/j.tim.
+2009.05.008
+Dodd, D., Mackie, R. I., and Cann, I. K. O. (2011). Xylan degradation, a metabolic
+property shared by rumen and human colonic Bacteroidetes. Mol. Microbiol.
+79, 292–304. doi: 10.1111/j.1365-2958.2010.07473.x
+Emsley, P., and Cowtan, K. (2004). Coot: model-building tools for molecular
+graphics. Acta Crystallogr. D Biol. Crystallogr. 60, 2126–2132. doi: 10.1107/
+s0907444904019158
+Foley, M. H., Cockburn, D. W., and Koropatkin, N. M. (2016). The Sus operon: a
+model system for starch uptake by the human gut Bacteroidetes. Cell. Mol. Life
+Sci. 73, 2603–2617. doi: 10.1007/s00018-016-2242-x
+Geyer, R., Jambeck, J. R., and Law, K. L. (2017). Production, use, and fate of all
+plastics ever made. Sci. Adv. 3:e1700782. doi: 10.1126/sciadv.1700782
+Haernvall, K., Zitzenbacher, S., Amer, H., Zumstein, M. T., Sander, M., McNeill,
+K., et al. (2017). Polyol structure inﬂuences enzymatic hydrolysis of bio-based
+2,5-furandicarboxylic acid (FDCA) polyesters. Biotechnol. J. 12:1600741. doi:
+10.1002/biot.201600741
+Hahnke, R. L., Meier-Kolthoﬀ, J. P., García-López, M., Mukherjee, S., Huntemann,
+M., Ivanova, N. N., et al. (2016). Genome-based taxonomic classiﬁcation of
+bacteroidetes. Front. Microbiol. 7:2003. doi: 10.3389/fmicb.2016.02003
+Hall, T. A. (1999). BioEdit: A User-Friendly Biological Sequence Alignment Editor
+and Analysis Program for Windows 95/98/NT. Nucleic Acids Symposium Series .
+London: Information Retrieval Ltd., c1979–c2000.
+Han, X., Liu, W., Huang, J. W., Ma, J., Zheng, Y., Ko, T. P., et al. (2017). Structural
+insight into catalytic mechanism of PET hydrolase. Nat. Commun. 8:2106.
+Hu, X., Thumarat, U., Zhang, X., Tang, M., and Kawai, F. (2010). Diversity
+of polyester-degrading bacteria in compost and molecular analysis of a
+thermoactive esterase from Thermobiﬁda alba AHK119. Appl. Microbiol.
+Biotechnol. 87, 771–779. doi: 10.1007/s00253-010-2555-x
+Jambeck, J. R., Geyer, R., Wilcox, C., Siegler, T. R., Perryman, M., Andrady, A.,
+et al. (2015). Plastic waste inputs from land into the ocean.Science 347, 768–771.
+doi: 10.1126/science.1260352
+Joo, S., Cho, I. J., Seo, H., Son, H. F., Sagong, H. Y., Shin, T. J., et al. (2018).
+Structural insight into molecular mechanism of poly(ethylene terephthalate)
+degradation. Nat. Commun. 9:382.
+Kabsch, W. (2014). Processing of X-ray snapshots from crystals in random
+orientations. Acta Crystallogr. D Biol. Crystallogr. 70, 2204–2216. doi: 10.1107/
+S1399004714013534
+Kim, D. E., Chivian, D., and Baker, D. (2004). Protein structure prediction and
+analysis using the Robetta server. Nucleic Acids Res. 32, W526–W531.
+Kleeberg, I., Hetz, C., Kroppenstedt, R. M., Muller, R. J., and Deckwer,
+W. D. (1998). Biodegradation of aliphatic-aromatic copolyesters by
+Thermomonospora fusca and other thermophilic compost isolates. Appl.
+Environ. Microbiol. 64, 1731–1735. doi: 10.1128/AEM.64.5.1731-1735.1998
+Kozlov, A. M., Darriba, D., Flouri, T., Morel, B., and Stamatakis, A.
+(2019). RAxML-NG: a fast, scalable and user-friendly tool for maximum
+likelihood phylogenetic inference. Bioinformatics 35, 4453–4455. doi: 10.1093/
+bioinformatics/btz305
+Krieg, N., Ludwig, W., Euzéby, J., and Whitman, W. (2015). “Bacteroidetes phyl.
+nov, ” inBergey’s Manual of Systematics of Archaea and Bacteria , eds M. E.
+Trujillo, S. Dedysh, P. DeVos, et al. (Hoboken, NJ: John Wiley & Sons, Inc.),
+1–2. doi: 10.1002/9781118960608.pbm00004
+Lasica, A. M., Ksiazek, M., Madej, M., and Potempa, J. (2017). The type IX secretion
+system (T9SS): highlights and recent insights into its structure and function.
+Front. Cell. Infect. Microbiol. 7:215. doi: 10.3389/fcimb.2017.00215
+Letunic, I., and Bork, P. (2019). Interactive tree of life (iTOL) v4: recent updates
+and new developments. Nucleic Acids Res. 47, W256–W259. doi: 10.1093/nar/
+gkz239
+Li, N., Zhu, Y., LaFrentz, B. R., Evenhuis, J. P., Hunnicutt, D. W., Conrad, R. A.,
+et al. (2017). The type IX secretion system is required for virulence of the ﬁsh
+pathogen Flavobacterium columnare. Appl. Environ. Microbiol. 83:e01769-17.
+Liebschner, D., Afonine, P. V., Baker, M. L., Bunkóczi, G., Chen, V. B., Croll, T. I.,
+et al. (2019). Macromolecular structure determination using X-rays, neutrons
+and electrons: recent developments in Phenix. Acta Crystallogr. D Struct. Biol.
+75, 861–877. doi: 10.1107/S2059798319011471
+Loch, T. P., and Faisal, M. (2015). Emerging ﬂavobacterial infections
+in ﬁsh: a review. J. Adv. Res. 6, 283–300. doi: 10.1016/j.jare.2014.
+10.009
+Markowitz, V. M., Chen, I. M., Palaniappan, K., Chu, K., Szeto, E., Grechkin, Y.,
+et al. (2012). IMG: the integrated microbial genomes database and comparative
+analysis system. Nucleic Acids Res. 40, D115–D122.
+Matlab, S. (2012). Matlab. Natick, MA: The MathWorks.
+Mistry, J., Finn, R. D., Eddy, S. R., Bateman, A., and Punta, M. (2013). Challenges
+in homology search: HMMER3 and convergent evolution of coiled-coil regions.
+Nucleic Acids Res. 41:e121. doi: 10.1093/nar/gkt263
+Mitchell, A. L., Almeida, A., Beracochea, M., Boland, M., Burgin, J., Cochrane, G.,
+et al. (2019). MGnify: the microbiome analysis resource in 2020. Nucleic Acids
+Res. 48, D570–D578. doi: 10.1093/nar/gkz1035
+Miyakawa, T., Mizushima, H., Ohtsuka, J., Oda, M., Kawai, F., and Tanokura, M.
+(2015). Structural basis for the Ca 2+-enhanced thermostability and activity of
+PET-degrading cutinase-like enzyme fromSaccharomonospora viridisAHK190.
+Appl. Microbiol. Biotechnol. 99, 4297–4307. doi: 10.1007/s00253-014-6
+272-8
+Frontiers in Microbiology | www.frontiersin.org 14 January 2022 | Volume 12 | Article 803896
+fmicb-12-803896 December 29, 2021 Time: 13:35 # 15
+Zhang et al. PET-Hydrolyzing Esterases From Bacteroidetes
+Molitor, R., Bollinger, A., Kubicki, S., Loeschcke, A., Jaeger, K. E., and Thies, S.
+(2020). Agar plate-based screening methods for the identiﬁcation of polyester
+hydrolysis by Pseudomonas species. Microb. Biotechnol. 13, 274–284. doi: 10.
+1111/1751-7915.13418
+Morgan-Lang, C., McLaughlin, R., Armstrong, Z., Zhang, G., Chan,
+K., and Hallam, S. J. (2020). TreeSAPP: the tree-based sensitive
+and accurate phylogenetic proﬁler. Bioinformatics 36, 4706–4713.
+doi: 10.1093/bioinformatics/btaa588
+Mukherjee, S., Stamatis, D., Bertsch, J., Ovchinnikova, G., Sundaramurthi, J. C.,
+Lee, J., et al. (2020). Genomes OnLine Database (GOLD) v.8: overview and
+updates. Nucleic Acids Res. 49, D723–D733. doi: 10.1093/nar/gkaa983
+Mulnaes, D., Porta, N., Clemens, R., Apanasenko, I., Reiners, J., Gremer, L., et al.
+(2020). TopModel: template-based protein structure prediction at low sequence
+identity using top-down consensus and deep neural networks. J. Chem. Theory
+Comput. 16, 1953–1967. doi: 10.1021/acs.jctc.9b00825
+Munoz, R., Rosselló-Móra, R., and Amann, R. (2016). Revised phylogeny of
+Bacteroidetes and proposal of sixteen new taxa and two new combinations
+including Rhodothermaeota phyl. nov. Syst. Appl. Microbiol. 39, 281–296. doi:
+10.1016/j.syapm.2016.04.004
+Notredame, C., Higgins, D. G., and Heringa, J. (2000). T-Coﬀee: a novel method
+for fast and accurate multiple sequence alignment. J. Mol. Biol. 302, 205–217.
+Numoto, N., Kamiya, N., Bekker, G.-J., Y amagami, Y., Inaba, S., Ishii, K., et al.
+(2018). Structural dynamics of the PET-degrading cutinase-like enzyme from
+Saccharomonospora viridis AHK190 in substrate-bound states elucidates the
+Ca2+-driven catalytic cycle. Biochemistry 57, 5289–5300. doi: 10.1021/acs.
+biochem.8b00624
+Ollis, D. L., Cheah, E., Cygler, M., Dijkstra, B., Frolow, F., Franken, S. M., et al.
+(1992). The alpha/beta hydrolase fold. Protein Eng. 5, 197–211.
+Pérez-García, P., Danso, D., Zhang, H., Chow, J., and Streit, W. R. (2021).
+Exploring the global metagenome for plastic-degrading enzymes. Methods
+Enzymol. 648, 137–157. doi: 10.1016/bs.mie.2020.12.022
+Ribitsch, D., Herrero Acero, E., Greimel, K., Dellacher, A., Zitzenbacher, S., Marold,
+A., et al. (2012). A new esterase from Thermobiﬁda halotolerans hydrolyses
+polyethylene terephthalate (PET) and polylactic acid (PLA). Polymers 4, 617–
+629. doi: 10.3390/polym4010617
+Ronkvist, ÅM., Xie, W., Lu, W., and Gross, R. A. (2009). Cutinase-catalyzed
+hydrolysis of poly(ethylene terephthalate). Macromolecules 42, 5128–5138.
+Sato, K., Naito, M., Yukitake, H., Hirakawa, H., Shoji, M., McBride, M. J., et al.
+(2010). A protein secretion system linked to bacteroidete gliding motility and
+pathogenesis. Proc. Natl. Acad. Sci. U.S.A. 107, 276–281. doi: 10.1073/pnas.
+0912010107
+Shoji, M., Sato, K., Yukitake, H., Kondo, Y., Narita, Y., Kadowaki, T., et al. (2011).
+Por secretion system-dependent secretion and glycosylation of Porphyromonas
+gingivalis hemin-binding protein 35. PLoS One 6:e21372. doi: 10.1371/journal.
+pone.0021372
+Son, H. F., Cho, I. J., Joo, S., Seo, H., Sagong, H.-Y., Choi, S. Y., et al. (2019).
+Rational protein engineering of thermo-stable PETase fromIdeonella sakaiensis
+for highly eﬃcient PET degradation. ACS Catal. 9, 3519–3526.
+Studier, F. W. (2005). Protein production by auto-induction in high-density
+shaking cultures. Protein Exp. Purif. 41, 207–234.
+Sulaiman, S., Y amato, S., Kanaya, E., Kim, J. J., Koga, Y., Takano, K., et al.
+(2012). Isolation of a novel cutinase homolog with polyethylene terephthalate-
+degrading activity from leaf-branch compost by using a metagenomic
+approach. Appl. Environ. Microbiol. 78, 1556–1562. doi: 10.1128/AEM.067
+25-11
+Sulaiman, S., You, D. J., Kanaya, E., Koga, Y., and Kanaya, S. (2014). Crystal
+structure and thermodynamic and kinetic stability of metagenome-
+derived LC-cutinase. Biochemistry 53, 1858–1869. doi: 10.1021/bi40
+1561p
+The UniProt Consortium (2017). UniProt: the universal protein knowledgebase.
+Nucleic Acids Res. 45, D158–D169.
+Thomas, F., Hehemann, J. H., Rebuﬀet, E., Czjzek, M., and Michel, G. (2011).
+Environmental and gut Bacteroidetes: the food connection. Front. Microbiol.
+2:16. doi: 10.3389/fmicb.2011.00093
+Wei, R., Oeser, T., and Zimmermann, W. (2014). Synthetic polyester-hydrolyzing
+enzymes from thermophilic actinomycetes. Adv. Appl. Microbiol. 89, 267–305.
+doi: 10.1016/B978-0-12-800259-9.00007-X
+Wei, R., and Zimmermann, W. (2017). Microbial enzymes for the recycling of
+recalcitrant petroleum-based plastics: how far are we? Microb. Biotechnol. 10,
+1308–1322. doi: 10.1111/1751-7915.12710
+Wexler, H. M. (2007). Bacteroides: the good, the bad, and the nitty-gritty. Clin.
+Microbiol. Rev. 20, 593–621. doi: 10.1128/CMR.00008-07
+Woyke, T., Chertkov, O., Lapidus, A., Nolan, M., Lucas, S., Del Rio, T. G.,
+et al. (2011). Complete genome sequence of the gliding freshwater bacterium
+Fluviicola taﬀensis type strain (RW262). Stand. Genomic Sci. 5, 21–29. doi:
+10.4056/sigs.2124912
+Wright, R. J., Bosch, R., Langille, M. G., Gibson, M. I., and Christie-Oleza,
+J. A. (2021). A multi-OMIC characterisation of biodegradation and microbial
+community succession within the PET plastisphere. Microbiome 9, 1–22. doi:
+10.1155/2021/6620574
+Yoshida, S., Hiraga, K., Takehana, T., Taniguchi, I., Y amaji, H., Maeda, Y., et al.
+(2016). A bacterium that degrades and assimilates poly(ethylene terephthalate).
+Science 351, 1196–1199. doi: 10.1126/science.aad6359
+Conﬂict of Interest: SH is a co-founder of Koonkie Inc., a bioinformatics
+consulting company that designs and provides scalable algorithmic and data
+analytics solutions in the cloud.
+The remaining authors declare that the research was conducted in the absence of
+any commercial or ﬁnancial relationships that could be construed as a potential
+conﬂict of interest.
+Publisher’s Note:All claims expressed in this article are solely those of the authors
+and do not necessarily represent those of their aﬃliated organizations, or those of
+the publisher, the editors and the reviewers. Any product that may be evaluated in
+this article, or claim that may be made by its manufacturer, is not guaranteed or
+endorsed by the publisher.
+Copyright © 2022 Zhang, Perez-Garcia, Dierkes, Applegate, Schumacher, Chibani,
+Sternagel, Preuss, Weigert, Schmeisser, Danso, Pleiss, Almeida, Höcker, Hallam,
+Schmitz, Smits, Chow and Streit. This is an open-access article distributed under the
+terms of the Creative Commons Attribution License (CC BY). The use, distribution
+or reproduction in other forums is permitted, provided the original author(s) and
+the copyright owner(s) are credited and that the original publication in this journal
+is cited, in accordance with accepted academic practice. No use, distribution or
+reproduction is permitted which does not comply with these terms.
+Frontiers in Microbiology | www.frontiersin.org 15 January 2022 | Volume 12 | Article 803896

@@ -1,0 +1,1526 @@
+Kimetal. BMCBioinformatics           (2020) 21:13 
+https://doi.org/10.1186/s12859-019-3328-x
+METHODOLOGY ARTICLE OpenAccess
+Improvingtheorganizationand
+interactivityofmetabolicpathfindingwith
+precomputedpathways
+SarahM.Kim 1,MatthewI.Peña 2,MarkMoll 1* ,GeorgeN.Bennett 2 andLydiaE.Kavraki 1
+Abstract
+Background: Therapid growth ofavailableknowledgeonmetabolicprocessesacrossthousandsofspecies
+continuestoexpandthepossibilitiesofproducingchemicalsbycombiningpathwaysfoundindifferentspecies.
+Severalcomputationalsearchalgorithmshavebeendevelopedforautomatingtheidentificationofpossible
+heterologouspathways;however,thesesearchesmayreturnthousandsofpathwayresults.Althoughthelarge
+numberofresultsareinpartduetothelargenumberofpossiblecompoundsandreactions,asubsetofcorereaction
+modulesisrepeatedlyobservedinpathwayresultsacrossmultiplesearches,suggestingthatsomesubpathsbetween
+commoncompoundsweremoreconsistentlyexploredthanothers.
+Toreducetheresourcesspentonsearchingthesamemetabolicspace,anewmeta-algorithmformetabolic
+pathfinding,HubPathwaysearchwithAtomTracking(HPAT),wasdevelopedtotakeadvantageofaprecomputed
+networkofsubpathmodules.Toinvestigatetheefficacyofthismethod,wecreatedatabledescribinganetworkof
+commonhubmetabolitesandhowtheyarebiochemicallyconnectedandonlyoffloadedsearchestoandfromthis
+hubnetworkontoaninteractivewebservercapableofvisualizingtheresultingpathways.
+Results: Atestsetofnineteenknownpathwaystakenfromliteratureandmetabolicdatabaseswereusedtoevaluate
+ifHPATwascapableofidentifyingknownpathways.HPATfoundtheexactpathwayforelevenofthenineteentest
+casesusingadiversesetofprecomputedsubpaths,whereasacomparablepathfindingsearchalgorithmthatdoes
+notuseprecomputedsubpathsfoundonlysevenofthenineteentestcases.ThecapabilityofHPATtofindnovel
+pathwayswasdemonstratedbyitsabilitytoidentifynovel3-hydroxypropanoate(3-HP)synthesispathways.Asfor
+pathwayvisualization,thenewinteractivepathwayfiltersenableareductionofthenumberofdisplayedpathways
+fromhundredsdowntolessthantenpathwaysinseveraltestcases,illustratingtheirutilityinreducingtheamountof
+presentedinformationwhileretainingpathwaysofinterest.
+Conclusions: Thisworkpresentsthefirststepinincorporatingaprecomputedsubpathnetworkintometabolic
+pathfindinganddemonstrateshowthisleadstoaconcise,interactivevisualizationofpathwayresults.Themodular
+natureofmetabolicpathwaysisexploitedtofacilitateefficientdiscoveryofalternatepathways.
+Keywords: Metabolicpathfinding,Precomputation,Atommapping,Graphsearch
+Background
+Identifying novel metabolic pathways for synthesizing
+valuable products is an important first step in the field
+of metabolic engineering, where organisms are geneti-
+cally manipulated to serve as cellular factories for pro-
+ducing valuable chemicals. Recent advances in the field
+*Correspondence:mmoll@rice.edu
+1DepartmentofComputerScience,RiceUniversity,Houston,Texas,USA
+Fulllistofauthorinformationisavailableattheendofthearticle
+of metabolic engineering have proven successful in opti-
+mizing the production of biofuels [1, 2], pharmaceuticals
+[3–6],andchemicalprecursors[ 7].
+Identifying the metabolic pathways used to synthe-
+size these products has traditionally required an expert
+to search through metabolic databases and literature
+for promising enzymatic reactions. However, the rapid
+expansion of available metabolic information stored
+acrossmanyonlinedatabaseshasmadeitincreasinglydif-
+ficult to manually survey all possibilities and resources.
+©TheAuthor(s).2020 OpenAccess ThisarticleisdistributedunderthetermsoftheCreativeCommonsAttribution4.0
+InternationalLicense( http://creativecommons.org/licenses/by/4.0/),whichpermitsunrestricteduse,distribution,and
+reproductioninanymedium,providedyougiveappropriatecredittotheoriginalauthor(s)andthesource,providealinktothe
+CreativeCommonslicense,andindicateifchangesweremade. TheCreativeCommonsPublicDomainDedicationwaiver
+(http://creativecommons.org/publicdomain/zero/1.0/)appliestothedatamadeavailableinthisarticle,unlessotherwisestated.
+Kimetal. BMCBioinformatics           (2020) 21:13 Page2of22
+To address the need for faster and broader search, several
+computational approaches have been developed to iden-
+tify promising pathways, resulting in the identification of
+novelpathwayslikethesynthesisof1,4-butanediol(BDO)
+[8], a high-demand commercial chemical precursor that
+hadamarketofonebilliontonsannuallyin2013[ 7].
+One of the universal challenges of automated pathfind-
+ingmethodsisthetrade-offbetweenfindingasetofpath-
+waysthatpresentsdiversealternativesforsynthesizingthe
+targetproduct,whilealsonotoverwhelmingtheuserwith
+too many options. Introducing strict constraints during
+the search can limit the diversity of pathways found, but
+too few constraints will result in a large number of repet-
+itive or biologically infeasible pathways. How the results
+arepresentedandvisualizedalsoplaysasignificantrolein
+this trade-off, as a means of visualization can enable the
+usertoeasilysiftthroughalargenumberofresults.
+This paper introduces a meta-algorithm designed for
+metabolic pathfinding, which could be generally applied
+to other graph-based search approaches giving rise to a
+large number of unique pathways. We demonstrate that
+our meta-algorithm and interactive visualization can be
+coupled allowing for post-search filtering that provides
+the user with information about a manageable number of
+pathways instead of listing all generated pathways, which
+requiressignificantmanualinspection.
+Themeta-algorithmproposedinthispaperisbuiltupon
+graph-based metabolic pathfinding algorithms, such as
+[9–12].Graph-basedmethodsfindpathwaysbasedonthe
+connectivity of compounds in a metabolic network and
+also lend themselves well to scaling to large metabolic
+networks and finding pathways that incorporate enzymes
+from multiple organisms. However, the flexibility of the
+graph-based search approach also results in finding thou-
+sands of biologically infeasible pathways. This paper con-
+tributesanewalgorithmformetabolicpathfinding,which
+besides its good performance, facilitates interpretation of
+theresults.
+Existing graph-based search approaches have utilized a
+combination of heuristics and cutoffs to limit the num-
+b e ro fi n f e a s i b l ep a t h w a y s[13]. One of the most widely
+used heuristics is the conservation of chemical struc-
+ture from the start to the target compound. Pathway
+Hunter Tool [14], MetabolicTinker [15], and GEM-Path
+[16] incorporate chemical similarity measures as heuris-
+tics to guide the metabolic search. Other methods track
+individual atoms, or groups of connected atoms in the
+case of AGPathFinder [17], from the start to target com-
+pound and aim to conserve a minimum number of
+atoms throughout the pathway [9, 12, 18]o rm a x i m i z e
+the number of atoms conserved [10, 19]. Information
+on enzymatic reactions, like thermodynamic favorability
+(/Delta1G) [15, 17, 20] and enzyme efficiency and promiscuity
+[20, 21], is also used to guide the search and rank
+pathways. It is important to note that many of these
+pathfindingmethodsuseacombinationofseveralheuris-
+tics. For example, in addition to factoring in chemical
+similarity and thermodynamic favorability, XTMS [22]
+incorporatesmetabolicexchangeinformation,compound
+toxicity scores, and estimated maximum pathway yield
+in ranking pathways. However, even when using these
+heuristics, pathfinding searches can return thousands of
+results, which are either listed sequentially in full or lim-
+ited by a cutoff of the top x pathways. Though users
+can adjust the search by changing input parameters (i.e.,
+changing the minimum number of atoms to conserved),
+userinteractionwiththeresultsthemselvesislimited.
+Across existing pathfinding methods, pathway results
+are most commonly presented in a ranked list [9, 19],
+whichrequiresuserstoevaluateeachpathwayresultindi-
+vidually. Instead of a list, Metabolic Tinker [15]p r e s e n t s
+an overview of pathways by providing a static output
+graphthatrepresentsacombinationofallpathwayresults.
+Pathway results that share all the same compound inter-
+mediates are grouped together and considered the same
+pathway. However, this organization does not help group
+similar pathways together if the pathways do not go
+through the same compound intermediates. Also, the
+graphproducedbyMetabolicTinkerisstaticanddoesnot
+come with any tools for users to alter or explore the out-
+put graph after the search has been completed. For more
+generalexplorationofthemetabolicspacearoundatarget
+compound,bothBioSynther[ 23]andA TLAS[24]provide
+views that display all compounds that are a given number
+of reaction steps away from a given compound. How-
+ever, this visualization becomes exponentially crowded
+with increasing step size, considering there are no ways
+for the user to filter pathways. Other tools incorporate
+userinteractionwithexplorationofpathways.TheMRSD
+tool designed by Xia et al. [21] and BioSynther [23]p r o -
+vide views where the user can specify a compound, then
+interactively select intermediate compounds step by step,
+manuallyconstructingapathway.Thisworkswellforfind-
+ingsmallvariantsofapathwayofinterestoriftheuserhas
+a specific pathway in mind. However, in the case where
+the user is more interested in exploring all possible path-
+ways for synthesizing a target compound, the interactive
+step-by-stepapproachtoexploringpossiblepathwayscan
+be time consuming and may not provide a good overview
+of all the possibilities, especially if there are many diverse
+routestoexplore.
+One aspect that is not addressed by previous search
+methodsistheidentificationofcommon segmentsacross
+different search results. Many pathways of interest in
+metabolic engineering involve synthesis of a more com-
+plex target compound (e.g., artemisinin) from relatively
+simple compounds like glucose. In several of these
+synthesis pathways, simple compounds must first be
+Kimetal. BMCBioinformatics           (2020) 21:13 Page3of22
+converted into common intermediate precursor com-
+pounds before being synthesized into the final target
+compound. The modularity of metabolic networks has
+been observed by previous work [25–28], and common
+reaction modules across known pathways have even been
+identified by [29]. However, these reaction modules are
+based on existing natural pathways and do not neces-
+sarily generalize to the heterologous pathways found by
+metabolic pathfinding algorithms. We have observed that
+thesubpathsbetweencommonprecursorcompoundsare
+often shared across several different heterologous path-
+ways, acting as modules that repeatedly appear across
+pathways.Giventhatthesecommonsubpathmodulescan
+be identified without extensive expert knowledge, pre-
+computingthesemodulestolookupduringthesearchcan
+keepmetabolicpathfindingalgorithmsfrom havingtore-
+explore the same metabolic space in future searches and
+aidwithcondensingthevisualizationoftheresults.
+Contributions
+This paper introduces and demonstrates an initial
+approach to take advantage of short series of connecting
+reactions among common compounds across metabolic
+pathways by incorporating precomputed subpaths into
+graph-based metabolic pathfinding search algorithms. To
+our knowledge, no previous approaches have incorpo-
+rated the use of precomputed pathways. In addition to
+their use as look-up modules in pathway searches, pre-
+computed pathways can help to organize and quickly
+visualize pathway results, enabling a more interactive
+userexperience.Thoughinteractivegraphvisualizationof
+known pathways has been explored [30–32] and included
+in recent pathway tools like PyPathway [33], this visual-
+ization has not yet been applied to metabolic pathfinding
+results. This paper also introduces the use of post-search
+slidingfilterswhichenabletheusertoevaluatethevalidity
+of result pathways based on path length, carbons con-
+served, and ATP used. The introduction of post-search
+filtersprovideamoreinteractiveexperienceforusersthat
+has not been provided by previous metabolic pathfinding
+methods,enablinguserstoselectpathwaysbasedontheir
+own interests and encouraging broader exploration of the
+searchresultswithoutoverwhelmingtheuser.
+Results
+The Hub Pathway Search with Atom Tracking (HPAT)
+was developed as a first step to utilizing precomputed
+subpaths in the metabolic pathfinding search (see Fig.1
+for a visual overview of the HPAT meta-algorithm). First,
+all subpaths between a set of highly connected hub com-
+poundsareprecomputedandstoredinalook-uptable.
+Then, given a start compound and a target com-
+pound, HPAT finds pathways converting the start to the
+target compound in three search steps: (1) a no-hub
+pathway search, where all hub compounds are excluded
+from the searched metabolic network, (2) a one hub
+pathway search, where all but one hub compound are
+excluded, and (3) the hub pathway search, which utilizes
+the precomputed subpaths.
+In this study, the linear atom-tracking search algorithm
+LPAT [9] was used to precompute subpaths between hub
+compounds, find pathways containing one or less hub
+compounds (Fig.1a-b), and find the segments of the hub
+pathways connecting the start compound to the first hub
+compound and the last hub compound to the target com-
+pound (Fig.1c). Only the hub compounds that have the
+most similar chemical structures to the start and target
+compounds are included in the search as the first and
+last hub compounds respectively (See the “First and Last
+HubsSelection”subsectionin“ Methods”sectionformore
+details).
+Throughout each step of the hub pathway search, car-
+bonatomsaretrackedfromthestartcompoundtothetar-
+get compound to insure that carbon atoms from the start
+compound are being incorporated into the target com-
+pound. Conserving carbon atoms throughout the path-
+way prevents the search from finding infeasible pathways
+thatgothroughcurrencymetabolitesthatonlycontribute
+energyorelectronbalancetothereaction.
+A hub pathway search tool will ideally find biochemi-
+callyfeasiblepathwaysthatdonotalreadyoccurnaturally
+inexistingorganisms.ThustheperformanceoftheHPAT
+meta-algorithm was evaluated based on its ability (1) to
+find a diverse set of known biochemically feasible path-
+ways documented in the literature, and (2) to find novel
+pathways that do not occur in existing organisms and
+have the potential to be used for metabolic engineering
+applications.
+This section then describes how pathways found by
+HPAT are visualized on the Hub Pathways Webserver,
+and how users can utilize interactive filtering options to
+selectivelyreducethenumberofresultsdisplayed.
+RecoveryofKnownPathwaysbyHPAT
+The quality of pathways found by HPAT were evalu-
+ated by comparing the HPAT results to nineteen known
+pathways taken from the literature and KEGG database
+[34, 35]. The final products of the pathways were chosen
+because of their importance as precursors to the syn-
+thesis of industrial or medicinal compounds. The start
+and target compounds of the test set pathways varied
+in size and complexity. The smallest compounds (pyru-
+vate, 3-hydroxypropanoate, and 1,3-propanediol) only
+contained three carbon atoms, whereas the largest com-
+pound (stachyose) contained twenty four carbon atoms
+and several ring structures (See Additional file1). The
+test set pathways also varied in path length, ranging from
+four to fifteen enzymatic reactions. Five variants of the
+Kimetal. BMCBioinformatics           (2020) 21:13 Page4of22
+Fig.1 Overviewofhubsearchprocess.Pathwayswithnohubs( a)andonehub( b)arefoundusinganexistinglinearatom-trackinggraph-based
+pathwaysearch(LPAT[ 9])whileexcludinghubcompoundsfromthemetabolicnetwork.Theprocessforfindingpathwayswithatleasttwohubs
+(c)consistsof(1)thestartcompoundto“first”hubcompoundssearch,(2)the“first”hubstothe“last”hubssearchusingtheprecomputednetwork,
+and(3)the“last”hubstothetargetcompoundsearch.The“first”hubsand“last”hubsareidentifiedbyusingachemicalsimilarityheuristic
+(SIMCOMP[50])tofindthehubcompoundsthathavethemostsimilarchemicalstructurestothestartcompoundandtargetcompound
+respectively.Thefirstandlasthubcompoundsareidentifiedbeforethehubtohubsearchisperformed.Forallpathwaysidentifiedbythehub
+pathwaysearch,atleasttwocarbonatomsareconservedfromthestartcompoundtothetargetcompoundtoavoidfindingpathwaysthatdonot
+utilizethestartcompoundtosynthesizethetargetcompound
+lysine synthesis pathway and seven variants of the 3-
+hydroxypropanoate (3-HP) synthesis pathway were also
+includedintheknownpathwaysettotestifHPAT’scould
+findadiverserangeofresults.
+To evaluate the HPAT meta-algorithm’s ability to find
+the known pathways, the F1 score [36] was calculated for
+each result pathway based on its reactions. Reactions in
+the result pathway that are also present in the known
+pathway are counted as true positives (TP), whereas reac-
+tions in the result pathway that are not present in the
+known pathway are counted as false positives (FP). Reac-
+tions that are in the known pathway but not the result
+pathway are counted as false negatives (FN). The F 1
+score is calculated as F1 =2 ×(P×R)/(P+R), where P =
+TP/(TP+FP) is the precision and R = TP/(TP+FN) is the
+recall.
+Kimetal. BMCBioinformatics           (2020) 21:13 Page5of22
+The highest F1 scores of all pathways found by HPAT
+compared to each known pathway is reported in Table1.
+This differs from previous studies, where only the top
+handful of pathways, determined by ranking heuristics
+like path length and thermodynamics, are compared to
+the known pathway. However, unlike previous studies, it
+is assumed that the user of the HPAT search can utilize
+interactive post-search filtering tools to narrow down the
+results to a manageable set of pathways, such that the
+ranking of the results does not have a significant impact
+on which pathways the user sees. For sake of reference,
+the F1 scores were also calculated for the closest pathway
+(1) among the top twenty pathway results and (2) among
+all the results obtained from a LPAT search using com-
+parable input parameters (see Additional file5 for values
+ofLPATinputparameters).TheF 1 scoreswerecalculated
+for the top twenty LPAT results to evaluate if a user could
+quickly find the canonical pathway in the top few LPAT
+resultswithoututilizingtheinteractivefilteringtools.
+The HPAT meta-algorithm was able to find the exact
+canonical pathway for eleven of the nineteen test cases,
+including all five variants of the lysine synthesis path-
+way. Meanwhile, the LPAT algorithm was able to find the
+exact canonical pathway for only seven of the nineteen
+test cases and found only one of the five canonical lysine
+synthesis pathways. The reason HPAT could outperform
+LPAT in these cases is that the maximum search depth
+usedforfindingtheprecomputedhubpaths(100,000)was
+larger than the depth used for the HPAT hub search and
+LPAT search (10,000, see Additional files3,4and5). This
+enables more diverse subpaths to be precomputed and
+then later looked-up during the HPAT search.
+Evaluating just the top twenty LPAT results (instead
+of all LPAT results) yielded lower F1 scores for four
+of the pathway test cases (dopamine, 3-HP III, 3-
+HP VII, and 1,3-propanediol). Though the known 1,3-
+propanediol synthesis pathway was found by LPAT, it
+was not contained in the top twenty LPAT results. This
+Table1 F1 scoresoftheclosestpathwayfoundbytheHPATmeta-algorithm(usesprecomputedsubpaths)andLPATalgorithm(does
+notuseprecomputedsubpaths)comparedtoknownpathways,whereanF 1 scoreofoneindicatesthattheHPATsearchfoundthe
+exactknownpathway
+F1 Score,LPAT F 1 Score,LPAT
+Knownpathway F 1 Score,HPAT (Top20Paths) (AllPaths)
+Pyruvate→ LysineI 1.00 0.70 0.70
+Pyruvate→ LysineII 1.00 0.70 0.70
+Pyruvate→ LysineIII 1.00 1.00 1.00
+Pyruvate→ LysineIV 1.00 0.78 0.78
+Pyruvate→ LysineV 1.00 0 0
+Glutamate→ Proline 1.00 1.00 1.00
+UDP-Galactose→ Stachyose 1.00 1.00 1.00
+alpha-D-glucose→ Phenylpyruvate 0.71 + 0.71 0.71
+alpha-D-glucose→ Dopamine 0.59 † 0.42 0.76
+*Pyruvate→ 3-HP,I 1.00 1.00 1.00
+*Pyruvate→ 3-HP,II 0.50 † 0.33 0.33
+*Pyruvate→ 3-HP,III 0.60 † 0.38 0.78
+*Pyruvate→ 3-HP,IV 0.42 † 0.71 0.71
+*Pyruvate→ 3-HP,V 0.36 † 0.40 0.40
+*Pyruvate→ 3-HP,VI 0.36 # 0.36 0.36
+*Pyruvate→ 3-HP,VII 0.53 # 0.36 0.50
+Glucose→ Glucaricacid 1.00 1.00 1.00
+alpha-D-glucose→ 1,3-propanediol 1.00 0.67 1.00
+Tryptophan→ Melatonin 1.00 1.00 1.00
+TheclosertheF 1 scoreistoone,themoresimilarthefoundpathway’sreactionsaretothatoftheknownpathway.ThefirstcolumnofF 1 scoresforLPATiscalculatedbased
+ontheclosestpathwaywithinthetoptwentypathwaysfoundbyLPAT,whilethesecondcolumnofF 1 scoresforLPATiscalculatedbasedontheclosestpathwayforallLPAT
+pathwayresults
+*Pathwayisexperimentallyvalidated;doesnotexistnaturallyinorganisms
+#Requiresanengineered,non-natural2,3-alanineaminomutase
++Knownpathwayconserveslessthantwocarbons
+†Hubincanonicalpathwayclosesttostart/targetnotamongclosesthubs
+Kimetal. BMCBioinformatics           (2020) 21:13 Page6of22
+example illustrates how HPAT with interactive filtering
+can often enable users to find known pathways as accu-
+rately as LPAT without having to look through as much
+information.
+For eight of the nineteen test cases, the HPAT meta-
+algorithmdidnotfindtheknownpathway.Therearethree
+main reasons for this: (1) the known pathway requires
+an engineered, non-natural enzyme, (2) the known path-
+way does not conserve at least two carbons, and (2) the
+f i r s to rl a s th u bc o m p o u n d ( s )i nt h ek n o w np a t h w a yw e r e
+not identified as the closest hubs to the start or tar-
+get compound by the chemical similarity heuristic (See
+Table1).
+For the first case, the reaction catalyzed by the engi-
+neered enzyme in these known pathways was not present
+intheKEGGdatabase,soitwasnotpossiblefortheHPAT
+search to find these pathways. For the second case, the
+selected input parameters for both the HPAT and LPAT
+searches impose the restriction that all result pathways
+must conserve a minimum of two carbons atoms from
+the start to the target compound. Though conserving
+one carbon atom from start to target compound pre-
+vents the search from finding pathways through currency
+metabolites that are not used to build up the target com-
+pound, conserving a single carbon atom does not prevent
+the search from finding nonsensical pathways that break
+down the start compound to a single carbon compound
+(i.e., CO2), only to build back up to the target compound.
+The two carbon atom limit was chosen to reduce the
+number of these particular nonsensical pathways. How-
+ever, if the known pathway only conserves one carbon
+atom from start to target compounds, the pathway will
+not be found by either HPAT or LPAT due to this two
+carbonatomlimitsetting.Inthesecases,theHPATmeta-
+algorithm performed about the same or slightly better
+than the LPAT algorithm in finding pathways similar to
+the known pathway.
+For the third case, whenever the start or target com-
+poundarenothubcompounds,theHPATsearchwillonly
+explore pathways that go through the first and/or last hub
+compounds identified by a chemical similarity heuristic
+(see “Methods” section for details), so if the first or last
+hub compound of the known pathway is not one of the
+most similar compounds, the HPAT search will not find
+the pathway. In these cases, the HPAT meta-algorithm
+tended to perform worse than LPAT in finding pathways
+similartotheknownpathway.
+IdentificationofnovelpathwaysbyHPAT
+Biochemical repositories, such as KEGG, are curated
+to maintain completeness and accuracy of standard
+metabolicreactions,butreactionsforenzymeswitheither
+engineered or off-target function are often not included.
+This is an inherent constraint on the discovery of novel
+pathways. Despite this limitation, novel approaches and
+usefulpathwayscanbeuncoveredusingexploratorytools
+such as the one described in this paper that can fil-
+ter results to favor carbon conservation from start to
+target compound or utilize enzymes drawn from dis-
+parate species to form heterologous pathways. Here, we
+look more closely at 3-hydroxypropionic acid (3-HP), the
+biosynthesis of which is characterized by multiple stan-
+dardandnonstandardpathways.
+3-HP, a compound of interest for numerous metabolic
+engineering projects, has had at least seven biosyn-
+thesis pathways starting from glucose that have been
+patented and evaluated to determine if they are "biolog-
+ically attractive," meaning the pathways are thermody-
+namically favorable, maintain redox balance, and require
+minimal ATP utilization [37–42]. Pyruvate is a sensible
+starting point for pathfinding the synthesis of many com-
+pounds, including 3-HP, because it is the natural product
+of glycolysis, a central pathway of organisms consum-
+ing glucose as a carbon source. 3-HP is a good test
+of the hub search because of the variety of nonstan-
+dard biosynthesis pathways that include hub compound
+intermediates.
+In Table 1,w ec a ns e et h a to ft h es e v e np r e v i o u s l y
+defined pathways only one is recovered in its entirety
+independentoftheselectedhubs:PathwayI,whichpasses
+through lactate. Two additional pathways are recovered
+f o rs p e c i f i ch u bs e t s :P a t h w a y sI I Ia n dI V ,w h i c hb o t h
+include the carboxylation of pyruvate to oxaloacetate but
+differ in the conversion ofβ-alanine to 3-oxopropanoate.
+Of the remaining four pathways, only partial coverage is
+obtained either from overlap with Pathways I, III, and
+IV or because individual reaction steps are present in
+the cumulative pathfinding results but not in a reaction
+sequence matching the illustrated pathways. Pathways VI
+and VII cannot be completed because the conversion
+of α-alanine to β-alanine requires an engineered, non-
+natural 2,3-alanine aminomutase, which is absent from
+KEGG[ 38].
+Of the remaining pathfinding results, the majority are
+alternative, feasible paths that have been documented
+in KEGG between the illustrated intermediates. These
+alternative pathways are valuable because they represent
+points where potentially more carbons can be fed into
+a pathway of interest. An example of this is seen for
+intermediates of the TCA cycle, succinate, fumarate, and
+malate, which can be fed into the oxaloacetate and aspar-
+t a t en o d e so fp a t h w a y sI I Ia n dI V( F i g .2b). Similarly, we
+can elaborate on pathway II by adding a parallel pathway
+of pyruvate to acetate to malonate to 3-oxopropanoate
+(also referred to as malonate semialdehyde). Between
+thesetwoparallelpathways,acetyl-CoAandmalonyl-CoA
+can each be converted to acetate and malonate, respec-
+tively(Fig. 2c).
+Kimetal. BMCBioinformatics           (2020) 21:13 Page7of22
+Fig.2 HPATcanrecoverthreeofsevenpathwayspatentedforuseintheproductionof3-hydroxypropionicacid(3-HP)startingfrompyruvate.The
+sevenpathwaysarenumberedaccordingtoJiangetal.[ 41].Intermediatesthatareunderlinedrepresenthubcompoundsfromthe50in-degree(I)
+hubtable(seeTable 2fordetails).Arrowsrepresentreactionslinkingintermediateswherethecolorofthearrowindicatesiftheyarefoundbythe
+HPATsearchwhereatleastonecarbonisconserved.SolidgreenarrowsrepresentreactionsthatwerefoundbytheHPATsearch,solidorange
+arrowsrepresentreactionsthatwerenotfoundinthesearch,dashedarrowsarerequiremultiplereactions,andanXmarksthosereactionsthatare
+absentfromKEGGandcannotbefoundbythesearch,greyarrowsrepresentalternativereactionsfoundbythesearchbutnotassociatedwiththe
+sevenpathways,andthegreenhighlightrepresentsentirepathwaysbetweenpyruvateand3-HPthatarerecovered. aReactionsidentifiedinthe
+HPATsearchconnectingTCAcycleintermediates,succinate,malate,andfumarate,toPathwaysIIIandIV( b)andviableacetateandmalonateto
+PathwayII( c)
+Thenewvisualizationsystemmakesiteasiertoidentify
+connections between common metabolic pathways and
+biosyntheticpathwaysofinterest,asdescribedinthenext
+section.
+Visualizationofpathwayresults
+The Hub Pathways Webserver ( http://hpat.kavrakilab.
+org) was developed to execute user pathway searches
+using LPAT and HPAT. Once a search query has been
+Kimetal. BMCBioinformatics           (2020) 21:13 Page8of22
+completed, the user can view the pathway results in the
+webserver’spathwayvisualizationinterface.
+The visualization interface consists of a main panel to
+display the pathway search results and a fixed left panel
+for displaying information on the compounds and reac-
+tions contained in the pathway results, as well as filtering
+options that can be applied to the results. Pathway results
+arevisualizedasasinglecombinedgraph,wherethenodes
+represent compounds and the edges represent enzymatic
+reactions. The starting compound node is highlighted in
+greenandthetargetcompoundnodeishighlightedinred.
+Eachcompoundnodecanbeclickedtodisplaythecom-
+monnameandchemicalstructureofthecompoundatthe
+topoftheleftpanel.Inadditiontothevisualizationgraph,
+themainpaneldisplaysthetotalnumberofpathwaysthat
+are currently being visualized by the graph in the top left-
+hand corner. Note that for HPAT pathways, a pathway
+result containing precomputed hub path(s) is counted as
+one pathway when calculating the displayed total number
+of pathways, instead of counting all possible variations of
+the hub path(s) as separate pathways.
+Combining all results into a single graph eliminates the
+redundancyofcommonpathsegmentsthatappearacross
+multiple pathway results, which provides a more con-
+densed summary of result pathways compared to a list
+of individual pathways (see Fig.3 as an example of how
+ninety six pathway results can be displayed in a single
+graph).
+Hubpathwayvisualization
+For HPAT results, the details of hub-to-hub pathways are
+abstracted such that there is a single dashed arrow to
+indicate that one or more subpaths exist between two
+hubcompounds. Hidingthedetailsofthesecommonhub
+pathwayssimplifiestheoverallpathwayview,allowingthe
+user to get a clearer idea of which hub compounds are
+used as intermediates by the found pathways. Though all
+compounds and reactions between hub compounds are
+initially hidden from view, the user may click any dashed
+arrow between a pair of hubs to switch to a more detailed
+view of all the possible subpath connections between the
+hub pair (See Fig.4).
+Filteringofpathways
+Since pathway searches may return tens of thousands of
+results, user are provided the option on the left panel
+Fig.3 VisualizationofLPATpathwayresultsfromglutamate(C00025,greennode)toproline(C00148,rednode).Compoundsinthecanonical
+prolinesynthesispathwayarehighlightedinblue.Thearrowsoftheedgesconnectingthecompoundnodesindicatethedirectionalityofthe
+reactions,wheredouble-sidedarrowsindicatethereactionisreversible.Thetotalnumberofpathways(96paths)inthegraphisindicatedinthe
+upperleftcorneroftheinterfacedisplay
+Kimetal. BMCBioinformatics           (2020) 21:13 Page9of22
+Fig.4 Visualizationofpathwayresultsforahubsearchfromglutamate(C00025)toproline(C00148). aTheinitialvisualizationabstractsthe
+subpathsbetweenseveralhubpairsasadottedarrow,includingthesubpathsfrom2-oxoglutarate(C00026)tosuccinate(C00042),highlightedby
+theredbox. bClickingonthedottededgebetweenC00026andC00042inview( a)displaysallthesubpathsbetweenthehubpairasasingle
+graph,wherenodesrepresentcompoundsandedgesrepresentenzymaticreactions
+o ft h ev i s u a l i z a t i o ni n t e r f a c et of i l t e rr e s u l t sb yc o m -
+pounds, path length, carbons conserved, and ATP usage
+(See Fig. 5). Users can also interact directly with the
+visualization graph by right clicking compounds to filter
+pathways containing the right-clicked compound. These
+filteroptionsallowtheusertoquicklyremoveorhighlight
+pathways,narrowingdownthenumberofresultstheuser
+must view at once.
+Compounds
+Using the compounds filter, the user can specify com-
+pounds that they would like to exclude from or include
+in all displayed pathway results (Fig.5). Users can also
+right click compound nodes in the visualization graph
+and choose to exclude or only include all pathways that
+contain that compound. To locate compounds in the
+visualization graph by their common names, the user can
+use the compound selection bar to highlight the com-
+poundsinthegraph(Fig. 6).
+Novel pathways that were found by the search can be
+identified by excluding result pathways that contain spec-
+ified compounds or by only including result pathways
+that go through specific compounds (See Fig.7 for an
+examplewith3-HPsearchresults).Thisprovidestheuser
+an option to quickly remove pathways with features that
+arenotinterestingtothemwithouthavingtolookateach
+pathway individually. The user can also switch between
+different compound filters without having to re-run the
+search.
+Interactivesliders
+Inadditiontothecompoundfilter,theuseralsohasaccess
+to three interactive sliders to filter pathways by (1) max-
+imum path length, defined as the number of reactions
+included in the pathway, (2) minimum number of car-
+bon atoms conserved between the start compound and
+the target compound, and (3) the maximum net num-
+ber of ATP consumed throughout the pathway (Fig.5).
+Path length and atom tracking have been used by several
+pathfinding approaches as a heuristic to find biologically
+feasible pathways. The default maximum path length is
+set to the minimum path length found in the results to
+prevent cases where an overwhelming number of path-
+ways is initially displayed to the user. The default min-
+imum carbons conserved is initially set to two carbons,
+since this filters out inefficient pathways that may break
+Kimetal. BMCBioinformatics           (2020) 21:13 Page10of22
+Fig.5 Filteringoptionsforpathwayresults.Ascreenshotoffilter
+optionsthatcanbefoundintheleftcolumnofthewebserver’s
+pathwayvisualizationinterface.Userscan(1)excludepathways
+containingspecificcompoundsandreactionsbyspecifyingtheir
+KEGGids,(2)onlyincludepathwayscontainingspecificcompounds
+andreactionsbyspecifyingtheirKEGGids,(3)excludepathwayswith
+apathlengthlongerthanagivennumberofreactions,(4)exclude
+pathwaysthatconservelessthanagivennumberofcarbonatoms,
+and(5)excludepathwaysthatproduceless/consumemorethana
+givennumberofATPs
+down the starting compound to single carbon compound
+intermediates (e.g., carbon dioxide) before building back
+up to the target compound.
+PathwaysthatrequirelessATP(energy)tendtobemore
+efficient and preferred in metabolic engineering, so the
+ability to filter pathways by ATP can narrow down the
+results based on energy efficiency. Unlike the previous
+two sliders, the ATP usage slider includes both positive
+and negative integers. Selecting a positive valuei,f i l t e r s
+out pathways that produce less than a net amount ofi
+ATP molecules. Selecting a negative value−i,f i l t e r so u t
+pathways that consume more than a net amount ofi ATP
+molecules. The default value for the ATP usage slider
+is−1, meaning that all pathways that consume more than
+a net amount of one ATP molecule will be filtered from
+theresults.
+Usingthethreesliderscansignificantlyreducethenum-
+ber of pathways displayed to the user. In some cases, the
+known pathways are captured at the extremes of the fil-
+ters.Forexample,theknownstachyosesynthesispathway
+can be recovered by sliding the path length filter to the
+minimum path length of three. However, aggressively fil-
+tering can exclude known pathways, such as the case for
+known lysine pathways (Fig.8). This example illustrates
+that filters may need to be adjusted by the user to identify
+all interesting pathways. Using interactive filtering, users
+can view a manageable subset of pathways that match
+theircriteriaforidentifyingfeasiblepathways.
+Hubtablesizeandselection
+The results reported so far were produced using the hub
+table constructed using fifty hub compound selected by
+out-degree, listed as the 50 (O) hub table in Table2.T o
+e n s u r et h eh u bt a b l es i z ea n ds e l e c t i o no fh u b su s e df o r
+this study were reasonable and to observe how changes
+to the selected hub compounds affected pathway results,
+hub tables of varying sizes (20, 50, and 80 hubs) and
+varying hub selection criteria were comparatively eval-
+uated (See Table2). Three of the hub selection criteria
+tested were based on the compound’s connectivity in the
+metabolic network. Compounds could be selected by (1)
+largest in-degree, or how many reactions produced the
+given compound as a product, (2) largest out-degree, or
+how many reactions used the given compound as a reac-
+tant, or (3) largest sum of in-degree and out-degree. Two
+random hub selections of fifty compounds and the hub
+compoundsselectedbyArakietal.[ 43]werealsoincluded
+for the sake of comparison with the hub selections based
+onconnectivity.
+The overlap of the different hub compound selections
+usedtoconstructthesehubtablesareillustratedinFigs. 9
+and 10. All hub tables had some overlap in hub com-
+poundswiththeothertables.Thirtyeighthubcompounds
+are shared between the top 50 out-degree (O) hub table
+and 139 (A) hub table. The top 50 in-degree (I) hub
+table and the 50 (O) hub table share twenty one hub
+compounds. All hub compounds in the top 50 combined
+in-degree and out-degree (IO) hub table are contained
+within eitherthe I table orO tableand contains about the
+samenumberofhubcompoundsfrombothtables.
+Thetwohubtablesconstructedfromrandomlyselected
+hub compounds shared no overlap with each other. The
+50 (R1) table has one hub (C00235) that is in the 50 (O)
+and80(O)tablesandanotherhub(C00002)thatisshared
+with the 139 (A) table. The 50 (R2) table has one hub
+(C00270) that is in the 50 (O), 80 (O), and 139 (A) tables.
+Otherwise, there were no other overlaps with the R1 and
+R2tables.
+Kimetal. BMCBioinformatics           (2020) 21:13 Page11of22
+Fig.6 Highlightingornithineinallpathwaysearchresultsfromglutamatetoproline.Forthepathwaysearchfromglutamate(C00025)toproline
+(C00148),iftheusersearchesfor“ornithine”inthe“Find”selectionbar,theywillbepresentedalistofcompoundsthatmatchtheirinput.Theycan
+thenselectL-ornithine(C00077)fromthe“Find”compoundselectionlist,anditwillbehighlightedwithaboldedsalmon-coloredoutlineinthe
+graph.Userscansearchforanycompoundinthegraphbyenteringeitherthecompound’scommonnameorKEGGid
+After running hub searches using the 20, 50, and 80
+(O) tables to find the canonical pathway test cases, the
+F1 scores of all the searches are relatively similar with the
+exception of three test cases: two (D-glucarate and 1,3-
+propanediol) where the search using the 80 (O) table fails
+tofindthecanonicalpathwaywhilethesearchesusingthe
+20 and 50 (O) tables successfully identify the canonical
+pathway and one (3-HP, III) where search using the 80(O)
+table finds the known pathway and the searches using the
+20 and 50 tables do not (See Table3). Though it seems
+counter-intuitivethatthelarger80hubtablefailstofinda
+few canonical pathways that are identified by the smaller
+20 and 50 hub tables, having a larger number of hub
+compounds increases the chances of the precomputed
+hub network being used during the online search, which
+can fail to find the known pathway due to not includ-
+ing the first or last hub compound of the known pathway
+as a hub closest to the start / target compound (see
+“Reasons for missing some canonical pathways”s u b s e c -
+tionin“ Discussion”sectionformoredetails).
+The search time typically ranged from seconds to a
+few minutes across all hub tables. Both the median
+and average total search time was lowest for the 80
+(O) hub table and highest for 20 (O) hub table (see
+Additional file 8). When looking at only the hub-to-
+hub search time, the time increases with the hub table
+size (see Additional file9). However, increasing the hub
+t a b l es i z ea l s oi n c r e a s e st h el i k e l i h o o do ft h es t a r tc o m -
+pound being a hub compound, which reduces the search
+time in two ways: (1) the start to hub search is not
+required, since the start compound is already in the
+hub table and (2) starting with a hub compound sig-
+nificantly reduces the search time for the hub to target
+compound, since there are fewer variations of carbons
+conserved. Because of this, the search time, on average, is
+less for the largest hub table than the mid-sized and small
+hub tables.
+The 20, 50, and 80 (O) hub tables were also compared
+based on their coverage of reactions present in KEGG
+pathway modules, a curated list of pathways featured by
+KEGGascentraltometabolismacrossorganisms.Areac-
+tion in a KEGG pathway module is considered “covered”
+byahubtableifthereactionispresentinatleastonepre-
+computed subpath stored in the hub table. An increasing
+numberofreactionsacrossKEGGmodulesarecoveredas
+the size of the hub table increases; however, the increase
+between the 20 and 50 hub table is larger than between
+t h e5 0a n d8 0h u bt a b l e( s e eT a b l e4 f o rm o r ed e t a i l s ) .
+These trends remained the same when examining the
+reaction coverage of the forty eight KEGG pathway mod-
+ules that specifically correspond to the reaction modules
+foundacrossmanyknownpathwaysidentifiedby[ 29](see
+Additional file7). This suggest that though increasing the
+size of the hub table does increase the number of KEGG
+module reactions contained in the hub table’s precom-
+putedsubpaths,therearediminishingreturnsforincreas-
+ing the number of hub compounds. In the end, the hub
+table constructed with 50 hubs was chosen for this study,
+sincethe50hubtablebothcoveredamoresizablenumber
+of reactions in the KEGG modules than the 20 hub table
+while also enabling the hub search to find more canonical
+pathways than the 80 hub table.
+Similar to the different hub table sizes, the three hub
+selections (O, I, and IO) described in Table2 were com-
+pared based on finding the canonical pathway test cases.
+The size of the hub tables were all fixed at 50 hub com-
+pounds. The search using the 50 (O) hub table was able
+to find the canonical pathways for eleven out of nine-
+teen test cases, whereas the search using the 50 (I) and
+the50(IO)tablesfoundeightandtencanonicalpathways
+respectively(Table 3).Thedifferencesbetweenthesethree
+hub selections were due to the start and/or target com-
+pound being included in the hub compounds list for one
+hub selection but not included for the others. As a result,
+Kimetal. BMCBioinformatics           (2020) 21:13 Page12of22
+Fig.7 Filteringpathwayresultsfrompyruvateto3-HPusingcompoundselections.Inthewebservervisualization,userscanspecifywhich
+compoundstheywouldliketoincludeorexcludeinpathwayresultsbytypingtheKEGGcompoundID(s)intothe“Filter”textboxorbyright
+clickingthecompoundnode(s)inthegraph.Forexample,for atheLPATpathwaysearchresultsbetweenpyruvate(C00022)and3-HP(C01013), b
+pathwayscontainingeither3-oxopropanoate(C00222)orpropanoyl-CoA(C00100)canbeexcludedfromthesearch,reducingthenumberof
+pathwaysdisplayedfromninety-sixtotwelve. cForthesamepathwaysearch,theusercanrequireallpathwaystocontainboth3-oxopropanoate
+(C00222)andpropanoyl-CoA(C00100),whichreducesthenumberofpathwaysdisplayedfromninety-sixtothree
+Kimetal. BMCBioinformatics           (2020) 21:13 Page13of22
+Fig.8 Filteringpathwayresultsfrompyruvatetolysine.ThenumberofuniquepathwaysfoundbyHPATfrompyruvatetolysinefordifferent
+combinationsofmaximumpathlengthandminimumnumberofconservedcarbonscutoffs(amaximumnetATPconsumedofoneisalsoapplied
+forallcombinations).Thenumberofpathwaysincludesallpossiblecombinationsofprecomputedsubpathsbetweenhubpairs,andthenumberof
+knownpathwaysthatcanbefoundusingeachfilteringcombinationisreportedinparentheses.Allfiveknownpyruvatesynthesispathwaysusedas
+testcasesinthispaperaredisplayedwhenthemaxpathlength=11andminimumcarbonsconserved=2.Thevisualizationoftheresultsfortwo
+differentfilteringcombinations(length=9,carbonsconserved=2,andlength=11,carbonsconserved=2)areshownontheright
+any failure to identify the closest hub compounds to the
+start or target compound (which is the first step in the
+hubsearch,seeFig. 1candthe“ First and Last Hubs Selec-
+tion”s u b s e c t i o ni n“Methods” section for more details)
+would unequally impact the F1 scores. For example, both
+thestartandtargetcompoundinthelysinepathwayswere
+hub compounds for the 50 (O) and 50 (IO) hub tables,
+but not the 50 (I) table. The hub search meta-algorithm
+did not identify the correct closest hub for the search
+using the 50 (I) table, resulting in the search not finding
+the canonical pathways. Meanwhile, since the start and
+target compound were hubs for the 50 (O) and 50 (IO)
+tables, the canonical pathways were able to be found in
+thesecases.
+Allthreeofthehubselectionshadcomparablecoverage
+of the KEGG module reactions and had higher coverage
+than that of the hub tables constructed using randomly
+selected hub compounds when looking at all 310 KEGG
+pathway modules (see Table4). However, when looking
+at only the KEGG pathway modules that correspond to
+reaction modules identified by [29], the out-degree hub
+selection covered more KEGG module reactions than the
+in-degree and the total degree selections (see Additional
+file 7). Search times for the hub tables varied for each test
+case and in almost all cases range from a few seconds
+to a few minutes. None of the three curated hub selec-
+tions resulted in a significantly lower total search time
+compared to the others across all the pathway test cases
+(Additionalfile 8).Forthisstudy,the50(O)hubtablewas
+used since this table enabled the search to find the most
+canonicalpathways.
+The 139 (A) hub table constructed based on the hub
+compounds in Araki et al. [43] had the highest cover-
+age of KEGG modules. Though the 139 (A) table showed
+significantly wider coverage of the KEGG pathway mod-
+ules corresponding to reaction modules (85.42% of these
+Table2 Descriptionofhubtablesthatwereevaluated
+HubTable Description
+20(O) Selectedtwentyhubcompoundsinvolvedas
+reactantsinthemostnumberofreactions(highest
+out-degree).Subsetofthe50(O)hubtable.
+50(O) Selectedfiftyhubcompoundsinvolvedasreactants
+inthemostnumberofreactions(highest
+out-degree).Subsetofthe80(O)hubtable.
+80(O) Selectedeightyhubcompoundsinvolvedas
+reactantsinthemostnumberofreactions(highest
+out-degree).
+139(A) 139hubsusedintheArakietal.[ 43]study.
+50(IO) Selectedfiftyhubcompoundsinvolvedinthemost
+numberofreactions(eitherasreactantsorproducts,
+highestdegree).
+50(I) Selectedfiftyhubcompoundsinvolvedasproducts
+inthemostnumberofreactions(highestin-degree).
+50(R1)and(R2) Twoindependentsetsoffiftyrandomlyselectedhub
+compounds.
+Kimetal. BMCBioinformatics           (2020) 21:13 Page14of22
+Fig.9 Overlapofhubcompoundsbetweenthe20(O),50(O),80(O),and139( a)hubtables.Thoughthereareafewcompoundscontainedinthe
+out-degreehubtablewhicharenotincludedinthe139( a)hubtable,thereisasignificantoverlapbetweentheout-degreetablesandthehub
+tableconstructedfromthelistofhubcompoundstakenfromArakietal.[ 43].Thereare68,38,and14compoundssharedbetweenthe139( a)hub
+tableandthe80(O),50(O),and20(O)hubtablesrespectively
+Fig.10 Overlapofhubcompoundsbetweenthe50(O),50(IO),and50(I)hubtables.Thethreehubtablessharetwentyonehubcompounds.The
+hubcompoundsintheIOhubtableareallencompassedbyeithertheOorItables.TheOhubtablehassixteenuniquehubcompoundsand
+thirteenhubcompoundssharedwiththeIOtable,butnottheItable.TheIhubtablehasthirteenuniquehubcompoundsandsixteenhub
+compoundssharedwiththeIOtablebutnottheOtable
+Kimetal. BMCBioinformatics           (2020) 21:13 Page15of22
+Table3 F1 scoresofhubtablesofdifferentsizesandhubselectionsfortheknownpathwaytestset,whereanF 1 scoreofone
+indicatesthattheHPATsearchfoundtheexactknownpathway
+NumberofHubs
+20(O) 50(O) 80(O) 139(A) 50(IO) 50(I) 50(R1) 50(R2)
+Pyruvate→ LysineI 1.00 1.00 1.00 1.00 1.00 0.67 0.70 0.70
+Pyruvate→ LysineII 1.00 1.00 1.00 1.00 1.00 0.67 0.70 0.70
+Pyruvate→ LysineIII 1.00 1.00 1.00 1.00 1.00 0.61 1.00 1.00
+Pyruvate→ LysineIV 1.00 1.00 1.00 1.00 1.00 0.61 0.78 0.78
+Pyruvate→ LysineV 1.00 1.00 1.00 1.00 1.00 0.10 0.30 0.30
+Glutamate→ Proline 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+UDP-Galactose→ Stachyose 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+alpha-D-glucose→ Phenylpyruvate 0.71 0.71 0.71 0.62 0.74 0.71 0.71 0.71
+alpha-D-glucose→ Dopamine 0.76 0.59 0.59 0.60 0.65 0.76 0.76 0.76
+Pyruvate→ 3-HP,I 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+Pyruvate→ 3-HP,II 0.38 0.50 0.50 0.50 0.50 0.60 0.33 0.33
+Pyruvate→ 3-HP,III 0.55 0.60 1.00 1.00 0.60 1.00 0.78 0.78
+Pyruvate→ 3-HP,IV 0.38 0.42 0.50 0.50 0.43 1.00 0.71 0.71
+Pyruvate→ 3-HP,V 0.40 0.36 0.36 0.36 0.36 0.36 0.40 0.40
+Pyruvate→ 3-HP,VI 0.36 0.36 0.18 0.18 0.36 0.67 0.36 0.36
+Pyruvate→ 3-HP,VII 0.36 0.53 0.77 0.77 0.53 0.77 0.50 0.50
+Glucose→ Glucaricacid 1.00 1.00 0.38 0.44 0.21 1.00 1.00 1.00
+alpha-D-glucose→ 1,3-propanediol 1.00 1.00 0.57 0.89 1.00 1.00 1.00 1.00
+Tryptophan→ Melatonin 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+TheclosertheF 1 scoreistoone,themoresimilarthefoundpathway’sreactionsaretothatofthecanonicalpathway.Thedifferentsuffixesincolumnnamesindicateho w
+hubswereselected:IO,sumofin-andout-degree;A,fromArakietal.2015;O,out-degree;I,in-degree;R n,randomly
+KEGG modules were at least partially covered by the 139
+(A) table while all the other hub tables only partially cov-
+ered 42–44%), in most cases the coverage of the 139 (A)
+tablewasnotsignificantlydifferentfromthe80(O)table.
+T h en u m b e ro fp a t h w a y sf o u n df o re a c hp a t h w a yt e s t
+casebythehubsearchusingthedifferenthubtablesarein
+Additional file10. The number of pathways are recorded
+f o rn oh u b/s i n g l eh u bs e a r c h( F i g .1a and b), and the
+start to hub, hub to hub, and hub to target components
+of the hub search (Fig.1c). Both the smaller hub tables
+(i.e., 20 (O)) and the hub tables constructed using ran-
+domly selected hubs tend to have a larger number of no
+hub/singlehubpathwaysandasmallernumberofhubto
+hub pathways than the larger hub tables (i.e., 80 (O) and
+139 (A)), illustrating that the hub to hub search is more
+actively used when the hub tables contain a large number
+ofhighly-connectedhubs.
+Discussion
+This paper outlines the first steps to taking advantage
+of repeated, common subpaths in the metabolic net-
+work and utilizing these subpath modules to improve the
+organization of pathway results identified by metabolic
+pathfinding approaches. HPAT was shown to find more
+known pathways than LPAT by using a diverse collec-
+tion of precomputed subpaths. The capability of HPAT
+Table4 Thepercentageofthe310KEGGpathwaymodulesthathadalloftheirreactions,atleasthalfoftheirreaction,andnoneof
+theirreactionscontainedbyhubtablesconstructedwithvaryingnumbersandselectionsofhubcompounds
+Differenthubtables
+20(O) 50(O) 80(O) 139(A) 50(IO) 50(I) 50(R1) 50(R2)
+All 19.35 26.77 32.58 34.52 24.84 28.71 13.23 20.00
+Atleasthalf 42.90 54.19 61.61 63.55 53.23 56.13 35.16 45.48
+None 37.42 26.13 23.55 18.06 31.29 30.00 42.58 35.16
+TheKEGGpathwaymodulesrepresentswell-documentedandimportantmetabolicpathwaysthatideallyshouldbecoveredbytheprecomputedsubpathsst oredinhub
+tables.Thedifferentsuffixesincolumnnamesindicatehowhubswereselected:IO,sumofin-andout-degree;A,fromArakietal.2015;O,out-degree; I,in-degree;R n,randomly
+Kimetal. BMCBioinformatics           (2020) 21:13 Page16of22
+to find novel pathways was illustrated through the
+alternative 3-HP pathways identified by the search. The
+p a p e ra l s oi n t r o d u c e san e ww a yt ov i s u a l i z ep a t h w a y
+results as a single interactive graph, where subpaths
+betweenhubcompoundscanbeexpandedorhiddenfrom
+view to simply visualization. Filtering tools enable users
+to quickly sift through pathway results without having to
+click individually through a list of pathways or rely on
+a pre-determined ranking heuristic to present the best
+results.
+Reasonsformissingsomecanonicalpathways
+ThoughtheHPATmeta-algorithmrecoveredmanyofthe
+k n o w np a t h w a y si nt h et e s ts e t ,af e wk n o w np a t h w a y s
+were not found due to a failure of the HPAT meta-
+algorithm to identify the correct first or last hub in the
+pathway. The identification of closest hubs is based on
+the assumption that the hub compounds with the highest
+chemical similarity score to the start and target com-
+poundswouldbethemostlikelyhubcompoundsincluded
+inthepathwayresult(Seesubsection“ First andLastHubs
+Selection”subsectionin“ Methods”section).
+As seen in the results, the structure of the first or last
+hub compound may not necessarily resemble the start
+or the target compound respectively due to (1) an addi-
+tion of a coenzyme or large structural addition along the
+way (i.e. coenzyme-A) or (2) the hub compound present
+in the known pathway is many reactions away from both
+the start and the target compound. In these cases, the
+heuristic is unable to identify the correct closest hub
+compound.
+One alternative method is to directly identify the hub
+compounds that are the least reactions away from the
+start and the target, using a breadth first search. Though
+it would take more time to compute, this approach
+would be able to find closest hubs with chemical struc-
+tures that differ significantly from the start and target
+compounds.
+Another promising option is to use the chemical sim-
+ilarity measure to identify a recommended set of closest
+hub pathways, then provide the user the option to add or
+remove hub compounds to the recommended set before
+performingthehubsearch.Thisallowstheusertoprovide
+expertguidanceonwhichclosesthubsshouldbeexplored
+inthesearch,whilealsopresentingtheuserwithasmaller
+subset of recommended hub compounds so that the user
+doesnotneedtoexamineallpossiblehubcompounds.
+Conservationofcarbonatoms
+All the metabolic pathfinding experiments described in
+this paper had the constraint of conserving at least two
+carbon atoms from the start compound to the target
+compound. When using the term ‘conservation’ we are
+specificallyreferringtoretainingasubsetofcarbonatoms
+present in the starting compound through each biochem-
+ical transformation in the pathway through to the final
+target compound. Conserving some minimum number of
+carbon atoms throughout the pathway is done to ensure
+that the start compound is being utilized in produc-
+tion of the target compound, and this heuristic has been
+used by several existing metabolic pathfinding methods
+[9,10,12,17,19,44,45].However,ifthenumberofatoms
+conservedthroughoutthepathwayisrelativelysmallcom-
+pared to the number of atoms in the start compound or
+target compound, the carbon conservation heuristic may
+not be as effective at preventing the search from finding
+infeasible pathways, since the search is still able to find
+pathways that break down the start compound to a much
+smaller compound (i.e., CO2) then build that compound
+backuptoproducethetargetcompound.
+Thereareafewwaystopreventthesearchfrominclud-
+ing unnecessary build up / break down steps in the path-
+way results. First, the user of the hub pathway search has
+the choice to maximize the number of carbons conserved
+throughoutthepathway,sothatallpathwaysfoundbythe
+hubpathwaysearchconservethelargestpossiblenumbers
+of carbon atoms from start to target compound. Another
+option that can be easily made available is for the user
+to specify what percentage of carbon atoms that exist in
+the start compound or target compound should be con-
+servedthroughoutthepathway.Thisway,alargernumber
+of carbon atoms are conserved when the start and target
+compounds are large, preventing the search from find-
+ing pathways with unnecessary break down / build up
+steps, while also accounting for scenarios where the start
+compound or target compound is small, and conserving
+only one or two carbon atoms will not cause the search
+algorithmtofindlengthyinfeasiblepathways.
+Hubcompoundselection
+The selection of hub compounds used in the hub table
+can have a significant impact on how frequently the hub
+tableisutilizedinthesearch.Whenhubcompoundswere
+selected randomly, the hub table was often not used in
+finding the canonical pathways since no feasible path-
+ways passed through the precomputed paths. Meanwhile,
+when the hub compounds were selected by their degree
+of connectivity with other compounds, the hub table was
+used for finding more than half the canonical pathways.
+I n c r e a s i n gt h en u m b e ro fh u b sa l s oi n c r e a s e st h eu s eo f
+thehubtableinsearches,whichinsomecases,hadaneg-
+ative effect on the F1 score when the chemical similarity
+heuristicdidnotidentifythecorrectfirstorlasthubcom-
+pound. As a result, increasing the hub table size did not
+result in better F1 scores for finding canonical pathways
+even though larger hub tables had more coverage of the
+KEGG modules and KEGG reactions than smaller hub
+tables.
+Kimetal. BMCBioinformatics           (2020) 21:13 Page17of22
+Improvementstovisualization
+Metabolic pathfinding has many potential applications,
+from suggesting new pathways for metabolic engineer-
+ing to help with understanding the metabolic space in
+multi-species communities. It is essential for these tools
+to be flexible and interactive, so users can quickly find
+the information that they are seeking. To this end, bet-
+ter organization and visualization of predicted pathways
+will enable further development and utilization of the
+available,rapidlygrowingmetabolicinformation.
+The sliding filters in the web server visualization allow
+formoreflexibleuserinteractionwiththepathwaysearch
+results; however, there are several improvements that
+couldbemadeforaneasieruserexperience.Forexample,
+the layout of the pathways can be intimidating to users,
+especially for large pathway graphs which often resemble
+ahairballofnodesandedges.Onesolutiontovisualizinga
+complex, disorganized network of predicated pathways is
+to utilize an existing scaffold for organization. This could
+be accomplished by overlaying the predicted pathways
+on curated representations of global metabolic networks,
+such as those from KEGG, which have been designed
+to minimize overlapping paths and to facilitate pathway
+navigation. Alternatively, introducing more hierarchical
+elements described in [31] could further condense the
+graph while still giving the user a feel of the connectivity
+andscopeofthenetwork.
+More interactive filters based on other common search
+heuristicscanbeaddedtothewebservertoallowtheuser
+tonarrowthesearch.Forexample,anorganism-basedfil-
+ter could allow users to view pathways that only contain
+enzymatic reactions from specific organisms of interest.
+A filter based on thermodynamic (/Delta1G) cutoffs could also
+be included for users to remove pathways that contain
+enzymaticreactionswithunfavorablethermodynamics.
+StandardizationandIntegration
+The Hub Pathways Webserver is currently a stand-alone
+tool, to gather feedback from the community. Such feed-
+back and the availability of the code will drive further
+in-depth development. Ultimately, the development of
+an open-source suite of metabolic pathway visualization
+tools will help insure the sustainability and continued
+usage of these visualization tools over the years. In the
+future, it would be ideal for the Hub Pathways Webserver
+to be modulized such that the webserver’s functional-
+ities can be seamlessly integrated with and supported
+by existing, well established open-source network visu-
+alization softwares like Escher [46]a n dC y t o s c a p e[47].
+Utilizing common standardized formats for compounds
+and reactions (i.e., SBML, MDL mol, and MDL rxn files)
+as inputs to the webserver could also bolster the web-
+server’s utility to the community. Realizing these changes
+is an ongoing process, and feedback and collaboration
+fromthecommunityisencouragedtoachieveamoreinte-
+gratedandstandardizedenvironmentforvisualizingnovel
+pathways.
+Futuredirections
+Thecurrenthubsearchmethodonlyexploreslinearpath-
+ways, which tracks the conversion of a single compound
+throughout the pathway. However, most metabolic path-
+ways are more accurately represented as branching paths
+and require multiple intermediate compounds at each
+enzymatic reaction step. The easiest way to introduce
+branched pathways into the hub search is to identify
+potential merge points between subpaths connecting a
+pair of hubs, similar to how the BPAT-M algorithm [48]
+findsbranchedpathwaysbymerginglinearpathwayswith
+thesamestartandtargetcompound.Identifyingpotential
+branchpathwaysthathelptofeedby-productcompounds
+back into the main pathway can result in a significant
+improvementsinproduction.Thisisillustratedinarecent
+study by South et al. [49], where crops were modified to
+have an alternate metabolic pathway that more efficiently
+recycledunproductivesideintermediatesofphotosynthe-
+sisandsubsequentlyshoweda40%increaseinbiomassin
+the field.
+In this paper, the metabolic pathfinding problem is
+framed as a graph-search problem similar to LPAT and
+BPAT [9]. However, there are other well-studied methods
+for identifying metabolic pathways, including constraint-
+based optimization methods. In order to better compare
+the performance of the hub search method with existing
+optimizationapproaches,thenextstepistoframethehub
+pathway search approach presented in this paper as an
+optimization problem. This step could also facilitate the
+incorporationofmoreadvancedpropertiessuchastaking
+into account steady state mass balance constraints.
+Beyonditsapplicationsinmetabolicpathfinding,theset
+of hub compounds identified in this study could be used
+as a tool to compare and describe the structure and prop-
+erties of metabolic networks from different organisms or
+communities. For this paper, all compounds and reac-
+tionsintheKEGGdatabasewereincludedinthesearched
+metabolic network. However, there are cases where only
+a subset of the available reactions (i.e., only reactions
+from a specific species or community of organisms) are
+of interest to the user. The complexity and properties
+of the metabolic network composed of this subset may
+significantly differ from the entire known metabolome
+and other subsets of the metabolic network. Examining
+how the selection of hub compounds differ for a range
+of organisms, and which hub compounds are ubiquitous
+across all species, could lead to more insights about the
+roles these compounds play in metabolism. Also, assum-
+ing that the precomputed paths between hub compounds
+are a good representation of common metabolic modules
+Kimetal. BMCBioinformatics           (2020) 21:13 Page18of22
+across species, identifying which organism(s) contain the
+most of these precomputed subpaths could be a way to
+identify potential chassis organisms for metabolic engi-
+neering. This study’s initial exploration on how to select
+hub compounds and construct precomputed hub tables
+containing common metabolic modules serves as a good
+startingpointforexaminingdifferentorganismsandcom-
+munitiesinthefuture.
+Conclusion
+The HPAT meta-algorithm takes advantage of the modu-
+larity of metabolic pathways by precomputing short sub-
+paths (containing no more than ten reactions) that con-
+serve carbon atoms between common hub compounds,
+and organizing these subpaths as a hub table for quick
+lookup during the graph-based search. The HPAT meta-
+algorithm was able to find a variety of known pathways
+and demonstrated its capability to find novel pathways.
+The interactive visualization of result pathways by the
+Hub Pathways Webserver enables users to filter pathways
+using intuitive heuristics, giving them more control over
+which pathways they see. Users also gain the flexibility to
+view a wide range of pathways without having to decide
+on cutoff parameters before the search.
+Methods
+Thehubpathwaysearchmeta-algorithmwithatomtrack-
+ing (HPAT) uses a graph-based atom tracking search
+approach for finding metabolic pathways. HPAT consists
+of an offline component, where paths between hub com-
+pounds are precomputed and stored in a hub table, and
+an online component, where the hub table is utilized for
+pathway search. Subpaths between hub compounds are
+assumed to appear frequently in pathway search results,
+since hub compounds are the substrates or products of
+a large number of enzymatic reactions. By precomputing
+and storing these subpaths, pathways between any pair
+of hub compounds can be easily explored and added to
+a pathway search. These precomputed subpathways are
+indexed by both the hub pair and the uniquely conserved
+carbonatomtuplesforfasterlook-up.
+Offlinecomponent:precomputationofhubpathways
+To construct the hub table, hub compounds must first
+be selected from the pool of known metabolites. Hub
+compounds are defined as key metabolites found across
+multiplepathways,suchthatwewouldexpectmanypath-
+ways to contain subpaths between two or more hub
+compounds. If the metabolic network is represented as a
+bipartite graph of compound nodes and reaction nodes,
+hub compounds can be identified as compound nodes
+connected with many reaction nodes. Three hub selec-
+tions based on the in-degree, out-degree, and combined
+degreeofcompoundswereusedtoconstructtheO,I,and
+IO hub tables described in the “Results”s e c t i o n .T h e s e
+hub selections were determined by ranking each KEGG
+compound by the number of reactions that contained the
+compoundasareactantand/orproduct(seeFig. 11),then
+selecting the compounds that were involved in the largest
+numberofreactions.
+Before hub compounds were selected, a set of KEGG
+compounds that would not make good hub compounds
+were removed from consideration based on a list of pre-
+determined rules (see Additional file2). These removed
+compounds include currency metabolites and side com-
+pounds that are used to provide energy or to balance the
+reaction but do not contribute any carbon atoms to the
+targetcompound.
+Hubtableconstruction
+The hub table is constructed by running a linear pathway
+searchbetweeneachpossiblepairofhubsusingtheLinear
+Pathfinding with Atom Tracking algorithm (LPAT) from
+Heath et al. [9]. All precomputed subpaths were required
+to conserve at leasttwocarbon atoms (oratleastone car-
+bon atom, if the start or end hub compound contain only
+o n ec a r b o n ) .T ol i m i tt h es i z eo ft h eh u bt a b l e ,a l lp a t h s
+storedinthehubtablearetenorlessreactionslong,anda
+conditionalmaximumofonehundredsubpathsarestored
+perhubpair.Themaximumofonehundredsubpathsmay
+be exceeded only if all subpaths stored in the hub table
+conserve a unique set of carbon atoms, to ensure that all
+possiblevariationsofconservedcarbonsetsarepresentin
+the hub table.
+In addition to the start and target compound, LPAT
+also takes several adjustable input parameters, including
+the minimum number of carbon atoms to conserve, the
+number of shortest pathways to return (K), the maximum
+searchdepth,andwhetherornottoconsiderallreactions
+asreversible.Thevaluesusedfortheseparameterscanbe
+found in Additional file3. Although LPAT is used in this
+study,theHPATmeta-algorithmcanbegeneralizedtouse
+any linear pathfinding method with atom tracking to find
+precomputedpathways.
+Allprecomputedsubpathsbetweenhubcompoundsare
+stored in the hub table. The subpaths are indexed first
+by hub pair and then by the tuples of conserved carbons
+f r o mt h es t a r th u bt ot h ee n dh u b( F i g .12), which were
+trackedbytheLPATalgorithm.Indexingsubpathsbyhub
+pair enables the HPAT meta-algorithm to quickly access
+all possible subpaths given a start hub and an end hub.
+The subpaths are further organized by tuples of carbon
+atoms conserved so the HPAT meta-algorithm can look
+upsubpathsthatconservetherequirednumberofcarbon
+atomsduringtheonlinesearchstep.Indexingsubpathsby
+tuples of carbons conserved can condense a list of a hun-
+dredsubpathstotwoorthreegroupsofsubpaths.Forthis
+study, the precomputation and organization of subpaths
+Kimetal. BMCBioinformatics           (2020) 21:13 Page19of22
+Fig.11 ThenumberofreactionseachcompoundinKEGGparticipatesinas aareactant(out-degree,usedforOtables), baproduct(in-degree,
+usedforItables),or casareactantoraproduct(totaldegree,usedforIOtables).Asillustratedinallthreeofthegraphs,thereareafewcompounds
+thatareinvolvedinalargenumberofreactions,whereasthemajorityofcompoundstakepartinonlyahandfulofreactions
+for all hub tables were performed on a Rice cluster, with
+eac hh ubta bletakingaf ewhourst oc om put e.
+Onlinecomponent:pathwaysearch
+The online component of the hub search draws on both
+thelinearpathwaysearchandtheprecomputedhubtable.
+The hub search separately explores three types of path-
+ways: (1) pathways containing no hub compounds, (2)
+pathways containing one hub compound, and (3) path-
+ways containing at least two hub compounds (See Fig.1
+in“Results”section).Thesepathwaysarefoundseparately
+because for finding pathways containing one or no hub
+compounds,theprecomputednetworkisnotusedforthe
+search,whileforfindingpathwayscontainingtwoormore
+hubs,theprecomputednetworkisused.
+A linear pathway search which excludes all hubs in
+the network is first run to find pathways with no hubs.
+Second, linear pathway searches which exclude all hubs
+except a single hub compound are run to find pathways
+with only one hub. The single hub searches are limited
+to only then hubs that are closest to the start compound
+or to the target compound based on chemical similarity.
+Similar to the hub table construction step, the hub path-
+way search takes several input parameters to adjust the
+breadth of the search, including the maximum number
+of hubs in a hub pathway and the maximum number of
+Kimetal. BMCBioinformatics           (2020) 21:13 Page20of22
+Fig.12 Theorganizationofthehubtableforapairofhubs.Hub1isthecompoundtothebottomleftandhub2isthecompoundtothebottom
+right.Eachhubcompoundhasnumberedcarbonatomscorrespondingtothemappingsdisplayedinthehubtable.Individualrowsinthetable
+representauniquetupleofcarbonsconservedbetweenhub1andhub2,wherethecarbonnumbersofhub1inthefirstcolumncorrespondwith
+thecarbonnumbersofhub2inthesecondcolumn.Thethirdcolumncontainsallthesubpathsbetweenhub1andhub2thataregroupedunder
+thistupleofconservedcarbons
+reactions in a hub to hub path. The values used for the
+inputparametersaredescribedintheAdditionalfile 4.
+Firstandlasthubsselection
+Start and end hub compounds were identified using the
+KEGG SIMCOMP similarity measure [50]. SIMCOMP
+is a graph-based method for scoring the structural sim-
+ilarity between compounds. The compound structure
+is represented by a graph with atoms represented as
+nodes and bonds represented as edges. SIMCOMP iden-
+tifies the maximal cliques between compound graphs by
+comparing either the atom nodes or the bond edges,
+then calculating the similarity score as the number of
+nodes or edges matched between the compound graphs
+divided by the total number of nodes or edges present
+in the smaller compound. SIMCOMP also incorporates
+biochemical features (i.e., chirality) into the final simi-
+larity score. We assume that hub compounds that are
+structurally similar to the start compound or the tar-
+get compound are more likely to be part of a feasible
+pathway connecting the two compounds. SIMCOMP was
+used to rank the similarity of all hub compounds to the
+start compound of the search, as well as the target com-
+pound. In this study, the three hub compounds with the
+top SIMCOMP similarity scores to the start compound
+wereselectedasthefirsthubs,andlikewise,thethreehub
+compounds with the top SIMCOMP similarity scores to
+the target compounds were selected as the last hubs in
+the search. By limiting the search to the top three scor-
+ing start hubs and last hubs, we can reduce the scope of
+the search to completely explore all possible paths going
+through the selected first hubs and last hubs instead of
+having to exhaustively search through all combinations of
+hubs.However,thenumberofclosesthubcompoundscan
+beraisedtoobtainmorediverseresultpathways.
+Supplementaryinformation
+Supplementaryinformation accompaniesthispaperat
+https://doi.org/10.1186/s12859-019-3328-x.
+Additionalfile1: Thetestsetofnineuniquepairsofstartandtarget
+compounds.The“num.carbons”columnsreportthenumberofcarbon
+atomsinthestartandtargetcompounds.The“knownpaths”column
+referstothenumberofcanonicalpathwaysfoundinKEGGorinother
+literature.The“pathlength”columnreferstothenumberofreactionsin
+thecanonicalpathway(s).
+Additionalfile2: Alistofalltheexclusionrulesusedtocuratethehub
+compoundlist.Theleftcolumnprovidestheruledescription,whilethe
+rightcolumnprovidesalistofcompounds(withKEGGids)thatwere
+removedduetothecorrespondingrule.
+Additionalfile3: Hubtableconstructionparameters.Valuesoftheinput
+parametersusedforprecomputingsubpathsforallthehubtablesinthis
+paper.
+Additionalfile4: Hubpathwaysearchparameters.Valuesoftheinput
+parametersusedforthehubsearch.Thesevaluescanbeadjustedto
+increasethenumberanddiversityofpathwaysfound.
+Additionalfile5: LPATsearchparameters.Valuesoftheinputparameters
+usedfortheLPATsearchasacomparisontoHPAT.Thesevalueswere
+chosentobecomparabletotheparametersusedintheHPATsearch.
+Additionalfile6: Anillustrationofwhichstepsofhubsearch(asshownin
+Figure1)wouldfindthecanonicalpathwayforeachofthepathwaytest
+casesusingthedifferenthubtables.Forcombinationsmarkedwithan“A,”
+thecanonicalpathwayisfoundbytheno-hubsearch.Forcombinations
+markedwitha“B,”thesinglehubsearchisrequiredtofindthecanonical
+pathway,andforcombinationsmarkedwitha“C,”thecanonicalpathway
+wouldbefoundbythehub-to-hubsearch.Combinationsthatarealso
+markedwitha*indicatethatthehubsearchfailedtofindthecanonical
+pathwayinthiscase.Hubtablesconstructedwithmorehubsmustmore
+frequentlyusethehubtohubsearchtofindcanonicalpathways,whilethe
+hubtablesconstructedwitharandomselectionofhubsdonotusethe
+hubtohubsearchtofindthecanonicalpathways.Thedifferentsuffixesin
+columnnamesindicatehowhubswereselected:IO,sumofin-and
+out-degree;A,fromArakietal.2015;O,out-degree;I,in-degree;R n,
+randomly.
+Additionalfile7: ThepercentageofthefortyeightKEGGpathway
+modulescorrespondingtothereactionmodulesidentifiedby[ 29]thathad
+alloftheirreactions,atleasthalfoftheirreaction,andnoneoftheir
+reactionscontainedbyhubtablesconstructedwithvaryingnumbersand
+Kimetal. BMCBioinformatics           (2020) 21:13 Page21of22
+selectionsofhubcompounds.Thedifferentsuffixesincolumnnames
+indicatehowhubswereselected:IO,sumofin-andout-degree;A,from
+Arakietal.2015;O,out-degree;I,in-degree;R n,randomly.
+Additionalfile8: Totaltimeofsearchesusinghubtablesofdifferentsizes
+andhubselectionsfortheknownpathwaytestset,runonanIntelCore
+i7-4790with16GBRAM.Thedifferentsuffixesincolumnnamesindicate
+howhubswereselected:IO,sumofin-andout-degree;A,fromArakietal.
+2015;O,out-degree;I,in-degree;R n,randomly.
+Additionalfile9: Timesforthehub-to-hubpartofthehubsearch,using
+hubtablesofdifferentsizesandhubselectionsfortheknownpathwaytest
+set.Thedifferentsuffixesincolumnnamesindicatehowhubswere
+selected:IO,sumofin-andout-degree;A,fromArakietal.2015;O,
+out-degree;I,in-degree;R n,randomly.
+Additionalfile10: Numberofpathwaysfoundforthe(1)nohub/single
+hubpartofthesearchand(2)thehub-to-hubpartofthesearch,usinghub
+tablesofdifferentsizesandhubselectionsfor19pathwaytestset.Forthe
+hub-to-hubpathways,uniquecombinationsofhubpairsthatconserve
+differentsetsofcarbonsarecountedasindividualpathways;however,the
+differentcombinationsofsubpathsbetweenhubpairsarenotcountedas
+separatepathways.Forexample,givenhubcompoundsH1,H2,andH3,(1)
+H1→H2andH1 →H3arecountedasseparatepathways,(2)H1 →H2
+conservingtwocarbonatomsandH1 →H2conservingadifferentsetof
+twocarbonatomsarecountedasseparatepathways,but(3)anysubpath
+variationsbetweenH1andH2(i.e.,H1 →N1→H2andH1 →N2→H2,
+whereN1andN2arenon-hubcompounds)arenotcountedasseparate
+pathways,giventhattheyconservethesamecarbonatomsfromH1toH2.
+Thedifferentsuffixesincolumnnamesindicatehowhubswereselected:
+IO,sumofin-andout-degree;A,fromArakietal.2015;O,out-degree;I,
+in-degree.
+Abbreviations
+3-HP:3-hydroxypropanoate;ATP:Adenosinetriphosphate;HPAT:Hub
+pathwaysearchwithatomtracking;KEGG:Kyotoencyclopediaofgenesand
+genomes;LPAT:Linearpathwaysearchwithatomtracking
+Acknowledgements
+WewouldliketoacknowledgePrudhviBoyapalliforthedevelopmentofthe
+corefeaturesanddesignoftheHubPathwaysWebserver.Wewouldalsoliketo
+acknowledgeAllisonHeathforthedevelopmentoftheLPATalgorithm,which
+wasusedasthepathwaysearchalgorithmforconstructingthehubtables.
+Authors’contributions
+SKandMPco-wrotethe“ Background”section.SKwrotethe“ Methods”,
+“Discussion”,and“ Conclusion”sections.The“ Identificationofnovelpathways
+byHPAT”andFigs. 2,9,and 10werewrittenandcreatedbyMP,whiletherest
+ofthe“ Results”sectionwaswrittenbySK.Additionalfile 2wascreatedbyMP
+andGB.MMhelpedwiththeformattingofallthetables.MM,GB,andLK
+directedtheresearch,andadvisedandprovidedexpertfeedbackonthe
+writingofthepaper.Allauthorshavereadandapprovedthemanuscript.
+Funding
+ThisworkwassupportedinpartbyNSFDBI-1262491andtheNSFGraduate
+FellowshipawardedtoSarahKIM.MatthewPeñawaspartiallysupportedby
+NSFEAGER:DESYN-C3CBET-1843556andDOEBESDE-SC0014462.The
+fundingbodydidnotplayanyroleinthedesignofthestudy,orcollection,
+analysis,orinterpretationofdata,orinwritingthemanuscript.
+Availabilityofdataandmaterials
+Thedatasetsusedand/oranalysedduringthecurrentstudyareavailablefrom
+thecorrespondingauthoronreasonablerequest.
+Ethicsapprovalandconsenttoparticipate
+Notapplicable.
+Consentforpublication
+Notapplicable.
+Competinginterests
+Theauthorsdeclarethattheyhavenocompetinginterests.
+Authordetails
+1DepartmentofComputerScience,RiceUniversity,Houston,Texas,USA.
+2DepartmentofBioSciences,RiceUniversity,Houston,Texas,USA.
+Received:14March2019 Accepted:18December2019
+References
+1. LeeSK, ChouH, HamTS, LeeTS, KeaslingJD.Metabolicengineeringof
+microorganismsforbiofuelsproduction:frombugstosyntheticbiology
+tofuels.CurrOpinBiotechnol.2008;19(6):556–63.
+2. MajidianP, TabatabaeiM, ZeinolabediniM, NaghshbandiMP, ChistiY.
+Metabolicengineeringofmicroorganismsforbiofuelproduction.Renew
+SustEnergyRev.2018;82:3863–85.
+3. PaddonCJ, WestfallP, PiteraDJ, BenjaminK, FisherK, McPheeD,etal.
+High-levelsemi-syntheticproductionofthepotentantimalarial
+artemisinin.Nature.2013;496:528–32.
+4. GalanieS, ThodeyK, TrenchardIJ, InterranteMF, SmolkeCD.Complete
+biosynthesisofopioidsinyeast.Science.2015;349:1095–1100.
+5. NarcrossL, FossatiE, BourgeoisL, DueberJE, MartinVJ.Microbial
+factoriesfortheproductionofbenzylisoquinolinealkaloids.Trends
+Biotechnol.2016;34(3):228–41.
+6. IbdahM, MartensS, GangDR.Biosyntheticpathwayandmetabolic
+engineeringofplantdihydrochalcones.JAgricFoodChem.2017;66(10):
+2273–80.
+7. JenkinsS.Commercial-scaleproductionofbio-basedBDOannounced.
+ChemEng.2013.Availablefrom: http://www.chemengonline.com/
+commercial-scale-production-of-bio-based-bdo-announced/ .Accessed
+9Aug2019.
+8. YimH, HaselbeckR, NiuW, Pujol-BaxleyC, BurgardA, BoldtJ,etal.
+MetabolicengineeringofEscherichiacolifordirectproductionof
+1,4-butanediol.NatChemBiol.2011;7:445–52.
+9. HeathAP, BennettGN, KavrakiLE.Findingmetabolicpathwaysusing
+atomtracking.Bioinformatics.2010;26:1548–55.
+10. PitkänenE, JouhtenP, RousuJ.Inferringbranchingpathwaysin
+genome-scalemetabolicnetworks.BMCSystBiol.2009;3:103.
+11. FaustK, CroesD, vanHeldenJ.MetabolicPathfindingUsingRPAIR
+Annotation.JMolBiol.2009;388:390–414.
+12. AritaM.Insilicoatomictracingbysubstrate-productrelationshipsin
+Escherichiacoliintermediarymetabolism.GenomeRes.2003;13:2455–66.
+13. KimSM, PeñaMI, MollM, BennettGN, KavrakiLE.Areviewof
+parametersandheuristicsforguidingmetabolicpathfinding.J
+Cheminformatics.2017;9(1):51.
+14. RahmanSA, AdvaniP, SchunkR, SchraderR, SchomburgD.Metabolic
+pathwayanalysiswebservice(PathwayHunterToolatCUBIC).
+Bioinformatics.2005;21:1189–93.
+15. McClymontK, SoyerOS.Metabolictinker:Anonlinetoolforguidingthe
+designofsyntheticmetabolicpathways.NucleicAcidsRes.2013;41:e113.
+16. CampodonicoMA, AndrewsBA, AsenjoJA, PalssonBO, FeistAM.
+GenerationofanatlasforcommoditychemicalproductioninEscherichia
+coliandanovelpathwaypredictionalgorithm,GEM-Path.MetabEng.
+2014;25:140–58.
+17. HuangY, ZhongC, LinHX, WangJ.AMethodforFindingMetabolic
+PathwaysUsingAtomicGroupTracking.PLoSONE.2017;12:e0168725.
+18. BlumT, KohlbacherO.MetaRoute:Fastsearchforrelevantmetabolic
+routesforinteractivenetworknavigationandvisualization.
+Bioinformatics.2008;24:2108–9.
+19. LatendresseM, KrummenackerM, KarpPD.Optimalmetabolicroute
+searchbasedonatommappings.Bioinformatics.2014;30:2043–50.
+20. ChoA, YunH, ParkJH, LeeSY, ParkS.Predictionofnovelsynthetic
+pathwaysfortheproductionofdesiredchemicals.BMCSystBiol.2010;4:
+35.
+21. XiaD, ZhengH, LiuZ, LiG, LiJ, HongJ,etal.MRSD:Awebserverfor
+MetabolicRouteSearchandDesign.Bioinformatics.2011;27:1581–2.
+22. CarbonellP, ParuttoP, HerissonJ, PanditSB, FaulonJL.XTMS:Pathway
+designinaneXTendedmetabolicspace.NucleicAcidsRes.2014;42:
+W389–94.
+23. TuW, ZhangH, LiuJ, HuQN.BioSynther:Acustomizedbiosynthetic
+potentialexplorer.Bioinformatics.2015;32:472–3.
+24. HadadiN, HafnerJ, ShajkofciA, ZisakiA, HatzimanikatisV.ATLASof
+Biochemistry:ARepositoryofAllPossibleBiochemicalReactionsfor
+Kimetal. BMCBioinformatics           (2020) 21:13 Page22of22
+SyntheticBiologyandMetabolicEngineeringStudies.ACSSynthBiol.
+2016;5:1155–66.
+25. PapinJA, ReedJL, PalssonBO.Hierarchicalthinkinginnetworkbiology:
+theunbiasedmodularizationofbiochemicalnetworks.TrendsBiochem
+Sci.2004;29(12):641–7.
+26. RavaszE, SomeraAL, MongruDA, OltvaiZN, BarabásiAL.Hierarchical
+organizationofmodularityinmetabolicnetworks.Science.5586;297:
+1551–5.
+27. SchusterS, PfeifferT, MoldenhauerF, KochI, DandekarT.Exploringthe
+pathwaystructureofmetabolism:decompositionintosubnetworksand
+applicationtoMycoplasmapneumoniae.Bioinformatics.2002;18(2):
+351–61.
+28. YamadaT, KanehisaM, GotoS.Extractionofphylogeneticnetwork
+modulesfromthemetabolicnetwork.BMCBioinformatics.2006;7(1):130.
+29. MutoA, KoteraM, TokimatsuT, NakagawaZ, GotoS, KanehisaM.
+Modulararchitectureofmetabolicpathwaysrevealedbyconserved
+sequencesofreactions.JChemInformaModel.2013;53(3):613–22.
+30. LuoW, PantG, BhavnasiYK, BlanchardJrSG, BrouwerC.PathviewWeb:
+userfriendlypathwayvisualizationanddataintegration.Nucleicacids
+research.2017;45(W1):W501–8.
+31. PaduanoF, EtemadpourR, ForbesAG.BranchingSets:Interactively
+visualizingcategoriesonnode-linkdiagrams.In:Proceedingsofthe9th
+InternationalSymposiumonVisualInformationCommunicationand
+Interaction.ACM;2016. p.9–16. https://doi.org/10.1145/2968220.
+2968229.
+32. SariM, BahceciI, DogrusozU, SumerSO, AksoyBA,BaburÖ,etal.
+SBGNViz:atoolforvisualizationandcomplexitymanagementofSBGN
+processdescriptionmaps.PloSONE.2015;10(6):e0128985.
+33. XuY, LuoXC.PyPathway:PythonPackageforBiologicalNetworkAnalysis
+andVisualization.JComputBiol.2018;25(5):499–504.
+34. KanehisaM, FurumichiM, TanabeM, SatoY, MorishimaK.KEGG:new
+perspectivesongenomes,pathways,diseasesanddrugs.NucleicAcids
+Res.2017;45:D353–61.
+35. KanehisaM, GotoS.KEGG:kyotoencyclopediaofgenesandgenomes.
+NucleicAcidsRes.2000;28:27–30.
+36. PowersDM.Evaluation:fromprecision,recallandF-measuretoROC,
+informedness,markednessandcorrelation.JMachLearnTechnol.
+2011;2(1):37–63.
+37. GokarnRR, SelifonovaOV, JessenHJ, GortSJ, SelmerT, BuckelW,
+inventors, CargillIncassignee.3-Hydroxypropionicacidandother
+organiccompounds.USPatent7,393,676;2008. https://patents.google.
+com/patent/US7393676/en.
+38. LiaoHH, GokarnRR, GortSJ, JessenHJ, SelifonovaO,inventors, Cargill
+Incassignee,Alanine2.3-Aminomutase.USPatent7,309,597;2007.
+https://patents.google.com/patent/US7309597B2/en.
+39. LiaoHH, GokarnRR, GortSJ, JessenHJ, SelifonovaO,inventors, Cargill
+Incassignee.Productionof3-hydropropionicacidusing
+beta-alanine/pyruvateaminotransferase.USPatentApp.10/581,570;
+2007.https://patents.google.com/patent/US20070107080A1/en.
+40. MarxA, WendischVF, RittmannD, BuchholzS,inventors, Wisconsin
+AlumniResearchFoundationassignee.Microbiologicalproductionof
+3-hydroxypropionicacid.USPatent6,852,517B1;2009. https://patents.
+google.com/patent/US6852517B1/en.
+41. JiangX, MengX, XianM.Biosyntheticpathwaysfor3-hydroxypropionic
+acidproduction.ApplMicrobiolBiotechnol.2009;82(6):995–1003.
+42. HenryCS, BroadbeltLJ, HatzimanikatisV.Discoveryandanalysisofnovel
+metabolicpathwaysforthebiosynthesisofindustrialchemicals:
+3-hydroxypropanoate.BiotechnolBioeng.2010;106(3):462–73.
+43. ArakiM, CoxRS, MakiguchiH, OgawaT, TaniguchiT, MiyaokuK,etal.
+M-path:Acompassfornavigatingpotentialmetabolicpathways.
+Bioinformatics.2015;31:905–11.
+44. BoyerF, ViariA.Abinitioreconstructionofmetabolicpathways.
+Bioinformatics.2003;19:ii26–34.
+45. PeyJ, PlanesFJ, BeasleyJE.Refiningcarbonfluxpathsusingatomictrace
+data.Bioinformatics.2013btt653. https://doi.org/10.1093/bioinformatics/
+btt653.
+46. RoweE, PalssonBO, KingZA.Escher-FBA:awebapplicationfor
+interactivefluxbalanceanalysis.BMCSystBiol.2018;12(1):84.
+47. ShannonP, MarkielA, OzierO, BaligaNS, WangJT, RamageD,etal.
+Cytoscape:asoftwareenvironmentforintegratedmodelsof
+biomolecularinteractionnetworks.GenomeRes.2003;13(11):2498–504.
+48. HeathAP, BennettGN, KavrakiLE.AnAlgorithmforEfficientIdentification
+ofBranchedMetabolicPathways.JComputBiol.2011;18:1575–97.
+49. SouthPF, CavanaghAP, LiuHW, OrtDR.Syntheticglycolatemetabolism
+pathwaysstimulatecropgrowthandproductivityinthefield.Science.
+2019;363(6422):eaat9077.
+50. HattoriM, TanakaN, KanehisaM, GotoS.SIMCOMP/SUBCOMP:chemical
+structuresearchserversfornetworkanalyses.NucleicAcidsRes.
+2010;38(suppl_2):W652–6.
+Publisher’sNote
+SpringerNatureremainsneutralwithregardtojurisdictionalclaimsin
+publishedmapsandinstitutionalaffiliations.

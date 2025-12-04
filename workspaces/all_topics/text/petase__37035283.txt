@@ -1,0 +1,1336 @@
+Conformational Selection of a Tryptophan Side Chain Drives the
+Generalized Increase in Activity of PET Hydrolases through a Ser/Ile
+Double Mutation
+Alessandro Crnjar,
+⊥
+Aransa Grin ̃ en,
+⊥
+Shina C. L. Kamerlin,* and César A. Ramírez-Sarmiento*
+Cite This: ACS Org. Inorg. Au 2023, 3, 109−119
+ Read Online
+ACCESS
+Metrics & More
+ Article Recommendations *
+sı Supporting Information
+ABSTRACT: Poly(ethylene terephthalate) (PET) is the most common
+polyester plastic in the packaging industry and a major source of environmental
+pollution due to its single use. Several enzymes, termed PET hydrolases, have
+been found to hydrolyze this polymer at different temperatures, with the
+enzyme from Ideonella sakaiensis (IsPETase) having optimal catalytic activity at
+30−35 °C. Crystal structures of IsPETase have revealed that the side chain of a
+conserved tryptophan residue within an active site loop (W185) shifts between
+three conformations to enable substrate binding and product release. This is
+facilitated by two residues unique to IsPETase, S214 and I218. When these
+residues are inserted into other PET hydrolases in place of the otherwise strictly
+conserved histidine and phenylalanine residues found at their respective
+positions, they enhance activity and decrease T
+opt
+. Herein, we combine
+molecular dynamics and well-tempered metadynamics simulations to investigate
+dynamic changes of the S214/I218 and H214/F218 variants of IsPETase, as well as three other mesophilic and thermophilic PET
+hydrolases, at their respective temperature and pH optima. Our simulations show that the S214/I218 insertion both increases the
+flexibility of active site loop regions harboring key catalytic residues and the conserved tryptophan and expands the conformational
+plasticity of this tryptophan side chain, enabling the conformational transitions that allow for substrate binding and product release
+in IsPETase. The observed catalytic enhancement caused by this substitution in other PET hydrolases appears to be due to
+conformational selection, by capturing the conformational ensemble observed in IsPETase.
+KEYWORDS: PET hydrolases, plastic recycling, molecular dynamics, metadynamics, enzyme design
+■
+INTRODUCTION
+The inexpensive manufacturing, long-term durability, and high
+resistance to degradation of plastics have led to its concerning
+accumulation as waste in landfills and oceans at rates that
+parallel its annual production.
+1
+The primary sources of plastic
+waste are single-use or short-lifetime consumer plastics, mainly
+poly(ethylene terephthalate) (PET), polyethylene (PE), and
+polypropylene (PP), with PET being the predominant polymer
+in postconsumer domestic plastic waste collected in countries
+such as the UK (40% abundance).
+2
+Although PET is recognized as one of the most recyclable
+plastics due to the vast presence of mechanical recycling
+industries, it can only endure a limited number of cycles before
+its properties are compromised. For example, the tensile and
+impact strength of virgin PET used in bottles decreases almost
+linearly within the first three extrusion cycles,
+3
+whereas its
+ductility is reduced from >200 to <10% elongation at break
+upon mechanical recycling.
+4
+Consequently, recycled PET ends
+up being used in lower-grade PET applications that are seldom
+recycled, breaking the circularity of this process.
+In this context, the discovery of PET hydrolases
+5,6
+has
+emerged as a promising and environmentally friendly approach
+for plastic biorecycling.
+7,8
+These enzymes depolymerize PET
+into its main constituent monomers, which can then be used to
+resynthesize virgin PET and thus enable a fully circular plastic
+recycling process.
+9
+Most PET hydrolytic enzymes are
+thermophilic,
+5
+with optimal activities (∼65 °C) near the
+glass-transition temperature of PET (∼75 °C
+10
+), where the
+polymer chains become more flexible and are prone to
+enzymatic hydrolysis, due to the inability of PET hydrolases to
+degrade highly crystalline PET. However, a PET hydrolase
+from the mesophilic bacterium Ideonella sakaiensis 201-F6
+(IsPETase) was described to degrade amorphous and semi-
+crystalline PET with high efficiency at 30−35 °C.
+11
+While most known PET hydrolytic enzymes have been
+subjected to protein engineering via rational design or directed
+Received: October 7, 2022
+Revised: December 15, 2022
+Accepted: December 15, 2022
+Published: January 9, 2023
+Articlepubs.acs.org/orginorgau
+© 2023 The Authors. Published by
+American Chemical Society
+109
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+
+evolution, with substantial improvements in thermal stability
+and depolymerase activity,
+12
+finding a “one size fits all”
+solution to improve the catalytic efficiency of any PET
+hydrolase has been elusive. A recent work
+13
+presented a
+general mechanism for improving their catalytic activity based
+on the experimentally observed dihedral torsions of a
+conformationally dynamic tryptophan side chain in IsPETase,
+W185 (Figure 1), that is highly conserved in PET hydrolases in
+a loop within the active site (hereafter referred to as the W-
+loop). On a nearby helix, there are two residues, S214 and
+I218, which are unique to IsPETase, and in all other known
+PET hydrolytic enzymes correspond to histidine and phenyl-
+alanine.
+Crystal structures of IsPETase in the absence of substrates
+(PDB ID: 5XG0
+14
+) show that the W185 side chain can adopt
+three conformations, termed A, B, and C, as illustrated in
+Figure 1, a phenomenon that has been described in the
+literature as “wobbling”.
+15
+Substrate analogue-bound enzyme
+complexes (PDB IDs: 5XH2
+14
+and 5XH3
+14
+) show that this
+residue adopts conformer B for substrate binding, where it can
+form T-shaped, stacked, or parallel displaced interactions with
+one of the terephthalic rings of the substrate. Comparison of
+the crystal structure of IsPETase against a thermophilic PET
+hydrolase from a leaf-branch compost metagenome (LCC)
+suggests that the small size of S214 yields sufficient space for
+W185 to rotate to accommodate the substrate.
+15
+Altogether, it
+is thought that tryptophan motion is relevant for substrate
+binding and product release. Consistently with this, the S214H
+mutant of IsPETase shows decreased activity compared to the
+wild-type enzyme.
+14
+We note that there have been multiple elegant computa-
+tional studies that have helped reveal the mechanisms of PET-
+degrading enzymes,
+16−19
+more global conformational changes
+involved in catalysis,
+20,21
+and contributed to associated
+engineering effort.
+22−25
+However, corresponding studies of
+the conformational dynamics of this catalytically important
+tryptophan remain limited. Therefore, to explore the
+importance of the S214/I218 substitution for PET hydrolytic
+activity, doubly substituted variants of the strictly conserved
+histidine and phenylalanine residues in several PET hydrolases,
+including the mesophilic BurPL from a Burkholderiales
+bacterium (H344/F348),
+13
+and the thermophilic Tf Cut from
+Thermobifida fusca (H224/F228)
+26
+and LCC (H218/F222),
+27
+were generated based on the S214/I218 residues unique to
+IsPETase. All engineered variants have experimentally shown
+an increase in PET-degrading activity.
+13
+Conversely, an H214/
+F218 variant of IsPETase exhibits a decrease in PET hydrolase
+activity.
+13
+The enhancement in PET hydrolysis caused by the
+S214/I218 substitution is accompanied by a decrease in the
+optimal temperature for catalytic activity (T
+opt
+), suggesting that
+the substitutions impact either the local or global stability of
+these enzymes.
+In this work, we employ molecular dynamics (MD) and
+well-tempered metadynamics
+28
+simulations to explore the
+structural basis of the improved catalytic activity of BurPL,
+Tf Cut, and LCC upon incorporation of the IsPETase-based
+S214/I218 double substitution. Our results show that these
+substitutions increase the flexibility of both active site loop
+regions harboring key catalytic residues, and the conforma-
+tional plasticity of the conserved tryptophan within the W-
+loop. Notably, while all of the experimentally determined
+tryptophan conformers are accessible for all enzymes, the
+IsPETase-based S214/I218 substitution appears to facilitate
+population shifts to and from conformer A, as well as other
+conformations, such as a 180° side chain rotation that has not
+been observed in any solved crystal structures of PET
+hydrolases. Overall, our simulations provide evidence for a
+dynamical origin for the enhanced catalytic activity of the
+doubly substituted variants, affecting both loop dynamics and
+the conformational plasticity of the tryptophan.
+■
+METHODOLOGY
+Preparation of Initial Structures
+Initial coordinates for wild-type BurPL (H344/F348), LCC
+(H218/F222), and Tf Cut (H224/F228) were obtained from
+the crystal structures deposited in the Protein Data Bank
+29
+under PDB IDs: 7CWQ,
+13
+4EB0,
+27
+and 5ZOA,
+30
+respectively.
+For IsPETase, the initial structure corresponded to the recently
+solved structure of the single-point mutant S214H, PDB ID:
+7CY0,
+13
+where the serine residue in S214/I218 was replaced
+by the histidine that is strictly conserved in other PET
+hydrolytic enzymes. The doubly substituted versions of BurPL
+(S344/I348), Tf Cut (S224/I228), and LCC (S218/I222), as
+well as the S214/I218 and H214/F218 variants of IsPETase,
+were generated using the Mutagenesis tool in PyMOL v.
+2.4.2.
+31
+Figure 1. Multiple conformations of W185 observed in crystal
+structures of free and substrate-bound IsPETase. Cartoon representa-
+tion of the active site of IsPETase (A) in the absence (PDB ID:
+5XG0
+14
+) and (B) in the presence of the substrate analogue HEMT
+(PDB ID: 5XH3
+14
+). The key catalytic residues (S160, D206, H237),
+the active site disulfide bond (C203-C239), the W185 side chain, and
+the critical S214/I218 residues are shown in sticks. The different
+conformers of W185 are shown in red (conformer A), green
+(conformer B), and pink (conformer C). Relevant loops harboring
+W185 (W-loop), D206 (D-loop), and H237 (H-loop) are colored
+blue, orange, and green, respectively. The substrate analogue 1-(2-
+hydroxyethyl) 4-methyl terephthalate (HEMT) forms a T-shaped
+interaction with W185. Loops in cartoon representation were
+smoothed for visualization purposes.
+ACS Organic & Inorganic Au pubs.acs.org/orginorgau Article
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+110
+Both IsPETase and BurPL harbor an active site (C203-C239
+for IsPETase, C333-C370 for BurPL) and a C-terminal (C273-
+C289 for IsPETase, C404-C424 for BurPL) disulfide bond. For
+Tf Cut and LCC, only the C-terminal disulfide bond (C281-
+C299 for Tf Cut, C275-C292 for LCC) is present. These
+disulfide bonds, which are present in the available crystal
+structures, were kept in all of the wild-type enzymes and
+doubly substituted variants.
+Residue numbers for each enzyme are presented throughout
+the main text according to the full-length amino acid sequences
+of these proteins in the Uniprot database,
+32
+with accession IDs:
+A0A0K8P6T7 (IsPETase), A0A1F4JXW8 (BurPL), Q6A0I4
+(Tf Cut), and G9BY57 (LCC).
+Molecular Dynamics Simulations
+MD simulations were performed using the pmemd.cuda
+implementation of the AMBER 2020 simulation package,
+33
+along with the ff14SB force field
+34
+and the TIP3P
+35
+water
+model for the parameters of protein atoms and water
+molecules, respectively. For each of the eight simulation
+systems, the protonation state of each residue at pH 9.0 was
+estimated with the H++ server,
+36
+to match the experimental
+conditions in enzymatic degradation assays using either PET
+films or granules.
+13
+The consistency of the estimated
+protonation states for the wild-type and doubly substituted
+variant of each enzyme was manually checked. The residues
+affected by the choice of pH include the catalytic histidine in
+all four enzymes (which would be protonated at pH 7),
+alongside E334 and H408 in BurPL, which are not part of the
+active site cleft. The pK
+1/2
+of these residues, employed by the
+H++ server to compute whether they should be protonated or
+not depending on the pH, is reported in Table S1. Then, all
+systems were solvated in truncated octahedral water boxes with
+15 Å of padding and neutralized with Na
++
+or Cl
+−
+counterions.
+A standard minimization, heating, and 10 ns equilibration
+protocol were performed, followed by NPT production at 1
+bar and the experimentally determined optimal temperature of
+catalytic activity for each system
+13
+(i.e. 303 K for IsPETase, 308
+K for BurPL, 323 K for LCC, and 333 K for Tf Cut). Constant
+temperature and pressure conditions for each system were
+controlled using a Langevin thermostat
+37
+with a collision
+frequency of 1 ps
+−1
+, and a Berendsen barostat
+38
+with a pressure
+relaxation time of 1 ps. MD simulations were run using a time
+step of 2 fs along with the SHAKE
+39
+algorithm to constrain
+hydrogen-containing bonds, a 12 Å cutoff for nonbonded
+interactions, and the particle-mesh Ewald
+40
+method for long-
+range electrostatics. Five 500 ns long replicas were produced
+for each of the wild-type and doubly substituted systems, for a
+total of 20 μs of MD simulations. The convergence of the
+simulations is shown in Figure S1.
+Well-Tempered Metadynamics Simulations
+To study the torsional free energy associated with rotation of
+the conserved W-loop tryptophan, we performed eight 400-ns-
+long well-tempered metadynamics
+28
+simulations (one per
+system), using the AMBER 2020
+33
+simulation package and
+Plumed 2.7.
+41
+We used as collective variables (CVs) the χ
+1
+(N-
+C
+α
+-C
+β
+-C
+γ
+) and χ
+2
+(C
+α
+-C
+β
+-C
+γ
+-C
+δ2
+) dihedral angles, which
+describe the torsional space of the tryptophan side chain.
+Metadynamics runs were started after 50 ns of NPT
+equilibration (following the same protocol and simulation
+settings as the MD). The backbone root-mean-square
+deviation (RMSD) of the helices and β-sheets of the protein
+structure, and the convergence of our metadynamics runs, are
+shown in Figures S2−S4. Simulations were performed using a
+bias factor of 12, a Gaussian width of 9° per CV, a Gaussian
+initial height of 0.1 kcal/mol, and a deposition rate of 1 ps
+−1
+.
+The convergence of these simulations was checked by
+monitoring the evolution of the CVs over time together with
+the free energy profile.
+The free energy surface as a function of the two chosen CVs
+was calculated according to the theory of well-tempered
+metadynamics.
+28,42
+Given the deposited bias potential, V
+V t W
+n
+n
+( , , ) exp
+( ( ))
+2
+( ( ))
+ 2
+1 2
+1 1
+2
+2
+2 2
+2
+2
+1
+ 2
+=
+i
+k
+j
+j
+j
+j
+j
+j
+j
+y
+ {
+z
+z
+z
+z
+z
+z
+ z
+(1)
+where χ
+1
+and χ
+2
+denote the two selected CVs, τ denotes the
+time step, n denotes the number of steps until time t (so that
+the sum runs over all steps nτ < t), and σ
+χ1
+and σ
+χ2
+denote the
+Gaussian widths associated with the two CVs. In well-
+tempered metadynamics, W is also a function of time such that
+W t W( ) e
+V t k T
+ 0
+( , , )/
+1 2
+B
+ =
+(2)
+Here, W
+0
+is the initial height and ΔT is a parameter linked to
+the bias factor, γ, by the following equation
+T T T( )/ = +
+(3)
+Over long simulation timescales, this bias potential converges
+to the free energy, F
+V t
+T
+ T T
+F C( , , ) ( , )
+ 1 2 1 2
+=
+ +
++
+(4)
+with C being a constant that, for well-tempered metadynamics,
+vanishes for a long enough time (i.e., once the diffusive state in
+the collective variable space has been reached). Finally, the free
+energy was evaluated as a function of the CVs using the Tiwary
+method
+43
+F
+V t
+k T
+( , )
+( , , )
+ log d d e
+V t k T
+1 2
+1 2
+B
+ 1 2
+( , , )/
+1 2
+B
+=
+ +
+(5)
+Simulation Analysis
+Simulation analysis was performed using the CPPTRAJ
+44
+module from AMBER 2020
+33
+and the Python library
+MDAnalysis.
+45,46
+Snapshots were collected every 50 ps from
+the MD production runs for further analysis. Open cleft
+volume analysis was performed using POcket Volume
+MEasurer (POVME) 3.0,
+47
+by considering 1000 frames over
+all replicas, taken every 2.5 ns of the production run. An initial
+sphere of radius 4 Å located at the center of mass between the
+α-carbon atoms of residues Y87 and M161 (IsPETase), Y217
+and M291 (BurPL), Y100 and S170 (Tf Cut), and Y95 and
+S165 (LCC) was used for the calculations. The residues
+forming the cleft are represented in Figure S5 and listed in
+Table S2. Root-mean-square fluctuations (RMSF) were
+calculated on the C
+α
+atoms along the amino acid sequence
+of each protein relative to their averaged position over time.
+Hydrogen bonds for catalytic residues were calculated by
+considering a donor−acceptor distance cutoff of 3.5 Å and a
+donor−hydrogen−acceptor angle cutoff of 120°, considering
+ACS Organic & Inorganic Au pubs.acs.org/orginorgau Article
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+111
+all 25,000 frames collected per replica. The same number of
+frames was employed for calculating the change in distance
+between the C
+γ
+atoms of the conserved tryptophan in the W-
+loop and the conserved tyrosine with which it forms an active
+site aromatic clamp.
+20
+Finally, shortest path map (SPM)
+analysis was carried out by means of the DynaComm.py Python
+script,
+48
+using the dynamic cross-correlation matrices and
+average inter-residue distance matrices for the MD simulations.
+■
+RESULTS AND DISCUSSION
+To determine the effects of the S214/I218 double substitution
+on PET hydrolase dynamics, we analyzed the root-mean-
+square fluctuations (RMSF) of the H214/F218 and S214/I218
+variants of IsPETase and of the equivalent variants for BurPL,
+Tf Cut, and LCC across a cumulative 2.5 μs of conventional
+MD simulations of each unliganded system (5 × 500 ns
+trajectories per system) at their respective temperature and pH
+optima. In all cases, comparison of the variants for each
+enzyme did not show significant differences in RMSF
+throughout the protein (Figure S6), except for the W- and
+D-loops (Figure 2), which harbor the conserved active site
+tryptophan (W185 in IsPETase) and the catalytic aspartic acid
+(D206 in IsPETase), respectively.
+From the data shown in Figure 2, it is observed that in
+IsPETase, the substitution of S214/I218 by H214/F218
+reduces the flexibility of the D-loop. Conversely, in the other
+PET-degrading enzymes, which harbor histidine and phenyl-
+alanine in their wild-type forms, the double substitution by
+serine and isoleucine increases the overall flexibility of the D-
+loop and, in the case of Tf Cut and LCC, the W-loop (although
+the precise magnitude of this effect varies by enzyme and
+specific loop). Moreover, the H-loop is more flexible in the
+serine and isoleucine variants of IsPETase and BurPL than in
+Tf Cut and LCC, despite harboring the active site disulfide
+bond connecting the D-loop and H-loop in the mesophilic
+enzymes (Figure 1). This could be explained by the longer
+extension of the H-loop in IsPETase and BurPL than in the
+thermophilic enzymes, which enables the formation of a
+continuous cleft for substrate binding.
+49
+Despite the differences in loop flexibility of the key active
+site loops, two of which carry residues from the catalytic triad
+(Figure 1), we observe only subtle differences in the hydrogen-
+bonding patterns between the side chains of the catalytic serine
+(S160 in IsPETase) and histidine (H237 in IsPETase) and of
+the histidine and aspartate (D206 in IsPETase) for the
+IsPETase-based S214/I218 and H214/F218 variants of each
+system (Figures 3 and S7). It is worth noting that while the
+differences within each system are small, there is a more
+marked effect when comparing between different enzymes, and
+in particular between the mesophilic IsPETase and BurPL and
+the thermophilic Tf Cut and LCC enzymes. Here, all
+mesophilic enzymes exhibit substantially lower occupancy of
+the key hydrogen-bonding interactions, and in particular the
+serine−histidine interaction (Figure 3A), than their thermo-
+philic counterparts. This is consistent with the fact that the key
+active site loops in the mesophilic enzymes are overall more
+flexible than their thermophile counterparts (Figure 2), even
+after introducing the serine and isoleucine double substitution,
+and may account for the reduced catalytic activity of the
+mesophiles compared to their thermophilic counter-
+parts.
+12−14,20
+Following from this, we also calculated the volume of the
+active site cleft in all enzymes using POVME 3.0.
+47
+The
+resulting averages and standard deviations are shown in Table
+1. As can be seen from these data, with the exception of BurPL,
+the IsPETase-based H214/F218 and S214/I218 variants of
+each system have similar active site volumes and fluctuations.
+However, there is quite a spread in active site volume and
+flexibility (using standard deviation as a proxy measure for
+flexibility), with BurPL and Tf Cut having the most compact
+and least flexible clefts, and LCC having the largest and most
+flexible cleft. The average cleft volume depends on its shape,
+Figure 2. Effect of the IsPETase-based S214/I218 substitution on the local structural flexibility of PET hydrolases. (A−D) C
+α
+atom root-mean-
+square fluctuations (RMSF, Å) of the flexible active site W-loop, D-loop, and H-loop (shown in Figure 1) during MD simulations of the IsPETase-
+based S214/I218 (pink) and H214/F218 (black) variants of (A) IsPETase, (B) BurPL, (C) Tf Cut, and (D) LCC. The shaded area represents the
+standard deviation over 5 × 500 ns trajectories per system.
+ACS Organic & Inorganic Au pubs.acs.org/orginorgau Article
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+112
+and on how many and how bulky the amino acid side chains
+which point inside the cleft are, whereas the volume
+fluctuations are intimately related to the structural flexibility
+of the cleft.
+For all enzymes, the conserved W-loop tryptophan is facing
+a tyrosine residue, forming an aromatic clamp into which one
+of the terephthalic rings of PET binds.
+14,20
+When W185 in
+IsPETase (PDB ID: 5XG0
+14
+) adopts conformer B, the distance
+between the C
+γ
+atoms of this residue and Y87 in the aromatic
+clamp is 9.2 Å, whereas for conformer C, the distance is 7.8 Å
+(Figure S8). Therefore, we analyzed the change in distance
+between these aromatic residues in all MD simulations. As
+shown in Figure 4, a median distance of ∼8.1 Å, similar to the
+experimental distance for the C conformer of W185, is
+obtained from the MD simulations for both IsPETase and
+BurPL. In contrast, a median distance of 8.9 Å, resembling the
+experimental distance for conformer B, is observed for
+simulations of IsPETase and BurPL with the S214/I218
+substitutions. Finally, no differences are observed for the
+median distance of both variants of Tf Cut and LCC, with
+TfCut having a median distance 2 Å away from the
+crystallographic distance (PDB ID: 5ZOA
+30
+), whereas LCC
+is closer to the experimental distance (PDB ID: 4EB0
+27
+)
+(Figure S8).
+Following from this, we performed shortest path map
+(SPM) analysis
+48
+on the MD replicas to analyze the allosteric
+communication pathways that potentially connect the different
+active site loop regions. The SPM method allows for the
+calculation of the shortest pathways between all residues (the
+nodes) in the network. Nodes and edges (pathways between
+nodes) that are often used for communication between
+residues can then be identified, and these residues can
+therefore be considered as being important for regulating the
+global conformational dynamics of the enzyme. The calculated
+allosteric communication pathways are presented in Figure 5
+and illustrate the differences between enzymes from different
+source organisms. Loop D and the mutation-hosting helix are
+only mildly important for the pathway of both variants of
+IsPETase. In BurPL, loop H harbors significant residues whose
+motions are highly correlated. In Tf Cut, the network includes
+nodes on protein sections far from the active site.
+When comparing the enzyme variants studied here, it is
+observed that the three loops, W, D, and H, appear linked to
+each other through different pathways on the identified
+networks. That is, with the exception of IsPETase, the SPM
+calculates a path connecting loops D and W in the cases of the
+histidine- and phenylalanine-containing variants (shown in red
+in Figure 5), whereas for IsPETase, this connection is absent in
+both H214/F218 and S214/I218 variants. For the H344/F348
+variant of BurPL, the connection takes place between the W-
+loop tryptophan (W315) and the H344/F348 histidine. In
+LCC and Tf Cut, the correlation takes place between the
+tryptophan (W190 and W195 respectively) in loop W, and
+A213 and A219, respectively. It is therefore possible that both
+the enhanced fluctuations of loops H and D, and the decreased
+correlations of the dynamics of the conserved tryptophan in
+loop W with residues on loop D may depend on the bulkier
+nature of histidine and phenylalanine, which may exert
+additional steric repulsion on loop W.
+Next, we explored the effect of the IsPETase-based serine
+and isoleucine double substitution on the conformational
+stability of the side chain of the conserved tryptophan from
+Figure 3. Frequency of interactions between key residues of the
+catalytic triad (Figure 1) during 5 × 500 ns simulations of each of the
+IsPETase-based S214/I218 and H214/F218 variants of PET hydro-
+lases. Shown here are the relative frequencies of the interactions
+between (A) the hydroxyl group hydrogen of S160 and the N
+ε
+of
+H237, (B, C) the N
+δ
+-bound hydrogen of H237 and each oxygen (B,
+O
+δ1
+; C, O
+δ2
+) from the carboxylic group of D206. The residue
+numbering corresponds to IsPETase. The error bars show the
+standard deviations across 5 × 500 ns conventional MD simulations
+of each system.
+Table 1. Average Volumes of the Active Site Clefts of Each
+of IsPETase, BurPL, Tf Cut, and LCC, during Our
+Simulations
+a
+open cleft volume (Å
+3
+)
+residues IsPETase BurPL Tf Cut LCC
+H214/F218 187 ± 93 165 ± 44 189 ± 58 235 ± 98
+S214/I218 192 ± 70 228 ± 59 188 ± 59 230 ± 102
+a
+All values were calculated using POVME 3.0
+47
+and are presented as
+average values and standard deviations over 5 × 500 ns MD
+simulations per system, with snapshots taken every 2.5 ns of
+simulation time (2000 frames analyzed per system).
+Figure 4. Box plot of the change in distance between the C
+γ
+atom of
+the conserved tryptophan of the W-loop and the conserved tyrosine
+that completes the active site aromatic clamp, during 5 × 500 ns
+simulations of each of the IsPETase-based S214/I218 and H214/
+F218 PET hydrolase variants. The box length represents the
+interquartile range, which covers the central 50% of the data, and
+the horizontal line in the middle corresponds to the median, while the
+whiskers correspond to the minimum and maximum values. The
+dotted lines represent the experimental distances observed between
+Y87 and W185 in conformer B (red) and C (green) from IsPETase
+(PDB ID: 5XG0
+14
+).
+ACS Organic & Inorganic Au pubs.acs.org/orginorgau Article
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+113
+loop W in our MD simulations. IsPETase residues S214 and
+I218, which correspond to histidine and phenylalanine in all
+other enzymes, are adjacent to W185 (Figure 1), with C
+α
+−C
+α
+distances to this residue of ∼6 Å and ∼9 Å, respectively, based
+on PDB ID: 5XG0.
+14
+Crystal structures of IsPETase (PDB ID:
+5XG0
+14
+) have shown that W185 can rotate into conformers A
+(chain A, χ
+1
+= 187.4°, χ
+2
+= 20.7°), B (chain B, χ
+1
+= 185.9°, χ
+2
+=
+79.3°), and C (chain C, χ
+1
+= 188.2°, χ
+2
+= 113.1°).
+14
+Upon
+binding of substrate analogues, W185 adopts conformer B
+14,15
+(Figure 1).
+To probe whether this plasticity is facilitated by the serine
+and isoleucine double substitution or by other features of the
+IsPETase scaffold, we calculated the χ
+1
+and χ
+2
+dihedral torsions
+of the corresponding tryptophan in all of the trajectories. From
+these data, it can be seen that the tryptophan side chain residue
+χ
+1
+and χ
+2
+dihedral angles are consistent with the B and C
+conformers of wild-type IsPETase in all of the H214/F218 and
+S214/I218 PET hydrolase variants (Figure 6). In contrast, the
+space created by the S214/I218 substitution and by the
+equivalent double substitution in BurPL, Tf Cut, and LCC
+enables the tryptophan to rotate into the A conformer in all
+Figure 5. Representation of the shortest path map (SPM)
+48
+highlighting allosteric communication pathways in the different PET hydrolases
+studied in this work. The SPM is represented by spheres (residues) and edges (connections between residues), with the size of the spheres and
+edges being proportional to the number of pathways involving a sphere or edge, and a larger sphere size effectively meaning more importance of
+that residue for allosteric communication. Loop D and the S214/I218-H214/F218 containing helix are represented in orange, loop H in green, and
+loop W in blue. The path connecting loops W and D is shown in red (with residues involved labeled).
+Figure 6. Torsional space explored by the W-loop tryptophan in the IsPETase-based H214/F218 and S214/I218 variants of PET hydrolases. The
+color gradient corresponds to the number of observations of a given χ
+1
+, χ
+2
+conformer in all MD trajectories for each system, cumulatively totaling
+2.5 μs simulation time per system (5 × 500 ns), with snapshots taken every 20 ps of simulation time. The arrows in IsPETase indicate the χ
+1
+, χ
+2
+torsion angles of the A, B, and C conformers observed in the crystal structures of IsPETase, and the new D and E conformers observed in our
+simulations.
+ACS Organic & Inorganic Au pubs.acs.org/orginorgau Article
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+114
+PET hydrolases, as well as explore new conformations (Figures
+6 and 7) that have not been captured in experimental
+structures. This is consistent with the expected plasticity of this
+residue in the unliganded form of the enzyme.
+14
+This plasticity
+is lost in the H214/F218 variant of IsPETase, consistent with
+the observed loss of activity of the IsPETase S187H variant.
+14
+These data highlight that the S214/I218 residues alone are
+sufficient to facilitate W185 and the equivalent residue in all
+other enzymes to rotate, without the need for other
+modifications to the scaffold, and that this “wobbling effect”
+appears to be transferable to other PET hydrolases.
+Given the observed conformational plasticity of the
+conserved tryptophan residue in loop W, we opted to fully
+explore its torsional space via well-tempered metadynamics
+simulations,
+28
+in which the χ
+1
+and χ
+2
+dihedrals were used as
+collective variables (CVs). These simulations reached con-
+vergence within 400 ns, in terms of the diffusive behavior of
+the simulations (Figures S3 and S4). The free energy surfaces
+(FES) for each enzyme as a function of the two chosen CVs
+are presented in Figure 8. The overall landscape is conserved
+across all enzyme variants, with several common basins
+(labeled from A to I), separated by high energy barriers
+Figure 7. Representative structures of the different tryptophan conformations explored in our MD simulations. The residues of the catalytic triad
+and the W-loop tryptophan are shown in sticks, the MD-derived conformers for the W-loop tryptophan are shown in yellow, and the
+crystallographic conformers A and B are shown in red and green, respectively. (A, B) MD simulations exploring these conformers, whereas the
+conformer D from Figure 4, shown in (C), is only explored in the MD simulations and corresponds to a 180° rotation of the tryptophan side chain
+relative to conformer B.
+Figure 8. Free energy landscapes of the conformational space sampled by the side chain of the W-loop tryptophan in parallel-tempered
+metadynamics simulations of the IsPETase-based H214/F218 and S214/I218 variants of IsPETase, BurPL, LCC, and Tf Cut. Free energy
+landscapes were generated as a function of the χ
+1
+and χ
+2
+dihedral angles. The minimum free energy value is set to zero in every graph. The
+corresponding energy barriers are tabulated in Table S1.
+ACS Organic & Inorganic Au pubs.acs.org/orginorgau Article
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+115
+(Figure 8 and Table S3). The D, E, and F basins correspond to
+the tryptophan side chain being oriented toward S/H214 and
+I/F218. In the F basin, the tryptophan is also proximal to the
+aspartic acid, in the I basin to the histidine and in the G basin
+to the serine of the catalytic triad, respectively. The H218/
+F222 variant of LCC and Tf Cut (either as H224/F228 or
+S224/I228) feature neither the F nor the I basins. The I basin
+is only present in the H214/F218 variant of IsPETase and
+H344/F348 variant of BurPL. For LCC and Tf Cut, the S218/
+I222 and S224/I228 mutations lower the barriers that connect
+the basins B, G, and E (Table S3). This is connected to an
+outward torsion of the tryptophan side chain (i.e., in the
+direction of the solvent), with the G basin corresponding to a
+conformation where the side chain shields the catalytic
+histidine from the solvent. The F basin in the S218/I222
+mutant of LCC consists of the tryptophan side chain located in
+proximity to the catalytic residues.
+Despite the overall topological similarities between the FES
+for each enzyme, important energetic differences are observed
+(Table S3). With the exception of BurPL, the different FES
+suggest that conformers A and B in the serine and isoleucine
+doubly substituted variants are nearly isoenergetic, in
+comparison to the energetic favorability of the B conformer
+in the histidine and phenylalanine variants. Since the
+neighboring side chains for these conformers are almost the
+same for all organisms, this probably arises from subtle
+dynamical effects of the W-loop. Specifically, for LCC and
+Tf Cut, this change in the energetics of the FES is accompanied
+by reductions of 4.4 and 3.3 kcal/mol in the relative free
+energy difference between the B and A basins, respectively
+(Table S3). These results suggest that the IsPETase-based
+S214/I218 substitutions result in enhanced “wobbling” of the
+W-loop tryptophan in these thermophilic enzymes, consistent
+with their 2- and 3-fold increase in activity against PET films.
+13
+Similarly, conformer D is energetically more favorable for the
+IsPETase-based S214/I218 PETase variants in comparison to
+the histidine and phenylalanine variants in almost all cases,
+except for BurPL.
+While our simulations are unable to elucidate the role of the
+new conformers observed by MD simulations for W185 in
+IsPETase and of the equivalent tryptophan residue in all
+variants of BurPL, Tf Cut, and LCC, recent works have
+provided valuable insights. Plastic degradation assays and MD
+simulations by Guo et al.
+50
+showed that PET polymers can
+bind in two different backbone conformations on the active
+site of IsPETase, trans (straight polymer conformation) and
+gauche (twisted polymer conformation), with a preferential
+selectivity for the gauche conformation that is abundant in PET
+films but absent in pretreated PET bottles. Interestingly, they
+design a trans-selective mutant (S238A) that has higher
+binding affinity to PET films than the wild-type enzyme and 3-
+fold higher activity against an all-trans PET substrate, which is
+enabled by W185 adopting conformer A to enable polymer
+binding in trans.
+50
+In addition, a similar work on computational and
+experimental engineering of IsPETase to enhance its activity
+against PET
+22
+shows that W185 in the wild-type enzyme
+adopts conformers different from B to establish parallel
+displaced interactions with the terephthalic ring in the
+lowest-energy, catalytically competent predicted pose. Con-
+versely, the W159H/S238F mutant, with higher activity against
+PET, binds the substrate in a conformer similar to B to
+establish T-shaped interactions. Moreover, when modeling the
+binding of polyethylene-2,5-furandicarboxylate (PEF), an
+emerging bioplastic for replacing PET that is also degraded
+by IsPETase, W185 adopts conformers similar to D and A in
+the wild-type and W159H/S238F mutant enzymes, respec-
+tively.
+■
+CONCLUSIONS
+In this work, we have performed a combination of MD and
+well-tempered metadynamics
+28
+simulations on four represen-
+tative PET hydrolases with different optimal temperatures for
+hydrolytic activity, with the goal of providing an atomistic
+explanation on why the IsPETase-based S214/I218 substitu-
+tion of two residues in the vicinity of the active site open cleft
+enhances the activity. Our investigation provides useful
+information regarding both the local dynamics of their active
+site. In particular, we have focused our attention on the
+flexibility of the active site and on the conformational plasticity
+of the side chain of a particularly important and highly
+conserved W-loop tryptophan, whose roles in the activity of
+these hydrolases have been previously demonstrated.
+14,20
+Our MD simulations illustrate that the S214/I218
+substitution results in enhanced flexibility of the active site
+loops (as demonstrated by their higher fluctuations), in
+particular loop D that is connected to the helix that harbors
+the substituted residues. In turn, this flexibility allows the W-
+loop tryptophan and the tyrosine residue with which it forms
+an active site aromatic clamp
+20
+to occupy distances compatible
+with conformers for substrate binding in the two mesophilic
+enzymes studied. Even though the volume of the active site
+and its fluctuations over time are essentially unaltered by the
+mutations, we can speculate that the shape of the external part
+of the open cleft is, in the case of the IsPETase-based S214/
+I218 variants, amenable to accommodate the binding of a PET
+chain in the early stages of the overall degradation process.
+Validating this requires simulations that include the substrate
+docked into the binding pocket; whether this flexibility does in
+fact help substrate binding or product release will be a very
+interesting topic for future modeling studies. It is also clear that
+at the level of the global scaffold, the communication pathways
+differ by both organism and variant, which affects the flexibility
+of key loops and in turn the conformational sampling of the
+conserved tryptophan.
+Regarding the conserved tryptophan, the unbiased MD
+simulations visited additional conformers A, D, and E for the
+IsPETase-based S214/I218 variants of PET hydrolases on a
+500 ns timescale. Meanwhile, the free energy surfaces emerging
+from thorough exploration via metadynamics show how
+rotating through different basins is more likely in these PET
+hydrolase variants (which is true in general but it is particularly
+important for basins A and B), after elimination of the steric
+effects caused by the conserved histidine and phenylalanine
+residues.
+14,15
+This enhanced rotation could be important for
+facilitating substrate binding and product release.
+Prior work has proposed that these rotations of the
+conserved tryptophan are required to provide optimal aromatic
+interactions for the stabilization of substrate binding.
+22
+Our
+insights complement these observations, suggesting that easy
+access and switch between different conformers of the
+conserved tryptophan is required for productive binding of
+different substrate conformations and possibly for product
+release to enable continued hydrolysis. The latter requires PET
+hydrolysis experiments in the presence of degradation products
+and simulations of enzyme−product complexes addressing the
+ACS Organic & Inorganic Au pubs.acs.org/orginorgau Article
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+116
+molecular mechanisms of exiting the active site of PET
+hydrolases.
+Evolutionary conformational selection is not unique to PET
+hydrolases: de novo designed Kemp eliminases such as the
+HG3
+51
+and KE07
+52,53
+series also possess conformational
+flexible and catalytically important tryptophan side chains in
+their active sites, the conformations of which are optimized
+during directed evolution. Similarly, laboratory evolution of an
+organophosphate hydrolase, serum paraoxonase 1, showed
+similar conformational effects in key active site residues along
+the evolutionary trajectory.
+54
+Similarly to these systems, our
+results suggest that engineering of PET hydrolases with
+mutations that enable conformational selection of the
+conserved tryptophan, such as S214/I218 and the S238A
+mutation in IsPETase, could lead to predefined active site
+conformations matching the polymer conformations in PET
+materials and enable higher catalytic efficiency. Further
+computational and experimental work is necessary to explore
+how different tryptophan conformations enable higher catalytic
+activity in natural and engineered PET hydrolases.
+■
+ASSOCIATED CONTENT
+Data Availability Statement
+The data underlying this study are available in the published
+article and its online supplementary material. A companion
+data package including input files, starting structures, and
+simulation snapshots has been submitted to Zenodo at the
+following DOI: 10.5281/zenodo.7158149.
+*
+sı
+Supporting Information
+The Supporting Information is available free of charge at
+https://pubs.acs.org/doi/10.1021/acsorginorgau.2c00054.
+RMSD of production runs for molecular dynamics and
+equilibration runs for metadynamics simulations;
+diffusive behavior of the metadynamics simulations;
+additional structural analysis; and free energy differences
+between the different conformational states (PDF)
+■
+AUTHOR INFORMATION
+Corresponding Authors
+Shina C. L. Kamerlin − Department of Chemistry�BMC,
+Uppsala University, S-751 23 Uppsala, Sweden; School of
+Chemistry and Biochemistry, Georgia Institute of Technology,
+Atlanta, Georgia 30332-0400, United States;
+ orcid.org/
+0000-0002-3190-1173; Email: skamerlin3@gatech.edu
+César A. Ramírez-Sarmiento − Institute for Biological and
+Medical Engineering, Schools of Engineering, Medicine and
+Biological Sciences, Pontificia Universidad Católica de Chile,
+Santiago 7820436, Chile; ANID�Millennium Science
+Initiative Program�Millennium Institute for Integrative
+Biology (iBio), Santiago 8331150, Chile;
+ orcid.org/0000-
+0003-4647-903X; Email: cesar.ramirez@uc.cl
+Authors
+Alessandro Crnjar − Department of Chemistry�BMC,
+Uppsala University, S-751 23 Uppsala, Sweden
+Aransa Grin ̃ en − Institute for Biological and Medical
+Engineering, Schools of Engineering, Medicine and Biological
+Sciences, Pontificia Universidad Católica de Chile, Santiago
+7820436, Chile; ANID�Millennium Science Initiative
+Program�Millennium Institute for Integrative Biology
+(iBio), Santiago 8331150, Chile
+Complete contact information is available at:
+https://pubs.acs.org/10.1021/acsorginorgau.2c00054
+Author Contributions
+⊥
+A.C. and A.G. contributed equally to this work. CRediT:
+Alessandro Crnjar conceptualization (equal), data curation
+(equal), formal analysis (equal), investigation (equal), method-
+ology (equal), writing-original draft (equal), writing-review &
+editing (equal); Aransa Grin ̃ en formal analysis (equal),
+investigation (equal), writing-original draft (equal), writing-
+review & editing (equal); Shina C. L. Kamerlin conceptual-
+ization (equal), data curation (equal), formal analysis (equal),
+funding acquisition (equal), investigation (equal), method-
+ology (equal), project administration (equal), resources
+(equal), software (equal), supervision (equal), validation
+(equal), writing-original draft (equal), writing-review & editing
+(equal); Cesar A. Ramirez-Sarmiento conceptualization
+(equal), data curation (equal), formal analysis (equal), funding
+acquisition (equal), investigation (equal), methodology
+(equal), project administration (equal), resources (equal),
+software (equal), supervision (equal), validation (equal),
+visualization (equal), writing-original draft (equal), writing-
+review & editing (equal).
+Notes
+The authors declare no competing financial interest.
+■
+ACKNOWLEDGMENTS
+This research was funded by the National Agency for Research
+and Development (ANID) and the Sa ̃o Paulo Research
+Foundation (grant ANID-FAPESP 2019/13259-9), the
+ANID Millennium Science Initiative Program (grant
+ICN17_022), and the Knut and Alice Wallenberg Foundation
+(grant nos. 2018.0140 and 2019.0431). Aransa Grin ̃ en was
+supported by an ANID doctoral scholarship (PFCHA
+21220450). Powered@NLHPC: This research was partially
+supported by the supercomputing infrastructure of the
+NLHPC (ECM-02). Further simulations were enabled by
+resources provided by the Swedish National Infrastructure for
+Supercomputing (SNIC: SNIC2020-3-1 and SNIC2021-3-1),
+partially funded by the Swedish Research Council [Grant
+2016-07213].
+■
+REFERENCES
+(1) Geyer, R.; Jambeck, J. R.; Lavender Law, K. Production, Use,
+and Fate of All Plastics Ever Made. Sci. Adv. 2017, 3, No. e1700782.
+(2) Schyns, Z. O. G.; Shaver, M. P. Mechanical Recycling of
+Packaging Plastics: A Review. Marcomol. Rapid Commun. 2021, 42,
+No. e2000415.
+(3) La Mantia, F. P.; Vinci, M. Recycling Poly-
+(ethyleneterephthalate). Polym. Degrad. Stab. 1994, 45, 121−125.
+(4) Hong, M.; Chen, E. Y.-X. Chemically Recyclable Polymers: A
+Circular Economy Approach to Sustainability. Green Chem. 2017, 19,
+3692−3706.
+(5) Kawai, F.; Kawabata, T.; Oda, M. Current Knowledge on
+Enzymatic PET degradation and its Possible Application to Waste
+Stream Management and Other Fields. Appl. Microbiol. Biotechnol.
+2019, 103, 4253−4268.
+(6) Taniguchi, I.; Yoshida, S.; Hiraga, K.; Miyamoto, K.; Kimura, Y.;
+Oda, K. Biodegradation of PET: Current Status and Application
+Aspects. ACS Catal. 2019, 9, 4089−4105.
+(7) Salvador, M.; Abdulmutalib, U.; Gonzalez, J.; Kim, J.; Smith, A.
+A.; Faulon, J.-L.; Wei, R.; Zimmermann, W.; Jimenez, J. I. Microbial
+Genes for a Circular and Sustainable Bio-PET Economy. Genes 2019,
+10, 373.
+ACS Organic & Inorganic Au pubs.acs.org/orginorgau Article
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+117
+(8) Wei, R.; Zimmermann, W. Microbial Enzymes for the Recycling
+of Recalcitrant Petroleum-Based Plastics: How Far Are We? Microb.
+Biotechnol. 2017, 10, 1308−1322.
+(9) Sonnendecker, C.; Oeser, J.; Richter, P. K.; Hille, P.; Zhao, Z.;
+Fischer, C.; Lippold, H.; Blázquez-Sánchez, P.; Engelberger, F.;
+Ramírez-Sarmiento, C. A.; Oeser, T.; Lihanova, Y.; frank, R.; Jahnke,
+H.-G.; Billig, S.; Abel, B.; Sträter, N.; Matysik, J.; Zimmermann, W.
+Low Carbon Footprint Recyclinc of Post-Consumer PET Plastic with
+a Metagenomic Polyester Hydrolase. ChemSusChem 2022, 15,
+No. e202101062.
+(10) Thomsen, T. B.; Hunt, C. J.; Meyer, A. S. Influence of Substrate
+Crystallinity and Glass Transition Temperature on Enzymatic
+Degradation of Polyethylene Terephthalate (PET). New Biotechnol.
+2022, 69, 28−35.
+(11) Yoshida, S.; Hiraga, K.; Takahena, T.; Taniguchi, I.; Yamaji, H.;
+Maeda, Y.; Toyohara, K.; Miyamoto, K.; Kimura, Y.; Oda, K. A
+Bacterium That Degrades and Assimilates Poly(ethylene terephtha-
+late). Science 2016, 351, 1196−1199.
+(12) Wei, R.; von Haugwitz, G.; Pfaff, L.; Mican, J.; Badenhorst, C.
+P. S.; Liu, W.; Weber, G.; Austin, H. P.; Bednar, D.; Damborsky, J.;
+Bornscheuer, U. T. Mechanism-Based Design of Efficient PET
+Hydrolases. ACS Catal. 2022, 12, 3382−3396.
+(13) Chen, C.-C.; Han, X.; Li, X.; Jiang, P.; Niu, D.; Ma, L.; W, L.;
+Li, S.; Qu, Y.; Hu, H.; Min, J.; Yang, Y.; Zhang, L.; Zeng, W.; Huang,
+J.-W.; Dai, L.; Guo, R.-T. General Features to Enhance Enzymatic
+Activity of Poly(ethylene Terephthalate) Hydrolysis. Nat. Catal.
+2021, 4, 425−430.
+(14) Han, X.; Liu, W.; Huang, J.-W.; Ma, J.; Zheng, Y.; Ko, T.-P.;
+Xu, L.; Cheng, Y.-S.; Chen, C.-C.; Guo, R.-T. Structural Insight into
+Catalytic Mechanism of PET Hydrolase. Nat. Commun. 2017, 8,
+No. 2106.
+(15) Chen, C.-C.; Han, X.; Ko, T.-P.; Liu, W.; Guo, R.-T. Structural
+Studies Reveal the Molecular Mechanism of PETase. FEBS J. 2018,
+285, 3717−3723.
+(16) Jerves, C.; Neves, R. P. P.; Ramos, M. J.; da Silva, S.; Fernandes,
+P. A. Reaction Mechanism of the PET Degrading Enzyme PETase
+Studied with DFT/MM Molecular Dynamics Simulations. ACS Catal.
+2021, 11, 11626−11638.
+(17) Pinto, A. V.; Ferreira, P.; Neves, R. P. P.; Fernandes, P. A.;
+Ramos, M. J.; Magalhães, A. L. Reaction Mechanism of MHETase, a
+PET Degrading Enzyme. ACS Catal. 2021, 11, 10416−10428.
+(18) Boneta, S.; Arafet, K.; Moliner, V. QM/MM Study of the
+Enzymatic Biodegradation Mechanism of Polyethylene Terephthalate.
+J. Chem. Inf. Model. 2021, 61, 3041−3051.
+(19) Magalha ̃es, R. P.; Fernandes, H. S.; Sousa, S. F. The Critical
+Role of Asp206 Stabilizing Residues on the Catalytic Mechanism of
+the Ideonella sakaiensis PETase. Catal. Sci. Technol. 2022, 12, 3474−
+3483.
+(20) Fecker, T.; Galaz-Davison, P.; Engelberger, F.; Narui, Y.;
+Sotomayor, M.; Parra, L. P.; Ramírez-Sarmiento, C. A. Active Site
+Flexibility as a Hallmark for Efficient PET Degradation by I. sakaiensis
+PETase. Biophys. J. 2018, 114, 1302−1312.
+(21) da Costa, C. H. S.; Santos, Dos.; Alves, A. M.; Martí, C. N.;
+Moliner, S.; Santana, V.; Lameira, K.; Assessment, J. of the PETase
+Conformational Changes Induced by Poly(Ethylene Teraphthalate)
+Binding. Proteins: Struct., Funct., Bioinf. 2021, 89, 1340−1352.
+(22) Austin, H. P.; Allen, M. D.; Donohoe, B. S.; Rorrer, N. A.;
+Keanr, F. L.; Silveira, R. L.; Pollard, B. C.; Dominick, G.; Duman, R.;
+El Omari, K.; Mykhaylyk, V.; Wagner, A.; Michener, W. E.; Amore,
+A.; Skaf, M. S.; Crowley, M. F.; Thorne, A. W.; Johnson, C. W.;
+Woodcock, H. L.; McGeehan, J. E.; Beckham, G. T. Characterization
+and Engineering of a Plastic-Degrading Aromatic Polyesterase. Proc.
+Natl. Acad. Sci. U.S.A. 2018, 115, E4350−E4357.
+(23) Knott, B. C.; Erickson, E.; Allen, M. D.; Gado, J. E.; Graham,
+R.; Kearns, F. L.; Pardo, I.; Topuzlu, E.; Anderson, J. J.; Austin, H. P.;
+Dominick, G.; Johnson, C. W.; Rorrer, N. A.; Skostkiewicz, C. J.;
+Copié, V.; Payne, C. M.; Woodcock, H. L.; Donohoe, B. S.; Beckham,
+G. T.; McGeehan, J. E. Characterization and Engineering of a Two-
+Enzyme System for Plastics Depolymerization. Proc. Natl. Acad. Sci.
+U.S.A. 2020, 117, 25476−25485.
+(24) Lu, H.; Diaz, D. J.; Czarnecki, N. J.; Zhu, C.; Kim, W.; Shroff,
+R.; Acosta, D. J.; Alexander, B. R.; Cole, H. O.; Zhang, Y.; Lynd, N.
+A.; Ellington, A. D.; Alper, H. S. Machine Learning-Aided Engineering
+of Hydrolases for PET Depolymerization. Nature 2022, 604, 662−
+667.
+(25) Joho, Y.; Vongsouthi, V.; Spence, M. A.; Ton, J.; Gomez, C.;
+Tan, L. L.; Kaczmarski, J. A.; Caputo, A. T.; Royan, S.; Jackson, C. J.;
+Ardevol, A. Ancestral Sequence Reconstruction Identifies Structural
+Changes Underlying the Evolution of Ideonella sakaiensis PETase and
+Variants with Improved Stability and Activity. Biochemistry 2022,
+DOI: 10.1021/acs.biochem.2c00323.
+(26) Mu ̈ ller, R.-J.; Schrader, H.; Profe, J.; Dresler, K.; Deckwer, W.-
+D. Enzymatic Degradation of Poly(ethylene Terephthalate): Rapid
+Hydrolysis Using a Hydrolase from T. f usca. Macromol. Rapid
+Commun. 2005, 26, 1400−1405.
+(27) Sulaiman, S.; Yamoto, S.; Kanaya, E.; Kim, J.-J.; Koga, Y.;
+Takano, K.; Kanaya, S. Isolation of a Novel Cutinase Homolog with
+Polyethylene Terephthalate-Degrading Activity from Leaf-Branch
+Compost Using a Metagenomic Approach. Appl. Environm. Microbiol.
+2012, 78, 1556−1562.
+(28) Barducci, A.; Bussi, G.; Parrinello, M. Well-Tempered
+Metadynamics: A Smoothly Converging and Tunable Free-Energy
+Method. Phys. Rev. Lett. 2008, 100, No. 020603.
+(29) Berman, H. M.; Westbrook, J.; Feng, Z.; Gilliland, G.; Bhat, T.
+N.; Weissig, H.; Shindyalov, I. N.; Bourne, P. E. The Protein Data
+Bank. Nucleic Acids Res. 2000, 28, 235−242.
+(30) Dong, Q.; Yuan, S.; Wu, L.; Su, L.; Zhao, Q.; Wu, J.; Huang,
+W.; Zhuo, J. Structure-Guided Engineering of a Thermobifida fusca
+Cutinase for Enhanced Hydrolysis on Natural Polyester Substrate.
+Bioresour. Bioprocess. 2020, 7, No. 37.
+(31) The PyMOL Molecular Graphics System; Schro ̈ dinger, LLC.
+(32) The Uniprot Consortium. UniProt: The Universal Protein
+Knowledgebase. Nucelic Acids Res. 2018, 46, 2699.
+(33) Case, D. A.; Belfon, K.; Ben-Shalom, I. Y.; Brozell, S. R.;
+Cerutti, D. S.; Cheatham, T. E., III; Cruzeiro, V. W. D.; Darden, T. A.;
+Duke, R. E.; Giambasu, G.; Gilson, M. K.; Gohlke, H.; Goetz, A. W.;
+Harris, R.; Izadi, S.; Izmailov, S. A.; Kasavajhala, K.; Kovalenko, A.;
+Krasny, R.; Kurtzman, T.; Lee, T. S.; LeGrand, S.; Li, P.; Lin, C.; Liu,
+J.; Luchko, T.; Luo, R.; Man, V.; Merz, K. M.; Miao, Y.; Mikhailovskii,
+O.; Monard, G.; Nguyen, H.; Onufriev, A.; Pan, F.; Pantano, S.; Qi,
+R.; Roe, D. R.; Roitberg, A.; Sagui, C.; Schott-Verdugo, S.; Shen, J.;
+Simmerling, C. L.; Skyrnnikov, N. R.; Smith, J.; Swails, J.; Walker, R.
+C.; Wang, J.; Wilson, L.; Wolf, R. M.; Wu, X.; Xiong, Y.; Xue, Y.;
+York, D. M.; Kollman, P. A. AMBER 2020; University of California:
+San Francisco, 2020.
+(34) Maier, J. A.; Martinez, C.; Kasavajhala, K.; Wickstrom, L.;
+Hauser, K. E.; Simmerling, C. FF14SB: Improving the Accuracy of
+Protein Side Chain and Backbone Parameters from FF99SB. J. Chem.
+Theory. Comput. 2015, 11, 3696−3713.
+(35) Jorgensen, W. L.; Chandrasekhar, J.; Madura, J. D.; Impey, R.
+W.; Klein, M. L. Comparison of Simple Potential Functions for
+Simulating Liquid Water. J. Chem. Phys. 1983, 79, 926−935.
+(36) Anandakrishnan, R.; Aguilar, B.; Onufriev, A. V. H++ 3.0:
+Atomatic pK Prediction and the Preparation of Biomolecular
+Structures for Atomistic Molecular Modeling and Simulations. Nucleic
+Acids Res. 2012, 40, W537−W541.
+(37) Pastor, R. W.; Brooks, B. R.; Szabo, A. An Analysis of the
+Accuracy of Langevin and Molecular Dynamics Algorithms. Mol. Phys.
+1988, 65, 1409−1419.
+(38) Berendsen, H. J. C.; Postma, J. P. M.; van Gunsteren, W. F.;
+DiNola, A.; Haak, J. R. Molecular Dynamics with Coupling to an
+External Bath. J. Chem. Phys. 1984, 81, 3684−3690.
+(39) Ryckaert, J.-P.; Ciccotti, G.; Berendsen, H. J. C. Numerical
+Integration of the Cartesian Equations of Motion of a System with
+Constraints: Molecular Dynamics of n-Alkanes. J. Comput. Phys. 1977,
+23, 327−341.
+ACS Organic & Inorganic Au pubs.acs.org/orginorgau Article
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+118
+(40) Darden, T.; York, D.; Pedersen, L. Particle Mesh Ewald: An N·
+log(N) Method for Ewald Sums in Large Systems. J. Chem. Phys.
+1993, 98, 10089−10092.
+(41) Tribello, G. A.; Bonomi, M.; Branduardi, D.; Camilloni, C.;
+Bussi, G. PLUMED 2: New Feathers for an Old Bird. Comput. Phys.
+Commun. 2014, 185, 604−613.
+(42) Laio, A.; Parrinello, M. Escaping Free Energy Minima. Proc.
+Natl. Acad. Sci. U.S.A. 2002, 99, 12562−12566.
+(43) Tiwary, P.; Parrinello, M. A.; Time-Independent, A. Free
+Energy Estimator for Metadynamics. J. Phys. Chem. B 2015, 119,
+736−742.
+(44) Roe, D. R.; Cheatham, T. E. PTRAJ and CPPTRAJ: Software
+for Processing and Analysis of Molecular Dynamics Trajectory Data. J.
+Chem. Theory. Comput. 2013, 9, 3084−3095.
+(45) Michaud-Agrawal, N.; Denning, E. J.; Woolf, T. B.; Beckstein,
+O. MDAnalysis: A Tool for the Analysis of Molecular Dynamics
+Simulations. J. Comput. Chem. 2011, 32, 2319−2327.
+(46) Gowers, R.; Linke, M.; Barnoud, J.; Reddy, T.; Melo, M.;
+Seyler, S.; Domanski, J.; Dotson, D.; Buchoux, S.; Kenney, I.;
+Beckstein, O. In MDAnalysis: A Python Package for the Rapid Analysis
+of Molecular Dynamics Simulations, Proceedings of the 15th Python in
+Science Conference, 2016.
+(47) Wagner, J. R.; Sørensen, J.; Hensley, N.; Wong, C.; Zhu, C.;
+Perison, T.; Amaro, R. E. POVME 3.0: Software for Mapping Binding
+Pocket Flexibility. J. Chem. Theory Comput. 2017, 13, 4584−4592.
+(48) Romero-Rivera, A.; Garcia-Borras, M.; Osuna, S. Role of
+Conformational Dynamics in the Evolution of Retro-Aldolase
+Activity. ACS Catal. 2017, 7, 8524−8532.
+(49) Joo, S.; Cho, I. J.; Seo, H.; Son, H. F.; Sagong, H.-Y.; Shin, T. J.;
+Choi, S. Y.; Lee, S. Y.; Kim, K.-J. Structural Insight Into Molecular
+Mechanism of Poly(Ethylene Terephthalate) Degradation. Nat.
+Commun. 2018, 9, No. 382.
+(50) Guo, B.; Vanga, S. R.; Lopez-Loreno, X.; Saenz-Mendez, P.;
+Ericsson, S. R.; Fang, Y.; Ye, X.; Schriever, K.; Bäckström, E.; Biundo,
+A.; Zubarev, R. A.; Furó, I.; Hakkarainen, M.; Syrén, P.-O.
+Conformational Selection in Biocatalytic Plastic Degradation by
+PETase. ACS Catal. 2022, 12, 3397−3409.
+(51) Blomberg, R.; Kries, H.; Pinkas, D. M.; Mittl, P. R. E.; Gru ̈ tter,
+M. G.; Privett, H. K.; Mayo, S. L.; Hilvert, D. Precision is Essential for
+Efficient Catalysis in an Evolved Kemp Eliminase. Nature 2013, 503,
+418−421.
+(52) Röthlisberger, D.; Khersonsky, O.; Wollacott, A. W.; Jiang, L.;
+DeChancie, J.; Betker, J.; Gallaher, J. L.; Althoff, E. A.; Zanghellini, A.;
+Dym, O.; Albeck, S.; Houk, K. N.; Tawfik, D. S.; Baker, D. Kemp
+Elimination Catalysts by Computational Enzyme Design. Nature
+2008, 453, 190−195.
+(53) Hong, N.-S.; Petrovic, D.; Lee, R.; Gryn’ova, G.; Purg, M.;
+Saunders, J.; Bauer, P.; Carr, P. D.; Lin, C.-Y.; Mabbitt, P. D.; Zhang,
+W.; Altamore, T.; Easton, C.; Coote, M. L.; Kamerlin, S. C. L.;
+Jackson, C. J. The Evolution of Multiple Active Site Configurations in
+a Designed Enzyme. Nat. Commun. 2018, 9, No. 3900.
+(54) Ben-David, M.; Soskine, M.; Dubovetskyi, A.; Cherukuri, K.-P.;
+Dym, O.; Sussman, J. L.; Liao, Q.; Szeler, K.; Kamerlin, S. C. L.;
+Tawfik, D. S. Enzyme Evolution: An Epistatic Ratchet versus a
+Smooth Reversible Transition. Mol. Biol. Evol. 2020, 37, 1133−1147.
+ACS Organic & Inorganic Au pubs.acs.org/orginorgau Article
+https://doi.org/10.1021/acsorginorgau.2c00054
+ACS Org. Inorg. Au 2023, 3, 109−119
+119

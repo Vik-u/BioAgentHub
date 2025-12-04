@@ -1,0 +1,611 @@
+{
+  "question": "Using the ω-transaminase literature you have access to, generate a detailed workflow to test and optimize ω-TAs for synthesizing a target chiral amine from a prochiral ketone. Give step-by-step reasoning first, then the full sequential protocol.",
+  "experimental_sections": [
+    {
+      "score": 0.3932777941226959,
+      "id": "CHEM-28-0:experimental_sections:0",
+      "section_type": "experimental",
+      "heading": "Because of the potentially different experimental conditions",
+      "paper": "Computational Insights into the Catalytic Mechanism of",
+      "pdf_file": "CHEM-28-0.pdf",
+      "text": "and the uncertainties in our calculated numbers mentioned\nabove, direct comparison of computed and observed kinetic\nquantities is difficult. It has also been suggested that as the\nsubstrate of this reaction is non-aqueous, classical Michaelis–\nMenten kinetics cannot be used to relate reaction rates to\ncalculated energy barriers.\n[25]\nThese energy barriers calculated in this work are suitably\nlow to suggest that none of the hydrolysis steps catalysed by Is-\nPETase constitute its rate-limiting step. By a process of\nelimination, this leaves either substrate binding or product\nrelease as candidates for the rate limiting step. This is consistent\nwith the findings from site-directed mutagenesis studies, where\nthe largest improvements in enzyme activity were obtained\nthrough mutations that are thought to affect binding.\nIn several calculation steps starting from six MD snapshots,\nthe product geometry (Figure 2) was not found to be stable,\ninstead forming an alternate product state aPS (Figure 7). The\ncarboxylic moiety of the ligand was deprotonated, having\ntransferred to the side-chain oxygen of S131 causing the ɛ-\nnitrogen on H208 and the carboxyl of D177 to be protonated.\nThe energy of this state was calculated to be up to\n\u0000 137.4 kJ mol\n\u0000 1\nmore stable relative to the geometry of\nintermediate 4 that preceded it (Figure 5). Subsequent MD\nsimulations of the aPS state revealed that the deprotonated\nproduct forms strong hydrogen bonds with the active site\nresidues (Figure 6). This caused the ligand to persist in the\nactive site for up to 1 ns. This tendency for the product to\ndeprotonate while inside the active site might thus result in a\nsubstantial energy barrier in the product release step of the\nreaction. This would significantly hinder the enzyme’s catalytic\nefficiency."
+    }
+  ],
+  "computational_sections": [
+    {
+      "score": 0.3889310657978058,
+      "id": "2024.07.04.602061v1.full:computational_sections:0",
+      "section_type": "computational",
+      "heading": "The field of computational design of thermostable proteins is relatively mature, with several established",
+      "paper": "1",
+      "pdf_file": "2024.07.04.602061v1.full.pdf",
+      "text": "available methods that can help to generate a library of mutants and rank them. The easiest and more \ncommon approach involves the introduction of one or more  disulphide bonds, which can rigidify the \nbackbone of the protein and make it more stable. Other stabilization methods generally aim at extending \nthe intramolecular hydrogen bonding network, creating inter-molecular salt-bridges, or providing a better \npacking of the hydrophobic core (e.g., PROSS ).29 The Rosetta Supercharge method is meant to improve \nthe stability of the protein by making the surface more hydrophilic, a feature that is usually  associated \nwith more stable proteins.30"
+    },
+    {
+      "score": 0.38892775774002075,
+      "id": "2024.07.04.602061v1.full:computational_sections:1",
+      "section_type": "computational",
+      "heading": "In the first stage of our in silico enzyme engineering campaign, starting from the LCC-ICCG crystal structure",
+      "paper": "1",
+      "pdf_file": "2024.07.04.602061v1.full.pdf",
+      "text": "(PDB code 6THS) we used three different protein design tools to generate a library of potentially stabilized \nenzyme variants. The use of the Rosetta Supercharge method,30 which aimed at increasing the charge on \nthe surface of the enzyme, led to the design of 1000 enzyme variants, from which those 10 that featured \nthe best Rosetta score (which we named C01 -C10) were selected for further analysis. PROSS design 29 \nproduced 9 variants (P01 -P09), and disulfide bond design 31 identified 125 enzyme variants, from which \nwe selected the best 10, named X01-X10."
+    },
+    {
+      "score": 0.3830655813217163,
+      "id": "2025.09.28.679094v1.full:computational_sections:7",
+      "section_type": "computational",
+      "heading": "In this study, we employed QuantaMind MD, a MLFF trained on diverse high-level quantum",
+      "paper": "Cinematic",
+      "pdf_file": "2025.09.28.679094v1.full.pdf",
+      "text": "mechanical (QM) data with an emphasis on transition-state regimes, to simulate the complete\ncatalytic cycle of the PETase enzyme over 400 ps of simulation time. Our simulations capture\nkey proton transfer events throughout the reaction, consistent with mechanisms reported in\nprevious studies. 19–26 Distance analysis underscores the critical role of the backbone amide\nnitrogens of Y95 and M166, which function as the \"oxyanion hole\" by forming hydrogen\nbonds that stabilize the carbonyl oxygen atom throughout the reaction.\nThe free energy analysis provides quantitative insights into the reaction activation ener-\ngies. Our simulations estimate free energy barriers of 22 and 20 kcal/mol for the acylation\nand deacylation steps, respectively, following the lower bound path. These values are rela-\ntively close to the estimated experimental value of 18.7 kcal/mol 2,24 and the calculated value\nof 21.1 kcal/mol by Boneta et al. 24 Nevertheless, we acknowledge several limitations aﬀect-\ning the accuracy of the free energy barrier estimation. The large error bars primarily stem\nfrom the relatively short simulation time, necessitating longer simulations for QuantaMind to\nsample suﬃcient conﬁgurations and converge the mean force. Additionally, in the acylation\nstep, the nucleophilic attack and C-O bond cleavage may proceed in a concerted rather than\nsequential fashion. 19 Thus, a two-dimensional distance scan is required to construct the full\npotential energy surface and determine the lowest energy path. A similar approach applies\nto the deacylation reaction’s two sub-steps.\nFinally, as a DL-based model, QuantaMind relies heavily on its training data. While\nthe training of QuantaMind signiﬁcantly considers transition-state geometries, 34 additional\ntraining data would be beneﬁcial, particularly for estimating energy barriers. The transition-\nstate structures sampled in this work provide a valuable source of geometries that can be\nfurther optimized at the DFT level. These calculations can serve as additional training data\nto iteratively enhance the QuantaMind model, improving its accuracy and applicability to\nserine hydrolase-related biomolecular systems.\n12\n(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. \nThe copyright holder for this preprintthis version posted September 30, 2025. ; https://doi.org/10.1101/2025.09.28.679094doi: bioRxiv preprint \nOv\nerall, this work demonstrates the versatility of QuantaMind MD as a powerful tool for\nsimulating enzymatic reactions in explicit water solvents with ab initio accuracy. Beyond\nPETase, this framework can be readily extended to a wide range of enzyme classes. Looking\nforward, we envision that this MLFF-based methodology will not only complement but\nultimately supersede traditional QM/MM approaches, eliminating the need for artiﬁcial\nsystem partitioning while retaining quantum-level accuracy at accessible computational cost.\nWith continued reﬁnement, QuantaMind MD has the potential to establish a new paradigm\nfor studying enzymatic catalysis and biomolecular reactivity."
+    }
+  ],
+  "results_sections": [],
+  "parameter_edges": [
+    {
+      "score": 0.41339126229286194,
+      "text": "Articles outcome In the future, we anticipate that by adapting the selection pres -\nsures of our directed evolution workflows, we will be able to engi -\nneer a suite of useful biocatalysts with complementary functions \nand improved activities under process-relevant conditions.. Evidence: In the future, we anticipate that by adapting the selection pres -\nsures of our directed evolution workflows, we will be able to engi -\nneer a suite of useful biocatalysts with complementary functions \nand improved activities under process-relevant conditions.",
+      "metadata": {
+        "paper": "Articles",
+        "pdf_file": "s41929-022-00821-3.pdf",
+        "section_type": "results",
+        "heading": "Conclusions",
+        "relation": "outcome",
+        "value": "In the future, we anticipate that by adapting the selection pres -\nsures of our directed evolution workflows, we will be able to engi -\nneer a suite of useful biocatalysts with complementary functions \nand improved activities under process-relevant conditions.",
+        "sentence": "In the future, we anticipate that by adapting the selection pres -\nsures of our directed evolution workflows, we will be able to engi -\nneer a suite of useful biocatalysts with complementary functions \nand improved activities under process-relevant conditions."
+      }
+    },
+    {
+      "score": 0.4094770848751068,
+      "text": "1 outcome 194 \nWhile we achieve d high conversion to pXYL from TPA  using pH adjustment, we next 195 \naimed to produce amines without pH adjustment using MHET or BHET as starting substrates.. Evidence: 194 \nWhile we achieve d high conversion to pXYL from TPA  using pH adjustment, we next 195 \naimed to produce amines without pH adjustment using MHET or BHET as starting substrates.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2025.10.01.679844v1.full.pdf",
+        "section_type": "results",
+        "heading": "Results 88",
+        "relation": "outcome",
+        "value": "194 \nWhile we achieve d high conversion to pXYL from TPA  using pH adjustment, we next 195 \naimed to produce amines without pH adjustment using MHET or BHET as starting substrates.",
+        "sentence": "194 \nWhile we achieve d high conversion to pXYL from TPA  using pH adjustment, we next 195 \naimed to produce amines without pH adjustment using MHET or BHET as starting substrates."
+      }
+    },
+    {
+      "score": 0.40530961751937866,
+      "text": "1 outcome We anticipate that the further improvement o f the enzyme towards 211 \npractical applications will necessitate the implementation of a dditional engineering 212 \ntechniques, such as directed evolution and computational design.. Evidence: We anticipate that the further improvement o f the enzyme towards 211 \npractical applications will necessitate the implementation of a dditional engineering 212 \ntechniques, such as directed evolution and computational design.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2023.04.17.537204v1.full.pdf",
+        "section_type": "computational",
+        "heading": "Genomic mining and in silico analysis of distant cutinase homologs 108",
+        "relation": "outcome",
+        "value": "We anticipate that the further improvement o f the enzyme towards 211 \npractical applications will necessitate the implementation of a dditional engineering 212 \ntechniques, such as directed evolution and computational design.",
+        "sentence": "We anticipate that the further improvement o f the enzyme towards 211 \npractical applications will necessitate the implementation of a dditional engineering 212 \ntechniques, such as directed evolution and computational design."
+      }
+    },
+    {
+      "score": 0.4030302166938782,
+      "text": "Current advances in the structural action The results showed that the chimeric\nproteins all exhibit markedly improved PET and MHET turnover\ncompared with the single free enzyme or the mixed two free\nenzymes.. Evidence: The results showed that the chimeric\nproteins all exhibit markedly improved PET and MHET turnover\ncompared with the single free enzyme or the mixed two free\nenzymes.",
+      "metadata": {
+        "paper": "Current advances in the structural",
+        "pdf_file": "fbioe-11-1263996.pdf",
+        "section_type": "computational",
+        "heading": "In addition, molecular simulation indicated that the lid could be",
+        "relation": "action",
+        "value": "The results showed that the chimeric\nproteins all exhibit markedly improved PET and MHET turnover\ncompared with the single free enzyme or the mixed two free\nenzymes.",
+        "sentence": "The results showed that the chimeric\nproteins all exhibit markedly improved PET and MHET turnover\ncompared with the single free enzyme or the mixed two free\nenzymes."
+      }
+    },
+    {
+      "score": 0.3956989347934723,
+      "text": "RESEARCH ARTICLE action Additionally, one amino acid could\nnot be derived from the structural alignment withIsPE-\nTase due to the existence of another extended loop at\nthis position.. Evidence: Additionally, one amino acid could\nnot be derived from the structural alignment withIsPE-\nTase due to the existence of another extended loop at\nthis position.",
+      "metadata": {
+        "paper": "RESEARCH ARTICLE",
+        "pdf_file": "PRO-34-e70305.pdf",
+        "section_type": "results",
+        "heading": "In conclusion, we observed that conserved features",
+        "relation": "action",
+        "value": "Additionally, one amino acid could\nnot be derived from the structural alignment withIsPE-\nTase due to the existence of another extended loop at\nthis position.",
+        "sentence": "Additionally, one amino acid could\nnot be derived from the structural alignment withIsPE-\nTase due to the existence of another extended loop at\nthis position."
+      }
+    },
+    {
+      "score": 0.3954015076160431,
+      "text": "Current advances in the structural outcome The results showed that the chimeric\nproteins all exhibit markedly improved PET and MHET turnover\ncompared with the single free enzyme or the mixed two free\nenzymes.. Evidence: The results showed that the chimeric\nproteins all exhibit markedly improved PET and MHET turnover\ncompared with the single free enzyme or the mixed two free\nenzymes.",
+      "metadata": {
+        "paper": "Current advances in the structural",
+        "pdf_file": "fbioe-11-1263996.pdf",
+        "section_type": "computational",
+        "heading": "In addition, molecular simulation indicated that the lid could be",
+        "relation": "outcome",
+        "value": "The results showed that the chimeric\nproteins all exhibit markedly improved PET and MHET turnover\ncompared with the single free enzyme or the mixed two free\nenzymes.",
+        "sentence": "The results showed that the chimeric\nproteins all exhibit markedly improved PET and MHET turnover\ncompared with the single free enzyme or the mixed two free\nenzymes."
+      }
+    },
+    {
+      "score": 0.3849986791610718,
+      "text": "Cinematic outcome With continued reﬁnement, QuantaMind MD has the potential to establish a new paradigm\nfor studying enzymatic catalysis and biomolecular reactivity.. Evidence: With continued reﬁnement, QuantaMind MD has the potential to establish a new paradigm\nfor studying enzymatic catalysis and biomolecular reactivity.",
+      "metadata": {
+        "paper": "Cinematic",
+        "pdf_file": "2025.09.28.679094v1.full.pdf",
+        "section_type": "computational",
+        "heading": "In this study, we employed QuantaMind MD, a MLFF trained on diverse high-level quantum",
+        "relation": "outcome",
+        "value": "With continued reﬁnement, QuantaMind MD has the potential to establish a new paradigm\nfor studying enzymatic catalysis and biomolecular reactivity.",
+        "sentence": "With continued reﬁnement, QuantaMind MD has the potential to establish a new paradigm\nfor studying enzymatic catalysis and biomolecular reactivity."
+      }
+    },
+    {
+      "score": 0.3836318850517273,
+      "text": "1 duration 204 \nmin. Evidence: As MaCAR has been shown to have 204 \nminimal activity on pAMBA, we hypothesized that we could  target pAMBA synthesis using a 205 \none-pot one-step approach36.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2025.10.01.679844v1.full.pdf",
+        "section_type": "results",
+        "heading": "Results 88",
+        "relation": "duration",
+        "value": "204 \nmin",
+        "sentence": "As MaCAR has been shown to have 204 \nminimal activity on pAMBA, we hypothesized that we could  target pAMBA synthesis using a 205 \none-pot one-step approach36."
+      }
+    },
+    {
+      "score": 0.38105419278144836,
+      "text": "Current advances in the structural outcome To further\nimprove the thermostability of IsPETase, an automated, high-\nthroughput directed evolution protocol was reported for the\nscreening and identi ﬁcation of promising PET-degrading\nbiocatalysts (Bell, Smithson, and Kilbride, 2022 ).. Evidence: To further\nimprove the thermostability of IsPETase, an automated, high-\nthroughput directed evolution protocol was reported for the\nscreening and identi ﬁcation of promising PET-degrading\nbiocatalysts (Bell, Smithson, and Kilbride, 2022 ).",
+      "metadata": {
+        "paper": "Current advances in the structural",
+        "pdf_file": "fbioe-11-1263996.pdf",
+        "section_type": "computational",
+        "heading": "In a recent study, a computational strategy, greedy accumulated",
+        "relation": "outcome",
+        "value": "To further\nimprove the thermostability of IsPETase, an automated, high-\nthroughput directed evolution protocol was reported for the\nscreening and identi ﬁcation of promising PET-degrading\nbiocatalysts (Bell, Smithson, and Kilbride, 2022 ).",
+        "sentence": "To further\nimprove the thermostability of IsPETase, an automated, high-\nthroughput directed evolution protocol was reported for the\nscreening and identi ﬁcation of promising PET-degrading\nbiocatalysts (Bell, Smithson, and Kilbride, 2022 )."
+      }
+    },
+    {
+      "score": 0.37758639454841614,
+      "text": "1 outcome Moreover, 49 \nwe were able to enhance the enzyme's depolymerization rate thro ugh further engineering, 50 \nresulting in a two-fold increase in activity.. Evidence: Moreover, 49 \nwe were able to enhance the enzyme's depolymerization rate thro ugh further engineering, 50 \nresulting in a two-fold increase in activity.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2023.04.17.537204v1.full.pdf",
+        "section_type": "experimental",
+        "heading": "Biological methods such as enzyme- catalyzed PET recycling or bi oprocessing are seen as a 41",
+        "relation": "outcome",
+        "value": "Moreover, 49 \nwe were able to enhance the enzyme's depolymerization rate thro ugh further engineering, 50 \nresulting in a two-fold increase in activity.",
+        "sentence": "Moreover, 49 \nwe were able to enhance the enzyme's depolymerization rate thro ugh further engineering, 50 \nresulting in a two-fold increase in activity."
+      }
+    },
+    {
+      "score": 0.37271034717559814,
+      "text": "Very Important Paper outcome Alter-\nnatively, enzyme engineering can be employed to enhance\nenzyme thermostability to reduce or even eliminate concen-\ntration-dependent inhibition.. Evidence: Alter-\nnatively, enzyme engineering can be employed to enhance\nenzyme thermostability to reduce or even eliminate concen-\ntration-dependent inhibition.",
+      "metadata": {
+        "paper": "Very Important Paper",
+        "pdf_file": "ChemSusChem - 2023 - Avilan - Concentration‐Dependent Inhibition of Mesophilic PETases on Poly ethylene terephthalate  Can.pdf",
+        "section_type": "results",
+        "heading": "Conclusion",
+        "relation": "outcome",
+        "value": "Alter-\nnatively, enzyme engineering can be employed to enhance\nenzyme thermostability to reduce or even eliminate concen-\ntration-dependent inhibition.",
+        "sentence": "Alter-\nnatively, enzyme engineering can be employed to enhance\nenzyme thermostability to reduce or even eliminate concen-\ntration-dependent inhibition."
+      }
+    },
+    {
+      "score": 0.36942175030708313,
+      "text": "Very Important Paper outcome [25]\nHere,\nwe measured detectable MHETase activity with 100 nm IsPE-\nTase, albeit at a rate approximately 280-times lower than for\nBHET hydrolysis (Figure S6).. Evidence: [25]\nHere,\nwe measured detectable MHETase activity with 100 nm IsPE-\nTase, albeit at a rate approximately 280-times lower than for\nBHET hydrolysis (Figure S6).",
+      "metadata": {
+        "paper": "Very Important Paper",
+        "pdf_file": "ChemSusChem - 2023 - Avilan - Concentration‐Dependent Inhibition of Mesophilic PETases on Poly ethylene terephthalate  Can.pdf",
+        "section_type": "results",
+        "heading": "Results",
+        "relation": "outcome",
+        "value": "[25]\nHere,\nwe measured detectable MHETase activity with 100 nm IsPE-\nTase, albeit at a rate approximately 280-times lower than for\nBHET hydrolysis (Figure S6).",
+        "sentence": "[25]\nHere,\nwe measured detectable MHETase activity with 100 nm IsPE-\nTase, albeit at a rate approximately 280-times lower than for\nBHET hydrolysis (Figure S6)."
+      }
+    },
+    {
+      "score": 0.36793720722198486,
+      "text": "From Bulk to Binding: Decoding the Entry of outcome The implementation\nof apolar residues, especially alanine, at the expense of polar residues also significantly\nincreased Eint (e.g., S145A in LCCIG, S13A in PES-H1FY), while larger apolar residues such\nas valine or leucine yielded no significant changes or even made the interaction at these\nsites more favorable (e.g., T211V and N239L in LCCIG; Q26L and T28V in PES-H1FY).. Evidence: The implementation\nof apolar residues, especially alanine, at the expense of polar residues also significantly\nincreased Eint (e.g., S145A in LCCIG, S13A in PES-H1FY), while larger apolar residues such\nas valine or leucine yielded no significant changes or even made the interaction at these\nsites more favorable (e.g., T211V and N239L in LCCIG; Q26L and T28V in PES-H1FY).",
+      "metadata": {
+        "paper": "From Bulk to Binding: Decoding the Entry of",
+        "pdf_file": "2024.04.21.590457v1.full.pdf",
+        "section_type": "computational",
+        "heading": "The simulations were analyzed with respect toEint and the possible reorientation of the",
+        "relation": "outcome",
+        "value": "The implementation\nof apolar residues, especially alanine, at the expense of polar residues also significantly\nincreased Eint (e.g., S145A in LCCIG, S13A in PES-H1FY), while larger apolar residues such\nas valine or leucine yielded no significant changes or even made the interaction at these\nsites more favorable (e.g., T211V and N239L in LCCIG; Q26L and T28V in PES-H1FY).",
+        "sentence": "The implementation\nof apolar residues, especially alanine, at the expense of polar residues also significantly\nincreased Eint (e.g., S145A in LCCIG, S13A in PES-H1FY), while larger apolar residues such\nas valine or leucine yielded no significant changes or even made the interaction at these\nsites more favorable (e.g., T211V and N239L in LCCIG; Q26L and T28V in PES-H1FY)."
+      }
+    },
+    {
+      "score": 0.36479800939559937,
+      "text": "1 outcome As MaCAR has been shown to have 204 \nminimal activity on pAMBA, we hypothesized that we could  target pAMBA synthesis using a 205 \none-pot one-step approach36.. Evidence: As MaCAR has been shown to have 204 \nminimal activity on pAMBA, we hypothesized that we could  target pAMBA synthesis using a 205 \none-pot one-step approach36.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2025.10.01.679844v1.full.pdf",
+        "section_type": "results",
+        "heading": "Results 88",
+        "relation": "outcome",
+        "value": "As MaCAR has been shown to have 204 \nminimal activity on pAMBA, we hypothesized that we could  target pAMBA synthesis using a 205 \none-pot one-step approach36.",
+        "sentence": "As MaCAR has been shown to have 204 \nminimal activity on pAMBA, we hypothesized that we could  target pAMBA synthesis using a 205 \none-pot one-step approach36."
+      }
+    },
+    {
+      "score": 0.36409690976142883,
+      "text": "Current advances in the structural action MHETase-\nTip1 could also efﬁciently hydrolyse MHET, releasing TPA, and\nafter 24 h, all MHET (400 nM) was converted to TPA.. Evidence: MHETase-\nTip1 could also efﬁciently hydrolyse MHET, releasing TPA, and\nafter 24 h, all MHET (400 nM) was converted to TPA.",
+      "metadata": {
+        "paper": "Current advances in the structural",
+        "pdf_file": "fbioe-11-1263996.pdf",
+        "section_type": "computational",
+        "heading": "Recently, an in silico -based screening (sequence similarity",
+        "relation": "action",
+        "value": "MHETase-\nTip1 could also efﬁciently hydrolyse MHET, releasing TPA, and\nafter 24 h, all MHET (400 nM) was converted to TPA.",
+        "sentence": "MHETase-\nTip1 could also efﬁciently hydrolyse MHET, releasing TPA, and\nafter 24 h, all MHET (400 nM) was converted to TPA."
+      }
+    },
+    {
+      "score": 0.36090171337127686,
+      "text": "www.chembiochem.org volume 1 mL. Evidence: 4μL of supernatant was then used to initiate the hydrolysis of\n0.5 mMpNPB at 30 °C in 1 mL 50 mM Tris–HCl, pH 8.",
+      "metadata": {
+        "paper": "www.chembiochem.org",
+        "pdf_file": "CBIC-26-e202500065.pdf",
+        "section_type": "results",
+        "heading": "TPA as the major product, is consistent with results obtained with",
+        "relation": "volume",
+        "value": "1 mL",
+        "sentence": "4μL of supernatant was then used to initiate the hydrolysis of\n0.5 mMpNPB at 30 °C in 1 mL 50 mM Tris–HCl, pH 8."
+      }
+    },
+    {
+      "score": 0.3603203296661377,
+      "text": "Single Distal Mutation Enhances Activity of known PETases via outcome High conversion rate from raw PET to TPA rather than MHET is\nneeded to achieve the circular biorecycling and is preferable to be done by a single enzyme.. Evidence: High conversion rate from raw PET to TPA rather than MHET is\nneeded to achieve the circular biorecycling and is preferable to be done by a single enzyme.",
+      "metadata": {
+        "paper": "Single Distal Mutation Enhances Activity of known PETases via",
+        "pdf_file": "2024.09.11.612432v1.full.pdf",
+        "section_type": "computational",
+        "heading": "To explore the underlying mechanisms, we conducted extensive molecular dynamics",
+        "relation": "outcome",
+        "value": "High conversion rate from raw PET to TPA rather than MHET is\nneeded to achieve the circular biorecycling and is preferable to be done by a single enzyme.",
+        "sentence": "High conversion rate from raw PET to TPA rather than MHET is\nneeded to achieve the circular biorecycling and is preferable to be done by a single enzyme."
+      }
+    },
+    {
+      "score": 0.3600095212459564,
+      "text": "1 outcome We observed that the amination of 5 mM TPAL had an optimal conversion to pXYL at pH 183 \n7.5, resulting in a 90% conversion after 1 h (Fig.. Evidence: We observed that the amination of 5 mM TPAL had an optimal conversion to pXYL at pH 183 \n7.5, resulting in a 90% conversion after 1 h (Fig.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2025.10.01.679844v1.full.pdf",
+        "section_type": "results",
+        "heading": "Results 88",
+        "relation": "outcome",
+        "value": "We observed that the amination of 5 mM TPAL had an optimal conversion to pXYL at pH 183 \n7.5, resulting in a 90% conversion after 1 h (Fig.",
+        "sentence": "We observed that the amination of 5 mM TPAL had an optimal conversion to pXYL at pH 183 \n7.5, resulting in a 90% conversion after 1 h (Fig."
+      }
+    },
+    {
+      "score": 0.3596611022949219,
+      "text": "1 outcome In the second design strategy (P-series) we used the PROSS web server29 to generate 9 different enzyme \ndesigns with improved packing, hydrogen bond networks and salt bridge networks.. Evidence: In the second design strategy (P-series) we used the PROSS web server29 to generate 9 different enzyme \ndesigns with improved packing, hydrogen bond networks and salt bridge networks.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2024.07.04.602061v1.full.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing mutants",
+        "relation": "outcome",
+        "value": "In the second design strategy (P-series) we used the PROSS web server29 to generate 9 different enzyme \ndesigns with improved packing, hydrogen bond networks and salt bridge networks.",
+        "sentence": "In the second design strategy (P-series) we used the PROSS web server29 to generate 9 different enzyme \ndesigns with improved packing, hydrogen bond networks and salt bridge networks."
+      }
+    },
+    {
+      "score": 0.3563832640647888,
+      "text": "80 outcome The bound MHET (the product of BHET \ndegradation) at the active site depicted the exact second tetrahedral intermediate conformation \nof the canonical serine hydrolase mechanism.. Evidence: The bound MHET (the product of BHET \ndegradation) at the active site depicted the exact second tetrahedral intermediate conformation \nof the canonical serine hydrolase mechanism.",
+      "metadata": {
+        "paper": "80",
+        "pdf_file": "2025.10.14.682280v1.full.pdf",
+        "section_type": "computational",
+        "heading": "The biochemical, crystal structure, and molecular dynamics simulation-based analysis",
+        "relation": "outcome",
+        "value": "The bound MHET (the product of BHET \ndegradation) at the active site depicted the exact second tetrahedral intermediate conformation \nof the canonical serine hydrolase mechanism.",
+        "sentence": "The bound MHET (the product of BHET \ndegradation) at the active site depicted the exact second tetrahedral intermediate conformation \nof the canonical serine hydrolase mechanism."
+      }
+    },
+    {
+      "score": 0.35566431283950806,
+      "text": "Machine Learning-Guided Identification of PET Hydrolases from action SUMO protease was added to cleave\nthe target proteins from the magnetic beads, yielding the\ntagless protein into the supernatant.. Evidence: SUMO protease was added to cleave\nthe target proteins from the magnetic beads, yielding the\ntagless protein into the supernatant.",
+      "metadata": {
+        "paper": "Machine Learning-Guided Identification of PET Hydrolases from",
+        "pdf_file": "machine-learning-guided-identification-of-pet-hydrolases-from-natural-diversity.pdf",
+        "section_type": "computational",
+        "heading": "Identified Using Bioinformatics and Iterative Machine",
+        "relation": "action",
+        "value": "SUMO protease was added to cleave\nthe target proteins from the magnetic beads, yielding the\ntagless protein into the supernatant.",
+        "sentence": "SUMO protease was added to cleave\nthe target proteins from the magnetic beads, yielding the\ntagless protein into the supernatant."
+      }
+    },
+    {
+      "score": 0.3536324203014374,
+      "text": "Perspective https://doi.org/10.1038/s41467-025-60016-9 outcome Nonetheless, the\nresulting PET depolymerization activity is signiﬁcantly constrained by\nthe inherent protein architecture, which may hinder effective sub-\nstrate access necessary for interfacial catalysis\n17,49.A l t h o u g ht h e s e\nstudies demonstrated the feasibility of the computational methodol-\nogy, it is yet to be determined whether AI-assisted design can generate\nnovel PET hydrolase scaf. Evidence: Nonetheless, the\nresulting PET depolymerization activity is signiﬁcantly constrained by\nthe inherent protein architecture, which may hinder effective sub-\nstrate access necessary for interfacial catalysis\n17,49.A l t h o u g ht h e s e\nstudies demonstrated the feasibility of the computational methodol-\nogy, it is yet to be determined whether AI-assisted design can generate\nnovel PET hydrolase scaffolds with overwhelming activity that sur-\npasses the naturally evolvedα/β hydrolase folds.",
+      "metadata": {
+        "paper": "Perspective https://doi.org/10.1038/s41467-025-60016-9",
+        "pdf_file": "s41467-025-60016-9.pdf",
+        "section_type": "computational",
+        "heading": "However, these bioinformatics-based searches have often been biased",
+        "relation": "outcome",
+        "value": "Nonetheless, the\nresulting PET depolymerization activity is signiﬁcantly constrained by\nthe inherent protein architecture, which may hinder effective sub-\nstrate access necessary for interfacial catalysis\n17,49.A l t h o u g ht h e s e\nstudies demonstrated the feasibility of the computational methodol-\nogy, it is yet to be determined whether AI-assisted design can generate\nnovel PET hydrolase scaf",
+        "sentence": "Nonetheless, the\nresulting PET depolymerization activity is signiﬁcantly constrained by\nthe inherent protein architecture, which may hinder effective sub-\nstrate access necessary for interfacial catalysis\n17,49.A l t h o u g ht h e s e\nstudies demonstrated the feasibility of the computational methodol-\nogy, it is yet to be determined whether AI-assisted design can generate\nnovel PET hydrolase scaffolds with overwhelming activity that sur-\npasses the naturally evolvedα/β hydrolase folds."
+      }
+    },
+    {
+      "score": 0.3532310128211975,
+      "text": "Development of a highly active engineered PETase enzyme action Reﬁnement was performed by\nalternating rounds of REFMAC5 [41] and manual adjust-\nments in Coot[42] Water molecules were added both man-\nually and automatically using the Coot_reﬁne tool from the\nCCP4 package [43] The crystallographic table is shown in\nthe SI ﬁle in TableS6.. Evidence: Reﬁnement was performed by\nalternating rounds of REFMAC5 [41] and manual adjust-\nments in Coot[42] Water molecules were added both man-\nually and automatically using the Coot_reﬁne tool from the\nCCP4 package [43] The crystallographic table is shown in\nthe SI ﬁle in TableS6.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "action",
+        "value": "Reﬁnement was performed by\nalternating rounds of REFMAC5 [41] and manual adjust-\nments in Coot[42] Water molecules were added both man-\nually and automatically using the Coot_reﬁne tool from the\nCCP4 package [43] The crystallographic table is shown in\nthe SI ﬁle in TableS6.",
+        "sentence": "Reﬁnement was performed by\nalternating rounds of REFMAC5 [41] and manual adjust-\nments in Coot[42] Water molecules were added both man-\nually and automatically using the Coot_reﬁne tool from the\nCCP4 package [43] The crystallographic table is shown in\nthe SI ﬁle in TableS6."
+      }
+    },
+    {
+      "score": 0.35218915343284607,
+      "text": "1 action To retain desired aldehyde products for eventual upcycling reactions, we 93 \nexpressed MaCAR in the previously engineered E.. Evidence: To retain desired aldehyde products for eventual upcycling reactions, we 93 \nexpressed MaCAR in the previously engineered E.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2025.10.01.679844v1.full.pdf",
+        "section_type": "results",
+        "heading": "Results 88",
+        "relation": "action",
+        "value": "To retain desired aldehyde products for eventual upcycling reactions, we 93 \nexpressed MaCAR in the previously engineered E.",
+        "sentence": "To retain desired aldehyde products for eventual upcycling reactions, we 93 \nexpressed MaCAR in the previously engineered E."
+      }
+    },
+    {
+      "score": 0.3515750467777252,
+      "text": "Current advances in the structural concentration 850 m. Evidence: With this method, a library of 2,850 mutants with an average of 1-\n7 amino acid substitutions constructed by error-prone PCR was\nscreened, and the results revealed that through two-round screening,\n6 improved variants with 1.3–4.9-fold improved activities were\nsuccessfully identi ﬁed.",
+      "metadata": {
+        "paper": "Current advances in the structural",
+        "pdf_file": "fbioe-11-1263996.pdf",
+        "section_type": "results",
+        "heading": "The results revealed that SR-PETase",
+        "relation": "concentration",
+        "value": "850 m",
+        "sentence": "With this method, a library of 2,850 mutants with an average of 1-\n7 amino acid substitutions constructed by error-prone PCR was\nscreened, and the results revealed that through two-round screening,\n6 improved variants with 1.3–4.9-fold improved activities were\nsuccessfully identi ﬁed."
+      }
+    },
+    {
+      "score": 0.3514805734157562,
+      "text": "Received:6 April 2025.Revised:2 June 2025.Accepted:10 June 2025 concentration 5 m. Evidence: The M5 motif imposes strict structural and functional con-\nstraints, requiring not only the presence of the full catalytic \ntriad but also specific amino acid residues essential for substrate \nbinding and enzyme stability .",
+      "metadata": {
+        "paper": "Received:6 April 2025.Revised:2 June 2025.Accepted:10 June 2025",
+        "pdf_file": "wraf121.pdf",
+        "section_type": "results",
+        "heading": "Discussion",
+        "relation": "concentration",
+        "value": "5 m",
+        "sentence": "The M5 motif imposes strict structural and functional con-\nstraints, requiring not only the presence of the full catalytic \ntriad but also specific amino acid residues essential for substrate \nbinding and enzyme stability ."
+      }
+    },
+    {
+      "score": 0.3514695167541504,
+      "text": "Article https://doi.org/10.1038/s41467-024-45662-9 outcome More\nimportantly, in large-scale reactions with > 150 g kg\n−1 substrate loading,\nthe reduction in enzyme activity and depolymerization efﬁciency was\nmore signiﬁcant at lower enzyme loading levels13.I nP E Td e g r a d a t i o n\nprocess reported by Tournier et al., aﬁnal conversion of 80% was\nachieved by LCCICCG using 1 mgenzymegPET\n−1 enzyme loading compared to\nthe 90% conversion with 2 mgenzyme g. Evidence: More\nimportantly, in large-scale reactions with > 150 g kg\n−1 substrate loading,\nthe reduction in enzyme activity and depolymerization efﬁciency was\nmore signiﬁcant at lower enzyme loading levels13.I nP E Td e g r a d a t i o n\nprocess reported by Tournier et al., aﬁnal conversion of 80% was\nachieved by LCCICCG using 1 mgenzymegPET\n−1 enzyme loading compared to\nthe 90% conversion with 2 mgenzyme gPET\n−1 enzyme loading17.H e n c e ,a\n2m genzyme gPET\n−1 enzyme loading was chosen to attain a balanc",
+      "metadata": {
+        "paper": "Article https://doi.org/10.1038/s41467-024-45662-9",
+        "pdf_file": "s41467-024-45662-9.pdf",
+        "section_type": "computational",
+        "heading": "BhrPETase and TurboPETase during the MD simulations, indicating global changes",
+        "relation": "outcome",
+        "value": "More\nimportantly, in large-scale reactions with > 150 g kg\n−1 substrate loading,\nthe reduction in enzyme activity and depolymerization efﬁciency was\nmore signiﬁcant at lower enzyme loading levels13.I nP E Td e g r a d a t i o n\nprocess reported by Tournier et al., aﬁnal conversion of 80% was\nachieved by LCCICCG using 1 mgenzymegPET\n−1 enzyme loading compared to\nthe 90% conversion with 2 mgenzyme g",
+        "sentence": "More\nimportantly, in large-scale reactions with > 150 g kg\n−1 substrate loading,\nthe reduction in enzyme activity and depolymerization efﬁciency was\nmore signiﬁcant at lower enzyme loading levels13.I nP E Td e g r a d a t i o n\nprocess reported by Tournier et al., aﬁnal conversion of 80% was\nachieved by LCCICCG using 1 mgenzymegPET\n−1 enzyme loading compared to\nthe 90% conversion with 2 mgenzyme gPET\n−1 enzyme loading17.H e n c e ,a\n2m genzyme gPET\n−1 enzyme loading was chosen to attain a balanc"
+      }
+    },
+    {
+      "score": 0.35095226764678955,
+      "text": "Machine Learning-Guided Identification of PET Hydrolases from outcome SUMO protease was added to cleave\nthe target proteins from the magnetic beads, yielding the\ntagless protein into the supernatant.. Evidence: SUMO protease was added to cleave\nthe target proteins from the magnetic beads, yielding the\ntagless protein into the supernatant.",
+      "metadata": {
+        "paper": "Machine Learning-Guided Identification of PET Hydrolases from",
+        "pdf_file": "machine-learning-guided-identification-of-pet-hydrolases-from-natural-diversity.pdf",
+        "section_type": "computational",
+        "heading": "Identified Using Bioinformatics and Iterative Machine",
+        "relation": "outcome",
+        "value": "SUMO protease was added to cleave\nthe target proteins from the magnetic beads, yielding the\ntagless protein into the supernatant.",
+        "sentence": "SUMO protease was added to cleave\nthe target proteins from the magnetic beads, yielding the\ntagless protein into the supernatant."
+      }
+    },
+    {
+      "score": 0.35031306743621826,
+      "text": "Cinematic action These calculations can serve as additional training data\nto iteratively enhance the QuantaMind model, improving its accuracy and applicability to\nserine hydrolase-related biomolecular systems.. Evidence: These calculations can serve as additional training data\nto iteratively enhance the QuantaMind model, improving its accuracy and applicability to\nserine hydrolase-related biomolecular systems.",
+      "metadata": {
+        "paper": "Cinematic",
+        "pdf_file": "2025.09.28.679094v1.full.pdf",
+        "section_type": "computational",
+        "heading": "In this study, we employed QuantaMind MD, a MLFF trained on diverse high-level quantum",
+        "relation": "action",
+        "value": "These calculations can serve as additional training data\nto iteratively enhance the QuantaMind model, improving its accuracy and applicability to\nserine hydrolase-related biomolecular systems.",
+        "sentence": "These calculations can serve as additional training data\nto iteratively enhance the QuantaMind model, improving its accuracy and applicability to\nserine hydrolase-related biomolecular systems."
+      }
+    },
+    {
+      "score": 0.348239928483963,
+      "text": "www.chembiochem.org volume 4 μL. Evidence: 4μL of supernatant was then used to initiate the hydrolysis of\n0.5 mMpNPB at 30 °C in 1 mL 50 mM Tris–HCl, pH 8.",
+      "metadata": {
+        "paper": "www.chembiochem.org",
+        "pdf_file": "CBIC-26-e202500065.pdf",
+        "section_type": "results",
+        "heading": "TPA as the major product, is consistent with results obtained with",
+        "relation": "volume",
+        "value": "4 μL",
+        "sentence": "4μL of supernatant was then used to initiate the hydrolysis of\n0.5 mMpNPB at 30 °C in 1 mL 50 mM Tris–HCl, pH 8."
+      }
+    },
+    {
+      "score": 0.3474455773830414,
+      "text": "Articles action Using the UPLC method developed here, the MHET and \nTPA produced by a single degradation reaction can be analysed \nin under 2 minutes (Supplementary Fig.. Evidence: Using the UPLC method developed here, the MHET and \nTPA produced by a single degradation reaction can be analysed \nin under 2 minutes (Supplementary Fig.",
+      "metadata": {
+        "paper": "Articles",
+        "pdf_file": "s41929-022-00821-3.pdf",
+        "section_type": "results",
+        "heading": "Results",
+        "relation": "action",
+        "value": "Using the UPLC method developed here, the MHET and \nTPA produced by a single degradation reaction can be analysed \nin under 2 minutes (Supplementary Fig.",
+        "sentence": "Using the UPLC method developed here, the MHET and \nTPA produced by a single degradation reaction can be analysed \nin under 2 minutes (Supplementary Fig."
+      }
+    },
+    {
+      "score": 0.3456147313117981,
+      "text": "Computational Insights into the Catalytic Mechanism of action [25]\nThese energy barriers calculated in this work are suitably\nlow to suggest that none of the hydrolysis steps catalysed by Is-\nPETase constitute its rate-limiting step.. Evidence: [25]\nThese energy barriers calculated in this work are suitably\nlow to suggest that none of the hydrolysis steps catalysed by Is-\nPETase constitute its rate-limiting step.",
+      "metadata": {
+        "paper": "Computational Insights into the Catalytic Mechanism of",
+        "pdf_file": "CHEM-28-0.pdf",
+        "section_type": "experimental",
+        "heading": "Because of the potentially different experimental conditions",
+        "relation": "action",
+        "value": "[25]\nThese energy barriers calculated in this work are suitably\nlow to suggest that none of the hydrolysis steps catalysed by Is-\nPETase constitute its rate-limiting step.",
+        "sentence": "[25]\nThese energy barriers calculated in this work are suitably\nlow to suggest that none of the hydrolysis steps catalysed by Is-\nPETase constitute its rate-limiting step."
+      }
+    },
+    {
+      "score": 0.3455972671508789,
+      "text": "www.chembiochem.org pH pH 8.. Evidence: 4μL of supernatant was then used to initiate the hydrolysis of\n0.5 mMpNPB at 30 °C in 1 mL 50 mM Tris–HCl, pH 8.",
+      "metadata": {
+        "paper": "www.chembiochem.org",
+        "pdf_file": "CBIC-26-e202500065.pdf",
+        "section_type": "results",
+        "heading": "TPA as the major product, is consistent with results obtained with",
+        "relation": "pH",
+        "value": "pH 8.",
+        "sentence": "4μL of supernatant was then used to initiate the hydrolysis of\n0.5 mMpNPB at 30 °C in 1 mL 50 mM Tris–HCl, pH 8."
+      }
+    },
+    {
+      "score": 0.34513092041015625,
+      "text": "Trends in outcome Therefore, we will ﬁrst ex-\namine the individual steps of the catalytic cycle, which present several opportunities for enzyme \nimprovement, before focusing on the initial step: the adsorption of PET hydrolases onto the \nPET material.. Evidence: Therefore, we will ﬁrst ex-\namine the individual steps of the catalytic cycle, which present several opportunities for enzyme \nimprovement, before focusing on the initial step: the adsorption of PET hydrolases onto the \nPET material.",
+      "metadata": {
+        "paper": "Trends in",
+        "pdf_file": "1-s2.0-S0968000425001069-main.pdf",
+        "section_type": "computational",
+        "heading": "Computational Chemistry, Heinrich",
+        "relation": "outcome",
+        "value": "Therefore, we will ﬁrst ex-\namine the individual steps of the catalytic cycle, which present several opportunities for enzyme \nimprovement, before focusing on the initial step: the adsorption of PET hydrolases onto the \nPET material.",
+        "sentence": "Therefore, we will ﬁrst ex-\namine the individual steps of the catalytic cycle, which present several opportunities for enzyme \nimprovement, before focusing on the initial step: the adsorption of PET hydrolases onto the \nPET material."
+      }
+    },
+    {
+      "score": 0.3449135720729828,
+      "text": "Enhancing PET Degrading Enzymes: A Combinatory action Then, one by\none, new moieties of MHET were added to both ends of the\nfirst molecule until the 8mer-PET substrate was finished.. Evidence: Then, one by\none, new moieties of MHET were added to both ends of the\nfirst molecule until the 8mer-PET substrate was finished.",
+      "metadata": {
+        "paper": "Enhancing PET Degrading Enzymes: A Combinatory",
+        "pdf_file": "ChemBioChem - 2024 - Joho - Enhancing PET Degrading Enzymes  A Combinatory Approach.pdf",
+        "section_type": "computational",
+        "heading": "Protein Modelling and Molecular Dynamics Simulations",
+        "relation": "action",
+        "value": "Then, one by\none, new moieties of MHET were added to both ends of the\nfirst molecule until the 8mer-PET substrate was finished.",
+        "sentence": "Then, one by\none, new moieties of MHET were added to both ends of the\nfirst molecule until the 8mer-PET substrate was finished."
+      }
+    },
+    {
+      "score": 0.34429532289505005,
+      "text": "From Bulk to Binding: Decoding the Entry of outcome This is\nalso consistent with arecent studyby Schubertet al., in which chain mobilityand the number\nof available sites for endo-type chain scission, which depend on the degree of crystallinity, are\npostulated as the activity-limiting factor causing the initial lag phase for the release of the\nsoluble product.7 Another biotechnological approach to mitigate this hindering effect could\nbe to design en. Evidence: This is\nalso consistent with arecent studyby Schubertet al., in which chain mobilityand the number\nof available sites for endo-type chain scission, which depend on the degree of crystallinity, are\npostulated as the activity-limiting factor causing the initial lag phase for the release of the\nsoluble product.7 Another biotechnological approach to mitigate this hindering effect could\nbe to design enzymes to introduce residues that enhance enzyme–PET interactions, which\nwould promote and counterbal",
+      "metadata": {
+        "paper": "From Bulk to Binding: Decoding the Entry of",
+        "pdf_file": "2024.04.21.590457v1.full.pdf",
+        "section_type": "computational",
+        "heading": "To more comprehensively assess the predominant interactions throughout all simulations",
+        "relation": "outcome",
+        "value": "This is\nalso consistent with arecent studyby Schubertet al., in which chain mobilityand the number\nof available sites for endo-type chain scission, which depend on the degree of crystallinity, are\npostulated as the activity-limiting factor causing the initial lag phase for the release of the\nsoluble product.7 Another biotechnological approach to mitigate this hindering effect could\nbe to design en",
+        "sentence": "This is\nalso consistent with arecent studyby Schubertet al., in which chain mobilityand the number\nof available sites for endo-type chain scission, which depend on the degree of crystallinity, are\npostulated as the activity-limiting factor causing the initial lag phase for the release of the\nsoluble product.7 Another biotechnological approach to mitigate this hindering effect could\nbe to design enzymes to introduce residues that enhance enzyme–PET interactions, which\nwould promote and counterbal"
+      }
+    },
+    {
+      "score": 0.34362223744392395,
+      "text": "Article https://doi.org/10.1038/s41467-024-45662-9 action The last few years have witnessed impressive progress in tailoring\nnatural enzymes by computational redesign strategies20.I n s p i r e db y\nthe achievements in artiﬁcial intelligence for addressing the protein\nﬁtness landscape to probe hidden evolutionary information, we\nemployed a computational strategy that incorporates a protein lan-\nguage model and force- ﬁeld-based algorithms to engineer PET. Evidence: The last few years have witnessed impressive progress in tailoring\nnatural enzymes by computational redesign strategies20.I n s p i r e db y\nthe achievements in artiﬁcial intelligence for addressing the protein\nﬁtness landscape to probe hidden evolutionary information, we\nemployed a computational strategy that incorporates a protein lan-\nguage model and force- ﬁeld-based algorithms to engineer PET\nhydrolases with balanced thermostability and hydrolytic capacity.",
+      "metadata": {
+        "paper": "Article https://doi.org/10.1038/s41467-024-45662-9",
+        "pdf_file": "s41467-024-45662-9.pdf",
+        "section_type": "computational",
+        "heading": "Computational redesign of a hydrolase for",
+        "relation": "action",
+        "value": "The last few years have witnessed impressive progress in tailoring\nnatural enzymes by computational redesign strategies20.I n s p i r e db y\nthe achievements in artiﬁcial intelligence for addressing the protein\nﬁtness landscape to probe hidden evolutionary information, we\nemployed a computational strategy that incorporates a protein lan-\nguage model and force- ﬁeld-based algorithms to engineer PET",
+        "sentence": "The last few years have witnessed impressive progress in tailoring\nnatural enzymes by computational redesign strategies20.I n s p i r e db y\nthe achievements in artiﬁcial intelligence for addressing the protein\nﬁtness landscape to probe hidden evolutionary information, we\nemployed a computational strategy that incorporates a protein lan-\nguage model and force- ﬁeld-based algorithms to engineer PET\nhydrolases with balanced thermostability and hydrolytic capacity."
+      }
+    },
+    {
+      "score": 0.3432958722114563,
+      "text": "1 concentration 220 \nm. Evidence: Collectively, these results demonstrate the potential 219 \nfor structure-based deep learning in protein engineering and the opportunities for converting 220 \nmesophilic enzyme scaffolds into broad-range biocatalysts for a cyclic plastic economy.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2021.10.10.463845v1.full.pdf",
+        "section_type": "results",
+        "heading": "In conclusion, this work utilized a structure-based deep learning model  to identify portable 212",
+        "relation": "concentration",
+        "value": "220 \nm",
+        "sentence": "Collectively, these results demonstrate the potential 219 \nfor structure-based deep learning in protein engineering and the opportunities for converting 220 \nmesophilic enzyme scaffolds into broad-range biocatalysts for a cyclic plastic economy."
+      }
+    },
+    {
+      "score": 0.34289053082466125,
+      "text": "From Bulk to Binding: Decoding the Entry of duration 1\nmin. Evidence: convKm\n\u0002g\nL\n\u0003 invKm[µM] kcat\nh\n1\nmin·µM\ni\nmolarKM [µM] molarη\nh\n1\nmin·µM2\ni\nLCCICCG 0.215 ±0.059 0.365 ±0.061 0.047 0.357 0.132\nICCG H164A 0.095 ±0.063 0.861 ±0.164 0.032 0.278 0.114\nICCG T211G 0.091 ±0.068 0.430 ±0.130 0.042 0.223 0.189\nICCG S241G 0.250 ±0.068 0.234 ±0.070 0.054 0.357 0.151\nPES-H1FY 0.391 ±0.109 0.892 ±0.105 0.088 1.036 0.085\nFY S68A 0.357 ±0.117 0.278 ±0.053 0.084 0.728 0.115\nFY D93A 0.501 ±0.180 2.017 ±0.481 0.040 2.434 0.016\nFY N212A 0.481 ±0.174 1.767 ±0.318 0.068 1.564 0.0",
+      "metadata": {
+        "paper": "From Bulk to Binding: Decoding the Entry of",
+        "pdf_file": "2024.04.21.590457v1.full.pdf",
+        "section_type": "computational",
+        "heading": "To investigate the effects of these mutations, we performed HREMD simulations for the",
+        "relation": "duration",
+        "value": "1\nmin",
+        "sentence": "convKm\n\u0002g\nL\n\u0003 invKm[µM] kcat\nh\n1\nmin·µM\ni\nmolarKM [µM] molarη\nh\n1\nmin·µM2\ni\nLCCICCG 0.215 ±0.059 0.365 ±0.061 0.047 0.357 0.132\nICCG H164A 0.095 ±0.063 0.861 ±0.164 0.032 0.278 0.114\nICCG T211G 0.091 ±0.068 0.430 ±0.130 0.042 0.223 0.189\nICCG S241G 0.250 ±0.068 0.234 ±0.070 0.054 0.357 0.151\nPES-H1FY 0.391 ±0.109 0.892 ±0.105 0.088 1.036 0.085\nFY S68A 0.357 ±0.117 0.278 ±0.053 0.084 0.728 0.115\nFY D93A 0.501 ±0.180 2.017 ±0.481 0.040 2.434 0.016\nFY N212A 0.481 ±0.174 1.767 ±0.318 0.068 1.564 0.0"
+      }
+    },
+    {
+      "score": 0.34289053082466125,
+      "text": "From Bulk to Binding: Decoding the Entry of duration 1\nmin. Evidence: convKm\n\u0002g\nL\n\u0003 invKm[µM] kcat\nh\n1\nmin·µM\ni\nmolarKM [µM] molarη\nh\n1\nmin·µM2\ni\nLCCICCG 0.215 ±0.059 0.365 ±0.061 0.047 0.357 0.132\nICCG H164A 0.095 ±0.063 0.861 ±0.164 0.032 0.278 0.114\nICCG T211G 0.091 ±0.068 0.430 ±0.130 0.042 0.223 0.189\nICCG S241G 0.250 ±0.068 0.234 ±0.070 0.054 0.357 0.151\nPES-H1FY 0.391 ±0.109 0.892 ±0.105 0.088 1.036 0.085\nFY S68A 0.357 ±0.117 0.278 ±0.053 0.084 0.728 0.115\nFY D93A 0.501 ±0.180 2.017 ±0.481 0.040 2.434 0.016\nFY N212A 0.481 ±0.174 1.767 ±0.318 0.068 1.564 0.0",
+      "metadata": {
+        "paper": "From Bulk to Binding: Decoding the Entry of",
+        "pdf_file": "2024.04.21.590457v1.full.pdf",
+        "section_type": "computational",
+        "heading": "To investigate the effects of these mutations, we performed HREMD simulations for the",
+        "relation": "duration",
+        "value": "1\nmin",
+        "sentence": "convKm\n\u0002g\nL\n\u0003 invKm[µM] kcat\nh\n1\nmin·µM\ni\nmolarKM [µM] molarη\nh\n1\nmin·µM2\ni\nLCCICCG 0.215 ±0.059 0.365 ±0.061 0.047 0.357 0.132\nICCG H164A 0.095 ±0.063 0.861 ±0.164 0.032 0.278 0.114\nICCG T211G 0.091 ±0.068 0.430 ±0.130 0.042 0.223 0.189\nICCG S241G 0.250 ±0.068 0.234 ±0.070 0.054 0.357 0.151\nPES-H1FY 0.391 ±0.109 0.892 ±0.105 0.088 1.036 0.085\nFY S68A 0.357 ±0.117 0.278 ±0.053 0.084 0.728 0.115\nFY D93A 0.501 ±0.180 2.017 ±0.481 0.040 2.434 0.016\nFY N212A 0.481 ±0.174 1.767 ±0.318 0.068 1.564 0.0"
+      }
+    }
+  ],
+  "instrument_evidence": [
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "use_case",
+      "value": "analysis",
+      "sentence": "Assemble the PCR reactions, following the manufacturer's instructions for the\nreagents, and following the plate lay\nout set up in the software.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/QuantStudioDesign_Analysis_Desktop_Software_UG.pdf"
+    },
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "use_case",
+      "value": "dispensing",
+      "sentence": "The default run method has been optimized for TaqMan™ assays and a broad\nrange of other reagents.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/QuantStudioDesign_Analysis_Desktop_Software_UG.pdf"
+    },
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "speed",
+      "value": "000 × g",
+      "sentence": "V ortex the plate for 5 seconds, then centrifuge at 750–1,000 × g for 2 minutes.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/e7462b14e891039c65a1032603d0b2f6e7a349878465285c7f2040ac9ed62760.pdf"
+    },
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "volume",
+      "value": "50 µL",
+      "sentence": "Aliquot 50 µL of deionized water to each well of the reaction plate.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/e7462b14e891039c65a1032603d0b2f6e7a349878465285c7f2040ac9ed62760.pdf"
+    },
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "volume",
+      "value": "100 µL",
+      "sentence": "Load 100 µL of the sample‑ specific PCR reaction mix into a micropipette.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/e7462b14e891039c65a1032603d0b2f6e7a349878465285c7f2040ac9ed62760.pdf"
+    },
+    {
+      "instrument": "ZenoTOF 7600+ System",
+      "relation": "volume",
+      "value": "300 µL",
+      "sentence": "In the Carrier Solvent section, set the flow rate to 300 µL/min.",
+      "pdf_file": "ZenoTOF 7600+ System/echo-ms-plus-user-guide.pdf"
+    }
+  ],
+  "answer": "## Experimental Workflow\n\n1. **Prepare enzyme stock and buffer**  \n   - **Goal:** Obtain a 10 mg mL⁻¹ ω‑TA solution in 50 mM phosphate buffer, pH 7.5.  \n   - **Reagents/Volumes:** 10 mg enzyme in 1 mL buffer (final 10 mg mL⁻¹).  \n   - **Instruments:** Magnetic stirrer, pH meter.  \n   - **Parameters:** Stir at 400 rpm, 4 °C until fully dissolved.  \n   - **Actions:** Dissolve enzyme, adjust pH to 7.5, filter (0.22 µm).  \n   - **QC/Observations:** Verify pH, clear solution, no precipitation.  \n   - **Next Step Trigger:** Proceed when enzyme is fully solubilized.  \n   - **Safety:** Wear gloves; enzyme may be allergenic.\n\n2. **Prepare prochiral ketone substrate (5 mM)**  \n   - **Goal:** Generate a 5 mM solution of the ketone in 50 mM phosphate buffer, pH 7.5.  \n   - **Reagents/Volumes:** 0.5 g ketone in 100 mL buffer (≈5 mM).  \n   - **Instruments:** Magnetic stirrer, volumetric flask.  \n   - **Parameters:** Stir at 400 rpm, 4 °C.  \n   - **Actions:** Dissolve substrate, filter (0.22 µm).  \n   - **QC/Observations:** Check clarity, confirm concentration by UV if possible.  \n   - **Next Step Trigger:** Ready for reaction setup.  \n   - **Safety:** Handle ketone in fume hood; avoid skin contact.\n\n3. **Set up 96‑well reaction plate**  \n   - **Goal:** Assemble 100 µL reaction mixtures in each well.  \n   - **Reagents/Volumes:**  \n     - 50 µL enzyme stock (10 mg mL⁻¹) → 0.5 mg enzyme per well.  \n     - 30 µL ketone solution (5 mM) → 0.15 mmol per well.  \n     - 20 µL amine donor (isopropylamine, 1 M) → 20 µmol per well.  \n     - 0 µL buffer to 100 µL total.  \n   - **Instruments:** **Applied Biosystems QuantStudio 7 Pro** (dispensing).  \n   - **Parameters:** Plate format 96‑well, 0.2 mL capacity.  \n   - **Actions:** Program QuantStudio to dispense 50 µL water (to each well), then add enzyme, ketone, and amine sequentially.  \n   - **QC/Observations:** Verify volumes by visual inspection; ensure no bubbles.  \n   - **Next Step Trigger:** Plate ready for incubation.  \n   - **Safety:** Use closed‑system dispensing to avoid aerosol.\n\n4. **Incubate reactions**  \n   - **Goal:** Allow transamination to proceed at optimal temperature.  \n   - **Reagents/Volumes:** Same as step 3.  \n   - **Instruments:** Thermomixer (or shaking incubator).  \n   - **Parameters:** 30 °C, 500 rpm, 1 h.  \n   - **Actions:** Place plate in thermomixer, start program.  \n   - **QC/Observations:** Monitor temperature stability; ensure no condensation.  \n   - **Next Step Trigger:** After 1 h, proceed to sampling.  \n   - **Safety:** Handle hot plate with heat‑resistant gloves.\n\n5. **Sample at time points (0, 30, 60 min)**  \n   - **Goal:** Track reaction progress.  \n   - **Reagents/Volumes:** 10 µL aliquot from each well.  \n   - **Instruments:** **Applied Biosystems QuantStudio 7 Pro** (vortex, centrifuge).  \n   - **Parameters:** Vortex 5 s, centrifuge 750–1 000 × g for 2 min.  \n   - **Actions:** Transfer 10 µL to a fresh 96‑well plate, vortex, centrifuge.  \n   - **QC/Observations:** Check for precipitation; record any turbidity.  \n   - **Next Step Trigger:** After sampling, quench remaining reaction.  \n   - **Safety:** Use pipette tips with aerosol barrier.\n\n6. **Quench remaining reaction**  \n   - **Goal:** Stop enzymatic activity.  \n   - **Reagents/Volumes:** 10 µL 1 M HCl per well.  \n   - **Instruments:** Pipette.  \n   - **Parameters:** Add directly to each well, mix gently.  \n   - **Actions:** Add acid, mix, store at 4 °C until analysis.  \n   - **QC/Observations:** Verify pH drop to ~2.5.  \n   - **Next Step Trigger:** Prepare samples for LC‑MS.  \n   - **Safety:** Handle HCl with gloves and eye protection.\n\n7. **Prepare samples for ZenoTOF analysis**  \n   - **Goal:** Dilute quenched samples to suitable concentration.  \n   - **Reagents/Volumes:** 90 µL deionized water + 10 µL quenched sample → 100 µL total.  \n   - **Instruments:** **Applied Biosystems QuantStudio 7 Pro** (dispensing).  \n   - **Parameters:** 100 µL per injection.  \n   - **Actions:** Dispense water, add sample, vortex 5 s, centrifuge 750–1 000 × g for 2 min.  \n   - **QC/Observations:** Ensure clear solution; no particulates.  \n   - **Next Step Trigger:** Load onto ZenoTOF.  \n   - **Safety:** Use closed‑system to avoid aerosol.\n\n8. **Run ZenoTOF 7600+ LC‑MS**  \n   - **Goal:** Quantify product and substrate.  \n   - **Reagents/Volumes:** 300 µL/min flow rate, 300 µL injection volume.  \n   - **Instruments:** **ZenoTOF 7600+ System**.  \n   - **Parameters:** Carrier solvent flow 300 µL min⁻¹, gradient 5–95 % solvent B over 10 min.  \n   - **Actions:** Inject 300 µL of each sample, run LC‑MS, collect data.  \n   - **QC/Observations:** Check retention times, peak shapes, mass accuracy.  \n   - **Next Step Trigger:** Data processing.  \n   - **Safety:** Ensure proper waste disposal of solvents.\n\n9. **Analyze data and calculate conversion**  \n   - **Goal:** Determine % conversion and enantiomeric excess (ee).  \n   - **Reagents/Volumes:** N/A.  \n   - **Instruments:** Data‑analysis software (e.g., MassLynx).  \n   - **Parameters:** Use calibration curve from authentic standards.  \n   - **Actions:** Integrate peaks, compute substrate depletion, product formation, ee via chiral HPLC overlay.  \n   - **QC/Observations:** Verify linearity, signal‑to‑noise >10.  \n   - **Next Step Trigger:** Decide on variant optimization.  \n   - **Safety:** None.\n\n10. **Quality control and decision making**  \n    - **Goal:** Confirm reproducibility and select best enzyme variant.  \n    - **Reagents/Volumes:** Replicate reactions (n = 3).  \n    - **Instruments:** Same as above.  \n    - **Parameters:** Standard deviation <5 %.  \n    - **Actions:** Review triplicate data, calculate mean conversion and ee.  \n    - **QC/Observations:** Flag any outliers.  \n    - **Next Step Trigger:** If conversion >80 % and ee >95 %, proceed to scale‑up; otherwise, return to computational design for next round.  \n    - **Safety:** Handle all waste according to institutional guidelines.\n\n---\n\n## Computational Workflow\n\n1. **Generate a focused ω‑TA variant library**  \n   - **Goal:** Create a set of mutants predicted to improve substrate binding and catalytic turnover.  \n   - **Approach:**  \n     - Use **Rosetta Supercharge** to introduce surface charge mutations (target ΔΔG < 2 kcal mol⁻¹).  \n     - Apply **PROSS** to enhance core packing and hydrogen‑bond networks (select top 10 designs).  \n     - Design disulfide bonds with **disulfide‑bond design** protocol (retain 10 most stable variants).  \n   - **Parameters:** Energy cutoff 5 REU, 10 k iterations per design.  \n   - **Data Flow:** Store PDBs and Rosetta scores in a shared database for downstream MD.\n\n2. **Run accelerated MD simulations (QuantaMind)**  \n   - **Goal:** Estimate free‑energy barriers for substrate binding and product release for each variant.  \n   - **Approach:**  \n     - Prepare each enzyme–substrate complex (PDB) with PLUMED plugin.  \n     - Perform 400 ps production runs at 300 K, 1 atm, using MLFF.  \n     - Record distances between catalytic lysine and substrate carbonyl, and between product and exit channel.  \n   - **Parameters:** 2 fs timestep, 1 kcal mol⁻¹ barrier threshold for selection.  \n   - **Data Flow:** Extract ΔG‡ values, identify variants with lowest barriers.\n\n3. **Integrate experimental feedback and refine designs**  \n   - **Goal:** Use measured conversion and ee to validate computational predictions.  \n   - **Approach:**  \n     - Correlate experimental conversion with predicted ΔG‡; variants with <20 kcal mol⁻¹ barrier should show >70 % conversion.  \n     - For variants that underperform, analyze MD trajectories for unexpected steric clashes or altered hydrogen‑bond networks.  \n     - Iterate design: introduce additional mutations (e.g., alanine scanning at residues lining the active‑site pocket) guided by MD insights.  \n   - **Parameters:** Update Rosetta scoring weights based on experimental ΔΔG.  \n   - **Outcome:** Generate a refined set of top 5 variants for the next experimental round.\n\n---"
+}

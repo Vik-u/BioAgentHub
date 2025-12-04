@@ -1,0 +1,546 @@
+Towards site-specific information 
+on PET degrading enzymes using 
+NMR near operational temperature
+Valeria Gabrielli1, Jelena Grga1, Sabine Gavalda2, Laura Perrot2, François-Xavier Cantrelle3,4, 
+Emmanuelle Boll3,4, Guy Lippens1 & Cyril Charlier1
+PETases are enzymes that can break down the poly-ethylene terephthalate (PET) polymer in its 
+constituent building blocks. This enzymatic recycling process offers a sustainable solution for 
+producing new, high-quality plastics from previously used materials. NMR spectroscopy can help in 
+understanding and ultimately improving these enzymes but is always confronted with the lengthy 
+step of acquisition and interpretation of triple resonance spectra for the spectral assignment. Here, 
+we explore whether this step can be made more efficient by recording the spectra directly at high 
+temperature, which simultaneously corresponds to more realistic working conditions for the enzyme. 
+Taking the inactive variant of LCCICCG as an example, we compare spectral quality at 30°C and 50°C, 
+and find that the latter condition greatly improves the Signal-to-Noise (S/N) ratio of the standard triple 
+resonance spectra. Going up to 60°C, we show that pulse sequences mainly used for the assignment 
+of intrinsically disordered proteins (IDPs) also become feasible. As a result, we present a methodology 
+enabling exhaustive backbone assignment based on a minimal set of triple resonance spectra acquired 
+and analysed in less than two weeks. The assignment process hence can be completed on a time scale 
+comparable to crystallography, bringing NMR in a favourable position to contribute to bio-structural 
+studies on this family of highly thermostable PETases.
+ Among analytical techniques, biomolecular Nuclear Magnetic Resonance (NMR) stands out as an exceptionally 
+versatile approach for probing the structure, function and dynamics of biomolecules, with particular strength in 
+enzyme characterization1,2. Nevertheless, recent advances in structural biology, including the rapid progress of 
+cryo-electron microscopy (cryo-EM)3, the continued improvements in X-ray crystallography4,5 and the rise of 
+powerful computational modelling have reshaped how researchers obtain structural insights into proteins6. This 
+paradigm shift has, in turn, posed new challenges for biomolecular NMR spectroscopy, compelling the field to 
+refine its identity and emphasize the unique advantages it offers7,8. Despite demanding initial stages, which often 
+require specialized NMR facilities for tasks such as sample preparation (including stable isotope labeling), data 
+acquisition through multiple triple- resonance experiments and complex data analysis like resonance assignment, 
+biomolecular NMR provides an unparalleled ability to probe mechanistic details of enzymes at atomic level 
+directly in solution 9. In the past decades, important breakthroughs have continued to push the boundaries 
+of what is achievable. Innovations include cell-free labeling systems 10, more efficient data acquisition (Non-
+Uniform Sampling11, SO-FAST12), automated resonance assignment procedures13–15 and integrative approaches 
+that combine NMR with artificial intelligence (AI) to address long-standing challenges 16,17. Contemporary 
+NMR spectroscopy clearly needs to take the best of these advances to open up to new horizons.
+In the field of biotechnology, enzyme optimization is for many programs the key towards the success of 
+bio-based approaches18. Computational methods based on artificial intelligence 19,20 thereby can generate huge 
+libraries of potential candidates, and coupled to high-throughput screening methods 21, have the potential 
+to rapidly converge upon improved enzymes. If NMR spectroscopy wants to participate in this effort – and 
+convince that its site-specific information is most useful for example to restrict the list of potential mutation 
+sites for directed evolution9,22, obtaining a fully assigned 1H-15N spectrum as rapidly as possible seems a strict 
+requirement.
+One recent example where enzymes are at the core of a promising industrial process is bio-enzymatic recycling 
+of plastic23. PET hydrolases (PETases) break the ester linkages in polyethylene terephthalate (PET), a common 
+1Toulouse Biotechnology Institute (TBI), University of Toulouse, CNRS, INRAE, INSA Toulouse, 135 Avenue de 
+Rangueil, 31077 Toulouse Cedex 04, France. 2Carbios, Parc Cataroux–Bâtiment B80, 8 rue de la Grolière, 63100 
+Clermont-Ferrand, France. 3CNRS EMR 9002 ─Integrative Structural Biology, 59000 Lille, France. 4Univ. Lille, 
+Inserm, CHU Lille, Institut Pasteur de Lille UMR 1167 ─RID-AGE─Risk Factors and Molecular Determinants of 
+Aging-Related Diseases, 59000 Lille, France. email: glippens@insa-toulouse.fr; charlier@insa-toulouse.fr
+OPEN
+Scientific Reports |        (2025) 15:38602 1| https://doi.org/10.1038/s41598-025-22351-1
+www.nature.com/scientificreports
+
+plastic used in the manufacturing of beverage bottles, food containers or clothing fibers. In this rapidly evolving 
+field, many newly identified PETase enzymes from diversity24 have been screened and used as starting points for 
+further engineering. It proved essential to work close to the PET glass temperature of ~ 70°C, where the plastic 
+becomes more dynamic at the molecular level without yet crystallizing 25. The temperature of denaturation of 
+the enzymes thereby has become an important factor next to their intrinsic catalytical efficacy. The initially 
+mesophilic Ideonella sakaiensis (Is) PETase26 with its Tm of 46.1°C was evolved to become the ThermoPETase 
+(Tm 58.6°C; Son et al.27), FastPETase (Tm 56.9°C; Lu et al.28), DepoPETase (Tm 69.4°C; Shi et al.29), DuraPETase 
+(Tm 78.7°C; Cui et al.30) and finally HotPETase (Tm 82.5°C; Bell et al.31). Derived from the thermophilic Leaf-
+branch Compost Cutinase (LCC)32, a thermostable cutinase characteristic from the type I group33, its quadruple 
+mutant LCCICCG was equally optimized based on its activity as well as its thermostability (Tm = 85.8°C for LCC 
+and 93.3°C for LCCICCG at pH 8, both proteins without C-terminal His-tag)23. The latter enzyme has shown great 
+promise for industrial application of plastic recycling34,35.
+From an NMR standpoint, this high thermostability could be - at least in theory- a significant advantage, 
+as spectral recording at higher temperatures should lead to faster tumbling of the enzyme and hence mimic a 
+lower molecular weight species. Here, taking the catalytically inactive S165A variant of LCCICCG as an example, 
+we explore the possibility to facilitate the resonance assignment of the thermophilic PETases by recording a 
+set of 3D experiments directly at higher temperatures. We first measure experimentally the global tumbling 
+time (τc) at different temperatures, and find a twofold reduction already when going from 30°C to 50°C. When 
+comparing spectra at 30°C, temperature where we obtained our first assignments 36, and similar experiments 
+recorded at 50°C, we find that the standard triple resonance experiments work significantly better at 50°C, with 
+an important gain in Signal-to-Noise (S/N) ratio and hence reduction in spectral recording time. We equally 
+find that additional experiments based on the hNcaNNH and HncaNNH pulse sequences 37, mostly used for 
+assignment of highly flexible Intrinsically Disordered Proteins (IDPs) although equally applied with success to 
+some larger enzymes after complete deuteration38,39, become feasible without any deuteration, and this despite 
+the 30 kDa MW range of the enzymes. Based on this observation, we achieve de novo backbone assignment 
+of an active variant of LCC ICCG primarily based on the resulting 15N and 1HN connectivities. Within 6 days of 
+data acquisition followed by 3 days of data analysis, nearly 75% of the 15N/1HN resonances were assigned. Such 
+achievement should enable NMR to follow protein design at a pace at least comparable to X-ray crystallography 
+and alleviate the bottleneck of resonance assignment in large scale projects involving thermostable enzymes.
+Materials and methods
+Protein expression and purification
+LCCICCG-S165A and its active variant were expressed and purified according to previous studies36,40.
+NMR spectroscopy
+LCCICCG-S165A
+All experiments recorded for backbone assignment at 50°C were acquired on a 800 MHz spectrometer equipped 
+with a 5-mm cryoprobe with pulsed field z-gradients. The sample contained 580 µM of 15N-13C labeled protein 
+in 25 mM Tris-HCl buffer pH 7.5 with 100 mM NaCl. The data presented here were recorded using the standard 
+Bruker library pulse sequences: 2D 1H-15N HSQC, HNCACB and HNCO. All spectra were processed using 
+Topspin 4.0.8 (Bruker Biospin). Spectral analysis for backbone assignments was performed manually using 
+POKY41. One important experimental factor we found when measuring at higher temperatures is the necessity to 
+seal the sample. Otherwise, already after a day, evaporation set in and shim quality rapidly deteriorated. Spectral 
+dimensions for the HNCO experiments were 3622 Hz (F1) × 2919 Hz (F2) × 12500 Hz (F3) corresponding to 18 
+× 36 × 15.6224 ppm, with sampling durations of 15.5 ms (t1), 10.9 ms (t2), 160 ms (t3). Spectra were centered at 
+4.7 ppm (1H), 117.5 ppm (15N), 173 ppm (13CO). Spectral settings for the HNCACB experiment were 6438.5 Hz 
+(F1) × 2919 Hz (F2) × 14084.25 Hz (F2) corresponding to 32 × 36 × 50 ppm, with sampling durations of 14.9 ms 
+(t1), 10.9 ms (t 2), 0.009 ms (t 3). Spectra were centered at 4.7 ppm ( 1H), 117.5 ppm ( 15N), 40 ppm ( 13Cα). Both 
+experiments were acquired with 4 scans per increment.
+Active variant of LCCICCG
+Experiments were recorded at 60 °C on a sample containing 600 µM of 15N-13C labeled of the active variant of 
+LCCICCG in 25 mM Tris-HCl buffer pH 7.5 with 100 mM NaCl on a 900 MHz spectrometer equipped with a 
+5-mm cryoprobe with pulsed field z-gradients with the parameters shown in Table 1:
+NUS percentages were estimated based on the number of resonances expected in each dataset. Data were 
+reconstructed using standard MDD software 42. Spectral analysis and backbone assignments were performed 
+manually using CcpNmr analysis software v2.543.
+TRACT analysis
+TRACT spectra were recorded with the pulse sequence of Lee et al., implemented as individual experiments for 
+the α and β 15N spin states44. A relaxation delay of 3 s was used between scans, and 4k points were recorded. A 
+total of 24 delays ranging from 1 to 200 ms were sampled as increments in a pseudo-2D matrix and recorded 
+with 512 scans per delay. After manual phasing and baseline correction, the integral of the [10.0-6.4] ppm region 
+was determined and plotted as a function of the corresponding delay. The resulting curve was fitted as a mono-
+exponentially decaying function, and the difference between the rates of both components was interpreted in 
+terms of τc as described by Robson et al.45.
+Theoretical calculus of the τc value as a function of temperature was performed by fixing the τ c value at the 
+experimentally determined value of 13 ns for 30°C, and then applying the following formula46 :
+Scientific Reports |        (2025) 15:38602 2| https://doi.org/10.1038/s41598-025-22351-1
+www.nature.com/scientificreports/
+ 
+τ c (30 ◦C)= η 30 ◦C
+η T
+∗ 273 +T
+303 ∗ τ c (T)
+where ηT is the viscosity of water at the temperature T (using the Celsius scale). The latter was calculated using 
+the equation from47
+ η T =1 .7753 − 0.0565T +1 .0751 ∗ 10−3T 2 − 9.222 ∗ 10−6T 3
+.
+or, alternatively, from48:
+ 
+log(η T /η 20)= (20 − T )
+(T + 96)× 1.2378 − 1.303 ∗ 10−3 (20 − T )+3 .06 ∗ 10−6(20 − T )2 +2 .55 ∗ 10−8(20 − T )3
+and does not consider that our protein sample was not in pure water but rather in 25mM Tris-HCl and 100mM 
+NaCl buffer pH 7.5.
+Results
+Determination of τc as function of temperature
+The global tumbling time τc (or, strictly speaking, the correlation time of the dipolar autocorrelation function of a 
+given amide H-N vector49) is one criterium that determines the linewidth of the corresponding amide correlation 
+peak. Other factors such as chemical exchange of the amide protons with water or the presence of dynamics in 
+the intermediate time scale regime can equally contribute. Whereas the ratio of transverse ( T2) to longitudinal 
+(T1) relaxation times can be used to estimate this τ c parameter50, the increasing influence of intramolecular 
+motions on the T1 relaxation time for larger proteins51 has motivated the development of an alternative method. 
+The TRACT (TRosy for rotAtional Correlation Times) method measures the decay of both TROSY and anti-
+TROSY components of the 15N doublet44, and translates the differential rate into a value of τc without interference 
+of dipole–dipole (DD) relaxation by remote protons or relaxation contributions from chemical exchange 44,45. 
+TRACT experiments on the LCCICCG-S165A enzyme were recorded at various temperatures ranging from 30°C 
+to 60°C. By integrating the envelope of the proton spectra over the amide region as a function of the relaxation 
+delay, both (TROSY and anti-TROSY) relaxation rates were obtained using an exponential minimization (Fig. 
+1. A & B). The difference between both rates (Δ R2) was interpreted using the equation given by Robson and 
+coauthors45 and yielded τc values varying from 13 to 5.7 ns upon increasing the temperature from 30°C to 60°C 
+(Fig. 1. C). The reduction of τ c is expected, and follows well the temperature dependence of water viscosity 
+expected for a rigid body of this size 46 (Fig. 1.D). The small discrepancy at higher temperature could come 
+for the buffer and salt concentrations influencing the viscosity 52. Importantly, accelerated tumbling predicts a 
+significant decrease in transverse relaxation rates for both amide and Cα resonances53, thereby reducing the need 
+for (partial) deuteration of the sample. We show here that because of this superior sensitivity, nearly complete 
+assignment of the backbone and side chain spectra of LCC ICCG-S165A can be obtained with a minimal set of 
+experiments recorded at 50°C (Mathematical details are given in in the methods section).
+ 
+Influence of the temperature on spectral quality
+To evaluate experimentally the influence of temperature on the spectral quality of our PETase, we recorded 
+on the same sample at 30°C and 50°C both the 1H-15N HSQC and 1H-15N TROSY correlation spectra using 
+standard Bruker pulse programs (hsqcf3gpph19 and trosyf3gpph19). Already at 30°C, signal intensity improved 
+Time domain data size (points) Spectral width/carrier frequency (ppm)
+t1 t2 t3 F1 (1H) F2(15N) F3
+1H,15N HSQC 3076 128 19.83/4.7 35/117
+HNCACB 4000 128 128 15.42/4.7 35/117 60/42 (13C)
+HNCO 4000 128 112 15.42/4.7 35/117 13/173.5 (13C)
+HNcaCO 4000 128 112 15.42/4.7 35/117 13/173.5 (13C)
+hNcaNNH 2048 128 128 13.88/4.7 35/117 35/117 (15N)
+HncaNNH 4000 128 512 15.42/4.7 35/117 6/8 (1H)
+NS Delay time (s) NUS (%) Pulse program Exp time
+1H,15N HSQC 4 1 – hsqcf3gpph19 9 min 55 s
+HNCACB 16 1 25 hncacbgpwg3d 22 h 54 min
+HNCO 4 1 8 hncogpwg3d 1 h 35 min
+HNcaCO 16 1 15 hncacogpwg3d 12 h 5 min
+hNcaNNH 64 1 13 hncannhgp3d  1 d 22 h 46 min
+HncaNNH 64 1 3.6 hncannhgp3d.2  2 d 6 h 48 min
+Table 1. List of experiments used for the assignment of the active variant of LCCICCG.
+ 
+Scientific Reports |        (2025) 15:38602 3| https://doi.org/10.1038/s41598-025-22351-1
+www.nature.com/scientificreports/
+by ~ 40% when comparing the HSQC experiment with the TROSY version, and going to 50°C clearly boosted 
+the intensity gain by another ~ 15% (Fig.  2.A). Equally important, the number of peaks in the 2D correlation 
+spectra remained nearly the same between spectra recorded at both temperatures (Fig.  2.B), indicating limited 
+solvent exchange.
+Further time-saving could be obtained by BEST-54 or SOFAST-12 HSQC sequences and should therefore be 
+considered before setting up any triple resonance experiment. However, the reduced spin-diffusion at higher 
+temperatures should diminish the difference between selective and non-selective relaxation after excitation 
+of the amide proton pool, which is the underlying principle of these pulse sequences 36. Moreover, due to the 
+presence of extreme 1H chemical shifts for some amide protons of LCCICCG (reaching 10.9 ppm or 5.6 ppm), the 
+use of these schemes in our particular case led to the loss of ~ 10 resonances (Figure S1), and was therefore not 
+pursued in the present study. In accordance with the lower τc value, NOE based magnetization transfer proved 
+slower at 50°C than at 30°C55, but should simultaneously suffer less from spin diffusion (Figure S2).
+In a typical backbone assignment experiment (e.g. HNCACB), the lengthy back-transfer of 13Cα to 15N 
+magnetization is often a limiting step due to the rapid relaxation of the 13Cα transverse magnetization. While in 
+a HMQC experiment, this loss is amplified by the short 1H transverse relaxation time, the HSQC experiment 
+is less impacted as the 1H magnetization is stored along the z-axis and the 1H T1 is long . This is exemplified 
+when comparing 1H-13C HMQC and HSQC at 30°C where one can clearly see the increased number of visible 
+resonances in the HSQC experiment (Figure S3). To evaluate how beneficial spectral recording at 50°C would 
+be, we then measured 1H-13CHSQC spectra with a wide 13C spectral window both at 30°C and 50°C (Fig. 2.C). 
+Relative to the isolated methyl signal of M166 56, we observe a nearly 40% increase in intensity for 1Hα-13Cα 
+resonances in the spectrum recorded at 50°C compared to that at 30°C. To evaluate the effect this has on triple 
+resonance spectra, we acquired a series of 1H-13C planes from HNCO, HNcaCO and HNCACB spectra using 
+the Bruker standard HSQC-based ( hncogpwg3d, hncacogpwg3d, hncacbgpwg3d) experiments both at 30 °C 
+and 50°C. When comparing the 1H spectra resulting from the 1st Free Induction Decay (FID) for HNCO and 
+HNcaCO and the positive sum of the HNCACB plane we observe significant improvement in the S/N ratio of 
+20–30% for HNCO and 50% for HNcaCO and HNCACB when measuring at 50°C (Fig. 2D and Figure S4). This 
+Fig. 1. Determination of the correlation time τc as function of temperature. (A,B) TRACT analysis of 
+LCCICCG-S165A at (A) 30°C and (B) 50°C. Both panels display the single-spin-state 15N Rα and Rβrelaxation 
+decay curves obtained using the TRACT sequence. The dots represent the experimental points, and the lines 
+represent the results of fitting the curves to a single exponential decay. (C) Theoretical curve of the difference 
+between 15N relaxation rates, ΔR2 as function of τc following the equations of Robson and coworkers45. (D) 
+Theoretical curve of the temperature dependence of τc as predicted for a protein with its τc at 30°C fixed at 13 
+ns, based on the temperature dependence of water viscosity. Solid lines shows the τc values as a function of 
+temperature as calculated with water viscosity according to Weast47 (black) or Kestin et al.48 (green). On C and 
+D panels, dots correspond to experimental values at 30°C (yellow), 40°C (orange), 50°C (red) and 60°C (blue). 
+Error bars on (C) and (D) were calculated based on and estimated uncertainty of +/- 0.5 s−1 for the fits of the 
+Rα and Rβ curves.
+ 
+Scientific Reports |        (2025) 15:38602 4| https://doi.org/10.1038/s41598-025-22351-1
+www.nature.com/scientificreports/
+improvement can be confirmed by the results of an automatic peak detection performed on the respective planes, 
+that finds for both HNcaCO and HNCACB planes nearly twice the number of resonances at 50°C compared to 
+identical dataset at 30°C. A detailed analysis of the increase of observable peaks is presented in the SI.
+To obtain the resonance assignment of LCC ICCG-S165A, we recorded a full HSQC-based HNCACB triple 
+resonance spectrum at 50 °C and pH 7.5. Starting from our previous assignment of the 1H-15N HSQC spectrum 
+of LCCICCG-S165A at 30°C56 which at the time required nearly 4 weeks of experimental time, we used this single 
+spectrum to confirm the assignments at 50°C (Figure S5). A HNCO experiment was recorded to obtain the 13C’ 
+resonances at 50°C. In total, 85% of the 1HN/15N resonances along with 91% for 13Cα (234 out of 258), 90% 13Cβ 
+Fig. 2. Selection of the best conditions and experiments for PETase assignment LCCICCG-S165A. (A) 1D 
+1H slices through G88 (top), A59 (middle), G163 (bottom) cross peaks from 1H-15N HSQC at 30°C (blue), 
+1H-15N TROSY at 30°C (light-blue), 1H-15N HSQC at 50°C (red) and 1H-15N TROSY at 50°C (orange). (B) 
+1H-15N HSQC at 30°C (blue) and 50°C (red). Cross peaks generally shift upfield, but their number is the same 
+at both temperatures (C) 1H-13C HSQC at 30°C (blue) and 50°C (red). The insets show how representative 
+13Cα signals are sharper at 50°C compared to 30°C. The 1H 1D slices were taken at the 13C frequency displayed 
+by the dashed lines. (D) 1D plot of the 1st FID of HNCO (top) and HNcaCO (middle) along with a positive 
+projection of a HNCACB experiment (bottom) measured at 30°C (blue) and 50°C (red).
+ 
+Scientific Reports |        (2025) 15:38602 5| https://doi.org/10.1038/s41598-025-22351-1
+www.nature.com/scientificreports/
+(215 out of 239 residues, excluding the 19 glycines) and 85% of 13C’ resonances (203 out of 239, excluding all 
+residues preceding a proline residue) were assigned.
+Raising the temperature for hNcaNNH
+In our general effort to accelerate the assignment of the 1H-15N spectrum, we explored the possibility to record 
+a hNcaNNH experiment 37. While the common approach of backbone assignment consists of connecting 
+consecutive residues through their various 13C resonances, these experiments have been developed to obtain 
+sequential correlations between successive amide proton and nitrogen resonances 1H(i−1), 15N(i−1), 1H(i), 15N(i), 
+1H(i+1), 15N(i+1)
+37,57,58. Although recognized as true game changers in the assignment process for disordered 
+proteins59,60, they have not been used for non-deuterated globular proteins of the size of PETases due to their 
+inherent low sensitivity. Indeed, the bottleneck in these experiments is the fast 13Ca relaxation rate that significantly 
+deteriorates their sensitivity. To explore whether these experiments would profit from the same sensitivity gain 
+as the above-described triple resonance spectra with a single period of 13Ca transverse relaxation, we recorded a 
+hNcaNNH at 30°C and 50°C with the standard pulse sequence from the Bruker library (hncannhgp3d).
+At 30 °C, no signal could be observed (Figure S6), and when raising the temperature to 50 °C the sensitivity 
+of this experiment proved at the edge (S/N < 5 for most peaks) in a reasonable amount of experimental time (2 
+days 15 hours for a fully sampled dataset) (Fig. 3.A). However, the signal-to-noise ratio further increased by an 
+average 70%, and even by a factor of two for certain residues (Figure S7) when raising the temperature to 60°C 
+(Fig. 3.A). For many resonances where the connecting peaks were absent in the spectrum at 50°C, we obtained 
+at 60°C the connection through their 15N(i−1) and 15N(i+1) resonances. (Fig. 3.B).
+Rapid de novo backbone assignment
+Based on the quality of the hNcaNNH acquired at 60°C, we sought to investigate whether a de novo backbone 
+assignment primarily based on the hNcaNNH and HncaNNH experiments would be possible. Turning stretches 
+of connecting resonances into a backbone assignment further required a HNCACB spectrum to obtain amino 
+acid type identifying 13C chemical shift values (Fig.  4). Finally, we recorded HNCO and HNcaCO spectra for 
+independent verification of the obtained assignments (Table 1). With a 500 µM sample of the active enzyme in a 
+5 mm tube, on a 900 MHz spectrometer equipped with a triple-resonance cryogenically cooled probe head, the 
+complete data set was acquired within 6 days of machine time (see Methods).
+The elevated temperature (60°C) led to improved signal-to-noise data and further allowed efficient non-
+uniform sampling providing very high-resolution spectra. Especially for the HncaNNH experiment, this 
+enhanced resolution proved important to establish firm 1HN connectivities between resonances of neighboring 
+residues and thereby to speed up significantly the assignment procedure. To complement the assignment strategy, 
+the HNCACB experiment was employed to confirm the sequential connectivity of residues. This experiment 
+enables the identification of both intra-residue (i) and preceding residue (i-1) carbon (Cα and Cβ) resonances, 
+thereby establishing the directionality of the assignments.
+As the overall goal of our work was to streamline and accelerate the backbone resonance assignment of 
+thermostable enzymes, we tested NMRtist, an AI-driven tool that enables automated processing from peak 
+picking to resonance assignment and ultimately to structure calculation14. NMRtist requires as input the amino 
+acid sequence of the target protein together with peak lists derived from 2D and 3D NMR spectra. Accordingly, 
+we prepared peak lists of 1H-15N-HSQC and 3D HNCO, HNcoCA, HNCACB, HncaNNH, and hNcaNNH 
+spectra. Automated peak-picking was performed with CCP-NMR v2 software, since NMRtist does not currently 
+Fig. 3. Connecting 15N resonances through hNcaNNH experiment. (A) Overlay of the 1H-15N strip extracted 
+from the hNcaNNH at 50°C (blue) and 60°C (red) for A59 and L203. 15N traces were extracted at the 1H 
+frequency of the selected signal. (B) 1H-15N strips of consecutive residues at 60°C shown for residues from 
+G113 to V118. Red resonances correspond to 15N(i-1) and 15N(i + 1) while the autocorrelation cross-peak 
+leading to the 15N(i) was added manually in orange based on the 15N value obtained from the 1H-15N HSQC 
+spectra.
+ 
+Scientific Reports |        (2025) 15:38602 6| https://doi.org/10.1038/s41598-025-22351-1
+www.nature.com/scientificreports/
+support peak picking for HncaNNH and hNcaNNH spectra. When providing only the carbon-connectivity-
+based spectra (HNCO, HNcoCA, HNCACB) along 1H-15N-HSQC peak lists, NMRtist returned an estimated 
+chemical shift assignment coverage of 46%. This value increased to 65% upon inclusion of the HncaNNH 
+and hNcaNNH peak lists as input. The inclusion of HncaNNH and hNcaNNH peak lists hence significantly 
+improves the overall assignment score, despite the fact that these spectra are underrepresented in the training 
+data, potentially leading to reduced performance. Therefore, we proceeded simultaneously with a manual 
+backbone resonance assignment. Within three days of spectral analysis, and without relying on the previously 
+generated NMRtist outputs, we successfully assigned nearly 80% of backbone (1H/15N) resonances (Figure S8). 
+A comparison between the manual and NMRtist-derived assignments revealed inaccuracies in the latter which 
+are likely attributable to the fact that our PETase, with its 258 amino acids, lies at the upper limit of the protein 
+size range for which NMRtist was trained. In addition, the slightly lower percentage than the one obtained 
+previously for the inactive LCC ICCG variant is primarily due to additional broadening of some resonances 
+assigned to solvent exposed residues that were already at the limit of observation at 50 °C in LCC ICCG-S165A 
+(T211 and G127; see Figure S5).
+Discussion
+The initial steps of the development of new or improved PETases have invariably involved molecular modeling 
+and/or bioinformatics, whereby the starting 3D structures that served as input for these efforts mostly came 
+from X-ray crystallography. Examples such as TfCut2 (PDB code: 4CG161), Cut190 (5ZNO62), LCC and mutants 
+(4EBO32 and 6THS, 6THT34) or IsPETase (5XG063), are reviewed by Liu et al.64 and Tournier et al.23.
+Solution biomolecular NMR has only recently entered this field, and not as much as to obtain structural 
+information but to characterize the interaction between the enzyme and small soluble substrates 56,65 or to 
+investigate the role of the catalytic histidine with its associated pKa value 40. Recently, a solid state NMR study 
+of the TfCut2 enzyme embedded in a trehalose glass in the presence of nanoparticles (NPs) made of 13C labeled 
+PET oligomers equally added to our understanding of the enzyme/polymer interaction and the biocatalytic 
+mechanism of the hydrolase reaction66. However, if NMR wants to consolidate its place in this large-scale project 
+that is the development of industrial PETases, easy, rapid and robust methods providing the assignment of the 
+1H-15N and/or 1H-13C spectra are required.
+Our study demonstrates that recording NMR experiments at elevated temperatures can significantly accelerate 
+backbone resonance assignment of thermostable PETases. Using the TRACT approach44,45, we observed that the 
+overall global tumbling time was reduced by approximately a factor of two, effectively making a 25 kDa protein 
+behave like a ~ 10 kDa protein in the NMR tube. Furthermore, the sensitivity increase that accompanies the 
+line narrowing by this apparent molecular weight decrease (Fig. 2) is not counteracted by opposing effects such 
+as increased exchange with the water or other line broadening effects. Indeed, we observed very limited amide 
+proton exchange up to 50°C/60°C, with only a couple of resonances less intense compared to 30°C. This sharply 
+contrasts with the case of IDPs where amide proton signals at neutral to alkaline pH completely disappear at 
+higher temperatures67,68. An upfield shift for most of the amide protons is observed at the high temperature, due 
+to weakened hydrogen bonding69–71. It is not clear at this moment whether the pH dependence of our Tris buffer 
+Fig. 4. De novo assignment primarily based on 15N and 1H connectivities. (A) Example of connectivity 
+between the HncaNNH (teal), HSQC (blue) and hNcaNNH (skyblue) experiments for residues V116-
+L117-V118. The 1H-1H and 15H-1H strips were extracted at the 1HN resonance frequency of the 3 signals. 
+The strips are only displayed in the window corresponding to the HSQC experiment (blue). The resonances 
+of V115 and I119 respectively on the V116 and V118 strips are outside of displayed window. The orange line 
+shows the connectivity for L117 both from V116 (i-1) and L118 (i + 1). (B) HNCACB strips displayed for all 3 
+residues with the Cα in red and Cβ in green.
+ 
+Scientific Reports |        (2025) 15:38602 7| https://doi.org/10.1038/s41598-025-22351-1
+www.nature.com/scientificreports/
+at higher temperature (with a predicted lowering of 0.3 units between 30°C and 50°C) contributes to this shift  
+or to limiting the water exchange. Finally, NOE build-up curves at both temperatures (Figure S2) showed the 
+feasibility of recording a high-resolution NOESY-HSQC spectrum even at 50 °C, and could thereby provide the 
+experimental data for efforts to assign the 1H-15N HSQC on the sole basis of a 3D NOESY-HSQC experiment 
+together with the experimental (or predicted) 3D structure14,72.
+Particularly true for enzymes near or beyond 30 kDa, considered the size-limit of classical solution state 
+NMR, assignment of the 1H-15N HSQC spectrum remains a real bottleneck for many projects in which NMR is 
+or could be involved. Except for intrinsically disordered proteins (IDPs), where the relevant τc parameter does not 
+correlate with the MW of the protein, the size problem leads not only to an increased number of peaks but also to 
+peak broadening and hence decreased signal-to-noise. Deuteration73–75 together with TROSY approaches36 can 
+alleviate the latter peak broadening, but significantly increases the price per sample, with associated costs that 
+become an important factor to consider in a program that generates many variants. Altogether, we observe in 
+the Biomagresbank76 an exponentially decreasing number of deposited assignments for proteins larger than 150 
+residues, and finally no more than ~ 100 entries for proteins of the size of LCC and its derivatives14.
+Although the NMR assignment clearly will never keep up with the many PETase variants that are currently 
+tested in academic and industrial laboratories all over the world, speeding up the process could increase its use 
+in this rapidly evolving field. Not only do we increase the sensitivity of the standard triple resonance experiments 
+that are the cornerstone of the assignment process by matching 13C frequencies (Fig. 2.D), but directly connecting 
+consecutive amide peaks through the complementary hNcaNNH or HncaNNH spectra becomes possible (Figs. 
+3 and 4) and dramatically speeds up the procedure, be it manual or (semi-)automatic. High temperatures equally 
+imply we are studying these enzymes in what we would call ‘near-working industrial conditions” 35 (to make 
+the parallel with “near-physiological conditions” for disease related enzymes), and should therefore be seen 
+as a win-win situation for solution state NMR : it not only yields higher-quality data and opens the door to 
+experiments that would otherwise be impossible, but it also gives information about the enzyme in conditions 
+that approximate its real-world functioning.
+Data availability
+All the parameter sets for the NMR spectra have been deposited to https://zenodo.org/records/15425383 and/or 
+contact either glippens@insa-toulouse.fr or charlier@insa-toulouse.fr. Chemical shifts have been deposited on 
+BMRB under the number 53331.
+Received: 16 May 2025; Accepted: 29 September 2025
+References
+ 1. East, K. W . et al. NMR and computational methods for molecular resolution of allosteric pathways in enzyme complexes. Biophys. 
+Rev. 12, 155–174 (2020).
+ 2. Shein, M. et al. Characterizing ATP processing by the AAA + protein p97 at the atomic level. Nat. Chem. 16, 363–372 (2024).
+ 3. Chua, E. Y . D. et al. Better, faster, cheaper: recent advances in cryo–electron microscopy. Annu. Rev. Biochem. 91, 1–32 (2022).
+ 4. Liu, H. & Lee, W . The XFEL protein crystallography: developments and perspectives. IJMS 20, 3421 (2019).
+ 5. Mous, S., Poitevin, F ., Hunter, M. S., Asthagiri, D. N. & Beck, T. L. Structural biology in the age of X-ray free-electron lasers and 
+exascale computing. Curr. Opin. Struct. Biol. 86, 102808 (2024).
+ 6. Rosignoli, S., Pacelli, M., Manganiello, F . & Paiardini, A. An outlook on structural biology after A Lpha F old: tools, limits and 
+perspectives. FEBS Open. Bio. 15, 202–222 (2025).
+ 7. Karamanos, T. K. & Matthews, S. Biomolecular NMR in the AI-assisted structural biology era: old tricks and new opportunities. 
+Biochim. Et Biophys. Acta (BBA) - Proteins Proteom. 1872, 140949 (2024).
+ 8. Selenko, P . Quo vadis biomolecular NMR spectroscopy? IJMS 20, 1278 (2019).
+ 9. Bhattacharya, S. et al. NMR-guided directed evolution. Nature 610, 389–393 (2022).
+ 10. Hoffmann, B., Löhr, F ., Laguerre, A., Bernhard, F . & Dötsch, V . Protein labeling strategies for liquid-state NMR spectroscopy using 
+cell-free synthesis. Progress Nucl. Magn. Reson. Spectrosc. 105, 1–22 (2018).
+ 11. Hoch, J. C., Maciejewski, M. W ., Mobli, M., Schuyler, A. D. & Stern, A. S. In Encyclopedia of Magnetic Resonance (ed. Harris, R. K.) 
+emrstm1239 https://doi.org/10.1002/9780470034590.emrstm1239 (John Wiley & Sons, Ltd, 2012).
+ 12. Schanda, P ., Kupče, Ē. & Brutscher, B. SOFAST-HMQC experiments for recording two-dimensional deteronuclear correlation 
+spectra of proteins within a few seconds. J. Biomol. NMR. 33, 199–211 (2005).
+ 13. Bishop, A. C., Torres-Montalvo, G., Kotaru, S., Mimun, K. & Wand, A. J. Robust automated backbone triple resonance NMR 
+assignments of proteins using Bayesian-based simulated annealing. Nat. Commun. 14, 1556 (2023).
+ 14. Klukowski, P ., Riek, R. & Güntert, P . Time-optimized protein NMR assignment with an integrative deep learning approach using 
+alphafold and chemical shift prediction. Sci. Adv. 9, eadi9323 (2023).
+ 15. Pritišanac, I., Würz, J. M., Alderson, T. R. & Güntert, P . Automatic structure-based NMR methyl resonance assignment in large 
+proteins. Nat. Commun. 10, 4922 (2019).
+ 16. Rasulov, U. et al. Protein NMR assignment by isotope pattern recognition. Sci. Adv. 10, eado0403 (2024).
+ 17. Shukla, V . K., Heller, G. T. & Hansen, D. F . Biomolecular NMR spectroscopy in the era of artificial intelligence. Structure 31, 
+1360–1374 (2023).
+ 18. Katsimpouras, C. & Stephanopoulos, G. Enzymes in biotechnology: critical platform technologies for bioprocess development. 
+Curr. Opin. Biotechnol. 69, 91–102 (2021).
+ 19. Reisenbauer, J. C., Sicinski, K. M. & Arnold, F . H. Catalyzing the future: recent advances in chemical synthesis using enzymes. Curr. 
+Opin. Chem. Biol. 83, 102536 (2024) https://doi.org/10.1016/j.cbpa.2024.102536.
+ 20. Y ang, J., Li, F . Z. & Arnold, F . H. Opportunities and challenges for machine learning-assisted enzyme engineering. ACS Cent. Sci. 
+10, 226–241 (2024).
+ 21. Y ew, M., Y ang, Y ., Wang, Q. & Zhu, L. High-throughput screening strategies for plastic-depolymerizing enzymes. Trends Biotechnol. 
+S0167779924003871 https://doi.org/10.1016/j.tibtech.2024.12.008 (2025).
+ 22. Gutierrez-Rus, L. I. et al. Enzyme enhancement through computational stability design targeting NMR-determined catalytic 
+hotspots. Preprint at. https://doi.org/10.26434/chemrxiv-2024-7xxzg (2024).
+ 23. Tournier, V . et al. Enzymes’ power for plastics degradation. Chem. Rev. 123, 5612–5701.  h t t p s : / / d o i . o r g / 1 0 . 1 0 2 1 / a c s . c h e m r e v . 2 c 0 0 
+6 4 4     (2023).
+Scientific Reports |        (2025) 15:38602 8| https://doi.org/10.1038/s41598-025-22351-1
+www.nature.com/scientificreports/
+ 24. Lin, X. et al. Natural-selected plastics biodegradation species and enzymes in landfills. PNAS Nexus. 4, pgaf066 (2025).
+ 25. Thomsen, T. B., Hunt, C. J. & Meyer, A. S. Influence of substrate crystallinity and glass transition temperature on enzymatic 
+degradation of polyethylene terephthalate (PET). New Biotechnol. 69, 28–35 (2022).
+ 26. Y oshida, S. et al. A bacterium that degrades and assimilates poly(ethylene terephthalate). Science 351, 1196–1199 (2016).
+ 27. Son, H. F . et al. Rational protein engineering of thermo-stable PETase from Ideonella sakaiensis for highly efficient PET degradation. 
+ACS Catal. 9, 3519–3526 (2019).
+ 28. Lu, H. et al. Machine learning-aided engineering of hydrolases for PET depolymerization. Nature 604, 662–667 (2022).
+ 29. Shi, L. et al. Complete depolymerization of PET wastes by an evolved PET hydrolase from directed evolution. Angew Chem. Int. 
+Ed. 62, e202218390 (2023).
+ 30. Cui, Y . et al. Computational redesign of a PETase for plastic biodegradation under ambient condition by the GRAPE strategy. ACS 
+Catal. 11, 1340–1350 (2021).
+ 31. Bell, E. L. et al. Directed evolution of an efficient and thermostable PET depolymerase. Nat. Catal. 5, 673–681 (2022).
+ 32. Sulaiman, S. et al. Isolation of a novel cutinase homolog with polyethylene terephthalate-degrading activity from leaf-branch 
+compost by using a metagenomic approach. Appl. Environ. Microbiol. 78, 1556–1562 (2012).
+ 33. Joo, S. et al. Structural insight into molecular mechanism of poly(ethylene terephthalate) degradation. Nat. Commun. 9, 382 
+(2018).
+ 34. Tournier, V . et al. An engineered PET depolymerase to break down and recycle plastic bottles. Nature 580, 216–219 (2020).
+ 35. Arnal, G. et al. Assessment of four engineered PET degrading enzymes considering Large-Scale industrial applications. ACS Catal. 
+13156–13166. https://doi.org/10.1021/acscatal.3c02922 (2023).
+ 36. Pervushin, K., Riek, R., Wider, G. & Wüthrich, K. Attenuated T 2 relaxation by mutual cancellation of dipole–dipole coupling and 
+chemical shift anisotropy indicates an avenue to NMR structures of very large biological macromolecules in solution. Proc. Natl. 
+Acad. Sci. U S A. 94, 12366–12371. https://doi.org/10.1016/j.bpj.2022.07.002 (1997).
+ 37. Weisemann, R., Rüterjans, H. & Bermel, W . 3D Triple-resonance NMR techniques for the sequential assignment of NH and 15 N 
+resonances in 15 N- and 13 C-labelled proteins. J. Biomol. NMR 3, (1993).
+ 38. Frueh, D. P . et al. Non-uniformly sampled double-TROSY hNcaNH experiments for NMR sequential assignments of large proteins. 
+J. Am. Chem. Soc. 128, 5757–5763 (2006).
+ 39. Frueh, D. P . Practical aspects of NMR signal assignment in larger and challenging proteins. Progress Nucl. Magn. Reson. Spectrosc. 
+78, 47–75 (2014).
+ 40. Charlier, C. et al. Exploring the pH dependence of an improved PETase. Biophys. J. S0006349524002881  h t t p s : / / d o i . o r g / 1 0 . 1 0 1 6 / j . 
+b p j . 2 0 2 4 . 0 4 . 0 2 6     (2024).
+ 41. Lee, W ., Rahimi, M., Lee, Y . & Chiu, A. POKY: a software suite for multidimensional NMR and 3D structure calculation of 
+biomolecules. Bioinformatics 37, 3041–3042 (2021).
+ 42. Mayzel, M., Kazimierczuk, K. & Orekhov, V . Y . The causality principle in the reconstruction of sparse NMR spectra. Chem. 
+Commun. 50, 8947–8950 (2014).
+ 43. Vranken, W . F . et al. The CCPN data model for NMR spectroscopy: development of a software pipeline. Proteins 59, 687–696 
+(2005).
+ 44. Lee, D., Hilty, C., Wider, G. & Wüthrich, K. Effective rotational correlation times of proteins from NMR relaxation interference. J. 
+Magn. Reson. 178, 72–76 (2006).
+ 45. Robson, S. A., Dağ, Ç., Wu, H. & Ziarek, J. J. TRACT revisited: an algebraic solution for determining overall rotational correlation 
+times from cross-correlated relaxation rates. J. Biomol. NMR. 75, 293–302 (2021).
+ 46. De La Garcı́a, J., Huertas, M. L. & Carrasco, B. H. Y . D. R. O. N. M. R. Prediction of NMR relaxation of globular proteins from 
+atomic-level structures and hydrodynamic calculations. J. Magn. Reson. 147, 138–146 (2000).
+ 47. CRC Handbook of Chemistry and Physics. A Ready-Reference Book of Chemical and Physical Data. (CRC P , 1979).
+ 48. Kestin, J., Sokolov, M. & Wakeham, W . A. Viscosity of liquid water in the range – 8°C to 150°C. J. Phys. Chem. Ref. Data. 7, 941–948 
+(1978).
+ 49. Cavanagh, J., Fairbrother, W . J., Palmer, A. G., Rance, M. & Skeltonv, N. J. In Protein NMR Spectroscopy (Second Edition)  (eds 
+Cavanagh, J. et al.) v–vi https://doi.org/10.1016/B978-012164491-8/50000-2 (Academic Press, 2007).
+ 50. Tjandra, N., Feller, S. E., Pastor, R. W . & Bax, A. Rotational diffusion anisotropy of human ubiquitin from 15 N NMR relaxation. J. 
+Am. Chem. Soc. 117, 12562–12566 (1995).
+ 51. Luginbühl, P . Semi-classical nuclear spin relaxation theory revisited for use with biological macromolecules. Progress Nucl. Magn. 
+Reson. Spectrosc. 40, 199–247 (2002).
+ 52. Woldeyes, M. A., Qi, W ., Razinkov, V . I., Furst, E. M. & Roberts, C. J. How well do low- and high-concentration protein interactions 
+predict solution viscosities of monoclonal antibodies? J. Pharm. Sci. 108, 142–154 (2019).
+ 53. Y amazaki, T., Lee, W ., Arrowsmith, C. H., Muhandiram, D. R. & Kay, L. E. A suite of triple resonance NMR experiments for the 
+backbone assignment of 15 N, 13 C, 2H labeled proteins with high sensitivity. J. Am. Chem. Soc. 116, 11655–11666 (1994).
+ 54. Schanda, P ., Van Melckebeke, H. & Brutscher, B. Speeding up three-dimensional protein NMR experiments to a few minutes. J. 
+Am. Chem. Soc. 128, 9042–9043 (2006).
+ 55. Neuhaus, D. & Williamson, M. P . The Nuclear Overhauser Effect in Structural and Conformational Analysis (Wiley, 2000).
+ 56. Charlier, C. et al. An NMR look at an engineered PET depolymerase. Biophys. J. 121, 2882–2894 (2022).
+ 57. Bracken, C., Iii, A. G. P . & Cavanagh, J. H)N(COCA)NH and HN(COCA)NH experiments for 1H-15 N backbone assignments in 
+13 C/15 N-labeled proteins. J. Biomol. NMR. 9, 94–100 (1997).
+ 58. Sun, Z. Y . J., Frueh, D. P ., Selenko, P ., Hoch, J. C. & Wagner, G. Fast assignment of 15 N-HSQC peaks using high-resolution 3D 
+HNcocaNH experiments with non-uniform sampling. J. Biomol. NMR. 33, 43–50 (2005).
+ 59. Lopez, J., Ahuja, P ., Gerard, M., Wieruszeski, J. M. & Lippens, G. A new strategy for sequential assignment of intrinsically 
+unstructured proteins based on 15 N single isotope labelling. J. Magn. Reson. 236, 1–6 (2013).
+ 60. Charlier, C. et al. Structure and dynamics of an intrinsically disordered protein region that partially folds upon binding by 
+chemical-exchange NMR. J. Am. Chem. Soc. 139, 12219–12227 (2017).
+ 61. Roth, C. et al. Structural and functional studies on a thermostable polyethylene terephthalate degrading hydrolase from 
+thermobifida fusca. Appl. Microbiol. Biotechnol. 98, 7815–7823 (2014).
+ 62. Numoto, N. et al. Structural dynamics of the PET-degrading cutinase-like enzyme from Saccharomonospora viridis AHK190 in 
+substrate-bound states elucidates the Ca2+-driven catalytic cycle. Biochemistry 57, 5289–5300 (2018).
+ 63. Han, X. et al. Structural insight into catalytic mechanism of PET hydrolase. Nat. Commun. 8, 2106 (2017).
+ 64. Liu, F . et al. Current advances in the structural biology and molecular engineering of PETase. Front. Bioeng. Biotechnol. 11, 1263996 
+(2023).
+ 65. Hellesnes, K. N., Vijayaraj, S., Fojan, P ., Petersen, E. & Courtade, G. Biochemical characterization and NMR study of a PET-
+hydrolyzing cutinase from Fusarium Solani Pisi. Biochemistry 62, 1369–1375 (2023).
+ 66. Falkenstein, P . et al. On the binding mode and molecular mechanism of enzymatic polyethylene terephthalate degradation. ACS 
+Catal. 13, 6919–6933 (2023).
+ 67. Gil, S. et al. NMR spectroscopic studies of intrinsically disordered proteins at near-physiological conditions. Angew Chem. Int. Ed. 
+52, 11808–11812 (2013).
+Scientific Reports |        (2025) 15:38602 9| https://doi.org/10.1038/s41598-025-22351-1
+www.nature.com/scientificreports/
+ 68. Lopez, J., Schneider, R., Cantrelle, F ., Huvent, I. & Lippens, G. Studying intrinsically disordered proteins under true in vivo 
+conditions by combined cross-polarization and carbonyl ‐detection NMR spectroscopyy. Angew Chem. Int. Ed.  55, 7418–7422 
+(2016).
+ 69. Wagner, G. & Wüthrich, K. Structural interpretation of the amide proton exchange in the basic pancreatic trypsin inhibitor and 
+related proteins. J. Mol. Biol. 134, 75–94 (1979).
+ 70. Baxter, N. J. & Williamson, M. P . Temperature dependence of 1H chemical shifts in proteins. J. Biomol. NMR. 9, 359–369 (1997).
+ 71. Asakura, T., Taoka, K., Demura, M. & Williamson, M. P . The relationship between amide proton chemical shifts and secondary 
+structure in proteins. J. Biomol. NMR. 6 (1995).
+ 72. Stratmann, D., Van Heijenoort, C. & Guittet, E. NOE net–use of NOE networks for NMR resonance assignment of proteins with 
+known 3D structure. Bioinformatics 25, 474–481 (2009).
+ 73. Gardner, K. H. & Kay, L. E. The use of 2H, 13C, 15N multidimensional NMR GTO study the structure and dynamics of proteins. 
+Annu. Rev. Biophys. Biomol. Struct. 27, 357–406 (1998).
+ 74. LeMaster, D. M. & Richards, F . M. NMR sequential assignment of Escherichia coli thioredoxin utilizing random fractional 
+deuteriation. Biochemistry 27, 142–150 (1988).
+ 75. Sattler, M. & Fesik, S. W . Use of deuterium labeling in NMR: overcoming a sizeable problem. Structure 4, 1245–1249 (1996).
+ 76. Hoch, J. C. et al. Biological magnetic resonance data bank. Nucleic Acids Res. 51, D368–D376 (2023).
+Acknowledgements
+We would like to thank Alain Marty, Vincent Tournier and Nicolas Chabot (Carbios, France) for insightful dis-
+cussions and comments on the manuscript. We thank the ICEO facility of the Toulouse Biotechnology Institute 
+(TBI), which is part of the Integrated Screening Platform of Toulouse (PICT, IBiSA), for providing access to pro-
+tein-purification equipment. We thank Dr. E. Cahoreau and L. Peyriga in the MetaToul (Toulouse metabolomics 
+& fluxomics facilities, www.metatoul.fr) NMR facility. MetaToul is part of the French National Infrastructure 
+for Metabolomics and Fluxomics MetaboHUB-AR-11-INBS-0010 (www.metabohub.fr), and is supported by the 
+Région Midi-Pyrénées, the ERDF , the SICOV AL and the French Minister of Education & Research, who are all 
+gratefully acknowledged. Financial support from the IR INFRANALYTICS FR2054 for conducting the research 
+is gratefully acknowledged. This study was supported by the OPTIZYME grant financed by ADEME - contract 
+number 2282D0513-C.
+Author contributions
+V .G., E.B. and F .-X.C. recorded and analysed NMR spectra. J.G., L.P . and S.G. resources. G.L. and C.C. concep-
+tualization, project administration, supervision, writing – original draft preparation, writing - review & editing. 
+All authors reviewed the manuscript.
+Declarations
+Competing interests
+The authors declare no competing interests.
+Additional information
+Supplementary Information The online version contains supplementary material available at  h t t p s : / / d o i . o r g / 1 
+0 . 1 0 3 8 / s 4 1 5 9 8 - 0 2 5 - 2 2 3 5 1 - 1     .  
+Correspondence and requests for materials should be addressed to G.L. or C.C.
+Reprints and permissions information is available at www.nature.com/reprints.
+Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and 
+institutional affiliations.
+Open Access  This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 
+4.0 International License, which permits any non-commercial use, sharing, distribution and reproduction in 
+any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide 
+a link to the Creative Commons licence, and indicate if you modified the licensed material. Y ou do not have 
+permission under this licence to share adapted material derived from this article or parts of it. The images or 
+other third party material in this article are included in the article’s Creative Commons licence, unless indicated 
+otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence 
+and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to 
+obtain permission directly from the copyright holder. To view a copy of this licence, visit  h t t p : / / c r e a t i v e c o m m o 
+n s . o r g / l i c e n s e s / b y - n c - n d / 4 . 0 /     .  
+© The Author(s) 2025 
+Scientific Reports |        (2025) 15:38602 10| https://doi.org/10.1038/s41598-025-22351-1
+www.nature.com/scientificreports/

@@ -1,0 +1,651 @@
+Citation: Huang, D.; Zhang, L.; Sun,
+Y. Rational Design of Disulﬁde
+Bridges in BbPETaseCD for Enhancing
+the Enzymatic Performance in PET
+Degradation. Molecules 2023, 28, 3528.
+https://doi.org/10.3390/
+molecules28083528
+Academic Editor: Ivan Gitsov
+Received: 21 March 2023
+Revised: 12 April 2023
+Accepted: 15 April 2023
+Published: 17 April 2023
+Copyright: © 2023 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+molecules
+Article
+Rational Design of Disulﬁde Bridges in BbPETaseCD for
+Enhancing the Enzymatic Performance in PET Degradation
+Dongjian Huang 1, Lin Zhang 1,2 and Yan Sun 1,2, *
+1 Department of Biochemical Engineering, School of Chemical Engineering and Technology, Tianjin University,
+Tianjin 300350, China; huangdongjian@tju.edu.cn (D.H.); linzhang@tju.edu.cn (L.Z.)
+2 Key Laboratory of Systems Bioengineering and Frontiers Science Center for Synthetic Biology
+(Ministry of Education), Tianjin University, Tianjin 300350, China
+* Correspondence: ysun@tju.edu.cn
+Abstract: Polyethylene terephthalate (PET) is one of the most prevalent transparent thermoplastics.
+It is commonly utilized due to its low cost and high durability. With the massive accumulation of
+waste PET, however, serious environmental pollution has become a global problem. Compared to
+traditional chemical degradation, biodegradation of PET catalyzed by PET hydrolase (PETase) is more
+environmentally friendly and energy-efﬁcient. BbPETaseCD from the Burkholderiales bacterium is a
+PETase that shows favorable properties for application in the biodegradation of PET. To enhance the
+enzymatic performance of this enzyme, this work focuses on the rational design of disulﬁde bridges
+in BbPETaseCD. We utilized two computational algorithms to predict the probable disulﬁde-bridge
+mutations in BbPETaseCD, and ﬁve variants were acquired from the computations. Among these,
+the N364C/D418C variant with one additional disulﬁde bond showed higher expression than the
+wild-type enzyme (WT) and the best enzymatic performance. The melting temperature (Tm) of the
+N364C/D418C variant presented an increase of 14.8 ◦C over that of WT (56.5 ◦C), indicating that the
+additional disulﬁde bond signiﬁcantly raised the thermodynamic stability of the enzyme. Kinetic
+experiments at different temperatures also demonstrated the thermal stability increase of the variant.
+The variant also showed signiﬁcantly increased activity over WT when using bis(hydroxyethyl)
+terephthalate (BHET) as the substrate. More remarkably, the N364C/D418C variant exhibited
+approximately an 11-fold increase over the WT enzyme in the long-term (14 days) degradation of
+PET ﬁlms. The results prove that the rationally designed disulﬁde bond signiﬁcantly improved the
+enzymatic performance of the enzyme for PET degradation.
+Keywords: BbPETaseCD; disulﬁde bridge; PET degradation; rational design
+1. Introduction
+Plastic products are widely used due to their light weight, easy manufacturing, and
+high durability [1]. The annual production capacity of plastic products is about 350 million
+tons [2]. However, only around 9% of plastic trash is recycled, while the remainder is burnt
+or disposed of in landﬁlls [3]. Plastic waste will form microplastics (<5 mm) after crushing
+and weathering. Under the inﬂuence of ocean circulation, microplastics have almost spread
+all over the world [4,5], resulting in serious environmental pollution. As one of the most
+common transparent thermoplastics, polyethylene terephthalate (PET) is widely used in
+beverage bottles, food packaging, and other ﬁelds [6,7]. However, it is estimated that in the
+natural environment, PET will take 300 to 450 years to degrade [8].
+Traditional chemical degradation of PET includes glycolysis [ 9], alcoholysis [ 10],
+and so on. The chemical degradation process often requires high temperatures and pres-
+sure and will be accompanied by the production of some pollutants [ 11]. In contrast,
+the biodegradation of PET by enzymes is more energy-efficient and environmentally
+friendly, and a variety of PET hydrolases have been identified, such as leaf–branch com-
+post cutinase (LCC), Humicola insolens cutinase ( HiC), Thermobifida fusca cutinase ( Tf C),
+Molecules 2023, 28, 3528. https://doi.org/10.3390/molecules28083528 https://www.mdpi.com/journal/molecules
+Molecules 2023, 28, 3528 2 of 12
+and Saccharomonospora viridis AHK 190 cutinase (Cut190) [ 12–14]. It is noted that these
+PET hydrolases have high optimum reaction temperature and energy requirements.
+Yoshida et al. [ 15] discovered a bacterium that can hydrolyze PET. IsPETase produced
+by the bacteria can hydrolyze PET into small molecules at moderate temperature. In
+addition, several PETase-like enzymes were determined through phylogenetic tree
+analysis, such as the RgPETase from Rhizobacter gummiphilus [16], the PbPETase from
+Polyangium brachysporum , and the BbPETase from Burkholderiales bacterium [17]. Of
+these, BbPETase differs from other type IIb enzymes in having an extra 143 amino acids
+(AAs) at the N-terminus. The segment was renamed BbPETaseAND , and the core do-
+main of this enzyme was called BbPETaseCD. Although BbPETaseAND provided higher
+thermal stability for the enzyme, it may limit enzyme performance by interfering with
+the enzyme’s interaction with the substrate PET [ 17]. The melting temperature ( Tm) of
+BbPETase is about 6 ◦C higher than that of IsPETase, indicating its better thermal stabil-
+ity. Nonetheless, its stability and activity are still insufficient to satisfy the demands of
+practical applications.
+A variety of enzyme engineering techniques have been used to improve the activity
+and stability of PETase, and the rational design of disulfide bridges is a reasonable
+scheme for improvement. Disulfide bonds primarily stabilize proteins by improving
+the rigidity of the protein structure and decreasing the entropy of the protein’s unfolded
+state [ 18]. Researchers improved the stability of some enzymes by computer-aided
+design to introduce disulfide bridges. Gihaz et al. [ 19] obtained a variant of lipase from
+Geobacillus stearothermophilus T6 by the computational design with DbD and MODIP
+programs, which had higher Tm value and significantly higher activity than the wild-
+type enzyme. Bashirova et al. [ 20] enhanced the structural rigidity of endoglucanase by
+the rational design of disulfide-bridge mutations through the BioLuminate program,
+and the half-life of the obtained variants were significantly increased.
+In this study, we introduced disulfide bridges in BbPETaseCD by computer-aided de-
+sign to improve the stability and activity of the enzyme. The structure of BbPETaseCD was
+predicted and analyzed using DbD2 (http://cptweb.cpt.wayne.edu/DbD2/index.php,
+accessed on 25 November 2022 ) [ 21] in conjunction with DSDBASE-MODIP(http://
+caps.ncbs.res.in/iws/modip.html, accessed on 25 November 2022) [ 22,23]. SWISS-
+MODEL homologous modeling (https://swissmodel.expasy.org/interactive, accessed
+on 26 November 2022 ) [ 24] was used to screen out mutant combinations that could
+correctly form disulfide bridges. We finally obtained P207C/D280C, A209C/R283C,
+and N364C/D418C variants through prediction and screening, and then obtained
+P207C/D280C/N364C/D418C and A209C/R283C/N364C/D418C variants through
+combining the mutations. These enzymes were extensively characterized to find the
+best variant.
+2. Results and Discussion
+2.1. Rational Design of Disulﬁde Bridges and Protein Expression
+We predicted the structure of BbPETaseCD using DbD2 and the DSDBASE-MODIP
+program, and obtained 25 pairs versus 84 pairs of mutation combinations, respectively.
+After removing two pairs of natural disulﬁde bonds and taking the intersection, nineteen
+pairs of mutant combinations were obtained. After screening according to the parameters
+or criteria mentioned in Section 3.2, P207C/D280C, A209C/R283C, and N364C/D418C
+variants were obtained for subsequent experiments. The distance between P207 and A209
+and the distance between D280 and R283 are shown in Figure S1. In consideration of the
+short distance between P207C/D280C and A209C/R283C, these two mutations were not
+used together in further combination of the mutations to avoid possible steric hindrance.
+By combining the P207C/D280C variant or A209C/R283C variant with the N364C/D418C
+variant, the P207C/D280C/N364C/D418C and A209C/R283C/N364C/D418C variants
+were obtained. The location of the disulﬁde bridge in the enzyme is depicted in Figure S2,
+Molecules 2023, 28, 3528 3 of 12
+where the natural disulﬁde bridge is marked in orange and the introduced disulﬁde bridge
+in purple. The active site of BbPETaseCD is marked in red.
+The expression of wild-type enzyme and variants was then determined. Only the
+N364C/D418C variant showed an expression level comparable to the wild type (Table S2),
+while the expression levels of the remaining variants were quite low. In the puriﬁcation
+using afﬁnity chromatography (Figure S3), only theBbPETaseCD and N364C/D418C variant
+showed obvious elution peak. We speculate that the mutation site of the P207C/D280C
+and A209C/R283C variants were close to the N-terminal of the enzyme after removing the
+extra N-terminal domain of the enzyme [17]. It made the protein more prone to misfolding
+and led to low soluble expression, signiﬁcantly reducing the apparent expression level of
+these variants.
+The formation of disulﬁde bridge in enzyme was then examined using the protocol
+described in Section 3.5. The results are shown in Table 1. It can be seen that not all
+enzymes correctly formed disulﬁde bridges. The four variants with low expression had
+low proportion of disulﬁde bridges. This also supported our suspicion that introducing
+disulﬁde bridges near the protein’s N-terminal would reduce protein expression. Fur-
+thermore, not all disulﬁde bridges of the BbPETaseCD formed upon expression, which
+could be attributed to the E. coli Rosetta gami-B (DE3) strain. Expression of proteins with
+disulﬁde bridges by the E. coli Rosetta gami-B (DE3) strain may be not very effective [25].
+Therefore, it may adversely affect the correct formation of disulﬁde bridges in BbPETaseCD
+and its variants. The sulfate–polyacrylamide gel electrophoresis (SDS-PAGE) results of
+BbPETaseCD and its variants are shown in Figure S4a. Minor bands near the target band
+were observed, which was considered as the enzyme without correct formation of disulﬁde
+bridges. Moreover, Figure S4b,c demonstrates that the bacterial lysates and precipitates of
+all the four variants except the N364C/D418C variant contain darker bands around 30 kDa,
+while their supernatants obtained after centrifugation have only very light bands around
+30 kDa. This indicates that all the four variants produced many inclusion bodies during the
+expression. This result conﬁrmed our conjecture that the four variants were less expressed
+in soluble form.
+Table 1. Proportion of disulﬁde bridge of BbPETaseCD and its variants.
+Enzyme Sulfhydryl Content under
+Nonreducing Condition (µM)
+Sulfhydryl Content under
+Reducing Condition (µM)
+The Proportion of
+Disulﬁde Bridge (%)
+BbPETaseCD 1.2 20.1 93.8
+P207C/D280C 4.7 26.5 82.2
+A209C/R283C 6.2 26.2 76.3
+N364C/D418C 3.3 30.6 89.3
+P207C/D280C/N364C/D418C 6.1 37.7 83.8
+A209C/R283C/N364C/D418C 5.5 39.4 86.2
+2.2. Activity and Stability of BbPETaseCD and Its Variants
+The activity of BbPETaseCD and its variants was evaluated using bis(Hydroxyethyl)
+Terephthalate (BHET) as substrate. The N364C/D418C variant had the highest activity
+in most cases, and no signiﬁcant difference was observed between the other variants
+(Figure 1). At pH 9.0, the activity increased with increasing temperature. Meanwhile,
+at each temperature tested (30, 40, 50 ◦C), the activity at pH 9.0 was higher than that at
+pH 7.0, indicating that pH 9.0 is more suitable for the reaction. At pH 7.0, the activity
+of BbPETaseCD increased from 30 ◦C to 40 ◦C, and then decreased when the temperature
+increased to 50 ◦C, indicating the poor stability of BbPETaseCD at high temperature.
+To evaluate the thermal stability, these enzymes were then incubated at 50◦C for 1, 2,
+4, and 6 h following by the examination of residual activity. Meanwhile, these enzymes
+were incubated for 1, 2, 4, 6, 9, 12, and 24 h at 40 ◦C (the temperature used for the long
+reaction time in PET degradation experiments). The residual activity of these enzymes
+decreased as the temperature of the incubation increased, but the magnitude of the decrease
+Molecules 2023, 28, 3528 4 of 12
+varied. At both 40 ◦C and 50 ◦C, the residual activity of the N364C/D418C variant was
+higher than that of the BbPETaseCD (Figure 2a,b). The optimal reaction pH for BbPETaseCD
+and its variants is mostly alkaline. Therefore, these enzymes are more able to maintain
+their activity at pH 9.0. The Tm values of these enzymes were obtained by CD (Figure S5),
+which showed that the Tm value of the N364C/D418C variant was 71.3 ◦C (Figure 2c),
+signiﬁcantly higher than that of the BbPETaseCD (56.5 ◦C) and other variants. Compared
+to the Tm value of BbPETaseCD, the P207C/D280C variant exhibited a lower Tm value,
+while the other variants had a slightly higher Tm value. However, when the incubation
+temperature was 40 ◦C, the residual activity of the N364C/D418C variant did not show
+signiﬁcantly higher value than that of the other variants. It indicated that the addition of
+disulﬁde bridges in the N364C/D418C variant signiﬁcantly improved the thermodynamic
+stability of the enzyme, but had no obvious effect on its kinetic stability.
+Molecules 2023, 28, x FOR PEER REVIEW  4 of 13 
+ 
+ 
+Figure 1. Activity of BbPETaseCD and its variants using BHET as substrate. The ﬁnal concentration 
+of enzyme was 50 nM. The ﬁnal concentration of BHET was 200 mg/L. 
+To evaluate the thermal stability, these enzymes were then incubated at 50 °C for 1, 
+2, 4, and 6 h following by the examination of residual activity. Meanwhile, these enzymes 
+were incubated for 1, 2, 4, 6, 9, 12, and 24 h at 40 °C (the temperature used for the long 
+reaction time in PET degradation experiments). The residual activity of these enzymes 
+decreased as the temperature of the incubation increased, but the magnitude of the de-
+crease varied. At both 40 °C and 50 °C, the residual activity of the N364C/D418C variant 
+was  higher  than  that  of  the  BbPETaseCD  (Figure  2a,b).  The  optimal  reaction  pH  for 
+BbPETaseCD and its variants is mostly alkaline. Therefore, these enzymes are more able to 
+maintain their activity at pH 9.0. The Tm values of these enzymes were obtained by CD 
+(Figure S5), which showed that the Tm value of the N364C/D418C variant was 71.3 °C (Fig-
+ure 2c), signiﬁcantly higher than that of the BbPETaseCD (56.5 °C) and other variants. Com-
+pared to the Tm value of BbPETaseCD, the P207C/D280C variant exhibited a lower Tm value, 
+while the other variants had a slightly higher Tm value. However, when the incubation 
+temperature was 40 °C, the residual activity of the N364C/D418C variant did not show 
+signiﬁcantly higher value than that of the other variants. It indicated that the addition of 
+disulﬁde bridges in the N364C/D418C variant signiﬁcantly improved the thermodynamic 
+stability of the enzyme, but had no obvious eﬀect on its kinetic stability. 
+Figure 1. Activity of BbPETaseCD and its variants using BHET as substrate. The ﬁnal concentration of
+enzyme was 50 nM. The ﬁnal concentration of BHET was 200 mg/L.
+2.3. Activity of BbPETaseCD and Its Variants for PET Film Degradation
+The activity of BbPETaseCD and its variants for PET degradation were tested using
+the protocol described in Section 3.9. The differential scanning calorimetry (DSC) curve
+of the substrate, Nongfu Spring PET mineral water bottle is shown in Figure S6. For this
+reaction, 30 ◦C and 40 ◦C was tested; 50 ◦C was not used because the activity of these
+enzymes decreased signiﬁcantly when the hydrolysis reaction of PET was performed at
+this temperature. At 30 ◦C, the reaction time for test was 6 days. At 40 ◦C, the reaction
+time was extended to 14 days. The degradation activity of BbPETaseCD and its variants on
+PET at 40 ◦C was higher than that at 30 ◦C. Therefore, the reaction time was extended to
+14 days at 40 ◦C. It can be seen that the hydrolytic activity of N364C/D418C variant on
+PET ﬁlm was signiﬁcantly higher than that of BbPETaseCD (Figure 3a,b). The total amount
+of soluble products released was up to 11-fold than that obtained using BbPETaseCD.
+Furthermore, the PET hydrolysis activity of BbPETaseCD at 30 ◦C was always higher
+than that at 40 ◦C, which further indicated its low thermal stability. N364C/D418C and
+P207C/D280C/N364C/D418C variants, on the other hand, displayed signiﬁcantly higher
+Molecules 2023, 28, 3528 5 of 12
+reactivity at 40◦C than BbPETaseCD and other variants. For the remaining three variants, the
+activity level was comparable to or much lower than that ofBbPETaseCD. We speculated that
+the addition of disulﬁde bridges to the P207C/D280C and A209C/R283C variants caused
+most of the enzyme to be degraded during expression due to misfolding and that a minor
+portion of the undegraded enzyme was also negatively affected. This is reﬂected in their
+signiﬁcantly lower PET hydrolysis activity than that of BbPETaseCD (Figure 3). Moreover,
+the activity of P207C/D280C/N364C/D418C and A209C/R283C/N364C/D418C variants
+were signiﬁcantly lower than that of N364C/D418C variant. This further indicated that the
+mutation sites of P270C/D280C and A209C/R283C were unfavorable to the BbPETaseCD.
+Molecules 2023, 28, x FOR PEER REVIEW  5 of 13 
+ 
+ 
+Figure 2. Residual activity of BbPETaseCD and its variants against BHET after incubation at 40 °C (a), 
+and 50 °C (b). The reaction temperature after incubation was 50 °C. The reaction buﬀer was basic 
+reaction buﬀer at pH 9.0. The ﬁnal concentration of enzyme was 50 nM. The ﬁnal concentration of 
+BHET was 200 mg/L. The Tm value of BbPETaseCD and its variants (c). 
+2.3. Activity of BbPETaseCD and Its Variants for PET Film Degradation 
+The activity of BbPETaseCD and its variants for PET degradation were tested using the 
+protocol described in Section 3.9. The diﬀerential scanning calorimetry (DSC) curve of the 
+substrate, Nongfu Spring PET mineral water bottle is shown in Figure S6. For this reaction, 
+30 °C and 40 °C was tested; 50 °C was not used because the activity of these enzymes 
+decreased signiﬁcantly when the hydrolysis reaction of PET was performed at this tem-
+perature. At 30 °C, the reaction time for test was 6 days. At 40 °C, the reaction time was 
+extended to 14 days. The degradation activity of BbPETaseCD and its variants on PET at 40 
+°C was higher than that at 30 °C. Therefore, the reaction time was extended to 14 days at 
+40 °C. It can be seen that the hydrolytic activity of N364C/D418C variant on PET ﬁlm was 
+signiﬁcantly higher than that of BbPETaseCD (Figure 3a,b). The total amount of soluble 
+products released was up to 11-fold than that obtained using BbPETaseCD. Furthermore, 
+the PET hydrolysis activity of BbPETaseCD at 30 °C was always higher than that at 40 °C, 
+which  further  indicated  its  low  thermal  stability.  N364C/D418C  and 
+P207C/D280C/N364C/D418C variants, on the other hand, displayed signiﬁcantly higher 
+reactivity at 40 °C than BbPETaseCD and other variants. For the remaining three variants, 
+the activity level was comparable to or much lower than that of BbPETaseCD. We specu-
+lated that the addition of disulﬁde bridges to the P207C/D280C and A209C/R283C variants 
+caused most of the enzyme to be degraded during expression due to misfolding and that 
+a minor portion of the undegraded enzyme was also negatively aﬀected. This is reﬂected 
+in their signiﬁcantly lower PET hydrolysis activity than that of BbPETaseCD (Figure 3). 
+Figure 2. Residual activity of BbPETaseCD and its variants against BHET after incubation at
+40 ◦C (a), and 50 ◦C (b). The reaction temperature after incubation was 50◦C. The reaction buffer was
+basic reaction buffer at pH 9.0. The ﬁnal concentration of enzyme was 50 nM. The ﬁnal concentration
+of BHET was 200 mg/L. The Tm value of BbPETaseCD and its variants (c).
+Following that, these PET ﬁlms’ incubation time was extended to 14 days at 40 ◦C,
+and the comparative activity is shown in Figure 4. The activities of N364C/D418C and
+P207C/D280C/N364C/D418C variants were signiﬁcantly higher than those of BbPETaseCD
+and other variants. The activities of BbPETaseCD and other variants did not differ signif-
+icantly. Li et al. [26] showed that the introduction of disulﬁde bonds in the same region
+could reduce the local unfolding rate of the enzyme, which in turn would enhance the
+structural rigidity of the region. The N364C/D418C mutation in this study was closer to the
+two natural disulﬁde bonds and the active site of the enzyme than the other two mutations.
+It is considered that the introduction of the N364C/D418C mutation increased the rigidity
+of the loop region. In addition, the disulﬁde bond might change the whole structure of the
+enzyme to some extent (though the change was not appreciable in Figure S2), resulting in
+an enlarged substrate binding pocket for the enzyme, which facilitated the binding of the
+Molecules 2023, 28, 3528 6 of 12
+enzyme to BHET or PET. Furthermore, all the enzymes were almost completely inactivated
+at 11 days because the soluble products almost stopped increasing after that. These PET
+ﬁlms were washed at 14 days, and their surfaces were examined by scanning electron
+microscopy (SEM) for traces of enzymatic erosion, as shown in Figure S7. The surface
+of the PET ﬁlm after incubation with the N364C/D418C variant was very rough, with
+obvious degradation marks. The surface of the PET ﬁlm showed obvious erosion marks
+after incubation with the P207C/D280C/N364C/D418C variant, but the roughness was
+lower than that of the N364C/D418C variant. These PET ﬁlms’ surfaces, on the other hand,
+showed only very shallow ﬁsh-scale erosion marks after incubation with the BbPETaseCD
+and other variants, which is consistent with the results of PET ﬁlm degradation activity.
+Molecules 2023, 28, x FOR PEER REVIEW  6 of 13 
+ 
+Moreover, the activity of P207C/D280C/N364C/D418C and A209C/R283C/N364C/D418C 
+variants were signiﬁcantly lower than that of N364C/D418C variant. This further indicated 
+that  the  mutation  sites  of  P270C/D280C  and A209C/R283C  were  unfavorable  to  the 
+BbPETaseCD. 
+ 
+Figure 3. Hydrolytic activity of BbPETaseCD and its variants on PET ﬁlms at 30 °C (a) and 40 °C (b). 
+The ﬁnal concentration of the enzyme was 200 nM. Two PET ﬁlms of 6 mm diameter were placed in 
+each centrifuge tube as substrates. 
+Following that, these PET ﬁlms’ incubation time was extended to 14 days at 40 °C, 
+and the comparative activity is shown in Figure 4. The activities of N364C/D418C and 
+P207C/D280C/N364C/D418C variants were signiﬁcantly higher than those of BbPETaseCD 
+and other variants. The activities of BbPETaseCD and other variants did not diﬀer signiﬁ-
+cantly. Li et al. [26] showed that the introduction of disulﬁde bonds in the same region 
+could reduce the local unfolding rate of the enzyme, which in turn would enhance the 
+structural rigidity of the region. The N364C/D418C mutation in this study was closer to 
+the two natural disulﬁde bonds and the active site of the enzyme than the other two mu-
+tations. It is considered that the introduction of the N364C/D418C mutation increased the 
+rigidity of the loop region. In addition, the disulﬁde bond might change the whole struc-
+ture of the enzyme to some extent (though the change was not appreciable in Figure S2), 
+resulting in an enlarged substrate binding pocket for the enzyme, which facilitated the 
+binding of the enzyme to BHET or PET. Furthermore, all the enzymes were almost com-
+pletely inactivated at 11 days because the soluble products almost stopped increasing after 
+that. These PET ﬁlms were washed at 14 days, and their surfaces were examined by scan-
+ning electron microscopy (SEM) for traces of enzymatic erosion, as shown in Figure S7. 
+The surface of the PET ﬁlm after incubation with the N364C/D418C variant was very 
+rough, with obvious degradation marks. The surface of the PET ﬁlm showed obvious ero-
+sion marks after incubation with the P207C/D280C/N364C/D418C variant, but the rough-
+ness was lower than that of the N364C/D418C variant. These PET ﬁlms’ surfaces, on the 
+other hand, showed only very shallow ﬁsh-scale erosion marks after incubation with the 
+BbPETaseCD and other variants, which is consistent with the results of PET ﬁlm degrada-
+tion activity. 
+Figure 3. Hydrolytic activity of BbPETaseCD and its variants on PET ﬁlms at 30 ◦C (a) and 40 ◦C (b).
+The ﬁnal concentration of the enzyme was 200 nM. Two PET ﬁlms of 6 mm diameter were placed in
+each centrifuge tube as substrates.
+Molecules 2023, 28, x FOR PEER REVIEW  7 of 13 
+ 
+ 
+Figure 4. Hydrolytic activity of BbPETaseCD and its variants on PET ﬁlms at 40 °C. The ﬁnal concen-
+tration of the enzyme was 200 nM. Two PET ﬁlms of 6 mm diameter were placed in each reaction 
+centrifuge tube as substrates. 
+2.4. Circular Dichroism (CD) and Fluorescence Analysis 
+To investigate the structural changes in BbPETaseCD and its variants, these enzymes 
+were characterized using CD and ﬂuorescence. The CD spectra of BbPETaseCD and its var-
+iants are shown in Figure S8a. The overall trends of the curves were similar, except for the 
+ellipticity peak. Signiﬁcant diﬀerences were observed in their secondary structures (Fig-
+ure S8b), particularly in the content of α-helix and β-sheet. The A209C/R283C variant and 
+the N364C/D418C variant showed high α-helix content and low β-sheet content. However, 
+the  sum  of α -helix  and β -sheet  was  similar  to  that  of  BbPETaseCD.  For  the 
+P207C/D280C/N364C/D418C and A209C/R283C/N364C/D418C variants, increased ran-
+dom coil content was observed. 
+The wavelengths corresponding to the ﬂuorescence peaks of the BbPETaseCD and the 
+variants were nearly identical (Figure S9a). No obvious diﬀerence was observed between 
+the BbPETaseCD and the N364C/D418C variant in the ﬂuorescence spectra, the endogenous 
+tryptophan ﬂuorescence spectra, or the endogenous tyrosine ﬂuorescence spectra (Figure 
+S9). The other four variants showed a slight red shift in the endogenous tryptophan ﬂuo-
+rescence spectra compared to BbPETaseCD (Figure S9b). This indicated that the two pairs 
+of disulﬁde bridges, P207C/D280C and A209C/R283C, had a signiﬁcant eﬀect on the struc-
+ture of the enzyme. In the endogenous tyrosine ﬂuorescence spectra (Figure S9c), com-
+pared to the BbPETaseCD, P207C/D280C variant showed a small red shift, and the left three 
+variants showed blue shifts. Only the P207C/D280C variant had a lower Tm value, most 
+likely due to the negative eﬀect of the P207C-D280C disulﬁde bridge on the structure and 
+stability of BbPETaseCD. 
+  
+Figure 4. Hydrolytic activity of BbPETaseCD and its variants on PET ﬁlms at 40 ◦C. The ﬁnal
+concentration of the enzyme was 200 nM. Two PET ﬁlms of 6 mm diameter were placed in each
+reaction centrifuge tube as substrates.
+Molecules 2023, 28, 3528 7 of 12
+2.4. Circular Dichroism (CD) and Fluorescence Analysis
+To investigate the structural changes in BbPETaseCD and its variants, these enzymes
+were characterized using CD and ﬂuorescence. The CD spectra of BbPETaseCD and its
+variants are shown in Figure S8a. The overall trends of the curves were similar, except
+for the ellipticity peak. Signiﬁcant differences were observed in their secondary struc-
+tures (Figure S8b), particularly in the content of α-helix and β-sheet. The A209C/R283C
+variant and the N364C/D418C variant showed high α-helix content and low β-sheet con-
+tent. However, the sum of α-helix and β-sheet was similar to that of BbPETaseCD. For
+the P207C/D280C/N364C/D418C and A209C/R283C/N364C/D418C variants, increased
+random coil content was observed.
+The wavelengths corresponding to the ﬂuorescence peaks of the BbPETaseCD and
+the variants were nearly identical (Figure S9a). No obvious difference was observed
+between the BbPETaseCD and the N364C/D418C variant in the ﬂuorescence spectra, the
+endogenous tryptophan ﬂuorescence spectra, or the endogenous tyrosine ﬂuorescence
+spectra (Figure S9). The other four variants showed a slight red shift in the endogenous
+tryptophan ﬂuorescence spectra compared to BbPETaseCD (Figure S9b). This indicated that
+the two pairs of disulﬁde bridges, P207C/D280C and A209C/R283C, had a signiﬁcant
+effect on the structure of the enzyme. In the endogenous tyrosine ﬂuorescence spectra
+(Figure S9c), compared to the BbPETaseCD, P207C/D280C variant showed a small red shift,
+and the left three variants showed blue shifts. Only the P207C/D280C variant had a lower
+Tm value, most likely due to the negative effect of the P207C-D280C disulﬁde bridge on the
+structure and stability of BbPETaseCD.
+3. Materials and Methods
+3.1. Bacterial Strains, Plasmid, and Materials
+E. coli JM109 served as the host strain for site-speciﬁc mutagenesis. E. coli Rosetta gami-
+B (DE3) (Weidi Biotech, Shanghai, China) was used to express various mutant enzymes. The
+gene for BbPETaseCD was synthesized by Genewiz (Suzhou, China) and using pET-22b(+)
+plasmid as gene vector. DNA sequencing was performed by Genewiz (Suzhou, China).
+5 mL His TrapTM FF afﬁnity chromatography column was purchased from GE Healthcare
+(9 × 15.7 mm, 90 µm, Marlborough, MA, USA). Fast pfu enzyme and DpnI enzyme
+were purchased from TransGen Biotech (Beijing, China). A plasmid extraction kit was
+purchased from Beyotime (Shanghai, China). A BCA kit was purchased from Dingguo
+Biotech (Tianjin, China). A sulfhydryl assay kit was purchased from Bestbio (Shanghai,
+China). The crystallinity of PET ﬁlms was measured using DSC by Standard (Qingdao,
+China). Other reagents were purchased from Sangon Biotech (Shanghai, China), Heowns
+(Tianjin, China), or Meryer (Shanghai, China).
+3.2. Rational Design of Disulﬁde Bridges
+The wild-type BbPETaseCD has two natural disulfide bridges, C333-C370 and
+C404-C424 [ 17]. To improve the thermal stability of the enzyme, we used DbD2 and the
+DSDBASE-MODIP program to predict mutation sites in the structure of BbPETaseCD
+that could form disulfide bridges and then screened them using the conditions listed
+below. Because disulfide bridges that were too close together could have an adverse
+effect on the enzyme structure, mutation sites that were too close together (fewer than
+10AAs in the primary structure) were removed at first [ 27]. Secondly, the preferential
+selection of mutation sites located in the flexible loop region may improve the thermal
+stability of the enzyme by increasing its local rigidity [ 18]. Meanwhile, predicted
+mutation sites should avoid the enzyme’s active site or sites related to substrate binding
+to avoid affecting enzyme activity. Finally, the variants were homology-modeled by
+the SWISS-MODEL program [ 24] and visualized by PyMOL (http://www.pymol.org,
+accessed on 26 November 2022) to see if they could correctly form disulfide bridges.
+Molecules 2023, 28, 3528 8 of 12
+3.3. Site-Directed Mutagenesis
+All disulﬁde-bridge mutations were introduced by polymerase chain reaction (PCR).
+After the PCR, the methylated template was removed with DpnI restriction endonuclease
+for 20 min at 37 ◦C. The concentrated PCR products were transformed into competent
+E. coli JM109 cells, and mutant plasmids were screened at 37 ◦C on Luria–Bertani (LB) agar
+plate medium containing 100 µg/mL sodium ampicillin. DNA sequencing was also used to
+identify the mutant plasmids. The correctly sequenced plasmid DNA was transformed into
+E. coli Rosetta gami-B (DE3) for protein expression. Table S1 shows the primers used for
+PCR, with underlines indicating the codons and anticodons corresponding to the mutation.
+3.4. Expression and Puriﬁcation
+E. coli Rosetta gami-B (DE3) strains containing various mutant plasmids were incu-
+bated aerobically at 220 rpm and 37 ◦C in LB medium containing 100 µg/mL ampicillin
+sodium until the optical density at 600 nm (OD 600) reached approximately 0.8–1.0 [ 17].
+Isopropyl β-D-thiogalactoside (IPTG) was added to a ﬁnal concentration of 0.5 mM to
+induce protein expression. After 24 h of protein expression at 16 ◦C, the bacteria were
+harvested by centrifugation at 4000 rpm for 30 min at 4 ◦C. The bacteria were resuspended
+in 25 mL of lysis buffer (30 mM imidazole, 50 mM Na 2HPO4, and 100 mM NaCl buffer,
+pH 7.0) and lysed for 30 min using ultrasonication. After centrifugation at 10,000 rpm for
+30 min at 4 ◦C, the supernatant was obtained and then ﬁltered through a 0.45 µm ﬁlter
+membrane. The enzyme was puriﬁed in an AKTA-Basic chromatography system (GE
+Healthcare, Marlborough, MA, USA) using a 5 mL His TrapTM FF afﬁnity chromatography
+column. The column was ﬁrst equilibrated with lysis buffer at a ﬂow rate of 5 mL/min,
+washed with lysis buffer at a ﬂow rate of 5 mL/min for 5 min after supernatant loading
+was completed, then eluted with elution buffer (500 mM imidazole, 50 mM Na2HPO4, and
+100 mM NaCl buffer, pH 7.0) at a ﬂow rate of 1 mL/min for 15 min. To remove imidazole,
+the puriﬁed protein solution was centrifuged at 6000 rpm for 30 min through a 10 kDa
+ultraﬁltration tube. Finally, the enzyme concentration was determined using the BCA kit
+according to the instructions and diluted to the reaction concentration (5 µM). Sodium
+dodecyl SDS-PAGE 12% was used to determine the purity and the molecular weight.
+3.5. Analysis of Disulﬁde Bridge of Enzyme
+To determine the sulfhydryl content of sample, the sample was mixed with the working
+solution in the sulfhydryl assay kit according to the instructions, and the reaction was
+carried out at room temperature for 15 min, followed by testing of OD412. All measurements
+were conducted in triplicate (n = 3). The standard curve was obtained by ﬁtting the OD412
+to the concentration of L-cysteine using standard solution of different concentrations, which
+was then used for the calculation of sulfhydryl content. Thereafter, the enzyme (5 µM)
+was prepared using the working solution, followed by the determination of sulfhydryl
+content under nonreducing condition. Meanwhile, 50 mM tris(2-carboxyethyl) phosphine
+(TCEP-HCl) was added to another group of enzyme (5 µM) to convert the disulﬁde bridges
+in the enzymes to sulfhydryl, followed by the determination of sulfhydryl content under
+reducing condition. Thereafter, the proportion of disulﬁde bridges formed in the enzyme
+was determined by comparing the sulfhydryl content of the enzyme under nonreducing
+and reducing conditions.
+3.6. Fluorescence and CD Spectrums
+The ﬂuorescence analysis was performed at room temperature on a ﬂuorescence spec-
+trometer (PerkinElmer, Waltham, MA, USA) using a quartz cuvette with a path length
+of 1.0 cm. It was excited at 280 nm, and the emission spectra were detected in the range
+of 250–450 nm with a slit width of 5.0 nm for both excitations and emissions. The ex-
+citation wavelengths were set to 250–330 nm and the scanning intervals ( ∆λ) were set
+to 15 and 60 nm to obtain their synchronous ﬂuorescence spectra, where ∆λ at 15 and
+Molecules 2023, 28, 3528 9 of 12
+60 nm represent the ﬂuorescence spectra of endogenous tyrosine (Tyr, Y) and tryptophan
+(Trp, W), respectively.
+The CD spectrum was tested by a Jasco J-810 circular dichroism spectrometer (Jasco,
+Tokyo, Japan) using a quartz cuvette with a path length of 1.0 mm. Continuous scanning
+was measured at 30 ◦C in the wavelength range of 190–260 nm with a data pitch of 0.1 nm,
+a response time of 1.0 s, a bandwidth of 2.0 nm, and a scanning speed of 100 nm/min.
+The secondary structure of the enzyme was analyzed by Dichroweb (http://dichroweb.
+cryst.bbk.ac.uk/, accessed on 16 February 2023) on-line analysis [ 28,29]. To obtain the
+Tm value of BbPETaseCD and its variants, the thermal denaturation curves of enzymes by
+CD detection were used. Speciﬁcally CD signal at 222 nm was examined as a function of
+temperature. The data was then ﬁtted with a Boltzmann curve, and the Tm value was the
+temperature corresponding to the ﬁtted curve’s midpoint.
+3.7. Enzyme Activity Using BHET as Substrate
+The enzyme activity was examined at 30 ◦C, 40 ◦C, and 50 ◦C with the small molecule
+BHET as the substrate. For the reaction, 910 µL of neutral reaction buffer (80 mM Na2HPO4,
+40 mM NaCl, pH 7.0) or 910 µL of basic reaction buffer (50 mM Gly-NaOH, pH 9.0) was
+used. Then, 10 µL of enzyme solution (5 µM) and 80 µL of BHET solution (2.5 g/L) were
+added, so the ﬁnal concentration of enzyme was 50 nM while the ﬁnal concentration of
+BHET was 200 µg/mL. The reaction was carried out for 30 min. At the end of the reaction,
+an equal volume of reaction stop buffer (160 mM NaH2PO4, 20% v/v DMSO, pH 2.5) was
+rapidly added, followed by a 10 min water bath at 85 ◦C. After 10 min of centrifugation at
+12,000 rpm, the samples were passed through a 0.22 µm ﬁlter membrane and the products
+were analyzed using high-performance liquid chromatography (HPLC). All measurements
+were conducted in triplicate (n = 3).
+3.8. Thermal Stability of the Enzyme
+To test the activity retention of enzyme after incubation at high temperature, we
+mixed the enzymes with basic reaction buffer, followed by incubation. Herein, 50 ◦C
+and 40 ◦C (temperature corresponding to long-term degradations of PET films) were
+used. For 50 ◦C, incubation time of 1 h, 2 h, 4 h, and 6 h was used. For 40 ◦C, incubation
+times of 1 h, 2 h, 4 h, 6 h, 9 h, 12 h, and 24 h were used. After incubation, the enzyme was
+placed in ice water for 10 min and 80 µL of BHET solution was then added. The reaction
+was carried out at 50 ◦C in a water bath for 30 min. The protocol of terminating and
+analyzing the reaction was the same as that described in Section 3.7. All measurements
+were conducted in triplicate ( n = 3).
+3.9. Enzyme Activity for PET Film Degradation
+A mineral water bottle (crystallinity of 32.3%, NongFu Spring, Tianjin, China) was
+used as substrate. It was washed with 1% w/v SDS solution, ethanol, and deionized water,
+and was cut into ﬁlms with a diameter of 6 mm. Each 2 mL centrifuge tube received
+two PET ﬁlms, 300 µL basic reaction buffer (pH 9.0), and 12.5 µL enzyme for 6 days.
+Reaction temperature of 30 ◦C and 40 ◦C was used. Meanwhile, 8 sets of reactions were
+supplemented at 40 ◦C for 14 days. The protocol of terminating and analyzing the reaction
+was the same as that described in Section 3.7. Following the reaction, the PET was washed
+using the method described above. Traces of enzyme erosion on the PET surface were
+observed by ﬁeld-emission scanning electron microscopy Apreo S LoVac (FEI, Hillsboro,
+OR, USA). All measurements were conducted in triplicate (n = 3).
+3.10. HPLC Analysis
+HPLC analysis of aromatic products was performed on an Agilent 1100 series LC
+system equipped with a Welch Ultimate XB-C18 column (4.6 × 250 mm, 5 µm, Welch
+Materials, Shanghai, China) at a controlled column temperature of 25 ◦C. The mobile phase
+contained 70% (v/v) distilled water, 20% (v/v) acetonitrile, and 10% (v/v) formic acid at a
+Molecules 2023, 28, 3528 10 of 12
+ﬂow rate of 1.0 mL/min. The aromatic products were detected by absorbance at 254 nm
+and identiﬁed by the retention time of the standard compounds [30]. A calibration curve
+consisting of the absorption peak area and the concentration of the standard solution was
+used to calculate the concentration of each product. The calibration curve had an R-squared
+value of at least 0.999.
+4. Conclusions
+Rational introduction of disulﬁde bridges in BbPETaseCD was performed through
+computer-aided rational design. P207C/D280C, A209C/R283C, N364C/D418C, P207C/
+D280C/N364C/D418C, and A209C/R283C/N364C/D418C variants were obtained. Among
+them, the N364C/D418Cvariant showed the most signiﬁcant enhancement of the hydrolytic
+activity of PET ﬁlms to about 11-fold that of BbPETaseCD and obtained an increase in the
+Tm value of 14.8 ◦C. The additional disulﬁde bridge could signiﬁcantly improve the struc-
+tural rigidity of BbPETaseCD, which in turn increased its stability and activity. The residual
+activity of the N364C/D418C variant in this study was not signiﬁcantly higher than that of
+the other variants after thermal incubation, whereas its Tm value was signiﬁcantly higher
+than that of the other variants, indicating that the kinetic and thermodynamic stability
+of this variant did not exactly match. Usually, high kinetic stability confers resistance to
+enzyme inactivation at high temperatures, while high thermodynamic stability is man-
+ifested by the higher free energy of enzyme unfolding, but the two are determined by
+different molecular processes and therefore do not always correspond exactly [ 31]. The
+remaining three variants showed no signiﬁcant improvement in activity and stability, ex-
+cept for the P207C/D280C/N364C/D418C variant, which showed increased activity. The
+N364C/D418C mutation was closer to the natural disulﬁde bond and the active site of the
+enzyme than the other two mutations. This resulted in a signiﬁcant increase in the Tm value
+of the enzyme by enhancing the regional structural rigidity of the enzyme [ 26], and we
+hypothesize that the introduction of the N364C/D418C mutation changed the structure
+of the enzyme, expanding its active site pocket and increasing its activity. In addition, the
+expression levels of the P207C/D280C, A209C/R283C, P207C/D280C/N364C/D418C and
+A209C/R283C/N364C/D418C variants were extremely low. We speculated that these four
+variants contained mutating points close to the N-terminal of the enzyme, which made the
+enzyme prone to misfolding and low expression during protein expression. It has been
+reported that inefﬁcient disulﬁde bonds can have a negative impact on enzyme activity
+and/or stability [32]. This may provide some reference for schemes to improve enzyme
+stability through rational design of disulﬁde bridges, and mutations near the N-terminal of
+proteins should be avoided for BbPETaseCD.
+Supplementary Materials: The following supporting information can be downloaded at https:
+//www.mdpi.com/article/10.3390/molecules28083528/s1. Table S1. Information on primers used
+for targeted mutagenesis; Table S2. Expression ofBbPETaseCD and its variants; Figure S1. The distance
+between P207 and A209 and the distance between D280 and R283. Figure S2. Location of disulﬁde
+bridges in variants of BbPETaseCD; Figure S3. Afﬁnity puriﬁcation of BbPETaseCD and its variants
+using nickel ion afﬁnity chromatography; Figure S4. SDS-PAGE electrophoresis of BbPETaseCD and
+its variants in nonreducing condition; Figure S5. Melting curves of BbPETaseCD and its variants;
+Figure S6. DSC diagram of Nongfu Spring mineral water bottle; Figure S7. SEM of PET ﬁlm after
+14 days of incubation with BbPETaseCD and its variants; Figure S8. CD spectra of BbPETaseCD and
+its variants with secondary structure content; Figure S9. Fluorescence spectra of BbPETaseCD and
+its variants.
+Author Contributions: Conceptualization, Y.S.; methodology, D.H. and L.Z.; validation, D.H.; formal
+analysis, D.H.; investigation, D.H. and L.Z.; data curation, L.Z.; writing—original draft preparation,
+D.H. and L.Z.; writing—review and editing, Y.S.; supervision, Y.S.; funding acquisition, L.Z. and Y.S.
+All authors have read and agreed to the published version of the manuscript.
+Funding: This work was supported by the National Key Research and Development Program of
+China (2018YFA0900702).
+Molecules 2023, 28, 3528 11 of 12
+Institutional Review Board Statement: Not applicable.
+Informed Consent Statement: Not applicable.
+Data Availability Statement: Data are available on request from the authors.
+Conﬂicts of Interest: The authors declare no conﬂict of interest.
+Sample Availability: Samples of the compounds are available from the authors.
+References
+1. Suzuki, M.; Date, M.; Kashiwagi, T.; Suzuki, E.; Yokoyama, K. Rational design of a disulﬁde bridge increases the thermostability
+of microbial transglutaminase. Appl. Microbiol. Biotechnol. 2022, 106, 4553–4562. [CrossRef]
+2. Li, C.; Ban, X.; Zhang, Y.; Gu, Z.; Hong, Y.; Cheng, L.; Tang, X.; Li, Z. Rational design of disulﬁde bonds for enhancing the
+thermostability of the 1,4-α-glucan branching enzyme from Geobacillus thermoglucosidans STB02. J. Agric. Food Chem. 2020, 68,
+13791–13797. [CrossRef] [PubMed]
+3. Geyer, R.; Jambeck, J.R.; Law, K.L. Production, use, and fate of all plastics ever made. Sci. Adv. 2017, 3, e1700782. [CrossRef]
+[PubMed]
+4. Suaria, G.; Perold, V .; Lee, J.R.; Lebouard, F.; Aliani, S.; Ryan, P .G. Floating macro- and microplastics around the southern ocean:
+Results from the antarctic circumnavigation expedition. Environ. Int. 2020, 136, 105494. [CrossRef] [PubMed]
+5. Peeken, I.; Primpke, S.; Beyer, B.; Gütermann, J.; Katlein, C.; Krumpen, T.; Bergmann, M.; Hehemann, L.; Gerdts, G. Arctic sea ice
+is an important temporal sink and means of transport for microplastic. Nat. Commun. 2018, 9, 1505. [CrossRef]
+6. Singh, A.K.; Bedi, R.; Kaith, B.S. Composite materials based on recycled polyethylene terephthalate and their properties—A
+comprehensive review. Compos. Part B Eng. 2021, 219, 108928. [CrossRef]
+7. Velásquez, E.J.; Garrido, L.; Guarda, A.; Galotto, M.J.; López De Dicastillo, C. Increasing the incorporation of recycled PET on
+polymeric blends through the reinforcement with commercial nanoclays. Appl. Clay Sci. 2019, 180, 105185. [CrossRef]
+8. Liu, X.; Wen, Y.; Chen, X.; Tang, T.; Mijowska, E. Co-etching effect to convert waste polyethylene terephthalate into hierarchical
+porous carbon toward excellent capacitive energy storage. Sci. Total Environ. 2020, 723, 138055. [CrossRef]
+9. Mendiburu-Valor, E.; Mondragon, G.; González, N.; Kortaberria, G.; Martin, L.; Eceiza, A.; Peña-Rodriguez, C. Valorization of
+urban and marine PET waste by optimized chemical recycling. Resour. Conserv. Recycl. 2022, 184, 106413. [CrossRef]
+10. Fang, P .; Xia, S.; Lu, X. Rapid alcoholysis of PET enhanced by its swelling under high temperature.J. Environ. Chem. Eng. 2022,
+10, 107823. [CrossRef]
+11. Shojaei, B.; Abtahi, M.; Najaﬁ, M. Chemical recycling of PET: A stepping-stone toward sustainability. Polym. Adv. Technol. 2020,
+31, 2912–2938. [CrossRef]
+12. Wei, R.; von Haugwitz, G.; Pfaff, L.; Mican, J.; Badenhorst, C.P .S.; Liu, W.; Weber, G.; Austin, H.P .; Bednar, D.; Damborsky, J.; et al.
+Mechanism-based design of efﬁcient PET hydrolases. ACS Catal. 2022, 12, 3382–3396. [CrossRef]
+13. Sulaiman, S.; Yamato, S.; Kanaya, E.; Kim, J.; Koga, Y.; Takano, K.; Kanaya, S. Isolation of a novel cutinase homolog with
+polyethylene terephthalate-degrading activity from leaf-branch compost by using a metagenomic approach. Appl. Environ.
+Microbiol. 2012, 78, 1556–1562. [CrossRef]
+14. Kawai, F.; Oda, M.; Tamashiro, T.; Waku, T.; Tanaka, N.; Yamamoto, M.; Mizushima, H.; Miyakawa, T.; Tanokura, M. A novel
+Ca2+-activated, thermostabilized polyesterase capable of hydrolyzing polyethylene terephthalate from saccharomonospora
+viridis ahk190. Appl. Microbiol. Biotechnol. 2014, 98, 10053–10064. [CrossRef]
+15. Yoshida, S.; Hiraga, K.; Takehana, T.; Taniguchi, I.; Yamaji, H.; Maeda, Y.; Toyohara, K.; Miyamoto, K.; Kimura, Y.; Oda, K. A
+bacterium that degrades and assimilates poly(ethylene terephthalate). Science 2016, 351, 1196–1199. [CrossRef] [PubMed]
+16. Sagong, H.; Son, H.F.; Seo, H.; Hong, H.; Lee, D.; Kim, K. Implications for the PET decomposition mechanism through similarity
+and dissimilarity between PETases from Rhizobacter gummiphilus and Ideonella sakaiensis. J. Hazard. Mater. 2021, 416, 126075.
+[CrossRef] [PubMed]
+17. Sagong, H.; Kim, S.; Lee, D.; Hong, H.; Lee, S.H.; Seo, H.; Kim, K. Structural and functional characterization of an auxiliary
+domain-containing PET hydrolase from Burkholderiales bacterium. J. Hazard. Mater. 2022, 429, 128267. [CrossRef]
+18. Zhang, Y.; Yang, J.; Yu, X.; Hu, X.; Zhang, H. EngineeringLeuconostoc mesenteroides dextransucrase by inserting disulﬁde bridges
+for enhanced thermotolerance. Enzym. Microb. Technol. 2020, 139, 109603. [CrossRef]
+19. Gihaz, S.; Bash, Y.; Rush, I.; Shahar, A.; Pazy, Y.; Fishman, A. Bridges to stability: Engineering disulﬁde bonds towards enhanced
+lipase biodiesel synthesis. Chemcatchem 2019, 12, 181–192. [CrossRef]
+20. Bashirova, A.; Pramanik, S.; Volkov, P .; Rozhkova, A.; Nemashkalov, V .; Zorov, I.; Gusakov, A.; Sinitsyn, A.; Schwaneberg, U.;
+Davari, M. Disulﬁde bond engineering of an endoglucanase from penicillium verruculosum to improve its thermostability. Int. J.
+Mol. Sci. 2019, 20, 1602. [CrossRef]
+21. Douglas, B.; Alan, D. Disulﬁde by design 2.0: A web-based tool for disulﬁde engineering in proteins. BMC Bioinform. 2013, 14,
+346. [CrossRef]
+22. Sowdhamini, R.; Srinivasan, N.; Shoichet, B.; Santi, D.V .; Ramakrishnan, C.; Balaram, P . Stereochemical modeling of disulﬁde
+bridges. Criteria for introduction into proteins by site-directed mutagenesis. Protein Eng. 1989, 3, 95–103. [CrossRef]
+Molecules 2023, 28, 3528 12 of 12
+23. Vinayagam, A. Dsdbase: A consortium of native and modelled disulphide bonds in proteins. Nucleic Acids Res. 2004, 32,
+200D–202D. [CrossRef] [PubMed]
+24. Waterhouse, A.; Bertoni, M.; Bienert, S.; Studer, G.; Tauriello, G.; Gumienny, R.; Heer, F.T.; de Beer, T.A.P .; Rempfer, C.; Bordoli,
+L.; et al. Swiss-model: Homology modelling of protein structures and complexes. Nucleic Acids Res. 2018, 46, W296–W303.
+[CrossRef]
+25. Bayar, E.; Ren, Y.; Chen, Y.; Hu, Y.; Zhang, S.; Yu, X.; Fan, J. Construction, investigation and application of TEV protease variants
+with improved oxidative stability. J. Microbiol. Biotechnol. 2021, 31, 1732–1740. [CrossRef]
+26. Li, L.; Zhang, S.; Wu, W.; Guan, W.; Deng, Z.; Qiao, H. Enhancing thermostability ofYarrowia lipolyticalipase 2 through engineering
+multiple disulﬁde bonds and mitigating reduced lipase production associated with disulﬁde bonds. Enzym. Microb. Technol. 2019,
+126, 41–49. [CrossRef]
+27. Yang, M.; Yang, S.; Liu, Z.; Li, N.; Li, L.; Mou, H. Rational design of alginate lyase fromMicrobulbifer sp. Q7 to improve thermal
+stability. Mar. Drugs. 2019, 17, 378. [CrossRef] [PubMed]
+28. Miles, A.J.; Ramalli, S.G.; Wallace, B.A. Dichroweb, a website for calculating protein secondary structure from circular dichroism
+spectroscopic data. Protein Sci. 2022, 31, 37–46. [CrossRef] [PubMed]
+29. Sreerama, N.; Woody, R.W. Estimation of protein secondary structure from circular dichroism spectra: Comparison of contin,
+selcon, and cdsstr methods with an expanded reference set. Anal. Biochem. 2000, 287, 252–260. [CrossRef]
+30. Furukawa, M.; Kawakami, N.; Oda, K.; Miyamoto, K. Acceleration of enzymatic degradation of poly(ethylene terephthalate) by
+surface coating with anionic surfactants. Chemsuschem 2018, 11, 4018–4025. [CrossRef]
+31. Liu, Z.; Liang, Q.; Wang, P .; Kong, Q.; Fu, X.; Mou, H. Improving the kinetic stability of a hyperthermostableβ-mannanase by a
+rationally combined strategy. Int. J. Biol. Macromol. 2021, 167, 405–414. [CrossRef] [PubMed]
+32. Wang, S.; Zhao, Y.; Mao, S.; Zhu, J.; Zhan, Y.; Cai, D.; Ma, X.; Wang, D.; Chen, S. Enhancing the activity of disulﬁde-bond-
+containing proteins via promoting disulﬁde bond formation in bacillus licheniformis. Int. J. Biol. Macromol. 2023, 233, 123468.
+[CrossRef] [PubMed]
+Disclaimer/Publisher’s Note: The statements, opinions and data contained in all publications are solely those of the individual
+author(s) and contributor(s) and not of MDPI and/or the editor(s). MDPI and/or the editor(s) disclaim responsibility for any injury to
+people or property resulting from any ideas, methods, instructions or products referred to in the content.

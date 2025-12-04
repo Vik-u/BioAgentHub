@@ -1,0 +1,1475 @@
+FULL-LENGTH PAPER
+Investigation of the halophilic PET hydrolase PET6 from
+Vibrio gazogenes
+Sebastian Weigert1 | Pablo Perez-Garcia 2 | Florian J. Gisdon1 |
+Andreas Gagsteiger1 | Kristine Schweinshaut 1 | G. Matthias Ullmann3 |
+Jennifer Chow2 | Wolfgang R. Streit2 | Birte Höcker 1
+1Department of Biochemistry, University
+of Bayreuth, Bayreuth, Germany
+2Department of Microbiology and
+Biotechnology, University of Hamburg,
+Hamburg, Germany
+3Computational Biochemistry, University
+of Bayreuth, Bayreuth, Germany
+Correspondence
+Birte Höcker, Department of
+Biochemistry, University of Bayreuth,
+95447 Bayreuth, Germany.
+Email:
+birte.hoecker@uni-bayreuth.de
+Funding information
+Bundesministerium für Bildung und
+Forschung, Grant/Award Numbers:
+LipoBiocat (031B0837B), MarBiotech
+(031B0562A), MetagenLig (031B0571A),
+PlastiSea (031B867B); Deutsche
+Forschungsgemeinschaft, Grant/Award
+Number: Project Number 391977956 - SFB
+1357 Microplastic
+Review Editor:Jeanine Amacher
+Abstract
+The handling of plastic waste and the associated ubiquitous occurrence of
+microplastic poses one of the biggest challenges of our time. Recent investiga-
+tions of plastic degrading enzymes have opened new prospects for biological
+microplastic decomposition as well as recycling applications. For polyethylene
+terephthalate, in particular, several natural and engineered enzymes are
+known to have such promising properties. From a previous study that identi-
+fied new PETase candidates by homology search, we chose the candidate PET6
+from the globally distributed, halophilic organismVibrio gazogenesfor further
+investigation. By mapping the occurrence ofVibrios containing PET6 homo-
+logs we demonstrated their ubiquitous prevalence in the pangenome of several
+Vibrio strains. The biochemical characterization of PET6 showed that PET6
+has a comparatively lower activity than other enzymes but also revealed a
+superior turnover at very high salt concentrations. The crystal structure of
+PET6 provides structural insights into this adaptation to saline environments.
+By grafting only a few beneficial mutations from other PET degrading enzymes
+onto PET6, we increased the activity up to three-fold, demonstrating the evolu-
+tionary potential of the enzyme. MD simulations of the variant helped ratio-
+nalize the mutational effects of those mutants and elucidate the interaction of
+the enzyme with a PET substrate. With tremendous amounts of plastic waste
+in the Ocean and the prevalence ofVibrio gazogenes in marine biofilms and
+estuarine marshes, our findings suggestthat Vibrio and the PET6 enzyme are
+worthy subjects to study the PET degradation in marine environments.
+KEYWORDS
+hydrolases, MD simulation, metagenome, PET degradation, PETase, polyethylene
+terephthalate, substrate interaction
+Received: 18 July 2022 Revised: 21 October 2022 Accepted: 3 November 2022
+DOI: 10.1002/pro.4500
+This is an open access article under the terms of theCreative Commons AttributionLicense, which permits use, distribution and reproduction in any medium, provided
+the original work is properly cited.
+© 2022 The Authors.Protein Sciencepublished by Wiley Periodicals LLC on behalf of The Protein Society.
+Protein Science. 2022;31:e4500. wileyonlinelibrary.com/journal/pro 1o f1 6
+https://doi.org/10.1002/pro.4500
+1 | INTRODUCTION
+Plastic pollution, which is considered an urgent current
+threat, is a consequence of the massive popularity of plas-
+tic materials starting in the 1950s paired with enduring
+inadequate waste management worldwide. While the
+world plastic production has grown to enormous 415 mil-
+lion tons in 2016,
+1 rates for recycling and incineration are
+still low, with over 50% of the plastic waste being dis-
+carded despite large improvements over the last decades.2
+Within this setting, microbiological research has focused
+on identifying plastic-active enzymes in the last decade.
+For some polymers enzymes have been reported acting
+on the polymers. These include ester-based polyure-
+thanes (PU), and plastic polyethylene terephthalate
+(PET) polyesters, which in principle can be cleaved by
+members of the extensive class of hydrolases.
+3 In the
+scope of plastic pollution, hydrolases with activity on the
+commodity PET came to the fore. Today, there are
+40 PET-active enzymes known.
+3 They are affiliated with
+four bacterial and two fungal phyla. The first PET
+degrading enzyme TfH was reported in 1998 by Kleeberg
+et al., which was isolated from Thermobifida fusca
+belonging to the order ofActinomycetales.
+4,5 As members
+of this order are common in the context of plant material
+degradation, including cutin,
+6 many PET degrading
+enzymes identified were found from bacteria of this phy-
+lum, including prominent TfCut2, Thc_Cut1, Est119, and
+LCC.
+7-11 Over the last years, protein engineering has been
+applied to increase activity and thermostability of these
+enzymes, enabling future recycling applications. Recently
+a number of exciting articles have been published report-
+ing improved catalytic activities of either IS, PET2, or
+LCC.
+12-19 A variety of strategies targeting sequence-based
+knowledge, substrate-binding or the catalytic mechanism
+have been used including machine-learning or directed
+evolution that resulted in enhanced degradation capabili-
+ties thereby emphasizing the high potential of engineered
+PET-hydrolases. In fact, Tournier et al. already presented
+a proof of concept for enzymatic PET recycling employ-
+ing engineered variants of LCC.
+20
+In 2016, the discovery ofIdeonella sakaiensisas a bac-
+terium that can exploit PET as sole energy and carbon
+source attracted particular attention. 21 This ability is
+facilitated by a two-enzyme system that consists of a
+cutinase-like enzyme called PETase (IsPETase) undertak-
+ing the coarse degradation whose main product mono-
+(2-hydroxyethyl)-terephthalate (MHET) is further hydro-
+lyzed by the second enzyme MHETase. The latter is
+related to feruloyl esterase and shows a comparably high
+specificity toward its substrate MHET,
+22 and increases
+PET hydrolysis rates of IsPETase when used together.23
+In contrast to most previously characterized enzymes,
+IsPETase shows decent activity at temperatures of 30–
+40/C14C, implying the possibility for substantial PET degra-
+dation in the environment. To evaluate this, the preva-
+lence of such enzymes must be analyzed, and their actual
+degradation activity on PET subsequently investigated.
+Accordingly Danso et al. conducted a bioinformatic
+search employing a hidden Markov model (HMM)
+approach trained with the structure–function relation-
+ships from known PET hydrolase to identify new poten-
+tial enzymes in genomic samples from various
+environments.
+24 They identified several potential
+enzymes, and PET hydrolase activity was measured
+among others for PET6.24 This enzyme is found in the
+proteobacteria Vibrio gazogenes from the genus Vibrio,
+whose members are ubiquitously present in saline and
+marine environments.25 A search in the PAZy database
+identified two additional marine-derived enzymes origi-
+nating from Pseudomonas aestusnigri and fromMarino-
+bacter sp.
+26,27 Of particular interest in the scope of plastic
+pollution is their prevalence in estuaries, salt marshes,
+and in the plastisphere, which describes the microbial
+environment around plastic particles.
+28–31 As there are
+million tons of plastic particles in the oceans and rivers
+as a main entrance path for plastic in the environment
+32
+mouthing in estuaries and neighboring salt marshes,
+PET6 is an interesting candidate to investigate its PET
+degradation potential. In particular, ecosystems like estu-
+aries and salt marshes combine the reported prevalence
+of Vibrio species and high concentrations of plastics and
+microplastics.
+33,34
+Of the variants found and initially characterized in
+the study by Danso et al.,24 PET6 ofVibrio gazogenesis a
+representative that, in addition to its described PETase
+activity, promises large-scale occurrence. It is well known
+that Vibrio species are found nearly everywhere, espe-
+cially in marine environments, where they play a critical
+role in carbon and nitrogen cycling.
+35 Furthermore,
+atmospheric warming is enhancing the global occurrence
+of this genus.36 In several studies describing the microbial
+community on plastic debris (“plastisphere”), the genus
+Vibrio was found to be the most abundant taxon able to
+colonize PET (40%), polyethylene (PE, 30%) or polypro-
+pylene (PP, 33%).37–39 Moreover, several pathogenic Vib-
+rios have been identified on the aforementioned plastics
+recovered from oceans, but also on polystyrene (PS) and
+polyvinyl chloride (PVC; see table 1 in Bowley et al.40).
+To which extent theseVibrios could be involved in degra-
+dation of these plastics remains yet unknown. In this
+study, we characterize PET6 from Vibrio gazogenes in
+detail and evaluate its potential for PET degradation in
+near-realistic saline conditions. This enables insights into
+2o f1 6 WEIGERT ET AL.
+
+the adaptation of this enzyme toward its environment
+and allows for a rough estimation of whether members of
+the genus Vibrio might facilitate PET degradation in the
+environment.
+2 | RESULTS AND DISCUSSION
+2.1 | Global prevalence of PET6
+homologs in theVibrio genus
+We aimed at identifying other putative PET-degrading
+Vibrios by performing a BLASTp search against NCBI's
+non-redundant database filtered for Vibrio spp. (taxid
+662). This resulted in eight hits with full coverage and
+more than 79% sequence identity compared to the PET-
+hydrolyzing PET6 in V. gazogenes , V. spartinae ,
+V. ruber, V. zhugei,a n dV. palustris (Table S1). All of
+these species were isolated from marine or saline
+environments,
+41–44 implying possible adaption to saline
+conditions.
+A pangenomic analysis of one representative genome
+of each PETase-containing Vibrio spp. revealed a core
+genome of 1,824 gene clusters (GCs; Figure 1), which
+included all putative PETases. The accessory genome ran-
+ged from 1,392 to 2,321 GCs for the analyzed isolates.
+Due to their high sequence similarity, all five PETases
+were allocated in the same GC. According to Average
+Nucleotide Identity (ANI) analysis, the analyzed Vibrio
+species belong to two distinct lineages, where additional
+1,050 and 805 GC are shared exclusively between the
+members. This strongly suggests the horizontal transfer
+of PETase genes within the genus (Figure
+1). The“plasti-
+sphere” of both aquatic and soil environments has been
+identified as a“hotspot” for gene transfer.45,46 This is fur-
+ther supported by the extended analysis in Figure S1,
+including 28 additional genomes from representative
+pathogenic and non-pathogenic Vibrios that do not con-
+tain genes coding for PETases. ANI analysis revealed the
+presence of two mainVibrio clades (I and II), where all
+Vibrios with predicted PET-degrading ability were allo-
+cated in Clade II. Again, the PETase-codingV. gazogenes,
+V. spartinae, and V. ruber clustered closely together, but
+V. palustris and V. zhugei appear closer related to
+V. tritoniusand V. nitrifigilis.
+Taken together, these results indicate that some Vib-
+rios are theoretically equipped to act on PET, making
+Vibrio-mediated PET hydrolysis in marine ecosystems
+conceivable. The next step in the classification of PET6
+and related enzymes in the Vibrio genus is a detailed
+analysis including its activity. Here, we use PET6 as a
+prototype.
+2.2 | Characterization of PET6 activity
+PET6 was expressed heterologously in Escherichia coli
+and purified to homogeneity using an encoded histi-
+dine tag. After purification, we first validated and char-
+acterized the enzyme's capabilities to degrade PET.
+Here, we employed our prev iously developed assay
+platform for PET degradation, which works with a
+PET-coating inside standard lab consumables as sub-
+strate.
+47 The coating was prepared from post-consumer
+FIGURE 1 Pangenomic analysis of five PETase-containingVibrio genomes. The analysis includes 6,651 GCs involving 19,117 individual
+gene calls. The five first tracks represent protein-coding GCs of individual genomes organized by ANI (red squares and cladogram) of the
+aligned fraction. Presence of a GC in a genome is indicated in dark colors, absence in light. The core genome of the analyzedVibrio genomes
+is indicated in turquoise. Further GCs specific of each of the two clades are indicated in the color of the clade (1 and 2). The red track shows
+the number of genomes harboring a defined GC. Other genome statistics (from left to right: total length [0–6 Mbp], GC content [30–50%],
+number of singleton GCs [0–1,000] and number of GCs [0–5,000]) are indicated as additional bar charts on the right. The GCs containing
+PETase-coding genes are marked with a circle for each species. PET6 is highlighted in yellow. ANI, average nucleotide identity; GCs, gene
+clusters; PET, polyethylene terephthalate
+WEIGERT ET AL. 3o f1 6
+
+PET bottles to achieve a near-realistic substrate with a
+crystallinity of around 10%. Besides the general capac-
+ity for PET degradation, the enzyme's individual
+optima regarding temperature and ionic strength were
+investigated. Since PET6 was derived from a marine
+organism, the experimental setup for examining the
+enzyme's activity in the presence of salt covered
+sodium chloride concentrations between 25 and
+2,500 mM (Figure
+2a). Similarly, we determined the
+optimum temperature in the range from 30 to 55 /C14C
+(Figure 2b). As a reference, the well-studied IsPETase
+was included for both quan titative benchmark and
+qualitative comparison of the determined optima. The
+activity was determined byU H P L Cs u m m i n gu pT P A ,
+BHET, and MHET to the total product release. As IsPE-
+Tase showed substantially higher activity at the given
+conditions, the concentration was adjusted to fit the
+substrate limits of the assay. Therefore, IsPETase was
+used at 20 nM while PET6 was employed at 2μM.
+The results indicate that IsPETase has a relatively
+broad temperature range for activity with an optimum
+around 30
+/C14C, whereas PET6 shows a distinct optimum
+between 45 and 50/C14C. The different behavior of the two
+enzymes is even more noticeable when looking at the
+impact of ionic strength on the PET degradation activity.
+While PET6 shows little activity at low salt concentra-
+tions, the product release increases rapidly with an opti-
+mum between 1 and 1.5 M NaCl. In contrast, IsPETase
+displays the opposite behavior toward salt with an opti-
+mum at low salt and rapidly decreasing activity with ris-
+ing ionic strength.
+2.3 | Structural analysis
+Next, we aimed to investigate if the differences between
+IsPETase and PET6 activity are reflected on a molecular
+level. Thus, crystal trials were set up and an X-ray struc-
+ture of PET6 was obtained. The solved structure (PDB ID
+7Z6B) shows three protein entities in the asymmetric
+unit. The maps allowed the modelling of three phos-
+phates, two sodium and one chloride ion that are sym-
+metrically arranged around each chain (Figures 3a
+and S2).
+As indicated by the sequence similarity to other PET
+degrading enzymes, PET6 can be identified as an enzyme
+of the alpha/beta hydrolase fold. The characteristic topol-
+ogy of this class features eight beta-strands connected
+with alpha-helices and a conserved arrangement of the
+catalytic triad (Ser163, Asp209, and His241), with all of
+them present in PET6 (Figure
+3b,c). As observed in other
+PETase crystal structures, all these enzymes are highly
+alike, with only minor differences in loop regions. The
+pseudo symmetry indicated by the crystallographic
+parameters is also reflected in the asymmetric unit of the
+solved structure. The arrangement of the three protein
+chains, including surrounding and bound ions, is highly
+symmetric (Figure
+3c). Consequently, the chains show an
+all-atom RMSD of only 0.61–0.68 Å among each other.
+PET6 features three disulfide bonds labeled DS 1 –3
+(Figure 3b,c,e). DS 1 is located close to the C-terminus,
+formed between residue 277 and 294, and conserved in
+all cutinases. Therefore, it was included in the HMM
+search model from Danso et al.
+24 The second disulfide
+FIGURE 2 Activity of PET6 and IsPETase on PET at varying temperatures and salt concentrations. PET6 (green line) and IsPETase
+(blue line) were incubated for 18 hr at a concentration of 2μM and 20 nM, respectively. (a) The effect of salt concentrations on the two
+enzymes varied between 0 and 2,500 mM (measured in 96-well reaction plates at 30/C14C). (b) Different incubation temperatures in the range
+of 30 and 55/C14C were tested (measured in coated PCR tubes) with the sodium chloride concentration fixed at 50 mM. PET, plastic
+polyethylene terephthalate
+4o f1 6 WEIGERT ET AL.
+
+bond DS 2 connects residue 206 and 243 and is located
+close to the active site. This disulfide bond position has
+been mainly described for fungal cutinases but is also
+found in IsPETase. DS 3 is located near the N-terminus
+between residue 27 and 30 and is not commonly
+described for PET hydrolases or cutinases.
+The presence of three coordinated ions per chain in
+the asymmetric unit is of particular interest. Binding sites
+for divalent cations such as Ca
+2+,Z n2+, and Mg2+ have
+been described for several cutinases and PET hydrolases,
+showing stabilizing effects and increasing activity when
+bound.48 PET6, on the contrary, shows binding of mono-
+valent ions with one sodium ion coordinated by the car-
+bonyl oxygens of the residues Arg 61, Ala 63, and Phe 65;
+the typical octahedral coordination is completed by three
+water molecules (Figure
+3d). The same set up is repeated
+for a second sodium ion, interacting with the residues
+Asp 282, Ser 284, and Val 287. A chloride ion can be
+FIGURE 3 Crystal structure of PET6 (green) and comparison to IsPETase (blue). (a) Shows the asymmetric unit of the PET6 crystal
+structure (green, PDB ID7Z6B) containing three protein molecules; ions are depicted as colored spheres including phosphate (orange-red),
+sodium (purple), and chloride (neon green). (b) Displays a single chain, with the catalytic triad (Ser-His-Asp) highlighted in pink; the three
+disulfide bonds are labeled DS1-3. (c) Illustrates how the superimposed structures of PET6 and IsPETase (5XJH) have only a few deviations
+in loops and termini. (d) Highlights ion binding with the two sodium ions (violet) being coordinated by three carbonyl oxygens and three
+water molecules, while chloride (neon green) is located in a small pocket. The positions of subsequent mutations are shown in (e) with the
+loop region (Ex-Loop) in dark orange and two residues for the double mutant VSTA in beige in proximity to the active site colored in pink.
+(f) Compares the surface of the two proteins with a focus on the putative substrate-binding site approximated as L shape in the
+superimposed structure.
+WEIGERT ET AL. 5o f1 6
+
+modeled in a shallow pocket created by the residues Ala
+208, Asp 209, Ala 210, Val 211, Ser 240, His241, Phe 242.
+Comparison of these ion binding sites with other cutinase
+structures revealed the same chloride binding site in
+Thc_Cut1 (PDB-ID:
+5LUI,2 /C2Mg2+,3 /C2Cl/C0) and Cut190
+(PDB-ID: 4WFK). The latter further shares the ion bind-
+ing site around the residues 61, 63, and 65 of PET6
+(Figure 3d) but coordinates a Ca2+ instead. This behavior
+toward monovalent ions might be a result of adapting to
+saline environments with high sodium chloride concen-
+trations. Furthermore, it hints at how salt concentrations
+might impact the enzyme's activity.
+Due to the similarity of IsPETase and PET6
+(Figure
+3c), the resulting shape and surface are also
+highly alike (Figure3f), with slight differences in the loop
+regions and positioning of side chains. The predicted
+binding site of the PET strand for IsPETase is a very dis-
+tinct shallow binding groove on both sides of the active
+site. Docking studies conducted by Joo et al. proposed an
+L-shaped binding pose.
+49 A part of this binding site
+described by the authors is formed by a series of six resi-
+dues, which are referred to as the extended loop. The sur-
+face of PET6 shows a similarly shaped binding groove
+but with one knob blocking the upper leg of the hypo-
+thetical L-binding site, as visible in the figure of the
+superimposed surfaces (Figure
+3f). This knob originates
+from Tyr248, while IsPETase's corresponding residue
+within the extended loop region is the smaller aspara-
+gine
+49 (Figure 3e). The B-factors of Tyr248, including the
+sidechain, show no abnormalities compared to the neigh-
+boring residues. Thus, there is no sign of particular flexi-
+bility that might indicate a flipping out movement.
+Consequently, this tyrosine might comprise an obstacle
+for an analogous binding mode to the one proposed for
+IsPETase and, therefore, might reduce activity. Yet the
+mode of this L-shaped binding has also been questioned,
+mainly asking whether the PET substrate would take on
+the necessary conformation for that binding mode.
+50
+2.4 | PET6 variants
+To explore the evolutionary potential of PET6, we tested
+some mutants of the enzyme. The first variant targets the
+tyrosine in the extended loop of PET6 that was revealed
+in the crystal structure. To check if this tyrosine hinders
+substrate-binding based on the mode described by Joo
+et al.,
+49 we mutated this residue to the less bulky alanine
+(PET6-YLA, mutation Y248A). In a second variant, the
+entire extended loop (residues 246 –251, sequence
+TGYPSE) was exchanged with the SGNSNQ-sequence
+from IsPETase (PET-ExLoop). Joo et al.
+49 had also
+reported the conservation of Thr88 and Ala89 (IsPETase
+numbering), which we transferred to PET6, changing the
+corresponding valine to threonine and serine to alanine,
+creating PET6-VSTA (mutations V91T, S92A). The three
+variants were benchmarked against each other and IsPE-
+Tase as reference. In this comparison, two salt concentra-
+tions (50 and 1,000 mM NaCl), and three different
+temperatures (30, 40, and 50
+/C14C) were tested. Due to the
+significantly higher activity of IsPETase compared to
+PET6, IsPETase was employed in a lower concentration
+to fit within the experimental substrate limits; eventually,
+the results were extrapolated accordingly by a factor of
+10 to compare them to the PET6 variants (Figure
+4c,d).
+At the lower salt concentration of 50 mM, all PET6
+variants show considerably lower activity (Figure 4a).
+Yet, there is a trend that introduced mutations lead to
+improvements in activity, especially at 30
+/C14C. At higher
+temperatures, the increase in activity is less significant or
+entirely within the error margin as for 50/C14C. The variant
+VSTA stands out, showing the best improvements but for
+50/C14C, where the performance breaks down dramatically
+to a total product release of 0.05 mM compared to
+0.2 mM of the other variants, including PET6-wt. At 1 M
+salt, the PET degradation is, as expected, much higher for
+all PET6 variants (Figure
+4b), but especially at 40 and
+50/C14C, the introduced mutations led to a significant
+increase in performance. In particular, this is true for
+PET6-ExLoop and VSTA at 40/C14C where the total product
+release reaches 0.31 ± 0.06 and 0.27 ± 0.05μM, respec-
+tively, compared to 0.08 ± 0.01μM for the wild type.
+Somewhat less improvement can be seen at 50/C14C, where
+PET6-ExLoop and PET6-VSTA outperform PET6-wt by
+79 and 58%, respectively. In contrast, the single mutant
+PET6-YLA, reconstructing the aforementioned L-shaped
+binding site by removing the tyrosine as an obstacle in
+the binding groove, shows only a slight improvement in
+all conditions. However, the exchange of the whole
+extended loop improved the PET degradation perfor-
+mance, especially at 40–50
+/C14C and 1 M salt, suggesting a
+more complex contribution of these residues. Given these
+results, PET6-VSTA is an appealing candidate for further
+experiments, for one because of its massive boosts in
+activity with only two mutations compared to the wild
+type, and for the other due to its surprising performance
+drop at 50
+/C14C at low salt.
+When we compare these results of PET6-wt and
+PET6-VSTA with IsPETase, in the presence of 50 mM
+NaCl, IsPETase is magnitudes more active at all tempera-
+tures with an extrapolated total product release between
+21 and 45 μM in contrast to 0.02 –0.2 μM for
+PET6-variants (Figure
+4c). As seen in previous experi-
+ments (Figure 2b), the performance of IsPETase
+decreases at temperatures around 50/C14C (Figure 4c). At
+1 M sodium chloride, IsPETase's performance decreases
+6o f1 6 WEIGERT ET AL.
+
+to a total product release of 5.6μMa t3 0/C14C, which is fur-
+ther reduced with rising temperatures. This opposite tem-
+perature preference of PET6 and IsPETase culminates at
+50
+/C14C, where PET6-VSTA and PET6-wt take the lead with
+1.8 and 1.1 μM product release over IsPETase with
+0.9 μM after extrapolation. This proves a decent PET deg-
+radation potential of PET6 under appropriate conditions
+and categorizes it as PET hydrolase according to Kawai
+et al.51
+In general, these results suggest that temperature and
+thereby protein stability in combination with salt might
+be crucial for PET6-wt activity, as well as for its variants
+and IsPETase. Therefore, DSC measurements were car-
+ried out for PET6-wt and PET-VSTA at 50, 500, and
+1,000 mM NaCl to determine the melting temperature
+and investigate this interplay.
+The analysis shows that higher salt levels generally
+stabilize the proteins, for example, PET6-wt gains around
+7
+/C14Ci n Tm from 49.8 to 57.7/C14C (Figure 4e). The same
+applies in principle for the PET6-VSTA variant, but the
+two introduced mutations show a destabilizing effect
+accounting for a 0.5–1/C14C decrease in Tm compared to
+PET6-wt at corresponding salt levels. Nevertheless, there
+is an evident trend in how PET6 benefits from improved
+stability at higher salt concentrations. Furthermore, the
+data offers a possible explanation as to why the perfor-
+mance of PET6-VSTA breaks down at 50
+/C14C and low salt
+in contrast to the wildtype. Both enzymes are employed
+near or even above theirTm in this condition. However,
+the small additional destabilization by about 0.6/C14C upon
+the mutations in PET6-VSTA might be sufficient to cause
+this dramatic activity loss.
+Interestingly, the stability of IsPETase is also
+increased with higher salt concentrations from 46.2/C14Ca t
+50 mM to 52.7/C14C at 1 M salt. However, this enhanced sta-
+bility does not translate to higher activity (Figure 4).
+Once more, this demonstrates the close relation between
+PET6 performance and ionic strength, which raises the
+question, whether the type of monovalent ions plays a
+role. A natural candidate, besides sodium and chloride, is
+potassium. It is not only a typical component of seawater
+with high similarity to sodium but also present in the
+FIGURE 4 Performance of PET6 variants compared to IsPETase at varying temperatures and salt concentrations. PET6 variants (green)
+were used at a concentration of 2μM and IsPETase (blue) at 200 nM and incubated for 18 hr. Therefore, the total product release of
+IsPETase was extrapolated by a factor of 10 to obtain comparable results within the activity experiments (a–d). The performance of the PET6
+variants at different temperatures is compared in (a) at 50 mM and (b) at 1 M salt. The same data is shown in (c) and (d) for PET6-wt and
+PET6-VSTA with IsPETase for comparison; therefore, they-axis is log10 scaled to account for strongly varying performance levels. (e) Shows
+the analysis ofT
+m for PET6-wt, PET6-VSTA, and IsPETase at varying salt concentrations with DSC. TheTm of the enzymes was determined
+at 50, 500, and 1,000 mM NaCl as indicated in the hatching; the two PET6 variants were further characterized under the same conditions
+with additional 10 mM KCl. DSC, differential scanning calorimetry
+WEIGERT ET AL. 7o f1 6
+
+successful crystallization condition containing sodium-
+potassium phosphate. Compounds in crystallization con-
+ditions often have stabilizing effects on the protein, even-
+tually promoting crystallization. Another series of DSC
+measurements were conducted to test whether 10 mM
+potassium chloride has a stabilizing effect. However,
+there is no clear difference in the measurements between
+corresponding conditions (Figure
+4e). The effect of potas-
+sium ions on the activity itself was tested in an experi-
+mental setup with 1 M salt as a base to minimize the
+relative increase in total ionic strength upon adding
+10 mM potassium chloride. After incubation at 50
+/C14C for
+18 hr the total product release of PET6-wt increased
+about 10% from 476 ± 22μM to 524 ± 33μM, while ris-
+ing by 8% for PET6-VSTA from 745 ± 47μM to 810
+±8 6μM. Despite the high standard deviation, these
+results strongly suggest a positive impact of potassium
+ions. Under the given conditions, 10 mM KCl
+corresponds only to a rise of about 1% of the total ionic
+strength, making it unlikely that this performance
+increase can only be attributed to the increased ion con-
+centration in general. Additionally, divalent ions includ-
+ing Ca
+2+,C o2+,C u2+,M g2+,M n2+,N i2+, and Zn2+ have
+been tested in a concentration of 10 mM, but no increase
+in activity could be detected. This emphasizes the prefer-
+ence of PET6 toward monovalent ions and their specific
+impact on its activity in contrast to other cutinases and
+their interaction with divalent metal ions.
+2.5 | Comparison of the binding modes
+of a PET tetramer to PET6-wt and to
+PET6-VSTA
+Because of the observed differences between PET6-wt
+and PET6-VSTA we set out to model the interactions
+FIGURE 5 Binding modes
+of a PET tetramer in complex
+with PET6-wt and PET6-VSTA.
+(a) Tanimoto similarity matrices
+clustered according to similar
+interaction patterns representing
+clusters of different binding
+modes. (b) Superimposition of
+representative structures of the
+identified binding modes
+corresponding to the clusters in
+(a). (c) Detailed representation
+of residues frequently involved
+in enzyme–ligand interaction for
+PET6-wt. The left side shows the
+enzyme in cartoon
+representation with the
+interacting residues as well as
+the catalytic triad (Ser163,
+Asp209, and His241) depicted in
+sticks. The residues colored in
+orange are involved in
+interactions in both PET6-wt
+and PET6-VSTA, while those
+shown in blue are additionally
+relevant in the context of
+PET6-VSTA; the catalytic triad is
+marked in purple. The same
+perspective is shown on the
+right but with a less transparent
+surface to visualize the
+positioning of the ligand within
+the binding region
+8o f1 6 WEIGERT ET AL.
+
+with the polymer. For this we employed a PET tetramer
+as model substrate in molecular dynamics
+(MD) simulations. The parameters were set to 323 K and
+a total ionic strength of 1,050 mM representing the high
+salt condition where PET6-wt showed the best perfor-
+mance in experiments. For each complex, several trajec-
+tories comprising a total of 400 ns were analyzed to
+calculate protein –ligand interaction fingerprints and
+binding modes using the analysis tool ProLIF.
+52 We ana-
+lyzed the binding of the PET tetramer to PET6-wt and
+PET6-VSTA using cluster analysis on the basis of the
+Tanimoto coefficient using k
+Means with the Silhouette
+score (Figure 5). A single dot represents a similarity of
+the binding motifs (the darker the dot, the more similar
+are the binding motifs). In the Tanimoto similarity matri-
+ces (Figure
+5a), we observe clusters with different size
+and different specificities. All clusters define energetic
+minima on the energy landscape. Larger clusters repre-
+sent deeper energy minima. The higher the average Tani-
+moto coefficient in the cluster, the more similar is the
+binding motif in the cluster, which can be interpreted as
+a higher binding specificity of the substrate to the
+protein.
+For PET6-wt, we identified seven clusters with differ-
+ent binding modes (Figure
+5a,b). The clusters 0, 1, 3, 5,
+and 6 represent structurally well-defined energetic min-
+ima. The clusters 2 and 4 are less specific. Thus, in
+PET6-wt, we found several minima of which five are rela-
+tively specific but nevertheless they differ structurally
+among each other. In contrast to PET6-wt, we identified
+only two clusters for PET6-VSTA. Cluster 0 is large and
+represents a structurally specific and strongly pro-
+nounced energetic minimum, whereas cluster 1 is less
+specific. Hence, the binding of the PET tetramer to
+PET6-VSTA is more specific than the binding to
+PET6-wt. Nevertheless, PET6-wt and PET6-VSTA show
+both that the substrate interacts favorably in the region
+around the active site.
+Binding of PET involves the same residues in
+PET6-wt and PET-VSTA, namely Tyr90, Trp162, Met164,
+Trp187, Leu189, Val211, and Phe242 (Figure
+5c). These
+residues define a region, which is approximately binding
+two units of the PET tetramer. A further frequent contact
+with the PET tetramer is located around Ser95 and indi-
+cates a potential binding region for another PET unit. In
+that region, we further see pronounced interactions with
+Ser96, Asn245, and Thr246 for PET6-VSTA, which are
+rather sparse for PET6-wt. This finding is in line with the
+defined interactions of a longer portion of the PET tetra-
+mer with PET-VSTA. The MD trajectories of the two
+enzymes indicate a dominance of π-stacking contacts
+between the PET tetramer and the respective enzyme.
+The share of frames within the trajectories, which show
+π-stacking interactions is higher for the complex of
+PET6-VSTA with the PET tetramer (93 ± 2%) compared
+to the complex of PET6-wt with the PET tetramer (78
+± 11%) reflecting a more defined interaction in the com-
+plex of PET6-VSTA. In addition to the more defined bind-
+ing of the substrate, we observed a higher contact
+frequency between the ligand and the catalytic histidine
+(His241) for PET6-VSTA (64 ± 14%) compared to
+PET6-wt (18 ± 27%), which is beneficial for optimal bind-
+ing to the active site. These observed differences are a
+consequence of the introduced mutations Val91 to threo-
+nine and Ser92 to alanine.
+In PET6-VSTA, the hydroxyl group of Thr91 is fre-
+quently close to aπ-system of the terephthalate units of
+the PET tetramer indicating potential OH –π interac-
+tions. The distance value at the maximum of the
+observed distribution is 3.5 Å (Figure S3, maximum of
+the estimated prob ability density function), which is
+exactly the ideal value found in the literature.
+53,54 In
+addition, we observe a hyd rophobic contact between
+Cβ of Ala92 and an ethyl linker of the PET tetramer.
+Interestingly, the distance between the hydroxyl group
+of Thr91 and the Cβ of Ala92 (5.1 Å, Figure S3) is about
+t h ed i s t a n c eo ft h eπ-system of a terephthalate unit to
+the ethyl linker in PET. This specific interaction is only
+possible in PET6-VSTA and not in PET6-wt, which
+explains a more specific interaction with the PET sub-
+strate in the mutant.
+In conclusion, the simulations show that the
+exchange of Val91 and Ser92, which are present in all
+natural PET6 variants, to threonine and alanine, respec-
+tively, enhances the interactions of the PET tetramer
+with PET6-VSTA. This enhanced substrate coordination
+in the immediate vicinity to the active site might be one
+cause for the improved PET degradation of PET6-VSTA.
+The experimentally shown significant increase in PET
+degradation induced by two small mutations in
+PET6-VSTA further underpins the evolutionary potential
+of PET6.
+To date, there is some crystallographic data on the
+substrate interaction of PET degrading enzymes, however
+they rely on shorter substrate analogues instead of the
+PET polymer.
+16,55–57 In order to circumvent this limita-
+tion, MD simulations can be employed, as done here. The
+value and significance of this method has been demon-
+strated by several studies that successfully generated
+improved variants of PET degrading enzymes using MD
+simulations.
+14,58–60 These studies not only confirm a
+mode of interaction comparable to the one we observe,
+with a strong proportion of aromatic interactions and
+simultaneous participation of polar interactions, but also
+illustrate for example the diverse binding of the substrate
+by means of several binding modes.
+16
+WEIGERT ET AL. 9o f1 6
+
+3 | CONCLUSION
+T h ee n z y m eP E T 6t h a tw ei n v e s t i g a t e di nt h i ss t u d ys h o w s
+a fascinating adaptation toward its saline environment.
+Sodium and chloride ions stabilize the protein and deci-
+sively promote its activity. While the activity profile strongly
+differs from IsPETase, similar trends have been observed
+for other PET hydrolases and their interaction with divalent
+cations. The optimal working conditions of the enzyme
+were determined to be around 50
+/C14Ca n d1–1.5 M salt. The
+X-ray structure confirmed theexpected fold and stabilizing
+interactions but also highlighted some differences that led
+to testable mutants. MD simulations further revealed a sta-
+ble interaction between enzymea n ds u b s t r a t ew i t hs p e c i f i c
+molecular contacts positioningthe substrate appropriately
+t o w a r dt h ea c t i v es i t e .T h ec o m p a r i s o no ft h ed o u b l e
+mutant additionally provided insights into how the struc-
+tural changes translate to an increased activity.
+An ongoing discussion about PET degrading enzymes
+is their actual contribution to PET waste decomposition
+in the environment, which has not been assessed by any
+study on an experimental level yet. Based on our find-
+ings, we propose that PET6 is a worthy candidate to study
+this topic. The genusVibrio is ubiquitous in saline envi-
+ronments, and we demonstrated the prevalence of PET6
+homologs in severalVibrio species. There is also a coinci-
+dence of high plastic concentrations in salt marshes, estu-
+aries, and oceans with the confirmed occurrence ofVibrio
+in these environments and the plastisphere itself. As
+recently shown by Menzel et al.
+61 even comparatively
+low levels of enzyme activity can significantly impact the
+integrity and thus the fate of PET material. Hence, a PET
+degradation activity of PET6 and its homologues in
+marine and estuarine environments seems feasible.
+4 | MATERIALS AND METHODS
+4.1 | Bioinformatics analysis
+Pangenome analysis and the illustration of the corre-
+sponding differential gene expression were conducted
+with Anvi'o 6.1 (83). GCs were built with a minbit of 0.5.
+A BLASTp search with the sequence of PET6
+(WP_021018894.1) as a query was performed against all
+Vibrio proteomes (taxid 662) in the non-redundant data-
+base from NCBI to identify closely related homologs of
+the PETase (query coverage >99%, sequence identity
+>80%). Multiple sequence alignments were carried out
+with T-Coffee in Expresso mode.
+62 Maximum likelihood
+trees were calculated with RAxML 8.2.1063 with 500 boot-
+straps and visualized on MEGA X.64
+The genomes of the PETase-coding V. gazogenes
+(GCF_002196515.1), V. palustris (GCF_900162645.1),
+V. ruber (GCF_900163965.1), V. spartinae
+(GCF_900149295.1), andV. zhugei(GCF_003716875.1) in
+GenBank format were fetched from NCBI. After file pre-
+processing with the script“anvi-script-process-genbank,”
+a pangenome analysis was conducted with Anvi'o
+7.1.
+65–67 GCs were built with a minbit of 0.5. ANI was cal-
+culated using FastANI.68 For the more extensive pange-
+nomic analysis in Figure S1, the genomes ofV. fischeri
+(Aliivibrio fischeri ; GCF_000011805.1), V. casei
+(GCF_003335255.1), V. algivorus (GCF_007623795.1),
+V. mediterranei (GCF_002214345.1), V. maritimus
+(GCF_003263775.1), V. splendidus (GCF_003050125.1),
+V. coralliilyticus (GCF_013266665.1), V. diabolicus
+(GCF_011801455.1), V. parahaemolyticus
+(GCF_000196095.1), V. hepatarius (GCF_013114105.1),
+V. harveyi (GCF_000770115.1), V. alginolyticus
+(GCF_001471275.2), V. natriegens (GCF_001456255.1),
+V. fluvialis (GCF_001558415.2), V. cholera
+(GCF_000006745.1), V. proteolyticus (GCF_000467125.1),
+V. metschnikovii (GCF_009763765.1), V. anguilarum
+(GCF_002287545.1), V. aerogenes (GCF_900130105.1),
+V. aestivus (GCF_003263845.1), V. hangzhouensis
+(GCF_900107935.1), V. mangrovi (GCF_900184095.1),
+V. nitrifigilis (GCF_015686695.1), V. quintilis
+(GCF_900143745.1), V. tritonius (GCF_001547935.1),
+V. vulnificus (GCF_004319645.1), and V. ziniensis
+(GCF_011064285.1) were included and processed as
+described above.
+4.2 | Cloning
+The pet6 gene (residues 25 –297, NCBI Ref. Seq.
+WP_077316261.1) was cloned into a pET28a vector
+(Merck Millipore Novagen) via the restriction sitesNdeI
+and SalI, creating a construct with a N-terminal 6x-
+HisTag upon expression, while the IsPETase gene (resi-
+dues 28–290) was inserted into a pET21b vector (Merck
+Millipore Novagen) usingNdeI and XhoI to feature a C-
+terminal 6x-HisTag upon expression. Primers for the
+introduction of mutations were designed with the tool
+NEBaseChanger (New England Biolabs), the PCR was
+conducted according to the parameters suggested by the
+design tool. After PCR cleanup, 6 μl DNA (≈50 ng/μl)
+was combined with 1μl each of T4 Ligase Buffer (10/C2),
+T4 Ligase (400 U/μl), DpnI (20 U/μl), and T4 PNK (10 U/
+μl) (New England Biolabs) and incubated for 1 hr at
+RT. After transformation of TOP10 cells with ligation
+mix, positive clones were identified by DNA sequencing
+(Eurofins Genomics GmbH).
+10 of 16 WEIGERT ET AL.
+
+4.3 | Protein production and purification
+T7 Shuffle cells (New England Biolabs) were chemically
+transformed with the vectors containing the genes of the
+enzymes; afterward, the corresponding antibiotics were
+constantly present in the media. Main cultures were
+grown in TB media at 37
+/C14C to an OD of 1.5 before the
+temperature was lowered to 18/C14C, and protein expression
+was induced by adding IPTG to a final concentration of
+300 μM. After 18 hr, the cells were harvested by centrifu-
+gation at 5,000g and resuspended in IMAC binding buffer
+(300 mM NaCl, 50 mM phosphate, 50 mM Imidazole,
+pH 7.4) with 10 ml/g wet weight. After sonication, cell
+debris was removed by centrifugation for 1 hr at 50,000g
+and vacuum filtrated through a 0.22μM filter. The clari-
+fied lysate was loaded onto a Cytivia HisTrap 5 ml col-
+umn. After washing with 20 column volumes
+(CV) binding buffer, the protein was eluted with a linear
+gradient (25 CV) of elution buffer (300 mM NaCl, 50 mM
+phosphate, 400 mM Imidazole, pH 7.4). The purification
+of the enzymes IsPETase and PET6 wildtype were
+polished with a size exclusion (SEC) run on a Cytivia
+Superdex 26/600 75 pg (SEC buffer: 150 mM NaCl,
+25 mM HEPES, pH 7.4), while the PET6 variants were
+dialyzed in SEC buffer after the IMAC step. Eventually,
+the proteins were concentrated to 50–300 μM to prepare
+aliquots of 100 μl, which were flash-frozen until
+further use.
+4.4 | Crystallization of PET6 and
+structure determination
+Sitting drop vapor diffusion experiments were conducted
+with various premixed crystal screens, including the
+JCSG Core Suite from Qiagen. The crystal screening was
+done in Intelli 3-well plates which were set up with a
+Crystal Phoenix (Art Robbins Instruments) setting drops
+in a 1:1 ratio with 0.4μl each, where PET6 was used in a
+concentration of 12.3 mg/mL. The protein crystallized in
+a condition containing 0.1 M sodium potassium phos-
+phate pH 6.2 and 35% 2-methyl-2,4-pentanediol (MPD),
+yielding crystals suitable for X-ray diffraction experi-
+ments without further optimization. The obtained crys-
+tals were frozen without the addition of a cryoprotectant
+and diffraction data was collected at the BESSY synchro-
+tron. Two datasets from the same crystal were recorded
+at the beamline MX14.2 with 13.5 keV with an exposure
+time of 0.1 s per 0.1
+/C14and 2,000 images each. The datasets
+were processed with XDSAPP 2 and merged with
+Xdsconv. The crystallographic data quality indicators
+show good results throughout with the resolution cut-off
+at 1.4 Å resulting in a R-meas of 5.4% (30.0%), I/σ(I) of
+19.45 (4.70), and CC1/2 of 99.9 (92.3), with the expression
+in brackets as the respective value in the highest resolu-
+tion (Table S2). However, the moderate data complete-
+ness of 95.6% (91% in the highest resolution shell) is
+typical for the P1 space group. The phase was solved
+using Phenix Phaser employing a homology model of
+PET6 generated by MODELLER.
+69 Refinement and
+model building was done with Phenix Refine 70 and
+Coot.71 During processing and solving of the structure, it
+could not be overlooked that this crystal with the triclinic
+space group P1 is strongly tending toward a higher sym-
+metry, the cell parameters (a = 44.8, b = 72.6, c = 72.8,
+α = 119.8
+/C14, β = 91.6/C14; γ = 91.8/C14) are very close to a hexag-
+onal crystal system with theoretical cell dimensions
+a = b ≠ c and α = β = 90/C14; γ = 120/C14. But processing the
+data sets merged or unmerged at higher symmetry did
+not successfully solve the structure, suggesting that
+higher symmetry was distorted. This could be related to
+the omission of cryoprotectant during the flash freezing
+step, only relying on the present MPD in the condition
+itself.
+4.5 | Activity assay on PET
+The PETase activity of the enzymes was measured by
+incubating the enzymes in PET-coated 96-well microtiter
+plates. The coating is part of an assay platform described
+in detail in our previous paper.
+47 In short, commercially
+available post-consumer PET (CleanPET, Veolia GmbH)
+is dissolved in trifluoroacetic acid and applied on 96-well
+microtiter plates (Nunc 96-well clear, Fisher Scientific),
+excess PET solution drained, and eventually, the plate is
+dried at 63
+/C14C to obtain the PET coating. For the actual
+experiments, each well was filled with 50μl enzyme solu-
+tion where 50 mM borate pH 8.5 was the basis while
+enzyme and sodium chloride concentration as well as
+incubation temperature and time were varied according
+to the individual experiment. After incubation, the solu-
+tion was mixed with four parts acetonitrile containing 1%
+formic acid followed by centrifugation. The degradation
+products were analyzed using the UHPLC (Thermofisher
+Ultimate 3000 RS) system on a reversed phase C18 col-
+umn (Kinetex 1.7μm EVO C18, 100 Å, 50/C22.1 mm Phe-
+nomenex). For fast separation at a flow rate of
+1.3 ml/min the following multi-slope gradient was
+employed starting at 100% solvent A (water+ 0.1% TFA)
+increasing acetonitrile as solvent B in the following pat-
+tern: 0.04 min— 15%, 0.4 min — 20%, 0.75 min— 50%,
+0.95 min— 80%, and 2.1 min— 80%. One microliter sam-
+ples were injected onto the column; absorption was mea-
+sured at 240 nm at a rate of 50 Hz. Six to 30 replicates
+were used for every condition to calculate a mean total
+WEIGERT ET AL. 11 of 16
+
+product release where TPA, MHET, and BHET are
+combined.
+4.6 | Differential scanning calorimetry
+Differential scanning calorimetry (DSC) runs were done
+with the proteins under different buffer conditions to
+determine the stability and melting point of the enzymes.
+While the buffer basis was kept constant with 50 mM
+borate pH 8.5, sodium chloride concentrations were var-
+ied (50, 500, and 1,000 mM), with the optional addition
+of 10 mM KCl. The proteins were dialyzed extensively
+and prepared in a final concentration between 0.5 and
+1.2 mg/mL. Before applying the sample, the instrument
+(Malvern Microcal PEAK DSC) was thermally equili-
+brated with corresponding buffer-buffer runs; scanning
+range was set between 25 and 70
+/C14C with a speed of
+120 K/hr.
+4.7 | Molecular dynamics simulations
+and binding mode analysis
+The PET6 crystal structure was prepared with the pro-
+gram CHARMM,72 using the CHARMM3673,74 force field.
+For the simulations we used chain A of the crystal struc-
+ture and the corresponding water molecules. The muta-
+tions for the PET6-VSTA structure were introduced with
+PyMOL.
+75 Disulfide bonds were set, and hydrogens were
+added with the HBUILD routine in CHARMM. Proton-
+ation probabilities were calculated using MEAD
+76,77 and
+GMCT.78 Two hundred equilibration scans and 100,000
+production scans were performed at 323 K with 1.05 M
+ionic strength and permittivity 4 for the protein and
+80 for the solvent in the pH range 0–14 with steps of 0.25.
+The protonation states of titratable groups were set
+according to this calculation. For the MD simulations, we
+used a PET tetramer as ligand applying published param-
+eters.
+79 The carboxyl ends of the ligand were modeled as
+methyl esters to simulate a neutral continuation of longer
+PET chains. The initial position of the ligand was mod-
+eled according to the inhibitor p-nitrophenol bound in
+the crystal structure with the PDB-ID 5XH2. Both protein
+structures were superimposed and the second repeat unit
+of the PET tetramer was superimposed with the phenyl
+ring of p-nitrophenol. The prepared protein with ligand
+was solved in a cubic box of water molecules extending at
+least 25 Å from the protein ligand complex with an ion
+concentration of 1.05 M NaCl. All MD simulations were
+run with ACEMD
+80 at 323.15 K. In total, we performed
+20 independent production runs about 50 ns for each pro-
+tein whereas we just considered trajectories where the
+PET tetramer remained bound to the protein throughout
+the trajectory and where a partially bound ligand did not
+form self-stacking interactions. For PET6-wt 8 trajectories
+fulfilled these criteria and for PET6-VSTA more than
+8 trajectories fulfilled them. Thus, for both proteins, we
+analyzed 8 independent production runs each 50 ns long.
+The processing of the MD trajectories was performed
+with MD analysis.
+81,82 Errors of the calculated shares of
+interactions were obtained by dividing each total trajec-
+tory for PET6-wt and for PET6-VSTA into five consecu-
+tive trajectories of equal size and calculating the standard
+deviation of the respective shares among them. Binding
+modes were obtained on the basis of the Tanimoto simi-
+larity coefficient.
+83 A coefficient of 1 means an identical
+interaction pattern and a coefficient of 0 means no identi-
+cal interactions. Similar interaction patterns among all
+the structures in the trajectories can then be clustered.
+For that, the analysis of interactions and the Tanimoto
+interaction fingerprint analysis were performed with Pro-
+LIF.
+52 Clustering for the binding mode analysis was per-
+formed with the kMeans algorithm of scikit-learn.84 The
+optimal number of clusters was obtained by the Silhou-
+ette score. As representative structure for each cluster the
+closest structure to the cluster center was taken.
+AUTHOR CONTRIBUTIONS
+Sebastian Weigert: Conceptualization (equal); investi-
+gation (equal); validation (equal); visualization (equal);
+writing –original draft (equal); writing–review and edit-
+ing (equal). Pablo Perez-Garcia: Conceptualization
+(equal); investigation (equal); validation (equal); visuali-
+zation (equal); writing–original draft (equal); writing–
+review and editing (equal).Florian J. Gisdon:Investiga-
+tion (equal); validation (equal); writing – original draft
+(equal); writing – review and editing (equal). Andreas
+Gagsteiger: Investigation (equal); validation (equal).
+Kristine Schweinshaut: Investigation (equal).
+G. Matthias Ullmann:Investigation (equal); validation
+(equal); writing – review and editing (equal). Jennifer
+Chow: Conceptualization (equal); investigation (equal);
+writing –original draft (equal); writing–review and edit-
+ing (equal). Wolfgang R. Streit: Conceptualization
+(equal); funding acquisition (equal); writing–review and
+editing (equal). Birte Höcker: Conceptualization
+(equal); funding acquisition (equal); investigation
+(equal); writing –original draft (equal); writing–review
+and editing (equal).
+ACKNOWLEDGMENTS
+Diffraction data have been collected on BL14.2 at the
+BESSY II electron storage ring operated by the Helm-
+holtz-Zentrum Berlin.
+85 We would particularly like to
+acknowledge the help and support of the BESSY team
+12 of 16 WEIGERT ET AL.
+
+during the experiment. This work was funded by the
+Deutsche Forschungsgemeinschaft (DFG, German
+Research Foundation) — Project Number 391977956 —
+SFB 1357 Microplastics, subproject C03 at Bayreuth Uni-
+versity. Work was in part supported by the BMBF within
+the programs MarBiotech (031B0562A), LipoBiocat
+(031B0837B), PlastiSea (031B867B), and MetagenLig
+(031B0571A) at the University of Hamburg. Open Access
+funding enabled and organized by Projekt DEAL.
+CONFLICTS OF INTEREST
+The authors declare no conflict of interest.
+DATA AVAILABILITY STATEMENT
+All data to support the conclusions of this manuscript are
+included in the main text and supporting information.
+Coordinates and structure factors have been deposited to
+the Protein Data Bank (PDB) with accession code: 7Z6B.
+ORCID
+Sebastian Weigert
+https://orcid.org/0000-0002-0469-
+1545
+Pablo Perez-Garcia https://orcid.org/0000-0003-2248-
+3544
+Andreas Gagsteiger https://orcid.org/0000-0003-0112-
+3400
+G. Matthias Ullmann https://orcid.org/0000-0002-6350-
+798X
+Jennifer Chow https://orcid.org/0000-0002-7499-5325
+Wolfgang R. Streit https://orcid.org/0000-0001-7617-
+7396
+Birte Höcker https://orcid.org/0000-0002-8250-9462
+REFERENCES
+1. Boucher J, Billard G, Simeone E, Sousa J. The Marine Plastic
+Footprint. International Union for Conservation of Nature
+(IUCN), Gland, Switzerland, 2020.
+https://doi.org/10.2305/
+IUCN.CH.2020.01.en.
+2. Geyer R, Jambeck JR, Law KL. Production, use, and fate of all
+plastics ever made. Sci Adv. 2017;3(7):e1700782. https://doi.
+org/10.1126/sciadv.1700782.
+3. Buchholz PCF, Feuerriegel G, Zhang H, et al. Plastics degrada-
+tion by hydrolytic enzymes: The plastics-active enzymes
+database— PAZy. Proteins. 2022;90:1456. https://doi.org/10.
+1002/prot.26325.
+4. Kleeberg I, Hetz C, Kroppenstedt RM, Müller RJ,
+Deckwer WD. Biodegradation of aliphatic-aromatic copolye-
+sters by Thermomonospora Fusca and other thermophilic com-
+post isolates. Appl Environ Microbiol. 1998;64(5):1731–1735.
+https://doi.org/10.1128/AEM.64.5.1731-1735.1998.
+5. Müller R-J, Schrader H, Profe J, Dresler K, Deckwer W-D. Enzy-
+matic degradation of poly(ethylene terephthalate): Rapid hydro-
+lyse using a hydrolase from T. Fusca. Macromol Rapid Commun.
+2005;26(17):1400–1405.
+https://doi.org/10.1002/marc.200500410.
+6. Bhatti AA, Haq S, Bhat RA. Actinomycetes benefaction role in
+soil and plant health. Microb Pathog. 2017;111:458 –467.
+https://doi.org/10.1016/j.micpath.2017.09.036.
+7. Maurya A, Bhattacharya A, Khare SK. Enzymatic remediation
+of polyethylene terephthalate (PET)–based polymers for effec-
+tive management of plastic wastes: An overview. Front Bioeng
+Biotechnol. 2020;8:1332.
+https://doi.org/10.3389/fbioe.2020.
+602325.
+8. Chen S, Tong X, Woodard RW, Du G, Wu J, Chen J. Identifica-
+tion and characterization of bacterial Cutinase*. J Biol Chem.
+2008;283(38):25854–25862.
+https://doi.org/10.1074/jbc.
+M800848200.
+9. Herrero Acero E, Ribitsch D, Steinkellner G, et al. Enzymatic
+surface hydrolysis of PET: Effect of structural diversity on
+kinetic properties of Cutinases from Thermobifida. Macromole-
+cules. 2011;44(12):4632 –4640.
+https://doi.org/10.1021/
+ma200949p.
+10. Kitadokoro K, Thumarat U, Nakamura R, et al. Crystal struc-
+ture of Cutinase Est119 from Thermobifida Alba AHK119 that
+can degrade modified polyethylene terephthalate at 1.76Å reso-
+lution. Polym Degrad Stab. 2012;97(5):771–775.
+https://doi.org/
+10.1016/j.polymdegradstab.2012.02.003.
+11. Sulaiman S, Yamato S, Kanaya E, et al. Isolation of a novel
+Cutinase homolog with polyethylene terephthalate-degrading
+activity from leaf-branch compost by using a metagenomic
+approach. Appl Environ Microbiol. 2012;78(5):1556 –1562.
+https://doi.org/10.1128/AEM.06725-11.
+12. Eiamthong B, Meesawat P, Wongsatit T, et al. Discovery and
+genetic code expansion of a polyethylene terephthalate
+(PET) hydrolase from the human saliva metagenome for the
+degradation and bio-functionalization of PET. Angew Chem
+Int Ed. 2022;61(37):e202203061.
+https://doi.org/10.1002/
+anie.202203061 .
+13. Wei R, von Haugwitz G, Pfaff L, et al. Mechanism-based design
+of efficient PET hydrolases. ACS Catal. 2022;12(6):3382–3396.
+https://doi.org/10.1021/acscatal.1c05856.
+14. Chen X-Q, Guo Z-Y, Wang L, et al. Directional-path modifica-
+tion strategy enhances PET hydrolase catalysis of plastic degra-
+dation. J Hazard Mater. 2022;433:128816.
+https://doi.org/10.
+1016/j.jhazmat.2022.128816.
+15. Zhang Z, Huang S, Cai D, et al. Depolymerization of post-
+consumer PET bottles with engineered Cutinase 1 from Ther-
+mobifida Cellulosilytica. Green Chem. 2022;24(15):5998–6007.
+https://doi.org/10.1039/D2GC01834A.
+16. Pfaff L, Gao J, Li Z, et al. Multiple substrate binding mode-
+guided engineering of a thermophilic PET hydrolase. ACS
+Catal. 2022;12(15):9790–9800.
+https://doi.org/10.1021/acscatal.
+2c02275.
+17. Lu H, Diaz DJ, Czarnecki NJ, et al. Machine learning-aided
+engineering of hydrolases for PET depolymerization. Nature.
+2022;604(7907):662–667.
+https://doi.org/10.1038/s41586-022-
+04599-z.
+18. Bell EL, Smithson R, Kilbride S, et al. Directed evolution of an
+efficient and thermostable PET depolymerase. Nat Catal. 2022;
+5(8):673–681. https://doi.org/10.1038/s41929-022-00821-3.
+19. Joho Y, Vongsouthi V, Spence MA, et al. Ancestral sequence
+reconstruction identifies structural changes underlying the evo-
+lution of Ideonella Sakaiensis PETase and variants with
+WEIGERT ET AL. 13 of 16
+
+improved stability and activity. Biochemistry. 2022.https://doi.
+org/10.1021/acs.biochem.2c00323.
+20. Tournier V, Topham CM, Gilles A, et al. An engineered PET
+depolymerase to break down and recycle plastic bottles.
+Nature. 2020;580(7802):216 –219.
+https://doi.org/10.1038/
+s41586-020-2149-4.
+21. Yoshida S, Hiraga K, Takehana T, et al. A bacterium that
+degrades and assimilates poly(ethylene terephthalate). Science.
+2016;351(6278):1196–1199.
+https://doi.org/10.1126/science.
+aad6359.
+22. Palm GJ, Reisky L, Böttcher D, et al. Structure of the plastic-
+degrading Ideonella Sakaiensis MHETase bound to a substrate.
+Nat Commun. 2019;10(1):1717.https://doi.org/10.1038/s41467-
+019-09326-3.
+23. Knott BC, Erickson E, Allen MD, et al. Characterization and
+engineering of a two-enzyme system for plastics depolymeriza-
+tion. PNAS. 2020;117(41):25476–25485.
+https://doi.org/10.1073/
+pnas.2006753117.
+24. Danso D, Schmeisser C, Chow J, et al. New insights into the
+function and global distribution of polyethylene terephthalate
+(PET)-degrading bacteria and enzymes in marine and terres-
+trial metagenomes. Appl Environ Microbiol. 2018;84(8):
+e02773–e02717.
+https://doi.org/10.1128/AEM.02773-17.
+25. Thompson FL, Iida T, Swings J. Biodiversity of Vibrios. Micro-
+biol Mol Biol Rev. 2004;68(3):403–431. https://doi.org/10.1128/
+MMBR.68.3.403-431.2004.
+26. Bollinger A, Thies S, Knieps-Grünhagen E, et al. A novel poly-
+ester hydrolase from the marine bacterium pseudomonas
+Aestusnigri— Structural and functional insights. Front Micro-
+biol. 2020;11:114.
+27. Meyer Cifuentes IE, Wu P, Zhao Y, et al. Molecular and bio-
+chemical differences of the tandem and cold-adapted PET
+hydrolases Ple628 and Ple629, Isolated From a Marine Micro-
+bial Consortium. Front Bioeng Biotechnol. 2022;10:930140.
+28. Mullenger L, Gill NR. Vibrio Natriegens: A rapidly growing
+micro-organism ideally suited for class experiments. J Biol
+Educ. 1973;7(5):33–39.
+https://doi.org/10.1080/00219266.1973.
+9653881.
+29. Lovell CR. Ecological fitness and virulence features of vibrio
+parahaemolyticus in estuarine environments. Appl Microbiol
+Biotechnol. 2017;101(5):1781 –1794.
+https://doi.org/10.1007/
+s00253-017-8096-9.
+30. Kirstein IV, Kirmizi S, Wichels A, et al. Dangerous hitchhikers?
+Evidence for potentially pathogenic vibrio Spp. on microplastic
+particles. Mar Environ Res. 2016;120:1–8. https://doi.org/10.
+1016/j.marenvres.2016.07.004.
+31. Kesy K, Labrenz M, Scales BS, Kreikemeyer B,
+Oberbeckmann S. Vibrio colonization is highly dynamic in
+early microplastic-associated biofilms as well as on Field-
+collected microplastics. Microorganisms. 2021;9(1):76.
+https://
+doi.org/10.3390/microorganisms9010076.
+32. Lebreton LCM, van der Zwet J, Damsteeg J-W, Slat B,
+Andrady A, Reisser J. River plastic emissions to the World's
+oceans. Nat Commun. 2017;8(1):15611.
+https://doi.org/10.
+1038/ncomms15611.
+33. L/C19opez AG, Najjar RG, Friedrichs MAM, Hickner MA,
+Wardrop DH. Estuaries as filters for riverine microplastics:
+Simulations in a large, Coastal-Plain Estuary. Front Mar Sci.
+2021;8:1200. https://doi.org/10.3389/fmars.2021.715924.
+34. Lloret J, Pedrosa-Pamies R, Vandal N, et al. Salt marsh sedi-
+ments act as sinks for microplastics and reveal effects of cur-
+rent and historical land use changes. Environ Adv. 2021;4:
+100060.
+https://doi.org/10.1016/j.envadv.2021.100060.
+35. Brumfield KD, Usmani M, Chen KM, et al. Environmental
+parameters associated with incidence and transmission of path-
+ogenic Vibrio Spp . Environ Microbiol. 2021;23:1462 –2920.
+https://doi.org/10.1111/1462-2920.15716.
+36. Vezzulli L, Baker-Austin C, Kirschner A, Pruzzo C, Martinez-
+Urtaza J. Global emergence of environmental NON-O1/O139
+vibrio cholerae infections linked with climate change: A
+neglected research field? Environ Microbiol. 2020;22(10):4342–
+4355. https://doi.org/10.1111/1462-2920.15040.
+37. Zettler ER, Mincer TJ, Amaral-Zettler LA. Life in the“plasti-
+sphere”: Microbial communities on plastic marine debris. Envi-
+ron Sci Technol. 2013;47(13):7137 –7146. https://doi.org/10.
+1021/es401288x.
+38. Delacuvellerie A, Cyriaque V, Gobert S, Benali S, Wattiez R.
+The plastisphere in marine ecosystem hosts potential specific
+microbial degraders including Alcanivorax Borkumensis as a
+key player for the low-density polyethylene degradation.
+J Hazard Mater. 2019;380:120899.
+https://doi.org/10.1016/j.
+jhazmat.2019.120899.
+39. Amaral-Zettler LA, Zettler ER, Mincer TJ. Ecology of the plasti-
+sphere. Nat Rev Microbiol. 2020;18(3):139–151. https://doi.org/
+10.1038/s41579-019-0308-0.
+40. Bowley J, Baker-Austin C, Porter A, Hartnell R, Lewis C. Oce-
+anic hitchhikers— assessing pathogen risks from marine micro-
+plastic. Trends Microbiol. 2021;29(2):107–116. https://doi.org/
+10.1016/j.tim.2020.06.011.
+41. Harwood CS. Beneckea Gazogenes Sp. Nov., a red, facultatively
+anaerobic, marine bacterium. Curr Microbiol. 1978;1(4):233–
+238. https://doi.org/10.1007/BF02602849.
+42. Lucena T, Arahal DR, Ruvira MA, et al. Vibrio Palustris
+Sp. Nov. and vibrio Spartinae Sp. Nov., two novel members of
+the Gazogenes clade, isolated from salt-marsh plants
+(Arthrocnemum Macrostachyum and spartina Maritima). Int J
+Syst Evol Microbiol. 2017;67(9):3506–3512.
+https://doi.org/10.
+1099/ijsem.0.002155.
+43. Guo Z, Li W, Wang Y, et al. Vibrio Zhugei Sp. Nov., a moder-
+ately halophilic bacterium isolated from pickling sauce. Int J
+Syst Evol Microbiol. 2019;69(5):1313–1319.
+https://doi.org/10.
+1099/ijsem.0.003308.
+44. Shieh WY. Vibrio Ruber Sp. Nov., a red, facultatively anaero-
+bic, marine bacterium isolated from sea water. Int J Syst Evol
+Microbiol. 2003;53(2):479 –484. https://doi.org/10.1099/ijs.0.
+02307-0.
+45. Arias-Andres M, Klümper U, Rojas-Jimenez K, Grossart H-P.
+Microplastic pollution increases gene exchange in aquatic eco-
+systems. Environ Pollut. 2018;237:253–261.
+https://doi.org/10.
+1016/j.envpol.2018.02.058.
+46. Zhu D, Ma J, Li G, Rillig MC, Zhu Y-G. Soil plastispheres as
+hotpots of antibiotic resistance genes and potential pathogens.
+ISME J. 2021;16:521–532.
+https://doi.org/10.1038/s41396-021-
+01103-9.
+47. Weigert S, Gagsteiger A, Menzel T, Höcker B. A versatile assay
+platform for enzymatic poly(ethylene-terephthalate) degrada-
+tion. Protein Eng Des Selection. 2021;34:gzab022.https://doi.
+org/10.1093/protein/gzab022.
+14 of 16 WEIGERT ET AL.
+
+48. Nikolaivits E, Kanelli M, Dimarogona M, Topakas E. A middle-
+aged enzyme still in its prime: Recent advances in the field of
+Cutinases. Catalysts. 2018;8(12):612.
+https://doi.org/10.3390/
+catal8120612.
+49. Joo S, Cho IJ, Seo H, et al. Structural insight into molecular
+mechanism of poly(ethylene terephthalate) degradation. Nat
+Commun. 2018;9(1):382. https://doi.org/10.1038/s41467-018-
+02881-1.
+50. Wei R, Song C, Gräsing D, et al. Conformational fitting of a
+flexible oligomeric substrate does not explain the enzymatic
+PET degradation. Nat Commun. 2019;10(1):5581.
+https://doi.
+org/10.1038/s41467-019-13492-9.
+51. Kawai F, Kawabata T, Oda M. Current knowledge on enzy-
+matic PET degradation and its possible application to waste
+stream management and other fields. Appl Microbiol Biotech-
+nol. 2019;103(11):4253 –4268.
+https://doi.org/10.1007/s00253-
+019-09717-y.
+52. Bouysset C, Fiorucci S. ProLIF: A library to encode molecular
+interactions as fingerprints. J Chem. 2021;13(1):72.https://doi.
+org/10.1186/s13321-021-00548-6.
+53. Kalra K, Gorle S, Cavallo L, Oliva R, Chawla M. Occurrence
+and stability of lone pair-π and OH–π interactions between
+water and nucleobases in functional RNAs. Nucleic Acids Res.
+2020;48(11):5825–5838.
+https://doi.org/10.1093/nar/gkaa345.
+54. Egli M, Sarkhel S. Lone pair/C0aromatic interactions: To stabi-
+lize or not to stabilize. Acc Chem Res. 2007;40(3):197–205.
+https://doi.org/10.1021/ar068174u.
+55. Zeng W, Li X, Yang Y, et al. Substrate-binding mode of a ther-
+mophilic PET hydrolase and engineering the enzyme to
+enhance the hydrolytic efficacy. ACS Catal. 2022;12:3033–3040.
+https://doi.org/10.1021/acscatal.1c05800.
+56. Han X, Liu W, Huang J-W, et al. Structural insight into cata-
+lytic mechanism of PET hydrolase. Nat Commun. 2017;8(1):
+2106. https://doi.org/10.1038/s41467-017-02255-z.
+57. Li Z, Zhao Y, Wu P, et al. Structural insight and engineering of
+a plastic degrading hydrolase Ple629. Biochem Biophys Res
+Commun. 2022;626:100 –106.
+https://doi.org/10.1016/j.bbrc.
+2022.07.103.
+58. Jerves C, Neves RPP, Ramos MJ, da Silva S, Fernandes PA.
+Reaction mechanism of the PET degrading enzyme PETase
+studied with DFT/MM molecular dynamics simulations. ACS
+Catal. 2021;11(18):11626 –11638.
+https://doi.org/10.1021/
+acscatal.1c03700.
+59. Li Q, Zheng Y, Su T, et al. Computational Design of a Cutinase
+for plastic biodegradation by mining molecular dynamics simu-
+lations trajectories. Comput Struct Biotechnol J. 2022;20:459–
+470. https://doi.org/10.1016/j.csbj.2021.12.042.
+60. Charupanit K, Tipmanee V, Sutthibutpong T, Limsakul P. In
+silico identification of potential sites for a plastic-degrading
+enzyme by a reverse screening through the protein sequence
+space and molecular dynamics simulations. Molecules. 2022;
+27(10):3353.
+https://doi.org/10.3390/molecules27103353.
+61. Menzel T, Weigert S, Gagsteiger A, et al. Impact of enzymatic
+degradation on the material properties of poly(ethylene tere-
+phthalate). Polymers. 2021;13(22):3885.
+https://doi.org/10.
+3390/polym13223885.
+62. Armougom F, Moretti S, Poirot O, et al. Expresso: Automatic
+incorporation of structural information in multiple sequence
+alignments using 3D-coffee. Nucleic Acids Res. 2006;34-
+(suppl_2):W604–W608. https://doi.org/10.1093/nar/gkl092.
+63. Stamatakis A. RAxML version 8: A tool for phylogenetic analy-
+sis and post-analysis of large phylogenies. Bioinformatics. 2014;
+30(9):1312–1313.
+https://doi.org/10.1093/bioinformatics/
+btu033.
+64. Kumar S, Stecher G, Li M, Knyaz C, Tamura K. MEGA X:
+Molecular evolutionary genetics analysis across computing
+platforms. Mol Biol Evol. 2018;35(6):1547 –1549.
+https://doi.
+org/10.1093/molbev/msy096.
+65. Eren AM, Esen ÖC, Quince C, et al. Anvi'o: An advanced anal-
+ysis and visualization platform for‘omics data. PeerJ. 2015;3:
+e1319. https://doi.org/10.7717/peerj.1319.
+66. Buchfink B, Xie C, Huson DH. Fast and sensitive protein align-
+ment using DIAMOND. Nat Methods. 2015;12(1):59 –60.
+https://doi.org/10.1038/nmeth.3176.
+67. Edgar RC. MUSCLE: Multiple sequence alignment with high
+accuracy and high throughput. Nucleic Acids Res. 2004;32(5):
+1792–1797.
+https://doi.org/10.1093/nar/gkh340.
+68. Jain C, Rodriguez-R LM, Phillippy AM, Konstantinidis KT,
+Aluru S. High throughput ANI analysis of 90K prokaryotic
+genomes reveals clear species boundaries. Nat Commun. 2018;
+9(1):5114.
+https://doi.org/10.1038/s41467-018-07641-9.
+69. Zimmermann L, Stephens A, Nam S-Z, et al. A completely
+reimplemented MPI bioinformatics toolkit with a new HHpred
+server at its Core. J Mol Biol. 2018;430(15):2237–2243. https://
+doi.org/10.1016/j.jmb.2017.12.007.
+70. Liebschner D, Afonine PV, Baker ML, et al. Macromolecular
+structure determination using X-rays, neutrons and electrons:
+Recent developments in phenix. Acta Cryst D. 2019;75(10):
+861–877.
+https://doi.org/10.1107/S2059798319011471.
+71. Emsley P, Cowtan K. Coot: Model-building tools for molecular
+graphics. Acta Crystallogr D Biol Crystallogr. 2004;60(Pt 12 Pt
+1):2126–2132. https://doi.org/10.1107/S0907444904019158.
+72. Brooks BR, Bruccoleri RE, Olafson BD, States DJ,
+Swaminathan S, Karplus M. CHARMM: A program for macro-
+molecular energy, minimization, and dynamics calculations.
+J Comput Chem. 1983;4(2):187 –217.
+https://doi.org/10.1002/
+jcc.540040211.
+73. MacKerell AD, Bashford D, Bellott M, et al. All-atom empirical
+potential for molecular modeling and dynamics studies of pro-
+teins. J Phys Chem B. 1998;102(18):3586–3616.
+https://doi.org/
+10.1021/jp973084f.
+74. Best RB, Zhu X, Shim J, et al. Optimization of the additive
+CHARMM all-atom protein force field targeting improved sam-
+pling of the backboneϕ, ψ and side-chain χ1 and χ2 dihedral
+angles. J Chem Theory Comput. 2012;8(9):3257–3273. https://
+doi.org/10.1021/ct300400x.
+75. The PyMOL Molecular Graphics System, Schrödinger, LLC.
+76. Bashford D, Gerwert K. Electrostatic calculations of the PKa
+values of ionizable groups in bacteriorhodopsin. J Mol Biol.
+1992;224(2):473–486.
+https://doi.org/10.1016/0022-2836(92)
+91009-E.
+77. Bashford D. An object-oriented programming suite for electro-
+static effects in biological molecules an experience report on
+the MEAD project. In: Ishikawa Y, Oldehoeft RR,
+Reynders JVW, et al., editors. Scientific Computing in Object-
+Oriented Parallel Environments. Lecture Notes in Computer
+WEIGERT ET AL. 15 of 16
+
+Science. Volume 1343. Berlin: Springer, 1997; p. 233 –240.
+https://doi.org/10.1007/3–540-63827-X_66.
+78. Ullmann RT, Ullmann GM. GMCT: A Monte Carlo simulation
+package for macromolecular receptors. J Comput Chem. 2012;
+33(8):887–900.
+https://doi.org/10.1002/jcc.22919.
+79. Cruz-Chu ER, Ritz T, Siwy ZS, Schulten K. Molecular control
+of ionic conduction in polymer nanopores. Faraday Discuss.
+2009;143:47. https://doi.org/10.1039/b906279n.
+80. Harvey MJ, Giupponi G, Fabritiis GD. ACEMD: Accelerating
+biomolecular dynamics in the microsecond time scale. J Chem
+Theory Comput. 2009;5(6):1632–1639.
+https://doi.org/10.1021/
+ct9000685.
+81. Michaud-Agrawal N, Denning EJ, Woolf TB, Beckstein O.
+MDAnalysis: A toolkit for the analysis of molecular dynamics
+simulations. J Comput Chem. 2011;32(10):2319–2327.
+https://
+doi.org/10.1002/jcc.21787.
+82. Gowers R, Linke M, Barnoud J, et al. MDAnalysis: A Python
+package for the rapid analysis of molecular dynamics simula-
+tions. Conference: Python in Science Conference; 2016, Austin,
+TX, pp. 98 –105.
+https://doi.org/10.25080/Majora-
+629e541a-00 e.
+83. Tanimoto TT. An elementary mathematical theory of classifica-
+tion and prediction; PB167360. New York: International Busi-
+ness Machines Corp, 1958.
+84. Pedregosa F, Varoquaux G, Gramfort A, et al. Scikit-learn:
+Machine learning in Python. J Mach Learn Res. 2011;12(85):
+2825–2830.
+85. Mueller U, Förster R, Hellmig M, et al. The macromolecular
+crystallography beamlines at BESSY II of the Helmholtz-
+Zentrum Berlin: Current status and perspectives. Eur Phys J
+Plus. 2015;130(7):141.
+https://doi.org/10.1140/epjp/i2015-
+15141-2.
+SUPPORTING INFORMATION
+Additional supporting information can be found online
+in the Supporting Information section at the end of this
+article.
+How to cite this article:Weigert S,
+Perez-Garcia P, Gisdon FJ, Gagsteiger A,
+Schweinshaut K, Ullmann GM, et al. Investigation
+of the halophilic PET hydrolase PET6 fromVibrio
+gazogenes. Protein Science. 2022;31(12):e4500.
+https://doi.org/10.1002/pro.4500
+16 of 16 WEIGERT ET AL.

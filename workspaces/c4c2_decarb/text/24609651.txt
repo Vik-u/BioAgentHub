@@ -1,0 +1,1048 @@
+Journal of Experimental Botany, Vol. 65, No. 13, pp. 3567–3578, 2014
+doi:10.1093/jxb/eru058 Advance Access publication 8 March, 2014
+This paper is available online free of all access charges (see http://jxb.oxfordjournals.org/open_access.html for further details)
+ReseaRch PaPeR
+Three distinct biochemical subtypes of C4 photosynthesis? 
+A modelling analysis
+Yu Wang1,2,*, Andrea Bräutigam3,*, Andreas P. M. Weber3,† and Xin-Guang Zhu1,2,†
+1 State Key Laboratory for Hybrid Rice, CAS-MPG Partner Institute for Computational Biology, Shanghai Institutes for Biological 
+Sciences, Chinese Academy of Sciences, Shanghai 200031, China
+2 Key Laboratory of Computational Biology, CAS-MPG Partner Institute for Computational Biology, Shanghai Institutes for Biological 
+Sciences, Chinese Academy of Sciences, Shanghai 200031, China
+3 Institute of Plant Biochemistry, Cluster of Excellence on Plant Sciences (CEPLAS), Heinrich-Heine University, 40225 Düsseldorf, 
+Germany
+* These authors contributed equally to this manuscript.
+† To whom correspondence should be addressed. E-mail: zhuxinguang@picb.ac.cn, andreas.weber@uni-duesseldorf.de
+Received 31 October 2013; Revised 20 January 2014; Accepted 23 January 2014
+Abstract
+C4 photosynthesis has higher light-use, nitrogen-use, and water-use efficiencies than C3 photosynthesis. Historically, 
+most of C4 plants were classified into three subtypes (NADP-malic enzyme (ME), NAD-ME, or phosphoenolpyruvate 
+carboxykinase (PEPCK) subtypes) according to their major decarboxylation enzyme. However, a wealth of historic 
+and recent data indicates that flexibility exists between different decarboxylation pathways in many C 4 species, and 
+this flexibility might be controlled by developmental and environmental cues. This work used systems modelling to 
+theoretically explore the significance of flexibility in decarboxylation mechanisms and transfer acids utilization. The 
+results indicate that employing mixed C
+4 pathways, either the NADP-ME type with the PEPCK type or the NAD-ME type 
+with the PEPCK type, effectively decreases the need to maintain high concentrations and concentration gradients of 
+transport metabolites. Further, maintaining a mixture of C4 pathways robustly affords high photosynthetic efficiency 
+under a broad range of light regimes. A pure PEPCK-type C 4 photosynthesis is not beneficial because the energy 
+requirements in bundle sheath cells cannot be fulfilled due to them being shaded by mesophyll cells. Therefore, only 
+two C
+4 subtypes should be considered as distinct subtypes, the NADP-ME type and NAD-ME types, which both inher-
+ently involve a supplementary PEPCK cycle.
+Key words: Efficiency, flexibility, mixture, NADP-ME, NAD-ME, PEPCK.
+Introduction
+Plants using C 4 photosynthesis have higher potential 
+energy-conversion efficiency than C 3 plants because of a 
+CO2-concentrating mechanism that largely reduces pho-
+torespiration (Zhu et  al., 2008; Amthor, 2010). In most 
+cases, with the exception of single-cell C 4 photosynthesis 
+(Edwards et al., 2004), this CO 2-concentrating mechanism 
+usually requires compartmentalized photosynthetic reac-
+tions into two distinct cell types: bundle sheath cells (BSCs) 
+and mesophyll cells (MCs) (Hatch, 1987). In C
+4 plants, CO2 
+is fixed by phosphoenolpyruvate (PEP) carboxylase (PEPC) 
+in the MC cytosol, and the resulting C
+4 acid is subsequently 
+converted to either malate or aspartate. Then, the C 4 acid 
+is transported to the BSCs where it is decarboxylated to 
+release CO
+2 around Rubisco. Decarboxylation in BSCs, 
+together with the CO 2 diffusion barrier between BSCs 
+and MCs, elevates the CO 2 concentration around Rubisco, 
+thereby minimizing photorespiration (von Caemmerer and 
+Furbank, 2003).
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by/3.0/), which 
+permits unrestricted reuse, distribution, and reproduction in any medium, provided the original work is properly cited.
+© The Author 2014. Published by Oxford University Press on behalf of the Society for Experimental Biology.
+3568 | Wang et al.
+Traditionally, C4 photosynthesis is classified into three bio-
+chemical subtypes, according to their different decarboxyla-
+tion mechanisms. The first enzyme of the C 4 cycle, PEPC, is 
+common to all three subtypes. The product of PEPC, oxaloac-
+etate (OAA), can be either reduced to malate by malate 
+dehydrogenase (MDH) or converted to aspartate (Asp) by 
+aspartate aminotransferase (Hatch and Slack, 1966; Hatch 
+et al., 1975; Pick et al., 2011). Malate is then transported to 
+BSCs in NADP-malic enzyme (ME) subtype plants while 
+Asp is transported in NAD-ME and PEPCK types (Hatch 
+et al., 1975; Kanai and Edwards, 1999; Furbank, 2011). In the 
+NADP-ME type, malate is used to generate pyruvate and CO
+2, 
+with the formation of NADPH catalysed by NADP-ME. In 
+the other two decarboxylation types, aspartate is converted 
+back to OAA in BS cytosol or mitochondria (Taniguchi et al., 
+1995). In the NAD-ME type, OAA is reduced to malate by 
+MDH, and the NAD-ME then catalyses splitting of malate 
+to release CO
+2 and pyruvate in mitochondria. In the PEP-
+carboxykinase (PEPCK) type, most of the OAA is converted 
+to PEP and CO
+2 in BSC cytosol by PEPCK. NAD-ME is 
+used to provide NADH for generation of ATP, which can be 
+used to fuel PEPCK (Kanai and Edwards, 1999). NAD-ME 
+can also balance the amino groups between MCs and BSCs 
+via the return of alanine to MCs (Furbank, 2011). Since Asp 
+brings an amino group from MCs to BSCs, OAA generated 
+from Asp can be utilized in two ways. One is that PEPCK 
+generates PEP, which directly returns to MCs without an 
+amino group; the other is that OAA is converted to malate, 
+which is then decarboxylated to pyruvate by NAD-ME. The 
+resulting pyruvate can be converted to alanine and returned 
+to MCs, thereby transporting the amino group.
+Although C
+4 photosynthesis has long been classified into 
+three distinct subtypes, multiple lines of evidence suggest 
+that some flexibility in C
+4 photosynthetic pathways exists in 
+the same leaf: specifically that NADP-ME and PEPCK sub-
+types might coexist; similarly, NAD-ME type and PEPCK 
+subtypes can also coexist. Early 
+14C-labelling experiments in 
+maize indicated that radioactively labelled carbon provided 
+as CO
+2 is mostly incorporated into malate, but also to a sub-
+stantial degree into aspartate, a compound normally consid-
+ered as not present in the classical NADP-ME-type model 
+(Hatch, 1971). Later, Chapman and Hatch (1981) showed 
+that isolated BSCs of maize can use aspartate and oxoglutar-
+ate to produce CO
+2 and Pick et al. (2011) showed that maize 
+leaves contain sufficient activities of the aminotransferases to 
+carry the required flux. Furthermore, a similar phenomenon 
+has also been found in Flaveria bidentis, an NADP-ME dicot 
+species (Meister et al., 1996). Key C
+4 enzyme activities also 
+indicate that the ratio of asparate to malate transferred var -
+ies in NADP-ME type species (Kanai and Edwards, 1999). 
+The flexibility of C
+4 subtypes has also been shown through 
+coexistence of key enzymes. For example, in maize, PEPCK 
+is present, active, and capable of supporting high rates of 
+aspartate-dependent photosynthesis in isolated BSCs (Walker 
+et al., 1997; Wingler et al., 1999; Majeran et al., 2010; Pick 
+et al., 2011). The PEPCK transcript is expressed at high lev-
+els in maize BSCs (Furumoto et al., 1999, 2000). Also in the 
+NAD-ME species Cleome gynandra, high PEPCK activity 
+was detected (Sommer et  al., 2012) and different C
+4 dicots 
+also contain PEPCK in addition to the major decarboxyla-
+tion enzyme (Muhaidat et al., 2007; Muhaidat and McKown, 
+2013).
+The flexibility or coexistence of different C
+4 subtypes, 
+i.e. between NADP-ME and PEPCK subtypes, or between 
+NAD-ME and PEPCK subtypes, is also reflected in the 
+theoretical quantum yield and observed energy-conversion 
+efficiencies between plants considered having different sub-
+types. Theoretical considerations on quantum yield and 
+leakiness of CO
+2 from BSCs suggested that the efficiency of 
+C4 subtypes should be different and that the PEPCK subtype 
+has the highest energy-conversion efficiency (Hatch, 1995; 
+von Caemmerer and Furbank, 1999; von Caemmerer and 
+Furbank, 2003). However, experimental evidence for this is 
+still insufficient (Ghannoum et al., 2001; Furbank, 2011).
+Considering these facts, it is highly likely that the so-
+called C
+4 subtypes actually coexist in C 4 plants. So far, the 
+physiological significance of this potential coexistence of C 4 
+subtypes is inadequately studied. This study uses a systems 
+modelling approach to theoretically evaluate the potential 
+physiological consequences of having different mixtures of 
+C
+4 subtypes and further discusses whether the PEPCK path-
+way should indeed be considered as an independent or as a 
+supplementary pathway.
+Materials and methods
+Model development
+The models developed here are depicted diagrammatically in Fig. 1. 
+The individual models were developed following the basic procedure 
+as in Zhu et al. (2007). Essentially, after the reaction diagrams were 
+established, differential equations, rate equations, and algebraic 
+equations representing conserved quantities were developed. The 
+models were implemented in MATLAB and solved using ode15s.
+With the models, this work computed changes in the metabolite 
+concentrations (dM/dt) by the differences between rates of fluxes 
+generating and consuming this metabolite:
+ 
+dM
+dt vvin out=−  (1)
+where vin and v out represent the rate of fluxes generating and 
+consuming metabolite (M), respectively. This work developed one 
+differential equation as equation 1 for each metabolite used in the 
+model. The equations and parameters used in the model were listed 
+in Table 1 and the Supplementary Data (available at JXB online). 
+The C
+4 NADP-ME type model (Wang et al., 2014) was used as a 
+basis of the kinetic models of mixed C4 pathways, upon which addi-
+tional pathways were added to form various mixed-pathway models 
+(Supplementary Fig. S1 available at JXB online).
+Combinations of C
+4 pathways
+Experimental evidence has suggested that the so-called three C 4 
+subtypes can coexist with each other (Hatch, 1971; Chapman and 
+Hatch, 1981; Meister et al., 1996; Pick et al., 2011). For example, in 
+Zea mays, about 25% of the initial carbon label partitions to aspar-
+tate and about 75% to malate (MAL), which shows that Z.  mays 
+uses both as transfer acids (Hatch, 1971). This mixture of C 4 sub-
+types were also clearly demonstrated in a recent transcriptomics and 
+enzyme activity study (Pick et  al., 2011). The use of amino acids 
+in addition to malate and pyruvate does not necessarily require the 
+New classification of C4 photosynthesis | 3569
+presence of PEPCK as the decarboxylation enzyme, as demonstrated 
+in Sorghum bicolor, which does not have PEPCK but transcriptome 
+data shows high level of Asp transaminase and Ala transaminase 
+expression which suggest amino acids are also used as transfer acids 
+(Gutierrez et al., 1974). Based on the knowledge above, the current 
+work developed different systems models representing various com-
+binations of C
+4 subtypes. Those pathways with combinations of C4 
+subtypes were termed as mixed C4 pathways, and models represent-
+ing these mixed pathways were termed as mixed-pathway models. 
+The models were named after the transfer C
+4 acid and the decar -
+boxylase used: Asp+MAL and PEPCK model, Asp+MAL and ME 
+model, and Asp+MAL and PEPCK+ME model. In the Asp+MAL 
+and PEPCK model, the transferred aspartate is decarboxylated in 
+BSC cytosol by PEPCK, while in the Asp+MAL and ME model, 
+the transferred aspartate is decarboxylated in BSC chloroplasts by 
+NADP-ME. The Asp+MAL and ME model requires existence of 
+MDH in BSCs. The Asp+MAL and PEPCK+ME model can be 
+regard as an integration of the other two models. In the hypothetical 
+Asp and PEPCK-only model, aspartate is the only transfer C
+4 acid 
+and PEPCK is the only decarboxylase in C4 cycle.
+Light reactions
+The electron transport rate (J) is used to calculate the rates of ATP 
+and NADPH synthesis in the models. The maximum rate of ATP 
+and NADPH synthesis reactions were described as:
+ VV VEJmaxm ax maxmin( ,)=  (2)
+where VmaxE is the maximum rate of ATP and NADPH synthesis 
+determined by the properties of ATP synthase and NADP + reduc-
+tase, and VmaxJ is calculated by the electron transport rate:
+ V JJmax =⋅ε  (3)
+Fig. 1. Models simulating different combinations of C4 pathways. Dark orange letters indicate enzymes and black letters indicate metabolites. AlaAT, 
+alanine aminotransferase; AspAT, aspartate aminotransferase; MAL, malate; NADP-MDH, NADPH-malate dehydrogenase; NADP-ME, NADP-malic 
+enzyme; OAA, oxaloacetate; PEP , phosphoenolpyruvate; PEPC, phosphoenolpyruvate carboxylase; PEPCK, phosphoenolpyruvate carboxykinase; 
+PPDK, pyruvate phosphate dikinase; PYR, pyruvate.
+3570 | Wang et al.
+where ε is the ATP/e– ratio or NADPH/e– ratio.
+A biochemical model (Ögren and Evans, 1993; von Caemmerer, 
+2000) was used to calculate J:
+ 
+J JI JI JI= +− +−22
+2
+24
+2
+maxm ax max() θ
+θ  
+(4)
+where I2 is the photosynthetic active radiation absorbed by pho-
+tosystem II (PSII) which is calculated from the input of photosyn-
+thetic photon flux density (PPFD), J max is the maximal electron 
+transport rate, and θ is an empirical curvature factor (Evans, 1989; 
+von Caemmerer, 2000).
+J of MC (J
+m) and BSC (J b) were calculated separately (Wang 
+et al., 2014; Supplementary Data available at JXB online), In this 
+model, the proportion of linear electron transport (LET) in BSCs, 
+as reflected in the PSII content in BSCs, was assumed to be variable:
+ I uIlb b_ = 1
+2  (5)
+ Jv Jlb bmax_ _m ax_=  (6)
+ 
+J
+IJ IJ IJ
+lb
+lb lb lb lb lb lb
+_
+_m ax_ __ max_ __ max_ _
+=
++− +() −
+2
+4
+2
+θ
+θ  
+(7)
+where Il_b and J maxl_b represent incident photosynthetic photon 
+flux density and Jmax, which participate in liner electron transport in 
+BSCs. u and v are variables representing the proportion of light and 
+Jmax of LET in BSCs; this model assumes that they are equal, i.e. 
+u=v=LETBSC. If u and v are 0, there is no LET in BSCs; if u and v 
+are 1, all light and Jmax take part in LET in BSCs. Ib represents light 
+absorbed by BSCs, and J max_b is the maximum electron transport 
+capacity of BSCs. ATP used by PEPCK in BSCs cytosol is assumed 
+to be supported by light reactions in BSCs.
+O
+2 generation from LET was considered in both MCs and BSCs. 
+The total equation is:
+ 
+  
+   
+HO NADP ADPP i
+NADPHA TP OH
+2
+2
+22
+2 1
+2
+++ +
+→+ ++
++
++
+ 
+(8)
+The reaction rate of equation 8 (vLET) was considered as:
+ vJLET l= 1
+2  (9)
+where Jl is the LET rate. The LET rate of BSCs (Jl_b) is calculated 
+by equation 7. In MCs, the model assumed that all electrons were 
+transported through the LET chain.
+CO
+2 assimilation rate
+During the simulation, it was assumed that the model reached a 
+steady state when the predicted metabolite concentrations did not 
+change with time any more. The steady-state metabolite levels and 
+flux rates were extracted from model output after the model reached 
+a steady state. The CO
+2 assimilation rate (A) was calculated as 
+(Farquhar et al., 1980):
+ A vv Rco d=− −05.  (10)
+where vc and vo are the rates of RuBP carboxylation and oxygena-
+tion, respectively, and R d is the rate of mitochondrial respiration. 
+The default value for Rd is 1 μmol m–2 s–1, with the rate of respiration 
+in both BSCs (Rb) and MCs (Rm) being equal as 0.5 μmol m–2 s–1.
+Results
+Model structures and predicted photosynthetic rates 
+under different light and CO2 levels
+The four mixed-pathway models were analysed together with a 
+standard NADP-ME model (Fig. 1). First, the models were used 
+to predict responses of CO
+2 assimilation rate (A) to the photo-
+synthetic photon flux density (PPFD) (Fig. 2). The standard 
+NADP-ME model had the highest predicted assimilation rate 
+at photon flux densities below a threshold of 1000  μmol m
+–2 
+s–1. Above this threshold, a mixed model assuming transfer of 
+Asp and malate but only decarboxylation through NADP-ME 
+(Asp+MAL and ME) showed the highest assimilation rate. 
+Compared to the standard NADP-ME model, all the mixed 
+models assuming PEPCK activity had lower assimilation rates 
+at photon flux densities below 2000 μmol m
+–2 s–1. Apart from 
+the PEPCK-only model, which has no photosynthesis rate, 
+photosynthetic responses predicted by all other models were 
+comparable to experimental data from maize (Fig. 2; Leegood 
+and von Caemmerer, 1989).
+Table 1. Enzyme abbreviations and maximum activities
+ECa Abbreviation Full name Vmax (μmol m–2 s–1) Reference
+1.1.1.40 MDH Malate dehydrogenase (NADP+) 90 Kanai and Edwards (1999); Hatch (1987)
+1.1.1.82B MDH Malate dehydrogenase (NADP+) 60b,c
+1.1.1.82 PPDK Pyruvate phosphate dikinase 90 Kanai and Edwards (1999); Hatch (1987)
+2.6.1.1B AspAT Aspartate transaminase 400b Pick et al. (2011)
+2.6.1.1M AspAT Aspartate transaminase 400a Pick et al. (2011)
+2.6.1.2B AlaTA Alanine transaminase 400b Pick et al. (2011)
+2.6.1.2M AlaTA Alanine transaminase 400b Pick et al. (2011)
+2.7.9.1 NADP-ME NADP-malic enzyme 90 Kanai and Edwards (1999); Hatch (1987)
+4.1.1.31 PEPC Phosphoenolpyruvate carboxylase 170 Kanai and Edwards (1999); Hatch (1987); von Caemmerer (2000)
+4.1.1.39 Rubisco Ribulose-bisphosphate carboxylase 65 Kanai and Edwards (1999); Hatch (1987)
+4.1.1.49 PEPCK Phosphoenolpyruvate carboxykinase 60b Pick et al. (2011)
+aSubscripts M and B indicate enzyme allocation in mesophyll and bundle sheath cells, respectively, and thus distinguish enzymes 
+localized in both.
+bThe values are assumed.
+cIt is not clear whether MDH in BSC also take part in C4 photosynthesis; therefore, no reference can be provided.
+New classification of C4 photosynthesis | 3571
+The predicted leakiness was increased in all mixed-path-
+way models compared to the standard NADP-ME model 
+(Fig. 3A). The modelled leakiness under different light levels 
+was generally consistent with measured leakiness for maize 
+(Fig.  3A) and Flaveria, two typical NADP-ME subtype C
+4 
+plants. The predicted photorespiratory rate was highest in the 
+standard NADP-ME model and lower in all mixed models 
+(Fig. 3B). The photorespiratory rate is a function of the CO
+2 
+and O2 concentration around Rubisco. In this simulation, O2 
+concentration was constant, because no LET generated O 2 
+in BSCs, while there were additional pathways that increased 
+CO
+2 concentration in BSCs (Supplementary Fig. S3 available 
+at JXB online). Therefore, the simulations showed that the 
+photorespiratory rate was suppressed in all mixed models; 
+furthermore, compared to models including PEPCK activ-
+ity, the standard NADP-ME model had a higher assimilation 
+rate and lower leakiness while the Asp+MAL+ME model 
+had a lower photorespiratory rate.
+Transfer metabolite gradients and concentration 
+changes
+The mixed model presented for maize (Pick et  al., 2011) 
+includes five transfer acids (Asp, malate, Ala, pyruvate, and 
+PEP) and two decarboxylation enzymes. Y et the model pre-
+dictions for assimilation rate, leakiness, and photorespiration 
+dismissed a mixed model, because a mixed model showed 
+lower energy-use efficiency and higher leakiness, although it 
+suppressed photorespiration rate (Figs 2 and 3). Hence, this 
+work tested whether a mixed model altered other parameters 
+which may explain why the mixed pathway was realized dur-
+ing evolution. In theory, the concurrent use of several species 
+of transfer acids will reduce the necessary concentration gra-
+dients for each of them (Fig. 4A and B). Movement of these 
+metabolites between MCs and BSCs was assumed to follow a 
+diffusional process through plasmodesmata, as has been sug-
+gested earlier (Stitt and Heldt, 1985). The transport rates are 
+dependent on the concentration gradient and the diffusion 
+coefficient of each individual metabolite.
+The model simulation indicated that the malate gradient 
+between MCs and BSCs was only slightly lower in all mixed 
+models as compared to the standard NADP-ME model. 
+The pyruvate gradient was also only slightly lower in the 
+Asp+MAL and ME model, but it was approximately halved 
+in the mixed model, which allowed for PEPCK activity. The 
+reduction in pyruvate transport was compensated by con-
+current transport of PEP and alanine, indicating that the 
+model predictions confirmed the theoretical estimations 
+with regard to the C
+3 but only marginally so for the C4 acids 
+(Fig. 4C).
+Fig. 2. Curves for models predicting CO2 assimilation vs. photosynthetic 
+photon flux density (PPFD). The models were named after the transfer C4 
+acid and the decarboxylase used. In the Asp+MAL and PEPCK model, the 
+transferred aspartate is decarboxylated in BSC cytosol by PEPCK; in the 
+Asp+MAL and ME model, the transfer acid aspartate is decarboxylated in 
+BSC chloroplasts by NADP-ME. The Asp+MAL and PEPCK+ME model 
+can be regarded as an integration of these two models. In the NADP-ME 
+model, malate is the only transfer C
+4 acid and the decarboxylase is 
+NADP-ME. The Asp and PEPCK-only model describes a hypothetical 
+condition that the transferred aspartate can only be decarboxylated by 
+PEPCK. Black dots indicate experimental data from maize (Leegood and 
+von Caemmerer, 1989). C
+i was 150 μbar in the simulation. MAL, malate; 
+NADP-MDH, NADPH-malate dehydrogenase; NADP-ME, NADP-malic 
+enzyme; PEPCK, phosphoenolpyruvate carboxykinase (this figure is 
+available in colour at JXB online).
+Fig. 3. Predicted leakiness and photorespiration rate. (A) Simulated leakiness vs. photosynthetic photon flux density (PPFD) for various combinations: 
+open circles indicate experimental data from Flaveria bidentis (Cousins et al., 2006) and filled squared indicate experimental data from maize (Henderson 
+et al., 1992). (B) Predicted photorespiration rate vs. PPFD for various combinations. MAL, malate; NADP-MDH, NADPH-malate dehydrogenase; 
+NADP-ME, NADP-malic enzyme; PEPCK, phosphoenolpyruvate carboxykinase (this figure is available in colour at JXB online).
+3572 | Wang et al.
+The concentrations of transfer acids were also different 
+between the models. The highest amount of transfer acids 
+was present in the standard NADP-ME model, closely fol-
+lowed by the Asp+MAL and ME model. The models using 
+PEPCK activity had lower total transfer acid contents 
+(Fig. 5A). For malate, the standard NADP-ME model pre-
+dicted the highest content, followed by the Asp+MAL and 
+ME model; the models using PEPCK had lower malate con-
+tents (Fig. 5B). For all other transfer acids, the Asp+MAL 
+and ME model predicted the highest contents (Fig. 5C– F), 
+for pyruvate up to 3-times higher compared to the mixed 
+models (Fig. 5D). It is notable that the malate contents were 
+an order of magnitude higher compared to the other transfer 
+acids (Fig. 5B).
+In summary, the models including PEPCK activity had lower 
+transfer acids contents and lower gradients, which matched the 
+aforementioned theoretical considerations (Fig. 5).
+Mixed pathways shift the optimal energy allocation 
+between BSCs and MCs and show that linear electron 
+transport in BSCs is permissible
+Theoretically, using different transfer acids should also affect 
+the optimum of light energy allocation between MCs and 
+Fig. 5. Predicted changes in amounts of transfer acids in leaf tissue with changes in photosynthetic photon flux density (PPFD). Ci in the simulation was 
+150 μbar. MAL, malate; NADP-MDH, NADPH-malate dehydrogenase; NADP-ME, NADP-malic enzyme; PEPCK, phosphoenolpyruvate carboxykinase 
+(this figure is available in colour at JXB online).
+Fig. 4. Acid gradients between mesophyll cells and bundle sheath cells. (A, B) Illustration of the gradient necessary to transfer acids between bundle 
+sheath cells in the standard NADP-ME type (A) and mixed type (B). (C) Simulated acid gradients of different C4 pathway combinations (μM) normalized 
+by CO2 assimilation rate (μmol m–2 s–1). The photosynthetic photon flux density used in the simulation was 2000 μmol m–2 s–1, and Ci was 150 μbar. 
+MAL, malate; NADP-MDH, NADPH-malate dehydrogenase; NADP-ME, NADP-malic enzyme; PEP , phosphoenolpyruvate; PEPCK, phosphoenolpyruvate 
+carboxykinase; PYR, pyruvate (this figure is available in colour at JXB online).
+New classification of C4 photosynthesis | 3573
+BSCs, assuming that LET is present and no reducing equiva-
+lents are shuttled by metabolites. However, the model predicted 
+very similar optimal light allocations for four different assump-
+tions of LET (Fig. 6); hence, reducing equivalents could not 
+exclusively result from LET but must be shuttled also by metab-
+olites. All LET-BSC assumptions predicted that 60–70% of 
+light is allocated to the MCs for optimal photosynthetic assim-
+ilation rates. Compared to a standalone NADP-ME type C
+4 
+photosynthesis, the Asp+MAL and ME model was predicted 
+to have a higher photosynthesis rate if MCs absorbed more 
+than 70% of incident light, while the Asp+MAL and PEPCK 
+model was predicted to have a higher photosynthesis rate if 
+MCs absorbed less than 50% of light (Fig. 6). The highest rates 
+achieved mirror those of Fig. 2, with the standard model reach-
+ing the highest assimilation rate followed by the Asp+MAL 
+and ME model, followed by the models using PEPCK.
+The curves for all models except for the Asp+PEPCK 
+model were essentially invariant in various LET ratios in 
+BSCs. All curves peaked at similar assimilation values, indi-
+cating that different assumptions of BSC LET permitted 
+similarly optimal photosynthetic rates.
+Photosystem II in BSCs is essential for a pathway 
+where only aspartate and PEPCK are used
+When no LET was assumed in BSCs, the model which assumed 
+only aspartate as the transfer acid and only PEPCK as the 
+decarboxylase, predicted a zero photosynthetic CO
+2 uptake 
+rate, no matter how high the PEPCK and AspAT activities 
+were set (Fig. 7). Aspartate does not transfer reducing equiva-
+lents to BSCs and the latter cannot generate NADPH through 
+light reactions in the absence of LET, therefore no NADPH 
+to support the CO
+2 assimilation by the Calvin–Benson cycle 
+in BSCs is available in this scenario. In a system with LET in 
+the BSCs, the rate of photosynthetic CO
+2 uptake was propor-
+tional to the rate of LET in the BSCs. As shown in Fig. 6, the 
+optimal energy allocation was in MCs and BSCs was 20 and 
+80%, respectively, of total incident light energy.
+Discussion
+This work first discusses the potential physiological signifi-
+cance of having mixed C
+4 pathways on the basis of theo-
+retical analyses using a systems modelling approach. Then 
+it discusses whether the current classification of C
+4 subtypes 
+should be reconsidered.
+This work tested different models of C 4 photosynthesis 
+with regard to transfer acids and decarboxylation enzymes. 
+The models indicated that a standard NADP-ME model was 
+favoured with regard to total photosynthetic rate at low PPFD, 
+because higher leakiness of mixed models decreases energy-use 
+efficiency at low PPFD. Under high light, models with ME as 
+the decarboxylation enzyme were superior over models that 
+assumed PEPCK as the sole or partial decarboxylation enzyme 
+(Fig. 2). A higher CO
+2 concentration in the BSC chloroplasts 
+will increase photosynthetic efficiency of Rubisco. However, 
+Fig. 6. The effects of light allocation between mesophyll cells (MCs) and bundle sheath cells on photosynthetic CO2-uptake rate. LETBSC represents the 
+proportion of liner electron transport of the total electron transport capacity in bundle sheath cells. Photosynthetic photon flux density in the simulation 
+was 300 μmol m–2 s–1. MAL, malate; NADP-MDH, NADPH-malate dehydrogenase; NADP-ME, NADP-malic enzyme; PEPCK, phosphoenolpyruvate 
+carboxykinase (this figure is available in colour at JXB online).
+3574 | Wang et al.
+PEPCK releases CO2 in BSC cytosol, while NADP-ME releases 
+CO2 in BSC chloroplasts, which hence shows superiority under 
+high-light conditions (Supplementary Fig. S3 available at JXB 
+online). Leakiness was also lowest for the classical NADP-ME 
+model. Having a mixed pathway increased the overall C4 path-
+way activity since it reduced limitations on acid generation 
+and transport in the C
+4 cycle, while the Calvin–Benson cycle 
+activity stayed the same. The faster C 4 cycle released more 
+CO2 in BSCs (enhanced overcycling), which increased the 
+CO2 concentration in BSCs (Supplementary Fig. S3 available 
+at JXB online). As a result, leakiness increased in all mixed 
+models (Fig. 3A). Additional pathways should increase leaki-
+ness, but the model might somewhat overestimate the increase 
+in leakiness. Because of the limitation of ordinary differential 
+equation models, the current models could not include the 
+positioning of the organelles and therefore neglected cytosolic 
+resistance, which is also a part of the total bundle sheath resist-
+ance, especially important for the PEPCK and NAD-ME sub-
+type (von Caemmerer and Furbank RT, 2003). This is the most 
+likely reason for the overestimation of leakiness in the current 
+models, especially for leakiness of CO
+2 released by PEPCK in 
+BS cytosol (Fig. 3A). Y et, for many C4 species, PEPCK activity 
+in addition to NADP-ME or NAD-ME activity, is well docu-
+mented (Meister et al., 1996; Wingler et al., 1999; Muhaidat 
+et al., 2007; Pick et al., 2011; Sommer et al., 2012; Muhaidat 
+and McKown, 2013). Hence, this work interrogated the models 
+to identify factors that might explain why mixed models were 
+favoured in evolution.
+Physiological significance of having mixed C4 pathways
+In a mixed pathway, in addition to malate and pyruvate, also 
+aspartate, PEP, and alanine are used as transfer acids between 
+MCs and BSCs. Utilizing two C
+4 acids and three C3 acids can 
+reduce the diffusion requirements for any one acid between 
+MCs and BSCs (Pick et al., 2011), because the total flux of 
+the C
+4 and C 3 acids is shared between two or three metabo-
+lites. The simulations indicated that a mixed pathway reduced 
+the metabolite concentrations and gradients required to sus-
+tain the C
+4 cycle (Fig. 4A and B).
+In the model, since the flux through Asp was set to around 
+25%, according to the carbon label partition experiment by 
+Hatch (1971), the gradient necessary for malate was reduced 
+but not halved, while the gradients for pyruvate, especially 
+for the mixed models which include PEPCK activity, were 
+substantially reduced for each transfer acid (Fig. 4C). This is 
+because the flux through the C
+3 acid can be shared by pyru-
+vate, PEP, and alanine in a mixed pathway. This might at least 
+partially explain the phenomenon that no concentration gra-
+dient was measured for pyruvate between BSCs and MCs in 
+maize (Stitt and Heldt, 1985). Until now, no C
+4 species has 
+been reported in which only one C4 and one C3 transfer acid 
+is in use; hence, evolution has implemented multiple transfer 
+acids in all C
+4 plants studied so far.
+Concomitant with the decreased concentration gradients, 
+mixed C4 pathways also lead to decreased concentrations of 
+transfer acids, except the Asp+MAL and ME type under high 
+light (Fig. 5). The finding that the Asp+MAL and ME type 
+had higher acid concentrations has two possible explana-
+tions. One is that this model displayed a higher photosynthe-
+sis rate and higher leakiness (Figs 2 and 3), which indicates 
+that C
+4 cycle flux in the Asp+MAL and ME type was much 
+higher than other models: higher fluxes demand relatively 
+higher metabolite concentrations. The other reason is that 
+the simulated pyruvate concentration was much higher than 
+other models’ predictions. In the Asp+MAL and ME model, 
+Fig. 7. Predicted CO2-assimilation rate of the PEPCK-only pathway. MAL, malate; AspAT, aspartate aminotransferase; LET, linear electron transport; 
+PEPCK, phosphoenolpyruvate carboxykinase (this figure is available in colour at JXB online).
+New classification of C4 photosynthesis | 3575
+although both alanine and pyruvate moved back to MCs, 
+all of the alanine was needed to form pyruvate again before 
+transport into MC chloroplasts to generate PEP by pyruvate 
+phosphate dikinase. Therefore, in the Asp+MAL and ME 
+model, more pyruvate accumulated in MCs, and the con-
+centration of pyruvate in BSCs was also higher, to maintain 
+the concentration gradient for diffusion. Having a decreased 
+concentration of transfer acids might also prevent excessive 
+accumulation of acidic substances, and decreasing the con-
+centration of pyruvate can be beneficial because pyruvate is 
+highly diffusible and thus its fluxes are difficult to control.
+The recruitment of amino transferases to the C
+4 cycle might 
+have been facilitated by the ubiquitous presence of relatively 
+high activities of Asp aminotransferase and Ala aminotrans-
+ferase activities in many C
+3 plants (compare with Bräutigam 
+et al., 2011; Gowik et al., 2011; Sommer et al., 2012). Possibly, 
+C4 plants early in evolution may have initially utilized Asp 
+as the predominant transfer acid, exploiting the fact that the 
+presence of high amounts of glutamate as an amino donor 
+and high amounts of OAA produced by increased PEPC 
+activity would drive Asp aminotransferase to transaminate 
+OAA to Asp.
+In addition to reducing the concentration gradients 
+required to run the C
+4 cycle, having a mixed pathway would 
+increase the robustness of C4 metabolism by maintaining the 
+energy balance between MCs and BSCs in response to rap-
+idly changing light conditions. Energy balances, including 
+both NADPH and ATP balance, in both BSCs and MCs are 
+required for maintaining a high efficiency of C
+4 photosynthe-
+sis. This theoretical study suggested that mixed C4 pathways, 
+compared to a pathway with NADP-ME subtype C 4 pho-
+tosynthesis, inherently have extra mechanisms to maintain 
+energy balances.
+First, changing the proportion of transferred C
+4 acid (i.e. 
+the ratio of transported malate to aspartate) modulates the 
+NADPH balance between MCs and BSCs (Evans et  al., 
+2007). If malate is used as the transfer acid, it will move 
+NADPH to the BSCs simultaneously; while, if aspartate is 
+used, no NADPH is moved to the BSCs. Secondly, the utiliza-
+tion of PEPCK, which uses ATP in BSCs, as decarboxylase, 
+can increase the ATP requirement in BSCs. Thirdly, the PSII 
+levels in BSCs chloroplasts control the NADPH production 
+in BSCs, which correspondingly influences the NADPH bal-
+ance. Consistent with this hypothesis, the PSII contents of 
+BSCs in a number of species conducting NADP-ME type 
+photosynthesis have been shown to be proportional to the 
+amount of aspartate produced as the translocated C
+4 acid 
+(Chapman and Hatch, 1981; Meister et al., 1996). Since LET 
+in the bundle sheath leads to the liberation of oxygen at the 
+site of Rubisco, one may ask whether the absence of LET 
+improves C
+4 photosynthetic efficiency. The modelling study 
+suggests that the peak assimilation rate is independent of 
+the amount of LET in BSCs as long as the LET ratio is half 
+or less (Fig. 6). This may be related to why a range of BSC 
+chloroplast morphologies, representing different amounts of 
+LET, can be identified in C
+4 plants (Y oshimura et al., 2004)
+The ability to utilize multiple decarboxylases and transfer 
+acids can potentially enable C 4 photosynthesis to maintain 
+higher photosynthetic efficiency under a wider range of light 
+regimes, where allocations of light into MCs and BSCs dif-
+fer. Under conditions where BSCs absorb more light, PEPCK 
+can use the extra energy in BSCs to operate the CO
+2 pump 
+and decrease the energy demand of pyruvate phosphate 
+dikinase in MCs. The simulation results indicated that the 
+Asp+MAL and PEPCK type could obtain higher photosyn-
+thesis rate if MCs absorbed less than 50% of light as com-
+pared to the NADP-ME type (Fig.  6). Under conditions 
+where MCs absorbed more light, the usage of aspartate as 
+the transfer acid reduced NADPH transferred from MCs to 
+BSCs, more PGA will be moved to MCs to use the NADPH 
+and ATP in MCs. The Asp+MAL and ME type can obtain a 
+higher photosynthetic rate than the NADP-ME type if MC 
+absorbs more than 70% of light (Fig. 6). Therefore, a mixed 
+C
+4 pathway provides robustness to the pathway under fluctu-
+ating environmental conditions.
+Despite having all these aforementioned benefits of mixed 
+pathways, a mixed pathway can lead to increased leakiness, 
+which reduces photosynthetic efficiency. However, C
+4 plants 
+have evolved mechanisms to cope with this inevitable con-
+sequence. Modelling analysis showed that reduced PEPC 
+activity could decrease leakiness without significantly affect-
+ing the photosynthetic rate (Supplementary Fig. S2 avail-
+able at JXB online). If PEPC activity was decreased by 15%, 
+leakiness was reduced by about 7% in high-light conditions. 
+Coincidently, enzyme activity data of a leaf developmental 
+gradient in Z.  mays show that in the tip of the leaf PEPC 
+activity decreased when PEPCK activity was significantly 
+elevated (Pick et al., 2011). A similar negative correlation of 
+PEPCK and PEPC activity was also found in C.  gynandra 
+(Sommer et  al., 2012). PEPC protein amounts also slightly 
+decreased in the tip of maize; however, the RNA expression 
+increased in the tip (Majeran et al., 2010; Pick et al., 2011). 
+The experimental evidence indicated that C
+4 plants may have 
+evolved post-transcriptional regulatory mechanisms to limit 
+leakiness and maintain high photosynthetic efficiency
+Even with all these mechanisms to regain energy balances 
+in BSCs and MCs, C
+4 leaves can still suffer energy imbalances 
+between BSCs and MCs under a few artificial conditions, 
+which correspondingly decrease photosynthetic efficiency. 
+As an example, under blue light the photosynthetic efficiency 
+of a C
+4 plant decreases more than that of a C 3 plant (Evans 
+et al., 2007; Sun et al., 2012). This is possibly because blue 
+light is strongly absorbed by surface MCs (Vogelmann and 
+Han, 2000; Vogelmann and Evans, 2002), which leaves little 
+energy available for BSCs to gain an energy balance required 
+to maintain a higher photosynthetic efficiency.
+C4 plants can be effectively classified into either 
+NADP-ME or NAD-ME type C4 photosynthesis
+Given these physiological significance of having mixtures 
+of C
+4 decarboxylases and transfer acids, are there three 
+subtypes of C 4 photosynthesis? The standard NADP-ME 
+model has not been realized in any C 4 plant studied to date. 
+S. bicolor might represent the Asp+MAL and ME type since 
+no PEPCK activity has been reported. The C
+4 genus Flaveria 
+3576 | Wang et al.
+also has very limited PEPCK activity (Gowik et  al., 2011) 
+and thus is closer to the Asp+MAL and ME type of C 4 pho-
+tosynthesis than to the Asp+MAL and ME+PEPCK type. 
+The Asp+MAL and ME+PEPCK model is represented by 
+maize with NADP-ME as the ME (Pick et  al., 2011), by 
+C.  gynandra with NAD-ME as the ME (Bräutigam et  al., 
+2011; Sommer et al., 2012) and by multiple other dicot species 
+of the order Caryophyllales (Muhaidat and McKown, 2013). 
+Similarly, plants that realize a PEPCK-only model have not 
+been identified so far. The metabolic process of the PEPCK 
+pathway usually also includes the reactions involved in the 
+NAD-ME type C
+4 photosynthesis (Burnell and Hatch, 1988). 
+On this aspect, plants that use PEPCK as the dominating 
+decarboxylase but not as the only decarboxylase do exist in 
+monocotyledons (Gutierrez et al., 1974). For example, Zoysia 
+japonica Steud in Eragrostoideae and Urochloa panicoides 
+Beauv in Panicoideae have 3–5 times higher PEPCK activ-
+ity than those of the NADP-ME and NAD-ME (Gutierrez 
+et al., 1974; Muhaidat et al., 2007).
+Recent genome-scale transcriptomic analyses in com-
+bination with enzyme activity assays have further shown 
+that maize (Pick et  al., 2011) and C.  gynandra ( Sommer 
+et  al., 2012) have PEPCK activity in the C
+4 cycle. Based 
+on literature research and the modelling effort, the pre-
+sent work sorted these species, in addition to Megathyrsus 
+maximus, a C
+4 plant classified as PEPCK type (Gutierrez 
+et al., 1974), and S. bicolor, a species with a relatively ‘pure’ 
+NADP-ME type decarboxylation chemistry (Gutierrez 
+et al., 1974), according to the proportion of PEPCK in total 
+decarboxylase activity in both NADP-ME and NAD-ME 
+type C
+4 photosynthesis (Fig. 8E). Apparently, PEPCK plays 
+a bigger role than previously assumed. Not only classical 
+PEPCK plants but also NADP-ME and NAD-ME plants 
+use substantial amounts of decarboxylation by PEPCK 
+(see also Muhaidat et al., 2007; Furbank, 2011; Pick et al., 
+2011; Sommer et al., 2012; Muhaidat and McKown, 2013). 
+It might therefore be useful to consider C
+4 plants as either 
+NAD-ME or NADP-ME plants, as there is a clear demar -
+cation line based on the type of decarboxylase, with vari-
+able contributions of PEPCK (Fig. 8A– D). In other words, 
+PEPCK might be considered as a supplementary activity to 
+the malate-decarboxylating enzymes, not as an independent 
+C
+4 decarboxylation activity, with the benefits of providing 
+additional mechanisms to balance energy between BSCs 
+and MCs and helping to decrease the metabolite concentra-
+tions of the transported acids.
+Fig. 8. Textbook pathways (A, B) in comparison with the situation in the plant (C, D) for the NADP-ME type (A, C) and the NAD-ME type (B, D). Asterisks 
+indicate where it is not clear whether the circles are also connected at this point by Asp aminotransferase and MDH, The C4 cycles have to be rewritten 
+as branched cycles that split at the position of C4 transfer acid into aspartate and malate and at the position of C3 transfer acid into pyruvate, alanine, and 
+(for PEPCK-using species) PEP . The proportions of different transfer acids probably vary with changing environmental conditions: for example, light for 
+malate reduction or nitrogen availability for amino acids as transfer acids. (E) Contribution of PEPCK to malic enzyme activity in five different C4 species. 
+AlaAT, alanine aminotransferase; AspAT, aspartate aminotransferase; MAL, malate; MDH, malate dehydrogenase; NADP-ME, NADP-malic enzyme; PEP , 
+phosphoenolpyruvate; PEPC, phosphoenolpyruvate carboxylase; PEPCK, phosphoenolpyruvate carboxykinase; PPDK, pyruvate phosphate dikinase.
+New classification of C4 photosynthesis | 3577
+However, many C 4 dicots and monocots (e.g. sorghum; 
+Fig.  8E), do not show high activities of PEPCK in some 
+measurements (Gutierrez et al., 1974; Muhaidat et al., 2007), 
+which possibly indicates that these species do not use PEPCK 
+as a supplemental decarboxylation enzyme. This model anal-
+ysis showed that standalone NADP-ME pathway also has 
+good photosynthetic performance in many cases (Figs 2, 3, 
+and 6). Even within the same plant, PEPCK activity can be 
+flexible (e.g. high PEPCK activity is only detected in the tip 
+of a maize leaf and in old leaves of cleome; Pick et al., 2011; 
+Sommer et al., 2012). Therefore, the current analysis shows 
+that the single NADP-ME pathway and the mixed pathways 
+each have their own advantages (Figs 2–6): if the flux alloca-
+tion in different pathways is flexible in C
+4 plants, these plants 
+can have better adaptability under changing environmental 
+conditions.
+Can the PEPCK pathway exists in isolation: i.e. is there a C
+4 
+photosynthetic subtype where no NAD-ME or NADP-ME 
+exists at all? Analysis from this study showed that photosys-
+tem II in BSCs is essential for a pure PEPCK C
+4 photosyn-
+thetic pathway that uses only PEPCK as the decarboxylase 
+and only aspartate as the C
+4 transfer acid from MCs to BSCs 
+(Fig.  7). This is because NADPH, which is required for 
+3-PGA reduction in the Calvin Benson Cycle, cannot be gen-
+erated in such a C
+4 pathway unless there is LET in BSCs (i.e. 
+only if there is PSII in BSCs). A higher LET rate in BSCs is 
+needed for a high photosynthesis rate (Fig. 7) in such a path-
+way. In this case, PEPCK releases CO
+2 in BSCs cytosol and 
+uses ATP in BSCs. Thus a PEPCK-only type prefers more 
+energy allocated to BSCs. The current theoretical analysis 
+suggests that the optimal energy allocation was 20% in MCs 
+and 80% in BSCs. This, however, is next to impossible to real-
+ize because of the structure of the Kranz anatomy, where 
+BSCs are surrounded by MCs and correspondingly light will 
+be inevitably preferentially absorbed by MCs before reaching 
+the BSCs. This unbalanced energy supply and usage in BSCs 
+and MCs might have prevented evolution of C
+4 plants with 
+PEPCK as the only decarboxylase and aspartate as the only 
+transfer acid.
+Another possibility that may limit the existence of the 
+PEPCK-only pathway is the inability to maintain a proper 
+amino group balance between BSCs and MCs. In the PEPCK 
+pathway, aspartate is transported from MCs to BSCs, and 
+PEP was transported from BSCs back to MCs, which cre-
+ates an imbalance of amino groups between two cell types 
+(Weber and Bräutigam, 2013). This problem can be solved in 
+the PEPCK-only type model if amino groups are transported 
+back to MCs in the form of alanine, and a reversed pyruvate 
+transport together with alanine keeps both amino group and 
+carbon transport balanced in both MCs and BSCs.
+Conclusion
+In summary, this modelling analysis and literature survey 
+shows that a mixed mode of C
+4 photosynthesis provides met-
+abolic robustness through reduced metabolite gradients and 
+metabolite concentrations. Operation of a mixed mode of C
+4 
+photosynthesis can confer higher ecological robustness due 
+to increased tolerance to fluctuating light conditions. A pure 
+PEPCK-type C
+4 photosynthesis is not beneficial because 
+the energy requirements in BSCs cannot be fulfilled due to 
+them being shaded by MCs. Hence, only the NAD-ME and 
+NADP-ME subtypes should be considered as distinct sub-
+types, with the PEPCK pathway as a supplement to these.
+Supplementary material
+Supplementary data are available at JXB online.
+Supplementary Fig. S1. The structure of the mixed-path-
+way model of C4 photosynthesis.
+Supplementary Fig. S2. Decreased PEPC reduced leaki-
+ness level of the Asp+MAL and PEPCK+ME model.
+Supplementary Fig. S3. Simulated CO 2 concentration of 
+BSC cytosol and chloroplast.
+Acknowledgements
+The authors gratefully acknowledge Professor Robert Furbank for discus-
+sions and comments on earlier model development and analysis. They also 
+thank the Chinese Academy of Sciences and the Max Planck Society for 
+support. Funding for authors’ research is from the Bill and Melinda Gates 
+Foundation (grant no. OPP1014417), National Science Foundation of China 
+(grant no. 30970213), Ministry of Science and Technology of China (grant no. 
+2011DFA31070), the Y oung Talent Frontier Program of Shanghai Institutes 
+for Biology Sciences/Chinese Academy of Sciences (grant no. 09Y1C11501), 
+the US Department of Energy (grant no. APRA-E Petro Award 0470-1535), 
+strategic priority research programme of the Chinese Academy of Sciences 
+(XDA08020301), the Deutsche Forschungsgemeinschaft (EXC 1028; IRTG 
+1525; WE 2231/9-1), and the 7th Framework Program of the European 
+Union (3to4; http://www.3to4.org, last accessed 23 February 2014).
+References
+Amthor JS. 2010. From sunlight to phytomass: on the potential efficiency 
+of converting solar radiation to phyto-energy. New Phytologist 188, 
+939–959.
+Brautigam A, Kajala K, Wullenweber J, et al. 2011. An mRNA 
+blueprint for C4 photosynthesis derived from comparative transcriptomics 
+of closely related C3 and C4 species. Plant Physiology 155, 142–156.
+Burnell JN, Hatch MD. 1988. Photosynthesis in phosphoenolpyruvate 
+carboxykinase type C
+4 plants pathways of C4 acid decarboxylation in 
+bundle sheath cells of Urochloa panicoides. Archives of Biochemistry and 
+Biophysics 260, 187–199.
+Chapman KSR, Hatch MD. 1981. Aspartate decarboxylation in 
+bundle sheath-cells of Zea mays and its possible contribution to C
+4 
+photosynthesis. Australian Journal of Plant Physiology 8, 237–248.
+Cousins AB, Badger MR, Von Caemmerer S. 2006. Carbonic 
+anhydrase and its influence on carbon isotope discrimination during C4 
+photosynthesis. Insights from antisense RNA in Flaveria bidentis. Plant 
+Physiology 141, 232–242.
+Edwards GE, Franceschi VR, Voznesenskaya EV. 2004. Single-cell C
+4 
+photosynthesis versus the dual-cell (Kranz) paradigm. Annual Review of 
+Plant Biology 55, 173–196.
+Evans JR. 1989. photosynthesis and nitrogen relationships in leaves of C3 
+plants. Oecologia 78, 9–19.
+Evans JR, Vogelmann TC, von Caemmerer S. 2007. Balancing light 
+capture with disturbed metabolic demand during C
+4 photosynthesis. 
+In: Sheehy JE, Mitchell PL, Hardy B, eds, Charting new pathways to C 4 
+rice. Los Banos, Philippines: International Rice Research Institute, pp 
+127–143.
+Farquhar GD, Caemmerer SV, Berry JA. 1980. A biochemical-model 
+of photosynthetic CO
+2 assimilation in leaves of C3 species. Planta 149, 
+78–90.
+3578 | Wang et al.
+Furbank RT. 2011. Evolution of the C4 photosynthetic mechanism: are 
+there really three C4 acid decarboxylation types? Journal of Experimental 
+Botany 62, 3103–3108.
+Furumoto T, Hata S, Izui K. 1999. cDNA cloning and characterization of 
+maize phosphoenolpyruvate carboxykinase, a bundle sheath cell-specific 
+enzyme. Plant Molecular Biology 41, 301–311.
+Furumoto T, Hata S, Izui K. 2000. Isolation and characterization of 
+cDNAs for differentially accumulated transcripts between mesophyll cells 
+and bundle sheath strands of maize leaves. Plant Cell Physiology 41, 
+1200–1209.
+Ghannoum O, von Caemmerer S, Conroy JP. 2001. Carbon and water 
+economy of Australian NAD-ME and NADP-ME C-4 grasses. Australian 
+Journal of Plant Physiology 28, 213–223.
+Gowik U, Bräutigam A, Weber KL, Weber AP and Westhoff P. 2011. 
+Evolution of C
+4 photosynthesis in the genus Flaveria: how many and which 
+genes does it take to make C4? The Plant Cell 23, 2087–2105.
+Gutierrez M, Gracen VE, Edwards GE. 1974. Biochemical and 
+cytological relationships in C
+4 plants. Planta 119, 279–300.
+Hatch MD, Slack CR. 1966. Photosynthesis by sugar-cane leaves: a 
+new carboxylation reaction and the pathway of sugar formation. The 
+Biochemistry Journal 101, 103–111.
+Hatch MD. 1971. C
+4 pathway of photosynthesis. Evidence for an 
+intermediate pool of carbon dioxide and identity of donor C4 dicarboxylic 
+acid. The Biochemistry Journal 125, 425–432.
+Hatch MD, Kagawa T, Craig S. 1975. Subdivision of C
+4 pathway 
+species based on differing C4 decarboxylating systems and ultrastructural 
+features. Australian Journal of Plant Physiology 2, 111–128.
+Hatch MD. 1987. C
+4 photosynthesis: a unique blend of modified 
+biochemistry, anatomy and ultrastructure. Biochimica et Biophysica Acta 
+895, 81–106.
+Henderson SA, Voncaemmerer S, Farquhar GD. 1992. Short-term 
+measurements of carbon isotope discrimination in several C4 species. 
+Australian Journal of Plant Physiology 19, 263–285.
+Kanai R, Edwards GE. 1999. The biochemistry of C
+4 photosynthesis. 
+In: Sage RF, Monson RK, eds, C4 plant biology. UK: Academic Press, pp 
+49–87.
+Leegood RC, Voncaemmerer S. 1989. Some relationships between 
+contents of photosynthetic intermediates and the rate of photosynthetic 
+carbon assimilation in leaves of Zea mays L. Planta 178, 258–266.
+Majeran W, Friso G, Ponnala L, et al. 2010. Structural and metabolic 
+transitions of C
+4 leaf development and differentiation defined by 
+microscopy and quantitative proteomics in maize. The Plant Cell 22, 
+3509–3542.
+Meister M, Agostino A, Hatch MD. 1996. The roles of malate and 
+aspartate in C
+4 photosynthetic metabolism of Flaveria bidentis (L). Planta 
+199, 262–269.
+Muhaidat R, Sage RF, Dengler NG. 2007. Diversity of Kranz anatomy 
+and biochemistry in C4 eudicots. American Journal of Botany 94, 
+362–381.
+Muhaidat R, McKown AD. 2013. Significant involvement of PEP-CK in 
+carbon assimilation of C4 eudicots. Annals of Botany 111, 577–589.
+Ögren E, Evans JR. 1993. Photosynthetic light-response curves. 1. The 
+influence of CO
+2 partial-pressure and leaf inversion. Planta 189, 182–190.
+Pick TR, Bräutigam A, Schluter U, et al. 2011. Systems analysis of 
+a maize leaf developmental gradient redefines the current C
+4 model and 
+provides candidates for regulation. The Plant Cell 23, 4208–4220.
+Sommer M, Bräutigam A, Weber APM. 2012. The dicotyledonous NAD 
+malic enzyme C4 plant Cleome gynandra displays age-dependent plasticity 
+of C4 decarboxylation biochemistry. Plant Biology 14, 621–629.
+Stitt M, Heldt HW. 1985. Generation and maintenance of concentration 
+gradients between the mesophyll and bundle sheath in maize leaves. 
+Biochimica et Biophysica Acta 808, 400–414.
+Sun W, Ubierna N, Ma JY, Cousins AB. 2012. The influence of light 
+quality on C
+4 photosynthesis under steady-state conditions in Zea mays 
+and Miscanthus giganteus: changes in rates of photosynthesis but not 
+the efficiency of the CO
+2 concentrating mechanism. Plant, Cell and 
+Environment 35, 982–993.
+Taniguchi M, Kobe A, Kato M, Sugiyama T. 1995. Aspartate 
+aminotransferase isozymes in Panicum miliaceum L, an NAD-malic 
+enzyme-type C
+4 plant comparison of enzymatic-properties, primary 
+structures, and expression patterns. Archives of Biochemistry and 
+Biophysics 318, 295–306.
+Vogelmann TC, Evans JR. 2002. Profiles of light absorption and 
+chlorophyll within spinach leaves from chlorophyll fluorescence. Plant, Cell 
+and Environment 25, 1313–1323.
+Vogelmann TC, Han T. 2000. Measurement of gradients of absorbed 
+light in spinach leaves from chlorophyll fluorescence profiles. Plant, Cell 
+and Environment 23, 1303–1311.
+von Caemmerer S, Furbank RT. 1999. Modelling of C
+4 photosynthesis. 
+In: Sage R, Monson RK, eds, C4 plant biology. UK: Academic Press, pp 
+173–211.
+von Caemmerer S. 2000. Biochemical models of leaf photosynthesis. 
+Collingwood: CSIRO Publishing.
+von Caemmerer S, Furbank RT. 2003. The C
+4 pathway: an efficient CO2 
+pump. Photosynthesis Research 77, 191–207.
+Walker RP, Acheson RM, Tecsi LI, Leegood RC. 1997. 
+Phosphoenolpyruvate carboxykinase in C
+4 plants: its role and regulation. 
+Australian Journal of Plant Physiology 24, 459–468.
+Wang Y, Long SP, Zhu XG. 2014. Elements required for an efficient 
+NADP-ME type C4 photosynthesis—exploration using a systems model of 
+C4 photosynthesis. Plant Physiology  (in press).
+Weber APM, Bräutigam A. 2013. The role of membrane transport in 
+metabolic engineering of plant primary metabolism. Current Opinion in 
+Biotechology 24, 256–262.
+Wingler A, Walker RP, Chen ZH, Leegood RC. 1999. 
+Phosphoenolpyruvate carboxykinase is involved in the decarboxylation of 
+aspartate in the bundle sheath of maize. Plant Physiology 120, 539–545.
+Yoshimura Y, Kubota F, Ueno O. 2004. Structural and biochemical 
+bases of photorespiration in C
+4 plants: quantification of organelles and 
+glycine decarboxylase. Planta 220, 307–317.
+Zhu XG, de Sturler E, Long SP. 2007. Optimizing the distribution of 
+resources between enzymes of carbon metabolism can dramatically 
+increase photosynthetic rate: a numerical simulation using an evolutionary 
+algorithm. Plant Physiology 145, 513–526.
+Zhu XG, Long SP, Ort DR. 2008. What is the maximum efficiency with 
+which photosynthesis can convert solar energy into biomass? Current 
+Opinion in Biotechology 19, 153–159.

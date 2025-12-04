@@ -1,0 +1,1562 @@
+Unraveling the Interplay between Stability and Flexibility in the
+Design of Polyethylene Terephthalate (PET) Hydrolases
+Shiqinrui Xu, Chengze Huo, and Xiakun Chu*
+Cite This: J. Chem. Inf. Model. 2024, 64, 7576−7589
+ Read Online
+ACCESS
+Metrics & More
+ Article Recommendations *
+sı Supporting Information
+ABSTRACT: The accumulation of polyethylene terephthalate
+(PET), a widely used polyester plastic in packaging and textiles,
+has led to a global environmental crisis. Biodegradation presents a
+promising strategy for PET recycling, with PET hydrolases
+(PETase) undertaking the task at the molecular level. Unfortu-
+nately, PETase operates only at ambient temperatures with low
+efficiency, limiting its industrial application. Current engineering
+efforts focus on enhancing the thermostability of PETase, but
+increased stability can reduce the structural dynamics needed for
+substrate binding, potentially slowing enzymatic activity. To
+elucidate the balance between stability and flexibility in optimizing
+PETase catalytic activity, we performed theoretical investigations
+on both wild-type PETase (WT-PETase) and a thermophilic variant (Thermo-PETase) using molecular dynamics simulations and
+frustration analysis. Despite being initially designed to stabilize the native structure of the enzyme, our findings reveal that Thermo-
+PETase exhibits an unprecedented increase in structural flexibility at the PET-binding and catalytic sites, beneficial for substrate
+recruitment and product release, compared to WT-PETase. Upon PET binding, we observed that the structural dynamics of
+Thermo-PETase is largely quenched, favoring the proximity between the catalytic residues and the carbonyl of the PET substrate.
+This may potentially contribute to a higher probability of a catalytic reaction occurring in Thermo-PETase compared to WT-
+PETase. We suggest that Thermo-PETase can exhibit higher PET-degradation performance than WT-PETase across a broad
+temperature range by leveraging stability and flexibility at high and low temperatures, respectively. Our findings provide valuable
+insights into how PETase optimizes its enzymatic performance by balancing stability and flexibility, which may contribute to future
+PETase design strategies.
+■
+INTRODUCTION
+Plastics play a vital role in all aspects of everyday life, offering
+numerous benefits for the development of modern society.
+However, due to the ultralong lifetimes of most synthetic
+plastics, plastic waste accumulation has now become one of the
+most globally challenging environmental crises, profoundly
+impacting the ecosystems and posing great health risks to both
+wildlife and humans.
+1−3
+Among the various types of plastics,
+polyethylene terephthalate (PET) is the most abundant
+thermoplastic polyester manufactured in the world, primarily
+because of its widespread usage in the packaging market and
+the textile industry.
+4,5
+Despite its prevalence, PET exhibits high
+resistance to degradation, leading to the accumulation of PET
+plastic waste after use and contributing significantly to the solid
+waste problem worldwide.
+6,7
+Great efforts have been made toward PET biodegradation,
+which is an environmentally friendly and efficient technology,
+ideal for the closed-loop recycling of PET plastics.
+8
+Enzymes
+that exhibit PET-degradation activity are known as PET
+hydrolases, and they are capable of breaking down the long-
+chain PET molecules into their building blocks.
+9−11
+Over
+recent decades, several PET hydrolases have been identified
+and studied, including cutinases, lipases, and esterases.
+12,13
+Among these, PET-degrading cutinases from thermophilic
+micro-organisms have shown remarkable PET-degradation
+efficiency at high temperatures, near the glass transition
+temperature of PET, where the PET crystalline structure starts
+to melt toward the amorphous polymer chains.
+13−17
+In 2016,
+Yoshida et al. made a breakthrough discovery of a cutinase-like
+PET hydrolase, named PETase, in the bacterium Ideonella
+sakaiensis, which can degrade and assimilate PET as its source
+of carbon and energy.
+18
+PETase is a naturally evolved PET
+hydrolase exhibiting high PET depolymerization activity at
+ambient temperatures. Consequently, this unique property of
+PETase has distinguished it from PET-degrading cutinases.
+11
+However, PETase showed very low degradation efficiency for
+Received: May 20, 2024
+Revised: July 22, 2024
+Accepted: September 4, 2024
+Published: September 13, 2024
+Articlepubs.acs.org/jcim
+© 2024 The Authors. Published by
+American Chemical Society
+7576
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+This article is licensed under CC-BY-NC-ND 4.0
+
+highly crystallized PET and rapidly lost its enzymatic activity
+with increasing temperature.
+19
+These features impede the
+practical applications of PETase in the plastics degradation
+industry.
+To increase the thermostability of PETase and further
+improve the PET-degradation performance, various engineer-
+ing strategies have been devised.
+20−31
+Son et al. discovered that
+PETase with only three-residue substitution (S121E/D186H/
+R280A) remarkably enhanced the PET depolymerization
+activity across different temperatures, compared to wild-type
+PETase (WT-PETase).
+21
+This new variant, named Thermo-
+PETase, derived from a structure-based protein engineering
+strategy, was primarily designed to stabilize the flexible loop,
+which exhibited high B-factor values in the crystal structure.
+The mutations proposed for Thermo-PETase established the
+newly formed interactions in the native structure of PETase,
+thus increasing the melting temperature by 8.8K compared to
+WT-PETase.
+21
+Similar strategies focusing on mutations of
+residues to stabilize the most flexible loop in PETase, have
+been recently developed to successfully achieve increased
+thermostability.
+32,33
+Moving forward, a deep learning method
+was employed to introduce two additional mutations to
+Thermo-PETase, giving rise to FAST-PETase.
+25
+FAST-
+PETase, which demonstrated much higher PET-degradation
+activity than many other PETase variants, exhibited an increase
+in melting temperature by 9 K over its scaffold Thermo-
+PETase. Structural analysis reveals that the increased thermo-
+stability of FAST-PETase can be largely attributed to the
+formation of favorable salt bridges and hydrogen bonds in the
+native structure. Recently, directed evolution methods have
+been applied to PETase design, resulting in successful variants
+capable of operating at the glass transition temperature of PET,
+presenting a significant step toward complete PET depolyme-
+rization.
+26,29
+Despite significant achievements made in the discovery of
+highly thermostable PETase variants,
+34−36
+progress toward
+finding PETase capable of operating efficiently at ambient
+temperatures has been proceeding slowly. This is largely due to
+the fact that our understanding of the structure−function
+relationship in PETase remains elusive.
+19,37−39
+It has been
+recognized that, unlike other thermophilic cutinases, the
+unique property of PET-degradation activity at ambient
+temperatures for PETase is attributed to its open and flexible
+substrate-binding cleft.
+40
+Increasing evidence has revealed that
+modulating the opening of the binding cleft in thermophilic
+cutinases can enhance their catalytic efficiency on PET
+degradation,
+41,42
+highlighting the importance of structural
+flexibility at the substrate-binding site of PET hydrolases in
+facilitating enzymatic activity. However, by narrowing down
+the binding cleft on the surface of WT-PETase through
+mutations, Austin et al. observed increased hydrolytic activity
+on PET,
+38
+leading to the seemingly conflicting effects of
+structural dynamics in PETase on exerting its catalytic
+function. Furthermore, increasing the thermostability of
+PETase is generally achieved by introducing newly formed
+interactions to stabilize the native structure.
+43,44
+Thus,
+reducing the structural flexibility in the native state of PETase,
+a common strategy for improving stability in PETase design,
+may be disadvantageous to substrate binding and product
+release, potentially slowing the catalytic activity. Understanding
+the interplay between stability and flexibility in PETase is
+fundamental and crucial for further engineering efficient PET
+hydrolase operating at ambient temperature, but it presents
+great challenges.
+In this work, we performed molecular dynamics (MD)
+simulations along with frustration analysis on WT-PETase and
+one prototypical thermophilic PET variant, Thermo-PETase,
+which was observed to exhibit an overall enhanced PET
+hydrolytic activity over WT-PETase across a wide range of
+temperatures.
+21,25
+Consistent with experimental findings, our
+simulations show that Thermo-PETase unfolds more slowly
+than WT-PETase at high temperatures,
+21
+thus allowing
+Thermo-PETase to maintain its functional activity for a longer
+duration at elevated temperatures. Interestingly, despite the
+increase in global stability led by mutations, we observed that
+Thermo-PETase possesses more significant structural flexibility
+than WT-PETase at ambient temperatures. Our detailed
+analyses unveil that the structural dynamics at the PET-
+binding site and catalytic triad in Thermo-PETase are more
+pronounced, potentially facilitating substrate recruitment and
+product release compared to WT-PETase. Additionally,
+frustration results indicate that there are large-scale arrange-
+ments of frustrated contacts in Thermo-PETase upon
+mutations, leading to an increased degree of frustration at
+the local binding site while maintaining global scales
+unchanged. Moreover, we found that the structural dynamics
+of Thermo-PETase within the substrate−enzyme complex are
+largely quenched by the interactions formed with PET,
+resulting in a stable bound complex state primed for
+subsequent highly efficient chemical reactions. Our results
+provide valuable insights into the future rational design of
+PETase and other PET hydrolases toward PET degradation at
+ambient temperature by balancing global stability and local
+flexibility.
+■
+MATERIALS AND METHODS
+MD Simulations of apo PETase. We performed all-atom
+MD simulations using Gromacs-2023.2 software
+45
+with Amber
+ff14SB force field.
+46
+Simulations were initialized from the
+native structures for WT- and Thermo-PETase (PDB: 5XJH
+19
+and 6IJ6
+21
+), respectively. Given the complex environmental
+conditions under which PETase may function, all amino acids
+in the enzyme are modeled at their standard protonated states
+at pH 7. The native structures of WT- and Thermo-PETase
+were individually placed in a cubic box with margins of 1.0 nm.
+The protein systems were then solvated with the TIP3P water
+model and the salt concentration was set to 100 mM to mimic
+the in vivo environment. For WT-PETase, the box length was
+7.50 nm, including 25 NA
++
+ions, 30 CL
+−
+ions, 12 385 water
+molecules, and a total of 40 928 atoms. For Thermo-PETase,
+the box length was 7.47 nm including 25 NA
++
+ions, 31 CL
+−
+ions, 12369 water molecules, and a total of 40 930 atoms. A
+short energy minimization step was performed for each system
+using the steepest descent algorithm, with a maximum of
+50000 steps and a maximum force threshold of 1000 kJ/mol/
+nm. After energy minimization, systems were equilibrated in
+the NVT phase using the V-rescale thermostat for 100 ps, with
+temperature coupling time constant τ
+t
+= 0.1 ps. Subsequently,
+the NPT equilibration simulations were conducted using the
+Parrinello−Rahman barostat for 100 ps with the relaxation
+time constant τ
+p
+= 4.0 ps and the reference pressure of 1.0
+bar.
+47
+During MD simulations, the LINCS algorithm was used
+to constrain all hydrogen bonds,
+48
+allowing for a time step of 2
+fs. The particle-mesh Ewald (PME) method was employed to
+compute the long-range electrostatic interactions
+49
+and all the
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7577
+nonbonded interactions were cut off at 1.0 nm. Periodic
+conditions were applied in all three directions. Temperature
+coupling was applied separately to protein and nonprotein
+groups. Isotropic pressure coupling was used to ensure uniform
+scaling of the box vectors. Production simulations were run in
+the NPT phase for 10 μs at the ambient temperatures (298 and
+308 K) and for 1 μs at an elevated temperature of 450 K. For
+each PETase system, two trajectories were performed at both
+298 and 308 K, and five trajectories were performed at 450 K.
+Molecular Docking. We constructed the complex
+structure of PETase with a PET tetramer (4PET) by molecular
+docking. The initial coordinates of PETase were chosen from
+the Protein Data Bank (PDB: 5XJH
+19
+). PETase was selected as
+the receptor in AutoDockTools
+50
+and converted to PDBQT
+format, which is similar to the PDB format but specifically
+designed to contain the information required by AutoDock
+software. We used 2-hydroxyethyl-(monohydroxyethyl tereph-
+thalate)
+4
+(2-HE(MHET)
+4
+) as the PET tetramer ligand. The
+PET tetramer was constructed by combining two PET dimers
+and carefully adding one ethylene glycol moiety to its
+terephthalate terminal using Avogadro software.
+51,52
+All
+hydrogen atoms were added to both protein and ligand
+using AutoDockTools prior to docking.
+50
+Molecular docking
+was carried out between the WT-PETase structure and 2-
+HE(MHET)
+4
+using AutoDock Vina (version 1.1.2).
+53
+During
+docking, the ligand was set to be flexible, while the protein was
+kept rigid. To prevent the collapse of the PET chain, the three
+bonds within the O−C−C−O group connecting the second
+and third benzene rings and the central C−C bond connecting
+the first and second benzene rings of the PET ligand were
+constrained from rotating. The top five docking structural
+models were analyzed to examine hydrogen bonds and π−π
+interactions between PETase and 4PET. The docking model,
+which is the most consistent with those from previous
+studies,
+19,54
+was selected and further evaluation of the structure
+model was done by MD simulations.
+MD Simulations of PETase:4PET Binary Complex. MD
+simulations of the PETase:4PET complex, starting from the
+docking model were performed using Gromacs-2023.2
+software,
+45
+following the same protocols as those used for
+simulations of the apo state of PETase. The PET ligand,
+consisting of 98 atoms, was parametrized with the general
+Amber force field (GAFF2)
+55
+and the topology files of 4PET
+for Gromacs simulations were prepared using ACPYPE
+software.
+56
+To model the complex structure of Thermo-
+PETase with 4PET, we directly introduced three mutations
+into WT-PETase using PyMOL software.
+57
+The simulation
+box was set to be cubic, with a length of 7.43 nm. The system
+was solvated with 12 330 and 12 338 TIP3P water molecules
+for WT- and Thermo-PETase, respectively. To realize the
+electrostatically neutral environment with the salt concen-
+tration of 100 mM, we added 25 NA+ and 31 Cl− ions for the
+WT-PETase system and 25 NA+ and 30 Cl− ions for the
+Thermo-PETase system, resulting in a total of 40 938 and
+40 956 atoms, respectively. For each PETase system, two
+trajectories each with a length of 1 μs were generated at both
+298 and 308 K without implementing any restraints on the
+enzyme and substrate, following previous studies.
+40,51,58,59
+We
+found that 4PET maintained binding interactions with both
+WT- and Thermo-PETase throughout the 1 μs MD
+simulations.
+Computational Analysis. We used the built-in modules of
+Gromacs to calculate root-mean-square deviation (RMSD),
+root-mean-square fluctuation (RMSF), residue distances, and
+to conduct principal component analysis (PCA), while the
+MDAnalysis software was employed for calculating the contact
+map.
+60
+All of the analyses were performed after the removal of
+the translation and rotation of the protein in the simulation
+system during the trajectories. The RMSF value for each
+residue was calculated by averaging the RMSF of atoms
+belonging to that residue. For contact probability calculations,
+contacts between any heavy atoms of one residue pair were
+included with the cutoff distance set at 0.5 nm. The results
+were normalized to obtain the residue-level contact probability.
+The two-dimensional (2D) free energy landscapes (FELs)
+were constructed using the formula: −kT lnP(x, y), where P(x,
+y) is the probability distribution of the protein configuration at
+the selected reaction coordinates x and y obtained from the
+simulations. All trajectories at ambient temperatures (298 and
+308 K) were combined together for calculating P(x, y).
+PCA transforms a number of correlated variables into a
+number of uncorrelated variables called principal components
+(PCs), while retaining those characteristics of the data set that
+contribute most to its variance.
+61
+The PCA results show the
+directionality and amplitude of protein motions with the first
+several PCs correlated with large conformational changes. PCA
+was performed on the trajectories of 298 and 308 K,
+respectively. At each temperature, two trajectories were
+combined together and the Cartesian coordinates of C
+α
+atoms of residues were chosen to calculate the covariance
+matrix C. The elements of covariance matrix C were calculated
+by
+=
+ =
+r r r rC
+ N
+1
+( )( )
+ij
+ k
+N
+i
+k
+i j
+k
+j
+ 1
+where N is the total number of simulation frames, r
+i
+k
+is the
+Cartesian coordinate of C
+α
+atom of residue i at the simulation
+frame k and ⟨r
+i
+⟩ denotes the average over the entire trajectory.
+The eigenvalues and eigenvectors were calculated by diagonal-
+izing covariance matrix C. Each eigenvalue represents the mean
+displacement along the corresponding eigenvectors. The two
+eigenvectors associated with the two highest eigenvalues
+account for the two largest percentages of the total
+fluctuations, corresponding to PC1 and PC2, respectively.
+The trajectories were finally projected onto PC1 and PC2 for
+further analysis.
+Frustration results were obtained by using the Frustra-
+tometer online server.
+62
+The PDB files of WT- and Thermo-
+PETase (5XJH
+19
+and 6IJ6
+21
+) were uploaded to the server with
+electrostatic interactions considered during the calculation.
+The frustration index (FruInd) measures how favorable a
+native contact is relative to the set of all possible contacts by
+mutation of the residues in that location, normalized using the
+variance of the energy distribution. In practice, we used
+“configurational frustration” to obtain FruInd, as this option
+takes into account residue changes in both identity and
+location. A contact is defined as “minimally frustrated” if
+FruInd is higher than 0.78, indicating that its native energy is at
+the lower end of the energy distribution. Conversely, a contact
+is defined as “highly frustrated” if FruInd is lower than −1,
+indicating that its native energy is at the higher end of the
+energy distribution.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7578
+■
+RESULTS AND DISCUSSION
+Structural Dynamics of PETase in the Native State.
+We performed microsecond-long MD simulations initialized
+from the native structures of WT- and Thermo-PETase to
+investigate the temperature-dependent structural dynamics of
+PETase. MD simulations were carried out at two ambient
+temperatures (298 and 308 K) and one elevated temperature
+(450 K), which is much higher than the melting temperatures
+of WT- and Thermo-PETase measured by experiments (321.8
+and 330.6 K).
+21
+RMSD relative to the respective native
+structures was then calculated for each simulation. We
+observed that Thermo-PETase consistently exhibits lower
+RMSD values than WT-PETase at all three temperatures, in
+particular, at the high temperature of 450 K (Figures 1A−C,
+S2). These results suggest that Thermo-PETase possesses
+enhanced thermodynamic stability upon the mutations,
+consistent with experimental observations.
+21
+Additionally, the
+consistently lower RMSD values of Thermo-PETase compared
+to WT-PETase at both 298 and 308 K imply an overall
+reduction in the structural dynamics of Thermo-PETase
+relative to WT-PETase.
+To quantitatively assess the structural dynamics of PETase
+at the residue level, we calculated RMSF by collecting all the
+simulation trajectories each at 298 and 308 K (Figure 1D and
+E). The RMSF profiles and residue-level contact probability
+maps of WT- and Thermo-PETase show substantial overlap at
+both corresponding temperatures, with notable differences
+primarily observed in the region involving Trp185 (within the
+W-loop, Ala180−Pro197), and the region involving Asp206
+(within the D-loop, Glu204−Ser213) and His237 of the
+catalytic triad (Figure S3). As the temperature increases, the
+structural flexibility of these two catalytic residues (Asp206 and
+His237) in both WT- and Thermo-PETase appears to be
+significantly enhanced (Figure 1F). Interestingly, although the
+overall structural dynamics of WT-PETase is more significant
+than those of Thermo-PETase, as indicated by RMSD (Figure
+Figure 1. Structural stability and flexibility of WT- and Thermo-PETase revealed by MD simulations. RMSD relative to the corresponding native
+structures of WT- and Thermo-PETase (PDB: 5XJH
+19
+and 6IJ6
+21
+) at (A) 298 K, (B) 308 K, and (C) 450 K, respectively. RMSF of WT- and
+Thermo-PETase at (D) 298 K and (E) 308 K. (F) RMSF differences between 298 and 308 K for WT- and Thermo-PETase. RMSF differences
+between WT- and Thermo-PETase (RMSF
+Thermo
+− RMSF
+WT
+) at (G) 298 K and (H) 308 K. The purple, orange, and red vertical lines in (D−H)
+indicate the catalytic triad Ser160, Asp206, and His237, respectively. (I) RMSF values at 298 and 308 K for WT- and Thermo-PETase projected
+onto the corresponding native structures. The thickness and color of the tubes illustrated on the PETase structures denote the magnitudes of
+RMSF. The blue dashed region in (I) illustrates the PET-binding site on the surface of PETase. The PET-binding site is determined by the docking
+of one PET tetramer to WT-PETase, as described in Figure S1. The three mutations (S121E/D186H/R280A) in Thermo-PETase with respect to
+WT-PETase are indicated in (I).
+21
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7579
+1A), Thermo-PETase exhibits more flexibility in regions
+involving two catalytic residues at 298 K (Figure 1G). Upon
+increasing the temperature to 308 K, the D-loop in Thermo-
+PETase appears to be more stable than it in WT-PETase, while
+the flexibility of the region close to His237 in Thermo-PETase
+is still more pronounced than that in WT-PETase, as
+demonstrated by RMSF (Figure 1H) and the contact
+probability map (Figure S3). The W-loop, which was identified
+as one of the most flexible regions in WT-PETase, has negative
+effects on its overall thermostability.
+32,63
+Mutation on the
+residues within the W-loop (e.g., Asp186) in order to form
+stable electrostatic interactions or hydrogen bonds has been
+demonstrated as a practice strategy for enhancing the
+thermostability of PETase.
+21,33
+Our simulations reveal that
+mutations in Thermo-PETase stabilize the W-loop by reducing
+the structural flexibility, potentially contributing to increased
+stability. On the other hand, the W-loop in Thermo-PETase
+remains consistently more stable than it is in WT-PETase
+across different temperatures. This observation is reminiscent
+of the findings from a recent study, which has underlined the
+advantageous role of a rigid, correctly oriented Trp185 in
+stabilizing the binding interactions with the substrate.
+33
+To better illustrate the structural flexibility of PETase and its
+changes with increasing temperature, we mapped the RMSF
+values onto the native structures of WT- and Thermo-PETase
+(Figure 1I). Noteworthy, the RMSD between the PDB
+structures of WT- and Thermo-PETase is only 0.02 nm,
+indicating that these two PETases share a high degree of
+similarity in the static native structure. However, notable
+differences in structural dynamics are evident, particularly in
+regions close to the PET-binding site. Furthermore, at the low
+temperature of 298 K, the D- and W-loops in WT-PETase
+exhibit certain degrees of flexibility, while most regions in WT-
+PETase are relatively static, including the PET-binding site. As
+the temperature increases to 308 K, the binding site of WT-
+PETase becomes dynamic. The flexible binding site in PETase
+may potentially facilitate substrate binding, contributing to the
+increased PET-degradation efficiency.
+40
+In contrast, despite
+having a more rigid W-loop, Thermo-PETase at 298 K exhibits
+excessive structural flexibility at the binding site, which
+becomes even more dynamic as the temperature increases to
+308 K. These distinct observations of structural dynamics
+between WT- and Thermo-PETase may influence substrate
+Figure 2. PCA projected on the native dynamics of WT- and Thermo-PETase. (A, B) FELs of WT- and Thermo-PETase at 298 K, projected onto
+PC1 and PC2. The weights of PC1 and PC2 are 20.89 and 15.35%, respectively. (C, D) FELs of WT- and Thermo-PETase at 308 K, projected
+onto PC1 and PC2. The weights of PC1 and PC2 are 29.19 and 12.18%, respectively. Representative structures of PETase extracted from the
+simulation trajectories at 298 K projected onto (E) PC1 and (F) PC2, respectively. Representative structures of PETase extracted from the
+simulation trajectories at 308 K projected onto (G) PC1 and (H) PC2, respectively. In each panel of panels (E−H), 10 representative structures
+ranging from the lowest to the highest PC values are shown, with arrows indicating the structural motions along the corresponding PC. (I−L) Local
+PETase structural illustrations focusing on the PET-binding site for different (meta)stable states indicated in (A−D). The PDB structure of WT-
+PETase (gray, representing state 1) is aligned with the (I) states 3 (green) and 4 (red), (J) state 5 (blue), (K) state 6 (cyan), and (L) state 7
+(yellow). In (E−H), the residues at the PET-binding site are colored dark green. In (E−L), the three catalytic residues (Ser160, Asp206, and
+His237) are colored in orange. State 2 is structurally similar to state 1 (native structure); thus, it is not shown. Full PETase structural illustrations
+are shown in Figure S4.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7580
+binding, thus, further making distinct contributions to the
+catalytic activity of PETase.
+FELs of PETase in the Native State. In order to capture
+the essential structural dynamics of PETase at the native states,
+we collected the simulation trajectories of WT- and Thermo-
+PETase at the same ambient temperatures (298 and 308 K),
+where both PETases remained folded, and subsequently
+performed PCA. At 298 K, the FELs projected onto the PC1
+and PC2 reveal that WT-PETase explores a notably smaller
+conformational space compared to Thermo-PETase, indicating
+significant structural flexibility in Thermo-PETase at low
+temperatures (Figure 2A and B). At 308 K, although the area
+of FELs is comparable for WT- and Thermo-PETase, the
+conformational spaces explored by these two PETases are
+significantly different, leading to distinct structural dynamics
+(Figure 2C and D).
+Further projections of simulation trajectories onto the PCs
+with structural illustrations showcase the key motions in
+PETase (Figure 2E−H). We observed that the most dominant
+structural dynamics in these two PETases at both temperatures
+are related to the collective motions led by the PET-binding
+site and catalytic site. Specifically, at 298 K, the D-loop exhibits
+a twisting motion along PC1, whereas it swings in the opposite
+direction from the loop hosting His237 along PC2. This
+Figure 3. FELs projected onto the distances between every pair of the catalytic triad of Ser160, Asp206, and His237. FELs at 298 K for (A−C)
+WT-PETase and (D−F) Thermo-PETase. FELs at 308 K for (G−I) WT-PETase and (J−L) Thermo-PETase. Typical structures of PETase
+focusing on the catalytic triad in different (meta)stable states are shown. The (meta)stable states are numbered in the same manner as they are in
+Figure 2. Colored triangles depict the geometries of the catalytic sites of PETase at different (meta)stable states, while the gray triangle depicts the
+geometry of the catalytic site in the native structure of WT-PETase (state 1). The pairwise distances of the catalytic residues in state 6 are similar to
+those in state 1 (native structure), thus the structural illustration of state 6 is not shown.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7581
+motion along PC2 may correspond to a conventional “open-to-
+close” conformational transition in PETase,
+38,64
+potentially in
+favor of accommodating PET-binding. Furthermore, the FEL
+of WT-PETase features a single, wide basin, which includes the
+native state (denoted as state 1) and native-like state 2. In
+contrast, the FEL of Thermo-PETase displays three widely
+distributed energy basins, with the most probable one
+corresponding to the native state. Thermo-PETase within the
+right-most basin (denoted as state 4) and the intermediate
+basin (denoted as state 3) both show a more elongated D-loop
+(Figure 2I), which may facilitate PET binding.
+65
+The collective motion patterns in PETase vary significantly
+as the temperature changes. When the temperature increases to
+308 K, the structural dynamics of PETase along PC1 and PC2
+predominantly concentrate on the PET-binding site and are
+strongly related to the “open-to-close” transition (Figure 2G
+and H). In this respect, state 5, which was found to be highly
+populated in both WT- and Thermo-PETase, exhibits an open-
+binding site (Figure 2J), serving as a binding-competent state.
+In addition, distinct structural dynamic behaviors were
+observed for these two PETase, as evidenced by the more
+widely distributed FEL of WT- and Thermo-PETase focusing
+along PC2 and PC1, respectively. It is worth noting that the
+collective motion of PETase along PC2 involves a twisting
+mode, which may lead to an incomplete opening of the binding
+site for PET. Careful analysis on the structures of PETase in
+states 6 and 7 (Figure 2K and L), which are respectively
+populated by WT- and Thermo-PETase, reveals no clear
+expansion in the binding cleft; thus, their roles in PET binding
+remain elusive.
+To elucidate the structural dynamics of PETase at the
+catalytic site, we projected the FELs onto the spatial distances
+between every pair of residues in the catalytic triad Ser160,
+Asp206, and His237 (Figure 3). At 298 K (Figure 3A−F),
+WT-PETase explores a much narrower conformational space
+than that of Thermo-PETase, with two (meta)stable states
+observed (states 1 and 2). Noteworthy, while WT-PETase in
+state 2 is overall structurally similar to the native structure
+shown in Figure 2, it possesses a slightly opened catalytic triad,
+compared to that in state 1. The existence of state 2 for WT-
+PETase may facilitate this enzyme to bind and consequently
+degrade PET at room temperature.
+40
+On the other hand,
+Thermo-PETase in states 3 and 4 exhibits similarly increased
+pairwise distances among these three catalytic residues
+compared to WT-PETase. This indicates that the structural
+flexibility of Thermo-PETase at the catalytic site is significantly
+enhanced by the mutations, thus promoting the binding of
+PET.
+At 308 K (Figure 3G−L), although WT- and Thermo-
+PETase display comparable overall areas of FELs, they are
+populated at different (meta)stable states. Apart from the
+shared states 1 and 5, where PETase exhibits the cleft-open,
+binding-competent structure, WT- and Thermo-PETase were
+also found to be populated at states 6 and 7, respectively.
+Detailed analysis reveals that WT-PETase maintains structural
+similarity at the catalytic site between states 1 and 6, indicating
+that WT-PETase in state 6 may not be advantageous for PET
+binding. On the other hand, Thermo-PETase in state 7
+features an open-binding cleft with the elongated pairs of
+Ser160−His237 and Asp206−His237, thus rendering it a
+binding-competent state for promoting PET binding. In
+addition, it is evident that Thermo-PETase can explore more
+conformational space at large distance values of Asp206−
+His237. It is worth noting that the Asp206−His237 bridge
+serves as a critical structural scaffold for substrate accom-
+modation and directly interacts with PET molecules (Figures
+Figure 4. Local frustrations in WT- and Thermo-PETase. (A) Distribution of the FruInd for contacts involving all residues, with a dashed gray line
+indicating the most probable value. Visualization of total minimally and highly frustrated contacts on the native structures of (B) WT- and (C)
+Thermo-PETase, respectively. (D−F) Same as (A−C), but specifically for contacts involving residues within the binding site. In (B), (C), (E), and
+(F), green lines represent the minimally frustrated contacts, while red lines represent the highly frustrated contacts.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7582
+1I and S1). In this respect, the extended and flexible Asp206−
+His237 pair possessed by Thermo-PETase may assist PET
+binding through excessive structural fluctuations.
+Frustrations in the Native Structure of PETase. A
+naturally evolved, well-folded protein adheres to the “principle
+of minimal frustration”,
+66
+which typically results in a funneled
+energy landscape. However, conflicting inter-residue inter-
+actions, known as frustrated contacts, are frequently observed
+in the native structures of proteins. Although these interactions
+generally weaken the stability of native structures, they can
+promote specific structural dynamics that may be related to
+functional purposes.
+67
+To assess the presence of frustrated
+contacts in WT- and Thermo-PETase, we quantified
+frustrations in the native structures of these two PETases
+using the method introduced by Ferreiro et al.
+68
+In brief, this
+method compares the energetic contribution to the additional
+stabilization provided to a pair of residues in the native
+structure with the statistical distribution of energies that would
+result from placing different residues in the same position. A
+native pair is deemed a highly frustrated contact if it induces
+significant destabilization compared with other possibilities. In
+other words, the native energy of a highly frustrated pair
+should be at the high end of the distribution. Conversely, for a
+minimally frustrated contact, its native energy should occupy
+the lower end of the energy distribution. This indicates that the
+minimally frustrated contact is relatively stable in the native
+structure, while any mutation affecting this contact will likely
+increase the energy, leading to structural destabilization. To
+measure the level of frustration, a quantity called the
+frustration index (FruInd) was introduced.
+68
+FruInd is
+calculated as the ratio of the additional stabilization energy
+for an individual native pair to the typical fluctuation in the
+energy distribution. Thus, a high (low) value of FruInd
+indicates a low (high) degree of frustration for the contact.
+The threshold of FruInd for determining whether a contact is
+highly or minimally frustrated was taken from Ferreiro et al.
+68
+We observed wide distributions of FruInd for both WT- and
+Thermo-PETase, with highly frustrated contacts being only
+weakly populated (Figure 4A−C and Table S1). Additionally,
+the distributions of FruInd for WT- and Thermo-PETase
+largely overlap, suggesting that the three mutations in Thermo-
+PETase may not lead to significant changes in the frustrations
+of the native structures. These results imply that both PETase
+and its variant have largely eliminated the highly frustrated
+interactions in their native states, resulting in stable structures
+as robust scaffolds for function. Focusing on the PET-binding
+site, we observed that the distributions of FruInd for WT- and
+Thermo-PETase slightly shift to the left, indicating an
+accumulation of highly frustrated contacts at the binding site
+(Figure 4D). This suggests that the binding site of PETase is
+fragile and prone to deformation.
+69
+Furthermore, notable
+differences in frustration were observed between WT- and
+Thermo-PETase (Figure 4E and F). Detailed comparisons at
+the binding site reveal that Thermo-PETase exhibits lower
+values in the FruInd distribution and possesses more highly
+frustrated contacts than does WT-PETase. These findings
+together suggest that WT- and Thermo-PETase may share
+globally similar structural dynamics, with discrepancies
+primarily observed locally at the binding site, where Thermo-
+PETase displays more significant structural flexibility than WT-
+PETase.
+Dynamics of PETase upon PET Binding. Structural
+flexibility of enzymes at catalytic sites can be advantageous for
+substrate recruitment and product release,
+70,71
+however
+excessive structural dynamics at catalytic sites may induce
+large catalytic distances, thereby impeding chemical reactions.
+In order to see how PET binding impacts the structural
+dynamics of PETase and subsequent catalysis, we performed
+Figure 5. Structural Dynamics of PETase upon substrate binding. RMSF of WT- and Thermo-PETase binding with the substrate at (A) 298 K and
+(B) 308 K. RMSF differences of PETase between the apo state and the binary substrate−complex state for WT- and Thermo-PETase at (C) 298 K
+and (D) 308 K. Normalized frequency distribution of spatial distance d
+OC
+between the oxygen O
+γ
+and the carbonyl carbon C of the substrate and
+population distribution of the potentially catalytically competent (“PotCal”) state and precatalytically competent (“PreCal”) state during MD
+simulations performed at (E) 298 K and (F) 308 K. The “PotCal” state and “PreCal” state are defined by a threshold of d
+OC
+of 0.4 nm.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7583
+molecular docking of a 4PET with PETase (Figure S1). The
+complex structure of PET:PETase obtained through docking is
+consistent with those from the previous studies,
+19,54
+and
+subsequently was used as the initial structure for the MD
+simulations at ambient temperatures (298 and 308 K).
+It has been proposed that the nucleophilic attack carried out
+by Ser160 to the carbonyl group of the benzene ring of the
+substrate PET molecules is essential for initializing the
+hydrolysis of PET polymer by PETase.
+37,58,59
+In this regard,
+we calculated the distance (d
+OC
+) between the oxygen O
+γ
+of the
+catalytic Ser160 and the carbonyl carbon C of the substrate
+during MD simulations (Figure S6), considering that a
+chemical reaction occurs only when the involving atoms are
+spatially close. At 298 K, both WT- and Thermo-PETase keep
+the distance d
+OC
+at relatively low values, which is optimal for
+the subsequent catalytic reaction. When the temperature
+increases to 308 K, the distance d
+OC
+during the simulations
+largely remained at small values. We note that large
+fluctuations in d
+OC
+were observed occasionally (d
+OC
+> 0.6
+nm) at both temperatures, leading to substrate drifting away
+from the binding site. Due to the inherent flexible character-
+istics of the polymer, the enzyme−substrate bound state was
+observed to be flexible in our simulations, consistent with
+previous studies.
+54,72
+In PET, the backbone adopts two
+different conformations, trans and gauche, which can have
+different impacts on the degradation efficiency of PETase.
+64
+To explore the main conformation of 4PET when bound with
+PETase, we performed analysis on the O−C−C−O torsion
+angle in the ethylene glycol (EG) units of the 4PET substrate
+(Figure S6). We found that the gauche conformation comprises
+about 90% of the PET conformational ensembles at both 298
+and 308 K, similar to previous observations for amorphous
+PET film.
+39
+These results further suggest that the binding
+modes in our study resemble the binding of a low-crystallinity
+PET film with PETase.
+In order to assess the structural dynamics of PETase upon
+substrate binding, we extracted the trajectories when 4PET is
+bound with PETase and calculated the RMSF of PETase
+(Figures 5A,B and S7). Interestingly, we found that the RMSF
+profiles of WT- and Thermo-PETase in the PET-bound binary
+complexes are very similar. This is different from PETase at the
+apo state, where arresting discrepancies were found upon
+mutations (Figure 1). Detailed comparisons of RMSF profiles
+between WT- and Thermo-PETase indicate that Thermo-
+PETase has overall smaller RMSF values than WT-PETase, in
+particular at the catalytic residues of Asp206 and His237.
+Further structural analysis reveals that the catalytic triad of
+PETase in the bound complex is very similar for both WT- and
+Thermo-PETase (Figure S8), resembling that in the native
+structure of PETase in its apo state. Our findings indicate that
+WT- and Thermo-PETase share similar structures and
+dynamics when they are bound with the substrate.
+We observed extensive quenching of structural dynamics in
+PETase bound with 4PET (Figure 5C and D). In detail, the
+most significant dynamics quenching effects for WT-PETase
+occurred within the W-loop. The side chain of Trp185 has
+been found to adopt three conformations in the native
+structure of WT-PETase.
+37,38
+Quenching the structural
+dynamics of Trp185 and adapting its structure toward the
+one in the PET-binding state are crucial steps in realizing the
+catalysis of PETase, leading to the major difference between
+mesophilic and thermophilic PET hydrolases. On the other
+hand, 4PET significantly stabilizes the catalytic residues
+Asp206 and His237 in Thermo-PETase, and thus, the
+dynamics of the catalytic triad observed in the apo state has
+been largely quenched. As the stable catalytic sites and spatially
+closed catalytic distances are prerequisites for catalysis, 4PET
+binding stabilizes structures of Thermo-PETase more than
+those of WT-PETase, possibly due to the fact that the
+interactions formed between substrate and enzyme are
+stronger and more widely distributed in Thermo-PETase
+than WT-PETase (Figure S9).
+By analyzing the d
+OC
+distribution, we found that Thermo-
+PETase exhibits a higher population at smaller d
+OC
+values
+when bound with 4PET (Figure 5E and F). A smaller distance
+between the catalytic serine of the enzyme and the labile
+carbonyl of the substrate often suggests a higher probability for
+the hydrolytic reaction to take place.
+73
+Here, we chose 0.4 nm
+as the threshold for defining the state with a small d
+OC
+, which is
+potentially competent to trigger catalysis (referred to as the
+“PotCat state”), and the state with too large d
+OC
+to trigger
+catalysis (referred to as the “PreCat state”). The higher
+population of the “PotCat” state for Thermo-PETase than that
+for WT-PETase implies that Thermo-PETase may more
+readily trigger the subsequent catalytic reaction, potentially
+contributing to its enhanced efficiency. As the temperature
+increased from 298 to 308 K, we observed a decreasing
+population of the “PotCat” state for Thermo-PETase, while
+WT-PETase maintained similar distributions of the “PotCat”
+and “PreCat” states. Our results suggest that the catalytic sites
+of Thermo-PETase, compared with those of WT-PETase, are
+more sensitive to external stimuli such as substrate binding and
+temperature changes.
+■
+CONCLUSIONS
+In this work, we used MD simulations and local frustration
+analysis to investigate how the three mutations (S121E,
+D186H, and R280A) contribute to the enhanced PET-
+degradation efficiency of Thermo-PETase. Experiments have
+demonstrated that Thermo-PETase exhibits enhanced PET-
+degradation activity compared to WT-PETase, even at low
+temperatures,
+21,25
+where both PETases remain well-folded.
+Previous studies have revealed that, unlike thermophilic PET
+hydrolases, which have rigid, closed active sites and show no
+PET-degradation activity at moderate (mesophilic) temper-
+atures, the active-site flexibility in PETase is crucial for efficient
+PET degradation.
+40
+Although the initial design objective for
+Thermo-PETase was to increase the thermostability of the
+enzyme by introducing additional stabilizing interactions,
+21
+we
+observed significant enhancements in structural flexibility at
+the PET-binding sites. The open and dynamic nature of the
+active-site cleft has been recognized as a critical factor enabling
+PETase to function at ambient temperatures, providing a
+distinct catalytic advantage over thermophilic hydrolases.
+38
+Our results align with these findings, showing that Thermo-
+PETase has increased both global thermostability and local
+flexibility, potentially contributing to the overall enhancement
+of PET degradation observed in the experiments. The high
+similarity between the native structures of WT- and Thermo-
+PETase has resulted in a similar overall pattern of frustrated
+contact. However, a detailed analysis of the local regions shows
+distinct frustration levels between these two PETases. The
+introduction of the three mutations in Thermo-PETase
+increases the degree of frustration at the local PET-binding
+sites, making Thermo-PETase more prone to deformation in
+favor of accommodating the substrate during binding
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7584
+compared to WT-PETase. Notably, our results from both MD
+simulations and frustration analysis on the apo form of PETase
+reveal the dynamic picture of PETase when recruiting the PET
+substrate, reminiscent of recently proposed conformational
+selection for the PETase:PET complex initiation.
+64
+Interest-
+ingly, we found that substrate binding significantly reduces the
+structural dynamics of Thermo-PETase induced by the
+mutations, resulting in a stable catalytic triad similar to that
+of WT-PETase. Furthermore, we observed increases in
+substrate−enzyme interchain contacts in Thermo-PETase,
+leading to more populated catalytically competent states for
+chemical reactions compared to WT-PETase. Collectively, we
+propose that the effects of mutations in Thermo-PETase on
+improving the PET-degradation performance may be multi-
+faceted: (1) enhancing the overall stability of the enzyme for
+increasing its tolerance to environmental changes; (2)
+increasing the local structural flexibility at the binding site,
+which is advantageous for substrate recruitment and product
+release; and (3) quenching the structural dynamics of the
+enzyme at catalytic sites upon substrate binding, a prerequisite
+for chemical reactions.
+Substrate-binding residues are important for enzymatic
+activity. Previous studies identified a unique conformationally
+dynamical equilibrium of the Trp185 side chain wobbling
+between conformers A, B, and C in PETase.
+37,38
+This has made
+PETase distinguishable from other homologous enzymes such
+as thermophilic PET hydrolases, where the equivalent
+conserved Trp adopts conformer C (Figure S10). Structural
+analysis indicates that the substrate can only bind to PETase
+with Trp185 in conformer B by forming stacked interactions
+with one of the rings in PET molecules, while other
+conformers of Trp185 would clash with the substrate, thus
+hindering the binding.
+37
+Recent experiments and simulations
+have underlined the importance of the unique amino acids
+Ser214 and ILe218 of WT-PETase in triggering the high
+mobility of Trp185, thereby proposing a general mechanism
+for improving the catalytic activity of thermophilic PET
+hydrolases through the permission of the “wobbling” dynamics
+of Trp185.
+63,74
+Interestingly, our simulation results reveal that
+the conformational dynamics of Trp185 in Thermo-PETase
+have vanished, associated with a stabilized W-loop, compared
+to WT-PETase. Detailed structural analysis shows that Trp185
+in Thermo-PETase is already in conformer B (Figure S10),
+thus facilitating the subsequent substrate binding. It is worth
+noting that great efforts have been made recently on mutating
+residues in the W-loop, aiming at fixing Trp185 in conformer B
+while simultaneously enhancing the overall stability.
+26,32,33
+Consequently, the mutations in Thermo-PETase have
+effectively stabilized both the local structure at Trp185 toward
+the substrate-binding conformation and the global structure by
+introducing a hydrogen bond (S121E/D186H) at the W-loop,
+which is one of the most flexible regions in WT-PETase.
+21,75
+Conventionally, the practical design of WT-PETase aims to
+improve thermostability by reducing the structural flexibil-
+ity,
+21,24−27,29,30,32,33,76
+as stability and flexibility are usually
+considered to be coupled in proteins. For instance, the residues
+within the highly flexible W-loop of WT-PETase have been
+targeted as hot spots for engineering. Through the
+substitutions of Asp186 with polar or nonpolar residues in
+the W-loop,
+21,32,33
+most PETase variants exhibited increased
+melting temperatures along with enhanced catalytic activity,
+compared to WT-PETase. From the energy landscape
+perspective, the stability of a protein can be determined by
+the funnel-like topography of its folding energy landscape.
+77,78
+In this regard, mutations aiming at introducing stabilized
+interactions in the native state, which corresponds to the
+bottom of the funnel, will deepen the energy landscape, thus
+leading to increased thermostability (Figure 6). Interestingly,
+our simulations reveal that the improvements in the catalytic
+activity of Thermo-PETase can be partially attributed to the
+enhanced structural flexibility of the enzyme in its native state.
+In other words, in addition to increasing the depth of the
+funnel, mutations in Thermo-PETase have unprecedented
+effects on modulating the shape of the energy landscape at the
+bottom of the funnel. At low temperature, Thermo-PETase can
+explore a wider range of conformational space than WT-
+Figure 6. Energy landscapes and FELs of WT- and Thermo-PETase. The funneled energy landscapes of WT- and Thermo-PETase show arresting
+differences in the depth of funnels (upper center), suggesting increased stability for Thermo-PETase upon triple mutations. With close examination
+at the bottom of the funnel, WT- and Thermo-PETase exhibit distinct free energy profiles (left and right), each showcasing unique temperature
+responses. Orange arrows denote the transitions between states near the native state with arrow thickness representing the ease of these transitions.
+Upon PET binding (lower center), these two PETases have the same catalytically competent native structure with PET being more loosely bound
+with WT-PETase than Thermo-PETase.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7585
+PETase. Mutations enable Thermo-PETase to switch between
+the native structure resembling WT-PETase and the PET
+binding-competent structure with the open and flexible active
+cleft, which promotes substrate binding. This binding-
+competent structure can be highly populated for WT-PETase
+only at elevated temperatures, where Thermo-PETase becomes
+more flexible in rendering multiple binding-competent
+structures. However, WT-PETase is heat-labile and prone to
+denaturation, slowing down its catalytic activity at high
+temperatures. Upon PET binding, the extensive structural
+dynamics of Thermo-PETase are largely quenched by PET,
+leading to a stable catalytically competent native structure, the
+same as WT-PETase. Furthermore, we found that the complex
+formed by WT-PETase and PET switch between two states
+(“PotCat” and “PreCat” states), supported by the NMR
+experiments, where PET in the binding cleft of PETase was
+found to be highly dynamic.
+39,79
+Compared to WT-PETase,
+Thermo-PETase, which forms more extensive contacts with
+PET and is dynamically quenched, exhibits closer distances for
+nucleophilic attack, thus leading to higher chances for PET
+hydrolytic reactions to take place. In conclusion, mutations in
+Thermo-PETase have decoupled the interplay between global
+stability and local flexibility of the enzyme, thus improving the
+catalytic performance of Thermo-PETase over WT-PETase
+across a wide range of temperatures.
+21
+The PET-degradation process is complex, involving both the
+adsorption of PETase to the PET polymeric chain and the
+chemical reaction that breaks down the PET polymer into its
+constituting monomers. Unlike thermophilic PET-degrading
+enzymes, PETase can depolymerize PET at moderate temper-
+atures.
+18
+This unique functionality of PETase is largely due to
+its structural characteristics, particularly its open active-site
+cleft, which provides high accessibility for substrate binding,
+38
+thereby enhancing PET-degradation activity at moderate
+temperatures. In this study, we focused on characterizing the
+structural dynamics of PETase and its variant, aiming to
+elucidate the roles of mutations in Thermo-PETase in
+facilitating substrate binding and stabilizing the initial
+PETase:PET complex. However, our study, which does not
+explore the chemical reaction, has limitations in fully
+understanding the PET-degradation process. Recently, Gar-
+ci
+́
+a-Meseguer et al. used hybrid quantum mechanics/molecular
+mechanics (QM/MM) MD simulations to characterize the
+catalytic mechanisms of FAST-PETase compared to WT-
+PETase.
+58
+They found that although all five mutations in
+FAST-PETase are far from the active site, they play important
+roles in stabilizing the transition state by indirectly impacting
+the catalytic triad, leading to lowering of the free energy
+barriers during the chemical reaction. This study, along with
+our work, suggests that the mutations in Thermo- and FAST-
+PETase, initially designed to improve thermostability, may also
+enhance substrate binding and catalysis, ultimately accelerating
+PET depolymerization.
+In summary, our results reveal that the stability and
+flexibility of enzymes are not necessarily correlated, in
+contradiction to the convention that high (low) stability
+usually leads to a rigid (flexible) protein structure.
+80
+It is worth
+noting that recent work has observed a decoupling interplay
+between the stability and flexibility in a computationally
+designed hydrolase Turbo-PETase, which has demonstrated
+superior performance compared to other PET hydrolases to
+date.
+30
+The high PET depolymerization efficiency of Turbo-
+PETase was attributed to the mutations that have resulted in
+both increases in thermostability at the global scale and
+structural flexibility at the PET-binding site, exhibiting elevated
+melting temperature and simultaneously enabling the pro-
+miscuous attack to different PET surface structures.
+30
+This
+significant achievement made by Turbo-PETase has paved a
+promising way for future PETase design, focusing on
+enhancing both thermostability and flexibility. Recently, AI-
+aided protein design has become increasingly popular and
+efficient, particularly for structural design and functional
+optimization.
+81
+Various deep-learning protein sequence
+engineering methods can be applied to create enzymes with
+enhanced catalytic efficiency.
+82−84
+A notable success in this
+field is FAST-PETase, which exhibits significantly improved
+catalytic activity over a wide range of temperatures compared
+to WT-PETase and Thermo-PETase.
+25
+FAST-PETase utilizes
+deep learning techniques to predict optimal amino acids in the
+local structural environments of WT-PETase, based on training
+with over 19,000 protein structures from the PDB. Our study
+shows that both global stability and local flexibility of PETase
+are crucial for achieving highly efficient PET-degradation
+activity. This underscores the necessity for AI tools to manage
+the delicate balance between stability and flexibility in PETase
+design, with the goal of optimizing PET degradation at
+ambient temperatures. Although a full mechanistic under-
+standing of achieving optimal stability−flexibility balance in
+PETase for maximizing PET-degradation efficiency remains
+elusive, our findings suggest that future mutations aimed at
+enhancing PETase enzymatic activity should carefully consider
+the trade-off between stability and flexibility. Our study offers
+valuable insights into the rational design strategy to improve
+the PET-degradation performance of PETase, where both the
+structure and dynamics of the enzyme should be simulta-
+neously considered.
+■
+ASSOCIATED CONTENT
+Data Availability Statement
+The necessary files for setting up Gromacs simulations and
+molecular docking, as well as the frustration analysis results are
+publicly available at https://osf.io/9yzjf/. Additional data can
+be found in Supporting Information.
+*
+sı
+Supporting Information
+The Supporting Information is available free of charge at
+https://pubs.acs.org/doi/10.1021/acs.jcim.4c00877.
+Details about the frustration analysis are organized in a
+table; graphs illustrating structures in greater detail,
+additional MD simulation trajectories, contact maps, and
+distributions of pairwise distances for the three residues
+of the catalytic triad in WT- and Thermo-PETase at
+different temperatures, with and without substrate
+binding (PDF)
+■
+AUTHOR INFORMATION
+Corresponding Author
+Xiakun Chu − Advanced Materials Thrust, Function Hub, The
+Hong Kong University of Science and Technology
+(Guangzhou), Guangzhou, Guangdong 511400, China;
+Guangzhou Municipal Key Laboratory of Materials
+Informatics, The Hong Kong University of Science and
+Technology (Guangzhou), Guangzhou, Guangdong 511400,
+China; Division of Life Science, The Hong Kong University of
+Science and Technology, Hong Kong SAR 999077, China;
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7586
+orcid.org/0000-0003-3166-7070; Email: xiakunchu@
+hkust-gz.edu.cn
+Authors
+Shiqinrui Xu − Advanced Materials Thrust, Function Hub,
+The Hong Kong University of Science and Technology
+(Guangzhou), Guangzhou, Guangdong 511400, China;
+orcid.org/0009-0000-5480-546X
+Chengze Huo − Advanced Materials Thrust, Function Hub,
+The Hong Kong University of Science and Technology
+(Guangzhou), Guangzhou, Guangdong 511400, China;
+orcid.org/0009-0005-9550-7123
+Complete contact information is available at:
+https://pubs.acs.org/10.1021/acs.jcim.4c00877
+Notes
+The authors declare no competing financial interest.
+■
+ACKNOWLEDGMENTS
+The project was supported by the National Key R&D Program
+of China (No. 2023YFC3905000) and the Guangdong
+Scientific Research Platform and Projects for Higher-educa-
+tional Institutions from the Department of Education of
+Guangdong Province (Grant No. 2023KTSCX169). X.C. was
+also partly supported by the Municipal Key Laboratory
+Construction program of the Guangzhou Municipal Science
+and Technology Project (Grant No. 2023A03J0003). The
+authors acknowledge the Green e Materials (GeM) Laboratory
+and HPC+AI Intelligence Computing Center at the Hong
+Kong University of Science and Technology (Guangzhou) for
+providing computational support.
+■
+REFERENCES
+(1) Moharir, R. V.; Kumar, S. Challenges Associated with Plastic
+Waste Disposal and Allied Microbial Routes for Its Effective
+Degradation: A Comprehensive Review. J. Cleaner Prod. 2019, 208,
+65−76.
+(2) Awoyera, P. O.; Adesina, A. Plastic Wastes to Construction
+Products: Status, Limitations and Future Perspective. Case Stud.
+Constr. Mater. 2020, 12, e00330.
+(3) Ali, S. S.; Elsamahy, T.; Koutra, E.; Kornaros, M.; El-Sheekh, M.;
+Abdelkarim, E. A.; Zhu, D.; Sun, J. Degradation of Conventional
+Plastic Wastes in the Environment: A Review on Current Status of
+Knowledge and Future Perspectives of Disposal. Sci. Total Environ.
+2021, 771, 144719.
+(4) Jambeck, J. R.; Geyer, R.; Wilcox, C.; Siegler, T. R.; Perryman,
+M.; Andrady, A.; Narayan, R.; Law, K. L. Plastic waste inputs from
+land into the ocean. Science 2015, 347, 768−771.
+(5) Geyer, R.; Jambeck, J. R.; Law, K. L. Production, use, and fate of
+all plastics ever made. Sci. Adv. 2017, 3, e1700782.
+(6) Sinha, V.; Patel, M. R.; Patel, J. V. PET waste management by
+chemical recycling: a review. J. Polym. Environ. 2010, 18, 8−25.
+(7) Law, K. L.; Starr, N.; Siegler, T. R.; Jambeck, J. R.; Mallos, N. J.;
+Leonard, G. H. The United States’ Contribution of Plastic Waste to
+Land and Ocean. Sci. Adv. 2020, 6, eabd0288.
+(8) Wei, R.; Zimmermann, W. Biocatalysis as a green route for
+recycling the recalcitrant plastic polyethylene terephthalate. Microb.
+Biotechnol. 2017, 10, 1302.
+(9) Papadopoulou, A.; Hecht, K.; Buller, R. Enzymatic PET
+degradation. Chimia 2019, 73, 743.
+(10) Taniguchi, I.; Yoshida, S.; Hiraga, K.; Miyamoto, K.; Kimura,
+Y.; Oda, K. Biodegradation of PET: current status and application
+aspects. ACS Catal. 2019, 9, 4089−4105.
+(11) Kawai, F.; Kawabata, T.; Oda, M. Current knowledge on
+enzymatic PET degradation and its possible application to waste
+stream management and other fields. Appl. Microbiol. Biotechnol. 2019,
+103, 4253−4268.
+(12) Wei, Y.; Swenson, L.; Castro, C.; Derewenda, U.; Minor, W.;
+Arai, H.; Aoki, J.; Inoue, K.; Servin-Gonzalez, L.; Derewenda, Z. S.
+Structure of a microbial homologue of mammalian platelet-activating
+factor acetylhydrolases: Streptomyces exfoliatus lipase at 1.9 Å
+resolution. Structure 1998, 6, 511−519.
+(13) Mu ̈ ller, R.; Schrader, H.; Profe, J.; Dresler, K.; Deckwer, W.-D.
+Enzymatic Degradation of Poly(Ethylene Terephthalate): Rapid
+Hydrolyse Using a Hydrolase from T. Fusca. Macromol. Rapid
+Commun. 2005, 26, 1400−1405.
+(14) Ronkvist, Å. M.; Xie, W.; Lu, W.; Gross, R. A. Cutinase-
+catalyzed hydrolysis of poly (ethylene terephthalate). Macromolecules
+2009, 42, 5128−5138.
+(15) Sulaiman, S.; Yamato, S.; Kanaya, E.; Kim, J.-J.; Koga, Y.;
+Takano, K.; Kanaya, S. Isolation of a novel cutinase homolog with
+polyethylene terephthalate-degrading activity from leaf-branch com-
+post by using a metagenomic approach. Appl. Environ. Microbiol.
+2012, 78, 1556−1562.
+(16) Wei, R.; Breite, D.; Song, C.; Gräsing, D.; Ploss, T.; Hille, P.;
+Schwerdtfeger, R.; Matysik, J.; Schulze, A.; Zimmermann, W.
+Biocatalytic degradation efficiency of postconsumer polyethylene
+terephthalate packaging determined by their polymer microstructures.
+Adv. Sci. 2019, 6, 1900491.
+(17) Tournier, V.; Topham, C. M.; Gilles, A.; et al. An engineered
+PET depolymerase to break down and recycle plastic bottles. Nature
+2020, 580, 216−219.
+(18) Yoshida, S.; Hiraga, K.; Takehana, T.; Taniguchi, I.; Yamaji, H.;
+Maeda, Y.; Toyohara, K.; Miyamoto, K.; Kimura, Y.; Oda, K. A
+Bacterium That Degrades and Assimilates Poly(Ethylene Tereph-
+thalate). Science 2016, 351, 1196−1199.
+(19) Joo, S.; Cho, I. J.; Seo, H.; Son, H. F.; Sagong, H.-Y.; Shin, T. J.;
+Choi, S. Y.; Lee, S. Y.; Kim, K.-J. Structural Insight into Molecular
+Mechanism of Poly(Ethylene Terephthalate) Degradation. Nat.
+Commun. 2018, 9, No. 382.
+(20) Erickson, E.; Shakespeare, T. J.; Bratti, F.; Buss, B. L.; Graham,
+R.; Hawkins, M. A.; König, G.; Michener, W. E.; Miscall, J.; Ramirez,
+K. J.; Rorrer, N. A.; Zahn, M.; Pickford, A. R.; McGeehan, J. E.;
+Beckham, G. T. Comparative performance of PETase as a function of
+reaction conditions, substrate properties, and product accumulation.
+ChemSusChem 2022, 15, e202101932.
+(21) Son, H. F.; Cho, I. J.; Joo, S.; Seo, H.; Sagong, H.-Y.; Choi, S.
+Y.; Lee, S. Y.; Kim, K.-J. Rational Protein Engineering of Thermo-
+Stable PETase from Ideonella Sakaiensis for Highly Efficient PET
+Degradation. ACS Catal. 2019, 9, 3519−3526.
+(22) Meng, X.; Yang, L.; Liu, H.; Li, Q.; Xu, G.; Zhang, Y.; Guan, F.;
+Zhang, Y.; Zhang, W.; Wu, J. T. Ningfeng Protein engineering of
+stable IsPETase for PET plastic degradation by Premuse. Int. J. Biol.
+Macromol. 2021, 180, 667−676.
+(23) Liu, Y.; Liu, Z.; Guo, Z.; Yan, T.; Jin, C.; Wu, J. Enhancement
+of the Degradation Capacity of IsPETase for PET Plastic Degradation
+by Protein Engineering. Sci. Total Environ. 2022, 834, 154947.
+(24) Cui, Y.; Chen, Y.; Liu, X.; et al. Computational Redesign of a
+PETase for Plastic Biodegradation under Ambient Condition by the
+GRAPE Strategy. ACS Catal. 2021, 11, 1340−1350.
+(25) Lu, H.; Diaz, D. J.; Czarnecki, N. J.; Zhu, C.; Kim, W.; Shroff,
+R.; Acosta, D. J.; Alexander, B. R.; Cole, H. O.; Zhang, Y.; Lynd, N.
+A.; Ellington, A. D.; Alper, H. S. Machine Learning-Aided Engineering
+of Hydrolases for PET Depolymerization. Nature 2022, 604, 662−
+667.
+(26) Bell, E. L.; Smithson, R.; Kilbride, S.; Foster, J.; Hardy, F. J.;
+Ramachandran, S.; Tedstone, A. A.; Haigh, S. J.; Garforth, A. A.; Day,
+P. J. R.; Levy, C.; Shaver, M. P.; Green, A. P. Directed evolution of an
+efficient and thermostable PET depolymerase. Nat. Catal. 2022, 5,
+673−681.
+(27) Brott, S.; Pfaff, L.; Schuricht, J.; Schwarz, J.-N.; Böttcher, D.;
+Badenhorst, C. P.; Wei, R.; Bornscheuer, U. T. Engineering and
+evaluation of thermostable IsPETase variants for PET degradation.
+Eng. Life Sci. 2022, 22, 192−203.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7587
+(28) Lee, S. H.; Seo, H.; Hong, H.; Park, J.; Ki, D.; Kim, M.; Kim,
+H.-J.; Kim, K.-J. Three-directional engineering of IsPETase with
+enhanced protein yield, activity, and durability. J. Hazard. Mater.
+2023, 459, 132297.
+(29) Shi, L.; Liu, P.; Tan, Z.; Zhao, W.; Gao, J.; Gu, Q.; Ma, H.; Liu,
+H.; Zhu, L. Complete depolymerization of PET wastes by an evolved
+PET hydrolase from directed evolution. Angew. Chem., Int. Ed. 2023,
+62, e202218390.
+(30) Cui, Y.; Chen, Y.; Sun, J.; Zhu, T.; Pang, H.; Li, C.; Geng, W.-
+C.; Wu, B. Computational Redesign of a Hydrolase for Nearly
+Complete PET Depolymerization at Industrially Relevant High-Solids
+Loading. Nat. Commun. 2024, 15, No. 1417.
+(31) Joho, Y.; Royan, S.; Caputo, A.; Newton, S.; Peat, T.; Newman,
+J.; Jackson, C.; Ardevol, A. Enhancing PET Degrading Enzymes: A
+Combinatory Approach. ChemBioChem 2024, 25, e202400084.
+(32) Yin, Q.; You, S.; Zhang, J.; Qi, W.; Su, R. Enhancement of the
+polyethylene terephthalate and mono-(2-hydroxyethyl) terephthalate
+degradation activity of Ideonella sakaiensis PETase by an electrostatic
+interaction-based strategy. Bioresour. Technol. 2022, 364, 128026.
+(33) Yin, Q.; Zhang, J.; Ma, S.; Gu, T.; Wang, M.; You, S.; Ye, S.; Su,
+R.; Wang, Y.; Qi, W. Efficient polyethylene terephthalate
+biodegradation by an engineered Ideonella sakaiensis PETase with a
+fixed substrate-binding W156 residue. Green Chem. 2024, 26, 2560−
+2570.
+(34) Wei, R.; von Haugwitz, G.; Pfaff, L.; Mican, J.; Badenhorst, C.
+P. S.; Liu, W.; Weber, G.; Austin, H. P.; Bednar, D.; Damborsky, J.;
+Bornscheuer, U. T. Mechanism-based design of efficient PET
+hydrolases. ACS Catal. 2022, 12, 3382−3396.
+(35) Amalia, L.; Chang, C.-Y.; Wang, S. S.; Yeh, Y.-C.; Tsai, S.-L.
+Recent advances in the biological depolymerization and upcycling of
+polyethylene terephthalate. Curr. Opin. Biotechnol. 2024, 85, 103053.
+(36) Shi, L.; Zhu, L. Recent Advances and Challenges in Enzymatic
+Depolymerization and Recycling of PET Wastes. ChemBioChem 2024,
+25, e202300578.
+(37) Han, X.; Liu, W.; Huang, J.-W.; Ma, J.; Zheng, Y.; Ko, T.-P.;
+Xu, L.; Cheng, Y.-S.; Chen, C.-C.; Guo, R.-T. Structural insight into
+catalytic mechanism of PET hydrolase. Nat. Commun. 2017, 8,
+No. 2106.
+(38) Austin, H. P.; Allen, M. D.; Donohoe, B. S.; et al.
+Characterization and engineering of a plastic-degrading aromatic
+polyesterase. Proc. Natl. Acad. Sci. U.S.A. 2018, 115, E4350−E4357.
+(39) Wei, R.; Song, C.; Gräsing, D.; Schneider, T.; Bielytskyi, P.;
+Böttcher, D.; Matysik, J.; Bornscheuer, U. T.; Zimmermann, W.
+Conformational fitting of a flexible oligomeric substrate does not
+explain the enzymatic PET degradation. Nat. Commun. 2019, 10,
+No. 5581.
+(40) Fecker, T.; Galaz-Davison, P.; Engelberger, F.; Narui, Y.;
+Sotomayor, M.; Parra, L. P.; Ramírez-Sarmiento, C. A. Active Site
+Flexibility as a Hallmark for Efficient PET Degradation by I.
+Sakaiensis PETase. Biophys. J. 2018, 114, 1302−1312.
+(41) Silva, C.; Da, S.; Silva, N.; Matamá, T.; Arau ́jo, R.; Martins, M.;
+Chen, S.; Chen, J.; Wu, J.; Casal, M.; Cavaco-Paulo, A. Engineered
+Thermobifida fusca cutinase with increased activity on polyester
+substrates. Biotechnol. J. 2011, 6, 1230−1239.
+(42) Arau ́jo, R.; Silva, C.; O’Neill, A.; Micaelo, N.; Guebitz, G.;
+Soares, C. M.; Casal, M.; Cavaco-Paulo, A. Tailoring cutinase activity
+towards polyethylene terephthalate and polyamide 6, 6 fibers. J.
+Biotechnol. 2007, 128, 849−857.
+(43) Kan, Y.; He, L.; Luo, Y.; Bao, R. IsPETase is a novel biocatalyst
+for poly (ethylene terephthalate)(PET) hydrolysis. ChemBioChem
+2021, 22, 1706−1716.
+(44) Berselli, A.; Ramos, M. J.; Menziani, M. C. Novel Pet-
+Degrading Enzymes: Structure-Function from a Computational
+Perspective. ChemBioChem 2021, 22, 2032−2050.
+(45) Abraham, M. J.; Murtola, T.; Schulz, R.; Páll, S.; Smith, J. C.;
+Hess, B.; Lindahl, E. GROMACS: High Performance Molecular
+Simulations through Multi-Level Parallelism from Laptops to
+Supercomputers. SoftwareX 2015, 1−2, 19−25.
+(46) Maier, J. A.; Martinez, C.; Kasavajhala, K.; Wickstrom, L.;
+Hauser, K. E.; Simmerling, C. ff14SB: Improving the Accuracy of
+Protein Side Chain and Backbone Parameters from ff99SB. J. Chem.
+Theory Comput. 2015, 11, 3696−3713.
+(47) Parrinello, M.; Rahman, A. Polymorphic Transitions in Single
+Crystals: A New Molecular Dynamics Method. J. Appl. Phys. 1981, 52,
+7182−7190.
+(48) Hess, B.; Bekker, H.; Berendsen, H. J. C.; Fraaije, J. G. E. M.
+LINCS: A Linear Constraint Solver for Molecular Simulations. J.
+Comput. Chem. 1997, 18, 1463−1472.
+(49) Darden, T.; York, D.; Pedersen, L. Particle Mesh Ewald: An N·
+log(N) Method for Ewald Sums in Large Systems. J. Chem. Phys.
+1993, 98, 10089−10092.
+(50) Morris, G. M.; Huey, R.; Lindstrom, W.; Sanner, M. F.; Belew,
+R. K.; Goodsell, D. S.; Olson, A. J. AutoDock4 and AutoDockTools4:
+Automated Docking with Selective Receptor Flexibility. J. Comput.
+Chem. 2009, 30, 2785−2791.
+(51) Jerves, C.; Neves, R. P.; Ramos, M. J.; da Silva, S.; Fernandes, P.
+A. Reaction mechanism of the PET degrading enzyme PETase
+studied with DFT/MM molecular dynamics simulations. ACS Catal.
+2021, 11, 11626−11638.
+(52) Hanwell, M. D.; Curtis, D. E.; Lonie, D. C.; Vandermeersch, T.;
+Zurek, E.; Hutchison, G. R. Avogadro: an advanced semantic chemical
+editor, visualization, and analysis platform. J. Cheminf. 2012, 4,
+No. 17.
+(53) Eberhardt, J.; Santos-Martins, D.; Tillack, A. F.; Forli, S.
+AutoDock Vina 1.2.0: New Docking Methods, Expanded Force Field,
+and Python Bindings. J. Chem. Inf. Model. 2021, 61, 3891−3898.
+(54) da Costa, C. H. S.; Dos Santos, A. M.; Alves, C. N.; Martí, S.;
+Moliner, V.; Santana, K.; Lameira, J. Assessment of the PETase
+conformational changes induced by poly (ethylene terephthalate)
+binding. Proteins: Struct., Funct., Bioinf. 2021, 89, 1340−1352.
+(55) Wang, J.; Wolf, R. M.; Caldwell, J. W.; Kollman, P. A.; Case, D.
+A. Development and Testing of a General Amber Force Field. J.
+Comput. Chem. 2004, 25, 1157−1174.
+(56) Sousa da Silva, A. W.; Vranken, W. F. ACPYPE - AnteChamber
+PYthon Parser interfacE. BMC Res. Notes 2012, 5, No. 367.
+(57) Schrodinger, LLC. The PyMOL Molecular Graphics System,
+Version 1.8, 2015, http://www.pymol.org/pymol.
+(58) García-Meseguer, R.; Ortí, E.; Tun ̃ ón, I.; Ruiz-Pernía, J. J.;
+Aragó, J. Insights into the Enhancement of the Poly (ethylene
+terephthalate) Degradation by FAST-PETase from Computational
+Modeling. J. Am. Chem. Soc. 2023, 145, 19243−19255.
+(59) Burgin, T.; Pollard, B. C.; Knott, B. C.; Mayes, H. B.; Crowley,
+M. F.; McGeehan, J. E.; Beckham, G. T.; Woodcock, H. L. The
+reaction mechanism of the Ideonella sakaiensis PETase enzyme.
+Commun. Chem. 2024, 7, No. 65.
+(60) Gowers, R. J.; Linke, M.; Barnoud, J.; Reddy, T. J. E.; Melo, M.
+N.; Seyler, S. L.; Doman ́ski, J.; Dotson, D. L.; Buchoux, S.; Kenney, I.
+M.; Beckstein, O.MDAnalysis: A Python Package for the Rapid
+Analysis of Molecular Dynamics Simulations. In Proceedings of the
+15th Python in Science Conference 2016; pp 98−105.
+(61) Cheng, X.; Ivanov, I.; Wang, H.; Sine, S. M.; McCammon, J. A.
+Nanosecond-timescale conformational dynamics of the human α7
+nicotinic acetylcholine receptor. Biophys. J. 2007, 93, 2622−2634.
+(62) Parra, R. G.; Schafer, N. P.; Radusky, L. G.; Tsai, M.-Y.;
+Guzovsky, A. B.; Wolynes, P. G.; Ferreiro, D. U. Protein
+Frustratometer 2: A Tool to Localize Energetic Frustration in Protein
+Molecules, Now with Electrostatics. Nucleic Acids Res. 2016, 44,
+W356−W360.
+(63) Chen, C.-C.; Han, X.; Li, X.; et al. General features to enhance
+enzymatic activity of poly (ethylene terephthalate) hydrolysis. Nat.
+Catal. 2021, 4, 425−430.
+(64) Guo, B.; Vanga, S. R.; Lopez-Lorenzo, X.; Saenz-Mendez, P.;
+Ericsson, S. R.; Fang, Y.; Ye, X.; Schriever, K.; Bäckström, E.; Biundo,
+A.; Zubarev, R. A.; Furó, I.; Hakkarainen, M.; Syrén, P.-O.
+Conformational selection in biocatalytic plastic degradation by
+PETase. ACS Catal. 2022, 12, 3397−3409.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7588
+(65) Ferreiro, D. U.; Komives, E. A.; Wolynes, P. G. Frustration,
+Function and Folding. Curr. Opin. Struct. Biol. 2018, 48, 68−73.
+(66) Bryngelson, J. D.; Wolynes, P. G. Spin glasses and the statistical
+mechanics of protein folding. Proc. Natl. Acad. Sci. U.S.A. 1987, 84,
+7524−7528.
+(67) Ferreiro, D. U.; Komives, E. A.; Wolynes, P. G. Frustration in
+biomolecules. Q. Rev. Biophys. 2014, 47, 285−363.
+(68) Ferreiro, D. U.; Hegler, J. A.; Komives, E. A.; Wolynes, P. G.
+Localizing Frustration in Native Proteins and Protein Assemblies.
+Proc. Natl. Acad. Sci. U.S.A. 2007, 104, 19819−19824.
+(69) Chen, M.; Chen, X.; Schafer, N. P.; Clementi, C.; Komives, E.
+A.; Ferreiro, D. U.; Wolynes, P. G. Surveying biomolecular frustration
+at atomic resolution. Nat. Commun. 2020, 11, No. 5944.
+(70) Hammes, G. G. Multiple conformational changes in enzyme
+catalysis. Biochemistry 2002, 41, 8221−8228.
+(71) Hammes-Schiffer, S.; Benkovic, S. J. Relating protein motion to
+catalysis. Annu. Rev. Biochem. 2006, 75, 519−541.
+(72) Chen, L.; Fan, F.; Yang, M.; Wang, L.; Bai, Y.; Qiu, S.; Lyu, C.;
+Huang, J. Atomistic insight into the binding mode and self-regulation
+mechanism of Is PETase towards PET substrates with different
+polymerization degrees. Phys. Chem. Chem. Phys. 2023, 25, 18332−
+18345.
+(73) Baker, P. J.; Montclare, J. K. Biotransformations Using
+Cutinase. In Green Polymer Chemistry: Biocatalysis and Biomaterials;
+American Chemical Society, 2010; Chapter 11; pp 141−158.
+(74) Crnjar, A.; Grin ̃ en, A.; Kamerlin, S. C. L.; Ramírez-Sarmiento,
+C. A. Conformational Selection of a Tryptophan Side Chain Drives
+the Generalized Increase in Activity of PET Hydrolases through a
+Ser/Ile Double Mutation. ACS Org. Inorg. Au 2023, 3, 109−119.
+(75) Qu, Z.; Zhang, L.; Sun, Y. Molecular Insights into the
+Enhanced Activity and/or Thermostability of PET Hydrolase by
+D186 Mutations. Molecules 2024, 29, 1338.
+(76) Son, H. F.; Joo, S.; Seo, H.; Sagong, H.-Y.; Lee, S. H.; Hong,
+H.; Kim, K.-J. Structural bioinformatics-based protein engineering of
+thermo-stable PETase from Ideonella sakaiensis. Enzyme Microb.
+Technol. 2020, 141, 109656.
+(77) Wang, J.; Oliveira, R. J.; Chu, X.; Whitford, P. C.; Chahine, J.;
+Han, W.; Wang, E.; Onuchic, J. N.; Leite, V. B. Topography of
+funneled landscapes determines the thermodynamics and kinetics of
+protein folding. Proc. Natl. Acad. Sci. U.S.A. 2012, 109, 15763−15768.
+(78) Chu, X.; Gan, L.; Wang, E.; Wang, J. Quantifying the
+topography of the intrinsic energy landscape of flexible biomolecular
+recognition. Proc. Natl. Acad. Sci. U.S.A. 2013, 110, E2342−E2351.
+(79) Falkenstein, P.; Wei, R.; Matysik, J.; Song, C. Methods
+Enzymology; Elsevier, 2021; Vol. 648, pp 231−252.
+(80) Kamerzell, T. J.; Middaugh, C. R. The complex inter-
+relationships between protein flexibility and stability. J. Pharm. Sci.
+2008, 97, 3494−3517.
+(81) Ming, Y.; Wang, W.; Yin, R.; Zeng, M.; Tang, L.; Tang, S.; Li,
+M. A Review of Enzyme Design in Catalytic Stability by Artificial
+Intelligence. Briefings Bioinf. 2023, 24, bbad065.
+(82) Dauparas, J.; Anishchenko, I.; Bennett, N.; et al. Robust deep
+learning-based protein sequence design using ProteinMPNN. Science
+2022, 378, 49−56.
+(83) Watson, J. L.; Juergens, D.; Bennett, N. R.; et al. De novo
+design of protein structure and function with RFdiffusion. Nature
+2023, 620, 1089−1100.
+(84) Mu, J.; Li, Z.; Zhang, B.; Zhang, Q.; Iqbal, J.; Wadood, A.; Wei,
+T.; Feng, Y.; Chen, H.-F. Graphormer supervised de novo protein
+design method and function validation. Brief. Bioinform. 2024, 25,
+bbae135.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.4c00877
+J. Chem. Inf. Model. 2024, 64, 7576−7589
+7589

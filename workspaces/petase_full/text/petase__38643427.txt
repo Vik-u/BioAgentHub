@@ -1,0 +1,1130 @@
+Vol.:(0123456789)
+Applied Microbiology and Biotechnology (2024) 108:305 
+https://doi.org/10.1007/s00253-024-13144-z
+BIOTECHNOLOGICALLY RELEVANT ENZYMES AND PROTEINS
+Application of an alchemical free energy method for the prediction 
+of thermostable DuraPETase variants
+Sebastian Schreiber1 · David Gercke1 · Florian Lenz1 · Joachim Jose1 
+Received: 16 January 2024 / Revised: 25 March 2024 / Accepted: 9 April 2024 / Published online: 21 April 2024 
+© The Author(s) 2024
+Abstract 
+Non-equilibrium (NEQ) alchemical free energy calculations are an emerging tool for accurately predicting changes in protein 
+folding free energy resulting from amino acid mutations. In this study, this method in combination with the Rosetta ddg 
+monomer tool was applied to predict more thermostable variants of the polyethylene terephthalate (PET) degrading enzyme 
+DuraPETase. The Rosetta ddg monomer tool efficiently enriched promising mutations prior to more accurate prediction by 
+NEQ alchemical free energy calculations. The relative change in folding free energy of 96 single amino acid mutations was 
+calculated by NEQ alchemical free energy calculation. Experimental validation of ten of the highest scoring variants identi-
+fied two mutations  (DuraPETaseS61M and  DuraPETaseS223Y) that increased the melting temperature (Tm) of the enzyme by up 
+to 1 °C. The calculated relative change in folding free energy showed an excellent correlation with experimentally determined 
+Tm resulting in a Pearson’s correlation coefficient of r =  − 0.84. Limitations in the prediction of strongly stabilizing mutations 
+were, however, encountered and are discussed. Despite these challenges, this study demonstrates the practical applicability 
+of NEQ alchemical free energy calculations in prospective enzyme engineering projects.
+Key points
+• Rosetta ddg monomer enriches stabilizing mutations in a library of DuraPETase variants
+• NEQ free energy calculations accurately predict changes in Tm of DuraPETase
+• The DuraPETase variants S223Y, S42M, and S61M have increased Tm
+Keywords Alchemical free energy calculations · Enzyme engineering · Thermostability · MD simulation · PETase
+Introduction
+Enhancing the thermostability of enzymes is a key aspect 
+in the field of enzyme engineering as biotechnological 
+and industrial application processes require highly stable 
+enzymes (Bommarius et al. 2011; Nezhad et al. 2022). 
+Directed evolution has proven to be a successful approach 
+for developing thermostable proteins (Labrou 2010). It is, 
+however, labor intensive and screening of a large number 
+of enzyme variants is necessary. This makes this approach 
+expensive and limits it to enzymes for which high-throughput 
+assays are available. Computational methods that can aid in 
+protein or enzyme design to reduce the screening efforts 
+have therefore gained popularity. Software tools such as 
+FoldX, RosettaDesign, or PoPMuSiC 2.1 make use of semi-
+empirical force fields to predict the change in folding free 
+energy (∆∆Gfolding) of given mutations (Dehouck et al. 2009; 
+Guerois et al. 2002; Kellogg et al. 2011). ∆∆G folding gives 
+the difference in ∆Gfolding between a wild-type and a mutant 
+protein, whereas ∆G folding is the difference in free energy 
+between the unfolded and the folded states. The prediction 
+accuracy of these methods is however highly dependent 
+on the investigated protein (Buß et al. 2018). Most of the 
+time, a relatively high number of predictions still need to be 
+tested to identify more stable variants (Wijma et al. 2014). 
+Nevertheless, semi-empirical force field-based methods 
+usually perform better than random selection of mutations 
+(Buß et al. 2018). These predictions are often complemented 
+by molecular dynamic (MD) simulations with subsequent 
+analysis of the protein’s flexibility and/or hydrophobic 
+Sebastian Schreiber and David Gercke contributed equally.
+ * Joachim Jose 
+ joachim.jose@uni-muenster.de
+1 University of Münster, Institute of Pharmaceutical 
+and Medicinal Chemistry, PharmaCampus, Corrensstr. 48, 
+48149 Münster, Germany
+ Applied Microbiology and Biotechnology (2024) 108:305
+305 Page 2 of 13
+surface area (Childers and Daggett 2017; Floor et al. 2014; 
+Wang et al. 2018). The results attained from MD simulations 
+are however difficult to analyze objectively, since analysis 
+is dependent on correct visual inspection and interpretation 
+of the MD trajectory (Wijma et al. 2014). In recent years, 
+physically rigorous free energy calculations emerged as a 
+promising new tool for the prediction of ∆∆G folding. When 
+using this method to calculate ∆∆Gfolding in a conventional, 
+non-alchemical way, sampling of the complete folding or 
+unfolding path of each variant is necessary. Even though this 
+is possible in principle, it requires a lot of computational 
+effort and is therefore often not feasible. Alchemical free 
+energy calculations are physically rigorous calculations that 
+circumvent this problem by estimating free energy differences 
+along nonphysical, so-called alchemical paths that are more 
+accessible to sampling by MD or Monte Carlo simulations. 
+This way, alchemical free energy methods account for solvent 
+effects, conformational changes, and electrostatic interactions 
+with higher precision than semi-empirical methods. Several 
+different approaches to alchemical free energy calculations 
+have been developed and used in the past. Among the most 
+popular is the free energy perturbation method based on the 
+principles first published by Zwanzig (1954). Using this 
+method, equilibrium simulations for several intermediate 
+states along the alchemical path are simulated. From 
+these, free energy differences are then estimated (Bennett 
+1976; Shirts and Chodera 2008). This approach has been 
+implemented in the Schrödinger molecular modeling suite 
+and has been used in several publications to accurately predict 
+∆∆Gfolding or protein–protein interaction free energies upon 
+amino acid mutation (Ford and Babaoglu 2017; Steinbrecher 
+et al. 2017a, 2017b). It is, however, also possible to derive 
+free energy differences from non-equilibrium simulations 
+(NEQ) (Crooks 1999; Jarzynski 1997a, b). This was made 
+easily accessibly within the GROMACS framework over the 
+last couple of years by the group around de Groot (Gapsys 
+et al. 2015b; Seeliger and de Groot 2010). This approach has 
+been shown to give good prediction accuracy in retrospective 
+studies, in which literature values were used to verify the 
+validity of the predictions. Recently, the approach was also 
+used prospectively to guide the functional analysis of a 
+disease conferring mutation in the proliferating cell nuclear 
+antigen followed by experimental validation (Hardebeck 
+et al. 2023). Prospective, larger scale studies employing this 
+method for the prediction of more thermostable enzyme 
+variants, followed by experimental validation, are however 
+scarce. We therefore decided to test the ability of a workflow 
+based on NEQ alchemical free energy calculations to improve 
+the thermal stability of a biotechnologically relevant enzyme. 
+The development of solutions for the environmental burden 
+of polyethylene terephthalate (PET) remains a daunting 
+challenge (Yoshida et al. 2016). For the degradation of 
+PET, the use of highly active biocatalysts is a promising 
+approach. Since PET degradation is most efficient near the 
+glass transition temperature of PET (ca. 70 °C), increasing 
+the thermostability of the PET-degrading enzyme IsPETase 
+is crucial for the efficient application of the enzyme in 
+industrial processes (Jog 1995; Wei and Zimmermann 2017). 
+Significant efforts have already been made to optimize and 
+improve IsPETase (Bell et al. 2022; Brott et al. 2022; Liu 
+et al. 2022; Lu et al. 2022; Shi et al. 2023; Zurier and Goddard 
+2023). DuraPETase is one of the most thermostable variants, 
+with one of the highest PET degradation rates known today 
+(Cui et al. 2021). It was created by experimentally testing and 
+combining a library of 85 different mutations. This resulted 
+in a thermostable enzyme variant of mesophilic PETase 
+with ten additional point mutations and a T m elevated by 
+31 to 78 °C. Further improvement of DuraPETase should 
+therefore pose an interesting and challenging test case for the 
+performance of the NEQ alchemical free energy approach.
+Here, we present a study that utilizes NEQ alchemical 
+free energy calculations prospectively to identify variants of 
+DuraPETase with enhanced thermostability. We systemati-
+cally evaluated the performance of two computational meth-
+ods, Rosetta ddg monomer and NEQ free energy calcula-
+tions, for the prediction of more thermostable variants of the 
+highly thermostable DuraPETase. Calculations with Rosetta 
+ddg monomer proved to be able to enrich stabilizing muta-
+tions. However, predictions did not significantly correlate 
+with experimentally determined Tm. ∆∆Gfolding of 23 Dura-
+PETase variants (Table S1) predicted by NEQ free energy 
+calculations correlated well with experimentally determined 
+Tm with a Pearson’s correlation coefficient of r  = -0.84. 
+Among these variants, two variants  (DuraPETaseS61M and 
+ DuraPETaseS223Y) had increased Tm by up to 1 °C compared 
+to the original DuraPETase.
+Material and methods
+Plasmid construction, mutagenesis, expression, 
+and protein purification
+The sequence of DuraPETase (GenBank: GAP38373.1) was 
+codon optimized for E. coli and synthesized by Twist Bio-
+science (South San Francisco, USA). The codon-optimized 
+sequence of the DuraPETase gene is given in Sequence S1. 
+It was inserted into the plasmid p15-mNeonGreen (Hard-
+ebeck et al. 2023) by restriction and ligation to create the 
+plasmid pDuraPETase for intracellular expression of the 
+original DuraPETase under control of a T7 promotor. Point 
+mutations for the generation of DuraPETase variants were 
+introduced by PCR via In-Fusion cloning (Takara Bio, 
+Kusatsu, Japan). E. coli BL21(DE3) was used as the host 
+for protein expression. Cells containing one of the respective 
+plasmids for the expression of the original DuraPETase or its 
+Applied Microbiology and Biotechnology (2024) 108:305 
+ Page 3 of 13 305
+variants were grown in 500 ml lysogeny broth-Miller (LB) 
+medium supplemented with 50 µg/ml carbenicillin at 33 °C 
+and 160 rpm. Gene expression was induced with 1 mM 
+IPTG as soon as an optical density at 578 nm of 0.8 was 
+reached and incubation was continued for 24 h at 16 °C and 
+160 rpm. Cells were harvested by centrifugation (5000 × g, 
+10 min, 4 °C), suspended in 5 ml loading buffer (50 mM 
+ NaH2PO4, 300 mM NaCl, 10 mM imidazole, pH 8), and 
+lysed using a sonicator. Cell debris were removed by cen-
+trifugation (48,000 × g, 15 min, 4 °C). The supernatant was 
+used to isolate the respective enzyme via Ni–NTA affinity 
+chromatography using Protino Ni–NTA agarose beads (Th. 
+Geyer, Höxter, Germany), and the buffer was exchanged for 
+storage buffer (50 mM  Na2HPO4-Hcl, pH 7, 100 mM NaCl) 
+by dialysis. Enzyme concentrations were determined by 
+measuring the absorbance at 280 nm.
+Differential scanning fluorimetry (DSF)
+To determine the apparent T m of the original DuraPETase 
+and its variants by DSF, 4 µM of the respective enzyme in 
+25 µl of PBS containing a total of 20 × SYPRO orange pro-
+tein gel stain (Sigma-Aldrich, St. Louis, USA) and a Rotor-
+Gene Q 2 Plex HRM (Qiagen, Hilden, Germany) were used 
+(Lavinder et al. 2009). The samples were heated from 30 
+to 95 °C, increasing the temperature by 0.5 °C every 5 s. 
+SYPRO orange was excited at 470 ± 10 nm, and the emis-
+sion was detected at 610 ± 5 nm. All measurements were 
+performed three times from individually prepared samples. 
+The apparent T m were calculated from the extreme points 
+of the first derivative of the fluorescence dF/DT(T) formed 
+from the recorded melting curves as function F(T) using the 
+Rotor-Gene Q software.
+Determination of PET degradation rates
+The PET degradation rates for the original DuraPETase and 
+its variants were tested using amorphous PET (2.4% crystal-
+linity, determined by differential scanning calorimetry) with 
+a thickness of 0.25 mm purchased from Goodfellow Cam-
+bridge Limited (Huntingdon, England). Substrate cut-outs 
+with a diameter of 6 mm were incubated in 300 µl of 50 mM 
+bicine NaOH buffer pH 9 containing 100 nM of the respec-
+tive enzyme in microvolume reaction tubes. All reactions 
+were performed as triplicates and were incubated at 50 °C 
+or 52 °C and 300 rpm for 3 days. The reactions were stopped 
+by removing the substrate. Three volumes of acetonitrile 
+were added, and a centrifugation step (20,000 × g, 10 min) 
+was performed. For each sample, 10 µl of the supernatant 
+was injected into a LaChrom Elite HPLC system equipped 
+with a L-2455 DAD detector (Hitachi, Chiyoda, Japan) and 
+a Nucleodur C18 HTec column (Macherey–Nagel, Düren, 
+Germany). The separation was performed isocratically at 
+40 °C with a flow rate of 0.5 ml/min for 8 min using 70% 
+ ddH2O, 20% acetonitrile, and 10% formic acid. The signal 
+was detected at 254 nm, and standards of the reaction prod-
+ucts terephthalic acid (TCI, Tokyo, Japan) and 2-hydroxy -
+ethyl terephthalic acid (Activate Scientific, Prien am Chiem-
+see, Germany) were used to quantify the degradation rate.
+Rosetta ddg monomer calculations
+Rosetta version 3.12 was used for the ddg monomer  
+calculations. The crystal structure of DuraPETase (PDB 
+ID: 6ky5) was used for all calculations. Only chain A was 
+retained. Ions and water molecules were deleted. First, 
+minimization was performed using distance constrains on 
+Cα atoms. The protocol described as “row 3” in Kellogg 
+et al. was used for all calculations. This protocol was 
+chosen, because it exhibited a high prediction accuracy 
+for the dataset analyzed in the original publication (Kellog 
+et al. 2011), while also appeared to be computationally 
+inexpensive. The commands are described in detail in the 
+Supporting information of Kellogg et al. (2011).
+NEQ alchemical free energy calculations
+System preparation
+The crystal structure of DuraPETase (PDB ID: 6ky5) was 
+retrieved from the PDB server. Only chain A was retained. 
+Ions and water molecules were deleted. Protonation states 
+were assigned with the Protonate 3D function from MOE 
+(Molecular Operating Environment, Chemical Computing 
+Group, Canada version: 2022.02) using default settings 
+at pH = 7.0. Mutations were generated using the Protein 
+Builder. Sidechains were repacked and minimized using the 
+Minimize tool, while a tether was applied to the backbone. 
+The structures were exported from MOE in PDB format and 
+used for MD system preparation within GROMACS 2019.3 
+(Abraham et al. 2015).
+Free energy calculations and hybrid topology generation
+For the estimation of the change in folding free energy 
+(∆∆Gfolding) upon amino acid mutation, a well-established 
+thermodynamic cycle was constructed according to Alde-
+ghi et al. (2019). The cycle is also shown in Figure S1 for 
+clarity. The alchemical transitions between both end states 
+were performed along the ∆G 1 arrow for the unfolded and 
+along the ∆G3 arrow for the folded state. The unfolded state 
+was modeled by a Gly-X-Gly tripeptide as done in previ-
+ous publications (Gapsys et al. 2015b, 2016). All simula-
+tions were run independently from each other. The pmx 
+ Applied Microbiology and Biotechnology (2024) 108:305
+305 Page 4 of 13
+package was used to generate hybrid topologies (Gapsys 
+et al. 2015b). This was done after equilibrium simulations 
+were performed. This way, equilibrium trajectories of the 
+original DuraPETase could be used for different amino acid 
+transitions.
+Molecular dynamic (MD) simulations
+GROMACS 2019.3 was used to carry out all MD simula-
+tions (Abraham et al. 2015). The Amber99SB*ILDN force 
+field was used to model the protein (Lindorff-Larsen et al. 
+2010). Water molecules were represented by the TIP3P water 
+model. Proteins or tripeptides were solvated in a cubic box 
+with 150 mM of  Na+ and  Cl− ions. The total charge of the 
+system was neutralized with either  Na+ or  Cl−. For equilib-
+rium simulations, energy minimization was performed using 
+the steepest decent method. Equilibration was performed for 
+500 ps in the NVT and for 500 ps in the NPT ensemble. A 
+position restraint with a value for the harmonic force con-
+stants of 1000 kJ  mol−1  nm−2 was applied to all heavy atoms 
+of the system during both equilibration phases. Production 
+simulations were run for 10 ns. H-Bonds were constrained 
+using LINCS algorithm (Hess et al. 1997), and the simula-
+tion temperature was controlled by the velocity rescaling 
+thermostat at 300 K every 0.1 ps (Bussi et al. 2007). The 
+Parrinello-Rahman barostat was used to control pressure at 
+1 atm (Parrinello and Rahman 1981). Particle mesh Ewald 
+was used to treat electrostatic interactions in the simulation 
+with a cutoff set to 1.2 nm (Essmann et al. 1995). The mean 
+RMSD during the production stage of each replica was cal-
+culated to check the system stability.
+After equilibrium simulation, snapshots were extracted 
+to construct hybrid topologies and perform the NEQ transi-
+tion simulations. To do so, the first 2.5 ns of each trajectory 
+was discarded and 75 snapshots were extracted equidistantly 
+from the remaining trajectory. The pmx package was used 
+to generate hybrid topologies (Gapsys et al. 2015b). Transi-
+tions were performed in 100 ps after energy minimization 
+and 50 ps of equilibration. The resulting change in λ  was 
+5 ×  10−5/step. A softcore potential with default parameters 
+was applied to the Lennard–Jones and electrostatic inter -
+actions. Using the scripts provided with the pmx package, 
+extracted work values were used to estimate the free energy 
+at 300 K. The free energy estimation was based on the 
+Crooks fluctuation theorem (Crooks 1999). Bennett accept-
+ance ratio was used as a maximum likelihood estimator 
+(Shirts et al. 2003). The uncertainty given is the standard 
+deviation over multiple independent replicas. Either ten or 
+four independent replicas were used at different stages of the 
+study as stated in the “Results” section.
+Results
+In silico screening for stabilizing mutations 
+in DuraPETase using ddg monomer
+The high computational demand of alchemical free energy 
+calculations is one of its drawbacks and makes compre-
+hensive screening of the entire mutational space of a 
+protein practically impossible in the foreseeable future. 
+Semi-empirical force field-based methods provide a fast 
+alternative to systematically analyze single-point muta-
+tions of the entire protein. We therefore decided to include 
+a first virtual screening step using the Rosetta ddg mono-
+mer tool in the optimization of thermostability of Dura-
+PETase (Kellogg et al. 2011). This also provided the 
+opportunity to test, whether further improvement of the 
+thermostability of DuraPETase could be achieved using 
+this simpler approach. A systematic screening of all pos-
+sible single amino acid mutations, with some exceptions, 
+was performed. Firstly, mutations from and to proline are 
+not supported by the later employed NEQ free energy cal -
+culations at the moment. They were therefore excluded in 
+this step. Secondly, mutations involving the catalytic triad 
+of DuraPETase were also excluded, as these amino acids 
+are essential for catalytic activity. Lastly, charge change 
+mutations were shown to be poorly predicted by the ddg 
+monomer approach (Gapsys et al. 2016). Charge change 
+mutations also need to be setup in a slightly different 
+way for the NEQ free energy calculations due to artifacts 
+introduced by a net charge change. Additionally, even if 
+properly set up, charge change mutations still require sub -
+stantially longer to reach convergence during the simula-
+tion (Patel et al. 2021). Taking all of this into account, 
+we decided to exclude charge change mutations from our 
+screening. In the end, this resulted in a total of 2838 single 
+amino acid mutations for the 264 amino acids comprising 
+DuraPETase. The change in folding free energy of these 
+mutations was calculated with ddg monomer employing 
+the row 3 protocol from Kellogg et al. (2011). These cal-
+culations were completed in a single day on a medium-
+sized cluster. Mutations were then ranked according to 
+their score, which is intended to correlate with ∆∆G  but 
+is not a quantitatively predicted change in folding free 
+energy (Fig.  1a). The score calculated with ddg monomer  
+will be named ∆∆G Rosetta  in the following to distinguish 
+it from the ∆∆Gfolding determined by NEQ alchemical free 
+energy calculations. Cutoff values varying from <  − 0.75 
+to <  − 5 kcal/mol are often used to identify stabiliz-
+ing mutations (Buß et al. 2018; Wijma et al. 2014). The 
+cutoff for the mutational scan of DuraPETase was set to 
+∆∆GRosetta <  − 3.8 kcal/mol. This was within the normally 
+Applied Microbiology and Biotechnology (2024) 108:305 
+ Page 5 of 13 305
+chosen range of cutoff values and comprises the top 5% of 
+the scores corresponding to 130 different DuraPETase var -
+iants. These variants should next be characterized experi-
+mentally. As our laboratory capacities did not allow for the 
+purification and characterization of around 130 different 
+DuraPETase variants, 13 variants were chosen randomly 
+from below the threshold for experimental verification. 
+Variants were purified by Ni–NTA affinity chromatogra-
+phy. The respective change in the apparent melting tem-
+peratures (ΔT m) for each variant compared to the original 
+DuraPETase was calculated by substracting the T m of the 
+original DuraPETase from the T m of the variant. Both T m 
+were measured by differential scanning fluorimetry (DSF) 
+(Fig.  1b). Only a single variant,  DuraPETase S42M, had a 
+significantly higher T m than the original DuraPETase. The 
+Tm of the  DuraPETase S42M  variant was 0.66 ± 0.17 °C 
+higher. The T m of  DuraPETase S136I  and  DuraPETase A80I 
+did not differ from the original DuraPETase. All other 
+variants had significantly lower T m when compared to the 
+original DuraPETase. Consequently, the success rate was 
+low. The prediction accuracy was also rather poor, as four 
+of the mutations  (DuraPETase G155M ,  DuraPETaseA170L , 
+ DuraPETaseG251I, and  DuraPETase G251W) predicted to be 
+stabilizing were destabilized by more than 5 °C. Due to the 
+low prediction accuracy, a set of 13 DuraPETase variants 
+with a wide range of T m was obtained, providing a reason-
+able dataset that was used to test the accuracy of NEQ free 
+energy calculations for the DuraPETase in a next step.
+Prediction accuracy of NEQ free energy calculations 
+of DuraPETase
+In order to analyze how well the results from the experi-
+mental testing could be calculated with NEQ free energy 
+calculations, these calculations were performed for all of 
+the 13 variants that were tested experimentally in the first 
+screening round (Fig.  1b). Ten independent calculations 
+were performed for each amino acid mutation using equi-
+librium trajectories of 10 ns in order to obtain a reliable esti-
+mate of uncertainty. Previous research has shown that run-
+ning several short simulations results in more accurate error 
+estimates than running fewer long simulations (Bhati and 
+Coveney 2022). Analysis of the mean RMSD of the original 
+DuraPETase confirmed the stability of the system during 
+equilibrium MD simulation (Supplementary Figure S2). The 
+hybrid topologies for the NEQ transitions were constructed 
+after running the equilibrium trajectories, as explained in the 
+“Material and methods” section. This way, the equilibrium 
+trajectories of the original DuraPETase could be used for 
+all transitions, which substantially reduced computational 
+cost. NEQ free energy calculations are easily scalable, as the 
+many short non-equilibrium transitions can be run indepen-
+dently. This way, calculations could be performed relatively 
+quickly in approx. 3 days, on a medium-sized cluster. Pre-
+dicted ∆∆Gfolding was obtained as the result of the calcula-
+tion. Figure  2 shows the correlation between the predicted 
+∆∆Gfolding and the experimentally determined ∆Tm of the 13 
+DuraPETase variants described above. A significant Pearson 
+Fig. 1  a Cumulative distribution of ddg monomer results predict-
+ing the change in folding free energy upon amino acid mutation of 
+DuraPETase. Mutations from and to proline, mutations involving a 
+net charge change, and mutations involving the catalytic triad were 
+excluded. The red box indicates the 130 variants below the cutoff  
+value of ∆∆G Rosetta <  − 3.8  kcal/mol from which 13 were randomly 
+selected for experimental validation. b ∆T m were calculated by sub-
+tracting the T m value of the original DuraPETase from the T m value 
+of each respective variant. T m values were determined by DSF. The 
+variants were randomly selected among the variants within the top 
+5% of predictions made with ddg monomer. Measurements were per -
+formed in triplicate. Statistical significance was analyzed by one-way 
+ANOVA with Dunnett’s multiple comparison test. Single asterisk 
+(*) corresponds to p < 0.05 and triple asterisk (***) corresponds to 
+p < 0.001
+ Applied Microbiology and Biotechnology (2024) 108:305
+305 Page 6 of 13
+correlation between ∆∆G folding and ∆Tm of r =  − 0.84 was 
+determined. Linear regression gave an R 2 = 0.70. A nega-
+tive correlation was expected, as higher or more positive 
+∆∆Gfolding values correspond to thermodynamically unsta-
+ble proteins. These proteins have a lower T m and therefore 
+a negative ∆T m. Even though ten replicas were used for 
+∆∆Gfolding calculations, the prediction accuracy for the 13 
+DuraPETase mutations also remained consistent when using 
+only four randomly selected replicas. Therefore, it should be 
+sufficient in this case to run only four replicas per prediction 
+for further calculations to reduce the computational burden. 
+It is worth noting that our dataset is biased towards pre-
+dominantly destabilizing mutations. It is therefore especially 
+encouraging that  DuraPETaseS42M, which is the only stabi-
+lizing mutation, is predicted with ∆∆Gfolding =  − 6.7 kJ/mol, 
+the lowest among the predictions. Overall, we concluded 
+that NEQ free energy calculations can identify stabilizing 
+mutations in DuraPETase.
+Two‑step screening approach using ddg monomer 
+and NEQ free energy calculations
+Free energy changes calculated by NEQ free energy calcula-
+tions showed a strong correlation with experimentally deter-
+mined Tm but are computationally demanding. We therefore 
+aimed to determine if the results of the ddg monomer cal-
+culations could serve as an initial screening tool to enrich 
+promising mutations for further investigation. Twenty single 
+amino acid mutations were selected from the ddg mono-
+mer prediction pool of 801 predictions having a ∆∆G Rosetta 
+exceeding 4 kcal/mol. Another 20 were selected from a pool 
+of 2037 predictions with a ∆∆ GRosetta lower than 4 kcal/
+mol. This cutoff was selected to test whether Rosetta ddg 
+monomer could differentiate destabilizing mutations from 
+stabilizing or neutral ones. The subsets were labelled “high” 
+and “low,” respectively. NEQ free energy calculations were 
+used to predict ∆∆G folding for each individual amino acid 
+mutation in both groups. The simulations for one mutation in 
+the high subset did not converge properly, as evident by the 
+insufficient overlap in the work distribution to estimate ∆G. 
+This mutation was excluded from further analysis. Thus, 
+the resulting dataset consisted of 39 data points. The mean 
+∆∆Gfolding calculated with the NEQ alchemical free energy 
+workflow was compared between the high and low datasets 
+(Fig. 3a). The mean ∆∆G folding for all predictions derived 
+from the high subset was 21.18 ± 5.36 kJ/mol. In contrast, 
+the mean ∆∆G folding for all predictions from the low  sub-
+set was 4.01 ± 4.53 kJ/mol. This difference was statistically 
+significant (p  = 0.020). The four most negative ∆∆G folding 
+predictions all belonged to the low  subset. Subsequently, 
+∆∆Gfolding values, which were calculated with the NEQ free 
+energy protocol, were plotted against ∆∆G Rosetta for every 
+single amino acid mutation (Fig.  3b). The ∆∆G Rosetta and 
+∆∆Gfolding were significantly correlated with Pearson’s cor-
+relation coefficient of r  = 0.39. Consequently, ∆∆ GRosetta 
+can provide a rough estimation of the impact of a single 
+amino acid mutation on protein stability. This suggests that 
+ddg monomer  can serve as an initial enrichment tool for 
+identifying potentially favorable mutations. This way, the 
+computational effort for the identification of potentially sta-
+bilizing mutations with NEQ free energy calculations may 
+be reduced.
+Identification of stabilizing mutations using ddg 
+monomer and NEQ free energy calculations
+In the first two parts of this study, a model was built that 
+could accurately predict the change in thermostability of 
+DuraPETase upon single amino acid mutation. In the third 
+part, it was also shown that ddg monomer calculations can 
+be used to enrich promising mutations. We now decided 
+to utilize these findings prospectively, to identify stabiliz-
+ing mutations in addition to  DuraPETase S42M. To do so, 
+∆∆Gfolding of another 60 variants was predicted. The entire 
+workflow including the verification steps is summarized in 
+Fig. 4. In accordance with the results presented above, the 
+variants were randomly selected from the low group of ddg 
+monomer predictions. Together with 40 already calculated 
+mutations (Fig. 3), a total of 100 predictions were run. Out 
+of these 100, the results of the calculations for four muta-
+tions could not be analyzed properly because the overlap in 
+the work distribution for estimating ∆G was insufficient. In 
+the end, this resulted in 96 successfully calculated ∆∆Gfolding 
+predictions (Fig. 5a). The top ranking 11 mutations all were 
+Fig. 2  Experimentally determined ∆T m plotted against ∆∆G folding 
+calculated by NEQ free energy calculations of 13 DuraPETase vari-
+ants. ∆Tm were calculated by subtracting the T m value of the original 
+DuraPETase from the Tm value of each respective variant. Tm val -
+ues were determined by DSF. The uncertainty given is the standard 
+deviation of three independent measurements. The uncertainty of 
+∆∆Gfolding for each mutation is the standard deviation of ten inde-
+pendent replicas. A significant negative correlation between ∆T m and 
+∆∆Gfolding was observed (Pearson r = -0.85, p = 0.002, N = 13). Linear 
+regression (black line) gave an R2 = 0.70
+Applied Microbiology and Biotechnology (2024) 108:305 
+ Page 7 of 13 305
+mutations to aromatic amino acids. To minimize potential 
+bias, we decided to choose variants for experimental vali-
+dation from among the top predictions as follows. A cutoff  
+value of ∆∆G folding =  − 6.5 kJ/mol that corresponds to the 
+calculated ∆∆G folding of the already identified stabilizing 
+ DuraPETaseS42M variant was chosen. Nineteen variants were 
+below this cutoff value. Ten variants were selected semi-ran-
+domly from these variants. However, the number of muta-
+tions to each single amino acid was limited to a maximum of 
+three. The selected variants were expressed and purified and 
+the Tm was measured by DSF (Fig.  5b). Two variants had 
+significantly higher Tm than the original DuraPETase. Five 
+variants had the same Tm as the original DuraPETase, while 
+three variants had lower Tm.  DuraPETaseS223Y was the most 
+stable among all tested variants. The Tm was 0.93 °C higher 
+than that of the original DuraPETase.  DuraPETaseA280W had 
+a Tm that was 2.30 °C lower than that of the original Dura-
+PETase. It was the most unstable variant. The entire range of 
+determined Tm from this screening was only 3.43 °C. This is 
+distinctly smaller than in the first screening round that was 
+based on ddg monomer predictions, which had a range of 
+Tm of 21.66 °C. The number of mutations that were identi-
+fied to be stabilizing with the second screening round was 
+higher, two compared to one, even though the number of 
+enzymes tested was smaller (10 instead of 13). There was 
+however no significant correlation between the ∆ Tm val-
+ues and ∆∆G folding for the variants from the second round 
+screening (r =  − 0.17, p = 0.63, N = 10) (Fig. 5c). ∆Tm val-
+ues of all 23 experimentally tested mutations were plotted 
+against the calculated ∆∆G folding (Fig. 5d). This resulted in 
+a Pearson correlation of r  =  − 0.82, which is slightly worse 
+than the correlation determined for the first dataset alone. 
+This shows that the prediction accuracy over the entire range 
+of mutations is very good. When only focusing on stabilizing 
+mutations, the prediction accuracy drops however. The lower 
+accuracy of the predictions for stabilizing mutations also 
+explains the slightly lower correlation of the entire dataset, 
+when compared to the mutations from the first screening 
+round alone. These results indicate that NEQ calculations 
+predict ∆∆Gfolding accurately as long as the mutation is not 
+strongly stabilizing. With mutations predicted to be stabi-
+lizing, the effect seems to be overestimated. Stabilizing or 
+neutral mutations are nevertheless enriched by the NEQ free 
+energy calculations.
+PET hydrolysis by DuraPETase variants
+In addition to the already determined T m for the ten Dura-
+PETase variants from the second round of screening, their 
+respective activities on amorphous PET were analyzed 
+as well (Fig.  6). Since the variant  DuraPETase S42M from 
+the first round was found to be stabilizing, it was also 
+included. The activity was tested at 50 °C and 52 °C to see 
+how the enzymes performed at the optimum temperature 
+of the original DuraPETase (50 °C) and slightly above 
+this temperature. Overall, the changes in activity at 50 °C 
+and 52 °C reflect the observed changes in thermostability. 
+ DuraPETaseS223Y—which showed the strongest increase in 
+Fig. 3  a ∆∆G folding predictions calculated with NEQ free energy 
+calculations of 19 single amino acid mutations from the high and 
+20 single amino acid mutations from the low ddg monomer predic-
+tion subsets. The high subset was defined as predictions with a 
+∆∆GRosetta > 4  kcal/mol. The low subset was defined as predictions 
+with a ∆∆G Rosetta < 4  kcal/mol. The mean ∆∆G folding was signifi-
+cantly lower for the low  subset (p = 0.013), as indicated by an aster -
+isk. b ∆∆Gfolding predicted by NEQ free energy calculations plotted 
+against the ∆∆G Rosetta for single amino acid mutations. The error 
+given for ∆∆G folding is the standard deviation over four independ-
+ent replicas. A significant Pearson correlation (Pearson r = 0.39, 
+p = 0.0145, N = 39) of the ∆∆G Rosetta and ∆∆G folding values was 
+observed
+ Applied Microbiology and Biotechnology (2024) 108:305
+305 Page 8 of 13
+ Tm—showed practically identical PET degradation rates at 
+50 °C compared to the original DuraPETase but was approx. 
+ten percent more active at 52 °C. Similarly, a better per -
+formance at 52 °C was also recorded for one of the other 
+two more thermostable variants,  DuraPETaseS42M. For the 
+third stable variant,  DuraPETaseS61M, the same tendency was 
+observed at 52 °C, the results were however not statistically 
+significant. The variants  DuraPETaseG75I,  DuraPETaseA280W, 
+and  DuraPETaseA280Q all showed a reduced thermostability. 
+In line with this, there was a pronounced decrease of PET 
+degradation rates at 50 °C for these variants. The overall 
+changes in thermostability of the new variants were rela-
+tively small compared to the already very high Tm of original 
+DuraPETase. In line with this, only relatively small changes 
+could be measured when analyzing the PET degradation 
+activity at a temperature slightly above the original opti-
+mum temperature.
+Discussion
+In this study, a workflow for the improvement of enzyme 
+thermostability based around the Rosetta ddg monomer  
+tool and NEQ alchemical free energy calculations was 
+developed. DuraPETase, the enzyme optimized in this 
+study, is a highly evolved thermostable enzyme (Cui et al. 
+2021) and therefore an interesting test case for the perfor -
+mance and limitations of the NEQ alchemical free energy 
+calculation approach. Alchemical free energy calculations 
+have been established as a powerful tool for predicting 
+the change in protein stability upon amino acid muta-
+tion (Gapsys et al. 2016; Steinbrecher et al. 2017b). They 
+therefore provide the opportunity to reduce the number of 
+enzyme variants that need to be tested experimentally. The 
+high computational demand of free energy calculations has 
+however limited their use in prospective studies.
+Fig. 4  Flow diagram of the complete workflow used in this study for 
+the identification of more thermostable DuraPETase variants. Num-
+bers shown in brackets show the actual number of successful run 
+predictions, if it deviated from the initially intended number due to 
+incomplete convergence in some of the predictions
+Applied Microbiology and Biotechnology (2024) 108:305 
+ Page 9 of 13 305
+This study demonstrates how to integrate free energy 
+calculations into a protein engineering project to supplement 
+well-established semi-empirical in silico methods (Bell et al. 
+2022; Cui et al. 2021). The use of the ddg monomer tool 
+in the first round of screening resulted in the identification 
+of a single DuraPETase variant with higher thermostability 
+among 13 tested variants. Compared with previous results 
+also using semi-empirical methods, this is on the lower end 
+of successful predictions (Buß et al. 2018; Wijma et al. 
+2018). The outcome was however potentially better than 
+the expected 2% success rate in a directed evolutionary 
+approach (Bromberg and Rost 2009). Due to the rather 
+small sample size, this is just a rough approximation 
+and cannot be judged reliably. The NEQ alchemical free 
+energy calculations performed next, resulted in a very good 
+correlation between the experimentally measured T m and 
+the predicted ∆∆G folding. Pearson’s correlation coefficient 
+was − 0.85. Linear regression gave an R2 = 0.73. Notably, Tm 
+is not a direct measure for ∆Gunfolding at standard conditions 
+(Peccati et al. 2023). Nevertheless, the correlation between 
+Tm and ∆Gunfolding generally is extremely high (Gapsys et al. 
+2016; Wijma et al. 2014). Pearson’s correlation coefficient 
+for the Δ Tm and changes in folding free energy falls 
+within the same range as the previously reported excellent 
+correlation of r  = 0.86 determined with the same approach 
+(Gapsys et al. 2016). Studies employing equilibrium free 
+Fig. 5  a Cumulative distribution of ∆∆G folding calculated with NEQ 
+free energy calculations for single amino acid mutations of Dura-
+PETase. Eighty mutations were selected from the low  subset of pre-
+dictions from the ddg monomer results, while 20 were chosen from 
+the high subset. For four mutations, insufficient overlap in the work 
+distribution for estimating ∆G was observed. They were excluded 
+from further analysis. In total, the results of 96 predictions are shown. 
+b ΔT m of different purified DuraPETase variants. ∆T m were calcu-
+lated by subtracting the Tm value of the original DuraPETase from 
+the Tm value of each respective variant. T m values were determined 
+by DSF. The variants were selected among mutations predicted to 
+have ∆∆G folding less than − 6.5  kJ/mol calculated with NEQ free 
+energy calculations. c Experimentally determined ∆T m values plot-
+ted against ∆∆Gfolding values calculated by NEQ free energy calcula-
+tions of ten DuraPETase variants from the second round of screening. 
+No significant correlation of the ∆T m values and ∆∆G folding values 
+was observed (Pearson r = -0.17, p = 0.63, N = 10). d Experimen-
+tally determined ∆T m values plotted against ∆∆G folding values cal-
+culated by NEQ free energy calculations of 23 DuraPETase variants 
+from both rounds of screening. A significant negative correlation of 
+∆Tm values and ∆∆G folding values was observed (Pearson r = -0.83, 
+p < 0.0001, N = 23). The uncertainty given for ∆T m is the standard 
+deviation of three independent measurements. Statistical significance 
+was analyzed by one-way ANOVA with Dunnett’s multiple compari-
+son test. Triple asterisk (***) corresponds to p < 0.001. The uncer -
+tainty of ∆∆G folding for each mutation is the standard deviation of 
+four independent replicas
+ Applied Microbiology and Biotechnology (2024) 108:305
+305 Page 10 of 13
+energy perturbations (FEP) reported on slightly worse R 2 
+of 0.4 and 0.65 compared to the R 2 of 0.73 reported in 
+this study for the correlation between experimentally and 
+predicted ∆∆Gunfolding (Jespers et al. 2019; Scarabelli et al. 
+2022; Steinbrecher et al. 2017b). One reason for the high 
+correlation between Tm and ∆∆Gunfolding in our dataset might 
+be the fact that we excluded charge changing mutations from 
+our predictions. Charge change mutations have been shown 
+to converge slower and are predicted less accurately by both 
+NEQ and EQ alchemical free energy calculations (Clark 
+et al. 2019; Patel et al. 2021). Purposefully omitting them 
+might therefore increase the prediction accuracy.
+With the intent to combine the ddg monomer tool and 
+NEQ alchemical free energy calculations in the second 
+screening round, it was first shown that the ddg monomer  
+tool can enrich stabilizing mutations. Selection of mutations 
+from a subset of possible mutations with lower ∆∆G Rosetta 
+led to an on average lower ∆∆G folding predicted by NEQ 
+alchemical free energy calculations. This shows that muta-
+tions with lower scores from the ddg monomer tool should 
+be prioritized for free energy calculations. This two-step 
+approach has the potential to save significant amounts of 
+computational time while simultaneously enabling the 
+screening of large portions of the sequence space. Out of 
+a total of 96 NEQ alchemical free energy calculations, 19 
+were below a cutoff of − 6.5 kJ/mol. Out of these 19, 11 were 
+mutations to aromatic amino acids. These mutations are 
+generally considered to be stabilizing (Serrano et al. 1991). 
+Aromatic amino acids thermodynamically favor the folded 
+state of a protein, as this minimizes the solvent exposed 
+hydrophobic surface area and enables hydrophobic interac-
+tions between the amino acids. It is however also possible 
+that the stabilizing effect of aromatic amino acids might be 
+overestimated by the NEQ alchemical free energy calcula-
+tions, due to insufficient sampling or force field inaccuracies. 
+This is also why we limited the experimental validation of 
+variants to a maximum of three variants for a mutation into 
+any single amino acid.
+Ten of the variants predicted to be stabilizing in the sec-
+ond screening round were tested experimentally. No sig-
+nificant correlation between experimental and predicted 
+values was observed for these ten variants. The prediction 
+accuracy over the entire dataset of 23 mutations was how -
+ever still good, with a Pearson’s correlations coefficient of 
+r =  − 0.83. This indicates a better performance of the NEQ 
+alchemical free energy calculations for destabilizing and 
+neutral mutations and a worse prediction accuracy for sta-
+bilizing ones. In contrast to these findings, previous studies 
+have shown that the correlation between experimental and 
+predicted ∆∆Gfolding is roughly the same for stabilizing and 
+destabilizing mutations (Gapsys et al. 2016; Steinbrecher 
+et al. 2017b). Naturally occurring proteins, as used in the 
+datasets of theses previous studies, are most often meso-
+philic and only marginally stable (Goldenzweig and Fleish-
+man 2018; Taverna and Goldstein 2002). DuraPETase, with 
+its Tm of 78 °C, is however already highly thermostable. 
+From this, the question arises, if the performance of NEQ 
+free alchemical free energy calculations is worse for single 
+amino acid mutations that further increase the stability of 
+already highly stable proteins. Theoretically, this should 
+not be the case, as NEQ alchemical free energy calculations 
+present a physically rigorous way of calculating changes in 
+protein folding free energy. Insufficient sampling during 
+the MD simulation can however influence the accuracy of 
+the predictions. Highly stable proteins are often more rigid, 
+and transitions between relevant conformations might take 
+more time, because they are separated from each other by 
+higher energy barriers. Thorough sampling of all relevant 
+conformations for highly stable proteins might therefore take 
+more time than for less stable ones. This directly impacts the 
+accuracy of the free energy prediction, as it is dependent on 
+a correct frequency distribution of all relevant conforma-
+tions. Performing multiple independent replicas, as done in 
+this study, should provide a first indication if insufficient 
+sampling poses a problem in the system under investigation. 
+If, however, the number of replicas is too small and relevant 
+conformations are only marginally populated, this approach 
+might nevertheless provide a false error estimate. A con-
+venient way to detect such limitations during MD sampling 
+could be the usage of closed thermodynamic cycles with 
+Fig. 6  Relative activity alterations of DuraPETase variants at 50  °C 
+and 52  °C in comparison to the original DuraPETase. The purified 
+enzymes were used at 100 nmol/l and incubated for 3 days at 50 °C 
+or 52  °C in 300  µl of 50  mmol/l bicine NaOH buffer pH 9 with a 
+6  mm diameter cutout of amorphous PET. The PET degradation 
+activity was quantified by determining the concentration of the reac-
+tion products by HPLC. The changes in activity are given as relative 
+values and are normalized to the PET degradation rates for the orig-
+inal DuraPETase at 50  °C and 52  °C, respectively. All experiments 
+were performed as triplicates. Statistical significance was analyzed by 
+one-way ANOVA with Dunnett’s multiple comparison test against the 
+DuraPETase sample at the corresponding temperature. Triple asterisk 
+(***) corresponds to p < 0.001, double asterisk (**) corresponds to 
+p < 0.01, and single asterisk (*) corresponds to p < 0.05
+Applied Microbiology and Biotechnology (2024) 108:305 
+ Page 11 of 13 305
+relative free energy differences at their edges. If the sum of 
+all relative free energy changes deviates from zero, insuffi-
+cient sampling for one or multiple of the mutations could be 
+an issue (Gapsys et al. 2015a; Hardebeck et al. 2023). Both 
+approaches mentioned above, the use of closed thermody -
+namic cycle and increasing the number of independent rep-
+licas, come however with a substantial increase in computa-
+tional effort and need to be considered carefully. Aside from 
+potential sampling issues, force field parametrization also 
+influences the performance of NEQ alchemical free energy 
+calculations (Gapsys et al. 2016). The force fields used in 
+molecular simulations are typically parameterized based on 
+experimental data and may not fully capture the nuances of 
+highly stable proteins (Lindorff-Larsen et al. 2010). To the 
+best of our knowledge, a comprehensive investigation on the 
+performance of force fields on highly stable proteins has not 
+been undertaken thus far. This could be an interesting topic 
+for future research in the context of the application of free 
+energy calculations.
+Overall, we managed to identify three mutations that 
+increased the thermostability of DuraPETase. The increase 
+in thermostability was however limited, especially when 
+compared with other optimizations of IsPETase (Bell et al. 
+2022; Cui et al. 2021; Lu et al. 2022). It is also a rather 
+limited number of successfully identified mutations when 
+compared to another protein engineering project. Song et al. 
+used the well-established FoldX tool in conjunction with 
+a free energy perturbation approach for the engineering of 
+a more thermostable blue light photo receptor YtvA LOV 
+domain from Bacillus subtilis. They identified nine stabiliz-
+ing mutations and had a good correlation of r = 0.63 between 
+experimentally determined and predicted ∆∆G values (Song 
+et al. 2013). When one however considers the free energy 
+surface as a function of protein sequence space, it is conceiv-
+able that several local minima exist in addition to the global 
+minimum. If the sequence of DuraPETase represents a point 
+close to such a local minimum on the energy hypersurface, 
+only small increases in thermostability can be achieved by 
+single amino acid mutations. This is consistent with reports 
+in the literature where larger enhancement in the thermosta-
+bility of DuraPETase was only achieved with the introduc-
+tion of a disulfide bond or a salt bridge (Brott et al. 2022; 
+Lu et al. 2022). Both are mutations that could not have been 
+identified with our screening approach.
+The three mutations identified with the screening 
+approach with a higher T m than original DuraPETase were 
+ DuraPETaseS42M,  DuraPETaseS61M, and  DuraPETaseS223Y. 
+None of these mutations are located near the active center. 
+Interestingly, in the thermostable PETase variant Hot-
+PETase, the serine in position 61 was also mutated, however 
+in this case to a valine (Bell et al. 2022). Both mutations 
+introduce more lipophilic amino acids. The serine is located 
+near the surface of the enzyme in a relatively hydrophilic 
+region. Introduction of a hydrophobic residue in this region 
+likely leads to a more compact packing of the region to 
+reduce the surface exposed hydrophobic area. This could 
+pose a possible explanation for the increased thermostabil-
+ity of the enzyme. The same explanation can be given for 
+ DuraPETaseS61M and  DuraPETaseS223Y. Serine 61 and ser -
+ine 223 are also located near the surface of the enzyme, 
+and mutation to a methionine or tyrosine also drastically 
+increases the lipophilicity at these positions. Analysis of 
+PET hydrolysis by the DuraPETase variants showed that var-
+iants with an improved thermostability also were more active 
+than the original DuraPETase at an elevated reaction tem-
+perature of 52 °C. The most stable variant  DuraPETaseS223Y 
+showed the highest amount of PET degradation at 52 °C 
+with a 10% increase compared to the original DuraPETase. 
+If this can be attributed to an increased activity or a longer 
+half-life of the enzyme at 52 °C remains unclear. Unfortu-
+nately, this slight increase in both the T m and the improved 
+degradation rate at 52 °C of the variant is likely not relevant 
+for the potential industrial application of DuraPETase.
+In conclusion, we demonstrated the applicability of NEQ 
+alchemical free energy calculations for enzyme engineering 
+projects. Challenges encountered with the extremely stable 
+DuraPETase in this study, however, also highlight limita-
+tions of the approach and provide directions for the further 
+optimization and validation of free energy calculations. We 
+also validated an efficient way to integrate NEQ alchemi-
+cal free energy calculations with semi-empirical methods to 
+reduce overall computational cost. Overall, this study shows 
+that free energy calculations can be a valuable tool for the 
+design of thermostable proteins that can be readily employed 
+in these kinds of projects.
+Supplementary Information The online version contains supplemen-
+tary material available at https:// doi. org/ 10. 1007/ s00253- 024- 13144-z.
+Acknowledgements We acknowledge the support of the HPC facility 
+of the University of Münster for providing computational resources.
+Author contribution SS and DG contributed equally to this work. SS 
+and DG performed experiments and data analysis. FL performed data 
+analysis. SN, DG, and JJ conceived and designed research. SS and DG 
+wrote the initial manuscript. FL and JJ reviewed and edited the manu-
+script. JJ supervised the research and acquired funding. All authors 
+have read and approved the final version of the manuscript.
+Funding Open Access funding enabled and organized by Projekt 
+DEAL.
+Data availability Data is available from the corresponding author upon 
+reasonable request.
+Declarations 
+Ethics approval This article does not contain any studies with human 
+participants or animals performed by any of the authors.
+Competing interests The authors declare no competing interest.
+ Applied Microbiology and Biotechnology (2024) 108:305
+305 Page 12 of 13
+Open Access This article is licensed under a Creative Commons Attri-
+bution 4.0 International License, which permits use, sharing, adapta-
+tion, distribution and reproduction in any medium or format, as long 
+as you give appropriate credit to the original author(s) and the source, 
+provide a link to the Creative Commons licence, and indicate if changes 
+were made. The images or other third party material in this article are 
+included in the article’s Creative Commons licence, unless indicated 
+otherwise in a credit line to the material. If material is not included in 
+the article’s Creative Commons licence and your intended use is not 
+permitted by statutory regulation or exceeds the permitted use, you will 
+need to obtain permission directly from the copyright holder. To view a 
+copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+References
+Abraham MJ, Murtola T, Schulz R, Páll S, Smith JC, Hess B, Lindahl 
+E (2015) GROMACS: high performance molecular simulations 
+through multi-level parallelism from laptops to supercomputers. 
+SoftwareX 1–2:19–25. https:// doi. org/ 10. 1016/j. softx. 2015. 06. 
+001
+Aldeghi M, de Groot BL, Gapsys V (2019) Accurate calculation of 
+free energy changes upon amino acid mutation. Methods Mol Biol 
+1851:19–47. https:// doi. org/ 10. 1007/ 978-1- 4939- 8736-8_2
+Bell EL, Smithson R, Kilbride S, Foster J, Hardy FJ, Ramachandran S, 
+Tedstone AA, Haigh SJ, Garforth AA, Day PJR, Levy C, Shaver 
+MP, Green AP (2022) Directed evolution of an efficient and ther-
+mostable PET depolymerase. Nat Catal 5(8):673–681. https:// doi. 
+org/ 10. 1038/ s41929- 022- 00821-3
+Bennett CH (1976) Efficient estimation of free energy differences from 
+Monte Carlo data. J Comput Phys 22(2):245–268. https:// doi. org/ 
+10. 1016/ 0021- 9991(76) 90078-4
+Bhati AP, Coveney PV (2022) Large scale study of ligand–protein rela-
+tive binding free energy calculations: actionable predictions from 
+statistically robust protocols. J Chem Theory Comput 18(4):2687–
+2702. https:// doi. org/ 10. 1021/ acs. jctc. 1c012 88
+Bommarius AS, Blum JK, Abrahamson MJ (2011) Status of protein 
+engineering for biocatalysts: how to design an industrially useful 
+biocatalyst. Curr Opin Chem Biol 15(2):194–200. https:// doi. org/ 
+10. 1016/j. cbpa. 2010. 11. 011
+Bromberg Y, Rost B (2009) Correlating protein function and sta -
+bility through the analysis of single amino acid substitu-
+tions. BMC Bioinformatics 10(8):S8. https:// doi. org/ 10. 1186/  
+1471- 2105- 10- S8- S8
+Brott S, Pfaff L, Schuricht J, Schwarz JN, Bottcher D, Badenhorst CPS, 
+Wei R, Bornscheuer UT (2022) Engineering and evaluation of 
+thermostable IsPETase variants for PET degradation. Eng Life Sci 
+22(3–4):192–203. https:// doi. org/ 10. 1002/ elsc. 20210 0105
+Buß O, Rudat J, Ochsenreither K (2018) FoldX as protein engineer -
+ing tool: better than random based approaches? Comput Struct 
+Biotechnol J 16:25–33. https:// doi. org/ 10. 1016/j. csbj. 2018. 01. 002
+Bussi G, Donadio D, Parrinello M (2007) Canonical sampling through 
+velocity rescaling. J Chem Phys 126(1):014101. https:// doi. org/ 
+10. 1063/1. 24084 20
+Childers MC, Daggett V (2017) Insights from molecular dynamics 
+simulations for computational protein design. Mol Syst Des Eng 
+2(1):9–33. https:// doi. org/ 10. 1039/ C6ME0 0083E
+Clark AJ, Negron C, Hauser K, Sun M, Wang L, Abel R, Friesner RA 
+(2019) Relative binding affinity prediction of charge-changing 
+sequence mutations with FEP in protein–protein interfaces. J 
+Mol Biol 431(7):1481–1493. https:// doi. org/ 10. 1016/j. jmb. 2019. 
+02. 003
+Crooks GE (1999) Entropy production fluctuation theorem and the non-
+equilibrium work relation for free energy differences. Phys Rev 
+E 60(3):2721–2726. https:// doi. org/ 10. 1103/ PhysR evE. 60. 2721
+Cui Y, Chen Y, Liu X, Dong S, Ye T, Qiao Y, Mitra R, Han J, Li C, 
+Han X, Liu W, Chen Q, Wei W, Wang X, Du W, Tang S, Xiang H, 
+Liu H, Liang Y, Houk KN, Wu B (2021) Computational redesign 
+of a PETase for plastic biodegradation under ambient condition 
+by the GRAPE strategy. ACS Catal 11(3):1340–1350. https:// doi. 
+org/ 10. 1021/ acsca tal. 0c051 26
+Dehouck Y, Grosfils A, Folch B, Gilis D, Bogaerts P, Rooman M 
+(2009) Fast and accurate predictions of protein stability changes 
+upon mutations using statistical potentials and neural networks: 
+PoPMuSiC-2.0. Bioinformatics 25(19):2537–2543. https://  doi. 
+org/ 10. 1093/ bioin forma tics/ btp445
+Essmann U, Perera L, Berkowitz ML, Darden T, Lee H, Pedersen 
+LG (1995) A smooth particle mesh Ewald method. J Chem Phys 
+103(19):8577–8593. https:// doi. org/ 10. 1063/1. 470117
+Floor RJ, Wijma HJ, Colpa DI, Ramos-Silva A, Jekel PA, Szymański 
+W, Feringa BL, Marrink SJ, Janssen DB (2014) Computational 
+library design for increasing haloalkane dehalogenase stability. 
+ChemBioChem 15(11):1660–1672. https:// doi. org/ 10. 1002/ cbic. 
+20140 2128
+Ford MC, Babaoglu K (2017) Examining the feasibility of using free 
+energy perturbation (FEP+) in predicting protein stability. J Chem 
+Inf Model 57(6):1276–1285. https:// doi. org/ 10. 1021/ acs. jcim. 
+7b000 02
+Gapsys V, Michielssens S, Peters JH, de Groot BL, Leonov H (2015a) 
+Calculation of binding free energies. In: Kukol A (ed) Molecular 
+modeling of proteins. Springer, New York, New York, NY, pp 
+173–209
+Gapsys V, Michielssens S, Seeliger D, de Groot BL (2015b) pmx: 
+automated protein structure and topology generation for alchemi-
+cal perturbations. J Comput Chem 36(5):348–354. https:// doi. org/ 
+10. 1002/ jcc. 23804
+Gapsys V, Michielssens S, Seeliger D, de Groot BL (2016) Accurate 
+and rigorous prediction of the changes in protein free energies in a 
+large-scale mutation scan. Angew Chem Int Ed Engl 55(26):7364–
+7368. https:// doi. org/ 10. 1002/ anie. 20151 0054
+Goldenzweig A, Fleishman SJ (2018) Principles of protein stability 
+and their application in computational design. Annu Rev Bio-
+chem 87(1):105–129. https:// doi. org/ 10. 1146/ annur  ev- bioch 
+em- 062917- 012102
+Guerois R, Nielsen JE, Serrano L (2002) Predicting changes in the 
+stability of proteins and protein complexes: a study of more than 
+1000 mutations. J Mol Biol 320(2):369–387. https:// doi. org/ 10. 
+1016/ S0022- 2836(02) 00442-4
+Hardebeck S, Schreiber S, Adick A, Langer K, Jose J (2023) A FRET-
+based assay for the identification of PCNA inhibitors. Int J Mol 
+Sci 24(14):11858
+Hess B, Bekker H, Berendsen HJC, Fraaije JGEM (1997) LINCS: 
+a linear constraint solver for molecular simulations. J Comput 
+Chem 18(12):1463–1472. https:// doi. org/ 10. 1002/ (SICI) 1096- 
+987X(199709) 18: 12% 3c146 3:: AID- JCC4% 3e3.0. CO;2-H
+Jarzynski C (1997a) Equilibrium free-energy differences from non-
+equilibrium measurements: a master-equation approach. Phys Rev 
+E 56(5):5018–5035. https:// doi. org/ 10. 1103/ PhysR evE. 56. 5018
+Jarzynski C (1997b) Nonequilibrium equality for free energy differ -
+ences. Phys Rev Lett 78(14):2690–2693. https:// doi. org/ 10. 1103/ 
+PhysR evLett. 78. 2690
+Jespers W, Isaksen GV, Andberg TAH, Vasile S, van Veen A, Åqvist J, 
+Brandsdal BO, Gutiérrez-de-Terán H (2019) QresFEP: an auto-
+mated protocol for free energy calculations of protein mutations 
+in Q. J Chem Theory Comput 15(10):5461–5473. https:// doi. org/ 
+10. 1021/ acs. jctc. 9b005 38
+Applied Microbiology and Biotechnology (2024) 108:305 
+ Page 13 of 13 305
+Jog JP (1995) Crystallization of polyethyleneterephthalate. JMS Rev 
+Macromol Chem Phys 35(3):531–553. https://  doi. org/ 10. 1080/ 
+15321 79950 80145 98
+Kellogg EH, Leaver-Fay A, Baker D (2011) Role of conformational 
+sampling in computing mutation-induced changes in protein struc-
+ture and stability. Proteins 79(3):830–838. https:// doi. org/ 10. 1002/ 
+prot. 22921
+Labrou NE (2010) Random mutagenesis methods for in vitro directed 
+enzyme evolution. Curr Protein Pept Sci 11(1):91–100. https://  
+doi. org/ 10. 2174/ 13892 03107 90274 617
+Lavinder JJ, Hari SB, Sullivan BJ, Magliery TJ (2009) High-through-
+put thermal scanning: a general, rapid dye-binding thermal shift 
+screen for protein engineering. J Am Chem Soc 131(11):3794–
+3795. https:// doi. org/ 10. 1021/ ja804 9063
+Lindorff-Larsen K, Piana S, Palmo K, Maragakis P, Klepeis JL, Dror 
+RO, Shaw DE (2010) Improved side-chain torsion potentials for 
+the Amber ff99SB protein force field. Proteins 78(8):1950–1958. 
+https:// doi. org/ 10. 1002/ prot. 22711
+Liu Y, Liu Z, Guo Z, Yan T, Jin C, Wu J (2022) Enhancement of the 
+degradation capacity of IsPETase for PET plastic degradation by 
+protein engineering. Sci Total Environ 834:154947. https:// doi.  
+org/ 10. 1016/j. scito tenv. 2022. 154947
+Lu H, Diaz DJ, Czarnecki NJ, Zhu C, Kim W, Shroff R, Acosta DJ, 
+Alexander BR, Cole HO, Zhang Y, Lynd NA, Ellington AD, Alper 
+HS (2022) Machine learning-aided engineering of hydrolases for 
+PET depolymerization. Nature 604(7907):662–667. https:// doi. 
+org/ 10. 1038/ s41586- 022- 04599-z
+Nezhad NG, Rahman R, Normi YM, Oslan SN, Shariff FM, Leow TC 
+(2022) Thermostability engineering of industrial enzymes through 
+structure modification. Appl Microbiol Biotechnol 106(13–
+16):4845–4866. https:// doi. org/ 10. 1007/ s00253- 022- 12067-x
+Parrinello M, Rahman A (1981) Polymorphic transitions in sin-
+gle crystals: a new molecular dynamics method. J Appl Phys 
+52(12):7182–7190. https:// doi. org/ 10. 1063/1. 328693
+Patel D, Patel JS, Ytreberg FM (2021) Implementing and assessing an 
+alchemical method for calculating protein-protein binding free 
+energy. J Chem Theory Comput 17(4):2457–2464. https:// doi. org/ 
+10. 1021/ acs. jctc. 0c010 45
+Peccati F, Alunno-Rufini S, Jiménez-Osés G (2023) Accurate predic-
+tion of enzyme thermostabilization with Rosetta using AlphaFold 
+ensembles. J Chem Inf Model 63(3):898–909. https:// doi. org/ 10. 
+1021/ acs. jcim. 2c010 83
+Scarabelli G, Oloo EO, Maier JKX, Rodriguez-Granillo A (2022) 
+Accurate prediction of protein thermodynamic stability changes 
+upon residue mutation using free energy perturbation. J Mol Biol 
+434(2):167375. https:// doi. org/ 10. 1016/j. jmb. 2021. 167375
+Seeliger D, de Groot BL (2010) Protein thermostability calculations 
+using alchemical free energy simulations. Biophys J 98(10):2309–
+2316. https:// doi. org/ 10. 1016/j. bpj. 2010. 01. 051
+Serrano L, Bycroft M, Fersht AR (1991) Aromatic-aromatic inter -
+actions and protein stability: investigation by double-mutant 
+cycles. J Mol Biol 218(2):465–475. https:// doi. org/ 10. 1016/ 0022- 
+2836(91) 90725-L
+Shi L, Liu P, Tan Z, Zhao W, Gao J, Gu Q, Ma H, Liu H, Zhu L 
+(2023) Complete depolymerization of pet wastes by an evolved 
+PET hydrolase from directed evolution. Angew Chem Int Ed 
+62(14):e202218390. https:// doi. org/ 10. 1002/ anie. 20221 8390
+Shirts MR, Chodera JD (2008) Statistically optimal analysis of samples 
+from multiple equilibrium states. J Chem Phys 129(12):124105. 
+https:// doi. org/ 10. 1063/1. 29781 77
+Shirts MR, Bair E, Hooker G, Pande VS (2003) Equilibrium free ener-
+gies from nonequilibrium measurements using maximum-likeli-
+hood methods. Phys Rev Lett 91(14):140601. https:// doi. org/ 10. 
+1103/ PhysR evLett. 91. 140601
+Song X, Wang Y, Shu Z, Hong J, Li T, Yao L (2013) Engineering 
+a more thermostable blue light photo receptor Bacillus subtilis  
+YtvA LOV domain by a computer aided rational design method. 
+PLoS Comp Biol 9(7):e1003129. https:// doi. org/ 10. 1371/ journ al. 
+pcbi. 10031 29
+Steinbrecher T, Abel R, Clark A, Friesner R (2017a) Free energy per -
+turbation calculations of the thermodynamics of protein side-chain 
+mutations. J Mol Biol 429(7):923–929. https:// doi. org/ 10. 1016/j. 
+jmb. 2017. 03. 002
+Steinbrecher T, Zhu C, Wang L, Abel R, Negron C, Pearlman D, Fey-
+fant E, Duan J, Sherman W (2017b) Predicting the effect of amino 
+acid single-point mutations on protein stability—large-scale vali-
+dation of MD-based relative free energy calculations. J Mol Biol 
+429(7):948–963. https:// doi. org/ 10. 1016/j. jmb. 2016. 12. 007
+Taverna DM, Goldstein RA (2002) Why are proteins marginally stable? 
+Proteins 46(1):105–109. https:// doi. org/ 10. 1002/ prot. 10016
+Wang X-C, You S-P, Zhang J-X, Dai Y-M, Zhang C-Y, Qi W, Dou 
+T-Y, Su R-X, He Z-M (2018) Rational design of a thermophilic 
+β-mannanase from Bacillus subtilis TJ-102 to improve its thermo-
+stability. Enzyme Microb Technol 118:50–56. https:// doi. org/ 10. 
+1016/j. enzmi ctec. 2018. 07. 005
+Wei R, Zimmermann W (2017) Biocatalysis as a green route for recy-
+cling the recalcitrant plastic polyethylene terephthalate. Microb 
+Biotechnol 10(6):1302–1307. https:// doi. org/ 10. 1111/ 1751- 7915. 
+12714
+Wijma HJ, Floor RJ, Jekel PA, Baker D, Marrink SJ, Janssen DB 
+(2014) Computationally designed libraries for rapid enzyme sta-
+bilization. Protein Eng Des Sel 27(2):49–58. https:// doi. org/ 10. 
+1093/ prote in/ gzt061
+Wijma HJ, Fürst MJLJ, Janssen DB (2018) A computational library 
+design protocol for rapid improvement of protein stability: 
+FRESCO. In: Bornscheuer UT, Höhne M (eds) Protein engineer-
+ing: methods and protocols. Springer, New York, New York, NY, 
+pp 69–85
+Yoshida S, Hiraga K, Takehana T, Taniguchi I, Yamaji H, Maeda Y, 
+Toyohara K, Miyamoto K, Kimura Y, Oda K (2016) A bacte-
+rium that degrades and assimilates poly(ethylene terephthalate). 
+Science 351(6278):1196–1199. https:// doi. org/ 10. 1126/ scien ce. 
+aad63 59
+Zurier HS, Goddard JM (2023) A high-throughput expression and 
+screening platform for applications-driven PETase engineering. 
+Biotechnol Bioeng 120(4):1000–1014. https:// doi. org/ 10. 1002/ 
+bit. 28319
+Zwanzig RW (1954) High-temperature equation of state by a perturba-
+tion method. I Nonpolar Gases J Chem Phys 22(8):1420–1426. 
+https:// doi. org/ 10. 1063/1. 17404 09
+Publisher's Note Springer Nature remains neutral with regard to 
+jurisdictional claims in published maps and institutional affiliations.

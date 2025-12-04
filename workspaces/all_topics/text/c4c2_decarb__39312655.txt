@@ -1,0 +1,1492 @@
+PNAS  2024  Vol. 121  No. 40 e2402781121 https://doi.org/10.1073/pnas.2402781121 1 of 12
+RESEARCH ARTICLE | 
+Significance
+ This study advances 
+understanding of the cis-
+regulatory mechanisms 
+underpinning the evolution of C3 
+and C4 photosynthesis in 
+grasses. Leveraging cutting-edge 
+single-cell assay for transposase 
+accessible chromatin-sequencing 
+technology, we reveal intricate 
+cell-type-specific regulatory 
+landscapes that delineate the 
+evolutionary trajectory from C3 
+to C4 photosynthesis. The 
+comprehensive single-cell 
+resolution cis-regulatory maps 
+across five grass species, 
+including both C3 and C4 types, 
+uncover the dynamic interplay of 
+gene co-option and evolutionary 
+innovation driving this critical 
+adaptation. These findings not 
+only elucidate the genetic 
+foundations of photosynthetic 
+diversity, but also pave the way 
+for future biotechnological 
+approaches to improve crop 
+resilience and efficiency under 
+changing environments.
+Author contributions: J.P.M., S.Z., and R.J.S. designed 
+research; J.P.M., X.T., D.J., H.Y., X.Z., and A.P.M. performed 
+research; J.P.M. analyzed data; and J.P.M., S.Z., and R.J.S. 
+wrote the paper.
+Competing interest statement: R.J.S. is a co- founder 
+of REquest Genomics, LLC, a company that provides 
+epigenomic services.
+This article is a PNAS Direct Submission.
+Copyright © 2024 the Author(s). Published by PNAS. This 
+article is distributed under Creative Commons Attribution- 
+NonCommercial- NoDerivatives License 4.0 (CC BY- NC- ND).
+1Present address: Department of Molecular, Cellular, 
+and Development Biology, University of Michigan, Ann 
+Arbor, MI 48109.
+2To whom correspondence may be addressed. Email: 
+schmitz@uga.edu.
+This article contains supporting information online at 
+https://www.pnas.org/lookup/suppl/doi:10.1073/pnas.  
+2402781121/- /DCSupplemental.
+Published September 23, 2024.
+GENETICS
+Investigating the cis- regulatory basis of C3 and 
+C4 photosynthesis in grasses at single- cell resolution
+John Pablo Mendietaa , Xiaoyu Tub , Daiquan Jiangc , Haidong Yana, Xuan Zhanga , Alexandre P. Maranda,1 , Silin Zhongc ,  
+and Robert J. Schmitza,2
+Affiliations are included on p. 11.
+Edited by Julia Bailey- Serres, University of California, Riverside, CA; received February 13, 2024; accepted July 23, 2024
+While considerable knowledge exists about the enzymes pivotal for C4 photosynthesis, 
+much less is known about the cis- regulation important for specifying their expression in 
+distinct cell types. Here, we use single- cell- indexed ATAC- seq to identify cell- type- specific 
+accessible chromatin regions (ACRs) associated with C4 enzymes for five different grass 
+species. This study spans four C4 species, covering three distinct photosynthetic subtypes: 
+Zea mays and Sorghum bicolor (NADP- dependent malic enzyme), Panicum miliaceum 
+(NAD- dependent malic enzyme), Urochloa fusca (phosphoenolpyruvate carboxykin-
+ase), along with the C3 outgroup Oryza sativa. We studied the cis- regulatory landscape 
+of enzymes essential across all C4 species and those unique to C 4 subtypes, measuring 
+cell- type- specific biases for C4 enzymes using chromatin accessibility data. Integrating 
+these data with phylogenetics revealed diverse co- option of gene family members between 
+species, showcasing the various paths of C4 evolution. Besides promoter proximal ACRs, 
+we found that, on average, C4 genes have two to three distal cell- type- specific ACRs, high-
+lighting the complexity and divergent nature of C4 evolution. Examining the evolutionary 
+history of these cell- type- specific ACRs revealed a spectrum of conserved and novel ACRs, 
+even among closely related species, indicating ongoing evolution of cis- regulation at these 
+C4 loci. This study illuminates the dynamic and complex nature of cis- regulatory elements 
+evolution in C4 photosynthesis, particularly highlighting the intricate cis- regulatory evolu-
+tion of key loci. Our findings offer a valuable resource for future investigations, potentially 
+aiding in the optimization of C3 crop performance under changing climatic conditions.
+C4 Photosynthesis | Cis- regulation | Plant Genomics | Regulatory Evolution | Single- cell
+ Photosynthesis is one of the most critical chemical reactions on the planet whereby CO2  
+is metabolized into glucose. Plants have evolved numerous variations of photosynthesis. 
+The most common type of photosynthesis uses the enzyme ribulose 1,5-biphosphate 
+carboxylase oxygenase (RuBisCO) which combines CO 2  with a five-carbon compound 
+ribulose 1,5-biphosphate to create 3-phosphoglyceric acid. This three-carbon compound 
+is then used in a redox reaction within the Calvin Benson cycle, where sucrose is made. 
+The production of this three-carbon compound is what gives this type of photosynthesis, 
+C3 , its name. However, although widely evolved and found in many crop plants, C 3  
+photosynthesis struggles to perform in hot, arid conditions. In nonideal conditions, O 2  
+can competitively bind the RuBisCO active site, causing the formation of a toxic inter­
+mediate, and reducing photosynthetic efficiency and plant performance ( 1 ). Due to 
+increasing temperature caused by anthropogenic climate change, this reduction in pho­
+tosynthetic capacity for key crop plants poses a major agricultural challenge ( 2 ). However, 
+other types of photosynthesis have evolved in hotter conditions and offer a model to 
+potentially alter key C3  crop plants to be more efficient.
+ The C4  photosynthetic pathway is an example of a modified style of photosynthesis 
+that is able to perform in hot conditions. In brief, C 4  typically works by sequestering 
+key photosynthetic enzymes into two different compartments in the leaf made up of 
+different cell types. These two cell types/compartments are bundle sheath (BS) cells, 
+which in C4  plants generally form a concentric ring around the vasculature, and mes­
+ophyll (MS) cells, which make up large portions of the nonvascularized leaf internal 
+cells ( 3 ). In the MS, CO2  is imported and converted to bicarbonate (HCO 3 − ) by the 
+enzyme carbonic anhydrase (CA). Bicarbonate is then converted to a four- carbon 
+molecule oxaloacetate (OAA) by the O2- insensitive phosphoenolpyruvate carboxylase 
+(PEPC). This OAA molecule made of a four- carbon compound (where C 4  derives its 
+name) is finally converted into a stable metabolite, either malate or aspartate. This 
+intermediate molecule is then transported to the BS where it undergoes a decarboxy­
+lation process, by one of three different types of decarboxylases, NAD- dependent malic 
+2 of 12   https://doi.org/10.1073/pnas.2402781121 pnas.org
+enzyme (NAD-ME), NADP-dependent malic enzyme (NADP - 
+ME), or phosphoenolpyruvate carboxykinase (PEPCK). This 
+decarboxylation reaction releases a CO 2  molecule that enters 
+into the Calvin Benson cycle. The generation and processing of 
+intermediate molecules in cellular compartments allows for 
+concentrated levels of CO 2  to interact with RuBisCO, reducing 
+the inefficiencies mentioned above. Additional types of C 4  pho­
+tosynthesis have been observed which do not rely on division 
+of metabolites between MS and BS cell types, but instead rely 
+on using dimorphic chloroplast instead as in the species 
+ Bienertia sinuspersici  ( 4 ,  5 ). Current C4  crops such as maize 
+(Zea mays ), sorghum (Sorghum bicolor ), pearl millet (Cenchrus 
+americanus ), foxtail millet (Setaria italica ), and broomcorn mil­
+let (Panicum miliaceum ) excel in their ability to operate in 
+adverse conditions.
+ Although the evolution of C4  photosynthesis is a complex pro­
+cess, there is tantalizing evidence that engineering C3  crops to do 
+C4  photosynthesis might be possible. One piece of evidence that 
+points to this is that C4  photosynthesis has evolved independently 
+65 times in different lineages of plants ( 6 ). These results indicate 
+that most plant lineages have the genetic material capable of evolv­
+ing into C4  photosynthesizers. The Poaceae  lineage of grasses exem­
+plifies this, as C4  photosynthesis has evolved independently at least 
+18 times ( 7 ). Interestingly, all of these species use the same core 
+C4  enzymes and steps, but many use different decarboxylation 
+enzymes as mentioned above ( 8   – 10 ). Furthering this hypothesis 
+is the fact that many C 4 -related genes originally evolved from 
+either C3  photosynthetic genes or key enzymes critical in core 
+metabolism ( 11 ,  12 ). For instance, PEPC is a key metabolism 
+enzyme in the glycolytic pathways of the Krebs Cycle, with some 
+copies being important in guard cell metabolism ( 13   – 15 ). Instead 
+of novel gene content being the main driver of C4  photosynthesis, 
+it is more likely due to the correct timing and compartmentaliza­
+tion of key enzymes into specific cell types ( 16   – 18 ). This raises 
+the question of how is gene expression of these key C 4  enzymes 
+regulated. Moreover, as C 4  has evolved multiple times conver­
+gently, have similar regulatory networks and paradigms been 
+co-opted to alter when and where these key genes are expressed?
+ cis- regulatory elements (CREs) are key players in gene regu­
+lation, as they both fine- tune expression and provide cell- type 
+specificity ( 19     – 22 ). In brief, these regions operate as binding 
+sites for transcription factors (TFs). TFs are proteins which are 
+able to alter transcription by binding DNA sequences and 
+recruiting transcriptional machinery which can either increase 
+or decrease transcription ( 23 ). Thus TFs are able to significantly 
+change molecular phenotypes. Previous work has shown that 
+CREs could be key players in the transition to C 4  photosynthe ­
+sis. This was demonstrated by taking C 4  genes from Z. mays  and 
+transforming them into Oryza sativa,  a C 3  species ( 24 ,  25 ), 
+which revealed that CREs from Z. mays  genes were able to drive 
+cell-type-specific expression in MS in O. sativa  ( 24 ,  25 ). 
+Additional analyses have implicated CREs as drivers in the evo ­
+lution of C 4  photosynthesis. In the genus of plants Flaveria,  
+which contains both C 4  and C3  plants, one key difference in C4  
+plants was a specific CRE driving gene expression in MS cells. 
+This 41 bp motif named Mesophyll expression module 1  is critical 
+for cell- type-specific expression of PEPC  in MS cells, a critical 
+first step in the C 4  pathway ( 19 ,  26 ). Finally, four conserved 
+noncoding sequences were identified to be critical in MS- specific 
+expression of PEPC  in monocots ( 27 ). Furthermore, a recent 
+cross-species study examining the binding sites of GLK, a con­
+served TF regulating photosynthetic genes, revealed that CREs 
+can undergo rapid changes and result in diverse gene expression 
+patterns without the need of altering the TF itself ( 28 ). These 
+findings show that CREs are important genetic elements that 
+plants use for the evolution of C 4  photosynthesis.
+ Although some CREs critical for cell-type-specific expression 
+of key photosynthetic genes have been identified, they’ve been 
+restricted to those nearby the transcriptional start sites. This is 
+due, in part, to the challenge of identifying CREs genome wide, 
+as well as limitations in the isolation of BS and MS cells which is 
+labor intensive and challenging. However, a recent study used a 
+multiomic approach in Z. mays  BS and MS cells and found CREs 
+genome-wide that might be critical in the cell-type-specific regu­
+lation of genes ( 29 ). One example is the identification of a poten­
+tial distal CRE ~40 kb upstream of SULFATE TRANSPORTER4  
+(ZmSFP4 ), a BS-specific sulfate transporter ( 29 ). These results 
+highlight the complexity of identifying loci involved in cis  regu­
+lation. Identifying all CREs associated with C 4  loci is critical in 
+enhancing our understanding of cis  regulation of key C 4  genes, 
+and would greatly enhance attempts at engineering C 3  crops. 
+During the evolution of C4  photosynthesis, it is unclear whether 
+these CREs have been preestablished during evolution and 
+co-opted for C4  photosynthesis or if they evolved independently 
+numerous times. Understanding the ways in which cis  regulation 
+evolves to control timing and cell-type-specific expression of C 4  
+photosynthesis genes would greatly assist efforts in engineering 
+C3  plants to be more C4 -like.
+ T o investigate the role of CREs and their potential contribution 
+in controlling key C4  genes, we used single-cell indexed assay for 
+transposase accessible chromatin sequencing (sciATAC-seq) to 
+identify cell-type-specific CREs from five grass species represent­
+ing diverse C4  subtypes, as well as an additional C3  outgroup. We 
+investigated the cell-type specificity of both the core C4  enzymes, 
+and those which are unique to each photosynthetic subtype. 
+Further, we identify CREs of C4  genes and find cell-type-specific 
+CREs that might be critical in C 4  gene expression. We find that 
+some of these regulatory regions appear not just conserved in a 
+single C4  subtype, but in all of the C4  species we studied. Finally, 
+we leverage these data to find TF binding motifs enriched in MS 
+and BS cell types and use these motifs to catalog these regulatory 
+loci. 
+Results
+Identification and Annotation of Cell Types in Diverse Species. 
+T o investigate CREs in BS and MS cells potentially important in 
+C4 photosynthesis, we generated replicated sciATAC- seq libraries 
+for four different C4 species, comprising three different C4 subtypes 
+NADP- ME (Z. mays, S. bicolor), NAD- ME (P . miliaceum), and 
+PEPCK (Urochloa fusca), and a C 3 outgroup species (O. sativa) 
+(Fig.  1A). Libraries were filtered for high- quality cells by first 
+pseudobulking the sciATAC- seq libraries, and identifying accessible 
+chromatin regions (ACRs). Using these ACRs, per nuclei quality 
+metrics were then calculated such as fraction of reads in peaks, 
+transcriptional start site enrichment, and total integration events 
+per nucleus (Methods). Nuclei found to have a high proportion 
+of organellar reads were also removed, with values being adjusted 
+on a per library basis (Methods). Clustering of cells was done on 
+genomic bins, and with additional cells removed that had a high 
+correlation with in silico generated doublets, and clusters were 
+removed that were skewed toward one replicate by greater than 
+75% (Methods). After filtering on per nucleus quality metrics, we 
+identified 16,060 nuclei in Z. mays, 15,301 nuclei in S. bicolor, 
+7,081 nuclei in P . miliaceum, 19,110 nuclei in U. fusca, and 5,952 
+nuclei in O. sativa (SI Appendix, Fig. S1 and Dataset S1).
+ Due to variation in genome size and content, cell-type anno­
+tation for each dataset was done independently using the reference 
+PNAS  2024  Vol. 121  No. 40 e2402781121 https://doi.org/10.1073/pnas.2402781121 3 of 12
+genome for each species ( Fig. 1B  ). We used multiple approaches to 
+annotate cell types. Orthologs of key marker genes from Z. 
+mays  and O. sativa  were identified using a phylogenetics-based 
+approach (Methods ). This allowed for the identification of marker 
+genes for specific cell types in a cross-species context. T o gauge 
+gene activity of these marker genes, gene body chromatin acces­
+sibility was used as a proxy for expression ( Fig. 1D  ) ( 21 ,  30 ). 
+Cell-type annotation was done manually taking into consideration 
+marker gene chromatin accessibility, marker enrichment in clus­
+ters, as well as ontological relationships between cell types 
+(SI Appendix, Figs. S2–S19 ). Due to the lack of marker genes for 
+many cell types in plants, as well as the challenge of annotating a 
+broad sample of species, we reduced resolution of our annotation 
+across our datasets to ensure accurate comparisons between vari­
+able species ( Fig. 1B  ). All markers used to annotate cell types in 
+this manuscript can be found in Dataset S2 .
+ Deeper exploration of the list of marker genes from Z. mays  
+showed conservation of gene body chromatin accessibility in 
+markers for certain cell types (Datasets S2  and S3 ). As expected, 
+for the C4  plants, RIBULOSE BISPHOSPHATE CARBOXYLASE 
+SMALL SUBUNIT1 (RBCS1) and RIBULOSE BISPHOSPHATE 
+CARBOXYLASE SMALL SUBUNIT2  ( RBCS2 ) were enriched 
+in BS cells compared to MS cells ( Fig. 1C  ), a pattern that was 
+not found in O. sativa.  Additionally, PEPC1  showed MS-specific 
+chromatin accessibility in all of the C4  species sampled ( Fig. 1D  ). 
+Additionally, we found conservation of marker genes like 
+ SUCROSE TRANSPORTER 1  (SUT1 ) in companion cells and 
+sieve elements, and GLOSSY1  ( GL1 ) in epidermis cells, indi­
+cating that these historically described marker genes are likely 
+important in this diverse set of species. This analysis provides 
+an examination of core- C4  marker genes’ chromatin accessibility 
+across a diverse sample of plant species at cell- type resolution.  
+Chromatin Accessibility of Core C4 Enzymes Shows Similar Cell- 
+Type Bias, but Differing Evolutionary Origins.  We measured 
+the chromatin accessibility bias of the C 4- associated enzymes. 
+Due to the diverse nature of the plants sampled, and the C 4 
+photosynthetic subtypes, we separated enzymes into core-  and 
+subtype- specific groups. This list comprised nine core C4 enzymes, 
+and nine variable enzymes. These enzymes were assigned to one 
+of these two groups based on if they are found in all C4 subtypes 
+(core) or are specific to only one or two subtypes (variable). One 
+Fig. 1.   Annotation of cell types in diverse grass species at single- cell resolution. (A) A phylogeny indicating the relationship of various C3 and C4 photosynthesizers 
+sampled. In this sample, two NADP- ME subtypes are represented, one NAD- ME subtype, a PEPCK subtype, as well as a C3 species. (B) UMAP embedding showing 
+the annotation for each species. A cell type legend is below. (C) Dotplots for various marker genes used to annotate each species. The y axis represents cell 
+types, and the x axis is a list marker genes used to annotate different cell types. The size of each circle is proportional to the number of cells within that cell type 
+that showed chromatin accessibility of the marker. Color is z- score transformed values across clusters of gene chromatin accessibility across the clusters. (D) 
+Screenshots of the PEPC locus for all sampled species. For each screenshot, the top track shows the protein coding, the red track is chromatin accessibility of 
+MS cells, and the blue track is the chromatin accessibility of the BS cells.
+4 of 12   https://doi.org/10.1073/pnas.2402781121 pnas.org
+example of a core enzyme is carbonic anhydrase, which is used to 
+generate bicarbonate from CO2, as well as for the regeneration of 
+phosphoenolpyruvate from oxaloacetate in the BS cells by means 
+of PEPCK (Fig. 2A). The list of gene families that we considered 
+as core or variable is found in Dataset S3.
+ T o investigate the cell-type bias of these enzymes, we used chro­
+matin accessibility of the gene (gene body as well as 500 bp 
+upstream of the transcriptional start site) ( Fig. 2B  ). Cell-type bias 
+was calculated as the log2  fold change of BS/MS chromatin acces­
+sibility. In order to identify core C4  enzymes across these species, 
+we used OrthoFinder, named and numbered the enzyme models 
+based off of their relatedness to Z. mays  copies of known core C4  
+genes ( 31 ). Using only cell-type-specific chromatin accessibility 
+data, we observed expected cell-type bias with many orthologs of 
+the maize MS-specific core C4  genes showing MS-specific bias as 
+compared to BS ( Fig. 2C  ). For instance, in all C4  species, PEPCK , 
+which regenerates PEP from OAA in BS cells, always showed a 
+BS-specific bias ( Fig. 2 A  and C  ). Additionally, PEPC , which con­
+verts bicarbonate to OAA in MS cells, showed MS-specific bias 
+for all species sampled, except the C 3  outgroup O. sativa  ( Fig. 2 
+ A  and C  ). These results highlight the quality of the data and the 
+cell-type annotations for these single-cell datasets.
+ When analyzing these data in tandem with the phylogenetic trees, 
+we noticed that some of the key enzymes showed different cell-type 
+specificity based on their evolutionary origin (SI Appendix, Figs. S21 
+and S22 ). For instance, for carbonic anhydrase in P . miliaceum,  the 
+orthologs that showed the largest bias between MS and BS cell types 
+were not the copies that were the most evolutionary closely related 
+to the Z. mays  and S. bicolor  cell-type-specific copies (Here PmCA1  
+and PmCA2 ). Rather, a copy found in a separate clade (PmCA3 ) 
+showed the most MS- specific bias ( Fig. 2C  ). This indicates that 
+during the evolution of C4 , different sets of carbonic anhydrases 
+were likely co-opted. One challenge using chromatin accessibility 
+in this context, however, is the fact that neighboring gene models 
+can occlude cell-type-specific signals. For instance, in the S. bicolor  
+copy of RBCS1 , a BS-specific gene has a neighboring gene model 
+directly upstream which shares a promoter region making measure­
+ment of the cell-type-specific bias of some loci challenging when 
+using chromatin accessibility data (SI Appendix, Fig. S23 ).
+ One unexpected result from this analysis was the lack of 
+cell-type-specific bias for MALATE PHOSPHATE ANTIPORT 1 
+(DIC1),  also known as DICARBOXYLATE/TRICARBOXYLATE 
+TRANSPORTER 1  (DTC1 ) in Z. mays . It has been previously 
+reported that DIC1  had BS-specific expression bias in Z. mays  as 
+well as in P . miliaceum  ( 32   – 34 ). However, there is not a clear signal 
+based on the chromatin accessibility data. This could indicate that 
+some ACRs harbor multiple CREs active in different cell types 
+that are not obvious in chromatin accessibility data or that the 
+cell-type-specificity observed is not due to cis -regulation, possibly 
+involving posttranscriptional processes ( Fig. 2C  ). Last, as expected, 
+there was very little bias in the C3  outgroup (O. sativa ). In total, 
+12/13 of the core C4  enzymes showed cell-type-specific bias in Z. 
+mays , 7/12 in S. bicolor , 16/21 in P . miliaceum , 11/13 in U. fusca , 
+and finally 0/16 in O. sativa . These data demonstrate that 
+chromatin-accessibility data can be leveraged to investigate the 
+cell-type regulation of C4  genes while also taking into considera­
+tion their evolutionary relationships in a cross-species context.  
+Key C 4 Subtype Genes Show Potential Convergent Evolution 
+in Cell- Type- Specific Bias. We investigated the variable enzymes 
+that give each C 4 subtype its unique properties by focusing 
+on two species (S. bicolor and Z. mays) from the NADP- ME 
+A
+C
+B
+Fig. 2.   Cell- type chromatin- accessibility bias for core 
+enzymes in C4 and C3 species. (A) Schematic of the core 
+C4 enzymatic pathway. Core C 4 enzymes are defined 
+as those which maintain their cell- type- specificity in 
+all C4 subtypes sampled. The red and blue squares 
+represent MS and BS cells, respectively. Enzymes 
+are labeled in bold, and transporters are denoted 
+by shapes. Intermediate molecules are indicated by 
+nonbolded text. (B) Screenshot of PEPCK in Z. mays. 
+Blue tracks correspond to BS chromatin accessibility 
+and red tracks show MS chromatin accessibility. 
+Tracks are equally scaled to facilitate comparison. (C) 
+Heatmaps of chromatin accessibility bias of the core 
+C4 enzymes. Values within each heatmap correspond 
+to Log2(BS/MS). Blue indicates increased BS chromatin 
+accessibility and red indicates increased MS chromatin 
+accessibility. Each species column and subtype was 
+clustered independently, and genes were assigned 
+as being MS-  or BS- specific (top/bottom of heatmap) 
+based on literature. Enzyme copies were distinguished 
+phylogenetically.
+PNAS  2024  Vol. 121  No. 40 e2402781121 https://doi.org/10.1073/pnas.2402781121 5 of 12
+subtype (Fig. 3A). As expected, chromatin accessibility bias was 
+observed for enzymes previously reported as having cell- type- 
+specific expression patterns, similarly to the core C 4 enzyme 
+set (29, 35). Reassuringly, one of the most biased enzymes 
+identified was NADP- ME, the key enzyme of the redox step in 
+NADP- ME subtypes. More specifically, of the multiple copies 
+of NADP- ME that exist in Z. mays, we observed the expected 
+cell- type bias for the known BS- specific copy, ME3, a key factor 
+in C4 (here ZmNADP- ME1) (Fig. 3B). We noticed in S. bicolor, 
+the BS- specific NADP- ME and the MS- specific NADP- malate 
+dehydrogenase (NADP- MDH) gene copies are recent tandem 
+duplications, each maintaining their respective cell- type specific 
+chromatin accessibility (Fig. 3 B and C and SI Appendix, Figs. S22 
+and S23). The malate transporters DICARBOXYLIC ACID 
+TRANSPORTER1/2 (DIT1/2) also demonstrated their expected 
+cell- type- specific bias with DIT1 being MS specific and DIT2 
+being BS specific in both species (Fig. 3 B and C). However, upon 
+further inspection of the phylogenies of the DITs in S. bicolor, 
+we noticed a pattern where the most BS- biased copy, SbDIT4 
+(Sobic.004G035500), was phylogenetically more closely related 
+to the ZmDIT1. Something which has been previously reported 
+(33, 36). These results indicate that over evolutionary time, even 
+members of the same C 4 photosynthetic subtype, which likely 
+share a C4 ancestor, can use different paralogous loci to achieve 
+cell- type- specific expression. This highlights that C4 evolution is 
+an ongoing process.
+ NAD-ME subtypes in P . miliaceum  are interesting, as the inter­
+mediate molecule being passed between MS and BS does not take 
+the form of malate, but instead aspartate, alanine, and oxaloacetate 
+( Fig. 3D  ). At least one gene copy of all the key redox enzymes, 
+ NAD-ME  and the NAD-dependent malate dehydrogenase  (NAD- 
+MDH ), show BS-biased chromatin accessibility ( Fig. 3 E  and F  ). 
+Interestingly, of the three copies of NAD-MDH  analyzed, only 
+two showed bias for BS. Next, we evaluated two key enzymes 
+NADP-MEA
+Mitochondria
+OAA
+Asp
+AspAT
+OAAMalate
+NADP-MDH
+AspAT
+DIT1
+Malate
+Chloroplast
+DIT2
+Malate
+Pyr
+NADP-ME
+CO2
+Zea mays Sorghum bicolor
+NADPME 1
+AlaAT 6
+DIT 2
+NADPME 2
+ASPAT 2
+NADMDH 1
+ASPAT 3
+NHD 1
+NADMDH 2
+AlaAT 7
+AlaAT 5
+NADME 1
+BASS 1
+AlaAT 4
+AlaAT 2
+AlaAT 1
+DIT 1
+ASPAT 1
+AlaAT 3
+NADPMDH 1
+Bundle SheathMesophyll, Bundle SheathMesophyll
+DIT 4
+NADPME 2
+ASPAT 2
+AlaAT 3
+NADPME 1
+NADPME 3
+AlaAT 4
+NADMDH 1
+NADME 1
+BASS 1
+AlaAT 1
+ASPAT 3
+NHD 1
+DIT 2.2
+DIT 2.1
+AlaAT 2
+ASPAT 1
+DIT 1
+NADPMDH 1
+NADPMDH 2
+Bundle SheathMesophyll, Bundle SheathMesophyll
+B NAD-ME
+Chloroplast
+Mitochondria
+Chloroplast
+OAA PEP
+AspAT
+Asp
+NAD-ME
+MalateCO2
+Pyr
+Asp
+OAA
+NAD-MDH
+PYR
+Ala
+AlaAT
+AlaAT
+Panicum milliaceum
+D
+AspAT
+BASS/NHD
+NADME 1
+NADME 2
+NADMDH 2
+NADMDH 1
+DIT 2
+NADMDH 3
+AlaAT 5
+AlaAT 1
+AlaAT 3
+NADPMDH 2
+AlaAT 6
+NADPMDH 1
+AspAT 2
+AspAT 1
+NADPME 2
+DIT 3
+AlaAT 2
+NADPMDH 3
+NADPME 1
+AlaAT 4
+AspAT 4
+AspAT 3
+NHD 2
+BASS 1
+BASS 2
+NHD 1
+DIT 1
+BASS 3
+BASS 4
+Bundle SheathMesophyll, Bundle SheathMesophyll
+E
+C
+F
+Z. mays: DIT2
+P. miliaceum: NADME 1
+P. miliaceum: AspAT 3
+S. bicolor: NADPME 2 
+[0 - 18]
+31 kb
+10 kb
+[0 - 18]
+13 kb
+[0 - 13]
+6.5 Kb
+[0 - 9]
+Oryza sativaUrochloa FuscaPEP-CK
+Chloroplast
+Mitochondria
+OAA
+AspAT
+Asp
+Malate
+CO2
+Pyr
+Malate
+OAAPEP
+PYR
+NAD-ME
+Ala
+AlaAT
+PEPCK
+AlaAT
+CO2
+Chloroplast
+RBCS/RCA
+Calvin Cycle
+C3G
+NADP-MDH
+NADME 2
+NADME 1
+PEPCK 1
+DIT 2
+AlaAT 4
+NADPME 1
+AlaAT 3
+ASPAT 1
+ASPAT 2
+AlaAT 1
+AlaAT 2
+BASS 1
+DIT 1
+NADMDH 1
+BASS 2
+NADPMDH 1
+NHD 1
+Bundle SheathMesophyll, Bundle SheathMesophyll
+NADMDH 1
+AspAT 2
+NADPME 1
+AlaAT 3
+AspAT 1
+NADPMDH 1
+BASS 1
+NHD 1
+DIT 1
+AlaAT 2
+AlaAT 1
+DIT 2
+NADMDH 2
+AlaAT 4
+Mesophyll, Bundle Sheath
+H
+Log2(BS/MS)
+−2
+−1
+0
+1
+2
+J K
+[0 - 14]
+U. fusca: NADME 1
+[0 - 14]
+U. fusca: NADPMDH
+17 Kb
+4 Kb
+I
+Fig. 3.   Cell- type chromatin accessibility bias for variable C 4 genes associated with C 4 subtypes. (A) Schematic of C 4 enzymatic pathways for various NADP- ME 
+subtypes. The red and blue squares represent MS and BS cells. Enzymes are labeled in bold, and transporters are denoted by shapes. Intermediate molecules 
+are indicated by nonbolded text. For clarity, core enzymes have been removed. (B) Heatmaps of chromatin accessibility bias in C 4 NADP- ME subtypes. Values 
+within the heatmap correspond to Log2(BS/MS). Blue indicates increased BS- chromatin accessibility and red indicates increased MS- chromatin accessibility. 
+Genes were labeled as being BS specific (blue), BS/MS specific (purple), or MS specific (red) based on previous literature. (C) Screenshot of various C 4 subtype 
+enzymes and their chromatin accessibility profiles around the TSS. Blue tracks correspond to BS chromatin accessibility, and red tracks show MS chromatin 
+accessibility. Tracks are equally scaled to facilitate comparison. (D) Additional schematic diagrams corresponding to specific C 4 subtypes, with enzymes and 
+transporters identified similarly to (A). (E) Heatmaps showing chromatin accessibility bias for the corresponding C4 subtypes, following the same format as (B). (F) 
+Additional chromatin accessibility profiles as in (C), aligned with the relevant subtypes. (G) Additional schematic diagrams corresponding to specific C4 subtypes, 
+with enzymes and transporters identified similarly to (A). (H) Heatmaps showing chromatin accessibility bias for the corresponding C 4 subtypes, following the 
+same format as (B). (I) Additional chromatin accessibility profiles as in (C), aligned with the relevant subtypes. (J) Additional schematic diagrams corresponding 
+to specific C4 subtypes, with enzymes and transporters identified similarly to (A). (K) Heatmaps showing chromatin accessibility bias for the corresponding C 4 
+subtypes, following the same format as (B).
+6 of 12   https://doi.org/10.1073/pnas.2402781121 pnas.org
+associated with the generation of critical intermediate metabolites, 
+Aspartate aminotransferase (AspAT), and Alanine aminotrans­
+ferase (AlaAT). It has been reported that some AspAT have 
+cell-type-specific expression patterns, with the MS-specific copy 
+of the protein being transported to the cytosol and the BS-specific 
+copy being transported to the mitochondria ( Fig. 3 E  and F  ) 
+( 37   – 39 ). Of the four copies of AspAT we examined, two 
+(PmAspAT3/4 ) showed significant MS-specific bias, whereas the 
+other two copies (PmAspAT1/2 ) did not show significant deviation 
+toward BS ( Fig. 3E  ). This possibly indicates differing levels of 
+regulation for the AspAT copies that did not show the expected 
+BS bias, or missing copies of AspAT that we have not investigated. 
+Within AlaAT , however, we identified one copy, PmAlaAT1,  show­
+ing MS-specific bias, and PmAlaAT6  showing BS-specific bias; 
+something that has been previously hypothesized based on bio­
+chemical information ( 40 ). Additionally, somewhat unexpectedly 
+is that we did not observe clear bias for sodium bile acid symporters 
+(BASS ) and sodium:hydrogen antiporters (NHD ) ( Fig. 3E  ). These 
+two proteins together form a functioning sodium bile acid sym­
+porter system, which balances the ratio of sodium and is important 
+in the transport of pyruvate into the chloroplast of MS cells ( 41 ). 
+Although two copies of the BASS  genes were MS biased, only a 
+single copy of NHD  was slightly MS biased. Surprisingly, we do 
+observe slight cell-type-specific chromatin accessibility bias for 
+malate transporter DIT1/DIT2  in P . miliaceum . This is somewhat 
+surprising, as malate is not the main 4-carbon intermediate used 
+by NAD-ME subtypes ( 10 ). This highlights the flexible nature of 
+ P . miliaceum  in terms of its C4  photosynthetic style, as it has been 
+implicated that it can perform some of the metabolite shuttling 
+as the NADP-ME subtype ( 10 ,  42 ,  43 ). The potential flexibility 
+of P . miliaceum  in its style of C4  makes it an extremely interesting 
+species to study, especially when considering that it does not share 
+common C4  ancestry with Z. mays  or S. bicolor.  This lack of evo­
+lutionary relationship between P . miliaceum  and S. bicolor  and  
+ Z. mays  makes the comparison between P .miliaceum  and its closer 
+relativeU. fusca  all the more valuable. These observations point to 
+the complicated nature of some of these C 4  photosynthetic sub­
+types. While the obvious subtype-specific enzymes show expected 
+chromatin-accessibility bias, others do not.
+ Using the PEPCK  subtype in U. fusca,  we evaluated cell-type 
+bias of enzymes that operate as an intermediate between NAD-ME 
+and NADP-ME subtypes ( Fig. 3G  ). Copies of NAD-ME  and 
+ PEPCK  showed significant BS bias ( Fig. 3 H  and I  ). Additionally, 
+ NADP-MDH  was significantly biased toward MS, reflecting its 
+critical role in the regeneration of malate from pyruvate ( Fig. 3H  ). 
+We also observed one copy of BASS,  which was heavily MS biased, 
+as well as the only copy of NHD  being highly MS biased ( Fig. 3G  ) 
+( 44 ). Within the BASS  family, based on the phylogenies, it appears 
+one clade of BASS  genes was co-opted to be MS specific, whereas 
+the other clade remained somewhat BS specific. This potentially 
+indicates that this co-opted clade may have been predisposed for 
+C4  photosynthesis at the common ancestor of P . miliaceum  and 
+ U. fusca.  Additionally, we also find one MS-biased and one 
+BS-biased version of AlaAT ( Fig. 3H  ).
+ Finally, when evaluating genes in the C3  outgroup O. sativa,  
+we only observed significant chromatin accessibility bias for three 
+of the 14 enzymes. This is expected given the overall lack of enzy­
+matic bias seen in C3  species ( Fig. 3K  ). Interestingly though, we 
+did find a single instance where one copy of AspAT  is BS specific, 
+suggesting that this copy of AspAT  might slowly be co-opted into 
+being more BS-specific ( Fig. 3K  ). Even more interesting is the 
+slight BS-specific bias of the rice NAD-MDH , a BS-specific 
+enzyme in the NAD-ME  subtypes. These results show a series of 
+complex evolutionary relationships where many different genes 
+can be co-opted into the C 4  pathway and highlight the myriad 
+ways in which C4  evolution occurs.  
+Cell- Type- Specific ACRs of Both Core -  and Subtype - Specific 
+Enzymes. Although measuring the gene body chromatin access­
+ibility of C 4 enzymes is valuable, it does not inform us about 
+the cell- type- specific cis- regulatory environment controlling these 
+genes, as we only included 500 bp upstream in this initial analysis. 
+T o identify all potential CREs important for regulation of C 4 
+enzymes, we identified cell- type- specific ACRs using a modified 
+entropy metric (Methods; SI  Appendix, Figs.  S36 and S37). In 
+short, cell- type- specific ACRs are those which are unique to either 
+a single cell- type or two or three cell types in contrast to broadly 
+accessible ACRs which are accessible in many different cell types. 
+For each C 4 enzyme, in both the core and the noncore set, we 
+identified ACRs around them. We only considered ACRs to be 
+potential regulators of a locus based on distance, with assigned 
+ACRs needing to be less than 200 kb away from the target enzyme, 
+and requiring that no other gene intervenes between the ACR and 
+enzyme in question. In total, across all variable and core enzymes 
+and taking into consideration only C 4 species, we find that on 
+average, C4 genes have between 2 and 3 cell- type- specific ACRs, 
+with an additional 2 to 3 broadly accessible ACRs (Fig. 4A and 
+Dataset S5).
+ For all C4  subtypes, the key redox enzymes all showed BS 
+cell-type-specific ACRs, potentially identifying critical CREs for 
+proper cell- type-specific expression. For instance, in Z. mays, 
+NADP-ME1  had five BS-specific ACRs, in S. bicolor, NADP-ME2  
+had five BS -specific ACRs, in P . miliaceum, NAD- ME1  had 
+four BS- specific ACRs, and in U. fusca, PEPCK,  had three 
+BS-specific ACRs ( Fig. 4 A  and C  ). Additionally, of the MS- 
+specific enzymes, we consistently observed numerous cell- type- 
+specific ACRs around the carbonic anhydrase family. On aver ­
+age, there were 3.5 MS- specific ACRs for each copy of carbonic 
+anhydrase across all of the species. This likely reflects the fact 
+that carbonic anhydrase is critical in the initial steps of C 4 , and 
+also important in CO 2  sensing ( 45 ). We also noticed an intrigu­
+ing pattern where enzymes which were accessible in one cell 
+type had cell- type-specific ACRs of the other cell type. For 
+instance, around RBCS2,  a BS-specific enzyme, we found a series 
+of MS- specific ACRs ( Fig. 4D  ). On average, we found 2.5 
+BS-specific ACRs around RBCS  and 1.5 MS-specific ACRs. This 
+contrasting pattern was observed in key photosynthetic enzymes 
+in all of the C4  subtypes. This likely indicates that some of these 
+ACRs contain CREs that negatively regulate RBCS  in MS, as 
+cell-type-specific CRE usage has been implicated as being an 
+important driver in proper compartmentalization ( 46 ,  47 ). The 
+identification of ACRs around key C 4  enzymes provides a 
+detailed map about potential cis-  regulators of these loci, which 
+provides the basis for future investigation into the direct function 
+of each of these ACRs and how they might be altering transcrip­
+tion in multiple different ways. These results show that there are 
+likely multiple ACRs important to cell- type specificity of these 
+enzymes.
+ T raditionally, the field has focused on cis- regulation within a 
+set distance from the transcriptional start site, often 1 to 2 kb, 
+which is thought to generally encompass the promoter ( 48 ). 
+However, we observed abundant distal cell-type-specific ACRs for 
+many of these key genes ( Fig. 4B  ). For instance, the average dis­
+tance of an ACR to its C4  enzyme is 10,080 bp (Z. mays ), 3,017 
+bp (S.bicolor ), 4,260 bp (P . miliaceum ), 2,358 bp (U. fusca ), and 
+4,730 bp (O. sativa ), indicating that the cis -regulatory space for 
+these enzymes is far greater than previously appreciated, where a 
+majority of the focus in the literature is on putative promoters. 
+PNAS  2024  Vol. 121  No. 40 e2402781121 https://doi.org/10.1073/pnas.2402781121 7 of 12
+T o test this, we compared the identified ACRs to a series of pre­
+viously reported cloned promoters. We found that for Z. mays  and 
+ S. bicolor  the ACR space identified includes significantly more 
+regions that are distal to their target gene (SI Appendix, Fig. S25C   
+and Dataset S6 ) ( 25 ,  49 ,  50 ).
+ The genome of Z. mays  emphasizes this point, as the subtype- 
+specific enzyme NADP-ME  has three cell-type-specific BS ACRs 
+distal to the transcriptional start site, with the furthest being 34,336 
+bp away ( Fig. 4C  ). These distal ACRs provide critical regulatory 
+loci to further investigate. Interestingly, we found some enzyme/
+ACR pairs with opposite cell- type-specificity (i.e., BS- specific 
+enzyme, MS-specific ACR). Many of these ACRs were distally 
+located. For example, in Z. mays,  the MS-specific ACR of RBCS  
+was 36,171 bp upstream ( Fig. 4D  ). When investigating ACRs 
+around promoters, we were struck at how often cell-type-specific 
+ACRs occurred outside of the bounds of previously analyzed pro­
+moters. For example, in PEPC  in P . miliaceum , a recent analysis 
+demonstrated that a series of conserved noncoding sequences 
+found between species were able to drive MS expression ( 27 ). 
+When we looked at chromatin accessibility data of the promoter 
+fragment which was cloned from PEPC , we identified many 
+MS-specific ACRs within the cloned fragment, but an additional 
+one upstream. This result shows the advantage of using 
+scATAC-seq data to identify candidate CREs for certain genes, 
+removing the guesswork of cloning fragments to investigate and 
+providing a detailed cell-type-specific regulatory map of the locus 
+( Fig. 4E  ). Thus, scATAC-seq greatly improves the search space of 
+the active CREs potentially driving cell-type-specific gene expres­
+sion patterns.  
+The Evolutionary Relationships of ACRs Associated with C4 Genes 
+Are Complex and Variable.  Next, we explored the evolutionary 
+histories of these ACRs. Due to the fact that the C 4 subtypes 
+come from different radiation events, (with Z. mays and S. bicolor 
+likely sharing a C4 ancestor and U. fusca and P . miliaceum sharing 
+a different C 4 ancestor), we were curious to evaluate whether a 
+majority of the ACR space around these genes were either novel, or 
+shared among these species. We implemented a pairwise sequence- 
+based approach by identifying sequence conservation of ACRs 
+between the study species using BLAST (SI Appendix, Supplemental 
+Methods). The majority of important C4 genes have both novel and 
+conserved ACRs. For example, PPDK, a MS- specific enzyme, shares 
+~25% of its ACRs across all species examined including the O. sativa 
+C3 outgroup (Fig. 5A). Interestingly, RUBISCO ACTIVASE (RCA), 
+a critical enzyme in photosynthesis which removes inhibitory 
+molecules from the RuBisCO active site, had novel ACRs in all 
+the C4 species examined, whereas RCA in the C3 species O. sativa 
+shared one ACR with all the C4 species. This might indicate that 
+each of the C4 species gained regulatory sequences at RCA or that 
+O. sativa might have lost them (Fig. 5A). Focusing on NADP- ME 
+revealed notable divergence in its associated ACRs, even among 
+closely related species. For example, in Z. mays, two out of nine 
+ACRs linked to NADP- ME1 were unique, lacking counterparts 
+in other species (Fig. 5A). This is particularly striking given that  
+S. bicolor, belonging to the same C4 subtype, diverged from Z. mays 
+only 13 mya (51). Similarly, in S. bicolor, the BS- specific NADP- 
+ME2 variant exhibited two out of five unique ACRs. This pattern 
+underscores the rapid and distinct evolutionary trajectories of ACRs 
+in C4 plants. A full list of gene families, and gene models, and their 
+relative conservation is found in SI Appendix, Fig. S26A. Using this 
+same approach to study all of the core class of C4 enzymes did not 
+reveal a generalizable pattern associated with gain or loss of ACRs 
+around C4 genes (SI Appendix, Fig. S26A). Our findings not only 
+confirm the dynamic evolution of cis- regulatory sequences in C4 
+enzymes but also align with existing research that highlights rapid 
+cis- regulatory changes among closely related species (48, 52).
+ While investigating the ACRs around the C4  genes is interest­
+ing, understanding how cell-type specificity is achieved across C4  
+subtypes is needed for efforts to engineer C4  photosynthesis. When 
+looking at just the cell-type-specific ACRs around key C4  loci, we 
+find a similar pattern where there is a mix of both conserved and 
+novel ACRs. For example, we found that some of the MS-specific 
+A
+B
+CD E
+Fig. 4.   Investigating the number and distance of 
+cell- type- specific ACRs around C 4 enzymes across 
+subtypes. (A) Dot plots showing the number of 
+cell- type- specific ACRs around each enzyme. The 
+x axis indicates which cell type these enzymes are 
+found in. The y axis is counts of ACRs. The graph 
+is further subdivided with the Top panel being 
+broad ACRs, Middle panel BS- specific ACRs, and 
+the Bottom being MS- specific ACRs. Enzymes are 
+labeled. (B) Dotplots showing the mean distance of 
+cell- type- specific ACRs to their closest C 4 enzyme. 
+The x axis indicates which cell type these enzymes 
+are found in. The x axis is the genomic distance 
+to the C 4 enzyme in question. If an enzyme had 
+multiple cell- type- specific ACRs, the distance was 
+averaged (mean). (C) Screenshot of NADP- ME1 in 
+Z. mays. Blue tracks correspond to BS chromatin 
+accessibility and red tracks show MS chromatin 
+accessibility. Tracks are equally scaled to facilitate 
+comparison. All genes found within this window 
+are shown. (D) Screenshot of RBCS2 in Z. mays. Blue 
+tracks correspond to BS chromatin accessibility 
+and red tracks show MS chromatin accessibility. 
+Tracks are equally scaled to facilitate comparison. 
+All genes found within this window are shown. (E) 
+Screenshot of PEPC1 in P. miliaceum. The green 
+fragment represents the cloned promoter from 
+Gupta et al. (27), which was identified by minimap2 
+alignment. Blue tracks correspond to BS chromatin 
+accessibility and red tracks show MS chromatin 
+accessibility. Tracks are equally scaled to facilitate 
+comparisons.
+8 of 12   https://doi.org/10.1073/pnas.2402781121 pnas.org
+ACRs associated with PPDK  and PEPC  are highly conserved in 
+all of the studied species. Interestingly, the MS-specific ACRs 
+around PEPC  were only found in the C4  species, and not in the 
+C3  outgroup, O. sativa  ( Fig. 5B  ). This indicates that some of the 
+CREs that allow PEPC  expression in MS likely evolved after the 
+split between the most recent common ancestors. We also observed 
+that NADP-ME  possessed numerous BS- specific ACRs that 
+were conserved in all species, including O. sativa  ( Fig. 5B  ). 
+Considering proper compartmentalization of NADP- ME  in 
+BS cells is only critical in two of the three C 4  subtypes, this 
+was surprising. However, in both S. bicolor  and Z. mays , there 
+were novel BS-specific ACRs associated with each key NADP-ME . 
+In Z. mays,  one out of the five BS-specific ACRs was novel to  
+ Z. mays , and in S. bicolor  two out of the five were novel to S. bicolor.  
+Upon inspection of all the NADP-ME  loci in genome browsers, 
+we were struck by the complexities and shuffling that occurred at 
+these BS cell-type-specific ACRs ( Fig. 5C  ). These results highlight 
+that extensive cis- regulatory evolution is occurring in each of these 
+species, and on a cell- type-specific level. Additionally, this may 
+point to the fact that the novel BS-specific ACRs found in S. bicolor  
+and Z. mays  may be more important for proper BS-specific expres­
+sion than the conserved regulatory elements.
+ Although binary classification of ACRs was useful to decipher 
+larger scale patterns between key enzymes, we next tested whether 
+larger segments of sequence were conserved around some C4  genes 
+as compared to others. We profiled the relative amount of con­
+served sequence at each of these ACRs, as alignment of sequence 
+between species gives greater resolution about important ACRs. 
+One interesting observation from this analysis was the fact that the 
+cell-type-specific ACRs around PEPCK  appear to be novel between 
+ Z. mays  and U. fusca  ( Fig. 5D   and SI Appendix, Figs. S26–S31 ). 
+This suggests that these regulatory loci emerged independently, and 
+yet are still likely important in cell- type-specific expression of 
+ PEPCK . Additionally, around the NAD-ME  loci in P . miliaceum , 
+we found diverse evolutionary histories with both copies NAD-ME1  
+and NAD-ME2  having both conserved and novel BS-specific ACRs 
+(one out of four ACRs were novel for NAD-ME1 , and zero out of 
+the two were conserved for NAD-ME2 ) ( Fig. 5D  ). The ACRs from 
+ NADP-ME1  are conserved in U. fusca , whereas all three BS-specific 
+ACRs are conserved in relation to P . miliaceum.  Pointing to the fact 
+that the ACRs have likely maintained their cell-type specificity, and 
+are likely critical drivers in the correct expression of NAD-ME  loci. 
+These results highlight the dynamic evolution of cell-type-specific 
+ACRs around key C4  loci, and that even closely related subtypes 
+have evolved novel ACRs potentially critical in terms of proper gene 
+expression, as well as compartmentalization.  
+Identification of De Novo TF- Binding Motifs from Cell- Type- Specific 
+Chromatin Data Reveals Rapid Sequence Diversification of ACRs. 
+Leveraging the cell- type- resolved datasets, we identified de novo cell- 
+type- specific TF motifs in BS and MS ACRs (Fig. 6 A and B; Methods; 
+and SI Appendix, Fig. S32). We selected the BS- specific motifs based 
+on motif similarity within C4 species for BS, and motif similarity seen 
+across all species for MS. Additionally for the identification of BS- 
+specific motifs, we identified motifs which did not appear to have a 
+corresponding motif in O. sativa (SI Appendix, Supplemental Methods). 
+Reassuringly, within the BS- specific motifs, we identified a DOF 
+TF motif, which is a key driver in the switch to C4 photosynthesis 
+(29, 53, 54). In brief, the DOF TFs have been implicated as being 
+potential drivers of proper gene expression in Z. mays C 4 genes, 
+both as repressors and activators. For example, ZmDOF30 has been 
+implicated as being important in driving BS- specific gene expression 
+(29, 53, 54). In total, we identified three BS- specific motifs, and 
+four MS- specific de novo motifs that are shared between the species 
+A
+CD
+B
+Fig. 5.   The evolutionary relationships of cis- regulatory 
+regions around C4 genes are complex, being com-
+posed of both novel and conserved ACRs. (A ) The 
+proportion of all ACRs that are conserved or novel for 
+the following gene families PPDK, RCA, and NADP- ME. 
+Purple bars represent ACRs that have any sequence 
+aligned to them from a different species, and gray 
+represents ACRs where sequences are not alignable. 
+The number of ACRs in each locus is labeled at the top 
+of each column. (B) The proportion of cell- type- specific 
+ACRs that are conserved and novel for the following 
+gene families, PPDK, PEPC, and NADP- ME. Red bars only 
+consider MS- specific ACRs, and blue bars only consider 
+BS- specific ACRs. (C) Screenshot of the conservation 
+of BS- specific ACRs around NADP- ME across species. 
+From top to bottom, the species are Z. mays, S. bicolor,  
+P. miliaceum, U. fusca, and O. sativa. NADP- ME is annotated 
+in green for all species. Dashed bars between gene 
+models represent the same gene model, and yellow 
+bars are conserved ACRs. Browser tracks are blue for 
+BS, and red for MS. Browser tracks are scaled within each 
+species to allow for direct comparisons. (D) The length 
+of ACRs that are conserved in a cross- species context. 
+Rows represent gene families, and columns represent 
+species. Each histogram is the number of ACRs within 
+the loci of that gene family. The x axis is the length of the 
+ACR that is conserved and the y axis is the count. ACRs 
+are color coded according to the legend.
+PNAS  2024  Vol. 121  No. 40 e2402781121 https://doi.org/10.1073/pnas.2402781121 9 of 12
+sampled (Fig. 6 A and B and SI Appendix, Fig. S32). Using motif 
+comparison tools, we were able to assign five out of the six motifs 
+to a putative TF family, implicating potential novel regulators in 
+BS- and MS- specific gene expression (SI  Appendix, Supplemental 
+Methods and Fig. S29). We surveyed the C4 ACRs for the presence 
+and absence of these motifs to determine whether they provide the 
+information needed for cell- type specificity. We additionally overlaid 
+our BLAST results from the previous analysis in order to explore 
+the relationship between these motifs and conservation (Fig. 6C). A 
+substantial number of motifs were present within the nonconserved 
+regions of the ACRs. For instance, in one MS- specific ACR associated 
+with ZmCA3,12/13 MS- specific motifs were found in nonconserved 
+regions, suggesting these regions could be critical for driving the cell- 
+type- specificity of this locus (Fig. 6D).
+ We expanded the analysis of BS- and MS-specific motifs in 
+conserved and nonconserved regions of ACRs across key loci in 
+the C4  species. On average the MS-specific motifs are more con­
+served than the BS-specific motifs ( Fig. 6 E  and F   and SI Appendix, 
+Fig. S33 A  ). Agreeing with previous models of C4  evolution where 
+some motifs that are MS specific have been co-opted to operate 
+in C4  photosynthesis ( Fig. 6D  ) ( 11 ). Interestingly, we noticed a 
+pattern where around PPDK , many of the MS-specific motifs 
+appeared to be in nonconserved sequences for all of our species 
+sampled (SI Appendix, Fig. S33 A  and B ). This pattern is further 
+highlighted in both NADPME , and NADME  loci, where a major­
+ity of the BS-specific motifs occurred in nonconserved ACRs for 
+ NADPME . This pattern is more nuanced in the NADME  ACRs, 
+as P . miliaceum  and U. fusca  share a significant amount of con­
+served sequence containing BS-specific motifs in the ACRs, sug­
+gesting that the BS-specific regulatory changes associated with 
+these motifs are important (SI Appendix, Fig. S33A  ). These results 
+highlight the capacity of genome-wide single-cell cis -regulatory 
+maps to pinpoint key TF motifs important for the evolution of 
+cell-type specificity.  
+The DITs in the NADP - ME Subtypes Demonstrate Dynamic CRE 
+Evolution. Upon analyzing the malate transporters DICARBOXYLIC 
+ACID TRANSPORTERs (DITs also known as the DCTs), we noticed 
+the DITs in the NADP- ME subtypes showed an interesting pattern 
+where the copies of DIT1 in Z. mays and S. bicolor showed MS- 
+specific chromatin accessibility, but the BS- specific copies of the 
+DITs showed a more complex evolutionary history (Fig.  3B and 
+SI Appendix, Fig. S34). We generated a phylogeny with additional 
+species and found that the BS- specific copy of ZmDIT2 is related to 
+two additional copies of DITs which are not BS- specific in S. bicolor 
+(Here SbDIT2.2 and SbDIT2.1) (SI Appendix, Fig. S34). S. bicolor has 
+a BS- specific copy of SbDIT4, which shares a clade with ZmDIT1. 
+These results are consistent with earlier studies that found similar 
+patterns and gene expression profiles of these copies of the DITs in 
+Z. mays and S. bicolor (33, 36, 55). Although previous studies have 
+documented changes in cell- type- specific gene expression for the 
+BS- specific copies of the DITs, the mechanisms underlying these 
+changes remain unclear. By using cell- type- specific ACRs, we explored 
+whether expression changes are associated with changes in the number 
+of cell- type- specific cis- regulatory elements over evolutionary time.
+ T o understand how cell-type specificity changed in these DITs due 
+to changes in cis -regulation, we compared the ACRs associated with 
+the DITs , and mapped the TF-binding motifs found within each 
+ACR (Methods ). For the MS- specific DIT1s , we focused on a 
+MS-specific ACR located at the 3′  end of DIT1  in Z. mays  
+(SI Appendix, Fig. S34 ). Upon comparing this ACR to S. bicolor , we 
+were struck that the sequence found in the Z. mays  ACR was actually 
+split in two in S. bicolor , neither of which demonstrated cell-type 
+specificity in S. bicolor  (SI Appendix, Fig. S34 ). A closer inspection of 
+motifs in these ACRs showed many MS-specific motifs (SI Appendix, 
+Fig. S34 ). These motifs might promote MS-specific gene expression 
+of this locus. However, many S. bicolor  MS-specific ACRs were not 
+found in regions with any homology to Z. mays  ( SI Appendix, 
+Fig. S34 ). These results point to the rapid change of candidate CREs 
+(cCRES) in this locus, and likely indicate that cCREs important in 
+cell-type-specific gene expression might not be only found in con­
+served regulatory regions ( 56 ). Rather, selection of MS-specific gene 
+expression is ongoing and may yield significantly different regulatory 
+environments in relatively short evolutionary time scales.
+ Next, we examined the BS-specific ZmDIT2  and its two ort­
+hologs SbDIT2.1 and SbDIT2.2 , which are not BS specific 
+(SI Appendix, Fig. S35 ). The BS-specific ACR around ZmDIT2  
+has many DOF TF motifs (SI Appendix, Fig. S35 ). These motifs 
+are interesting, as expression changes within the DOF TF family 
+could be important in driving BS-specific gene expression in C 4  
+plants ( 29 ,  53 ,  57 ). When comparing the BS-specific ACRs 
+around ZmDIT4  to the more closely related copies of SbDIT2.1  
+and SbDIT2.2,  we found no conservation of these DOF TF 
+motifs, and rather a significant lack of BS-specific TF motifs 
+(SI Appendix, Fig. S355 ). Since neither of these DIT  copies in S. 
+bicolor  show BS-specific expression, this result makes sense. 
+Potentially providing a model where the ZmDIT2  locus either 
+gained these cCREs allowing for this copy of ZmDIT2  to have 
+BS-specific gene expression, or S. bicolor  lost these BS-specific 
+motifs, and had a gain in SbDIT4  specificity. In either scenario, 
+0
+1
+2
+0
+1
+2
+0
+1
+2
+23456789 100
+1
+2
+Uf
+Pm
+Zm
+Sb
+Sb
+Zm
+Pm
+Uf
+Os
+Sb
+Zm
+Zm
+Pm
+Pm
+Uf
+Sb
+Zm
+Sb
+Pm
+Uf
+BS CATG
+MS CTAG
+MS GACA
+A
+B
+[0 - 13]
+[0 - 13]
+0 2 4 6 8
+AS2LOB
+BES1
+bs CATG
+bs DOF
+C2C2 Dof
+CAMTA
+GARP 
+HD
+HD−Zip_I_II
+MADS MIKC
+ms CGTCGTCGT
+ms GACA
+ms GACGA
+SBP
+bs DOF
+ACGA
+ms GACGA
+ms GACGA
+ms GACA
+ms CGTCGTCGT
+ms CGTCGTCGT
+ms CGTCGTCGT
+mssms
+scACR 50193
+150379300 150379700
+0
+5
+10
+15
+Genomic Location
+Motif Score
+Zea mays: CA 3
+Genes
+ACRs
+MS ACC
+BS ACC
+Sequence
+ conservation
+Motif Counts
+Motif typeD
+C
+BS DOF
+Fig. 6.   Identification of cell- type- specific TF motifs 
+reveals a complex relationship between sequence 
+conservation and motif presence. A subsample of 
+MS-  (A) and BS- specific (B) de novo TF motifs iden-
+tified. (Left) De novo motifs were clustered by the 
+correlation of their PWMs and a correlation- based 
+tree was generated. (Right) Representative PWMs 
+identified through de novo analysis. (C) Screenshot 
+of the ZmCA3 locus. ACRs are color coded based 
+on their cell- type specificity. MS-  and BS- chromatin 
+accessibility tracks are equally scaled for compari-
+son. Sequence conservation is identified by the ACR 
+having sequence homology to other CA ACRs from 
+a different species. (D) An example of the conser-
+vation and motif landscape of one MS- specific ACR 
+at ZmCA3. Left, the location of the motifs in ACRs 
+with MS-  and BS- specific motifs labeled. Orange 
+highlighted regions correspond to the region of 
+sequence conservation seen above. Right, quanti-
+fication of the motifs found in the ACR. The X axis is 
+the motif count, and the y axis is the motif.
+10 of 12   https://doi.org/10.1073/pnas.2402781121 pnas.org
+it demonstrates the rapid pace of CRE evolution, and how these 
+regions might be altering cell-type-specific gene expression. These 
+results contrast with SbDIT4 , where the ACRs around this locus 
+are BS specific, and contain BS-specific motifs identified in our 
+previous analysis (SI Appendix, Fig. S35 ). In total, these results 
+highlight the rapid rate of regulatory change around key C4  loci, 
+and highlight the fact that there are likely key regulatory switches 
+outside of conserved sequences. Finally, these results emphasize 
+the fast pace in which cell-type specificity changes in plants   
+Discussion
+ Understanding the evolution of cis -regulation associated with C4  
+photosynthesis has been a long-standing goal in the field of plant 
+biology. In this study, we demonstrated the utility of single- cell 
+ATAC-seq data to investigate many aspects of the evolution of C4  
+photosynthesis. By identifying cell-type-specific chromatin accessi­
+bility from four C4  species composed of three different C4  subtypes, 
+as well as a single C3  outgroup, we were able to compare key genes 
+and their ACRs which define and distinguish C4  photosynthesis. We 
+have shown that by using gene-body chromatin accessibility data, we 
+can measure cell-type-specific bias of both core, and subtype-specific 
+C4  enzymes. When considering the gene family trees of many of these 
+genes, we show diverse co- option of loci into the C 4  pathway. 
+Additionally, we identify cell-type-specific ACRs surrounding these 
+key C4  enzymes. We find numerous cell-type-specific ACRs sur­
+rounding key C4  enzymes, many of which fall outside of the core 
+promoter region. Additionally we find that around all of the C 4  
+enzymes there is a mix of both conserved and novel cell-type-specific 
+ACRs indicating that regulatory evolution of these regions is ongoing. 
+Finally, we use cell-type-specific ACRs to identify a series of de novo 
+binding motifs which appear to be cell-type specific, and show that 
+these motifs surround C4  loci, and have a mixed relationship with 
+conservation depending on the motif. This indicates that cell-type-
+specific TF motifs are rapidly changing around C4  loci.
+ Investigation of the CREs driving cell-type-specific expression of 
+C4  genes is challenging. This often requires evaluation using transgenic 
+plants, which limits the number of CREs that can be tested. This has 
+greatly hampered efforts at understanding how cis -regulation of C4  
+genes evolves, whether by co-option of existing CREs or emergence 
+of new ones. Our results show the complex nature of CRE evolution 
+of C4  genes, including those specific to C4  subtypes. While we observe 
+conservation of ACRs around many C4  genes, we do see interesting 
+examples where the subtype-specific enzymes have evolved novel 
+ACRs (NAD-ME s in P . miliaceum , and PEPCK  in U. fusca ). These 
+results support that there is likely a combination of both co-opting 
+preexisting CREs, as well as evolving new ones to facilitate proper 
+expression and cell-type-specification of genes. This is further exem­
+plified by the analysis of the DIT  family of transporters, where we 
+show striking accumulation of cell-type-specific TF motifs in non­
+conserved regions of ACRs between two closely related species. This 
+highlights that the regions of the genome promoting cell-type-specific 
+gene expression are likely found in both conserved, and novel 
+regions. Another recent single-cell genomic study of the evolution 
+of CREs important for photosynthesis using a comparison between 
+ O. sativa  and S. bicolor  reached similar conclusions ( 57 ). They fre­
+quently found different ACRs and TF motifs in promoters of ort­
+hologous C4  genes ( 57 ). Future efforts to assay these candidate CREs 
+using reporter assays, transgenesis, and genome editing will be 
+required. Additionally, expanding these analyses outward to all genes 
+associated with photosynthesis might provide valuable insights into 
+how genes in the Calvin-Benson cycle alter their regulation in their 
+adaptation to C4  photosynthesis. Fortunately, these high-resolution 
+maps of cell-type-specific ACRs of these key genes/species provide a 
+strong foundation to build upon.
+ Although these studies provide a blueprint for the study of key 
+candidate CREs associated with C4  loci, profiling cell-type-specific 
+chromatin accessibility of additional species would be greatly bene­
+ficial. Although O. sativa  is an invaluable outgroup for this study, 
+additional more closely related C3  species might make these com­
+parisons simpler, and add additional resolution. For instance the C3  
+grass species Dichanthelium oligosanthes  is more closely related to  
+ U. fusca  and P . miliaceum  and has a recently completed reference 
+genome ( 58 ). Adding more species would enable greater resolution 
+in the comparison of cell-type-specific ACRs, as the genetic distance 
+between the species we examined, and O. sativa  make identification 
+of conserved and novel ACRs challenging. As an example, the ACRs 
+associated with NAD-MEs  in P . miliaceum  might be co-opted instead 
+of novel, however, based on our sampling, we cannot say.
+ Genome editing analysis of many of these ACRs would signif­
+icantly advance which ACRs, and more specifically which CREs 
+within the ACRs are most important for cell-type-specific expres­
+sion ( 22 ). However, currently generating genome edits in mono­
+cots is challenging, time consuming, and expensive. Fortunately, 
+improvements to transgenesis are constantly improving making 
+achieving these goals more likely in the future ( 59 ). It is also 
+important to consider that mutational analysis of CREs is not 
+straightforward, often requiring numerous editing events of the 
+ cis -regulatory landscape of each gene. Previous studies have shown 
+that deletions of many CREs produce variable molecular and 
+morphological phenotypes, further complicating our understand­
+ing of the cis -regulatory code ( 60   – 62 ). And finally, many species, 
+including P . miliaceum  and U. fusca  have to date never been trans­
+formed. This highlights the need to continually improve trans­
+genesis methods to help facilitate the molecular dissection of CRE. 
+In conclusion, this study provides a comprehensive map of 
+cell-type-specific ACRs around key C 4  genes, which reveals the 
+dynamic evolution and diversity of cis -regulation of C4  genes.  
+Methods
+Plant Growth Conditions and Sampling. Seedlings of all five plant species, includ-
+ing maize (Z. mays B73), sorghum (S. bicolor BTx623), proso millet (P . miliaceum L. 
+CGRIS 00000390), and browntop signalgrass (U. fusca LBJWC- 52), along with the C3 
+plant rice (O. sativa Nipponbare), were grown under the conditions of 12:12 Light/
+Dark cycles at 30 °C Light/22 °C Dark and at 50% humidity. The sampling of the C4 
+species was timed to coincide with a specific developmental stage, identified when 
+the ligule of the third leaf became visible, marking the third leaf unfolding, yet prior 
+to the appearance of the fourth leaf. For the C3 species, rice, 18- d- old leaves were used 
+to correspond with the equivalent stage of the C4 species.
+Library Preparation.  Nuclei isolation for the experiments was conducted 
+using fresh seedlings of both the C 4 and C3 species at their respective develop-
+mental stages. The methodology for nuclei extraction, encompassing the buffer 
+composition and the subsequent steps, was used with procedures outlined for 
+single- nucleus combinatorial indexing with transposed- based ATAC- seq library 
+construction, as detailed in a prior study (63).
+Barcode Correction Read Alignment and Mapping of Tn5 Insertions. Read 
+UMIs were processed using cutadapt (version 4.5) to identify UMIs (64). First, the 
+index adapter sequences were trimmed from the reads. Next, the well barcodes and 
+Tn5 barcode within the reads were identified, removed from the original sequencing 
+read, and appended to the read header. Reads were aligned using BWA (version 
+0.7.17) (65). Reads were filtered using samtools (version 1.16.1) for mapping quality 
+of >10 for Z. mays, S. bicolor, U. fusca, and O. sativa. P . miliaceum required a greater 
+threshold of 30 given its recent whole genome duplication (66). Duplicate reads were 
+removed using picard tools (version 2.25.0) (67). Single- base pair Tn5 integration 
+events were mapped using the python script makeTn5bed.py. Finally, for each bar-
+code only unique Tn5 integrations sites were used.
+PNAS  2024  Vol. 121  No. 40 e2402781121 https://doi.org/10.1073/pnas.2402781121 11 of 12
+Isolating High- Quality Cells.  Cells were filtered using Socrates (21). In 
+short, Fraction of Reads in Peaks (FRiP) scores were calculated for each cell by 
+pseudobulking the libraries and identifying peaks. For each individual cell, 
+FRiP score, TSS, enrichment, as well as correlation to background were used 
+to isolate high- quality cells. Additional details can be found in SI Appendix, 
+Supplemental Methods.
+UMAP embeddings were then calculated for each species utilizing genomic 
+bins (68). Additional bin selection criteria and clustering specifics can be found 
+in SI Appendix, Supplemental Methods. Doublets were then removed using 
+the in silico approach Scrublet (69) (SI  Appendix, Supplemental Methods). 
+Harmony (version 0.1.1) was used adjust replicate overlap with parameters 
+“theta = 2, nclust = 4, and var = sampleID” (70). After integration, clusters 
+which skewed greater than 75% toward one replicate were removed from 
+downstream analysis.
+Annotation of Cell Types. Cell types were annotated by calculating gene chroma-
+tin accessibility for marker genes in each genome on a per- cell basis. These values 
+were then visualized on the UMAP embedding, and clusters with numerous marker 
+genes associated with the same cell- type were used as evidence. Additionally, for 
+each louvain cluster, enrichment of marker genes was calculated by comparing the 
+cluster average as compared to a random shuffle of random cells. The top five most 
+enriched markers were used in tandem with the UMAPs to ascertain cell- type identity. 
+We also tested the statistical significance of the marker gene using Presto, a modified 
+Wilcoxon rank- sum test in order to identify the most unique marker gene in each 
+cluster (71). Additional methods implemented to ensure comparison of the same 
+cell types can be found in Supplemental methods.
+Identifying Cell- Type- Specific ACRs. To identify cell- type specific ACRs, a modified 
+bootstrapping method was used which drew inspiration from the modified entropy 
+metrics found in ref. 72. On a per ACR basis, Tn5 integrations per cell- type were 
+summed and counts per million (CPM) normalized. These values were then converted 
+to a probability by using the following equation (below, Eq. 1). From this probability 
+statement, a modified Shannon entropy metric was calculated, followed by a metric 
+of specificity Qpt. For robust cell- type- specific ACR identification, the annotated cell- 
+type was bootstrapped 5,000 times. To generate the null distribution of specificity 
+scores, individual cell annotations were scrambled to generate an equal number of 
+null cell- type classifications. For each null value, the entropy and specificity score 
+were calculated. Finally, a nonparametric approach was used to identify how many 
+of the real bootstraps fell outside of the null distribution using a one- tailed test. ACRs 
+specific to greater than three were classified as broadly accessible, less than or equal 
+to three as cell type restricted, and a single cell- type as cell- type specific. Additional 
+details can be found in Supplemental methods.
+ [1]
+pi = qi
+Σ(qi) ,
+ 
+ 
+[2]Hp = −Σptlog 2 (pt),
+ 
+[3]Qpt = Hp − log 2 (pt).
+Data, Materials, and Software Availability. sciATAC- seq data for Z. mays, S. 
+bicolor, U. fusca, and P . miliaceum is found in NCBI under the following bioproject 
+PRJNA1063172 (73). Leaf data for O. sativa can be found under the following 
+SRR bioproject PRJNA100757 (74). All scripts used for processing and analyz-
+ing data in this manuscript can be found at the following GitHub repository: 
+https://github.com/Jome0169/Mendieta.C4_manuscript (75). Additionally, all 
+datasets with both MS-  and BS- specific accessibility profiles, their ACRs, as well 
+as their BLASTN relationships can be found on the epigenome browser https://
+epigenome.genetics.uga.edu/PlantEpigenome (76). All datasets can be found 
+under the subfolder Mendieta_et_al.C4_project.
+ACKNOWLEDGMENTS. This research was funded by awards from the NSF (IOS- 
+2134912 and IOS- 1856627) and the Office of Research to R.J.S. and Hong Kong 
+University Grant Council (GRF 1409420) to S.Z. A.P .M. and J.P .M. were supported 
+by the NIH (K99GM144742) and (T32GM142623), respectively. This research was 
+additionally funded with support from the National Natural Science Foundation 
+of China (32100438 & 32370247) and Shanghai Jiao Tong University 2030 
+Initiative (to X.T.).
+Author affiliations: aDepartment of Genetics, University of Georgia, Athens, GA 30605; 
+bShanghai Collaborative Innovation Center of Agri- Seeds, Joint Center for Single - Cell 
+Biology, School of Agriculture and Biology, Shanghai Jiao Tong University, Shanghai 
+200240, China; and cState Key Laboratory of Agrobiotechnology, School of Life Sciences, 
+The Chinese University of Hong Kong, Hong Kong, SAR
+1. G. Bowes, W. L. Ogren, R. H. Hageman, Phosphoglycolate production catalyzed by ribulose 
+diphosphate carboxylase. Biochem. Biophys. Res. Commun. 45, 716–722 (1971).
+2. T. Wheeler, J. von Braun, Climate change impacts on global food security. Science 341, 508–513 (2013).
+3. M. D. Hatch, C4 photosynthesis: A unique blend of modified biochemistry, anatomy and 
+ultrastructure. Biochim. Biophys. Acta (BBA), Rev. Bioenerg. 895, 81–106 (1987).
+4. S. Offermann, T. W. Okita, G. E. Edwards, Resolving the compartmentation and function of C4 
+photosynthesis in the single- cell C4 species Bienertia sinuspersici. Plant Physiol. 155, 1612–1628 
+(2011).
+5. H. Akhani et al., Bienertia sinuspersici (Chenopodiaceae): A new species from Southwest Asia and 
+discovery of a third terrestrial C4 plant without Kranz anatomy. Syst. Bot. 30, 290–301 (2005).
+6. R. F. Sage, A portrait of the C4 photosynthetic family on the 50th anniversary of its discovery: 
+Species number, evolutionary lineages, and Hall of Fame. J. Exp. Bot. 67, 4039–4056 (2016).
+7. R. F. Sage, P . A. Christin, E. J. Edwards, The C4 plant lineages of planet Earth. J. Exp. Bot. 62, 
+3155–3169 (2011).
+8. U. Gowik, P . Westhoff, The path from C3 to C4 photosynthesis. Plant Physiol. 155, 56–63 (2011).
+9. Grass Phylogeny Working Group II, New grass phylogeny resolves deep evolutionary relationships 
+and discovers C4 origins. New Phytol. 193, 304–312 (2012).
+10. X. Rao, R. A. Dixon, The differences between NAD- ME and NADP- ME subtypes of C4 photosynthesis: 
+More than decarboxylating enzymes. Front. Plant Sci. 7, 01525 (2016).
+11. K. Kajala et al., Multiple Arabidopsis genes primed for recruitment into C4 photosynthesis. Plant J. 
+69, 47–56 (2012).
+12. J. Sheen, C4 gene expression. Annu. Rev. Plant Physiol. Plant Mol. Biol. 50, 187–217 (1999).
+13. R. Chollet, J. Vidal, M. H. O’Leary, Phosphoenolpyruvate carboxylase: A ubiquitous, highly regulated 
+enzyme in plants. Annu. Rev. Plant Physiol. Plant Mol. Biol. 47, 273–298 (1996).
+14. M. H. O’Leary, Phosphoenolpyruvate carboxylase: An enzymologist’s view. Annu. Rev. Plant Physiol. 
+33, 297–315 (1982).
+15. W. H. Outlaw Jr., Kinetic properties of guard- cell phosphoenolpyruvate carboxylase. Biochem. 
+Physiol. Pflanz 186, 317–325 (1990).
+16. M. Matsuoka, T. Numazawa, Cis- acting elements in the pyruvate, orthophosphate dikinase gene 
+from maize. Mol. Gen. Genet. 228, 143–152 (1991).
+17. M. S. Ku et al., High- level expression of maize phosphoenolpyruvate carboxylase in transgenic rice 
+plants. Nat. Biotechnol. 17, 76–80 (1999).
+18. M. Nomura et al., The evolution of C4 plants: Acquisition of cis- regulatory sequences in the 
+promoter of C4- type pyruvate, orthophosphate dikinase gene. Plant J. 22, 211–221 (2000).
+19. U. Gowik et al., Cis- regulatory elements for mesophyll- specific gene expression in the C4 plant Flaveria 
+trinervia, the promoter of the C4 phosphoenolpyruvate carboxylase gene. Plant Cell 16, 1077–1090 (2004).
+20. E. D. Kim et al., Dynamic chromatin accessibility deploys heterotypic cis/trans- acting factors driving 
+stomatal cell- fate commitment. Nat. Plants 8, 1453–1466 (2022).
+21. A. P . Marand, Z. Chen, A. Gallavotti, R. J. Schmitz, A cis- regulatory atlas in maize at single- cell 
+resolution. Cell 184, 3041–3055.e21 (2021).
+22. F. Meng et al., Genomic editing of intronic enhancers unveils their role in fine- tuning tissue- specific 
+gene expression in Arabidopsis thaliana. Plant Cell 33, 1997–2014 (2021).
+23. F. Spitz, E. E. M. Furlong, Transcription factors: From enhancer binding to developmental control. 
+Nat. Rev. Genet. 13, 613–626 (2012).
+24. M. Matsuoka, J. Kyozuka, K. Shimamoto, Y. Kano- Murakami, The promoters of two carboxylases in a C4 plant 
+(maize) direct cell- specific, light- regulated expression in a C3 plant (rice). Plant J. 6, 311–319 (1994).
+25. M. Matsuoka, Y. Tada, T. Fujimura, Y. Kano- Murakami, Tissue- specific light- regulated expression 
+directed by the promoter of a C4 gene, maize pyruvate, orthophosphate dikinase, in a C3 plant, rice. 
+Proc. Natl. Acad. Sci. U.S.A. 90, 9586–9590 (1993).
+26. U. Gowik et al., A MEM1- like motif directs mesophyll cell- specific expression of the gene encoding 
+the C4 carbonic anhydrase in Flaveria. J. Exp. Bot. 68, 311 (2017).
+27. S. D. Gupta et al., The C4Ppc promoters of many C4 grass species share a common regulatory 
+mechanism for gene expression in the mesophyll cell. Plant J. 101, 204–216 (2020).
+28. X. Tu et al., Limited conservation in cross- species comparison of GLK transcription factor binding 
+suggested wide- spread cistrome divergence. Nat. Commun. 13, 7632 (2022).
+29. X. Dai et al., Chromatin and regulatory differentiation between bundle sheath and mesophyll cells 
+in maize. Plant J. 109, 675–692 (2022).
+30. D. A. Cusanovich et al., A single- cell atlas of in vivo mammalian chromatin accessibility. Cell 174, 
+1309–1324.e18 (2018).
+31. D. M. Emms, S. Kelly, OrthoFinder: Phylogenetic orthology inference for comparative genomics. 
+Genome Biol. 20, 238 (2019).
+32. M. Taniguchi, T. Sugiyama, The expression of 2- oxoglutarate/malate translocator in the bundle- 
+sheath mitochondria of Panicum miliaceum, a NAD- malic enzyme- type C4 plant, is regulated by 
+light and development. Plant Physiol. 114, 285–293 (1997).
+12 of 12   https://doi.org/10.1073/pnas.2402781121 pnas.org
+33. Y. Taniguchi et al., Differentiation of dicarboxylate transporters in mesophyll and bundle sheath 
+chloroplasts of maize. Plant Cell Physiol. 45, 187–200 (2004).
+34. S. L. Tausta et al., Developmental dynamics of Kranz cell transcriptional specificity in maize leaf 
+reveals early onset of C4- related processes. J. Exp. Bot. 65, 3543–3555 (2014).
+35. A. R. Borba et al., Compartmentation of photosynthesis gene expression in C4 maize depends on 
+time of day. Plant Physiol. 193, 2306–2320 (2023).
+36. S. Weissmann et al., DCT4—A new member of the dicarboxylate transporter family in C4 grasses. 
+Genome Biol. Evol. 13, evaa251 (2021).
+37. M. Nomura et al., The promoter for C4- type mitochondrial aspartate aminotransferase does not direct 
+bundle sheath- specific expression in transgenic rice plants. Plant Cell Physiol. 46, 743–753 (2005).
+38. M. Taniguchi, A. Kobe, M. Kato, T. Sugiyama, Aspartate aminotransferase isozymes in Panicum 
+miliaceum L, an NAD- malic enzyme- type C4 plant: Comparison of enzymatic- properties, primary 
+structures, and expression patterns. Arch. Biochem. Biophys. 318, 295–306 (1995).
+39. M. Taniguchi, H. Sawaki, H. Sasakawa, T. Hase, T. Sugiyama, Cloning and sequence analysis of cDNA 
+encoding aspartate aminotransferase isozymes from Panicum miliaceum L., a C4 plant. Eur. J. 
+Biochem. 204, 611–620 (1992).
+40. D. Son, J. Jo, T. Sugiyama, Purification and characterization of alanine aminotransferase from 
+Panicum miliaceum leaves. Arch. Biochem. Biophys. 289, 262–266 (1991).
+41. T. Furumoto et al., A plastidial sodium- dependent pyruvate transporter. Nature 476, 472–475 (2011).
+42. Y. Wang, A. Bräutigam, A. P . M. Weber, X. G. Zhu, Three distinct biochemical subtypes of C4 
+photosynthesis? A modelling analysis. J. Exp. Bot. 65, 3567–3578 (2014).
+43. C. Zou et al., The genome of broomcorn millet. Nat. Commun. 10, 436 (2019).
+44. J. D. Washburn et al., Distinct C4 sub- types and C3 bundle sheath isolation in the Paniceae grasses. 
+Plant Direct. 5, e373 (2021).
+45. C. Engineer et al., CO2 sensing and CO2 regulation of stomatal conductance: Advances and open 
+questions. Trends Plant Sci. 21, 16–30 (2016).
+46. K. C. Bansal et al., Transient expression from cab- m1 and rbcS- m3 promoter sequences is different in 
+mesophyll and bundle sheath cells in maize leaves. Proc. Natl. Acad. Sci. U.S.A. 89, 3654–3658 (1992).
+47. J. F. Viret, Y. Mabrouk, L. Bogorad, Transcriptional photoregulation of cell- type- preferred expression of 
+maize rbcS- m3: 3’ and 5’ sequences are involved. Proc. Natl. Acad. Sci. U.S.A. 91, 8577–8581 (1994).
+48. Z. Lu et al., The prevalence, evolution and chromatin signatures of plant regulatory elements. Nat. 
+Plants 5, 1250–1259 (2019).
+49. M. Taniguchi et al., The promoter for the maize C4 pyruvate, orthophosphate dikinase gene directs cell-  
+and tissue- specific transcription in transgenic maize plants. Plant Cell Physiol. 41, 42–48 (2000).
+50. L. Heimann et al., A common histone modification code on C4 genes in maize and its conservation 
+in Sorghum and Setaria italica. Plant Physiol. 162, 456–469 (2013).
+51. A. H. Paterson et al., The Sorghum bicolor genome and the diversification of grasses. Nature 457, 
+551–556 (2009).
+52. K. A. Maher et al., Profiling of accessible chromatin regions across multiple plant species and cell types 
+reveals common gene regulatory principles and new control modules. Plant Cell 30, 15–36 (2018).
+53. S. Yanagisawa, Dof1 and Dof2 transcription factors are associated with expression of multiple genes 
+involved in carbon metabolism in maize. Plant J. 21, 281–288 (2000).
+54. R. Perduns, I. Horst- Niessen, C. Peterhansel, Photosynthetic genes and genes associated with the C4 
+trait in maize are characterized by a unique class of highly regulated histone acetylation peaks on 
+upstream promoters. Plant Physiol. 168, 1378–1388 (2015).
+55. D. M. Emms, S. Covshoff, J. M. Hibberd, S. Kelly, Independent and parallel evolution of new genes 
+by gene duplication in two origins of C4 photosynthesis provides new insight into the mechanism 
+of phloem loading in C4 species. Mol. Biol. Evol. 33, 1796–1806 (2016).
+56. H. Yan et al., Evolution of cell- type- specific accessible chromatin regions and the cis- regulatory 
+elements that drive lineage- specific innovation [Internet]. bioRxiv [Preprint] (2024). https://www.
+biorxiv.org/content/10.1101/2024.01.08.574753v1 (Accessed 9 January 2024).
+57. J. Swift et al., Single nuclei sequencing reveals C4 photosynthesis is based on rewiring of 
+ancestral cell identity networks [Internet]. bioRxiv [Preprint] (2023). https://www.biorxiv.org/
+content/10.1101/2023.10.26.562893v1 (Accessed 27 October 2023).
+58. A. J. Studer et al., The draft genome of the C3 panicoid grass species Dichanthelium oligosanthes. 
+Genome Biol. 17, 223 (2016).
+59. Z. Chen, J. M. Debernardi, J. Dubcovsky, A. Gallavotti, The combination of morphogenic  
+regulators BABY BOOM and GRF- GIF improves maize transformation efficiency [Internet]. Plant 
+Biol. (2022), http://biorxiv.org/lookup/doi/10.1101/2022.09.02.506370. Accessed 1 February 
+2024.
+60. D. Ciren, S. Zebell, Z. B. Lippman, Extreme restructuring of cis- regulatory regions controlling a 
+deeply conserved plant stem cell regulator [Internet]. bioRxiv [Preprint] (2023). https://www.biorxiv.
+org/content/10.1101/2023.12.20.572550v1 (Accessed 2 January 2024).
+61. L. Liu et al., Enhancing grain- yield- related traits by CRISPR–Cas9 promoter editing of maize CLE 
+genes. Nat. Plants 7, 287–294 (2021).
+62. D. Rodríguez- Leal, Z. H. Lemmon, J. Man, M. E. Bartlett, Z. B. Lippman, Engineering quantitative trait 
+variation for crop improvement by genome editing. Cell 171, 470–480.e8 (2017).
+63. X. Tu, A. P . Marand, R. J. Schmitz, S. Zhong, A combinatorial indexing strategy for low- cost 
+epigenomic profiling of plant single cells. Plant Commun. 3, 100308 (2022).
+64. M. Martin, Cutadapt removes adapter sequences from high- throughput sequencing reads. EMBnet 
+J. 17, 10–12 (2011).
+65. H. Li, R. Durbin, Fast and accurate short read alignment with Burrows–Wheeler transform. 
+Bioinformatics 25, 1754–1760 (2009).
+66. P . Danecek et al., Twelve years of SAMtools and BCFtools. GigaScience 10, giab008 (2021).
+67. Picard Tools, By Broad Institute [Internet]. http://broadinstitute.github.io/picard/. Accessed 4 January 
+2024.
+68. L. McInnes, J. Healy, J. Melville, UMAP: Uniform manifold approximation and projection for 
+dimension reduction [Internet]. arXiv [Preprint] (2020). http://arxiv.org/abs/1802.03426. 
+Accessed19 December 2022.
+69. S. L. Wolock, R. Lopez, A. M. Klein, Scrublet: Computational identification of cell doublets in single- 
+cell transcriptomic data. Cell Syst. 8, 281–291.e9 (2019).
+70. I. Korsunsky et al., Fast, sensitive and accurate integration of single- cell data with Harmony. Nat. Methods 16, 
+1289–1296 (2019).
+71. I. Korsunsky, A. Nathan, N. Millard, S. Raychaudhuri, Presto scales Wilcoxon and auROC 
+analyses to millions of observations [Internet]. Bioinformatics (2019), http://biorxiv.org/lookup/
+doi/10.1101/653253. Accessed 28 December 2023.
+72. K. Zhang et al., A single- cell atlas of chromatin accessibility in the human genome. Cell 184, 5985–6001.
+e19 (2021).
+73. S. Zhong, C3 C4 grasses single- cell ATAC- seq (ID 1063172). BioProject -  NCBI. https://www.ncbi.
+nlm.nih.gov/bioproject?term=PRJNA1063172. Deposited 24 January 2023.
+74. R. J. Schmitz, Rice single- cell ATAC- seq (ID 1007577). BioProject -  NCBI. https://www.ncbi.nlm.nih.
+gov/bioproject?term=PRJNA1063172. Deposited 9 September 2023.
+75. J. P . Mendieta, Jome0169/Mendieta.C4_manuscript. GitHub. https://github.com/Jome0169/
+Mendieta.C4_manuscript. Deposited 1 September 2024.
+76. R. J. Schmitz, PlantEpigenome. PlantEpigenome. https://epigenome.genetics.uga.edu/
+PlantEpigenome/. Deposited 9 September 2023.

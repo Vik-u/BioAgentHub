@@ -1,0 +1,59 @@
+PETase Research CLI
+-------------------
+Mode: RL + GPT-OSS  |  Seed: 7
+Type a question and press Enter, or 'quit' to exit.
+
+Q> ...thinking...
+
+A>
+The current literature paints a picture of a PETase that has evolved from a modest, naturally occurring hydrolase into a highly engineered biocatalyst capable of attacking real‑world plastic waste.  The wild‑type enzyme isolated from *Deinococcus* spp. (hereafter “PETase”) retains the ancestral α/β‑hydrolase fold but displays a more open active‑site cleft than related cutinases, a feature that is thought to facilitate access to the bulky PET polymer [2].  In its native form PETase cleaves PET into bis(2‑hydroxyethyl) terephthalate (BHET), which is then hydrolysed to mono(2‑hydroxyethyl) terephthalate (MHET) and finally to terephthalate (TPA) and ethylene glycol by a separate MHETase [2].  Although this cascade is chemically sound, the wild‑type enzyme is limited by low catalytic turnover, poor thermostability, and a narrow pH window, which together preclude efficient use on untreated, post‑consumer PET.
+
+To overcome these shortcomings, a structure‑based machine‑learning pipeline was employed to generate a “FAST‑PETase” variant that combines a scaffold of engineered stability with a set of predicted activity‑enhancing mutations.  The resulting enzyme contains five point mutations relative to the wild type: N233K, R224Q, and S121E (predicted by the algorithm) together with D186H and R280A (derived from the scaffold) [1].  FAST‑PETase demonstrates markedly improved performance: it retains activity at pH 8.0, tolerates temperatures up to 50 °C, and can depolymerise untreated PET containers in a single batch, releasing measurable amounts of monomeric products after 22‑hour intervals of enzyme replenishment [1].  The enzyme also shows superior activity compared to both the wild‑type PETase and other engineered variants such as Thermo‑Dura LCC and ICCM, as evidenced by higher monomer yields from pre‑treated PET bottles at 50 °C [1].
+
+Despite these advances, several knowledge gaps remain.  First, the catalytic efficiency (k_cat/K_M) of FAST‑PETase has not been quantified, leaving the true kinetic advantage over the wild type unclear.  Second, the structural basis for the enhanced stability conferred by D186H and R280A is not fully resolved; crystallographic or cryo‑EM data would help to confirm whether these residues reinforce the hydrophobic core or alter the active‑site geometry.  Third, the role of the predicted but unimplemented T140D mutation—identified in other high‑performance PETases as a key contributor to substrate binding and catalytic turnover—has not been explored in FAST‑PETase.  Finally, the enzyme’s performance on PET with higher crystallinity, on mixed‑polymer waste streams, and in the presence of common additives or contaminants remains largely untested.
+
+To address these limitations, a two‑pronged strategy combining computational design with targeted experimentation is recommended.  Computationally, molecular dynamics (MD) simulations of FAST‑PETase in complex with PET oligomers can reveal how the existing mutations influence substrate binding and transition‑state stabilization.  QM/MM calculations on the catalytic triad could quantify the energetic impact of each mutation, guiding the rational introduction of T140D or other potentially beneficial residues.  Machine‑learning models trained on the existing FAST‑PETase dataset could be expanded to predict additional stabilizing or activity‑enhancing mutations, particularly in regions that contact the polymer chain or the solvent.  Parallel to this, Rosetta‑based design could be used to explore combinatorial libraries that include T140D, N233K, R224Q, and S121E together with scaffold mutations, generating a focused set of variants for experimental testing.
+
+Experimentally, site‑directed mutagenesis should be employed to generate a T140D variant of FAST‑PETase, followed by kinetic assays (steady‑state and pre‑steady‑state) to determine k_cat, K_M, and catalytic efficiency against PET films of varying crystallinity.  Differential scanning calorimetry (DSC) and circular dichroism (CD) spectroscopy would quantify thermal stability and secondary‑structure integrity, respectively.  High‑resolution structural determination (X‑ray crystallography or cryo‑EM) of the wild‑type, scaffold, and FAST‑PETase variants would provide atomic‑level insight into the effects of each mutation.  Additionally, a high‑throughput screening platform—such as microfluidic droplet assays or fluorescence‑based monomer detection—could rapidly evaluate libraries of combinatorial mutants for activity on untreated PET.  Finally, co‑expression or co‑incubation studies with MHETase would assess whether a single‑enzyme system can fully depolymerise PET to monomers, thereby simplifying downstream processing.
+
+In parallel, process‑level investigations should examine the enzyme’s performance on real‑world waste streams, including high‑crystallinity PET bottles, mixed‑polymer packaging, and PET containing additives such as dyes or stabilizers.  Immobilization strategies (e.g., on polymeric supports or in packed‑bed reactors) could be explored to enhance enzyme reuse and to facilitate scale‑up.  By integrating these computational and experimental approaches, the field can move beyond the current FAST‑PETase benchmark toward a robust, industrial‑grade PETase that operates efficiently across a broad range of temperatures, pH values, and plastic substrates.
+
+Sources:
+[1] 662 | Nature | Vol 604 | 28 April 2022 (s41586-022-04599-z.pdf)
+[2] Received:6 April 2025.Revised:2 June 2025.Accepted:10 June 2025 (wraf121.pdf)
+
+Citations:
+  [1] 662 | Nature | Vol 604 | 28 April 2022 (s41586-022-04599-z.pdf)
+  [2] Received:6 April 2025.Revised:2 June 2025.Accepted:10 June 2025 (wraf121.pdf)
+
+Metrics:
+  FAISS avg score   : 0.738
+  KG confidence avg : n/a
+  RL reward sum     : 0.620
+meta: {
+  "steps": [
+    {
+      "action": "vector_search",
+      "info": "vector_search",
+      "context_size": 5
+    },
+    {
+      "action": "graph_expand",
+      "info": "graph_expand:PETase/FAST-PETase/FastPETase",
+      "context_size": 5
+    },
+    {
+      "action": "stop",
+      "info": "stop",
+      "context_size": 5
+    }
+  ],
+  "rewards": [
+    0.19,
+    0.13999999999999999,
+    0.29
+  ],
+  "mode": "llm"
+}
+------------------------------------------------------------
+Q> Bye!

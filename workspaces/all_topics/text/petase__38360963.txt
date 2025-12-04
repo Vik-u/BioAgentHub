@@ -1,0 +1,1317 @@
+Article https://doi.org/10.1038/s41467-024-45662-9
+Computational redesign of a hydrolase for
+nearly complete PET depolymerization at
+industrially relevant high-solids loading
+Yinglu Cui 1,4 ,Y a n c h u nC h e n1,4,J i n y u a nS u n1,2,4, Tong Zhu 1,4,H u aP a n g1,
+Chunli Li1, Wen-Chao Geng 1,3 &B i a nW u1
+Biotechnological plastic recyclinghas emerged as a suitable option for
+addressing the pollution crisis. A major breakthrough in the biodegradation of
+poly(ethylene terephthalate) (PET) is achieved by using a LCC variant, which
+permits 90% conversion at an industrial level. Despite the achievements, its
+applications have been hampered by the remaining 10% of nonbiodegradable
+PET. Herein, we address current challenges by employing a computational
+strategy to engineer a hydrolase from the bacterium HR29. The redesigned
+variant, TurboPETase, outperforms other well-known PET hydrolases. Nearly
+complete depolymerization is accomplished in 8 h at a solids loading of
+200 g kg
+−1. Kinetic and structural analysis suggest that the improved perfor-
+mance may be attributed to a moreﬂexible PET-binding groove that facilitates
+the targeting of more speciﬁc attack sites. Collectively, our results constitute a
+signiﬁcant advance in understanding and engineering of industrially applic-
+able polyester hydrolases, and provideguidance for further efforts on other
+polymer types.
+Substantial efforts have been dedicated to discovering and engineer-
+ing PET hydrolases over the past two decades, contributing to the
+development of PET biodegradation from the detection of trace
+amounts of released products to the attainment of high conversion
+1– 12.
+When combating the challenges posed by enzymatic PET recycling,
+key parameters should be taken into consideration to attain an eco-
+nomically viable industrial process, in particular solids loading
+(> 150 g kg
+−1) and product yield (> 90%)13– 15. However, almost all studies
+obtain appreciable depolymerization yields at solids loadings lower
+than 30 g kg
+−1, which is considerably below an industrially relevant
+level15. When increasing the solids loading to a high level, a reduction in
+the hydrolysis rate and conversion is commonly observed (referred to
+as “solids effect”), as demonstrated in other heterogeneous reactions
+such as the biomass conversion process
+16.
+A breakthrough was achieved with an engineered LCC variant
+(LCCICCG) that exhibited 90% depolymerization of pretreated PET waste
+at an industrially relevant solids loading (200 g kg−1)17.H o w e v e r ,t h e
+10% nonbiodegradable PET remained and reached a high crystallinity
+level of ~30% because of physical aging, hindering immediate reuse for
+PET depolymerization. A report issued by the National Association for
+PET Container Resources indicated that the postconsumer PET bottles
+collected for recycling reached 800 kilotons in the US
+11, and this would
+generate over 80 kilotons of nonbiodegradable PET waste per year if
+the current biodegradation strategy was employed, posing a sig-
+niﬁcant threat to the PET recycling economy. Increasing the extent of
+conversion from 90% to 99% would cut the minimum selling price
+(MSP) of TPA by 10% (US$0.2/kg) according to the TEA model pro-
+posed by the National Renewable Energy Laboratory in the US; thus,
+second to solids loading, the conversion level is the largest factor
+affecting MSP in the depolymerization process
+14. Both environmental
+and socioeconomic concerns have fueled intense interest in improving
+the degradation level to accelerate the transition towards the circular
+Received: 2 June 2023
+Accepted: 30 January 2024
+Check for updates
+1AIM Center, Institute of Microbiology, Chinese Academy of Sciences, Beijing, China.2University of Chinese Academy of Sciences, Beijing, China.3College of
+Chemistry, Nankai University, Tianjin, China.4These authors contributed equally: Yinglu Cui, Yanchun Chen, Jinyuan Sun, Tong Zhu.
+e-mail: cuiyinglu@im.ac.cn; wub@im.ac.cn
+Nature Communications|         (2024) 15:1417 1
+1234567890():,;
+1234567890():,;
+economy. According to the kinetic results of PET crystallization
+(Supplementary Fig. 1), physical aging can be vastly suppressed by
+decreasing the reaction temperature, but the catalytic efﬁciency of
+thermophilic PET hydrolases is concomitantly sacriﬁced
+18,19,t h u sr a i s -
+ing demands for biocatalysts with high depolymerization efﬁciency at
+low deformability temperatures of amorphous PET chains.
+The last few years have witnessed impressive progress in tailoring
+natural enzymes by computational redesign strategies20.I n s p i r e db y
+the achievements in artiﬁcial intelligence for addressing the protein
+ﬁtness landscape to probe hidden evolutionary information, we
+employed a computational strategy that incorporates a protein lan-
+guage model and force- ﬁeld-based algorithms to engineer PET
+hydrolases with balanced thermostability and hydrolytic capacity. The
+redesigned variant (TurboPETase) derived from this campaign out-
+performed the most efﬁcient PET hydrolases currently recognized in
+the ﬁeld (LCC
+21,L C CICCG17, ICCG I6M22, BhrPETase23, FastPETase24,
+HotPETase18,D e p o P E T a s e25, CaPETaseM926, and PES-H1L92F/Q94Y27)o v e ra
+range of temperatures (50 °C– 65 °C). The extraordinary degradation
+performance afforded by TurboPETase allowed nearly complete
+depolymerization of post-consumer PET bottles in 8 h at a high
+industrially relevant substrate loading of 200 g kg
+−1, with a maximum
+production rate of 61.3 ghydrolyzed PETL−1 h−1, addressing the challenge
+regarding residual nonbiodegradable PET waste.
+Results
+Computational redesign of an efﬁcient PET hydrolase
+PET hydrolases belong to serine-hydrolase family, a widely distributed
+group known for their relatively low substrate speciﬁcity. The degra-
+dation function of PET hydrolases is thought to preexist as a pro-
+miscuous function, which then evolves into a primary function
+28,29.
+Given our limited knowledge of how a sequence encodes catalytic
+functions in polymer-degrading enzymes
+30, addressing the challenge
+by exploiting physics-based computational redesign and rational
+design approaches is a difﬁcult task. Alternatively, a successful
+approach involves utilizing deep learning models to map the process
+from protein sequence to function, as demonstrated in many cases
+31– 33.
+These models can capture hidden information indicating the
+improvement in polymer degradation along the evolution trajectory
+from the relativeﬁtness of protein variants. To this end, we employed a
+language model trained on two datasets that involved approximately
+26,000 homologous sequences of PET hydrolases across evolution, to
+predict the probability of amino acid variation from the evolutionary
+landscape (Fig.1A). To select the template enzyme, we compared the
+activity of LCC, LCC
+ICCG, BhrPETase, FastPETase, and HotPETase using
+amorphous PETﬁlms (Gf-PET, from the supplier Goodfellow) across a
+range of temperatures (Supplementary Fig. 2). BhrPETase shares a high
+sequence identity of 94% with LCC, whereas LCC
+ICCG represents a var-
+iant of LCC characterized by four amino acid substituents (F243I/
+D238C/S283C/Y127G). Both FastPETase and HotPETase are derivatives
+engineered fromIsPETase (Supplementary Fig. 3). At 65 °C, BhrPETase
+and LCCICCG exhibited the highest catalytic performance of all PET
+hydrolases and temperatures tested and were chosen as the inputs. A
+Transformer encoder was used to process input amino acid sequences
+with absolute position embedding. Residue positions were sorted by
+the mean of the logits of 19 mutations assigned to the wild type amino
+acid at each position. The top ten amino acid positions with the highest
+average scores of each model were selected. After duplicated amino
+acid positions were removed, 18 amino acid positions at which the
+wild-type residues ﬁt less well than potential substitutions were
+obtained (Supplementary Table 1).
+According to the crystal structures of BhrPETase (PDB code:
+7EOA)a n dL C C
+ICCG S165A in complex with MHET (PDB code:7VVE34), 7
+of the 18 generated amino acid positions (W104, H164, M166, W190,
+H191, H218, and F/I243) were suggested to be embedded in a PET-
+binding groove. Due to the relatively higher thermostability of
+BhrPETase, we subjected the 7 positions on this enzyme to generate 34
+variants. Chen et al. reported that the Ser214/Ile218 double mutants of
+several IsPETase-homologous enzymes showed enhanced PET hydro-
+lysis activity (by at least 1.3-fold) but vastly decreasedT
+m values
+(by approximately 10 °C)35. Since His218 (corresponding to Ser214
+in IsPETase) was involved in our predicted candidates, the hydrolytic
+performance of the H218S/F222I variant was also explored (Supple-
+mentary Table 2). Among the variants, BhrPETase
+H218S/F222I (referred to
+as BhrPETase M2) resulted in the highest improvements with a 1.7-fold
+increase in PET-hydrolytic activity at 65 °C, rendering this variant the
+new template for the second-round accumulation of the mutations at
+the remaining 6 positions. During the 2nd accumulation stage, only
+mutations at W104 and F243 positions (W104L, W104S, W104H,
+W104G, F243I, F243T, and F243G) on M2 exhibited improved hydro-
+lytic activities (by 10% to 34%), albeit with signiﬁcant decrease in
+thermostability (Supplementary Table 3).
+Empirical data have suggested that aT
+m 15 °C higher than theTopt
+is necessary for catalyst longevity27. Hence, a PET hydrolase with aTm
+at least over 80 °C is preferred for efﬁcient PET degradation. Notably,
+the M2 variant exhibited a melting temperature of 85 °C, which was
+11 °C lower than that of the wild-type enzyme. The active mutations at
+the W104 positions on M2 reduced the stability even further, withT
+m
+values ranging from 71.5 °C to 75.5 °C. The nonnegligible decrease in
+stability limited further combination, and compensatory mutations
+needed to be introducedﬁrst to suppress the deleterious effects.
+Therefore, we applied our previously devised GRAPE strategy
+36,w h i c h
+employs four complementary algorithms, namely, FoldX37 (force ﬁeld
+energy function), Rosetta_cartesian_ddg38 (forceﬁeld energy function),
+ABACUS39 (statistical energy function) and DDD40 (force ﬁeld energy
+function), to design stabilizing mutations to compensate and buffer
+the destabilizing mutations (Fig.1B). Upon experimental validation, 3
+beneﬁcial variants (A209R, D238K, and A251C-A281C) resulted in
+improved thermostability without compromising the activity (Sup-
+plementary Table 4). We added the stabilizing variants to the M2 var-
+iant using a stepwise combining strategy and resulted in a BhrPETase
+M6 variant (BhrPETase
+H218S/F222I/A209R/D238K/A251C/A281C), which exhibited a
+restored melting temperature of 97 °C without sacriﬁcing activity.
+Subsequently, active mutations at the W104 and F243 positions were
+combinatorically assembled and accumulated onto the thermostable
+M6 variant, generating 12 new variants (Fig.1C and Supplementary
+Table 5). After a consideration of both depolymerization performance
+and thermostability, the best combination variant, BhrPETase
+H218S/F222I/
+A209R/D238K/A251C/A281C/W104L/F243T(referred to as TurboPETase), was selected
+with aTm of 84 °C and a 3.4-fold improvement in PET-speciﬁc activity
+towards GF-PETﬁlms compared to wild-type BhrPETase (Fig.1D). In
+industrial scenarios, enzymatic hydrolysis is typically conducted in
+water rather than in a dedicated buffered system to simplify down-
+stream processing. Aligned with the industrial preferences, we also
+evaluated the 12 variants under a low buffer concentration. The results
+revealed that with the exception M6
+W104G/F243T, all variants largely
+retained their degrading activity in 100 mM potassium phosphate
+buffer (Supplementary Fig. 4 and Supplementary Table 6). TurboPE-
+Tase consistently outperformed the other variants under both low and
+high buffer concentrations, making it the most effective variant for
+further investigation.
+The depolymerization performance of TurboPETase was subse-
+quently evaluated across a temperature range of 50– 65 °C with respect
+to other PET hydrolases (Fig.2A, B, and Supplementary Fig. 5). At 65 °C,
+TurboPETase exhibited the highest overall degradation of all PET
+hydrolases and temperatures tested, releasing 29.66 mM of the pro-
+ducts (sum of BHET, MHET, and TPA) in 3 h. Counterparts like
+BhrPETase, LCC, LCC
+ICCG,I C C GI6M,a n dP E S - H 1L92F/Q94Y which exhibit high
+degradation performance at elevated temperatures, rendered hydro-
+lytic activity 1.8-, 4.7-, 2.1-, 2.0-, and 19-fold lower than that of Turbo-
+PETase, respectively. At suboptimal temperatures, TurboPETase
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 2
+consistently outperformed other PET hydrolases, albeit the decreased
+hydrolytic activity. At the optimal temperature of HotPETase and
+CaPETaseM9 of 60 °C, TurboPETase generated 11.73 mM monomer
+products in 3 h, whereas HotPETase and CaPETaseM9 produced
+4.32 mM and 0.60 mM monomers, which were 1.7-, and 18-fold lower
+than that of TurboPETase. When subjected to 50 °C, TurboPETase
+registered hydrolytic efﬁciencies exceeding those of FastPETase and
+DepoPETase by 43% and 59%, respectively. In light of the lower enzyme
+concentrations employed in certain reports, we recalibrated our
+reactions to mirror these conditions to ensure a fairer comparison
+(Fig. 2C– E). Under their reported reaction conditions, the reaction
+rates of LCC
+ICCG, HotPETase, and FastPETase were 1.8-, 4.9-, and 1.0-fold
+lower, respectively, than that of TurboPETase. Recently, similar
+experiments were conducted to evaluate the degradation perfor-
+mance of FastPETase, HotPETase, PES-H1L92F/Q94Y and LCCICCG under
+industrial conditions41. Their results demonstrated that HotPETase
+exhibited a higher speciﬁc activity compared to PES-H1L92F/Q94Y at a low
+substrate loading of 2 g L−1. However, as the substrate concentrations
+increased to 16.5% (w/w) and 20% (w/w), the PET conversion of Hot-
+PETase were signiﬁcantly lower than those of PES-H1L92F/Q94Y.T h i s
+reduced efﬁciency at higher substrate loadings is suggested to be
+attributed to the limited thermostability and other catalytic properties
+of HotPETase, such as product inhibition. Despite the good perfor-
+mance of PES-H1
+L92F/Q94Y under industrially relevant conditions, theﬁnal
+depolymerization was still lower than that achieved by LCCICCG.G i v e n
+the reported enhancements of PES-H1L92F/Q94Y in 1 M potassium phos-
+phate buffer, we also compared TurboPETase with PES-H1L92F/Q94Y
+under elevated buffer concentration, with TurboPETase still out-
+pacing, yielding up to 2.5 times the degradation products of PES-H1
+L92F/
+Q94Y at 65 °C (Supplementary Fig. 6). To evaluate the long-time stability
+of TurboPETase, we extended the reaction time. The results demon-
+strated continuous enzyme performance of TurboPETase at elevated
+temperatures, as it produced 130 mM of soluble monomer products
+over 12 h at 65 °C, whereas the released products with BhrPETase, LCC,
+LCC
+ICCG were substantially lower (Supplementary Fig. 7). The degra-
+dation results highlight the substantially superior hydrolytic
+Fig. 1 | Schematic representation of the redesign of PET hydrolases using the
+hybrid computational method. APotentially beneﬁcial mutations are predicted
+with the Transformer model trained on two datasets (left panel). The top ten pre-
+dicted amino acid positions (red circles) were selected. Removal of duplicate
+positions resulted in 18 residue positions, of which 7 positions were suggested to be
+located at the PET binding site (right panel). The Cα atoms of these amino acid
+positions are shown as blue spheres, whereas the 11 remaining positions are shown
+as coral spheres. PET and the catalytic triad are shown as ball-and-stick repre-
+sentations.B Schematic representation of the GRAPE strategy. Four algorithms
+were employed to predict the stabilizing mutations (left panel). After structural
+ﬁltering, the potential stabilizing candidates were veriﬁed experimentally (right
+panel). The Cα atoms of the mutations with improved thermostability are shown as
+blue spheres, whereas other experimentally veriﬁed mutations are shown as coral
+spheres. C Schematic representation of the accumulation step. Mutations at the 7
+residue positions located at the PET binding site were added to the wild type
+enzyme (BhrPETase), resulting in the best hit BhrPETase
+H218S/F222I (M2). Adding the
+mutations at the remaining 6 positions to M2 led to active variants with dramati-
+cally decreased stability, and therefore, the GRAPE strategy was employed. The
+stabilizing mutations were combined into M2 and resulted in the thermostable
+variant M6, which can compensate for the destabilizing mutations in further
+accumulation steps. The active mutations at the W104 and F243 positions were
+combinatorically assembled on M6, leading to theﬁnal mutant TurboPETase.
+D Thermostability and relative PET-degrading activity of BhrPETase and the var-
+iants. The activities were homogenized according to BhrPETase. Data are from one
+independent experiment. Mutations predicted by the Transformer model and the
+GRAPE strategy are colored blue and green, respectively. The double mutants at the
+W104 and F243 positions on M6 are shown in red. Arrows represent the accumu-
+lation path. The yellow area represents the optimal melting temperature range for
+PET hydrolases to enable efﬁcient depolymerization at 65 °C.
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 3
+performance of TurboPETase across various temperatures and other
+reaction conditions tested.
+Michaelis‒Menten approach and structural analysis
+To interpret the enhanced hydrolysis performance, the kinetics were
+analysed through conventional Michaelis‒Menten model and inverse
+Michaelis‒Menten model. As shown in Fig.3A, the curves exhibited
+near-linear relationships for the initial rate and substrate loading under
+all conditions for TurboPETase, BhrPETase and LCC
+ICCG. Conventional
+saturation behaviour was not observed because even the lowest
+enzyme concentrations used here (0.12μM) were too high for the
+conventional approach to be valid, which indicates the very fast rates
+of dissociation of the enzymes from the PET surface. Additionally, we
+conducted a kinetic comparison for soluble substrates (MHET and
+pNPB) as detailed in Supplementary Fig. 8 and Supplementary Table 7.
+The catalytic efﬁciency of TurboPETase towards MHET showed only a
+modest enhancement relative to PET (with a 32% increase), suggesting
+that there may be other factors, potentially increased adsorption to
+the surface, contributing to the ampliﬁed degradation efﬁciency of
+PET. Conversely, the slight decrement in TurboPETase’s k
+cat for pNPB,
+accompanied by a reduced binding afﬁnity, inferred potential changes
+in the substrate binding domain, rendering it less conducive for other
+small molecule interactions.
+Although the hydrolysis of PET could not meet the criteria for the
+conventional approach, the inverse Michaelis‒Menten model was
+more applicable. The inverse Michaelis‒Menten equation has been
+successfully employed to study the kinetics of heterogeneous
+enzymes such as cellulases, by which the catalytic efﬁcacy against
+accessible attack sites on the polymer surface can be estimated
+42– 45.A s
+a typical surface erosion process, enzymatic hydrolysis of PET can
+hardly permeate the inner core of the polymer, resulting in a limited
+number of superﬁcial ester bonds (also termed attack sites) being
+accessed even if the enzymes are in great excess. Saturation thus
+occurs when all sites on the surface become occupied, and the excess
+enzyme molecules accumulate in the solvent
+42. It should be noted that
+not all adsorption sites are competent for catalytic conversion, non-
+speciﬁc adsorption also accounts for a considerable proportion44.W e
+measured free enzyme concentrations,Efree, and converted it to sub-
+strate coverage,Γ =( Etot - Efree)/SPET to calculated the total adsorption
+of the enzymes to PET surface (Supplementary Fig. 9 and
+Fig. 2 | Comparison of depolymerization performance of TurboPETase with
+other known PET hydrolases. ALocation of the beneﬁcial mutations in Turbo-
+PETase and its counterparts. TurboPETase, BhrPETase and LCCICCG are shown in
+green, grey and yellow, respectively. Residues are shown in ball and stick repre-
+sentations.B Comparison of the PET-hydrolytic activity of TurboPETase and other
+PET hydrolases towards Gf-PETﬁlms at temperatures ranging from 50 to 65 °C
+using 30 g kg
+−1 solids loading and 2 mgemzyme gPET
+−1 enzyme loading in 100 mM
+potassium phosphate buffer, pH 8.0. The bar chart shows the mean depolymer-
+ization after 3 h of reaction. Data are presented as mean ± s.d. (n = 3 biologically
+independent experiments). The circles represent the individual numbers. *In the
+investigation conducted by Arnal et al.
+41, the depolymerization efﬁciency of PES-
+H1L92F/Q94Y notably surpassed that of HotPETase, yet it remained inferior to LCCICCG,
+under industrially relevant substrate loadings of 16.5% (w/w) and 20% (w/w).C Time
+course reactions of TurboPETase and FastPETase towards Gf-PETﬁlms at 50 °C
+under its reported reaction conditions (0.3 mgemzyme gPET
+−1 enzyme loading,
+20 g kg−1 solids loading, 100 mM potassium phosphate buffer, pH 8.0). Data are
+presented as mean ± s.d. (n = 3 biologically independent experiments).D Time
+course reactions of TurboPETase and HotPETase towards Gf-PETﬁlms at 60 °C
+under its reported reaction conditions (0.06 mgemzyme gPET
+−1 enzyme loading,
+20 g kg−1 solids loading, 50 mM Glycine-NaOH buffer, pH 9.2). Data are presented as
+mean ± s.d. (n = 3 biologically independent experiments).E Time course reactions
+of TurboPETase and LCCICCG towards Gf-PETﬁlms at 65 °C using its reported
+enzyme loading of 0.2 mgemzyme gPET
+−1 in 100 mM potassium phosphate buffer
+(pH = 8.0). The solids loading was 20 g kg−1. Data are presented as mean ± s.d. (n =3
+biologically independent experiments). Source data are provided as a Source
+Data ﬁle.
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 4
+Supplementary Table 8).Γmax represents the (apparent) saturated
+bound enzymes, whereasKd is a dissociation constant46.A tl o w e r
+enzyme concentrations, TurboPETase exhibited a higher adsorption to
+the PET surface compared to its counterparts. However, upon reaching
+saturation, similar maximum adsorption capacities ( Γ
+max)w e r e
+observed, underscoring a consistent overall binding potential across
+the enzymes. Comparisons of these enzymes could be expanded by
+considering speciﬁc changes in inverse Michaelis‒Menten parameters,
+which can reﬂect the binding capability to the attack sites of the PET
+surface. As shown in Fig.3Ba n dT a b l e1,t h e
+invKM values revealed
+marginal differences between TurboPETase, BhrPETase, and LCCICCG,
+especially for the values at 30 g kg−1 substrate loading, indicating that
+the speciﬁc adsorption capacity of TurboPETase at the attack sites on
+the PET surface was not impaired. It’s noteworthy that TurboPETase
+exhibited a 2.1-fold increase ininvVmax/massS0 compared with BhrPETase
+and LCCICCG. The inverse parameter, maximal reaction velocity per
+available reactive site (invVmax/massS0), speciﬁes the rate when all attack
+sites are covered with the enzyme42. Since no substantial differences in
+invKM and Γmax values were observed among the enzymes, the elevated
+invVmax/massS0 values may imply a broadened targeting of TurboPETase
+towards speciﬁc attack sites when the enzymes maintained a stable
+overall adsorption level. Consequently, we presumed that the
+enhanced depolymerization performance of TurboPETase may rely, at
+least in part, on the enhanced ability to attack a broader spectrum of
+speciﬁc attack sites that can be hydrolysed to form a productive
+complex.
+Fig. 3 | Kinetic parameters and structural analysis of TurboPETase.
+A Conventional andB inverse Michaelis‒Menten plots of TurboPETase, BhrPETase,
+and LCCICCG at 65 °C in 100 mM potassium phosphate buffer, pH 8.0. Data are
+presented as mean ± s.d. (n = 3 biologically independent experiments). Source data
+are provided as a Source Dataﬁle. C RMSF values (in Å) for all Cα atoms of
+BhrPETase and TurboPETase during the MD simulations, indicating global changes
+in proteinﬂexibility, especially for the PET-binding groove. The H218S/F222I,
+W104L, and F243T mutations are shown as orange atoms, whereas the catalytic
+triad is shown as hot pink atoms.D Schematic diagram of PET depolymerization
+processes. Compared to the wild-type enzyme, TurboPETase may be more pro-
+miscuous due to the increasedﬂexibility along the protein PET-binding groove,
+which allows it to attack different surface structures.
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 5
+An in-depth structural analysis also helps us to understand the
+molecular underpinnings of the performance improvements. Accord-
+ing to the model of TurboPETase predicted by AlphaFold247 and sub-
+sequent molecular dynamics (MD) simulations, the improved
+performance of TurboPETase may be attributed to the following key
+aspects: improvedﬂexibility of the substrate binding cleft (H218S/
+F222I, W104L and F243T), optimized charge-charge interactions at the
+protein surface (A209R and D238K), and introduction of a disulﬁde
+bond (A251C-A281C). A209R, D238K, and the disulﬁde bond A251C-
+A281C are suggested to primarily contribute to improving thermo-
+stability while maintaining activity (Supplementary Figs. 10 and 11),
+whereas the enhanced hydrolysis efﬁcacy may be attributed to sub-
+stitutions in proximity to the active sites. H218 is suggested to form an
+intimate packing with the conserved W190 in analogous enzymes.
+Chen et al. found that PET hydrolytic activity could beneﬁt from a more
+ﬂexible active site in the H214S/F218I double mutant (corresponds to
+H218S/F222I in BhrPETase)
+35. In the present study, MD simulations of
+the apo form of TurboPETase revealed an expanded rotational free-
+dom of W190 endowed by the H218S/F222I mutation (Supplementary
+Fig. 12), which is consistent with the observation of diverse con-
+formations of the corresponding W156 ofIsPETase
+35.W h e nb i n d i n gt o
+the PET, the wobbling of W190 is curtailed and anchored by theπ-π
+interactions with the PET substrate. Thisﬂexibility of the PET binding
+cleft was further enhanced by the synergistic interactions conferred by
+the addition of W104L and F243T, as revealed by the Cα root-mean-
+square ﬂuctuation (RMSF) results (Fig.3C). W104 is previously repor-
+ted to pack against the adjacent P248 to stabilize the P248-situatedβ8-
+α6l o o p34. In the redesigned TurboPETase, the relinquishment of this
+interaction by leucine substitution may engender increased con-
+formational malleability within the loop region (N246-A250), as
+demonstrated by the largely reduced cross-correlation of these
+regions (Supplementary Fig. 13). For another substitution F243T in the
+PET binding cleft, the steric proﬁle of F243 appears to dictate a more
+peripheral binding locus for PET. Yet, its mutation to threonine, armed
+with a less pronounced steric feature, may release the space for PET
+binding with a more-ﬂexible state. More importantly, without the steric
+proﬁle of the aromatic ring, T243 may beckon PET deeper into the
+cleft, drawing the substrate’s labile carbonyl closer to the catalytic
+serine, with the interstitial distances contracting from 4.88 ± 0.51 Å to
+4.15 ± 0.37 Å (Supplementary Fig. 14). Concurrently, the enhanced
+ﬂexibility might compromise the protein’s stability, which is consistent
+with the observed decrease in the melting temperatures of the single
+point mutations. Synthesizing our structural analysis with the kinetic
+data, we postulated that the greatly increasedﬂexibility along the PET-
+binding groove may provide more space to accommodate a variety of
+attack conformations through dynamic binding, which may be crucial
+for the formation of catalytically competent complexes on different
+surface structures (Fig.3D). Based on the above results, we reasoned
+that TurboPETase is probably more promiscuous with respect to the
+conformation of the PET strand it attacks. Nevertheless, detailed
+analysis of the mechanism requires further efforts through more in-
+depth research.
+Performance of TurboPETase on alternative substrates and in
+dual-enzyme systems
+Previous study has demonstrated limited biodegradation efﬁciency of
+IsPETase and its variant towards other semiaromatic polyesters, spe-
+ciﬁcally PBT, at 37 °C36. Compared to PET, PBT has a lower glass tran-
+sition temperature (Tg), which ranges between 37 and 55 °C48.I nt h i s
+study, even though 65 °C surpasses theTg of PBT, thus signiﬁcantly
+enhancing the mobility of PBT polymer chains, all of the examined
+enzymes exhibited substantially reduced degradation ef ﬁciency
+towards PBT ﬁlms at 65 °C with respect to the degradation of PET
+(Supplementary Fig. 15). Speciﬁcally, TurboPETase yielded higher
+amounts of hydrolytic products (62.6μM) than both BhrPETase
+(27.5μM) and LCC
+ICCG (47.1μM). These results suggested that the
+active sites of current PET-degrading enzymes were less efﬁcient in
+binding with the extended aliphatic chains in PBT compared to PET.
+Consequently, dedicated efforts in enzyme discovery or tailored
+engineering are still needed for further improving the depolymeriza-
+tion of new classes of semiaromatic polyesters.
+Various efforts have been made to develop dual enzyme systems
+to remove the intermediate products BHET and MHET
+49– 53, which are
+known inhibitors of PET hydrolases. Haugwitz et al. reported a dual
+enzyme system combining an engineered TfCa mutant and PETase PM
+enzyme that yielded a 4-fold increase in overall products towards Gf-
+PET ﬁlms compared to PETase PM alone at 45 °C over 24 h
+52.W ef u r t h e r
+explored the application potential of TurboPETase by coupling it with
+the recently reported thermostable BHET hydrolyzing enzyme,
+BHETase
+54, in a dual-enzyme system. At a low substrate loading
+(2 g kg−1), the dual-enzyme system effectively doubled the overall yield
+of the products, relative to the singular use of TurboPETase (Supple-
+mentary Fig. 16). However, an intriguing observation emerged at an
+elevated PET loading of 30 g kg
+−1. TurboPETase alone surpassed the
+yields from most enzyme ratios in the dual-enzyme system at 65 °C, the
+only exception being the 0.5 mg
+TurboPETase/gPET:0.1 mgBHETase/gPET
+ratio. Nevertheless, in the current investigation, only degradation of
+amorphous PET materials at 65 °C were evaluated. Future research
+could expand to examine the efﬁcacy of the dual-enzyme system on
+different MHET hydrolases and PET substrates with varying physical
+properties under diverse reaction conditions, including varied
+temperatures.
+Nearly complete degradation of postconsumer PET products at
+industrially relevant high-solids loading
+To better evaluate the depolymerization performance of TurboPETase
+at industrially relevant levels of solids loading, we have compared the
+depolymerization of pretreated postconsumer coloured-ﬂake PET
+(PcPET) wastes with TurboPETase and LCC
+ICCG at a substrate loading of
+200 g kg−1. TurboPETase achieved nearly complete depolymerization
+(98.2%, calculated from the HPLC data) of PcPET wastes in 8 h (Fig.4A),
+with a maximum production rate of 61.3 ghydrolyzed PETL−1 h−1 (Supple-
+mentary Fig. 17 and Supplementary Tables 9 and 10). A slight change in
+the crystallinity of PcPET was observed (reaching 11.9% after 8 h),
+which allows an immediate reuse of the remaining PcPET waste for
+depolymerization. In contrast, LCC
+ICCG required 16 h to reach 97.7%
+depolymerization (calculated from the HPLC data) at 65 °C, and the
+remaining PcPET exhibited a similar crystallinity of 11.1%, demon-
+strating that the“physical aging” process was suppressed at lower
+temperatures. At the previously reported optimal reaction tempera-
+ture of 72 °C, LCC
+ICCG reached its maximal conversion of 92.5% (cal-
+culated from the HPLC data) over 12 h, and no further increase was
+obtained after prolonged reaction time due to the higher deform-
+ability of PET chains. The remaining PcPET showed a high level of
+Table 1 | Kinetic parameters of TurboPETase, BhrPETase, and
+LCCICCG derived from the inverse Michaelis‒Menten
+experiments
+Parameters invKM (mgenzyme gPET
+−1) invVmax/S (μmol g−1 s−1)
+Substrate loading
+12 g kg−1 20 g kg−1 30 g kg−1 12 g kg−1 20 g kg−1 30 g kg−1
+TurboPETase 0.67
+(± 0.13)
+0.46
+(± 0.08)
+0.24
+(± 0.03)
+0.081
+(± 0.006)
+0.082
+(± 0.006)
+0.071
+(± 0.002)
+BhrPETase 0.69
+(± 0.16)
+0.40
+(± 0.06)
+0.20
+(± 0.04)
+0.020
+(± 0.002)
+0.022
+(± 0.001)
+0.022
+(± 0.001)
+LCCICCG 0.54
+(± 0.12)
+0.42
+(± 0.07)
+0.23
+(± 0.03)
+0.021
+(± 0.002)
+0.027
+(± 0.001)
+0.023
+(± 0.001)
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 6
+crystallinity, estimated at 32.5%, which is in accordance with a previous
+report17.
+Many factors can affect enzymatic attack against the plastics: e.g.,
+crystallinity, chain mobility, molecular size, surface topography and
+hydrophobicity
+11. Among these, the role of low crystallinity in PET
+degradation has been extensively studied. A crystallinity exceeding
+20% has been previously proposed to signiﬁcantly impede the enzy-
+matic degradation process. In the depolymerization of non-melt-
+quenched PET powders (27.6% crystallinity), we found a signiﬁcant
+reduction in degradation performance (Supplementary Fig. 18 and
+Supplementary Table 11). However, during the depolymerization of
+pretreated PcPET, even when the crystallinity reached 20% after 4 h of
+degradation by LCC
+ICCG at 72 °C, we did not observe a rapid decline in
+degradation rate. Pfaff et al. showed that LCCICCG is more efﬁcient in
+hydrolyzing shorter polymers27. Recent studies also demonstrated that
+heavily pretreated PET, with a degree of polymerization (DP) less than
+20 and high crystallinity, can remain highly degradable
+55,56.T h e s e
+ﬁndings underscored the importance of factors other than crystallinity
+in enzymatic degradation, and promoted further investigation
+through gel permeation chromatography (GPC) analysis, which
+revealed notably low weight-average (M
+w) and number-average (Mn)
+molecular masses in PcPET powders compared to non-melt-quenched
+PET powders (Supplementary Table 12). From the GPC results, we
+speculate that the low molecular weight of pretreated PcPET may
+contribute to the maintained degradation rate by LCC
+ICCG at 72 °C
+during theﬁrst several reaction hours, but a further increase in crys-
+tallinity to 32.5% led to a substantial reduction in the amorphous
+regions, impeding further enzymatic catalysis. Moreover, during the
+depolymerization process, we also observed a slight decrease inMw
+and moderate changes inMn, despite achieving over 90% depoly-
+merization (Fig.4B ) .T h i si sc o n s i s t e n tw i t hp r e v i o u ss t u d i e so nP E T
+degradation hydrolyzed by Cut19057. It has been suggested that the
+enzymatic hydrolysis of PET typically initiates with an endo-type chain
+scission after the enzyme binds to the PET surface. Further hydrolysis
+of the neighboring ester bonds within the amorphous regions occurs
+through an exo-type chain scission, leading to the release of soluble
+products
+19. For polymers undergoing random scission, the probability
+of exo-scission inversely correlates with chain length53.F o rP E Tw i t ha
+DP around 200, the probability for exo-scission is substantially less
+than for endo-scission. In this study, the DP of the pretreated PcPET,
+approximately 50, is much lower than that of typical raw PET materials.
+This resulted in a signiﬁcantly increased number of chain ends avail-
+able for exo-scissions. Consequently, endo-type scission, which would
+reduce the DP of PET, no longer held a dominant proportion, which
+may potentially explain the minimal changes in molecular size
+observed during the PET depolymerization process.
+To explore the industrial viability, we scaled up the reaction
+and performed it in a 7.5 L bioreactor with a PET loading of 200 g kg
+−1
+in water solution at pH 8.0. Enzyme loading is of particular concern to
+the industry since enzyme cost is among the essential factors in
+the biomass depolymerization process. In contrast to using high
+enzyme concentrations up to 20 mgenzyme gPET
+−1 in the biomass
+conversion process13,58,2 m genzyme gPET
+−1 enzyme loading is saturated
+in PET degradation. Based on the TEA model14,ac h a n g ef r o m
+Fig. 4 | Depolymerization of PcPET with TurboPETase and LCCICCG in bior-
+eactors. AComparison of PcPET depolymerization kinetics for TurboPETae at
+65 °C and LCCICCG at 65 °C and 72 °C. Reactions were performed with 200 g kg−1
+substrate loading and 2 mgenzyme gPET
+−1 enzyme loading at pH 8.0. PET-
+depolymerization percentages were calculated based on the released products
+measured by HPLC. Data are presented as mean ± s.d. (n = 3 biologically indepen-
+dent experiments).B Time courses of crystallinity,Mw and Mn changes during the
+enzymatic hydrolysis. Data are presented as mean ± s.d. (n = 3 biologically inde-
+pendent experiments).C Nearly complete degradation of pretreated PcPET bottles
+by TurboPETase at 65 °C with 200 g kg−1 substrate loading and 2 mgenzyme gPET
+−1
+enzyme loading in water solution in a 7.5 L bioreactor. PET-depolymerization per-
+centages were calculated based on NaOH consumption (pH of the reaction mixture
+was regulated at 8.0). Data are from one independent experiment. Source data are
+provided as a Source Dataﬁle.
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 7
+0.1 mgenzyme gPET
+−1 to 2 mgenzyme gPET
+−1 enzyme loading levels only
+results in a 2% increase in MSP (US$0.04/kg), whereas the capital and
+operating costs would increase by at least 5% to maintain the prolonged
+reaction duration when low enzyme loading levels are used. More
+importantly, in large-scale reactions with > 150 g kg
+−1 substrate loading,
+the reduction in enzyme activity and depolymerization efﬁciency was
+more signiﬁcant at lower enzyme loading levels13.I nP E Td e g r a d a t i o n
+process reported by Tournier et al., aﬁnal conversion of 80% was
+achieved by LCCICCG using 1 mgenzymegPET
+−1 enzyme loading compared to
+the 90% conversion with 2 mgenzyme gPET
+−1 enzyme loading17.H e n c e ,a
+2m genzyme gPET
+−1 enzyme loading was chosen to attain a balance
+between productivity and enzyme cost. As shown in Fig.4C, the scaled-
+up reaction progression is almost linear for theﬁr s t2 hw i t ha p p r o x i -
+mately 57% depolymerization achieved, and followed by a slower phase
+from 2 to 8 h. According to the kinetic parameters obtained from Fig.3,
+we suggested that the reduced reaction rate may be attributed to the
+substantial decrease in PET loading at high conversion levels. Despite
+the decreased hydrolytic efﬁciency, the approximately 98% depoly-
+merization (98.9% calculated from the HPLC data, 98.4% calculated from
+the consumed NaOH and 97.4% calculated from the weight loss, as listed
+in Supplementary Table 10) achieved within 8 h during the scaled-up
+reaction makes pilot-scale production feasible. Further process reﬁne-
+ment could potentially optimize the depolymerization efﬁciency for
+lower concentrations of PET waste.
+Discussion
+Biocatalytic PET depolymerization offers a sustainable and energy-
+efﬁcient approach to PET recycling, presenting a more environmen-
+tally friendly alternative to current disposal methods such as landﬁlls
+and incineration. While signiﬁc a n tp r o g r e s sh a sb e e nm a d et ot h i se n d ,
+the ultimate goal is to develop enzymes and processes suitable for
+industrial-scale applications. Both high substrate solids content and
+conversion beneﬁt the economics of PET biodegradation, as it reduces
+both capital and operational expenditures. However, the material
+slurry exhibits a high apparent viscosity due to the high solids loading,
+leading to limited mass and heat transfer, which reduces the efﬁciency
+of enzymes in the early stages of hydrolysis. More importantly,
+increasing the solids loading to industrially relevant levels would lower
+the depolymerization yield due to the inhibition by high product
+concentrations
+16. Hence, mere thermostability of the enzyme may not
+sufﬁce for industrial PET degradation. Multiple factors interplay,
+inﬂuencing enzyme efﬁcacy in real-world scenarios. An aspect often
+overlooked by the scientiﬁc community is the variance in hetero-
+geneous enzymatic hydrolysis between laboratory experiments and
+industrial production. For instance, the depolymerization activity of
+PET can be enhanced in the laboratory by fusion with noncatalytic
+binding modules to increase the enzyme concentration on the PET
+surface. However, this advantage is completely lost at an industrial
+solids loading level
+15. Despite recent advancements in engineering PET
+hydrolases to improve their performance in PET depolymerization,
+efforts are still needed in the quest of new PET hydrolases to address
+conversion loss under industrially relevant conditions.
+Here, we employed a hybrid computational strategy to redesign a
+PET hydrolase that signiﬁcantly outperforms other well-known PET
+hydrolases. Nearly full degradation of postconsumer PET bottles was
+achieved at an industrially relevant level of solids loading, rendering
+this highly efﬁcient, optimized enzyme a good candidate for future
+applications in industrial plastic recycling processes. The mechanism
+responsible for enhancing enzyme performance has been demon-
+strated via kinetic analyses derived from an inverse Michaelis‒Menten
+reaction regime as well as structural analysis, highlighting the impor-
+tance of improving the speciﬁc polymer interactions on speciﬁc attack
+sites rather than general nonspeciﬁc surface adsorption. The results
+may help further knowledge on heterogeneous reaction catalysis and
+shall be beneﬁcial for designing industrial viable plastic-degrading
+enzymes to address the challenges associated with other more abun-
+dant plastics, such as polyurethanes with hydrolysable backbones.
+While the potential of enzyme design drives further developments in
+the improvement of enzyme performance, it is crucial to assess their
+depolymerization efﬁciency under industrially relevant conditions to
+demonstrate practical feasibility.
+Methods
+Training the Transformer model
+Unsupervised training datasets. Homologous sequences of BhrPE-
+Tase and LCCICCG were searched from Uniclust30 (version 2018_08)
+and the BFD database with HHblits (the number of iterations was set as
+4, and other parameters were left as default values) using 15 seed
+sequences in Pfam family PF01083 as queries. All searched sequences
+were clustered at 90% identity using CD-HIT to obtain 10847 sequen-
+ces. Since BFD and Uniclust30 were clustered at very low similarity,
+they may have been undersampled forﬁtness modelling in very close
+regions. Previous work by Frazer et al.
+59 sampled MSA built with more
+similar proteins to predict disease variants. We also retrieved
+15051 sequences belonging to PF01083 from the UniProt database.
+Training details and the prediction of“less-ﬁtted” candidates.T o
+model theﬁtness distance of sequences, we trained a neural network
+with an encoder-decoder from starch. We used a Transformer encoder
+to process input amino acid sequences with absolute position
+embedding. Unlike other models such as recurrent and convolutional
+networks, the Transformer made no assumption on sequence ordering
+and was more powerful at capturing long-distance relationships in
+sequence because of the attention mechanism (Eq.1):
+Attention Q,K,VðÞ = sof tmax
+QKT
+ﬃﬃﬃﬃﬃﬃ
+dk
+p
+ !
+V ð1Þ
+We applied multi-head self-attention as described by ref.60.T h e
+encoder consists of 3 Transformer layers with 8 heads using an
+embedding size of 512. Based on the encoder embeddings, the decoder
+generates probabilities of each token. The model was trained with a
+masked language modelling objective to predict the real amino acid at
+the masked position. In this study, 40% of tokens were replaced with
+mask tokens during training. We used the Adam optimizer with a
+learning rate set to 3 e
+−4. Models were trained for 20 epochs using a
+batch size of 32. Residues wereﬁltered by sorting by the logits assigned
+to the WT amino acid. The top ten residue positions with the highest
+average scores from the prediction of each model were selected. The
+average score was calculated using the following equation:
+/C22L
+residue =
+P19
+1 ðLmi /C0 Lwt Þ
+19
+ð2Þ
+where/C22Lresidue is the average score of the predicted residue position,Lmi
+and Lwt are the predicted logits of the single point mutation in the
+residue position and the wild-type amino acid, respectively. Excluding
+the duplicated positions, a total of 18 residue positions were
+generated, among which W104, H164, M166, W190, H191, H218, and
+F/I243 were suggested to be located on the PET-binding groove.
+Design of stabilizing mutations by the GRAPE strategy
+The GRAPE strategy reported in our previous study36 was used to improve
+the protein stability. The sequence of BhrPETaseH218S/F222Iwas submitted to
+the GRAPE-WEB online server (https://nmdc.cn/grape-web/). Based on
+the sequence information of BhrPETaseH218S/F222I, AlphaFold247 was used to
+predict the structure model. Subsequently, energy calculations with
+FoldX37, Rosetta_cartesian_ddg38, and ABACUS39 were used to predict
+stabilizing mutations. The DDD algorithm40 was used to predict the
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 8
+suitable disulﬁde bonds. The thresholds for ABACUS, FoldX, and Rosetta
+were set to -3.0 AEU,−1.5 kcal/mol and−1.5 REU, respectively.
+Molecular docking and MD simulations
+TurboPETase was modelled by AlphaFold2. Then, the protein was
+simulated for 20 ns. The representative structure obtained from the
+MD simulations and the crystal structure of BhrPETase (PDB ID:7EOA)
+was used for further docking. A model substrate comprising three
+consecutive PET units, mimicking the N-terminal and C-terminal
+groups to cap the polymer chain at both ends, was generated.
+YASARA was employed to make molecular docking of PET to Turbo-
+PETase and BhrPETase. The highest binding energy model was selec-
+ted. The selected model was subjected to local docking for 999 runs.
+The optimized model of TurboPETase-PET and BhrPETase-PET com-
+plexes were simulated in AMBER 16
+61 using the ff16SB forceﬁeld. The
+His242 residue was protonated in the HID state. Cl− ions were added to
+maintain system neutrality. The systems were then solvated in a
+truncated octahedron box using the TIP3P water model with an 8 Å
+distance around the solute. Following solvation, the systems under-
+went a 12,000-step minimization and were gradually heated from 0 K
+to 338 K with a collision frequency of 1 ps
+−1. After equilibration, 100 ns
+MD simulations were conducted for each complex, employing a time
+step of 2 fs.
+Cloning
+Genes encoding BhrPETase (GenBank accession number:GBD22443),
+LCC (GenBank accession number:AEV21261), LCCICCG (LCCF243I/D238C/
+S283C/Y127G), ICCG I6M (ICCGS32L/D18T/S98R/T157P/E173Q/N213P), FastPETase
+(IsPETaseD186H/R280A/N233K/R224Q/S121E, IsPETase GenBank accession number:
+BBYR01000074), HotPETase (IsPETaseS121E/D186H/R280A/N233C/S282C/P181V/S207R/
+S214Y/Q119K/S213E/R90T/Q182M/N212K/R224L/S58A/S61V/K95N/M154G/N241C/K252M/T270Q), DepoPET
+ase(IsPETaseT88I/D186H/D220N/N233K/N246D/R260Y/S290P), PES-H1 L92F/Q94Y and
+CaPETaseM9 (CaPETaseL180C/A202C/R242C/S291C/V129T/R198K/N109A/A155R/G196T, Ca
+PETase GenBank accession number:SHM40309) were synthesized and
+optimizated for expression inEscherichia coli(General Biosystems,
+Anhui, China). The signal peptide of BhrPETase, LCC, LCCICCG,I C C GI6M
+and CaPETaseM9 were removed from the synthetic DNA. The synthe-
+sized genes for BhrPETase, LCC, LCCICCG,P E S - H 1L92F/Q94Y and FastPETase
+were cloned into theNheIa n dXhoIs i t e so ft h ep B A Dv e c t o r( c o n -
+taining an N-terminal His-tag), whereas the gene for ICCGI6M,D e p o -
+PETase,CaPETaseM9 and HotPETase were cloned into theNdeIa n dXhoI
+sites of the pET-21a(+) vector (containing a C-terminal His-tag). A list of
+nucleotide sequences is provided in Supplementary Table 13.
+Site-directed mutagenesis
+BhrPETase mutants were generated using the QuickChange site-
+directed mutagenesis kit (Agilent Technologies, Santa Clara, CA, USA).
+The PCR products were subsequently treated withDpnI (New England
+Biolabs, Ipswich, MA, USA) to digest the original DNA template and
+then introduced intoE. coliTOP10 cells. Veriﬁcation of the introduced
+mutations was carried out through DNA sequencing (Tianyi Huiyuan,
+Beijing, China).
+Protein puriﬁcation
+Plasmids containing the genes of BhrPETase, LCC, LCCICCG,P E S - H 1L92F/Q94Y,
+FastPETase and their variants were transformed intoE. coliBW25113.
+Plasmids of ICCGI6M,D e p o P E T a s ea n dCaPETaseM9 were transformed into
+E. coliC41(DE3), while the plasmid of HotPETase was transformed intoE.
+coliRosetta gami-B cells (competent cells of the expression strains were
+purchased from Zoman Biotech, Beijing, China). The cells were cultured
+in 2×YT medium at 37 °C to an OD600 nm of ~0.8, and then protein
+expression was induced by adding 0.2% (w/v) L-arabinose (BhrPETase,
+LCC, LCCICCG,P E S - H 1L92F/Q94Y, FastPETase and their variants) or 1 mM iso-
+propyl β-D-thiogalactopyranoside (ICCGI6M, DepoPETase, CaPETaseM9
+and HotPETase). The cells were cultured for 20 h at 20 °C, harvested by
+centrifugation (10,000 × g, 10 min, 4 °C) and suspended in lysis buffer
+(50 mM Na2HPO4, 100 mM NaCl and 20 mM imidazole, pH 7.5). Cell
+disruption was carried out through ultrasonication on ice. The resulting
+cell extracts were obtained after centrifugation at 14,000 × g for 60 min
+at 4 °C, followed byﬁltration through a 0.22μm Millexﬁlter to remove
+precipitates. The unbound proteins were washed away in a 5 mL HisTrap
+HP column with washing buffer (50 mM Na
+2HPO4,1 0 0 m MN a C l ,a n d
+60 mM imidazole, pH 7.5), the target protein was eluted with an elution
+buffer (50 mM Na
+2HPO4, 100 mM NaCl and 300 mM imidazole, pH 7.5).
+Afterwards, the buffer was exchanged for a storage buffer (50 mM
+Na
+2HPO4 a n d1 0 0m MN a C l ,p H7 . 5 )b yu s i n gaH i P r e p2 6 / 1 0D e s a l t i n g
+column. The puriﬁed enzyme was stored at 4 °C. Protein concentrations
+were determined by the BCA method with bovine serum albumin as the
+reference.
+PET depolymerization assay using Gf-PETﬁlms
+Evaluating the activity of the mutants during BhrPETase engineer-
+ing.T h ea m o r p h o u sG f - P E Tﬁlm (Goodfellow, 250µmt h i c k n e s s ,p r o -
+duct number ES301445,⌀8 mm, approximately 15 mg) was soaked in
+500 μL of 1 M potassium phosphate buffer (pH 8.0, 30 g kg−1 solids
+loading) with 30μgo fp u r iﬁed enzyme (2 mgenzyme gPET
+−1 enzyme
+loading) at 65 °C for 3 h. In HPLC analysis, the mobile phase consisted
+of 70% buffer A and 30% buffer B (Buffer A: 0.1% formic acid in distilled
+water; Buffer B: acetonitrile). Theﬂow rate was 0.8 mL/min and the
+separation was carried out at 25 °C with detection performed
+at 260 nm.
+Comparing TurboPETase with other PET hydrolases under identical
+reaction conditions. The initial activities of the PET hydrolases at
+different temperatures were estimated. The Gf-PET ﬁlm (⌀8m m ,
+approximately 15 mg) was soaked in 500μLo f1 0 0 m Mp o t a s s i u m
+phosphate buffer (pH 8.0, 30 g kg
+−1 solids loading) with 4.5μg( 0 . 3
+mgenzyme gPET
+−1 enzyme loading) or 30μg( 2 m genzyme gPET
+−1 enzyme
+loading) of puriﬁe de n z y m ea t5 0 ,6 0o r6 5 ° Cf o r3 h ,a n dt h e nt h e
+supernatant was analysed by HPLC to quantify the concentration of
+released PET monomers.
+Due to the high extent of conversion after prolonged reactions,
+the time-course analysis was performed in 1 M potassium phosphate
+buffer (pH 8.0) to provide sufﬁcient buffering capacity. The Gf-PET
+ﬁlm (⌀8 mm, approximately 15 mg) was soaked in 500μLo f1 M
+potassium phosphate buffer (pH 8.0, 30 g kg
+−1 solids loading) with
+4.5 μg( 0 . 3m genzyme gPET
+−1 enzyme loading) of puriﬁed enzyme at 50,
+60 or 65 °C for 12 h.
+Comparing TurboPETase with other PET hydrolases under their
+reported reaction conditions.T h eG f - P E Tﬁlm (⌀8 mm, approximately
+15 mg) was soaked in 750μL buffer (20 g kg−1 solids loading) for 12 h.
+For comparison with FastPETase, the Gf-PET ﬁlm was soaked in
+100 mM potassium phosphate buffer (pH 8.0) at 50 °C with 4.5μgo f
+puriﬁed enzyme (0.3 mgenzyme gPET
+−1 enzyme loading). For comparison
+with HotPETase, the Gf-PETﬁlm was soaked in 50 mM Glycine-NaOH
+buffer (pH 9.2) at 60 °C with 0.9μgo fp u r iﬁed enzyme (0.06 mgenzyme
+gPET
+−1 enzyme loading). For comparison with LCCICCG,t h eG f - P E Tﬁlm
+was soaked in 100 mM potassium phosphate buffer (pH 8.0) at 65 °C
+with 3 μgo fp u r iﬁed enzyme (0.2 mg
+enzyme gPET
+−1 enzyme load-
+ing) for 3 h.
+Depolymerization of the pretreated PET bottles
+PET bottles pretreatment. Postconsumer PET bottles were collected
+from the garbage collection station in Beijing, China. The bottles were
+w a s h e dw i t hd e i o n i z e dw a t e ra n dd r i e da n dt h e nm i c r o n i z e di n t os m a l l
+ﬂakes using a crusher JZ-T-005 (Shiyan Precision Instruments, Dong-
+guan, China). Theﬂakes were subsequently amorphized using a twin-
+screw extruder SY-6219-20/32 (Shiyan Precision Instruments, Dong-
+guan, China). The set temperatures were 265 °C in the extruder zones,
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 9
+285 °C in the melt pump, and 285 °C in the screen changer zones. The
+obtained amorphous ﬁbres of PET were further micronized by a
+DFY– 1000D grinder (DingLi, Wenzhou, China) at room temperature.
+After sieving, PET powders with particle sizes less than 400μmw e r e
+obtained (11.1% crystallinity on average).
+Comparing the depolymerization performance of TurboPETase and
+LCCICCG. Twenty grams of pretreated PET powder and 80 mL of
+100 mM potassium phosphate buffer (pH 8.0) containing 40 mg of
+puriﬁed enzyme were mixed in a 200 mL bioreactor (Kusnc, Shanghai,
+China). A magnetic stirrer was utilized to maintain constant agitation at
+300 rpm. The temperature was regulated at 65 °C (or 72 °C for LCC
+ICCG)
+by water bath immersion, and the pH was regulated at 8.0 by adding
+4 M NaOH solution. Assays were performed in triplicate and evaluated
+accordingly.
+During the reaction, the percentage of PET depolymerization was
+evaluated by analysing the supernatant through HPLC. Theﬁnal
+depolymerization yield was additionally veriﬁed by investigating the
+weight of residual PET. The reaction mixture wasﬁltered through
+Whatman grade 1 qualitativeﬁlter papers (GE Healthcare, USA). The
+residue was washed twice with deionized water and then dried at 65 °C
+overnight. To evaluate the proportion of PET in the residue, 200 mg of
+the dried residue was incubated in 20 mL of 4 M NaOH solution at
+90 °C for 3 h. Afterwards, the amount of released TPA was measured by
+HPLC analysis. The overall weight of the residue solids and the pro-
+portion of PET are shown in Supplementary Table 9.
+Estimating the depolymerization performance of TurboPETase at a
+larger scale. A total of 0.5 kg pretreated PET powder, 1.9 L of deio-
+nized water and 0.1 L of TurboPETase solution (containing 1 g of pur-
+iﬁed enzyme) were combined in a 7.5 L bioreactor (New Brunswick
+Scientiﬁc, Edison, NJ, USA). The stirring rate was maintained at
+300 rpm, the temperature was regulated at 65 °C, and the pH was
+regulated at 8.0 by adding 4 M NaOH solution. The percentage of PET
+depolymerization during the reaction was evaluated according to base
+consumption. Additionally, theﬁnal depolymerization yield was ver-
+iﬁed by analysing the residue (alkaline hydrolysis and HPLC analysis
+methods were identical to the protocol above), which was collected by
+centrifugation (14,000 × g, 20 min), washed twice with deionized
+water and dried at 65 °C overnight.
+Determination of apparent melting temperatures, PET crystal-
+linity and molecular weights
+To determine apparent melting temperatures, aﬂuorescence-based
+thermal stability assay was employed. A 5µL1 0 0 - f o l dd i l u t e dS Y P R O
+Orange dye (Molecular Probes, Life Technologies, USA) was added in a
+20 µL protein solution. The mixture was placed in a thin-walled 96-well
+PCR plate, sealed with optical-quality sealing tape. The mixture was
+heated in a CFX 96 real-time polymerase chain reaction (PCR) system
+(BioRad, Hercules, CA, USA) from 25 to 100 °C at a heating rate of
+1.4 °C/min. The crystallinity of PET and PBT was analysed by differ-
+ential scanning calorimetry (DSC). The parameters were set following a
+previously reported procedure
+36. For molecular weight analysis of PET,
+gel permeation chromatography (GPC) analysis was applied. GPC
+measurements were carried out using an Agilent 1260 system (Agilent
+1260, Agilent Technologies Inc., U.S.A.) with a Refractive Index (RI)
+detector. The mobile phase consisted of 1,1,1,3,3,3-hexaﬂuoro-2-pro-
+panol (HFIP), and the analysis was performed at 35 °C with aﬂow rate
+of 1 mL/min.
+Kinetics analysis
+For PET depolymerisation, initial rate measurements were collected
+for the
+convMM andinvMM datasets. For theconvMM dataset, Gf-PETﬁlms
+over a range of 0-50 g kg−1 were treated in 300μLo f1 0 0 m Mp o t a s -
+sium phosphate buffer (pH 8.0) with enzyme loadings of 0.12μM,
+0.37μMa n d0 . 7 4μM( 1– 6 μg). For the invMM dataset, 12 g kg−1,
+20 g kg−1,a n d3 0gk g−1 Gf-PET ﬁlms were treated in 500μLo f1 0 0m M
+potassium phosphate buffer (pH 8.0) with enzyme loading levels
+ranging from 0 to 2.67μM( 0– 36 μg). The reaction mixture was incu-
+bated at 65 °C for 1 h. All reactions were performed in triplicate and
+terminated by heating to 100 °C for 10 min. The supernatant obtained
+by centrifugation (18,000 × g, 5 min) was then analysed by HPLC. The
+data wereﬁtted using Matplotlib in python.
+For 4-Nitrophenol butyrate (pNPB), all reactions were performed
+in 96-well plates in a total reaction volume of 100μL. Theﬁnal con-
+centrations of pNPB range from 0.2 to 1.4 mM, and theﬁnal con-
+centration of enzymes was 0.5µgm L
+−1.1 0μL of the solution ofpNPB
+(in anhydrous ethanol), 80μL of 10 mM potassium phosphate buffer
+(pH 8.0), and 10μL of enzymes were incubated at 65 °C for 3 min.
+Then, 100μL of anhydrous ethanol was added to quench the enzy-
+matic reactions. Each reaction was conducted in triplicate. Thep-
+nitrophenol products were measured at 405 nm using an Inﬁnite® 200
+PRO microplate reader (Tecan, Switzerland). One unit of enzyme
+activity was deﬁned as the amount of enzyme required to convert
+1 μmol of pNPB per min. The data wereﬁtted using Matplotlib in
+python.
+For MHET, the reactions were performed in a total volume of
+250 μL. Theﬁnal concentrations of MHET range from 6 to 60 mM (in
+100 mM potassium phosphate buffer, pH 8.0), and theﬁnal con-
+centration of enzymes was 0.1 mg mL
+−1. The reactions were conducted
+at 65 °C in triplicate for 15 min, then were quenched by adding 250μL
+of dimethylsulfoxide. The hydrolysis extent was measured by HPLC.
+The data wereﬁtted using Matplotlib in python.
+Binding isotherms
+Adsorption measurements for TurboPETase, BhrPETase, LCCICCG and
+bovine serum albumin (BSA) were conducted in a 100 mM potassium
+phosphate buffer (pH 8.0) using low-binding Eppendorf tubes
+46.AG f -
+PET ﬁlm (⌀8m m ,a p p r o x i m a t e l y1 5m g )w a ss o a k e di n3 0 0μLo fb u f -
+fers containing protein concentrations ranging from 0 to 2µM, main-
+tained at 65 °C for 1 h equilibration period. Afterward, 100µLo ft h e
+supernatant was mixed with 100µLo ff r e s h l yp r e p a r e dB C Aw o r k i n g
+solution. This mixture underwent incubation at 37 °C for 30 min, fol-
+lowed by absorbance measurements at 562 nm using a plate reader to
+determine the concentration of free proteins within the solution. The
+quantities of bound proteins werethen deduced by calculating the
+difference between the total protein concentrations and the con-
+centrations of free proteins.
+Determination of free cysteine residues
+To identify the free cysteine residues in the solution of TurboPETase,
+5,5’-Dithiobis-(2-nitrobenzoic acid) (DTNB) was used
+27.2 5 μLo f
+enzyme solution (8μM of BhrPETase or TurboPETase) or L-cysteine
+solution (0, 10, 20, 30, 40 and 50μM), 225μLo ff r e s h l yp r e p a r e dD T N B
+solution (2 mg/mL DTNB in 100 mM potassium phosphate buffer, pH
+8.0) and 250μL of EDTA solution (100 mM ethylene diamine tetra-
+acetic acid in 100 mM potassium phosphate buffer, pH 8.0) were
+mixed thoroughly and incubated for 15 min. Afterward, the absorption
+of samples at 412 nm was measured using the spectrophotometer
+(MAPADA V– 1100D, Shanghai, China).
+Depolymerization of PBT
+The PBTﬁlms were soaked in 500μL of 100 mM potassium phosphate
+buffer (pH 8.0, 4 g kg−1 solids loading) with 4μgo fp u r iﬁed enzyme
+(2 mgenzyme gPBT
+−1 enzyme loading) at 65 °C for 3 h.
+Depolymerization witha dual-enzyme system
+The Gf-PETﬁlm (⌀3 mm, approximately 2 mg) was soaked in 1 mL of
+100 mM potassium phosphate buffer (pH 8.0, 2 g kg−1 solids loading)
+containing a two-enzyme system (2 mgTurboPETase gPET
+−1 TurboPETase
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 10
+and BHETase loading ranging between 0 and 2 mgBHETase gPET
+−1)a n d
+incubated at 65 °C for 9 h. For a substrate loading of 30 g kg−1,t h eG f -
+PET ﬁlm (⌀8 mm, approximately 15 mg) was soaked in 500μLo f
+100 mM potassium phosphate buffer (pH 8.0, 30 g kg−1 solids loading)
+containing the two-enzyme system. The mixture was incubated at
+65 °C for 1 h with TurboPETase and BHETase concentrations ranged
+from 0 to 2 mg
+enzyme gPET
+−1. The supernatant was analysed by HPLC.
+Reporting summary
+Further information on research design is available in the Nature
+Portfolio Reporting Summary linked to this article.
+Data availability
+All data that support theﬁndings of this study are presented within the
+article and its supplementaryﬁles. For further inquiries or requests for
+additional information, please contact the corresponding
+authors. Source data are provided with this paper.
+Code availability
+The Transformer model used in this study has been made publicly
+available athttps://github.com/Wublab/code-for-TurboPETase.
+References
+1. Geyer, R., Jambeck, J. R. & Law, K. L. Production, use, and fate of all
+plastics ever made.Sci. Adv.3, e1700782 (2017).
+2. Plastics - the facts 2021 plastics Europe.Plastics Europe(2022).
+Available at:https://plasticseurope.org/knowledge-hub/plastics-
+the-facts-2021/.
+3. Jambeck, J. R. et al. Plastic waste inputs from land into the ocean.
+Science 347,7 6 8– 771 (2015).
+4. MacLeod, M. et al. The global threat from plastic pollution.Science
+373,6 1– 65 (2021).
+5. Wei, R. & Zimmermann, W. Microbial enzymes for the recycling of
+recalcitrant petroleumbased plastics: how far are we?Microb.
+Biotechnol.10,1 3 0 8– 1322 (2017).
+6. Bornscheuer, U. T. Feeding on plastic.Science351,1 1 5 4– 1155 (2016).
+7. Ellis, L. D. et al. Chemical and biological catalysis for plastics
+recycling and upcycling.Nat. Catal.4,5 3 9– 556 (2021).
+8. Kakadellis, S. & Rosetto, G. Achieving a circular bioeconomy for
+plastics.Science 373,4 9– 50 (2021).
+9. Wei, R. et al. Possibilities and limitations of biotechnological plastic
+degradation and recycling.Nat. Catal.3,8 6 7– 871 (2020).
+10. Wei, R. et al. Mechanism-based design of efﬁcient PET hydrolases.
+ACS Catal.12, 3382– 3396 (2022).
+11. Taniguchi, I. et al. Biodegradation of PET: current status and appli-
+cation aspects.ACS Catal.9,4 0 8 9– 4105 (2019).
+12. Kawai, F., Kawabata, T. & Oda, M. Current knowledge on enzymatic
+PET degradation and its possible application to waste stream
+management and otherﬁelds. A p p l .M i c r o b i o l .B i o t e c h n o l .103,
+4253– 4268 (2019).
+1 3 . M o d e n b a c h ,A .A .&N o k e s ,S .E .E n z y m a t i ch y d r o l y s i so fb i o m a s sa t
+high-solids loadings– ar e v i e w .Biomass-. Bioenergy56,
+526– 544 (2013).
+14. Singh, A. et al. Techno-economic, life-cycle, and socioeconomic
+impact analysis of enzymatic recycling of poly(ethylene ter-
+ephthalate).Joule 5,2 4 7 9– 2503 (2021).
+15. Graham, R. et al. The role of binding modules in enzymatic poly
+(ethylene terephthalate) hydrolysis at high-solids loadings.Chem.
+Catal. 2,2 6 4 4– 2657 (2022).
+16. Ayla, S. D. S. et al. Constraints and advances in high-solids enzy-
+matic hydrolysis of lignocellulosic biomass: a critical review.Bio-
+technol. Biofuels13, 58 (2020).
+17. Tournier, V. et al. An engineered PET depolymerase to break down
+and recycle plastic bottles.Nature 580,2 1 6– 219 (2020).
+18. Bell, E. L. et al. Directed evolution of an efﬁcient and thermostable
+PET depolymerase.Nat. Catal.5,6 7 3– 681 (2022).
+19. Wei, R. et al. Biocatalytic degradation efﬁciency of postconsumer
+polyethylene terephthalate packaging determined by their polymer
+microstructures.Adv. Sci.6, 1900491 (2019).
+20. Cui, Y., Sun, J. & Wu, B. Computational enzyme redesign: large
+jumps in function.Trends Chem.4,4 0 9– 419 (2022).
+21. Sulaiman, S. et al. Isolation of a novel cutinase homolog with
+polyethylene terephthalate-degrading activity from leaf-branch
+compost by using a metagenomic approach.Appl. Environ. Micro-
+biol. 78,1 5 5 6– 1562 (2012).
+22. Ding, Z. et al. Rational redesign of thermophilic PET hydrolase
+LCCICCG to enhance hydrolysis of high crystallinity polyethylene
+terephthalates.J. Hazard. Mater.453, 131386 (2023).
+23. Xi, X. et al. Secretory expression inBacillus subtilisand biochemical
+characterization of a highly thermostable polyethylene ter-
+ephthalate hydrolase from bacterium HR29.Enzym. Microb. Tech-
+nol. 143, 109715 (2021).
+24. Lu, H. et al. Machine learning-aided engineering of hydrolases for
+PET depolymerization.Nature 604, 662– 667 (2022).
+25. Shi, L. et al. Complete depolymerization of PET wastes by an
+evolved PET hydrolase from directed evolution.Angew. Chem. Int.
+Ed. Engl.62, e202218390 (2023).
+26. Hong, H. et al. Discovery and rational engineering of PET hydrolase
+with both mesophilic and thermophilic PET hydrolase properties.
+Nat. Commun.14, 4556 (2023).
+27. Pfaff, L. et al. Multiple substrate binding mode-guided engineering
+of a thermophilic PET hydrolase.ACS Catal.12,9 7 9 0–
+9800 (2022).
+28. Joho, Y. et al. Ancestral sequence reconstruction identiﬁes struc-
+tural changes underlying the evolution ofIdeonella Sakaiensis
+PETase and variants with improved stability and activity.Biochem-
+istry 62,4 3 7– 450 (2023).
+29. Erickson, E. et al. Sourcing thermotolerant poly (ethylene ter-
+ephthalate) hydrolase scaffolds from natural diversity.Nat. Com-
+mun. 13, 7850 (2022).
+30. Wei, R. et al. Conformationalﬁtting of aﬂexible oligomeric sub-
+strate does not explain the enzymatic PET degradation.Nat. Com-
+mun. 10,5 5 8 1( 2 0 1 9 ) .
+31. Ding, X. & Zou, Z. & Brooks Iii, C. L. Deciphering protein evolution
+and ﬁtness landscapes with latent space models.Nat. Commun.10,
+5644 (2019).
+3 2 . A l l e y ,E .C .e ta l .U n iﬁed rational protein engineering with sequence-
+b a s e dd e e pr e p r e s e n t a t i o nl e a r n i n g .Nat. Methods16,
+1315– 1322 (2019).
+33. Biswas, S. et al. Low-N protein engineering with data-efﬁcient deep
+learning.Nat. Methods18,3 8 9– 396 (2021).
+34. Zeng, W. et al. Substrate-binding mode of a thermophilic PET
+hydrolase and engineering the enzyme to enhance the hydrolytic
+efﬁcacy. ACS Catal.12,3 0 3 3– 3040 (2022).
+35. Chen, C.-C. et al. General features to enhance enzymatic activity of
+poly(ethylene terephthalate) hydrolysis.Nat. Catal.4,
+425– 430 (2021).
+36. Cui, Y. et al. Computational redesign of a PETase for plastic bio-
+degradation under ambient condition by the GRAPE strategy.ACS
+Catal. 11,1 3 4 0– 1350 (2021).
+37. Delgado, J., Radusky, L. G., Cianferoni, D. & Serrano, L. FoldX 5.0:
+working with RNA, small molecules and a new graphical interface.
+Bioinformatics35,4 1 6 8– 4169 (2019).
+38. Park, H. et al. Simultaneous optimization of biomolecular energy
+functions on features from small molecules and macromolecules.J.
+Chem. Theory Comput.12,6 2 0 1– 6212 (2016).
+39. Xiong, P. et al. Protein design with a comprehensive statistical
+energy function and boosted by experimental selection for fold-
+ability.Nat. Commun.5
+, 5330 (2014).
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 11
+40. Arabnejad, H. et al. A robust cosolvent-compatible halohydrin
+dehalogenase by computational library design.Protein Eng. Des.
+Sel. 30,1 7 3– 187 (2017).
+41. Arnal, G. et al. Assessment of four engineered PET degrading
+enzymes considering large-scale industrial applications.ACS Catal.
+13,1 3 1 5 6– 13166 (2023).
+42. Kari, J., Andersen, M., Borch, K. & Westh, P. An inverse
+Michaelis– Menten approach for interfacial enzyme kinetics.ACS
+Catal. 7, 4904– 4914 (2017).
+43. Schiano-di-Cola, C. et al. Systematic deletions in the cellobiohy-
+drolase (CBH) Cel7A from the fungusTrichoderma reeseireveal
+ﬂexible loops critical for CBH activity.J. Biol. Chem.294,
+1807– 1815 (2019).
+4 4 . B a a t h ,J .A .e ta l .C o m p a r a t i v eb i o c h e m i s t r yo ff o u rp o l y e s t e r( P E T )
+hydrolases.Chem. Bio. Chem.22,1 6 2 7– 1637 (2021).
+45. Erickson, E. et al. Comparative performance of PETase as a function
+of reaction conditions, substrate properties, and product accumu-
+lation. Chem. Sus. Chem.15, e202101932 (2022).
+46. Badino, S. et al. Adsorption of enzymes with hydrolytic activity on
+polyethylene terephthalate.Enzym. Microb. Technol.152,
+109937 (2022).
+47. Jumper, J. et al. Highly accurate protein structure prediction with
+AlphaFold.Nature 596,5 8 3– 589 (2021).
+48. Heidrich, D. & Gehde, M. The 3-phase structure of polyesters (PBT,
+PET) after isothermal and non-isothermal crystallization.Polymers
+14, 793 (2022).
+49. Barth, M. et al. A dual enzyme system composed of a polyester
+hydrolase and a carboxylesterase enhances the biocatalytic
+degradation of polyethylene terephthalateﬁlms. Biotechnol. J.11,
+1082– 1087 (2016).
+50. Knott, B. C. et al. Characterization and engineering of a two-enzyme
+system for plastics depolymerization.P r o c .N a t lA c a d .S c i .U S A .117,
+25476– 25485 (2020).
+51. Mrigwani, A. et al. Conversion ofpolyethylene terephthalate into
+pure terephthalic acid through synergy between a solid-degrading
+cutinase and a reaction intermediate-hydrolysing carboxylesterase.
+Green. Chem.24,6 7 0 7– 6719 (2022).
+52. Haugwitz, G. et al. Structural insights into (tere) phthalate-ester
+hydrolysis by a carboxylesterase and its role in promoting PET
+depolymerization.ACS Catal.12,1 5 2 5 9– 15270 (2022).
+53. Tarazona, N. A. et al. Rapid depolymerization of poly (ethylene
+terephthalate) thin ﬁlms by a dual-enzyme system and its
+impact on material properties.Chem. Catal. 2,3 5 7 3– 3589
+(2022).
+54. Li, A. et al. Discovery and mechanism-guided engineering of BHET
+hydrolases for improved PET recycling and upcycling.Nat. Com-
+mun. 14, 4169 (2023).
+55. Guo, B. et al. Conformational selection in biocatalytic plastic
+degradation by PETase.ACS Catal.12, 3397– 3409 (2022).
+56. Guo, B. et al. Fast depolymerization of PET bottle mediated by
+microwave pre-treatment and an engineered PETase.Chem. Sus.
+Chem. 16, e202300742 (2023).
+5 7 . K a w a i ,F .e ta l .E fﬁcient depolymerization of polyethylene ter-
+ephthalate (PET) and polyethylene furanoate by engineered PET
+hydrolase Cut190.AMB Express12, 134 (2022).
+58. Resch, M. G. et al. Clean fractionation pretreatment reduces
+enzyme loadings for biomass sacchariﬁcation and reveals the
+mechanism of free and cellulosomal enzyme synergy.ACS Sustain.
+Chem. Eng.2,1 3 7 7– 1387 (2014).
+59. Frazer, J. et al. Disease variant prediction with deep generative
+models of evolutionary data.Nature 599,9 1– 95 (2021).
+60. Vaswani, A. et al. Attention is all you need. In31st Conference on
+Neural Information Processing Systems.5998– 6008 (Association of
+Computational Machinery, 2017).
+61. Case, D. et al. AMBER 14, University of California, San Francisco.
+(2014).
+Acknowledgements
+This work was supported by the National Key R&D Program of China
+(grant no. 2021YFC2103600 to C.L.L.), the National Natural Science
+Foundation of China (32225002 to B.W., 31822002 to B.W. and
+32170033 to Y.L.C.), the Key Research Program of Frontier Sciences
+(ZDBS-LY-SM014 to B.W.), the Biological Resources Program (KFJ-BRP-
+009 to B.W. and KFJ-BRP-017-58 to Y.L.C.) from the Chinese Academy
+of Sciences, the Informatization Plan of Chinese Academy of Sciences
+(CAS-WX2021SF-0111 to B.W.), the Youth Innovation Promotion Asso-
+ciation CAS (2022086 to Y.L.C.), and the Postdoctoral Fellowship
+Program of CPSF (GZC20232929 to T.Z.).
+Author contributions
+B.W. initiated the project. Y.L.C. and J.Y.S. performed the computational
+work, Y.C.C., H.P., and C.L.L. performed biochemical and biocatalytic
+experiments, T.Z. and W.C.G. performed polymer degradation experi-
+ments, Y.L.C. and B.W. drafted the manuscript, which was revised and
+approved by all authors.
+Competing interests
+The authors declare no competing interests.
+Additional information
+Supplementary informationThe online version contains
+supplementary material available at
+https://doi.org/10.1038/s41467-024-45662-9.
+Correspondenceand requests for materials should be addressed to
+Yinglu Cui or Bian Wu.
+Peer review informationNature Communicationsthanks Pedro Alex-
+andrino Fernandes, and the anonymous reviewer(s) for their contribution
+to the peer review of this work. A peer reviewﬁle is available.
+Reprints and permissions informationis available at
+http://www.nature.com/reprints
+Publisher’s noteSpringer Nature remains neutral with regard to jur-
+isdictional claims in published maps and institutional afﬁliations.
+Open AccessThis article is licensed under a Creative Commons
+Attribution 4.0 International License, which permits use, sharing,
+adaptation, distribution and reproduction in any medium or format, as
+long as you give appropriate credit to the original author(s) and the
+source, provide a link to the Creative Commons licence, and indicate if
+changes were made. The images or other third party material in this
+article are included in the article’s Creative Commons licence, unless
+indicated otherwise in a credit line to the material. If material is not
+included in the article’s Creative Commons licence and your intended
+use is not permitted by statutory regulation or exceeds the permitted
+use, you will need to obtain permission directly from the copyright
+holder. To view a copy of this licence, visithttp://creativecommons.org/
+licenses/by/4.0/.
+© The Author(s) 2024
+Article https://doi.org/10.1038/s41467-024-45662-9
+Nature Communications|         (2024) 15:1417 12

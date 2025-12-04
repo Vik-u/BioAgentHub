@@ -1,0 +1,1107 @@
+1 
+ 
+Title 1 
+Deep learning redesign of PETase for practical PET degrading applications 2 
+  3 
+Hongyuan Lu,† Daniel J. Diaz,‡ Natalie J. Czarnecki,† Congzhi Zhu,† Wantae Kim,†  Raghav Shroff,§ Daniel J. 4 
+Acosta, †,§ Brad Alexander§, Hannah Cole,†,§ Yan Jessie Zhang,§ Nathaniel Lynd,† Andrew D. Ellington,§ Hal S. 5 
+Alper †,* 6 
+ 7 
+Affiliations  8 
+†McKetta Department of Chemical Engineering, The University of Texas at Austin, Austin, Texas 78712, United States 9 
+‡Department of Chemistry, The University of Texas at Austin, Austin, Texas 78712, United States 10 
+§Department of Molecular Biosciences, The University of Texas at Austin, Austin, Texas 78712, United States 11 
+*Corresponding Author: McKetta Department of Chemical Engineering, The University of Texas at Austin, 200 East Dean Keeton St., 12 
+C0400, Austin, Texas 78712, halper@che.utexas.edu  13 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+2 
+ 
+Abstract 14 
+Plastic waste poses an ecological challenge 1. While current plastic waste management largely relies 15 
+on unsustainable , energy-intensive, or even hazardous physicochemical and mechanical processes, 16 
+enzymatic degradation offers a green and sustainable route for plastic waste recycling2. Poly(ethylene 17 
+terephthalate) (PET) has been extensively used in packaging and for the manufacture of fabrics and 18 
+single-used containers, accounting for 12% of global solid waste 3. The practical application of PET 19 
+hydrolases has been hampered by the ir lack of robustness  and the requirement for high processing 20 
+temperatures. Here, we use a structure-based, deep learning algorithm to engineer an extremely robust 21 
+and highly active PET hydrolase. Our best resulting mutant (FAST-PETase: Functional, Active, Stable, 22 
+and Tolerant PETase) exhibits superior PET -hydrolytic activity relative to both wild -type and 23 
+engineered alternatives, (including a leaf -branch comp ost cutinase and its mutant 4) and possesses 24 
+enhanced thermostability and pH tolerance. We demonstrate that whole, untreated, post-consumer PET 25 
+from 51 different plastic products can all be completely degraded by FAST-PETase within one week, 26 
+and in as little as 24 hours at 50 ºC. Finally, we demonstrate two paths for closed-loop PET recycling 27 
+and valorization. First, w e re-synthesize virgin PET from the monomers recovered after enzymatic 28 
+depolymerization. Second, we enable in situ microbially-enabled valorization using a  Pseudomonas 29 
+strain together with FAST-PETase to degrade PET and utilize the evolved monomers as a  carbon 30 
+source for growth  and polyhydroxyalkanoate  production. Collectively, our results demonstrate the 31 
+substantial improvements enabled by deep learning and a viable route for enzymatic plastic recycling 32 
+at the industrial scale.  33 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+3 
+ 
+Manuscript Text 34 
+ Poly(ethylene terephthalate) (PET) composes 70% of synthetic textile fibers and 10% of non-35 
+fiber plastic  packaging1, and correspondingly represents an enormous waste stream of single-use, 36 
+manufactured materials. Yet, a circular carbon economy  for PET is theoretically attainable through 37 
+rapid enzymatic depolymerization followed by either chemical repolymerization or microbial 38 
+upcycling/valorization into other products5,6. However, all existing PET-hydrolyzing enzymes (PHEs) 39 
+are limited in their capacity to either function within moderate pH/temperature ranges or directly utilize 40 
+untreated post-consumer plastics . Such traits are essential for in situ depolymerization and for 41 
+simplified, low-cost industrial-scale processes7. To overcome these limitations , we employed deep 42 
+learning and protein engineering approaches to generate a PHE that has exceptionally high activity 43 
+across a broad range of raw PET substrates (both model and actual post -consumer PET (pc-PET)), 44 
+temperatures, and pH levels  in a manner that out -performs all other known PHEs and rationally-45 
+derived mutants. 46 
+ Enzymatic depolymerization  of PET was  first reported in 2005  and has been nascently 47 
+demonstrated using 19 distinct PHEs derived from esterases, lipases, and cutinases2,7,8. However, the 48 
+majority of these enzymes only show appreciable hydrolytic activity at high reaction temperatures (i.e. 49 
+at or exceeding the PET glass transition temperature of ca. 70 ºC) and with highly processed substrates. 50 
+For example, an engineered leaf-branch compost cutinase (LCC) can degrade 90% of pretreated pc-51 
+PET within 10 hours  at 72 ºC and a pH of 8.04. Most other PHEs similarly show poor activity at 52 
+moderate temperatures9 and more neutral pH condition s10, greatly restricting in situ  / microbially-53 
+enabled degradation solutions for PET waste. This limitation is of  critical concern as 40% of 54 
+uncollectable plastics reside in  natural environments 11. In addition , converting untreated post-55 
+consumer plastic waste at near ambient temperature would be preferable for industrial applications, 56 
+whereas elevated temperatures and pre-treatment increase net operating costs. 57 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+4 
+ 
+ While the PHE  from the PET-assimilating bacterium Ideonella sakaiensis 9 (PETase) can 58 
+operate at ambient conditions, it is highly labile and loses activity even at 37 ºC  after 24 hours 12, 59 
+thereby limiting practical applications. Nonetheless, this mesophilic enzyme has previously seen 60 
+attempts to enhance thermostability, robustness and function12–18. The most notable engineered PETase 61 
+variants—ThermoPETase12 and DuraPETase 17—were created through rational protein engineering 62 
+and computational redesign strategies, respectively. Although the thermostability and catalytic activity 63 
+of these two mutants were improved12,17 under certain conditions, they nonetheless had overall lower 64 
+PET-hydrolytic activity at mild temperatures. 65 
+We posited that highly focused protein engineering approaches such as those described above 66 
+cannot take into account  the evolutionary trade-off between overall stability and activity, and that a 67 
+neutral, structure-based, deep learning  neural network might generally improve enzyme function  68 
+across all conditions. To this end, we employed our 3D self-supervised, convolutional neural network, 69 
+MutCompute19 (Supplementary Information Fig. 1) to identify stabilizing mutations . This algorithm 70 
+learns the local chemical microenvironments of amino acids based on training over 19,000 sequence-71 
+diverse protein structures from the Protein Data Bank and can readily predict positions within a protein 72 
+where wild -type amino acids  are not optimized for their local environments . We employed 73 
+MutCompute to obtain a discrete probability distribution for the structural fit of all 20 canonical amino 74 
+acids at every position in both wild-type PETase and ThermoPETase (crystal structures PDB: 5XJH 75 
+and 6IJ6)  (Supplementary Information  Fig. 2 ), essentially carrying out a comprehensive scanning 76 
+mutagenesis of the protein in silico. The predicted distributions were rendered onto the protein crystal 77 
+structure ( Fig. 1a ) to identify positions where wild -type amino acid  residues were ‘less fit’ than 78 
+potential substitutions. Predictions were then ranked by predicted probabilities (fold-change of fit) (Fig. 79 
+1b; Supplementary Information Fig. 3). Using a stepwise combination strategy, a total of 159 single 80 
+or multiple predicted mutations were generated in various  PETase scaffolds. Variants exhibiting 81 
+improved catalytic activity (as measured by esterase activity and plastic degradation rates) and 82 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+5 
+ 
+thermostability (as measured by protein melting temperature (T m)) were characterized further. 83 
+Amongst this set, four predicted mutations (S121E, N233K, R224Q and T140D) (Fig 1c) resulted in 84 
+the highest improvements, both singly and in combination, and were selected for further assembly and 85 
+analysis (see Additional Supplementary Discussion in Supplementary Information Fig. 4 for a further 86 
+discussion of the mutant down-select).  Encouragingly, two substitutions ( S121E and T140D) were 87 
+reported in the literature after our initial predictions, whereas the remaining residues are entirely unique, 88 
+thus emphasizing the importance of a neutral , deep learning -based approach to identifying critical 89 
+substitutions.  90 
+We assembled all 29 possible combinations using these four mutations across three PETase 91 
+scaffolds (wild-type PETase, ThermoPETase, and DuraPETase). Of note, two could not be purified 92 
+using the DuraPETase background after multiple attempts. Thermostability analysis of the remaining 93 
+27 mutants indicated that 24 ( ca. 89%) resulted in elevated Tm relative to their respective scaffolds 94 
+(Supplementary Information  Fig. 5 ). The highest change in thermostability from their respective 95 
+PETase scaffolds were observed for variants PETaseN233K/T140D with a Tm of 58.1 ºC (ΔTm=10 ºC from 96 
+WT PETase), ThermoPETaseN233K/R224Q with a Tm of 67.4 ºC (ΔTm=9 ºC from ThermoPETase), and 97 
+DuraPETaseN233K with a Tm of 83.5 ºC (ΔTm=5 ºC from DuraPETase). The latter mutant represents the 98 
+most thermostable PETase mutant reported to date. It was noted that the protein yield of all 27 variants 99 
+was improved (up to 3.8-fold increase) compared with the parental scaffold, further underscoring the 100 
+ability of Mutcompute to identify mutants of higher stability (Supplementary Information Fig. 6). The 101 
+portability and combinatorial synergy of these mutations across scaffolds demonstrates the power of 102 
+this neural network-based approach.  103 
+Next, we sought to evaluate the PET hydrolytic activity of these more stable variants across a 104 
+range of temperatures from  30 to 60 ºC using an amorphous PET film (gf-PET, from the supplier 105 
+Goodfellow, PA, USA) commonly used in the literature4. This comparison immediately revealed that 106 
+the machine-learning guided predictions greatly enhanced PET-hydrolytic activity and extended the 107 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+6 
+ 
+range of working temperature in all scaffolds (Fig. 1d). In particular, PETase N233K/R224Q/S121E exhibited 108 
+a 3.4-fold and 29-fold increase in PET-hydrolytic activity at 30 and 40 ºC respectively, over wild-type 109 
+PETase (Fig. 1d). Enzyme mutants based on the ThermoPETase scaffold showed an extended range 110 
+of working temperature (30-60 ⁰C) and exhibited significantly higher activity than their counterparts. 111 
+Within this set, the best variant from the ThermoPETase scaffold (containing N233K and R224Q on 112 
+top of S121E), named FAST-PETase (Functional, Active, Stable, and Tolerant PETase), showed 2.4-113 
+fold and 38-fold higher activity at 40 and 50 ⁰C, respectively compared to ThermoPETase alone (Fig. 114 
+1d). At 50 ⁰C, FAST-PETase displayed the highest overall degradation of all mutants and temperatures 115 
+activity releasing 33.8 mM  of PET monomers in 96 hours (Fig. 1d). The DuraPETase scaffold in 116 
+general exhibited relatively low activity at mild temperatures (30 –50 ⁰C), but improvements were 117 
+nevertheless realized a t higher temperatures (55–60 ⁰C) as demonstrated by the most thermostable 118 
+PETase mutant- DuraPETaseN233K (Fig. 1d).  119 
+Crystal structure analysis of FAST-PETase at 1.44 Å resolution explains the enhanced stability 120 
+through newly formed,  favorable residue interactions (Fig. 2). The N233K mutation places a 121 
+positively-charged lysine next to E204 and establishes an intramolecular salt bridge (Fig. 2f). The side 122 
+chain of R224, when mutated to Gln, forms a hydrogen bond to the carbonyl group of S192 (Fig. 2d). 123 
+Finally, the S121E mutation enables a new water-mediated hydrogen-bonding network with H186 and 124 
+N172 (Fig. 2d). 125 
+ To evaluate the catalytic resilience of these mutants to environmental conditions, FAST-126 
+PETase were compared to previously reported wild-type and mutant PHEs including wild-type PETase, 127 
+ThermoPETase, DuraPETase, LCC, the most active mutant LCC  F243I/D238C/S283C/N246M (ICCM) using 128 
+gf-PET across a range of pH (6.5 – 8.0) and temperatures (30-40 ⁰C) (Supplementary Information Fig. 129 
+7). This comparative analysis demonstrated the unique catalytic capability of FAST-PETase to 130 
+function at low pH levels and ambient temperature. Specifically, FAST-PETase outperformed other 131 
+PHEs (including prior rational designs) at all pH conditions. Especially at pH 7, FAST-PETase 132 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+7 
+ 
+exhibited activities that were 9.7 and 115 times as high as that of wild -type PETase at 30 and 40 ⁰C, 133 
+respectively (Supplementary Information Fig. 7). This enzymatic performance makes FAST-PETase 134 
+an excellent candidate for mild temperatures and moderate pH enzymatic degradation of PET seen in 135 
+conditions of in situ plastic degradation.  136 
+ Beyond model plastic substrates, it is critical to demonstrate the performance of PETase 137 
+enzymes on raw, untreated pc -PET. Notably, unlike the gf -PET used above and throughout the 138 
+literature, there is no singular pcPET substrate. To this end, we collected 51 samples of post-consumer 139 
+plastic products used in the packaging of  food, beverages, medications, office supplies, household 140 
+goods and cosmetics available at local grocery store chains and treated this raw material enzymatically 141 
+with FAST-PETase at 50 ºC (Supplementary Information Fig. 8). Despite their heterogeneity including 142 
+physical properties such as crystallinity , molecular weight, and thickness as well as different 143 
+compositions including additives and plasticizers, hole-punched samples from this wide array of PET 144 
+products were all fully degraded by FAST-PETase within one week and in as little as 24 hours  (Fig. 145 
+3a). While thickness of the plastic did correlate with degradation time (as thickness and mass are 146 
+related), neither this metric nor crystallinity or any other measured trait of PET alone determined 147 
+overall degradation rates (Supplementary Information Fig. 9). 148 
+Among the post-consumer products tested above, we further evaluated the sample from a bean 149 
+cake container that was completely degraded by FAST-PETase within 24 hrs at 50 ⁰C. A time-course 150 
+analysis (Fig. 3b) revealed that the degradation of this pc -PET film exhibited an almost linear decay 151 
+rate using FAST-PETase in terms of the total PET monomers released. Concomitantly, degradation of 152 
+the pc-PET film by FAST-PETase brought an increase in the crystallinity from 1.2 % to 7.7% over 24 153 
+hrs (Supplementary Information Fig. 10). Atomic Force Microscopy (Fig. 3c) as well as Scanning 154 
+Electron Microscopy (Supplementary Information  Fig. 1 1) further showed  that the reaction 155 
+progression of FAST-PETase as it produced increasingly deeper and larger holes in the pc-PET surface 156 
+resulting in increased surface roughness (and visible opaqueness) over reaction time (Supplementary 157 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+8 
+ 
+Information Fig. 12). In contrast, t he PET-hydrolytic activity of wild-type PETase, ThermoPETase, 158 
+DuraPETase, LCC and ICCM toward this pc-PET was substantially lower (3.2 to 141.6-fold) than that 159 
+of FAST-PETase under the same conditions (Fig. 3b). Interestingly, even at their previously reported 160 
+optimal reaction temperature of 72 ⁰C 4, the activity of LCC and ICCM was still 4.9-fold and 1.5-fold 161 
+lower than that of FAST-PETase at 50 ⁰C. Further experimental analysis (Supplementary Information 162 
+Fig. 13) indicated that LCC and ICCM exhibited the ir highest degradation rate against this pc -PET 163 
+film at 60 ⁰C. However, even at 60⁰C, the activity of LCC and ICCM was still lower than that of FAST-164 
+PETase at 50 ⁰C. Moreover, we demonstrate that the depolymerization process with FAST-PETase is 165 
+easily scalable to large, untreated pieces of plastic (in this case, 6.4 g rather than 11 mg) simply by 166 
+increasing net reaction volumes (Fig. 3d). Given these results, FAST-PETase can serve as a promising 167 
+biocatalyst for the enzyme-based platform aimed at recycling raw, untreated PET waste , with  168 
+advantages of lower operating cost and higher degradation efficiency of pc-PET, in contrast to ICCM 169 
+that requires a higher reaction temperature.  170 
+Beyond packaging materials, PET is used heavily in the synthetic textile industry. To this end, 171 
+we evaluated the potential application of FAST-PETase to partially degrade commercial polyester 172 
+products. Five different commercial polyester products were treated with FAST-PETase at 50  ⁰C, 173 
+releasing higher amounts of terephthalic acid (TPA) and Mono-(2-hydroxyethyl)terephthalate (MHET) 174 
+relative to that of the samples treated with other PHEs (Fig. 3e). This indicates that FAST-PETase can 175 
+potentially be used for rapid and efficient degradation of the PET fragments embedded in textile fabrics, 176 
+providing a potential route for recovering PET monomers from commercial polyester products and 177 
+reducing the leaching of microfibers into the environment. 178 
+Given the high activity of this FAST-PETase mutant at ambient temperatures and pH 179 
+conditions, we hypothesized that this enzyme would be suitable for various enzymatic -microbial and 180 
+enzymatic-chemical processing of PET. In this regard, PET depolymerization is only half of the 181 
+circular plastic economy and we demonstrate here the compatibility of FAST-PETase with both 182 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+9 
+ 
+chemical and biological recycling/upcycling application s to close the cycle . First, we demonstrate a 183 
+closed-cycle PET re-constitution by first depolymerizing a tinted post-consumer plastic waste utilizing 184 
+FAST-PETase and subsequently recovering monome rs. TPA was recovered from the degradation 185 
+solution with a yield of 96.8% and with a purity of over 99%. We then regenerate virgin PET directly 186 
+from the degradation solution  using chemical polymerization  (Fig. 4a ). A complete cycle of 187 
+degradation to re -polymerization can be accomplished in as little as a few days  (Supplementary 188 
+Information Fig. 14). These results demonstrate the feasibility of a closed -loop enzymatic/chemical 189 
+recycling process to generate a clear, virgin PET film from non-petroleum resources. Moreover, this 190 
+workflow bypasses the challenges of recycling mixed-color PET products. 191 
+Second, we sought to utilize the degradation capability of FAST-PETase at ambient 192 
+temperature to enable direct depolymerization and microbial valorization of monomers. To this end, 193 
+we evaluated a simultaneous biodegradation  scheme using FAST-PETase to demonstrate that this 194 
+mutant enzyme is microbe -compatible. In particular, a soil bacteria Pseudomonas putida Go1920,21 195 
+capable of naturally utilizing TPA as a carbon and energy sour ce and capable of producing 196 
+polyhydroxyalkanoates (PHAs) was employed . Initially, we sought to combine exogenous FAST-197 
+PETase with this host to explore the possibility of simultaneous PET depolymerization and 198 
+fermentation. P. putida  Go19 was inoculated into a minimal medium supplemented with an 199 
+unpretreated pc-PET film absent of any other carbon source. Upon adding 200 nM of purified FAST-200 
+PETase to the culture medium, growth of P. putida Go19 was observed concomitant with the degraded 201 
+pc-PET film which displayed opacity and lost 20.2 ± 2.1% of its initial weight (Fig. 4b) after 4 days. 202 
+Through this experiment, we observed t hat the TPA liberated from the hydrolysis of pc -PET film by 203 
+FAST-PETase was consumed by the P. putida Go19 for growth (Fig. 4b) and PHAs accumulation (Fig. 204 
+4c). In contrast, when wild -type PETase, ThermoPETase, DuraPETase , LCC, or ICCM was used as 205 
+the catalyst in such process, the cell density of P. putida Go 19 and the weight loss of the pc-PET film 206 
+were all significantly lower than when FAST-PETase was used (Fig. 4b). These results demonstrated 207 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+10 
+ 
+that FAST-PETase exhibited the highest PET -hydrolytic activity under cell -growth compatible 208 
+conditions when compared with other PHEs tested. This demonstration represents the first 209 
+simultaneous bioprocess that integrates enzymatic PET depolymerization and TPA conversion to  210 
+PHAs at ambient temperatures and neutral pH. 211 
+              In conclusion, this work utilized a structure-based deep learning model  to identify portable 212 
+substitutions that imparted improved stability and function across a variety of PETase scaffolds. The 213 
+best variant, FAST-PETase, exhibits superior activity over a wide range of temperatures (30–50 ⁰C), 214 
+and exceptional compatibility with cell-growth conditions. We demonstrate this capacity via the rapid, 215 
+efficient, and complete degradation of bulk, untreated pc-PET waste and a reduction of PET fragments 216 
+embedded in textile fabrics. The properties of this variant are ultimately suitable for both low -cost 217 
+industrial recycling as well as  for in situ plastic degradation applications, as demonstrate d by 218 
+simultaneous bioprocessing with P. putida Go 19. Collectively, these results demonstrate the potential 219 
+for structure-based deep learning in protein engineering and the opportunities for converting 220 
+mesophilic enzyme scaffolds into broad-range biocatalysts for a cyclic plastic economy.   221 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+11 
+ 
+References 222 
+1. Geyer, R., Jambeck, J. R. & Law, K. L. Production, use, and fate of all plastics ever made. Sci. 223 
+Adv. 3, (2017). 224 
+2. Chen, C. C., Dai, L., Ma, L. & Guo, R. T. Enzymatic degradation of plant biomass and 225 
+synthetic polymers. Nature Reviews Chemistry (2020). doi:10.1038/s41570-020-0163-6 226 
+3. George, N. & Kurian, T. Recent Developments in the Chemical Recycling of Postconsumer 227 
+Poly(ethylene terephthalate) Waste. Ind. Eng. Chem. Res. 53, 14185–14198 (2014). 228 
+4. Tournier, V. et al. An engineered PET depolymerase to break down and recycle plastic 229 
+bottles. Nature (2020). doi:10.1038/s41586-020-2149-4 230 
+5. Simon, N. et al. A binding global agreement to address the life cycle of plastics. Science 231 
+(80-. ). 373, 43 LP – 47 (2021). 232 
+6. Kawai, F., Kawabata, T. & Oda, M. Current knowledge on enzymatic PET degradation and its 233 
+possible application to waste stream management and other fields. Applied Microbiology and 234 
+Biotechnology 103, (2019). 235 
+7. Taniguchi, I. et al. Biodegradation of PET: Current Status and Application Aspects. ACS 236 
+Catal. (2019). doi:10.1021/acscatal.8b05171 237 
+8. Inderthal, H., Tai, S. L. & Harrison, S. T. L. Non-Hydrolyzable Plastics – An Interdisciplinary 238 
+Look at Plastic Bio-Oxidation. Trends in Biotechnology (2021). 239 
+doi:10.1016/j.tibtech.2020.05.004 240 
+9. Yoshida, S. et al. A bacterium that degrades and assimilates poly(ethylene terephthalate). 241 
+Science (80-. ). (2016). doi:10.1126/science.aad6359 242 
+10. Chen, C. C. et al. General features to enhance enzymatic activity of poly(ethylene 243 
+terephthalate) hydrolysis. Nat. Catal. (2021). doi:10.1038/s41929-021-00616-y 244 
+11. Worm, B., Lotze, H. K., Jubinville, I., Wilcox, C. & Jambeck, J. Plastic as a Persistent Marine 245 
+Pollutant. Annual Review of Environment and Resources (2017). doi:10.1146/annurev-246 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+12 
+ 
+environ-102016-060700 247 
+12. Son, H. F. et al. Rational Protein Engineering of Thermo-Stable PETase from Ideonella 248 
+sakaiensis for Highly Efficient PET Degradation. ACS Catal. 9, 3519–3526 (2019). 249 
+13. Austin, H. P. et al. Characterization and engineering of a plastic-degrading aromatic 250 
+polyesterase. Proc. Natl. Acad. Sci. U. S. A. 115, E4350–E4357 (2018). 251 
+14. Joo, S. et al. Structural insight into molecular mechanism of poly(ethylene terephthalate) 252 
+degradation. Nat. Commun. 9, (2018). 253 
+15. Han, X. et al. Structural insight into catalytic mechanism of PET hydrolase. Nat. Commun. 254 
+(2017). doi:10.1038/s41467-017-02255-z 255 
+16. Furukawa, M., Kawakami, N., Oda, K. & Miyamoto, K. Acceleration of Enzymatic 256 
+Degradation of Poly(ethylene terephthalate) by Surface Coating with Anionic Surfactants. 257 
+ChemSusChem (2018). doi:10.1002/cssc.201802096 258 
+17. Cui, Y. et al. Computational Redesign of a PETase for Plastic Biodegradation under Ambient 259 
+Condition by the GRAPE Strategy. ACS Catal. (2021). doi:10.1021/acscatal.0c05126 260 
+18. Chen, K., Hu, Y., Dong, X. & Sun, Y. Molecular Insights into the Enhanced Performance of 261 
+EKylated PETase Toward PET Degradation. ACS Catal. 11, 7358–7370 (2021). 262 
+19. Shroff, R. et al. Discovery of novel gain-of-function mutations guided by structure-based deep 263 
+learning. ACS Synth. Biol. (2020). doi:10.1021/acssynbio.0c00345 264 
+20. Narancic, T. et al. Genome analysis of the metabolically versatile Pseudomonas umsongensis 265 
+GO16: the genetic basis for PET monomer upcycling into polyhydroxyalkanoates. Microb. 266 
+Biotechnol. (2021). doi:10.1111/1751-7915.13712 267 
+21. Kenny, S. T. et al. Up-cycling of PET (Polyethylene Terephthalate) to the biodegradable 268 
+plastic PHA (Polyhydroxyalkanoate). Environ. Sci. Technol. (2008). doi:10.1021/es801010e 269 
+ 270 
+ 271 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+13 
+ 
+Figure Legends 272 
+Fig. 1  Machine-learning guided predictions  improve enzyme performance across PETase 273 
+scaffolds. a. Wild-type PETase protein structure rendered by the output of Mutcompute. Each amino 274 
+acid residue was  assessed by Mutcompute, resulting in a probability distribution reflecting the 275 
+chemical congruency of each of the twenty amino acids with the neighboring chemical 276 
+microenvironments. Residues assigned the low wild-type probability (disfavored) are red and the high 277 
+wild-type probability (favored) are blue . Interactive visualizations of MutCompute are available at  278 
+https://www.mutcompute.com/petase/5xjh and https://www.mutcompute.com/petase/6ij6. b. Using 279 
+MutCompute with both wild -type PETa se and ThermoPETase, two libraries of predictions were 280 
+generated. To down-select mutations , t he predictions were ranked by the fold change in the 281 
+probabilities between the predicted and the wild -type amino acid. Using a stepwise combination 282 
+strategy, 159 v ariants were generated by incorporating single or multiple predicted mutations into 283 
+various PETase scaffolds. After experimental characterization, four predicted mutations (S121E, 284 
+N233K, R224Q and T140D) resulted in the highest improvements both singly and in combination. c. 285 
+Microenvironment of the four major mutations predicted by Mutcompute. d. The four major mutations 286 
+were completely and combinatorially assembled across three PETase scaffolds: wild -type PETase 287 
+(WT), ThermoPETase (Thermo), and DuraPETase (Dura). The red heatmap (left) shows the PET -288 
+hydrolytic activity of the resulting variants  and the blue heatmap (right) shows the fold -change of 289 
+activity over their respective scaffolds. PET -hydrolytic activity w as evaluated by measuring the 290 
+amount of PET monomers (the sum of TPA and MHET) released from hydrolyzing circular gf-PET 291 
+film (6 mm in diameter, ~11.4 mg) by the PETase variants after 96 hrs of incubation at temperature 292 
+ranging from 30 to 60 ºC. All measurements were conducted in triplicate (n=3).  293 
+ 294 
+Fig. 2 Predicted mutations from neural network algorithm stabilizes FAST -PETase. a-f.  295 
+Structural comparison between (a, c, e) wild-type PETase (tan-colored stick model, PDB code: 5XJH) 296 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+14 
+ 
+and (b, d, f) FAST-PETase (blue-colored stick model, PDB code: 7SH6) near the predicted mutation 297 
+sites (S121E, R224Q, N233K respectively). Hydrogen bonding and salt bridge interactions are shown 298 
+and highlighted as yellow dotted lines.  299 
+ 300 
+Fig. 3 The superior performance of FAST-PETase in enzymatic depolymerization of post -301 
+consumer PET plastic and polyester products.  a.  Complete degradation of pc -PET films hole-302 
+punched from 51 post-consumer plastic products. b. Time-course of PET-hydrolytic activity of FAST-303 
+PETase, wild-type PETase (WT), ThermoPETase (Thermo), DuraPETase (Dura), LCC and ICCM at 304 
+reaction temperature of 50 ⁰C. PET-hydrolytic activity was evaluated by measuring the amount of PET 305 
+monomers (the sum of TPA and MHET) released from hydrolyzing pc -PET ( Bean cake plastic 306 
+container) film by the tested PHEs at various time points. KH 2PO4-NaOH (pH 8) buffer was used for 307 
+all enzymes shown in this figure. All measurements were conducted in triplicate (n=3). c.  Atomic 308 
+Force Microscopy images of pc -PET films following various exposu re times with FAST-PETase. d. 309 
+Complete degradation of large, untreated PET container with FAST-PETase at 50 ⁰C. e. Degradation 310 
+of commercial polyester products with FAST -PETase, wild-type PETase (WT), ThermoPETase 311 
+(Thermo), DuraPETase (Dura), LCC and ICCM at 50 ⁰C. All measurements were conducted in 312 
+triplicate (n=3). 313 
+ 314 
+Fig. 4  Applications of FAST -PETase in enzymatic -chemical recycling of PET and in situ 315 
+depolymerization. a. Schematic of the  closed-loop PET recycling process  incorporating post -316 
+consumer colored plastic waste depolymerization by FAST-PETase and chemical polymerization. The 317 
+crystallinity of the regenerated PET was determined as 58 % by Differential Scanning Calorimetry. 318 
+The molecular weights (Mn, Mw), polydispersity indices (Ð) of the regenerated PET were determined 319 
+as Mn = 16.4 kg/mol, Mw = 45.9 kg/mol, Ð = 2.80 by Gel Permeation Chromatography. b. 320 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+15 
+ 
+Simultaneous process combining P. putida  Go19 and exogenous PHEs: FAST -PETase, wild-type 321 
+PETase (WT), ThermoPETase (Thermo), DuraPETase (Dura), LCC and ICCM.  PHE (FAST -322 
+PETase/WT/Thermo/Dura/LCC/ICCM) & Go19 represents the simultaneous process of a PHE with 323 
+P. putida Go 19, whereas PHE alone represents the control condition where the enzyme is presented 324 
+without P. putida Go 19. PET monomers, mass loss of the pc-PET films, and cell density of P. putida 325 
+Go19 were measured after 96 hrs of incubation. All measurements were conducted in triplicate (n=3). 326 
+EG represents ethylene glycol. c. Bright field (BF) microscopy of P. putida Go19 cells after growth 327 
+with pc -PET film for 96 h rs, and fluorescent microscopic observation of the intracellular PHAs 328 
+granulate via Nile Red (NR) staining of same cells.  329 
+ 330 
+Acknowledgements 331 
+This work was funded under research agreement EM10480.26 / UTA16 -000509 between the 332 
+ExxonMobil Research and Engineering Company and The University of Texas at Austin. Sequencing 333 
+was conducted at the Genomic Sequencing and Analysis Facility and Scanning Electron Microscopic 334 
+analysis was conducted at the Microscopy and Imaging Facility at the UT Austin Center for 335 
+Biomedical Research Support. We acknowledge Dr. Sapun Parekh (The University of Texas at Austin) 336 
+for access to his  microscopic imaging facility, as well as Yujen Wang for his assistance in taking 337 
+microscopic fluorescent images.    338 
+ 339 
+Accession number 340 
+Coordinates for the FAST-PETase structure ha ve been deposited in to the Protein Data Bank with 341 
+accession code 7SH6. 342 
+ 343 
+ 344 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+16 
+ 
+ 345 
+Author contributions 346 
+H.A., A.E., N.L., and H.L. designed and directed the research.  In investigation and  validation, R.S. 347 
+and D.D. performed neural network analysis, H.L. performed enzyme engineering, purification, and 348 
+the simultaneous process experiment . H.L., N. C., C. Z., D. A. and H.C. carried out structural and 349 
+physical characterization of variants. C.Z. and N.C. performed physical characterization of the treated 350 
+and untreated commercial PET materials.  C.Z carried out experiments for purifying terephthalic acid 351 
+and regenerating virgin PET and plastics films.  D.D. and B.A. developed MutCompute-View for 352 
+visualizing predictions from the neural network model W.K. and Y. Z. performed protein 353 
+crystallization and structural analysis of the engineered enzyme. H.A. and H.L. wrote the original draft 354 
+of the manuscript  H.A., A.E., N.L., and H.L. revised the manuscript.  H.A. and A.E. conceived the 355 
+project idea. All authors reviewed and accepted the manuscript. 356 
+ 357 
+Competing interests 358 
+A patent has been filed in 2020, “Mutations for improving activity and thermostability of PETase 359 
+enzymes” relating to the mutants and applications developed in this study. R.S. is a co -founder of 360 
+Aperiam, a company that applies machine learning to protein engineering.  R.S. and A.E. are inventors 361 
+on a patent for applying machine learning to protein engineering, that has been licensed to Aperiam.   362 
+ 363 
+Additional Information 364 
+Supplementary Information is available for this paper. 365 
+Correspondence and requests for materials should be addressed to H.A.   366 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+Down selected 
+mutations
+a b
+c
+S121E
+N233KR224Q
+T140D
+d
+PETase 
+scaffolds 
+Major 
+mutations
+Major 
+mutations
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+a
+bc
+d
+e
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+a
+b
+c
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+17 
+ 
+Supplementary Methods 367 
+Supplementary Methods 1: Description of methods 368 
+Convolutional Neural Network (CNN) Model: 369 
+MutCompute19 is a 3D CNN model where the architecture consists of nine la yers divided into two 370 
+blocks: 1) feature extraction and 2) classification. The feature extraction block consisted of six layers: 371 
+two pairs of 3D convolutional layers followed by a dimension reduction max pooling layer after each 372 
+pair. The first pair of convolutional layers used filters of size 3x3x3 and the second pair had filters of 373 
+size 2x2x2. Additionally, the Rectified Linearity Unit function (Relu) was applied to the output of each 374 
+of the four convolutional layers. The final feature maps generated by t he feature extraction block had 375 
+dimensions of size 400x3x3x3. These feature maps were flattened into a 1D vector of size 10,800 376 
+before being passed to the classification block. The classification block consisted of three fully 377 
+connected dense layers given dropout rates of 0.5, 0.2, and 0, respectively. Like the feature extraction 378 
+block, the output of the first two dense layers was transformed by the Relu function. To obtain a vector 379 
+of 20 probability scores representing the network prediction for each of the amino acids, we applied a 380 
+softmax activation function to the output of the third dense layer. MutCompute is available as a 381 
+machine learning as a service (MLaaS) on https://mutcompute.com.  382 
+MutCompute Predictions: 383 
+MutCompute predictions were obtained by running the wild type PETase (pdb id: 5xjh) and 384 
+thermopetase (pdb id: 6ij6) through our MLaaS at https://mutcompute.com. Residues were filtered by 385 
+sorting by the probability assigned to the wild type amino acid. We filtered 34  and 39 residues from 386 
+the wild type PETase and Thermopetase crystal structures, respectively. From these filtered residues, 387 
+we prioritized our experimental mutagenesis by selecting the 10 residues from each crystal structure 388 
+with the highest log2 fold chan ge between the predicted amino acid and wild type amino acid 389 
+probabilities. Prior to experimentation, selected residues were visualized with Mutcompute -View, 390 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+18 
+ 
+which is built on top of NGLViewer (https://github.com/nglviewer/ngl), to ensure three things: 1) the 391 
+prediction was chemically sound and not due to a crystal or model artifact, 2) we were avoiding the 392 
+active site and binding pocket and 3) avoiding epistatic interactions between predictions and instead 393 
+targeting predicted “instability hotspots”. MutCom pute-View has been made publicly available at 394 
+https://mutcompute.com/view. 395 
+ 396 
+Protein crystallization, X-ray diffraction data collection, data processing, and model 397 
+refinement 398 
+To identify crystallization conditions for FAST-PETase, a sample containing 6 mg/mL purified FAST-399 
+PETase was screened in sparse -matrix screening using Phoenix robotic system (Art Robinson). The 400 
+initial hits were identified with the rod -shaped crystals formed after incubating screening plates at 401 
+25 °C for three days. The crystallization was optimized as 0.1 M bis-TRIS, 2.0 M Ammonium Sulfate, 402 
+pH 5.5 setup as sitting-drop vapor diffusion.  403 
+ 404 
+Individual FAST-PETase crystals were flash-frozen directly in liquid nitrogen after cryoprotected with 405 
+30 % (v/v) glycerol. X -ray diffraction data were  collected at 23 -ID-B beamline in Advance Photon 406 
+Source (Lemont, IL). The X -ray diffraction pattern was processed to 1.44Å resolution for FAST -407 
+PETase crystals using HKL2000 22. The structure was solved by molecular replacement with 408 
+ThermoPETase structure as the initial search model (PDB code 6IJ6 12). The molecular replacement 409 
+solution for FAST -PETase structure was iteratively buil t and refined using Coot 23 and Phenix 24 410 
+refinement package. Procheck and MolProbity evaluated the quality of the finalized FAST -PETase 411 
+structure. The final statistics for data collec tion and structural determination are shown in 412 
+Supplementary Information Fig. 18.  413 
+ 414 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+19 
+ 
+Cloning 415 
+Genes encoding Ideonella sakaiensis  201-F6 IsPETase (wild-type PETase) (Genbank: 416 
+BBYR01000074, ISF6_4831), its mutants —PETase S121E/D186H/R280A (ThermoPETase12) and 417 
+PETaseS214H/I168R/W159H/S188Q/R280A/A180I/G165A/Q119Y/L117F/T140D (DuraPETase17), leaf -branch compost 418 
+cutinase (LCC) (Genbank: AEV21261) and its mutant LCC  F243I/D238C/S283C/N246M (ICCM)4 were 419 
+commercially synthesized for cloning. To enable e xtracellular expression of PETase and its mutants 420 
+in Pseudomonas putida  KT2440 (ATCC 47054), the nucleotide sequence of the signal peptide —421 
+SPpstu (21 amino acids) from maltotetraose-forming amylase of Pseudomonas stutzeri MO-1925 was 422 
+used to substitute the original signal peptide sequence (first 27 amino acids) of wild-type PETase. The 423 
+wild-type PETase and its mutants’ genes with SPpstu presented at the N -terminus were amplified by 424 
+polymerase chain reaction (PCR) using the synthetic genes as a template. Subsequently, using Gibson 425 
+Assembly method, DNA fragments encoding wild-type PETase, ThermoPETase and DuraPETase 426 
+were respectively subcloned into a modified pBTK552 vector26 where the antibiotic resistance marker 427 
+was swapped from spectinomycin to kanamycin resistance gene and a C -terminal hexa-histidine tag-428 
+coding sequence was added. To enable intracellular expression of LCC and ICCM in Escherichia coli 429 
+(DE3) (New England Biolabs, Ipswich, MA) , the nucleotide sequence encoding the original signal 430 
+peptide was removed from the synthetic genes. The LCC and ICCM genes without signal peptide 431 
+sequence were amplified by PCR using the synthetic genes as a template. Subsequently, using Gibson 432 
+Assembly method, the DNA fragments encoding LCC and ICCM were respectively subcloned into a 433 
+commercial vector-pET-21b (Novagen, San Diego, CA), which carry a C-terminal hexa-histidine tag-434 
+coding sequence. The electrocompetent cell E. coli DH10β was transformed with the Gibson Assembly 435 
+product by following a standard electroporation protocol. The resultant expression plasmid DNA was 436 
+extracted from the overnight culture of the cloning host by using the  QIAprep Spin Miniprep kit 437 
+(Qiagen, Valencia, CA). The DNA sequence of extracted plasmid was verified by Sanger sequencing. 438 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+20 
+ 
+List of nucleotide sequences and expressed amino acid sequences of the genes used in the study is 439 
+provided in Supplementary method 2. 440 
+ 441 
+Variant construction 442 
+Variants of wild-type PETase, ThermoPETase and DuraPETase were generated through site-directed 443 
+mutagenesis using the PCR method described in the Q5® Site-Directed Mutagenesis Kit E0552S (New 444 
+England Biolabs, Ipswich, MA). The constructed plasmids carrying wild-type PETase, ThermoPETase 445 
+and DuraPETase genes were used as the templates for mutagenesis PCR reaction. The corresponding 446 
+primer sequences and annealing temperature were designed and generated by using the 447 
+NEBaseChanger™ tool. Stellar™ Competent Cells ( Clontech Laboratories,  Mountain View, CA ) 448 
+were used as the cloning host and transformed with the ligated plasmids using the heat-shock method 449 
+provided in the manufacturer’s instruction. Plasmid extraction and sequencing for the variants were 450 
+performed under the same conditions as described for plasmids carrying wild-type PETase, 451 
+ThermoPETase and DuraPETase genes. 452 
+ 453 
+Protein expression and purification 454 
+For extracellular protein expression of wild-type PETase, ThermoPETase, DuraPETase, and their 455 
+variants, P. putida  KT2440 was used as the expression host and its e lectrocompetent cell was 456 
+transformed with the corresponding constructed plasmids. For intracellular protein expression of LCC 457 
+and ICCM, E. coli BL21 (DE3) was used as the expression host and its electrocompetent cell was 458 
+transformed with the corresponding constructed plasmids. A single colony of an P. putida KT2440 or 459 
+E. coli BL21 (DE3) strain harboring one of the constructed plasmids was inoculated into 2 mL of Luria 460 
+Bertani broth (LB) medium with 50 µg/mL kanamycin and grown overnight at 37 °C/225 rpm. The 461 
+overnight-grown culture (using 150 µl) was scaled up with 1000 -fold dilution in a 500 -mL triple 462 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+21 
+ 
+baffled shake flask and grown to a cell density of 0.8 (optical density [OD 600]) at 37 °C/2 25 rpm. 463 
+Protein expression was induced by adding 0.2 mM of isopropyl β -D-1-thiogalactopyranoside (IPTG) 464 
+and cells were cultured for 24 hrs at 30 °C/225 rpm. For isolation of the extracellularly expressed 465 
+PETase enzymes, the induced cell culture was centrifuged at 14,000 g and 4 ⁰C for 20 mins to obtain 466 
+the supernatant that accommodates secretory protein. For isolation of the intracellularly expressed 467 
+LCC and ICCM, the induced cell culture was harvested by centrifugation at 4,000 g and 4 ⁰C for 20 468 
+mins. Cell pellets were then resuspended in 25 mL of Dulbecco’s Phosphate Buffered Saline (DPBS) 469 
+(Thermo Fisher Scientific, Waltham, MA ) pH 7.0  buffer containing 10 mM imidazole, 1 g/L of 470 
+lysozyme and 5 µl of Pierce™ Universal Nuclease (Thermo Fisher Scientific, Waltham, MA), 471 
+followed by mixing on a rocker for 20 mins at 4 ⁰C. Subsequently, cells were lysed by sonication and 472 
+the resulting cell lysate was centrifuged at 14,000 g and 4 ⁰C for 20 mins to obtain the supernatant that 473 
+contains soluble proteins. Target proteins from the above two type of supernatants were both purified 474 
+by HisPur™ Ni -NTA Resin (Thermo Fisher Scientific, Waltham, MA) according to the 475 
+manufacturer’s instruction. Desalting of the protein eluent was carried out by using Sephadex G-25 476 
+PD-10 columns  (GE Healthcare, Piscataway, NJ ) according to the manufacturer’s instruction . All 477 
+purification and desalting steps were performed at 4° C in a cold room. Afterwards, the purified protein 478 
+was concentrated to a final volume of 1 mL by the 50 mL, 10KDa cut-off Amicon® Ultra Centrifugal 479 
+Filters device (EMD Millipore Corporation, Billerica, MA) and preserved in DPBS (pH 7.0). The 480 
+protein concentration was then determined by using the Coomassie Plus Bradford Assay kit (Thermo 481 
+Fisher Scientific) and the Infinite M200 PRO microplate reader (Teca n, Männedorf, Switzerland) to 482 
+measure the absorbance of assay mixtures. The presence and purity of the purified proteins were 483 
+assessed by sodium dodecyl sulfate‐polyacrylamide gel electrophoresis.  484 
+ 485 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+22 
+ 
+In Vitro Analysis of PET hydrolytic activity using commercial Goodfellow PET film (gf-PET) 486 
+To evaluate the PET hydrolytic activity of PETase and its variants, the homogenous amorphous gf -487 
+PET film (Goodfellow, U.S. 577 -529-50; specification: 1.3-1.4 g cm -3 density, 1.58-1.64 refractive 488 
+index, 100x10-13 cm3. cm cm -2 s-1 Pa-1 permeability to water @25 °C, 20-80 x10-6 K-1 coefficient of 489 
+thermal expansion, 0.13-0.15 W m-1 K-1 @23°C thermal conductivity) was used as the substrate for 490 
+degradation assays with the purified PETase enzyme and its variants. The gf-PET film was prepared 491 
+in a circular form (6 mm in diameter, ~11.4 mg) and was washed three times with 1 % SDS, 20 % 492 
+ethanol, and deionized water before usage.  Subsequently, the gf -PET film was put into a glass test 493 
+tube and fully submerged in 600 µl of 100 mM KH2PO4-NaOH buffer (pH 8.0) with 200 nM purified 494 
+enzyme. The test tube was tightly capped and wrapped with parafilm to minimize volatilization. The 495 
+reaction mixture was then incubated at 30/40/50/55/60 °C for 96 hrs. Followed by removing the 496 
+enzyme-treated gf-PET film from the reaction mixture, the enzyme reaction was terminated by heating 497 
+at 85 °C for 20 mins . The reaction mixture samples were then centrifuged at 10,000 × g for 5 mins. 498 
+The supernatant of each sample was further analyzed by High-performance liquid chromatography 499 
+(HPLC) for quantifying PET monomers released from the PET depolymerization.  500 
+To compare the PET hydrolytic activity of FAST-PETase with wild-type PETase, ThermoPETase, 501 
+DuraPETase, LCC, and ICCM across a range of pH (6.5 – 8.0) at 30 ⁰C and 40 ⁰C, similar experimental 502 
+setup was used. The circular gf-PET film (6 mm diameter, ~11.4 mg) was used as the substrate. The 503 
+enzyme reactions were performed with 200 nM purified enzyme in 600 µl of 100 mM KH2PO4-NaOH 504 
+buffer with various pH (6.5, 7.0, 7.5 or 8.0) at 30 ⁰C and 40 ⁰C. After incubating the enzyme reaction 505 
+for 96 hrs, the supernatant of the reaction mixture was also analyzed by HPLC for quantifying PET 506 
+monomers released from the PET depolymerization. 507 
+ 508 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+23 
+ 
+Degradation of post-consumer PET (pc-PET) plastics 509 
+Hole-punched pc-PET films (6 mm in diameter) from 51 post-consumer plastic products were serially 510 
+treated by 200 nM FAST-PETase in 600 µl of 100 mM KH2PO4-NaOH buffer (pH 8.0) at 50 ⁰C. Fresh 511 
+enzyme solution was replenished every 24 hrs to maximize enzymatic degradation rate for degrading 512 
+the 51 samples of various pc-PET films.  513 
+The time -course analysis of degrading a pc -PET film ( Bean cake container) by various PET-514 
+hydrolyzing enzymes (PHEs) was conducted at 50 ⁰C. The reactions were perf ormed with 200 nM 515 
+enzyme in 600 µl of 100 mM KH 2PO4-NaOH buffer (pH 8.0) and terminated at 6 hrs, 12 hrs, 18 hrs 516 
+or 24 hrs for quantifying total PET monomers released at each time point. 517 
+A large, untreated, and transparent pc -PET (Bean cake container, 6.4 g) was treated by 200 nM of 518 
+FAST-PETase in 100 mM of KH2PO4-NaOH buffer (pH 8.0) at 50 ⁰C. The whole piece of transparent 519 
+PET container was fully submerged in 2.5 L of enzyme solution and completely degraded after 48 hrs.  520 
+ 521 
+Degradation of polyester product 522 
+Five different commercial polyester products were cut into small pieces and used as the substrates that 523 
+were fully submerged in 600 µl of 100 mM KH 2PO4-NaOH buffer (pH 8.0) with 200 nM p urified 524 
+enzyme. Enzyme treatment on these five polyester products was conducted at 50 ⁰C. After 24 hrs of 525 
+incubation, the reaction was terminated. The enzyme degradation solution was used to determine how 526 
+much PET monomers were released from hydrolyzing these polyester products by various PHEs.   527 
+Degradation of large, untreated pc-PET container and regeneration of virgin PET  528 
+A large, untreated, and green colored pc-PET container was cut into small rectangular flakes (ca. 1cm 529 
+×3 cm). 3.0 g of the colored pc-PET flakes was serially treated by 200 nM FAST-PETase in 100 mM 530 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+24 
+ 
+KH2PO4-NaOH buffer (pH 8.0) at 50 ⁰C. 200 nM  of fresh enzyme was added to the degradation 531 
+solution every 24 hrs to maximize enzymatic degradation rate. All the colored pc-PET fragments were 532 
+completely degraded after 6 days. 533 
+Upon completion of degradation, the enzyme degradation solution was filtered, and the filtrate was 534 
+collected for regeneration. The pH of the filtrate was adjusted to pH 11 with NaOH to hyd rolyze 535 
+remaining MHET. The solution was stirred at room temperature for 4 hrs to complete the hydrolysis. 536 
+The pH of the solution was subsequently adjusted to 2 with 37% HCl. The precipitate was filtered and 537 
+washed several times with deionized water and dri ed under vacuum overnight. 4.3 g of TPA was 538 
+collected and used in the next step without further purification. 1H NMR (400 MHz, d6-DMSO): 8.03 539 
+ppm (s, 4H).  540 
+To a suspension of TPA (4.31 g, 25.9 mmol) in CH 3OH (150 mL), 95% H 2SO4 (2.0 mL) was added 541 
+dropwise at room temperature. The mixture was stirred at reflux for 24 hrs and became a clear solution. 542 
+The reaction mixture was then cooled to room temperature. DMT was subsequently recrystallized from 543 
+the reaction mixture and collected after filtration. These white crystals were washed with cold CH3OH 544 
+and dried under vacuum for 4 hrs to afford DMT (4.12 g) with a yield of 82%. 1H NMR (400 MHz, 545 
+CDCl3): 8.08 ppm (s, 4H), 3.93 ppm (s, 6H).  546 
+To a three-necked round bottom flask equipped with an air condenser, DMT (4.12 g, 21.1 mmol) was 547 
+added. The flask was evacuated under vacuum and refilled with nitrogen gas for three times. Ethylene 548 
+glycol (1.20 mL, 21.5 mmol) was added, followed by the addition of titanium isopropoxide (0.06 mL, 549 
+0.21 mmol). The mixture was stirred at 160 °C for 1 hour, 200 °C for 1 hour, and 210 °C for 2 hrs 550 
+under nitrogen. The reaction temperature was further increased to 260 °C, and high vacuum was 551 
+applied to remove unreacted monomers. The mixture was stirred at 260 °C for 2 hrs and then cooled 552 
+to room temperature. The resulting PET was dissolved in 1,1,1,3,3,3 -hexafluoro-2-propanol (10 mL) 553 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+25 
+ 
+and added dropwise to CH3OH to remove the catalyst. PET (2.83 g) was collected as white solids after 554 
+centrifuging and dried under vacuum.  555 
+Simultaneous bioprocess combing P. putida Go19 and exogenous PHEs 556 
+The simultaneous process experiments were performed using nitrogen-limiting M9 medium (NL-M9) 557 
+containing M9 Minimal Salts ( Sigma-Aldrich, St Louis, MO ), 1 g/L  NaNH4HPO4‧4H2O, 0.34 g/L 558 
+thiamine hydrochloride, 2 mM MgSO4, and 0.1 mM CaCl2. P. putida Go19 (accession number NCIMB 559 
+41537) was purchased from National Collection of Industrial, Food and Marine Bacteria (NCIMB 560 
+Aberdeen, Scotland, UK). A single colony of P. putida Go19 was inoculated into 20 mL of LB medium 561 
+and grown overnight at 30 °C/225 rpm. The overnight‐grown culture was centrifuged at 4000 g for 5 562 
+mins. Cell pellets were then resuspended in 20 mL of NL-M9 medium without any carbon source. The 563 
+resuspended cells used as inoculum for simultaneous process condition where P. putida Go19 and 564 
+exogenous PHEs were combined to explore the possibility of simultaneous PET depolymerization and 565 
+fermentation. Subsequently, P. putida Go19 was inoculated into 1 mL of NL-M9 medium (to an OD600 566 
+of 0.2) supplemented with an unpretreated circular pc-PET film (hole-punched from a cookies plastic 567 
+container; 6 mm in diameter and weigh around 6 mg) absent of any other carbon source in a culture 568 
+tube. 200 nM of exogenous enzyme (FAST-PETase, wild-type PETase, ThermoPETase, DuraPETase, 569 
+LCC or ICCM) was added to the 1 mL NL -M9 medium inoculated with P. putida  Go19 as the 570 
+simultaneous process condition. 200 nM of enzymes were also respectively added to the 1 mL of NL-571 
+M9 medium absent of P. putida Go19 as the control condition. All conditions were incubated at 37 ⁰C 572 
+and 165 RPM for 72 hrs, followed by incubation at 30 ⁰C and 225 RPM for another 24 hrs to maximize 573 
+PHAs production in P. putida Go19. The experiments were all performed in biological triplicates. PET 574 
+monomers concentration of the NL-M9 medium with or without P. putida Go19, mass loss of the pc-575 
+PET films, PHAs accumulation  and cell density of P. putida Go19 were determined after 96 hrs of 576 
+incubation.  577 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+26 
+ 
+ 578 
+Analytical method for measuring PET monomers released 579 
+HPLC was used to analyze the PET monomers – terephthalic acid (TPA) and Mono -(2-580 
+hydroxyethyl)terephthalic (MHET)  released from PET depolymerization. The assay samples were 581 
+filtered with 0.2 -μm nylon syringe filters (Wheaton Science,  Millville, NJ) prior to running HPLC. 582 
+Measurement of TPA and MHET was performed using a Dionex UltiMate 3000 (Thermo Fisher 583 
+Scientific, Waltham, MA) equipped with an Agilent Eclipse Plus C18 column (3.0 × 150 mm, 3.5 μm) 584 
+with detection wavelength at 260 nm. Column oven was held at 30 °C with 1% acetic acid in water or 585 
+1% acetic acid in acetonitrile as mobile phase over the course of the 30 -min sequence under the 586 
+following conditions: 1% to 5% organic (vol/vol) for 5 min, 5% to 100% organic (vol/vol) for 8 m in, 587 
+100% organic (vol/vol) for 10 min, 100% to 5% organic for 2 min followed by 5% organic for 5 min. 588 
+The flow rate was fixed at 0.8 mL min -1. A standard curve was prepared using commercial TPA 589 
+with ≥ 98.0% purity or MHET ≥  98.0% purity (Sigma-Aldrich, St Louis, MO). 590 
+ 591 
+Analytical method for measuring melting temperature (Tm). of proteins 592 
+To evaluate the thermostability of wild -type PETase and its variants, Differential Scanning 593 
+Calorimetry (DSC) was used to determine their respective T m. Purified protein sa mples were 594 
+concentrated to 300~500 µM using Microcon® Centrifugal Filter 10K Devices (Millipore, Billerica, 595 
+MA). 10 µL of concentrated protein solution (DPBS buffer pH 7.0) was placed in an aluminum Tzero 596 
+pan and sealed with a Tzero  hermetic lid (TA Instruments, DE New Caste, DE).  Tm of the protein 597 
+samples was analyzed by a DSC250 (TA Instruments, New Castle, DE) with a RCS90 electric chiller. 598 
+Two DSC procedures were used depending on the anticipated denaturation temperature of the protein. 599 
+The first DSC method heated from 40 °C to 90 ° C at 10 °C/min, held at 90 °C for two minutes, then 600 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+27 
+ 
+cooled from 90 °C to 40 ° C at –10 °C/min. The second method heated from 20 °C to 70 ° C at 10 601 
+°C/min, held at 70 °C for two minutes, cooled from 70 °C to 40 °C at –10 °C/min. The denaturation 602 
+temperature of the proteins was measured on the heating ramp trace as the midpoint value at half -603 
+height.  604 
+Analytical method for determining PET film crystallinity 605 
+DSC was used to determine percent crystallinity of t he PET films hole-punched from the post -606 
+consumer plastics. PET film samples (4–10.5 mg) were placed in aluminum Tzero pans with a Tzero 607 
+solid sample lid. Samples were run first heated from 40 °C to 300 ° C at 5 °C/min, held at 300 °C for 608 
+one minute, cooled from 300 °C to 30 °C at –5 °C/min, held at 30 °C for one minute in a DSC250 (TA 609 
+Instruments, New Castle, DE) with a RCS90 electric chiller. The percent crystallinity was determined 610 
+on the first heating scan using the enthalpies of melting and cold crystallization. The equation used to 611 
+calculate percent crystallinity within the PET film was the following 612 
+ % 𝑐𝑦𝑠𝑡𝑎𝑙𝑙𝑖𝑛𝑖𝑡𝑦 = ቂ
+𝛥𝐻𝑚−𝛥𝐻𝑐𝑐
+𝛥𝐻𝑚˚ ቃ × 100   613 
+where ΔHm is the enthalpy of melting (J/g), ΔHcc is the enthalpy of cold crystallization (J/g), and ΔHm° 614 
+is the enthalpy of melting for a 100% crystalline PET sample, which is 140.1 J/g 4,27. ΔHm and ΔHcc 615 
+were measured by integrating from 90 –100 °C to ca. 260 °C with a linear baseline. The percent 616 
+crystallinity was calculated using the TRIOS software package. The glass transition temperatures of 617 
+the PET films were measured using the second heating scan: 30–300 °C at 10 °C/min, held at 300 °C 618 
+for one minute, then 300–40 °C at –10 °C/min. The glass transition temperatures for all the PET films 619 
+were between 80–82 °C.  620 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+28 
+ 
+Gel Permeation Chromatography (GPC)  621 
+GPC measurement was performed at an on an Agilent system with a 1260 Infinity isocratic pump, 622 
+degasser, and thermostated  column chamber held at 30 °C. A mixture of chloroform with 50 ppm 623 
+amylene and 1,1,1,3,3,3 -hexafluoro-2-propanol (2.0 vol%) was used as the mobile phase at 0.5 624 
+mL/min. Molecular weights (Mn, Mw) and polydispersity indices (Ð) were determined relative to 625 
+polystyrene standards.  626 
+Sample preparation for GPC:  627 
+About 8 mg of PET was dissolved in 0.15 mL 1,1,1,3,3,3 -hexafluoro-2-propanol. Once PET was 628 
+completely dissolved, chloroform was added to make a total volume of 2.50 mL. The solution was 629 
+filtered through a PTFE membrane with a pore size of 0.45 μm. 100 μL of the sample solution was 630 
+then injected into the GPC system.  631 
+Scanning Electron Microscopy (SEM) 632 
+PET films were mounted onto a 3.2 mm SEM stub using carbon tape. Samples were sputter -coated 633 
+with 8 nm platinum/palladium using a Cressington 208HR Sputter Coater. The metal was sputter 634 
+coated onto the sample via plasma generated with argon present in the chamber. SEM imaging was 635 
+performed under vacuum using a Zeiss Supra40 Scanning Electron Microscope (SEM). The electron 636 
+beam intensity was 5 kV. 637 
+Atomic force Microscopy (AFM)  638 
+AFM was performed on an Aylum MFP -3D atomic force microscope (Asylum Research, Sa nta 639 
+Barbara, CA) in tapping mode. Images were recorded after a surface scan on an area of 50×50 μm. 640 
+Image analysis including histogram, and surface roughness was performed using Igor Pro. 641 
+ 642 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+29 
+ 
+Nuclear magnetic resonance (NMR) spectroscopy 643 
+1H NMR spectroscopy w as performed at a 400 MHz Bruker AVANCE NEO spectrometer at room 644 
+temperature in CDCl3 or d6-DMSO. Chemical shift was referenced to the residual solvent signal ( 1H 645 
+NMR: 7.26 ppm in CDCl3, 2.50 ppm in d6-DMSO, respectively). 646 
+Microscopic observation of P. putida Go19 and PHAs 647 
+PHAs formation in P. putida Go19 from the simultaneous experiment was microscopically observed 648 
+by using an upright laser scanning confocal microscope (LSM -510, Zeiss) under reflectance using a 649 
+100X, 1.3 NA oil -dipping objective (Zeiss), a ccording to the protocol described by Franden et al.28. 650 
+0.5 mL sample was taken from the simultaneous process experiment of the P. putida Go19 culture 651 
+(with 200 nM of FAST-PETase) that grew on NL-M9 medium supplemented with a circular pc-PET 652 
+film (cookie container) as the sole carbon source. Culture was centrifuged at 4,000 g for 3 min, 653 
+followed by washing twice with DPBS. Cell pellets were then stained with 1 mL of 10 μg/mL Nile 654 
+Red (Thermo Fisher  Scientific, Waltham, MA, USA) and kept in the dark for 30 min at room 655 
+temperature. Subsequently, the stained cells were pelleted again by centrifugation at 4,000 g for 3 min, 656 
+followed by washing twice with DPBS. Finally, the stained cells were resuspended in 200 μL of DPBS. 657 
+1 ul of the stained cell solution was dipped on a coverslip and pressed with a small coverslip.  The 658 
+samples were illuminated with a 561 nm laser and reflected light was collected by setting the Meta 659 
+detector channel between 570-670 nm wavelength. 660 
+Additional references 661 
+ 662 
+22. Otwinowski, Z. & Minor, W. Processing of X-ray diffraction data collected in oscillation 663 
+mode. Methods Enzymol. 276, 307–326 (1997). 664 
+23. Emsley, P. & Cowtan, K. Coot: model-building tools for molecular graphics. Acta 665 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+30 
+ 
+Crystallogr. D. Biol. Crystallogr. 60, 2126–2132 (2004). 666 
+24. Liebschner, D. et al. Macromolecular structure determination using X-rays, neutrons and 667 
+electrons: recent  developments in Phenix. Acta Crystallogr. Sect. D, Struct. Biol. 75, 861–877 668 
+(2019). 669 
+25. Fujita, M. et al. Cloning and nucleotide sequence of the gene (amyP) for maltotetraose-670 
+forming amylase from Pseudomonas stutzeri MO-19. J. Bacteriol. (1989). 671 
+doi:10.1128/jb.171.3.1333-1339.1989 672 
+26. Leonard, S. P. et al. Genetic Engineering of Bee Gut Microbiome Bacteria with a Toolkit for 673 
+Modular Assembly of Broad-Host-Range Plasmids. ACS Synth. Biol. (2018). 674 
+doi:10.1021/acssynbio.7b00399 675 
+27. Cui, Y.-L. et al. Computational redesign of PETase for plastic biodegradation by GRAPE 676 
+strategy. (2019). doi:10.1101/787069 677 
+28. Franden, M. A. et al. Engineering Pseudomonas putida KT2440 for efficient ethylene glycol 678 
+utilization. Metab. Eng. 48, 197–207 (2018). 679 
+  680 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+31 
+ 
+Supplementary method 2:  681 
+Sequences used in this study 682 
+Nucleotide sequence of the signal peptide —SPpstu (21 amino acids) from 
+maltotetraose-forming amylase of Pseudomonas stutzeri MO-1925 
+atgagccacatcctgcgagccgccgtattggcggcgatgctgttgccgttgccgtccatggcc 
+ 683 
+Wild-type PETase 684 
+Nucleotide sequence of wild-type PETase without its original signal peptide 
+cagaccaatccgtatgcgcgcggtccgaatccgacagccgccagtttggaagcgagcgctggtccattcaccgttcgctcctttaccgtgagt
+agaccgagcggttatggcgctggcaccgtttactatccaacaaatgctgggggtaccgtgggcgccatagccatagttcccgggtatacggc
+acggcagtcatcaattaaatggtggggaccgcgtctggcatcccacggtttcgtagtaattacaattgacacaaattccacgttagaccagccat
+caagtcggagttcgcaacaaatggccgcgctgcgccaggtggcgtcgttaaacggtacaagtagcagcccgatttacggaaaggtcgatac
+cgctcgtatgggtgttatggggtggagtatgggaggtggaggctccctgatctctgctgctaacaacccttcgctgaaagcagcggcgcctca
+agcaccatgggattcttcgacaaattttagttctgtaactgtgcccacgctgatcttcgcatgtgaaaacgatagtatagccccggtcaactcttca
+gcacttcctatctatgattctatgtcacgcaacgctaagcagtttctcgaaattaatggtggctcacattcctgtgcgaatagcggcaattctaacc
+aagcattaatcggaaaaaaaggcgttgcatggatgaaacgttttatggacaatgatactaggtattctacttttgcctgcgagaacccgaatagc
+accagagtgtctgattttcgtacagcgaattgcagcctcgagcaccaccaccaccaccac 
+ 685 
+Expressed amino acid sequence of wild-type PETase by P. putida GO16/KT2440 
+QTNPYARGPNPTAASLEASAGPFTVRSFTVSRPSGYGAGTVYYPTNAGGTVGAIAIVPGY
+TARQSSIKWWGPRLASHGFVVITIDTNSTLDQPSSRSSQQMAALRQVASLNGTSSSPIYGK
+VDTARMGVMGWSMGGGGSLISAANNPSLKAAAPQAPWDSSTNFSSVTVPTLIFACENDSI
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+32 
+ 
+APVNSSALPIYDSMSRNAKQFLEINGGSHSCANSGNSNQALIGKKGVAWMKRFMDNDTR
+YSTFACENPNSTRVSDFRTANCSLEHHHHHH 
+ 686 
+ThermoPETase 687 
+Nucleotide sequence of ThermoPETase without its original signal peptide sequence 
+cagaccaatccgtatgcgcgcggtccgaatccgacagccgccagtttggaagcgagcgctggtccattcaccgttcgctcctttaccgtgagt
+agaccgagcggttatggcgctggcaccgtttactatccaacaaatgctgggggtaccgtgggcgccatagccatagttcccgggtatacggc
+acggcagtcatcaattaaatggtggggaccgcgtctggcatcccacggtttcgtagtaattacaattgacacaaattccacgttagaccagcca
+gaaagtcggagttcgcaacaaatggccgcgctgcgccaggtggcgtcgttaaacggtacaagtagcagcccgatttacggaaaggtcgata
+ccgctcgtatgggtgttatggggtggagtatgggaggtggaggctccctgatctctgctgctaacaacccttcgctgaaagcagcggcgcctc
+aagcaccatggcactcttcgacaaattttagttctgtaactgtgcccacgctgatcttcgcatgtgaaaacgatagtatagccccggtcaactcttc
+agcacttcctatctatgattctatgtcacgcaacgctaagcagtttctcgaaattaatggtggctcacattcctgtgcgaatagcggcaattctaac
+caagcattaatcggaaaaaaaggcgttgcatggatgaaacgttttatggacaatgatactaggtattctacttttgcctgcgagaacccgaatag
+caccgcagtgtctgattttcgtacagcgaattgcagcctcgagcaccaccaccaccaccac 
+ 688 
+Expressed amino acid sequence of ThermoPETase by P. putida KT2440 
+QTNPYARGPNPTAASLEASAGPFTVRSFTVSRPSGYGAGTVYYPTNAGGTVGAIAIVPGY
+TARQSSIKWWGPRLASHGFVVITIDTNSTLDQPESRSSQQMAALRQVASLNGTSSSPIYGK
+VDTARMGVMGWSMGGGGSLISAANNPSLKAAAPQAPWHSSTNFSSVTVPTLIFACENDSI
+APVNSSALPIYDSMSRNAKQFLEINGGSHSCANSGNSNQALIGKKGVAWMKRFMDNDTR
+YSTFACENPNSTAVSDFRTANCSLEHHHHHH 
+ 689 
+DuraPETase 690 
+Nucleotide sequence of DuraPETase without its original signal peptide sequence 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+33 
+ 
+cagaccaatccgtatgcgcgcggtccgaatccgacagccgccagtttggaagcgagcgctggtccattcaccgttcgctcctttaccgtgagt
+agaccgagcggttatggcgctggcaccgtttactatccaacaaatgctgggggtaccgtgggcgccatagccatagttcccgggtatacggc
+acggcagtcatcaattaaatggtggggaccgcgtctggcatcccacggtttcgtagtaattacaattgacacaaattccacgtttgactatccatc
+aagtcggagttcgcaacaaatggccgcgctgcgccaggtggcgtcgttaaacggtgacagtagcagcccgatttacggaaaggtcgatacc
+gctcgtatgggtgttatggggcatagtatgggaggtggagcatccctgcgatctgctgctaacaacccttcgctgaaagcagcgattcctcaag
+caccatgggattctcaaacaaattttagttctgtaactgtgcccacgctgatcttcgcatgtgaaaacgatagtatagccccggtcaactctcatgc
+acttcctatctatgattctatgtcacgcaacgctaagcagtttctcgaaattaatggtggctcacattcctgtgcgaatagcggcaattctaaccaa
+gcattaatcggaaaaaaaggcgttgcatggatgaaacgttttatggacaatgatactaggtattctacttttgcctgcgagaacccgaatagcac
+cgcagtgtctgattttcgtacagcgaattgcagcctcgagcaccaccaccaccaccac 
+ 691 
+Expressed amino acid sequence of DuraPETase by P. putida KT2440 
+QTNPYARGPNPTAASLEASAGPFTVRSFTVSRPSGYGAGTVYYPTNAGGTVGAIAIVPGY
+TARQSSIKWWGPRLASHGFVVITIDTNSTFDYPSSRSSQQMAALRQVASLNGDSSSPIYGK
+VDTARMGVMGHSMGGGASLRSAANNPSLKAAIPQAPWDSQTNFSSVTVPTLIFACENDSI
+APVNSHALPIYDSMSRNAKQFLEINGGSHSCANSGNSNQALIGKKGVAWMKRFMDNDTR
+YSTFACENPNSTAVSDFRTANCSLEHHHHHH 
+ 692 
+  693 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+34 
+ 
+LCC 694 
+Nucleotide sequence of LCC without its original signal peptide sequence 
+agcaacccgtaccagcgtggcccgaatccgacccgcagcgcactgaccgcagatggcccgtttagcgtggcaacctacaccgtctcacgc
+ctgtcagtctcgggttttggcggtggcgtgatttattacccgaccggcacgtctctgacgttcggtggcatcgcgatgagtccgggttataccgc
+agatgctagctctctggcatggctgggtcgtcgcctggcttcccatggctttgtggttctggtgattaacacgaattcacgtttcgattatccggac
+agccgcgcctctcagctgagtgccgccctgaactacctgcgtaccagttccccgagcgccgttcgcgcacgtctggatgcaaatcgtctggc
+ggttgccggtcattctatgggtggcggtggcaccctgcgtattgcagaacaaaacccgagcctgaaagcggctgtcccgctgaccccgtggc
+acaccgataaaacgtttaataccagtgtcccggtgctgattgttggcgcagaagctgacaccgtggcgccggtttcgcagcatgccatcccgtt
+ttatcaaaacctgccgagcaccacgccgaaagtttacgtcgaactggataacgcatcgcacttcgctccgaatagcaacaatgcggccatttcc
+gtttatacgatctcatggatgaaactgtgggtcgataatgacacccgttaccgccagttcctgtgtaatgtgaacgacccggctctgtccgacttc
+cgcaccaataatcgccactgccaactcgagcaccaccaccaccaccac 
+ 695 
+Expressed amino acid sequence of LCC by E. coli 
+QTNPYARGPNPTAASLEASAGPFTVRSFTVSRPSGYGAGTVYYPTNAGGTVGAIAIVPGY
+TARQSSIKWWGPRLASHGFVVITIDTNSTFDYPSSRSSQQMAALRQVASLNGDSSSPIYGK
+VDTARMGVMGHSMGGGASLRSAANNPSLKAAIPQAPWDSQTNFSSVTVPTLIFACENDSI
+APVNSHALPIYDSMSRNAKQFLEINGGSHSCANSGNSNQALIGKKGVAWMKRFMDNDTR
+YSTFACENPNSTAVSDFRTANCSLEHHHHHH 
+ 696 
+  697 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+35 
+ 
+ICCM 698 
+Nucleotide sequence of ICCM without its original signal peptide sequence 
+atgagcaacccgtaccagcgtggcccgaatccgacccgcagcgcactgaccgcagatggcccgtttagcgtggcaacctacaccgtctcac
+gcctgtcagtctcgggttttggcggtggcgtgatttattacccgaccggcacgtctctgacgttcggtggcatcgcgatgagtccgggttatacc
+gcagatgctagctctctggcatggctgggtcgtcgcctggcttcccatggctttgtggttctggtgattaacacgaattcacgtttcgattatccgg
+acagccgcgcctctcagctgagtgccgccctgaactacctgcgtaccagttccccgagcgccgttcgcgcacgtctggatgcaaatcgtctg
+gcggttgccggtcattctatgggtggcggtggcaccctgcgtattgcagaacaaaacccgagcctgaaagcggctgtcccgctgaccccgtg
+gcacaccgataaaacgtttaataccagtgtcccggtgctgattgttggcgcagaagctgacaccgtggcgccggtttcgcagcatgccatccc
+gttttatcaaaacctgccgagcaccacgccgaaagtttacgtcgaactgtgcaacgcatcgcacattgctccgatgagcaacaatgcggccatt
+tccgtttatacgatctcatggatgaaactgtgggtcgataatgacacccgttaccgccagttcctgtgtaatgtgaacgacccggctctgtgcgac
+ttccgcaccaataatcgccactgccaactcgagcaccaccaccaccaccac 
+ 699 
+Expressed amino acid sequence of LCC by E. coli 
+MSNPYQRGPNPTRSALTADGPFSVATYTVSRLSVSGFGGGVIYYPTGTSLTFGGIAMSPGY
+TADASSLAWLGRRLASHGFVVLVINTNSRFDYPDSRASQLSAALNYLRTSSPSAVRARLD
+ANRLAVAGHSMGGGGTLRIAEQNPSLKAAVPLTPWHTDKTFNTSVPVLIVGAEADTVAP
+VSQHAIPFYQNLPSTTPKVYVELCNASHIAPMSNNAAISVYTISWMKLWVDNDTRYRQFL
+CNVNDPALCDFRTNNRHCQLEHHHHHH 
+ 700 
+  701 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+36 
+ 
+Legends for Supplementary Information Figures  702 
+Supplementary Information  Fig. 1 | Schematic diagram of Mutcompute. a. Creating a 703 
+microenvironment: MutCompute begins by centering itself on the alpha carbon of a particular residue 704 
+in the protein and filters all peptide atoms within a 20 angstrom cube (the orientation of the cube is 705 
+normalized with respect to the protein backbone). In the filtering process, we create an artificial, self-706 
+supervised label by excluding all atoms that belong the center residue. b. Encoding the 707 
+microenvironment: The filtered atoms are then encoded into a 7-channel voxelated representation with 708 
+a voxel resolution of 1A3.  c. Running MutCompute on a Microenvironment: The 7-channel voxelated 709 
+representation of a microenvironment is then passed to the CNN model, MutCompute. The model can 710 
+be broken into 2 parts: Feature extraction and classification. The feature extraction portion c onsist of 711 
+convolutional and max pooling layers and is then flattened into a 1D-vector before being passed to the 712 
+classification layers of the model. The output is a probability mass function of the likelihood each of 713 
+the 20 amino acids was the amino acid in the center of the microenvironment. We do this process for 714 
+every residue in the protein to identify residues for mutagenesis. 715 
+ 716 
+Supplementary Information Fig. 2 | Disfavored PETase residues flagged by MutCompute from 717 
+the wild -type and ThermoPETase crystal  structures. MutCompute outputs a probability 718 
+distribution that describes the likelihood of each of the 20 canonical amino acids to be the wild -type 719 
+amino acid for the surrounding chemical environment. A disfavored residue is defined as a residue 720 
+where the amino acid with the highest predicted probability is not the wild -type amino acid. Here, a 721 
+30% wild-type probability cutoff was used to down select disfavored residues.  722 
+ 723 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+37 
+ 
+Supplementary Information Fig. 3a | Predictions (based on wild-type PETase) ranked b y fold 724 
+change in the probabilities between the predicted and the wild -type amino acid.  Fold change 725 
+predictions are provided as a means of down-selecting potential mutations. 726 
+ 727 
+Supplementary Information Fig. 3b | TOP 10 ranked predictions (based on wild-type PETase). 728 
+The top 10 mutations predicted for the wild-type PETase scaffold are presented. 729 
+ 730 
+Supplementary Information  Fig. 3c | Predictions (based on ThermoPETase ) ranked by fold 731 
+change in the probabilities between the predicted and the wild -type amino acid.  Fold change 732 
+predictions are provided as a means of down-selecting potential mutations. 733 
+ 734 
+Supplementary Information Fig. 3d | TOP 10 ranked predictions (based o n ThermoPETase). 735 
+The top 10 mutations predicted for the ThermoPETase scaffold are presented. 736 
+ 737 
+Supplementary Information Fig. 4 | Selecting mutations based on experimental catalytic activity 738 
+measurements. A scheme for selecting mutations based on experimental evidence is provided. 739 
+ 740 
+Supplementary Information Fig. 5 | Thermostability of the PETase variants incorporating the 741 
+mutations predicted by Mutcompute and their respective scaffolds —wild-type PETase (WT), 742 
+ThermoPETase (Thermo), DuraPETase (Dura) . The melting temperature of each enzyme was 743 
+determined by DSC. All measurement were conducted in triplicate (n=3). 744 
+ 745 
+ 746 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+38 
+ 
+Supplementary Information  Fig. 6 | Protein yield of the PETase variants incorporating the 747 
+mutations predicted by Mutcompute and their resp ective scaffolds —wild-type PETase (WT), 748 
+ThermoPETase (Thermo), DuraPETase (Dura).  Protein yields from P. putida purification 749 
+experiments indicate improved yields from mutant enzymes. 750 
+ 751 
+Supplementary Information Fig. 7 | The PET-hydrolytic activity of FAST-PETase outperformed 752 
+various PHEs at mild temperatures and modest pH. Comparison of PET -hydrolytic activity of  753 
+FAST-PETase, wild-type PETase (WT), ThermoPETase (Thermo), DuraPETase (Dura), LCC and 754 
+ICCM across a range of pH (6.5 – 8.0) at reaction tempe ratures of 30 ⁰C ( a.) and 40 ⁰C ( b.). PET-755 
+hydrolytic activity was evaluated by measuring the amount of PET monomers (the sum of TPA and 756 
+MHET) released from hydrolyzing gf -PET film by the tested enzymes after 96 hrs of reaction time. 757 
+All measurement were conducted in triplicate (n=3). 758 
+ 759 
+Supplementary Information  Fig. 8 |  Mass, crystallinity %, molecular weights ( Mn, Mw), 760 
+polydispersity indices (Ð) and time for complete degradation of various pc-PET films by FAST-761 
+PETase. The circular pc -PET films (6 mm in diameter) were hole -punched from 51 different post -762 
+consumer plastic products used in the packaging of food, beverages, medications, office supplies, 763 
+household goods and cosmetics available at local grocery store chains (Walmart, Costco, and HEB). 764 
+The pc-PET films were hydrolysed by serial treatment with FAST-PETase at 50 ⁰C until the films were 765 
+completed degraded. The enzyme solution (200 nM of FAST-PETase in 100mM KH2PO4-NaOH (pH 766 
+8.0) buffer) was replenished every 24 hours. The crystallinity % of the intact pc -PET films was 767 
+determined by DSC. The initial m ass of the films was determined gravimetrically by a digital scale. 768 
+Both DSC and gravimetric measurements were conducted in triplicate. Means ± s.d. (n=3) are shown. 769 
+ 770 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+39 
+ 
+Supplementary Information Fig. 9 | Scatterplot of degradation rate versus (a.) initial mass or (b.) 771 
+crystallinity % or (c.) weight average molecular weight (Mw) or (d.) number average molecular 772 
+weight (Mn) or (e .) polydispersity indices of the hole -punched films from 51 different post -773 
+consumer plastic products.  Degradation rate was not foun d to be dependent on any one metric of 774 
+these various plastics. 775 
+ 776 
+Supplementary Information Fig. 10 | Time -course of crystallinity % of the degraded pc -PET 777 
+film. The hole-punched PET films from a bean cake PET container were treated with FAST -PETase 778 
+for 0 hr, 4hr, 8 hr,12 hrs 16 hr in 100 mM KH2PO4-NaOH (pH 8.0) buffer at 50 ⁰C. Crystallinity % of 779 
+the films was determined by DSC. All measurement were conducted in duplicate (n=2). 780 
+ 781 
+Supplementary Information Fig. 11 | Scanning electron microscopic analysis of the pc-PET films. 782 
+The hole-punched PET films from a bean cake PET container were treated with FAST -PETase for 0 783 
+hr, 8 hr, 16 hr in 100 mM KH2PO4-NaOH (pH 8.0) buffer at 50 ⁰C.  784 
+ 785 
+Supplementary Information Fig. 12 | The surface roughness of the pc-PET films determined by 786 
+atomic force microscopy. The hole-punched PET films from a bean cake PET container were treated 787 
+with FAST-PETase for 4 hr, 8 hr, 12 hr, 16 hr and 20 hr in 100mM KH2PO4-NaOH (pH 8.0) buffer at 788 
+50 ⁰C. T he time-course profile of the surface roughness indicated that longer exposure times with 789 
+FAST-PETase resulted in higher degree of surface roughness on the pc -PET films. RMS represents 790 
+root mean square.  791 
+ 792 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+40 
+ 
+Supplementary Information Fig. 13 | Time-course of PET-hydrolytic activity of LCC and ICCM 793 
+at reaction temperatures of 55 ⁰C, 60 ⁰C, 65 ⁰C, and 72 ⁰C. PET-hydrolytic activity was evaluated 794 
+by measuring the amount of PET monomers (the sum of TPA and MHET) released from hydrolyzing 795 
+the pc-PET (Bean cake plas tic container) film by the tested PHEs at various time points. 100 mM 796 
+KH2PO4-NaOH (pH 8.0) buffer was used for all reactions shown in this figure. All measurement were 797 
+conducted in triplicate (n=3). 798 
+ 799 
+Supplementary Information Fig. 14 | A closed-loop PET recycling process. Demonstration of a 800 
+closed-loop process for enzymatically degrading and then regenerating PET in the course of several 801 
+days. 802 
+ 803 
+Supplementary Information Fig. 15 | a. 1H NMR (400 MHz, d6-DMSO) spectra of TPA recovered 804 
+from degraded PET solutions. The peak at 8.029 ppm corresponds to the hydrogen nuclei of the 805 
+benzene ring. b. 1H NMR (400 MHz, CDCl3) spectra of DMT synthesized from TPA. The peak at 806 
+8.081 ppm corresponds to the hydrogen nuclei of the benzene ring. The peak at 3.93 ppm corresponds 807 
+to the hydrogen nuclei of the methyl group. 808 
+ 809 
+Supplementary Information Fig. 16 | DSC trace of PET regenerated from the degraded solutions. 810 
+The crystallinity of this regenerated PET is 58.46%. The melting onset is 243.6 °C. The melting peak 811 
+temperature is 258.4 °C. The glass transition temperature is 84.3 °C. 812 
+ 813 
+Supplementary Information Fig. 17 | X-ray crystal structure of FAST-PETase. a. Overall crystal 814 
+structure of FAST-PETase. Catalytic triads (S160, D206, H237) are shown in blue sticks. Mu tations 815 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint 
+41 
+ 
+originating from ThermoPETase (S121E, D186H, R280A) are shown in pink sticks, and novel 816 
+mutations predicted by the neural network are shown in green -yellow sticks. b-c. 2Fo-Fc map 817 
+(contoured at 1.5σ) shown as grey mesh superimposed on the stick models of novel mutation sites (b.) 818 
+R224Q, (c.) N233K.  819 
+ 820 
+Supplementary Information Fig. 18 | Statistics of the crystal structural determination of FAST-821 
+PETase. Information about the obtained crystal structure is provided. 822 
+ 823 
+Supplementary Information Fig. 19 | Stages of degradation of pc -PET films by FAST-PETase. 824 
+a. The transparent pc-PET film (6 mm in diameter) was completely degraded (only cutting edges 825 
+of the film remained) after 24 hrs of a single treatment with FAST-PETase at 50 ⁰C. b. The 826 
+colored pc-PET film (6 mm in diameter) was completely degraded (only cutting edges of the film 827 
+and some colorants remained) after six day of serial treatment with FAST-PETase at 50  ⁰C. 828 
+Enzyme (200 nM) treatment was performed with 100 mM KH2PO4-NaOH (pH 8.0) buffer.  829 
+preprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for thisthis version posted October 12, 2021. ; https://doi.org/10.1101/2021.10.10.463845doi: bioRxiv preprint

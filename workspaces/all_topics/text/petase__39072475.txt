@@ -1,0 +1,1302 @@
+Exploring the Reaction Mechanism of Polyethylene Terephthalate
+Biodegradation through QM/MM Approach
+Alberto M. dos Santos, Clauber H. S. da Costa, Pedro H. A. Silva, Munir S. Skaf, and Jero ̂ nimo Lameira*
+Cite This: J. Phys. Chem. B 2024, 128, 7486−7499
+ Read Online
+ACCESS
+Metrics & More
+ Article Recommendations *
+sı Supporting Information
+ABSTRACT: The enzyme PETase fromIdeonella sakaiensis
+(IsPETase) strain 201-F6 can catalyze the hydrolysis of poly-
+ethylene terephthalate (PET), mainly converting it into mono(2-
+hydroxyethyl) terephthalic acid (MHET). In this study, we used
+quantum mechanics/molecular mechanics (QM/MM) simulations
+to explore the molecular details of the catalytic reaction mechanism
+of IsPETase in the formation of MHET. The QM region was
+described with AM1d/PhoT and M06-2X/6-31+G(d,p) potential.
+QM/MM simulations unveil the complete enzymatic PET
+hydrolysis mechanism and identify two possible reaction pathways
+for acylation and deacylation steps. The barrier obtained at M06-
+2X/6-31+G(d,p)/MM potential for the deacylation step corre-
+sponds to 20.4 kcal/mol, aligning with the experimental value of 18
+kcal/mol. Our findings indicate that deacylation is the rate-limiting step of the process. Furthermore, per-residue interaction energy
+contributions revealed unfavorable contributions to the transition state of amino acids located at positions 200−230, suggesting
+potential sites for targeted mutations. These results can contribute to the development of more active and selective enzymes for PET
+depolymerization.
+■
+INTRODUCTION
+The advent of polyethylene terephthalate (PET) has
+significantly transformed modern human civilization, offering
+versatile applications across the plastics industry. However,
+synthetic polymers like PET-based plastic waste continue to
+present environmental challenges, threatening ecosystems and
+biodiversity due to their strong resistance to biodegrada-
+tion.
+1−5
+Enzymatic hydrolysis offers an alternative way to selectively
+generate monomers under mild conditions, thereby circum-
+venting the use of chemical waste such as organic solvents.
+6
+Ideonella sakaiensis strain 201-F6 was recently discovered with
+the ability to degrade and use synthetic polymers, such as PET,
+as its major energy and carbon source.
+7
+This discovery has
+paved the way for novel scientific investigations aimed at
+identifying eco-friendly alternatives for managing plastic waste
+through enzymatic recycling at moderate temperatures (20 to
+45 °C).
+8−11
+The Yoshida group demonstrated that I. sakaiensis expresses
+two closely related enzymes involved with PET degrada-
+tion.
+7,12
+The first enzyme is named PETase (PET-digesting
+enzyme), which converts PET to mono(2-hydroxyethyl)
+terephthalic acid (MHET), bis(2-hydroxyethyl)-TPA
+(BHET), and terephthalic acid (TPA) as products. The
+second enzyme is the MHETase (MHET-digesting enzyme),
+which further converts MHET into two monomers: ethylene
+glycol (EG) and TPA.
+13
+Structural and evolutionary studies of
+I. sakaiensis PETase (IsPETase) have shown that its structure
+resembles α/β-hydrolase enzymes.
+14−16
+The α/β-hydrolase
+family includes lipases and cutinases, which catalyze the
+hydrolysis of fatty acids and cutin, respectively.
+14−16
+Several studies have proposed a molecular mechanism for
+PET degradation catalyzed by IsPETase.
+14,17,18
+Moliner and
+colleagues investigated the atomic-level mechanism of the
+IsPETase enzyme using computational methods, outlining a
+four-step process for IsPETase that involved two or three
+monomers and a semiempirical potential with DFT correc-
+tions. They have found that acylation and deacylation take
+place in a stepwise mechanism.
+19
+Subsequently, Carola and co-
+workers conducted a similar study on IsPETase, suggesting
+that both acylation and deacylation proceed through a single,
+associative, tetrahedral transition state in a concerted yet
+asynchronous manner.
+20
+Both contributions
+19,20
+have pro-
+posed that acylation is the rate-limiting step of the process. On
+the other hand, Knott et al. demonstrated that the deacylation
+step is the rate-limiting catalytic mechanism of MHETase.
+21
+Received: April 3, 2024
+Revised: July 6, 2024
+Accepted: July 16, 2024
+Published: July 29, 2024
+Articlepubs.acs.org/JPCB
+© 2024 The Authors. Published by
+American Chemical Society
+7486
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+This article is licensed under CC-BY 4.0
+
+They have also proposed that MHETase’s catalytic mechanism
+occurs without stable tetrahedral intermediates, with acyl-
+enzyme intermediate formation (acylation) and hydrolysis
+(deacylation) taking place as individual steps.
+21
+These studies
+employed benchmark simulations using free energy surfaces
+and a quantum mechanics/molecular mechanics (QM/MM)
+approach to explore PET degradation catalyzed by IsPETase
+and MHETase.
+19−21
+Previously, we investigated the conformational dynamics of
+IsPETase in response to PET binding, highlighting details of its
+structural adaptability and regions of flexibility that could be
+targeted to enhance enzyme stability and efficacy.
+22
+Here, we
+present a QM/MM study of PET degradation by IsPETase,
+focusing on the formation of the product MHET using a PET
+tetramer. We have compared our results with recently
+published computational studies
+19−21
+and further developed
+the current general model of the catalytic mechanism of
+IsPETase.
+■
+THEORETICAL METHODS
+As described in the Introduction section, IsPETase catalyzes
+PET degradation into MHET, BHET, and TPA (Scheme 1),
+with MHET as the major product of IsPETase.
+7
+The PET-
+binding mode has been predicted mostly through computa-
+tional methods.
+16,23,24
+Recently, we proposed the binding
+mode of PET into the active site of IsPETase and provided
+molecular details of PET’s main interaction using molecular
+docking and molecular dynamics (MD) simulations.
+22
+Here,
+we used the PET-IsPETase complex described before
+22
+as a
+starting point to explore the catalytic mechanism of IsPETase
+for PET degradation into MHET and BHET. The system
+consists of the tetramer (2-hydroxyethyl-(monohydroxyethyl
+terephthalate)
+4
+, 2-HE(MHET)
+2
+) in the complex with
+IsPETase, additional details regarding the initial structure
+used for the simulation can be found elsewhere.
+22
+The Free Energy Surface (FES). To obtain the FES
+associated with MHET formation, we have used the weighted
+histogram analysis method (WHAM) combined with the
+umbrella sampling approach
+25
+as implemented in the
+pDynamo program.
+26
+The PMF calculation requires a series
+of molecular dynamics simulations in which the distinguished
+reaction coordinate variable, ξ, is constrained around particular
+values.
+27
+In the QM/MM approach, a small part of the system
+(ligand/substrate species) is described by quantum mechanics,
+while MM force fields represent the protein and solvent
+environment.
+28
+The 2D PMFs were obtained for the
+mechanism of MHET formation. A wide range of semi-
+empirical methods are used within hybrid QM/MM
+simulations to study different systems, including metallic
+nanoparticles
+29
+and enzymatic reactions.
+30
+Semiempirical
+potentials can be based on s and p orbitals (MNDO, AM1,
+PM3, and RM1) or also included orbitals, either based on
+approximations to Hartree−Fock theory (MNDO/d, PM6,
+and AM1/d-PhoT) or derived from density functional theory
+(DFTB3).
+30
+In this study, the AM1d/PhoT potential was used
+to describe the QM region. The atomic coordinates of the
+atoms involved in the reaction were restrained by a harmonic
+umbrella potential of 50 kcal·mol
+−1
+·Å
+2
+. For the hybrid QM/
+MM calculations, the atoms of the PET, a water molecule, and
+the side chains of Ser134 and His211 residues were selected to
+be treated by QM using a semiempirical AM1/d-PhoT
+31
+Hamiltonian. The other atoms of the system, protein, and
+water molecules were described using the CHARMM/TIP3P
+35
+force fields, respectively. The number of QM atoms then
+resulted in 44, while the final system contains 32,428 atoms,
+respectively. It is important to note that the QM region
+(Scheme 2) used in this work includes a smaller number of
+residues than in previous computational studies.
+19,20
+The
+simulation with a small QM region is computationally less
+demanding, and the size of the QM region may have little
+influence on the single-point QM/MM calculations for studies
+involving enzymatic catalysis.
+36,37
+Initially, QM/MM Langevin-Verlet MD at 300 K and in a
+canonical thermodynamic ensemble (NVT) were used to
+equilibrate the system. Due to the number of degrees of
+freedom, any residue 20 Å apart from any of the reactants’
+atoms was selected to be frozen in the remaining calculations.
+Cut-offs for the nonbonding interactions were applied using a
+switching scheme within a range radius of 14.5 to 16.0 Å.
+Afterward, the system was equilibrated by means of 2.0 ns of
+QM/MM MD at a temperature of 300 K. The computed
+RMSD for the protein during the last 1 ns renders a value
+always below 0.9 Å. Furthermore, the temperature RMS along
+the different equilibration steps was always lower than 2.5 K,
+and the potential energy variation coefficient during the
+dynamics simulations was never higher than 0.3%.
+A total of 40 simulations were performed at different values
+of the R1-R2 antisymmetric combination of distances (ranging
+from −2.0 to 2.0 Å, see Scheme 3), with an umbrella force
+constant of 50 kcal.mol
+−1
+·Å
+−2
+applied to this distinguished
+reaction coordinate. In addition, 40 simulations were
+performed at different values of R3 (ranging from 1.0 to 3.0
+Å, see Scheme 3), also with an umbrella force constant of 50
+kcal.mol
+−1
+·Å
+−2
+on this combination of distances. Conse-
+Scheme 1. IsPETase Catalyzes the Hydrolysis of PET into
+MHET and BHET
+Scheme 2. Quantum Region Used in QM/MM Simulations
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7487
+quently, 1600 simulation windows were needed to obtain the
+2D-PMF for Step 1 of the PET degradation mechanism of
+IsPETase (Scheme 3). R1-R2 described the proton transfer
+from Ser134 to His211, and R3 described the nucleophilic
+attack of Ser134 on the C
+4
+1
+of PET. The same protocol was
+used for Step 2, where the antisymmetric combination of
+distances R2-R4 and the distance R5 was used to describe,
+respectively, the proton transfer from His211 to the oxygen O
+y
+of PET and the PET C
+4
+1
+-O
+y
+bond breakdown. For Step 3, the
+antisymmetric combination of distances R6-R7 and the
+distance R8 was used to describe, respectively, the proton
+transfer from water to histidine and the nucleophilic attack of
+water on the C
+4
+1
+of PET. For Step 4, the antisymmetric
+combination of distances R7-R9 and the distance R3 were used
+to describe, respectively, the proton transfer from His211 to
+Ser134 and the C
+4
+1
+-O
+Ser134
+bond breakdown. The values of the
+variables sampled during the simulations were then pieced
+together to construct a full distribution function, from which
+the 2D-PMF was obtained. In each window, 20 ps of relaxation
+were followed by 20 ps of production with a time step of 0.5 fs
+due to the nature of the chemical step involving a hydrogen
+transfer. The Verlet algorithm was used to update the
+velocities. It is important to note that the coordinates
+considered in the PMF are described in Scheme 3. The
+transition states were identified as saddle points (see
+Supporting Information (SI)).
+Since the use of QM/MM calculations in the evaluation of
+free energy is commonly restricted to semiempirical Hamil-
+tonians due to the large number of gradient vector evaluations,
+we initiated our analysis with a semiempirical potential. Then,
+the error associated with this quantum level of theory was
+reduced by including correction terms. The corrections were
+applied by subtracting the energy calculated for the QM region
+using a semiempirical level and adding the energy from the
+DFT potential.
+38
+The QM region was described with the M06-
+2X
+38
+functional with the 6-31+G(d,p) basis set. The TS-like
+conformations obtained from AM1/d-PhoT/MM MD simu-
+lations were used as the starting geometries for the correction
+energy at the DFT level. The QM corrections were performed
+using the ORCA 5.0.3 quantum chemistry program suite
+39
+and
+the pDynamo program.
+26
+The same high-level QM corrections
+have been applied previously.
+40
+Per-residue Interaction Energy Calculations. Further-
+more, we investigated how active site residues stabilize or
+destabilize the species present along the free energy profile,
+analyzing the interaction energy of each protein residue with
+the ligand (TS and RS). There are different ways of exploring
+interaction energy per residue using the QM/MM approach.
+For instance, Quantum Mechanics-Poisson−Boltzmann Sur-
+face Area (QM-PBSA).
+41
+While insightful, the computational
+demands posed significant challenges for larger sampling
+endeavors and for exploring the energy interaction between the
+protein and different species along the reaction path. Other
+strategies employed QM/MM calculations to elucidate the
+interactions between proteins and ligands through the
+Interacting Quantum Atoms approach.
+42
+Despite offering
+novel insights into utilizing QM and QM/MM calculations
+for analyzing energy contributions to protein structure and
+binding, these methods often overlook transition state
+structures and the roles of specific residues in each step of
+chemical reactions. Here, we have made use of a hybrid M06-
+2X/CHARMM36m method based on a semiclassical approach
+to obtain the interaction energy between the substrates and
+transition states, obtained from the mechanism and the
+environment. This interaction energy is evaluated as the
+difference between the QM/MM energy and the energies of
+the separated, noninteracting QM and MM subsystems with
+the same geometry. Considering that the MM part is described
+using a nonpolarizable potential, the interaction energy
+contribution of each residue of the protein is given by the
+following expression:
+Scheme 3. Reaction Coordinates Used to Investigate the PET Degradation Reaction Mechanism
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7488
+=
++
+ +
+E
+q
+r
+Z q
+r
+ E
+QM/MM
+Int
+MM
+e,MM
+QM
+MM
+QM,MM
+ QM/MM
+vdW
+(1)
+This interaction energy can be exactly decomposed into a
+sum over residues, provided that the polarized wave function
+(Ψ) is employed to evaluate this energy contribution. It is
+important to point out that although the structures used to
+calculate the per-residue energy contribution were obtained
+from the reaction coordinates describing the mechanism, the
+QM region used in the decomposition analysis was the whole
+PET molecule (98 atoms) for TS1 and RS and the PET
+molecule and water (101 atoms), without His211 and Ser134
+in the QM region. The same strategy has been used in previous
+contributions.
+43,44
+■
+RESULTS AND DISCUSSION
+Free Energy Surface for Exploring Reaction Paths for
+PET Hydrolysis. IsPETase, which belongs to the serine
+hydrolase family, shares a similar molecular mechanism with
+cutinases,
+45
+involving the formation of an acyl-enzyme
+intermediate in the first step and a nucleophilic attack by a
+water molecule in the second step.
+16
+The PET hydrolysis
+mechanism was investigated using ONIOM calculations in
+previous computational studies.
+45,46
+Despite the limitations of
+ONIOM calculations, such as the inability to account for the
+dynamic behavior of the enzyme, it is possible to reasonably
+estimate the activation barrier associated with each step of the
+molecular mechanism. The potential energy surfaces obtained
+using QM/MM potentials can also be used to explore
+enzymatic mechanisms, albeit with the same limitations as
+ONIOM calculations.
+48
+Note that Determining the activation
+energy of the reaction catalyzed by IsPETase would be
+extremely resource-intensive when using free energy surfaces
+acquired through umbrella sampling at the DFT/MM
+potential. Therefore, we used QM/MM and molecular
+dynamics simulations with the semiempirical potential AM1/
+d-PhoT
+31
+to describe the QM region. This semiempirical
+potential is parametrized to reproduce high-level density-
+functional results and have been used for study different
+enzymatic reaction mechanisms.
+32−34
+Understanding the catalytic mechanism of IsPETase and
+investigating the impact of key mutations in this enzyme are
+crucial steps for enhancing enzymatic catalysis. It is worth
+noting that examining the effects of proposed mutations on the
+activation energy of the reaction catalyzed by IsPETase would
+be extremely resource-intensive when using free energy
+surfaces acquired through umbrella sampling at the DFT/
+MM potential, even for a small QM region. In simpler terms,
+the computational expenses tied to assessing free energy
+surfaces in proteins make it challenging to derive dependable
+surfaces for enzymatic reactions with both a sufficiently high ab
+initio level and adequate sampling. One alternative for
+analyzing the influence of mutations on the activation energy
+of the reaction catalyzed by IsPETase could involve the
+application of Empirical Valence Bond (EVB) methods,
+49
+which is a simple and useful tool for obtaining activation
+energy in a protein environment. On the other hand, this
+approach requires a well-calibrated EVB surface in solution.
+Our goals were to compute the activation energy for the
+reaction catalyzed by IsPETase and compare it with
+experimental data and previous QM/MM simulation re-
+sults.
+14,17−21
+The combination of experimental
+7,9
+and compu-
+tational data offers a comprehensive understanding of the
+enzyme’s functions, and the identification of specific amino
+acid residues that contribute to the stabilization or
+destabilization of the transition states can reveal potential
+targeted mutations for enhanced enzyme activity. Here, we
+initiated our analysis with the Potential of Mean Force (PMF)
+using QM/MM potential for exploring the acylation step
+Figure 1. Free energy surface (FES) at AM1/d-PhoT/MM potential for mechanism of reaction involving IsPETase. The acylation is described by
+two steps: (a) Step 1, where the formation of tetrahedral intermediate (TI1) is observed, and (b) Step 2, where the formation of MHET (INT2) is
+observed. Contour interval of 2 kcal/mol.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7489
+(Figure 1). The FES results provide a more detailed picture of
+the reaction mechanism, including a dynamic description of
+the enzymatic environment. To generate the FES, we applied
+the AM1/d-PhoT
+31
+Hamiltonian to describe the QM region
+(Scheme 2) during QM/MM MD simulations, which lacks
+accuracy compared to ab initio and DFT calculations, but it is
+fast enough to simulate QM/MM molecular dynamics
+simulation and obtain a proper sampling.
+Figure 1 shows the FES used to describe the first step of
+PET degradation. This FES describes the acylation step, where
+Figure 2. Free energies calculated at the AM1/d-PhoT/MM level for the MHET Formation. The values in parentheses represent the energy
+difference between the TS and its preceding intermediate, while the values outside parentheses are calculated with respect to the RS. Path 1 is in
+blue, and Path 2 is in red. Note that for some intermediates, two values are described for the stepwise (red) and the concerted (blue) paths. The
+units are in kcal/mol.
+Figure 3. Representative structures along the 2D-PMF obtained from the QM/MM free-energy simulations for Step 2 acylation PET breakdown:
+(a) Path 1, concerted proposal; (b) Path 2, stepwise proposal for TI formation. Structures are labeled according to their locations along the 2D
+PMF.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7490
+R1, R2, and R3 were used as distinguished reaction
+coordinates for describing the chemical reaction. R1-R2
+correspond to the proton transfer from Ser134-OG to
+His211-NE1. Note that OG is the hydroxyl group of Ser134,
+and NE1 is the N of imidazole in the His211 residue. R3
+corresponds to the attack of Ser134-OG on the ester carbon
+atom of the first subunit of the tetramer, which represents the
+PET polymer in our simulations. Here, this carbon atom was
+labeled as C
+4
+1
+, as proposed by reference.
+20
+The resulting FES obtained with AM1/d-PhoT/MM
+renders two possible paths for the formation of the tetrahedral
+intermediate (TI). Path 1 occurs through TS1 formation
+(Figure 1a). The free energy of activation associated with this
+path corresponds to 13.8 kcal/mol (see Figure 2). In TS1, the
+average distance between Ser134-OG and the carbon atom
+(C
+4
+1
+) corresponds to 1.6 Å, aligning with the value of 1.5 Å
+obtained from FES using DFT/MM as potential.
+20
+The
+average distance between the proton of Ser134-OG and
+His211-NE1 is 1.8 Å, with the proton located closer to Ser134
+(1.1 Å) (Figure 3a and Table S1), which indicates that this
+proton transfer is in an earlier stage of the process.
+Path 2 (Figure 1a) occurs in a stepwise mechanism through
+TS1′ and TS2′ formation. The free energy of activation
+associated with this path corresponds to 12.4 and 6.3 kcal/mol
+for the first and second steps, respectively (see Figure 2). In
+the TS1′, the average distance between Ser134-OG and the
+carbon atom (C
+4
+1
+) corresponds to 2.98 Å, and the average
+distance between the proton of Ser134-OG and His211-NE1 is
+1.1 Å, with the proton located closer to His211 (Figure 3b and
+Table S2). This result indicates a very advanced stage for
+proton transfer and suggests that the nucleophilic attack of
+Ser134 on the carbon atom (C
+4
+1
+) may occur after the
+deprotonation of Ser134 by His211. Path 2 agrees with
+IsPETase’s recently proposed mechanism for the acylation step
+of PET degradation.
+20
+In the TS2′, the average distance
+between Ser134-OG and the carbon atom (C
+4
+1
+) corresponds
+to 2.3 Å (Figure 3b and Table S2). The product of this step is
+the tetrahedral intermediate (TI1 on Figure 1). It is worth
+noting that previous work has also suggested that the
+formation of tetrahedral intermediate in the acylation stage
+may occur through a stepwise path.
+46
+Figure 4 shows the formation of an acyl-enzyme
+intermediate (INT2). There are also two possible paths on
+the FES to form this intermediate. Path 1 occurs through TS2.
+In the TS2, the R5 corresponds to 1.6 Å (see Figure 4a and
+Table S1). These coordinates represent the average distance
+between O
+γ
+and the carbon atom (C
+4
+1
+), which is associated
+with the breaking of the ester bond of the PET (Figure 4a).
+The proton transfer from His211-NE1 to O
+γ
+of PET is
+represented by the R2-R4 distances. In TS2, R4 corresponds to
+Figure 4. Representative structures along the 2D-PMF obtained from the QM/MM free-energy simulations for Step 2 acylation PET breakdown:
+(a) Path 1; (b) Path 2. Structures are labeled according to their locations along the 2D PMF.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7491
+1.1 Å (see Scheme 3, Table S1), indicating that proton transfer
+from His211-NE1 to O
+γ
+of PET occurs first, then the cleavage
+of the ester bond of the PET takes place. This result shows
+another alternative mechanism to the previously described
+work for PET degradation by IsPETase,
+20
+where first the
+proton transfer from His211 to PET occurs, and then PET
+cleavage takes place. The free energy of activation obtained at
+the AM1/d-PhoT/MM level corresponds to 13.8 kcal/mol for
+path 1 (Figure 2).
+Path 2 is in accordance with the mechanism of PET
+degradation by IsPETase described in the previous contribu-
+tion.
+20
+In TS3′, the R5 corresponds to 1.8 Å and R2 is 1.0 Å
+(see Figure 4b and Table S2). These results show the advanced
+stage of the breaking of the ester bond of the PET in TS3′,
+while the proton remains connected to His211-NE1. The
+INT2 corresponds to the acyl-enzyme intermediate (Figures
+1b and 4b). The path with lower barrier for reaction is through
+TS3′ with a free energy activation of 11.5 kcal/mol. In this
+step, there is the formation of an acetyl-enzyme intermediate
+(with Ser134 bonded to MHET), as also proposed in a
+previous computational study.
+19
+Figure 5 shows the FES for deacylation, where a water
+molecule of the solvent plays a critical role. In step 3, the
+barrier calculated at AM1/d-PhoT/MM potential for path 1 is
+8.3 kcal/mol. In TS3, the distance between the water oxygen
+and C
+4
+1
+is 1.6 Å, while the R6 and R7 distances describing the
+proton transfer from water to His211 are 1.1 and 1.8 Å,
+respectively (Figure 6a and Table S3). The product on the free
+energy surface (Figure 5a) step corresponds to the tetrahedral
+intermediate 2 (TI2). The transition states for TI2 formation
+identified using AM1/d-PhoT/MM potential are similar to the
+ones found in previous studies.
+45,46,47
+Path 2 occurs in a
+stepwise mechanism through TS5′ and TS6′ formation, with
+activation free energy of 10.3 and 3.6 kcal/mol, respectively
+(see Figure 2). In the TS5′, the average distance between the
+water molecule and carbon atom (C
+4
+1
+) corresponds to 2.9 Å,
+and the average distance between the proton of water and its
+oxygen is 1.8 Å, with the proton located closer to His211-NE1
+(1.0 Å) (Figure 6b and Table S4). In TS6′, the average
+distance between the oxygen of the formed hydroxyl group and
+the carbon atom (C
+4
+1
+) corresponds to 2.2 Å. In the next step,
+the proton transfer from His211-NE1 to O
+γ
+of MHET,
+represented by R7-R9, is associated with the breaking of the
+TI2 (R3 coordinate) (Figure 6b and Table S4).
+On FES, the TI2 (tetrahedral intermediate 2) is at a clear
+minimum (see Figure 5). In TS4, the R3, R7, and R9
+correspond to 1.7, 1.1, and 1.7 Å, which indicates the advanced
+stage of the proton transfer and the beginning of breaking the
+O
+γ
+-C
+4
+bond of acylated Ser134 (Figure 7a). Path 1, as depicted
+in Figure 5a, outlines a concerted and asynchronous
+mechanism for this step, consistent with prior computational
+contributions.
+20
+Path 2 leads to the formation of INT4′, where
+first occurs the O
+γ
+-C
+4
+bond break of acylated Ser134, and then
+the proton transfer from His211 to INT4′ takes place (Figure
+7b). Interestingly, the barriers of reaction for Path 1 and Path 2
+are 16.1 and 16.4 kcal/mol, respectively. Therefore, based on
+these results, both paths are feasible.
+The PS on this FES (Figure 5) corresponds to the reaction
+product, MHET. It is important to note that, according to our
+results, MHET is formed in the deacylation step. Initially, this
+may seem divergent from the result obtained in reference,
+20
+where an MHET leaving group is observed in the acylation
+step. However, a thorough analysis of the system reveals that
+MHET formation may occur in both steps, depending on the
+polymer size used in simulations and the choice of ester carbon
+for nucleophilic attack. In our case, we used a PET tetramer,
+while reference
+20
+used a PET dimer. This observation aligns
+with previous contributions, which highlight that the ester
+bond of the polymer is attacked by serine in the active site of
+PETase, forming a tetrahedral intermediate. Subsequently, the
+Figure 5. MHET Formation Mechanism PMF2D, describing the deacylation steps (a) Step 3; (b) Step 4 as described in Scheme 2. Contour
+interval of 2 kcal/mol.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7492
+first product of the reaction is MHET or a fragment of the
+polymer, depending on the length of the initial polymeric chain
+and the site of cleavage. Then, an acyl-enzyme intermediate is
+generated.
+19
+Therefore, the QM/MM with a reduced QM size
+and AM1/d-PhoT/MM potential describes the mechanism
+steps in agreement with experimental data.
+The estimated experimental activation free energy for PET
+degradation (using transition state theory to obtain activation
+free energy from experimental turnover rate) is 18.0 kcal/
+mol.
+7,9
+The uncertainty associated with this experimental value
+is less than 1 kcal/mol, considering the potential variability in
+the experimental conditions and measurement precision. We
+have determined that the reaction barriers for the last step of
+deacylation are 16.1 and 16.4 kcal/mol for paths 1 and 2,
+respectively (see Figures 2 and 5). For acylation, we have
+found barriers involved in the mechanism to be below 13.8
+kcal/mol, in agreement with reference.
+21
+In general, according
+to our results of the energy difference between the TS and its
+preceding intermediate (Figure 3), deacylation is the rate-
+limiting step of the process. Interestingly, Knott et al. have
+proposed that the deacylation step is the rate-limiting step in
+MHETase’s breakdown of an MHET molecule.
+21
+Additionally,
+cutinase QM/MM simulations for PET biotransformation
+processes revealed that deacylation is the rate-limiting step of
+PET degradation.
+50
+These results diverge from the observa-
+tions reported in references
+19
+and.
+20
+On the other hand,
+considering the energy difference between each TS and RS
+(Figure 3), the acylation step can be regarded as the rate-
+limiting step in the PET degradation reaction by IsPETase.
+This step has a barrier of 13.2 kcal/mol (stepwise) or 13.8
+kcal/mol (concerted), consistent with reference,
+19
+which
+describes the reaction mechanism of PET hydrolysis by
+PETase and LCC enzymes using QM/MM MD simulations,
+finding a barrier of 14.6 kcal/mol for the deacylation step. Our
+results also align with Reference,
+20
+which offers an atomistic
+and thermodynamic interpretation of the catalytic mechanism
+of PETase using umbrella sampling simulations at the PBE/
+MM MD level with a large QM region. This study details a
+two-stage reaction mechanism (acylation and deacylation),
+with the deacylation step having a free energy barrier of 15.1
+kcal/mol.
+Energy Corrections. In general, the AM1/d-PhoT/MM
+potential described the species along the reaction profile,
+consistent with previous computational contributions. Accord-
+ing to experimental data for PET degradation, the activation
+free energies are approximately 18 kcal/mol.
+7,9
+Previous
+computational contributions found values of 4.7 kcal/mol,
+51
+17.8 kcal/mol,
+46
+and 20.3
+19
+kcal/mol for the activation free
+energy associated with the acylation step. Interestingly,
+reference
+20
+reported values of 20 and 15 kcal/mol for acylation
+Figure 6. Representative structures along the 2D-PMF obtained from the QM/MM free-energy simulations for Step 3 deacylation water attack (a)
+concerted proposal; (b) stepwise proposal. Structures are labeled according to their locations along the 2D PMF.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7493
+and deacylation, respectively. It is important to emphasize that
+we used a semiempirical Hamiltonian to model the quantum
+mechanics (QM) region. While this approach enables the
+simulation of free energy profiles in a timely manner, it is less
+accurate compared to ab initio and density functional theory
+(DFT) methods. Indeed, the semiempirical potential used to
+describe the QM region underestimates activation barriers
+compared to DFT for the acylation step. However, for
+deacylation, we observed remarkable agreement, with a
+deviation of only 1 kcal/mol from the reference.
+20
+In order to correct the energies obtained with semiempirical
+potential, we applied corrections to the minimum free energy
+Figure 7. Representative structures along the 2D-PMF obtained from the QM/MM free-energy simulations for Step 4 deacylation tetrahedral
+intermediate breakdown: (a) concerted proposal; (b) stepwise proposal. Structures are labeled according to their locations along the 2D PMF.
+Figure 8. Free energies calculated at the M06-2X/6-31+G(d,p)/MM level for the MHET Formation. The values in parentheses represent the
+energy difference between the TS and its preceding intermediate, while the values outside parentheses are calculated with respect to the RS. Path 1
+is in blue, and Path 2 is in red. Note that for some intermediates, two values are described for the stepwise (red) and the concerted (blue) paths.
+The units are in kcal/mol.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7494
+path by subtracting the energy calculated for the QM region
+using the semiempirical level and adding the energy from the
+M06-2X/6-31+G(d,p) level (Figure 8). The results reveal that
+acylation and deacylation take place in a stepwise manner,
+which is in remarkable agreement with previous computational
+contribution,
+19
+where Path 2 for both acylation and
+deacylation presents the lower barrier for MHET formation
+(Figure 8). Energies calculated at M06-2X/6-31+G(d,p)/MM
+level showed that path 2 (Figure 8) describing the proton
+transfer from His211-NE1 to O
+γ
+of PET has the lowest ΔG
+‡
+value (2.9 kcal/mol), which suggests that it is the most
+energetically favorable step in the reaction under standard
+conditions. Also, the lowest ΔG value is seen in path 2 during
+PET breakdown (−12.5 kcal/mol), indicating that it is the
+most energetically favorable step under actual reaction
+conditions. Step 3 has the highest ΔG value (3.3 kcal/mol),
+suggesting that it is the least energetically favorable step under
+actual reaction conditions. Step 4 has the highest ΔG
+‡
+value
+(27.9 kcal/mol for the concerted path and 20.4 kcal/mol in the
+first step of the stepwise path), which indicates that it is the
+least energetically favorable step under standard conditions.
+Overall, the rate-limiting step was found to be deacylation with
+a barrier of 20.4 kcal/mol, which is in agreement with the
+computational value of 19.8 kcal/mol.
+21
+It is worth noting that,
+considering the energy difference between the TS and RS
+calculated at the M06-2X/6-31+G(d,p)/MM level for MHET
+formation, the deacylation step is also the rate-limiting step in
+the reaction involving PET and IsPETase (see Figure 8).
+Per-residue Interaction Energy. Here, we employed
+residual decomposition analysis to explore the contributions of
+individual molecular components to the overall electrostatic
+interaction energy between PET tetramer and IsPETase at the
+reactants (RS) and transition states (TS) (Figure 8). This
+approach yields insights into the specific residues that can
+either stabilize or destabilize the TS.
+Positive values indicate energy contributions with repulsive
+interactions with the transition state, whereas negative values
+suggest contributions favoring stabilization. Upon analysis of
+these results, in the first step of acylation, several residues
+display notable effects on the TS1. The residues Tyr61, Asp92,
+Arg97, Ser134, Met135, Ala157, Trp159, Glu178, Gly208,
+His211, Cys213, Gln221, Asn220, Thr253, and Arg254 show
+significant energy contributions, either stabilizing or destabiliz-
+ing the transition state (Figure 9a). These residues play a
+crucial role in catalysis or structural stabilization during the
+enzymatic reaction between PET and IsPETase.
+We highlight the residues located between 200 and 230
+positions in IsPETase with large positive energies, such as
+Gly208, Ser212, Cys213, Ala214, Asn215, and Gln221 (Figure
+9c). These residues might represent key positions for structural
+modifications or targeted mutations to reduce the reaction
+barrier during this step and enhance the enzyme’s efficiency or
+selectivity in the catalytic process. For the last step of the
+reaction, in the TI2 breakdown and therefore MHET release,
+the residues Arg64, Ser66, Arg97, Trp133, Ser134, Asp160,
+Glu178, Gly208, Cys213, Asn215, Asn218, Asn220, and
+Gln221 show significant energy contributions, either stabilizing
+or destabilizing the transition state (Figure 9c). The high
+energy contribution of Ser134 is related to its covalent bond
+with the substrate. Again, a cluster of residues with high
+Figure 9. Per-residue interaction energy contributions of individual amino acids to complex stabilization of TS1 and TS4 from the PETase
+mechanism calculated at the M06-2X/6-31+G(d,p)/MM level (in kcal/mol) (a) TS1-RS; (b) TS1-RS highlighting the residues 200−230 (c) TS4-
+INT3; and (d) TS4-INT3 highlighting the residues 200−230. Interaction energies larger than 60 kcal/mol are labeled.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7495
+interaction can be seen in the region 200 to 230 (Figure 9d),
+but differently from Step 1, we have seen a great number of
+attractive interactions with residues Gly208, Gly209, His211,
+Cys213, Asn215, and Gln221 playing an important role in the
+MHET release.
+Residues such as Arg254, Tyr61, and Cys213 exemplify the
+nuanced interplay of repulsive and attractive contributions in
+transition state stabilization. Arg254′s notable decrease in
+energy contribution (−260.11 kcal/mol) could reflect a
+reduction in electrostatic repulsion during TS1 formation,
+which is critical for stabilizing the PET subunit 4 that is located
+far away from the active site. This indicates Arg254′s pivotal
+role in neutralizing repulsive forces that could help stabilize the
+transition state. Similarly, a drastic energy decrease is observed
+for Tyr61 (−274.20 kcal/mol), which could be a result of the
+coordination of the PET monomer 1, due to the significant
+movements required in the first steps of the reaction (Figure
+10a). Cys213′s significant energy increase (176.47 kcal/mol)
+suggests a shift toward repulsive interactions, likely due to its
+role in orienting the substrate as it is strategically positioned
+between subunits 3 and 4, thus highlighting its essential
+contribution to maintaining a favorable energetic environment
+for the transition state. On the other hand, during the
+formation of TS4, its role is inverted as the movement of the
+end chain of PET is considerably larger than in the first steps
+of the mechanism (Figure 10b). Figure 10 depicts the
+transition states’ most significant residues, obtained by
+decomposition analysis during the PETase acylation and
+deacylation steps. These steps are critical because they involve
+the formation of a covalent acyl-enzyme intermediate and the
+release of the product, a key component of the enzyme’s
+catalytic mechanism.
+In addition to the interactions that define the central role of
+the catalytic serine and histidine residues, these findings
+highlight the presence of aromatic residues, such as tryptophan
+and tyrosine, which stabilize both transition states and provide
+a hydrophobic environment suitable for catalysis. However,
+their exact contributions may differ, with Trp159 in TS1 and
+Trp133 in TS4, indicating subunit-specific interactions with
+the substrate. The differences in the electrostatic environment
+between TS1 and TS4 provide insight into the fine-tuning
+required for each step. TS1, for example, contains Arg97 and
+Met135, whose contributions may not be absent in TS4,
+implying a distinct electrostatic and structural environment for
+the acylation step. In contrast, TS4 has residues such as
+Asn220 and Gln221, indicating a unique network of hydrogen
+bonds important for the deacylation process.
+Electrostatic contributions to PETase TS1 are mostly
+concentrated in the first subunit, but in TS4, these
+contributions move to the third and fourth subunits. These
+differences in the electrostatic interactions during the reaction
+could be attributed to the preparation of the PETase for
+nucleophilic attack in the first step and the product release in
+the final step of the reaction.
+The residual decomposition analysis further refines our
+understanding of the catalytic mechanism by isolating the
+contributions of individual amino acid residues to the total
+electrostatic interaction energy. This approach not only aids in
+identifying key residues that stabilize or destabilize transition
+states and intermediates, but also provides new opportunities
+for enzyme engineering by pinpointing targets for mutation or
+structural modification. These findings are helpful for creating
+enzymes with improved catalytic capabilities, as seen by the
+important roles that residues like Tyr61, Ser134, and His211
+play in stabilizing transition states. Recent studies have
+emphasized the crucial role of noncovalent interactions in
+maintaining the three-dimensional structure and function of
+proteins.
+52
+With our decomposition analysis, we could observe
+that this flexibility is particularly evident in the acylation step of
+PETase, where interactions between Met135, Tyr61, and the
+first ring of the PET polymer were crucial for the stabilization
+of the oxyanion (Figures 8a and 10a). The interaction
+contribution of each residue can be found in Supporting
+Information.
+Simulation and experimental data are useful for machine
+learning methods applied in the discovery and annotation of
+promising enzymes, as well as in suggesting beneficial
+mutations for improving known targets.
+53,54
+Indeed, combining
+experimental data on mutations and catalysis
+55−57
+with the
+computational interaction energies of different residues and
+their contributions to catalysis using machine learning (ML)
+algorithms may offer opportunities to design new, more
+effective catalytic systems. By analyzing the electrostatic
+profiles during catalysis obtained from QM/MM of enzymes
+such as PETase, we aim to create a ML model to predict the
+electrostatic impacts of mutations to predict beneficial
+mutations, optimize enzyme design for improved catalytic
+properties, and accelerate the discovery of efficient enzyme
+variants. Additionally, it is possible to develop a comprehensive
+mutation database from MD simulations and QM/MM
+Figure 10. Transition State Analysis of IsPETase Enzyme Catalysis. (a) TS1 Acylation Step with Key Residues from Per-Residue Interaction
+Energy Analysis Highlighted; (b) TS4 Deacylation Step with Corresponding Residue Interactions. The PET tetramer is green, while the key
+residues and protein are blue. The transparent green color represents the RS and TI2 PET conformations.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7496
+calculations. This integrated approach may accelerate the pace
+of enzyme engineering, opening new possibilities for creating
+catalytic systems specifically designed to degrade synthetic
+polymers like PET.
+■
+CONCLUSIONS
+We used the QM/MM approach to investigate PET
+degradation by IsPETase, providing a detailed analysis of the
+energetics involved in the formation of the product mono(2-
+hydroxyethyl) terephthalic acid (MHET). The acylation step
+simulations, focusing on the formation of tetrahedral
+intermediate 1 (TI1), unveiled two potential paths: a
+concerted mechanism through TS1 and a stepwise pathway
+via TS1′ and TS2′. The FES results indicated an endergonic
+reaction for the formation of TI1, aligning with prior
+computational insights. Further exploration into the deacyla-
+tion process elucidated the formation of tetrahedral
+intermediate 2 (TI2), a critical stage where a water molecule
+intervenes in the PET breakdown. Furthermore, residual
+decomposition analysis identified specific amino acid residues
+that contribute to stabilization or destabilization of the
+transition states. Our investigation highlighted that a cluster
+of residues, particularly in the 200−230 region, exhibited
+markedly positive energy contributions during the acylation,
+implying a potential site for structural modifications or targeted
+mutations. On the other hand, the same region provided
+negative energy contributions during the last step of the
+reaction. Overall, the energetic values obtained from our 2D-
+PMF for the acylation step using QM/MM potential are
+consistent with previous studies. This result can be used for
+exploring the mechanism of PET hydrolysis with less
+computational cost compared with previous simulations,
+which could be an important tool for designing IsPETase
+variants if one must explore key mutations that would affect
+the activation energy. Understanding the degradation of PET
+into its monomeric components is crucial for the engineering
+of enzyme systems tailored for PET degradation.
+■
+ASSOCIATED CONTENT
+*
+sı
+Supporting Information
+The Supporting Information is available free of charge at
+https://pubs.acs.org/doi/10.1021/acs.jpcb.4c02207.
+Oxyanion hole formed by Tyr61 and Met135 during
+acylation; transition state structure for TS2; TS1′, TS3′,
+TS4′; average key distances (Å) for structures obtained
+from 2D-PMF; methods, softwares, and PDB structures
+(PDF)
+Per-residue interaction energy calculated at the M06-
+2X/6-31+G(d,p)/MM level (XLS)
+■
+AUTHOR INFORMATION
+Corresponding Author
+Jero ̂nimo Lameira − Institute of Biological Sciences, Federal
+University of Para, 66075-110 Belem, Para, Brazil;
+orcid.org/0000-0001-7270-1517; Email: lameira@
+ufpa.br
+Authors
+Alberto M. dos Santos − Institute of Chemistry and Centre for
+Computer in Engineering and Sciences, University of
+Campinas (UNICAMP), Campinas 13084-862 Sao Paulo,
+Brazil
+Clauber H. S. da Costa − Institute of Chemistry and Centre
+for Computer in Engineering and Sciences, University of
+Campinas (UNICAMP), Campinas 13084-862 Sao Paulo,
+Brazil
+Pedro H. A. Silva − Institute of Biological Sciences, Federal
+University of Para, 66075-110 Belem, Para, Brazil
+Munir S. Skaf − Institute of Chemistry and Centre for
+Computer in Engineering and Sciences, University of
+Campinas (UNICAMP), Campinas 13084-862 Sao Paulo,
+Brazil;
+ orcid.org/0000-0001-7485-1228
+Complete contact information is available at:
+https://pubs.acs.org/10.1021/acs.jpcb.4c02207
+Author Contributions
+The manuscript was written with the contributions of all
+authors. All authors have given their approval to the final
+version of the manuscript.
+Funding
+This investigation has been supported by grants from the
+Fundação de Amparo a ̀ Pesquisa do Estado de Sa ̃o Paulo
+(FAPESP) (grants 2013/08293-7, 2022/04695-2, and 2022/
+04703-5). J.L. thanks the National Council for Scientific and
+Technological Development (CNPQ grant 305182/2021-8)
+for their financial support. The Article Processing Charge for
+the publication of this research was funded by the
+Coordination for the Improvement of Higher Education
+Personnel - CAPES (ROR identifier: 00x0ma614).
+Notes
+The authors declare no competing financial interest.
+■
+ACKNOWLEDGMENTS
+We also thank the COARACI Supercomputer provided by the
+Centre for Computer in Engineering and Sciences (CCES/
+UNICAMP), the Supercomputer Santos Dumont (SDumont)
+provided by the Laboratório de Computação Científica
+(LNCC), and the Centro de Computac ̧ a ̃ o de Alto
+Desempenho (CCAD UFPA).
+■
+REFERENCES
+(1) Jambeck, J. R.; Geyer, R.; Wilcox, C.; Siegler, T. R.; Perryman,
+M.; Andrady, A.; Narayan, R.; Law, K. L. Plastic Waste Inputs from
+Land into the Ocean. Science 2015, 347 (6223), 768−771.
+(2) Barnes, D. K. A.; Galgani, F.; Thompson, R. C.; Barlaz, M.
+Accumulation and Fragmentation of Plastic Debris in Global
+Environments. Philos. Trans. R. Soc., B 2009, 364 (1526), 1985−1998.
+(3) Picó, Y.; Barceló, D. Analysis and Prevention of Microplastics
+Pollution in Water: Current Perspectives and Future Directions. ACS
+Omega 2019, 4 (4), 6709−6719.
+(4) Restrepo-Flórez, J.-M.; Bassi, A.; Thompson, M. R. Microbial
+Degradation and Deterioration of Polyethylene - A Review. Int.
+Biodeterior. Biodegrad. 2014, 88, 83−90.
+(5) Brunner, I.; Fischer, M.; Ru ̈ thi, J.; Stierli, B.; Frey, B. Ability of
+Fungi Isolated from Plastic Debris Floating in the Shoreline of a Lake
+to Degrade Plastics. PLoS One 2018, 13 (8), No. e0202047.
+(6) Clark, R. A.; Shaver, M. P. Depolymerization within a Circular
+Plastics System. Chem. Rev. 2024, 124 (5), 2617−2650.
+(7) Yoshida, S.; Hiraga, K.; Takehana, T.; Taniguchi, I.; Yamaji, H.;
+Maeda, Y.; Toyohara, K.; Miyamoto, K.; Kimura, Y.; Oda, K. A
+Bacterium That Degrades and Assimilates Poly(Ethylene Tereph-
+thalate). Science 2016, 351 (6278), 1196−1199.
+(8) Tournier, V.; Topham, C. M.; Gilles, A.; David, B.; Folgoas, C.;
+Moya-Leclair, E.; Kamionka, E.; Desrousseaux, M. L.; Texier, H.;
+Gavalda, S.; et al. An Engineered PET Depolymerase to Break down
+and Recycle Plastic Bottles. Nature 2020, 580 (7802), 216−219.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7497
+(9) Chen, Z.; Wang, Y.; Cheng, Y.; Wang, X.; Tong, S.; Yang, H.;
+Wang, Z. Efficient Biodegradation of Highly Crystallized Polyethylene
+Terephthalate through Cell Surface Display of Bacterial PETase. Sci.
+Total Environ. 2020, 709, No. 136138.
+(10) Son, H. F.; Cho, I. J.; Joo, S.; Seo, H.; Sagong, H.-Y.; Choi, S.
+Y.; Lee, S. Y.; Kim, K.-J. Rational Protein Engineering of Thermo-
+Stable PETase from Ideonella Sakaiensis for Highly Efficient PET
+Degradation. ACS Catal. 2019, 9 (4), 3519−3526.
+(11) Taniguchi, I.; Yoshida, S.; Hiraga, K.; Miyamoto, K.; Kimura,
+Y.; Oda, K. Biodegradation of PET: Current Status and Application
+Aspects. ACS Catal. 2019, 9 (5), 4089−4105.
+(12) Tanasupawat, S.; Takehana, T.; Yoshida, S.; Hiraga, K.; Oda, K.
+Ideonella Sakaiensis Sp. Nov., Isolated from a Microbial Consortium
+That Degrades Poly(Ethylene Terephthalate). Int. J. Syst. Evol.
+Microbiol. 2016, 66 (8), 2813−2818.
+(13) Palm, G. J.; Reisky, L.; Böttcher, D.; Mu ̈ ller, H.; Michels, E. A.
+P.; Walczak, M. C.; Berndt, L.; Weiss, M. S.; Bornscheuer, U. T.;
+Weber, G. Structure of the Plastic-Degrading Ideonella Sakaiensis
+MHETase Bound to a Substrate. Nat. Commun. 2019, 10 (1),
+No. 1717.
+(14) Han, X.; Liu, W.; Huang, J. W.; Ma, J.; Zheng, Y.; Ko, T. P.; Xu,
+L.; Cheng, Y. S.; Chen, C. C.; Guo, R. T. Structural Insight into
+Catalytic Mechanism of PET Hydrolase. Nat. Commun. 2017, 8 (1),
+No. 2106.
+(15) Fecker, T.; Galaz-Davison, P.; Engelberger, F.; Narui, Y.;
+Sotomayor, M.; Parra, L. P.; Ramírez-Sarmiento, C. A. Active Site
+Flexibility as a Hallmark for Efficient PET Degradation by I. Sakaiensis
+PETase. Biophys. J. 2018, 114 (6), 1302−1312.
+(16) Joo, S.; Cho, I. J.; Seo, H.; Son, H. F.; Sagong, H.-Y. Y.; Shin, T.
+J.; Choi, S. Y.; Lee, S. Y.; Kim, K.-J. J. Structural Insight into
+Molecular Mechanism of Poly(Ethylene Terephthalate) Degradation.
+Nat. Commun. 2018, 9 (1), No. 382.
+(17) Kawai, F.; Kawabata, T.; Oda, M. Current Knowledge on
+Enzymatic PET Degradation and Its Possible Application to Waste
+Stream Management and Other Fields. Appl. Microbiol. Biotechnol.
+2019, 103 (11), 4253−4268.
+(18) Chen, C. C.; Han, X.; Ko, T. P.; Liu, W.; Guo, R. T. Structural
+Studies Reveal the Molecular Mechanism of PETase. FEBS J. 2018,
+285 (20), 3717−3723.
+(19) Boneta, S.; Arafet, K.; Moliner, V. QM/MM Study of the
+Enzymatic Biodegradation Mechanism of Polyethylene Terephthalate.
+J. Chem. Inf. Model. 2021, 61 (6), 3041−3051.
+(20) Jerves, C.; Neves, R. P. P.; Ramos, M. J.; da Silva, S.; Fernandes,
+P. A. Reaction Mechanism of the PET Degrading Enzyme PETase
+Studied with DFT/MM Molecular Dynamics Simulations. ACS Catal.
+2021, 11 (18), 11626−11638.
+(21) Knott, B. C.; Erickson, E.; Allen, M. D.; Gado, J. E.; Graham,
+R.; Kearns, F. L.; Pardo, I.; Topuzlu, E.; Anderson, J. J.; Austin, H. P.;
+et al. Characterization and Engineering of a Two-Enzyme System for
+Plastics Depolymerization. Proc. Natl. Acad. Sci. U.S.A. 2020, 117
+(41), 25476−25485.
+(22) da Costa, C. H. S.; Santos, A. M.; Alves, C. N.; Martí, S.;
+Moliner, V.; Santana, K.; Lameira, J. Assessment of the PETase
+Conformational Changes Induced by Poly(Ethylene Terephthalate)
+Binding. Proteins 2021, 89 (10), 1340−1352.
+(23) Roth, C.; Wei, R.; Oeser, T.; Then, J.; Föllner, C.;
+Zimmermann, W.; Sträter, N. Structural and Functional Studies on
+a Thermostable Polyethylene Terephthalate Degrading Hydrolase
+from Thermobifida Fusca. Appl. Microbiol. Biotechnol. 2014, 98 (18),
+7815−7823.
+(24) Herrero Acero, E.; Ribitsch, D.; Steinkellner, G.; Gruber, K.;
+Greimel, K.; Eiteljoerg, I.; Trotscha, E.; Wei, R.; Zimmermann, W.;
+Zinn, M.; et al. Enzymatic Surface Hydrolysis of PET: Effect of
+Structural Diversity on Kinetic Properties of Cutinases from
+Thermobifida. Macromolecules 2011, 44 (12), 4632−4640.
+(25) Roux, B. The Calculation of the Potential of Mean Force Using
+Computer Simulations. Comput. Phys. Commun. 1995, 91 (1−3),
+275−282.
+(26) Field, M. J. The PDynamo Program for Molecular Simulations
+Using Hybrid Quantum Chemical and Molecular Mechanical
+Potentials. J. Chem. Theory Comput. 2008, 4, 1151.
+(27) Schenter, G. K.; Garrett, B. C.; Truhlar, D. G. Generalized
+Transition State Theory in Terms of the Potential of Mean Force. J.
+Chem. Phys. 2003, 119 (12), 5828.
+(28) dos Santos, A. M.; Lima, A. H.; Alves, C. N.; Lameira, J.
+Unraveling the Addition−Elimination Mechanism of EPSP Synthase
+through Computer Modeling. J. Phys. Chem. B 2017, 121 (37), 8626−
+8637.
+(29) Olmos-Asar, J. A.; Rapallo, A.; Mariscal, M. M. Development of
+a Semiempirical Potential for Simulations of Thiol−Gold Interfaces.
+Application to Thiol-Protected Gold Nanoparticles. Phys. Chem.
+Chem. Phys. 2011, 13 (14), 6500−6506.
+(30) Martí, S.; Moliner, V.; S
+́
+widerek, K. Examination of the
+Performance of Semiempirical Methods in QM/MM Studies of the
+SN2-like Reaction of an Adenylyl Group Transfer Catalysed by
+ANT4. Theor. Chem. Acc. 2019, 138 (11), No. 120.
+(31) Nam, K.; Cui, Q.; Gao, J.; York, D. M. Specific Reaction
+Parametrization of the AM1/d Hamiltonian for Phosphoryl Transfer
+Reactions: H, O, and P Atoms. J. Chem. Theory Comput. 2007, 3 (2),
+486−504.
+(32) Ahmadi, S.; Herrera, L. B.; Chehelamirani, M.; Hostas ̌, J.; Jalife,
+S.; Salahub, D. R. Multiscale modeling of enzymes: QM-cluster, QM/
+MM, and QM/MM/MD: A tutorial review. Int. J. Quantum Chem.
+2018, 118, No. e25558.
+(33) López-Canut, V.; Roca, M.; Bertrán, J.; Moliner, V.; Tun ̃ ón, I.
+Theoretical Study of Phosphodiester Hydrolysis in Nucleotide
+Pyrophosphatase/Phosphodiesterase. Environmental Effects on the
+Reaction Mechanism. J. Am. Chem. Soc. 2010, 132 (20), 6955−6963.
+(34) Zalatan, J. G.; Herschlag, D. Alkaline Phosphatase Mono- and
+Diesterase Reactions: Comparative Transition State Analysis. J. Am.
+Chem. Soc. 2006, 128 (4), 1293−1303.
+(35) Huang, J.; Mackerell, A. D. CHARMM36 All-Atom Additive
+Protein Force Field: Validation Based on Comparison to NMR Data.
+J. Comput. Chem. 2013, 34, 2135−2145.
+(36) Liao, R. Z.; Thiel, W. Convergence in the QM-Only and QM/
+MM Modeling of Enzymatic Reactions: A Case Study for Acetylene
+Hydratase. J. Comput. Chem. 2013, 34 (27), 2389−2397.
+(37) Jindal, G.; Warshel, A. Exploring the Dependence of QM/MM
+Calculations of Enzyme Catalysis on the Size of the QM Region. J.
+Phys. Chem. B 2016, 120 (37), 9913−9921.
+(38) Zhao, Y.; Truhlar, D. G. The M06 Suite of Density Functionals
+for Main Group Thermochemistry, Thermochemical Kinetics,
+Noncovalent Interactions, Excited States, and Transition Elements:
+Two New Functionals and Systematic Testing of Four M06-Class
+Functionals and 12 Other Function. Theor. Chem. Acc. 2008, 120 (1),
+215−241.
+(39) Neese, F. Software Update: The ORCA Program System-
+Version 5.0. Wiley Interdiscip. Rev.: Comput. Mol. Sci. 2022, 12 (5),
+No. e1606, DOI: 10.1002/wcms.1606.
+(40) Ruiz-Pernía, J. J.; Silla, E.; Tun ̃ ón, I.; Martí, S.; Moliner, V.
+Hybrid QM/MM Potentials of Mean Force with Interpolated
+Corrections. J. Phys. Chem. B 2004, 108 (24), 8427−8433.
+(41) Gundelach, L.; Fox, T.; Tautermann, C. S.; Skylaris, C. K.
+Protein−Ligand Free Energies of Binding from Full-Protein DFT
+Calculations: Convergence and Choice of Exchange−Correlation
+Functional. Phys. Chem. Chem. Phys. 2021, 23 (15), 9381−9393.
+(42) López, R.; Díaz, N.; Francisco, E.; Martín-Pendás, A.; Suárez,
+D. QM/MM Energy Decomposition Using the Interacting Quantum
+Atoms Approach. J. Chem. Inf. Model. 2022, 62 (6), 1510−1524.
+(43) Lameira, J.; Alves, C. N.; Tun ̃ ón, I.; Martí, S.; Moliner, V.
+Enzyme Molecular Mechanism as a Starting Point to Design New
+Inhibitors: A Theoretical Study of O-GlcNAcase. J. Phys. Chem. B
+2011, 115 (20), 6764−6775.
+(44) S
+́
+widerek, K.; Martí, S.; Moliner, V. Theoretical Studies of HIV-
+1 Reverse Transcriptase Inhibition. Phys. Chem. Chem. Phys. 2012, 14
+(36), 12614−12624.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7498
+(45) Longhi, S.; Cambillau, C. Structure-Activity of Cutinase, a
+Small Lipolytic Enzyme. Biochim. Biophys. Acta, Mol. Cell Biol. Lipids
+1999, 1441 (2−3), 185−196.
+(46) Aboelnga, M. M.; Kalyaanamoorthy, S. QM/MM Investigation
+to Identify the Hallmarks of Superior PET Biodegradation Activity of
+PETase over Cutinase. ACS Sustainable Chem. Eng. 2022, 10 (48),
+15857−15868.
+(47) Shrimpton-Phoenix, E.; Mitchell, J. B. O.; Bu ̈ hl, M. Computa-
+tional Insights into the Catalytic Mechanism of Is-PETase: An
+Enzyme Capable of Degrading Poly(Ethylene) Terephthalate. Chem. -
+Eur. J. 2022, 28 (70), No. e202201728.
+(48) Bushnell, E. A. C.; Huang, W.; Gauld, J. W. Applications of
+Potential Energy Surfaces in the Study of Enzymatic Reactions. Adv.
+Phys. Chem. 2012, 2012 (1), No. 867409.
+(49) Warshel, A.; Weiss, R. M. An Empirical Valence Bond
+Approach for Comparing Reactions in Solutions and in Enzymes. J.
+Am. Chem. Soc. 1980, 102 (20), 6218−6226.
+(50) Zheng, M.; Li, Y.; Dong, W.; Feng, S.; Zhang, Q.; Wang, W.
+Computational Biotransformation of Polyethylene Terephthalate by
+Depolymerase: A QM/MM Approach. J. Hazard. Mater. 2022, 423
+(Pt A), No. 127017, DOI: 10.1016/j.jhazmat.2021.127017.
+(51) De Sousa, S. M. R.; Guimara ̃es, L.; Ferrari, J. L.; De Almeida,
+W. B.; Nascimento, C. S. A DFT Investigation on the Host/Guest
+Inclusion Process of Prilocaine into β-Cyclodextrin. Chem. Phys. Lett.
+2016, 652, 123−129.
+(52) Gibbs, C. A.; Weber, D. S.; Warren, J. J. Clustering of Aromatic
+Amino Acid Residues around Methionine in Proteins. Biomolecules
+2022, 12 (1), 6.
+(53) Kouba, P.; Kohout, P.; Haddadi, F.; Bushuiev, A.; Samusevich,
+R.; Sedlar, J.; Damborsky, J.; Pluskal, T.; Sivic, J.; Mazurenko, S.
+Machine Learning-Guided Protein Engineering. ACS Catal. 2023, 13
+(21), 13863−13895.
+(54) Ao, Y. F.; Dörr, M.; Menke, M. J.; Born, S.; Heuson, E.;
+Bornscheuer, U. T. Data-Driven Protein Engineering for Improving
+Catalytic Activity and Selectivity. ChemBioChem 2023, 25 (3),
+No. e202300754.
+(55) Nikam, R.; Kulandaisamy, A.; Harini, K.; Sharma, D.; Michael
+Gromiha, M. ProThermDB: Thermodynamic Database for Proteins
+and Mutants Revisited after 15 Years. Nucleic Acids Res. 2021, 49
+(D1), D420−D424.
+(56) Xavier, J. S.; Nguyen, T. B.; Karmarkar, M.; Portelli, S.;
+Rezende, P. M.; Velloso, J. P. L.; Ascher, D. B.; Pires, D. E. V.
+ThermoMutDB: A Thermodynamic Database for Missense Muta-
+tions. Nucleic Acids Res. 2021, 49 (D1), D475−D479.
+(57) Carlin, D. A.; Hapig-Ward, S.; Chan, B. W.; Damrau, N.; Riley,
+M.; Caster, R. W.; Bethards, B.; Siegel, J. B. Thermal Stability and
+Kinetic Constants for 129 Variants of a Family 1 Glycoside Hydrolase
+Reveal That Enzyme Activity and Stability Can Be Separately
+Designed. PLoS One 2017, 12 (5), No. e0176255.
+The Journal of Physical Chemistry B pubs.acs.org/JPCB Article
+https://doi.org/10.1021/acs.jpcb.4c02207
+J. Phys. Chem. B 2024, 128, 7486−7499
+7499

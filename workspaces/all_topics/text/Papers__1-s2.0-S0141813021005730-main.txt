@@ -1,0 +1,796 @@
+Protein engineering of stableIsPETase for PET plastic degradation
+by Premuse
+Xiangxi Menga,1, Lixin Yanga,1, Hanqing Liua,1,Q i n g b i nL ia,b, Guoshun Xua, Yan Zhanga,c, Feifei Guana,
+Yuhong Zhanga, Wei Zhanga,N i n g f e n gW ua,⁎,J i a nT i a na,⁎
+a Biotechnology Research Institute, Chinese Academy of Agricultural Sciences, Beijing 100081, China
+b State Key Laboratory of Microbial Technology, Shandong University, Qingdao, China
+c College of Food Science and Technology, Agricultural University of Hebei, Baoding, Hebei Province 071001, China
+abstractarticle info
+Article history:
+Received 16 December 2020
+Received in revised form 9 March 2021
+Accepted 10 March 2021
+Available online 19 March 2021
+Keywords:
+Protein engineering
+Poly(ethylene terephthalate) (PET) biodegra-
+dation
+IsPETase (PETase fromIdeonella Sakaiensis)
+Poly(ethylene terephthalate) (PET) is used widely by human beings, but is very difﬁcult to degrade. Up to now,
+the PET degradation effect of PETase fromIdeonella sakaiensis201-F6 (IsPETase) variants with low stability and
+activity was not ideal. In this study, a mutation design tool, Premuse, was developed to integrate the sequence
+alignment and quantitative selection of the preferred mutations based on natural sequence evolution. Ten single
+point mutants were selected from 1486 homologous sequences using Premuse, and then two mutations (W159H
+and F229Y) with improved stability were screened from them. The derived double point mutant, W159H/F229Y,
+exhibited a strikingly enhanced enzymatic performance. ItsT
+m and catalytic efﬁciency values (kcat/Km)r e s p e c -
+tively increased by 10.4 °C and 2.0-fold using p-NPP as the substrate compared with wild type. The degradation
+activity for amorphous PET was increased by almost 40-fold in comparison with wild type at 40 °C in 24 h. Addi-
+tionally, the variant could catalyze biodegradation of PET bottle preform at a mean rate of 23.4 mgPET/h/mgenzyme.
+This study allowed us to design the mutation more efﬁciently, and provides a tool for achieving biodegradation of
+PET pollution under mild natural environments.
+© 2021 Published by Elsevier B.V.
+1. Introduction
+Poly(ethylene terephthalate) (PET) is one of the most widely
+distributed synthetic plastic pollutants worldwide, due to its desirable
+properties of durability, low-cost, massive yield and heavy usage [1].
+Human-made PET has been present in the ecosystem for over
+100 years [2], and is a burgeoning threat because of accelerated produc-
+tion [3–6]. Micro- and nanoplastics have been reported as present in an-
+imals and food products, meaning they are part of human food chains
+[7,8], and potentially threaten human health [9]. The presence of PET
+in ecosystems has provided a long time for decomposers in the bio-
+sphere to evolve to access PET as a novel carbon source. PET can also
+be depolymerized by several other cutinase enzymes. However, PET
+biodegradation catalyzed by these natural enzymes is inefﬁcient and
+time-consuming [6,10–13]. Therefore, engineering of these PETases is
+an important issue.
+Not content with the evolutionary speed of natural enzymes, several
+groups have worked on engineering PETases. One potential solution for
+this problem is the enhancement of operational temperatures of
+thermophilic PETases close to the PET glass transition temperature
+(~76 °C) [14,15]. Tournier et al. succeeded in creating an ICCG variant
+of LCC by saturation mutagenesis, by increasing the operational temper-
+atures from 65 °C to 72 °C, so that it could break down PET bottle pre-
+forms [16]. Although this kind of approach provides a solution for
+industrialized PET recycling, it is of limited help for environmental engi-
+neering bacteria construction under mild environmental temperatures.
+However, the PETase produced by a strain of Ideonella sakaiensis
+(IsPETase) identiﬁed by Yoshida et al. [17] can degrade PET at ambient
+conditions. The engineering ofIsPETase can address this problem, and
+several groups have reported research advances. For example, Kim's
+group introduced S121E/D186H/R280A intoIsPETase, increasing the op-
+erational temperature of the variant by 10 °C and resulting in 14-fold
+higher PET degradation at 40 °C than the wild type [18]. IsPETase, how-
+ever, exhibits poor durability, and most of its variants can only catalyze
+amorphous PET biodegradation with slightly higher enzyme activity
+[18–21].
+Consensus protein design is a popular semi-rational design strategy
+for protein stability. It is based on the hypothesis that the respective
+consensus amino acids contribute more than the non-conserved
+amino acids at a speciﬁc position to the stability of the protein. The con-
+sensus design approach has been widely successful in improving the
+stabilities of proteins, resulting in melting temperatures increased by
+International Journal of Biological Macromolecules 180 (2021) 667–676
+⁎ Corresponding authors.
+E-mail addresses:wuningfeng@caas.cn(N. Wu),tianjian@caas.cn(J. Tian).
+1 These authors have contributed equally to this work.
+https://doi.org/10.1016/j.ijbiomac.2021.03.058
+0141-8130/© 2021 Published by Elsevier B.V.
+Contents lists available atScienceDirect
+International Journal of Biological Macromolecules
+journal homepage: http://www.elsevier.com/locate/ijbiomac
+10–32 °C in some proteins [22]. However, the key step of the method,
+creating a good multiple sequence alignment (MSA) of the sequences,
+is a major computational challenge especially in large, diverse sequence
+datasets. In addition, the numerous columns in the MSA make it difﬁcult
+to select the potential mutations, and mutation design using the method
+is generally considered more art than science [22–24].
+With the arrival of big-data and expanded sample size, large num-
+bers of genes have been sequenced from diverse environments and de-
+posited in public databases. Multiple homologs (>1000) of most
+proteins can thus be easily acquired. Sequences from big-data provide
+us a new way to analyze residue evolution and its effect on protein
+structure and function. A standardized method is needed to deal with
+such big-data and mine the useful mutants from this naturally evolved
+sequence pool.
+In this study, a web tool (Premuse,http://www.elabcaas.cn/pird/
+premuse.html) was developed to predict mutations based on natural
+sequence evolution. Pairwise alignment was employed to construct
+the ideal alignment and avoid the calculations required for MSA. The
+calculated position-speciﬁc amino acid probabilities (PSAP) were used
+to quantitatively select the preferred mutations. A series of evaluation
+criteria was introduced to establish a procedure and applied to the en-
+zyme IsPETase. The W159H/F229Y derived from Premuse exhibited ex-
+cellent enzymatic properties. Its melting temperature increased by
+10.4 °C, and its value ofkcat/Km and half-life were respectively twice
+and three times as much as that of wild type. As a result, the variant
+could catalyze biodegradation of PET bottle preform in 24 to 72 h, at a
+mean rate of 23.4 mgPET/h/mgenzyme, and it outperformed most of the
+other variants ofIsPETase reported so far, which could only depolymer-
+ize amorphous or low-crystalline PET.
+W159H/F229Y was screened from only ten alternative variants. The
+excellent success rate was because the strategy took full advantage of
+evolutionary information contained in homologous protein sequences
+[22]. Premuse could be an exquisite and efﬁcient option for protein en-
+gineering with a high success rate but a low workload.
+2. Materials and methods
+2.1. Computational design of IsPETase by Premuse
+The sequence information of poly(ethylene terephthalate) hydro-
+lases (PETase)IsPETase (Accession NO: 6EQD_A) and its 1486 homologs
+(identity >45%, coverage >50%) were acquired from databases of NCBI.
+The pairwise alignment tool, needle in EMBoss [25], was used to carry
+out the sequence alignment between the target sequence and each of
+the similar proteins. All of the homologs were trimmed to the same
+length as and aligned to the target sequence. Then the aligned homologs
+were weighted and the position-speciﬁc amino acid probabilities
+(PSAP) of the target sequence were calculated [26]. If the evolutionary
+selection probability of the mutation was greater than 65% of the prob-
+ability of the wild type, the amino acids were selected for the variant's
+construction. The above mutation selection protocol was integrated as
+a web tool, Premuse (Premuse,http://www.elabcaas.cn/pird/premuse.
+html), to design the potential mutations.
+2.2. Plasmids construction
+The nucleotide sequences encoding signal peptides predicted with
+SignalP [27]( http://www.cbs.dtu.dk/services/SignalP/) were removed.
+Then the gene encodingIsPETase was commercially synthesized with
+codon optimization by GenScript Co. Ltd. (Nanjing, China) and cloned
+into theHindIII andNcoIs i t e so fp E T - 2 7 b .
+2.3. Variant construction
+The single point mutations were cloned intoIsPETase by amplifying
+full-length plasmid using Phanta Max Super-Fidelity DNA Polymerase
+(Vazyme, Nanjing, China) with partially overlapping oligonucleotides.
+The product of polymerase chain reaction (PCR) was circularized by ho-
+mologous recombination using ClonExpress II One Step Cloning Kit
+(Vazyme, Nanjing, China) and transformed inE. coliBL21 (DE3). The
+DNA sequencing of variants was carried out by TSINGKE Co. Ltd. (Bei-
+jing, China). The sequences ofIsPETase andIsPETase
+W159H/F229Y were
+also cloned into theHindIII andNcoI sites of pET-30a for large scale pro-
+tein production. The primers used for cloning and site-directed muta-
+genesis are listed in Table S1.
+2.4. Protein expression and puriﬁcation
+As i n g l ec l o n eo fE. coliBL21 (DE3) cells containing the gene of a var-
+iant was inoculated in 5 mL LB medium with 50μg/mL kanamycin at
+37 °C, 220 rpm. Then the overnight culture was grown in LB medium
+with 50μg/mL kanamycin at 37 °C for 2 h to OD600 0.8–1.0, and then in-
+duced by 0.4 mM isopropylβ-D-thiogalactopyranoside (IPTG) at 16 °C,
+180 rpm for a further 20 h. TheE. coliBL21 (DE3) cells were harvested
+by centrifugation (7000 ×g, 5 min, 4 °C), and washed twice and
+suspended by binding buffer (50 mM Tris-HCL, 0.5 M NaCl, 5 mM imid-
+azole, pH 9.5). Then the cells were disrupted by ultrasonication. The cell
+precipitates were removed by centrifugation (12,000 ×g, 30 min, 4 °C)
+and ﬁltration (0.45-μm ﬁlter, Φ25mm, JINTENG). The supernatant was
+applied to a Ni-NTA afﬁnity column (Solarbio, Beijing) at 4 °C, then
+washed with binding buffer followed by wash buffer (50 mM Tris-HCl,
+0.5 M NaCl, 50 mM imidazole, pH 9.5). The target protein was eluted
+with elution buffer (50 mM Tris-HCl, 0.5 M NaCl, 500 mM imidazole,
+pH 9.5). The eluted fraction was applied to a dialysis membrane to
+wash out the imidazole in dialysis buffer (50 mM Tris-HCL, 0.5 M
+NaCl, pH 9.5) at 4 °C. After concentration with PEG 8000, the puriﬁed
+enzyme was stored in storage buffer (50 mM Tris-HCL, 0.5 M NaCl,
+20%(v/v) glycerol, pH 9.5) at−80 °C. Protein concentration was mea-
+sured by using a BCA Protein Assay Kit (CWBIO, Beijing).
+2.5. Variants screen and evaluation by p-nitrophenyl palmitate (p-NPP)
+colorimetric assay
+The PETase catalyzed ester bond hydrolysis resulted in PET depoly-
+merization, so that the ester bond ofp-nitrophenyl palmitate hydrolysis
+could be used for fast screening of variants. The puriﬁed protein solution
+(0.05 mg/mL, 2.5μL) was incubated at 50 °C for 30 min, then added into
+187.5 μL of 50 mM Tris buffer (pH 9.5) with 10μL of p-NPP solution
+(8 mM). After incubation for 10 min, 50μL of 10% (m/v) TCA was
+added to stop the reaction, and 50μL of 10% (m/v) Na2CO3 was added
+as a chromogenic agent. A total of 200μL of supernatant separated by
+centrifugation was injected in a thin-walled 96-well PCR plate. The pro-
+duction of p-nitrophenol (p-NP) was detected from the absorption at
+410 nm in a multiscan spectrophotometer (SpectraMax M2, Molecular
+Devices, US).
+2.6. Analytical assessment of melting temperature
+Thermal stability ofIsPETase and variants was determined by tem-
+perature melting curves in differential scanning calorimetry (MicroCal
+VP-Capillary DSC System, UN). Protein in storage buffer (~0.5 mg/mL,
+400 μL) was monitored by increasing temperature from 25 to 90 °C at
+a scanning rate of 200 °C/h. Melting temperature was determined
+from theﬁrst thermal shift curve.
+2.7. Analysis for thermostability of variants
+The variant proteins in storage solution (0.05 mg/mL) were incu-
+bated at 50 °C for 0, 5, 15, 30 and 60 min, and the residual activity was
+measured byp-nitrophenyl palmitate (p-NPP) colorimetric assay as
+stated above. The activity of enzyme without heat treatment was de-
+ﬁned as 100%.
+X. Meng, L. Yang, H. Liu et al. International Journal of Biological Macromolecules 180 (2021) 667–676
+668
+2.8. Analysis for the effects of temperature and pH on enzyme activity
+The optimum temperatures of variants were determined at temper-
+atures ranging from 25 °C to 60 °C in 50 mM Tris-HCl (pH 9.5). The op-
+timum pH of variants was measured in 50 mM glycine-NaOH with pH
+ranging from 8.5 to 10.5. The activity was determined by using ap-
+nitrophenyl palmitate (p-NPP) colorimetric assay.
+2.9. Kinetic analysis of variants for p-NPP
+Variant proteins (1.09 μM) were incubated in 50 mM Tris-HCl
+(pH 9.5) with 0.08, 0.2, 0.3, 0.4, 0.6, 0.8, 1, and 1.2μM at 40 °C. The p-
+NP produced was detected by a multiscan spectrophotometer as men-
+tioned above. Initial rates were plotted against p-NPP concentrations
+and the kinetic parameters were determined by using the Michaelis–
+Menten equation in Graph Pad Prism version 6 (GraphPad Software,
+San Diego, CA).
+2.10. Enzyme assays for BHET
+The puriﬁed protein solution (14 mg/mL, 0.1μL) was added into
+190 μL of 50 mM Tris buffer (pH 9.5) with 10μL of BHET solution
+(9 mM). After incubation for 5 min at 40 °C, the reaction was terminated
+by adding 100μL methyl alcohol. The reaction mixture was then ana-
+lyzed by HPLC, after centrifugation (10,000 ×g,5m i n )a n dﬁltering
+(0.22 μm).
+2.11. Enzyme assays for amorphous PETﬂoccule
+A Coca Cola bottle was cut into PET tablets (⌀6 mm, 10 mg), then dis-
+solved in 0.5 mL of 1,1,1,3,3,3-hexaﬂuoro-2-propanol. A total of 20μLo f
+this solution was added to 165μL reaction buffer (50 mM Tris-HCL, 20%
+(v/v) glycerol, pH 9.5), to generate amorphous PETﬂoccule. Variant pro-
+teins (15μL, 14 mg/mL) were added for PET degradation. After incuba-
+tion at 40 °C for 24 h, the reaction was terminated by adding 100μL
+methyl alcohol. After centrifugation (10,000 ×g,5m i n )a n dﬁltering
+(0.22 μm), the reaction mixture was analyzed by HPLC.
+2.12. HPLC analysis
+HPLC analysis was performed on a 1200 series HPLC system (Agilent
+Technologies, Santa Clara, CA, USA) equipped with a SunFire™ C18 col-
+umn (5μm, 44.6 × 250 mm, Waters, Massachusetts, USA). The column
+was developed with solvent A (ddH2O with 0.1% (v/v) triﬂuoroacetic
+acid) and methyl alcohol at aﬂow rate of 0.8 mL/min. The percentage
+of methyl alcohol was changed using a linear gradient from 1% to 5%
+over 0–5 min, and from 5% to 100% over 5–15 min. The detection wave-
+length was 240 nm.
+2.13. Enzyme assays for bottle grade PET preform
+A Coca Cola bottle was cut into PET tablets (⌀6 mm, 10 mg), then
+melted using an alcohol lamp and cooled down to make PET preform.
+A piece of preform was soaked in 200μL reaction buffer (50 mM Tris-
+HCL, 20% (v/v) glycerol, pH 9.5) with 15 μL of variant proteins
+(14 mg/mL). After 24 h, the weight of PET preform was measured, and
+the change of shape was photographed.
+2.14. LC-MS analyses
+HR-ESI-MS was performed on an Agilent 1260 HPLC/6520 QTOF-MS
+instrument (Santa Clara, CA, USA), equipped with an electrospray ioni-
+zation source and a Poroshell 120 SB-C18 column (2.7 μm,
+3.0 × 150 mm, Agilent, Santa Clara, CA, USA). The column was devel-
+oped with solvent A (ddH2O with 0.1% (v/v) formic acid) and methyl al-
+cohol at aﬂow rate of 0.55 mL/min. The percentage of methyl alcohol
+was changed using a linear gradient from 5% to 40% over 1–3m i n ,a n d
+from 40% to 50% over 3–7m i n .
+2.15. Molecular docking and molecular-dynamics (MD) simulations
+The wild-typeIsPETase three-dimensional structure was retrieved
+from the PDB database (PDB ID: 6EQD). The three-dimensional
+structures of the variants were constructed with Modeler 9.22 [27].
+The molecular docking consisting ofIsPETase and 2-hydroxyethyl-
+(monohydroxyethyl terephthalate)
+4 (2-HE(MHET)4) was performed
+by AutoDock vina 1.1.2 [28]and PyMOL 1.3 [29]. The substrate confor-
+mation in the complex structures was based on previous reports
+[30–32].
+MD simulations were carried out on wild-type and W159H/F229Y
+enzymes, in the free state, using the NAMD 2.12 [33] with CHARMM22
+[34] forceﬁeld. The procedure has been reported previously [35]. The
+protein structure was prepared for removing non-protein and hydrogen
+atoms using Discovery Studio 2.5 (https://discover.3ds.com/discovery-
+studio-visualizer-download). Protein molecules were placed in cubic
+boxes at a minimum of 12 Å distance from the edge and were solvated
+using TIP3P explicit water. To keep all systems neutral, 0.15 M NaCl was
+added. Simulations were carried out using periodic boundary conditions
+and a 12 Å cut-off for non-bonded interactions as well as a Particle Mesh
+Ewald for long-range electrostatics. A time step of 2 fs was used, and
+snapshots were saved every 1 ps. The protein was fully constrained,
+and the solvent minimized for 2000 steps using a conjugate gradient al-
+gorithm. The solvent was equilibrated for 100 ps under constant-
+temperature, constant-pressure NPT conditions. The solvent was then
+fully constrained, and the protein minimized for 2000 steps. The entire
+system was then minimized for another 2000 steps and equilibrated for
+100 ps under the same NPT conditions. Finally, a 20-ns MD simulation
+was performed at 400 K in constant-energy, constant-volume ensemble
+NVE conditions.
+2.16. Phylogenetic analysis of IsPETase mutational sites
+In total, 14 full-length protein sequences of known PETases
+reviewed by Taniguchi et al. [36] were aligned by ClustalW. The phylo-
+genetic analysis was performed with MEGA-X [37], and the guide tree
+was obtained on the basis of the neighbor-joining method using the
+p-distance model.
+2.17. Crystallinity analyses by differential scanning calorimetry (DSC)
+The crystallinity of bottle grade PET and preform were analyzed by
+the DSC (NETZSCH DSC 214) with the previously described method
+[38] at the ZHONG KE BAI CE Technology Service Company (Beijing,
+China). A sample of 3 mg was heated from 0 to 280 °C at 10 °C min
+−1.
+The heat of PET meltingΔHm and heat of PET cold crystallizationΔHc
+were determined by integrating areas (J g−1) under peaks. The heat of
+melting (100% crystalline PET)ΔHm
+0 is estimated to be 140.1 J g−1.P E T
+crystallinity is measured according to the following equation:
+%crystallinity¼j ΔHm j−jΔHc jðÞ =ΔHm
+0
+/C16/C17
+/C2 100
+3. Results
+3.1. Protein engineering for improving the stability of IsPETase using
+Premuse
+To design potential mutations from the large number of homologs, a
+protocol (Fig. 1) was proposed to integrate pairwise alignment [39], se-
+quence weighting [40], position-speciﬁc amino acid probabilities
+(PSAP) calculation [26], and preferred mutation selection. The sequence
+alignment between the target sequence and each of the similar proteins
+X. Meng, L. Yang, H. Liu et al. International Journal of Biological Macromolecules 180 (2021) 667–676
+669
+was calculated based on the Needleman-Wunsch alignment algorithm.
+The PSAP of the target sequence were calculated based on the Dirichlet
+mixture and sequence weighted methods. The mutations were quanti-
+tatively selected from the PSAP matrix, which has a higher probability
+of the mutation than the wild type. All of the calculations were inte-
+grated into a web tool (Fig. 1) to predict the mutations based on se-
+quence evolution (Premuse, http://www.elabcaas.cn/pird/premuse.
+html).
+To design the mutations ofIsPETase, 1486 sequences similar to
+IsPETase with more than 40% identity and 50% coverage were obtained
+from NCBI [41] with the tool BLASTP suite [42]. Ten mutations with
+large differences in the PSAP matrix between the mutation and wild
+type were selected based on the calculation of Premuse and are
+shown inTable 1. For instance, the wild-type amino acid at position
+159 was tryptophan (W), and the frequency of occurrence in the
+sequence alignments (Table 1) was 14.8%; however, the most highly
+conserved residue in the same site of homologs was histidine, at a
+frequency of 82.6%. It can be speculated that the function of mutation
+W159H could be more advantageous than wild type for maintaining
+structural or conformational stability of the protein.
+3.2. Characterization of variants improved thermal stability
+To evaluate the effect of the mutation on thermal stability, the genes
+of ten mutants and wild type were constructed in the expression plas-
+mid pET-30a(+). The protein expression was induced overnight at
+16 °C inE. colistrain BL21(DE3). As biodegradation of PET was time-
+consuming, the p-NPP colorimetric assay was carried out for prelimi-
+nary variant screening and enzymatic characterization. After incubation
+at 50 °C for half an hour, the remaining p-NPP hydrolysis activity of var-
+iants was determined. The wild type remained at 16.5%, while the resid-
+ual activities of G139S, W159H and F229Y were dramatically enhanced,
+at 59.2%, 78.4% and 51.5% respectively (Fig. 2A).
+To further conﬁrm the stability improvement, theTm values of vari-
+ants were also measured. TheTm value of G139S, 50.5 °C, was similar to
+that of wild type. In contrast, theTm values of W159H and F229Y were
+57.6 °C and 54.4 °C, which were 6.8 °C and 3.6 °C higher than the
+50.8 °C of wild type (Fig. 2B).
+The Tm value and residual enzyme activity of W159H and F229Y var-
+iants were higher than those of wild type, which indicated that the
+structure and activity of both variants were improved. Therefore, the
+two variants were selected to construct the combined variant W159H/
+F229Y. Its remaining activity was 96.0% andTm value was 61.2 °C, indi-
+cating further substantial improvement over wild type.
+In order to verify the stability improvement of W159H/F229Y, the
+thermo- stability and optimal temperature of variants were character-
+ized. The residual enzyme activity of mutant W159H/F229Y was basi-
+cally unchanged in the course of one hour of heat treatment at 50 °C.
+The mutant W159H and F229Y lost partial activity, with 78.4% and
+Fig. 1.Premuse protein engineering and screening approach. (A) In the design stage, 1486IsPETase homologous protein sequences were collected from NCBI, and PASP was calculated
+using Premuse arithmetic. (B) Using a p-NPP assay, the variants were screened, and then the PET biodegradation was tested. (C) The Pird web tool was integrated with Premuse.
+Table 1
+Premuse analysis of the stabilizing point mutations based on their frequencies of amino
+acids.
+AA
+No.
+Wild
+AA
+Max
+AA
+Frequency of
+Wild AA (%)
+Frequency of
+Max AA (%)
+Diff
+(%)
+65 A G 3.07 76.52 73.44
+127 Q L 4.75 74.95 70.20
+132 R D 2.19 71.48 69.29
+134 V L 10.47 84.62 74.14
+139 G S 3.26 68.47 65.21
+154 M L 1.61 78.81 77.20
+159 W H 14.47 82.57 68.09
+169 S A 4.77 82.95 78.18
+229 F Y 10.19 79.16 68.97
+270 T Q 1.08 70.52 69.44
+X. Meng, L. Yang, H. Liu et al. International Journal of Biological Macromolecules 180 (2021) 667–676
+670
+51.5% residual enzyme activity. However, the residual enzyme activity
+of wild type was only 16.5%, which meant it lost most of its enzyme ac-
+tivity (Fig. 3A).
+3.3. Temperature and pH dependency of wild type and variants
+The optimal temperature of variant F229Y was the same as wild
+type, at 40 °C. The optimal temperature of variant W159H was 45 °C,
+and the optimal temperature of combined variant W159H/F229Y was
+50 °C (Fig. 3B). This sharp rise in optimal temperature indicated that
+W159H/F229Y had good stability, which was in good agreement with
+the above results.
+To investigate changes in physical and chemical properties caused
+by variants, an assay for optimal pH value was carried out. All variants
+had optimal enzyme activity between pH 9.0 and 9.5, and there was
+no visible difference among them in terms of pH (Fig. S1). The consis-
+tency in optimal pH value indicated that the change in variants was
+mainly higher thermal stability.
+3.4. Catalytic efﬁciency of wild type and mutants
+The catalytic efﬁciency of variants was also determined at 40 °C.
+Compared with the wild type, the kinetic parameter (kcat/Km)o f
+W159H/F229Y for p-NPP hydrolysis was increased by 100% (Table 2),
+and the hydrolytic activity for bis (2-hydroxyethyl) terephthalic acid
+(BHET) of W159H/F229Y was 2.6 times as much as that of wild type
+(Fig. S2). These results showed that the catalytic efﬁciency of W159H/
+F229Y was improved.
+3.5. Increased thermal stability and catalytic efﬁciency resulted in enhanced
+PET degradation activity
+Long term stability measurements of wild type and W159H/F229Y
+were performed at 40 °C for 24 h, to ensure that the enzyme could func-
+tion for a long time in the process of PET degradation. As expected,
+W159H/F229Y lost less enzyme activity at a slower rate than the wild
+type (Fig. S3). While the half-life of W159H/F229Y was 26.6 h, the
+half-life of wild type was only 9.7 h.
+With the signiﬁcantly improved performance of W159H/F229Y,
+the anticipated amorphous PET digestion was explored. After
+incubation for 24 h at 40 °C, the total concentration of released com-
+pound by W159H/F229Y had a 40-fold increase over that released by
+wild type (Fig. 4A). The products released byIsPETase, which were
+Fig. 2.Screening of the variants generated in this study. (A) Residual enzyme activity of WT and variants at 50 °C for 30 min. Experiments were performed usingp-NPP colorimetric assay.
+(B) Tm values of WT and variants.
+Fig. 3.Thermal stability measurements of the wild type and screened variants. (A) Residual enzyme activity of WT and variants at 50 °C for 1 h. (B) The effect oftemperature on the
+activities of the WT and variants. Experiments were performed using p-NPP colorimetric assay.
+Table 2
+Kinetic parameters of the wild type and variants. The kinetic parameters were determined
+in pH 9.5 buffer at 40 °C with p-NPP colorimetric assay.
+Mutant k
+cat(s−1) Km(mmol·L−1) kcat/Km (mmol−1·L·s−1)
+IsPETase 11.59 ± 0.16 0.19 ± 0.01 61.00 ± 0.84
+W159H 6.71 ± 0.12 0.08 ± 0.01 83.88 ± 1.50
+F229Y 11.25 ± 0.19 0.18 ± 0.01 62.50 ± 1.05
+W159H/F229Y 9.64 ± 0.13 0.08 ± 0.01 120.50 ± 1.63
+X. Meng, L. Yang, H. Liu et al. International Journal of Biological Macromolecules 180 (2021) 667–676
+671
+terephthalic acid (TPA), mono (2-hydroxyethyl) terephthalic acid
+( M H E T ) ,a n dB H E T ,w e r ei d e n t iﬁed by HPLC-HR-MS analysis
+(Figs. 4B and S4). This result was consistent with that reported by
+Yoshida et al[17].
+The high performance of W159H/F229Y suggested that its potential
+applications could be extended to biodegradation for PET waste (29.2 ±
+0.8% crystallinity), which causes ubiquitous pollution. The use of
+W159H/F229Y for decomposition of PET bottle preform (10.7 ± 0.6%
+crystallinity) was examined. The PET bottle preform treated by wild
+type displayed slight changes in shape or weight, due to the poor stabil-
+ity ofIsPETase. However, the PET bottle preform lost 1.8 mg after it was
+treated by W159H/F229Y for 3 days, and the mean decomposition rate
+reached 23.4 mgPET/h/mgenzyme. Additionally, some particles clearly fell
+off from the main body and then disappeared due to decomposition by
+W159H/F229Y (Fig. 4C and D). These results therefore further inspired
+the enzymatic processing of PET waste.
+3.6. Molecular-dynamics simulations revealed the mechanism underlying
+W159H/F229Y Improvement
+To gain better insight into the structural effects of the mutations,
+molecular-dynamics simulations of the enzymes were carried out. The
+root mean square deviation (RMSD) of W159H/F229Y was signiﬁcantly
+lower than that of wild type (Fig. 5A), and the number of hydrogen
+bonds of W159H/F229Y was signiﬁcantly higher than that of wild type
+(Fig. 5B). A substantial difference in root mean squareﬂuctuations
+(RMSF) was observed in the area of amino acid 205 to 235 (Fig. 5C),
+where most of the extra hydrogen bonds derived from F229Y were con-
+centrated (Figs. 5D, S5 and S6A). As this area was near the active site,
+change may greatly increase protein stability. The number of salt
+bonds (Fig. S6B) and structural electrostatic energies (Fig. S7) were
+also determined by molecular dynamics simulation, but there was no
+obvious change between F229Y and wild type.
+The substitution of histidine for tryptophan in the W159H mutation
+reduced the distance between residues Asp118 and Arg123 from 5.5 Å
+in wild type to 2.7 Å in W159H. In addition, a new salt bridge formed,
+which was not present in F229Y but was retained in W159H/F229Y
+(Fig. 6A). This was consistent with theTm value of W159H being
+2.5 °C higher than F229Y (Fig. 2B), and suggested the key molecular
+mechanism to improve the variant stability. However, the substitution
+of histidine for tryptophan in W159H mutation conferred a new salt
+bridge interaction between residue H159 and 2-HE(MHET)4. Residue
+Trp185 was observed to formπ-π interactions with the aromatic motif
+of the PET polymer (Fig. S8), which was also suggested by Cui et al.
+[38]. This result signiﬁcantly enhanced the binding afﬁnity for PET poly-
+mer, and could explain the lowerKm value of W159H (Table 2). All of
+these results indicated that W159H contributed more than F229Y to in-
+crease enzyme properties.
+4. Discussion
+Traditional consensus design strategies rely on manual selection of
+protein sequences for MSA, which limits their utilization. Premuse, the
+alternative to manual MSA construction is standardized for sequence
+alignment and quantitative selection of the preferred mutations. In the
+sequence alignment, Premuse only considers the alignment between
+the target sequence and homologs from the database, rather than the
+entire MSA. Therefore, the method could exponentially reduce the com-
+putation quantity, allowing it to easily deal with large datasets, and
+mine information from big-data. Consequently, the expanded size ho-
+mologs based on big-data (1486 protein sequences) could not only re-
+ﬂect the results of natural evolution, but also allow for the advantages
+of this design strategy. As a result, this strategy could avoid the huge
+amount of work from saturation mutagenesis [16], and randomness of
+rational protein engineering [18,20], due to widespread epistatic effects
+and dependence on a speciﬁc structure [43–45]. Austin et al. [32]
+Fig. 4.Comparison of wild-typeIsPETase and W159H/F229Y in assays of PET biodegradation. (A) Comparison of the speciﬁc hydrolytic activity of W159H/F229Y and wild-type toward
+amorphous PET. (B) High-performance liquid chromatography spectrum of the BHET, MHET and TPA products released from the amorphous PET. (C) Degradation of PET bottle
+preform by wild-type and W159H/F229Y; the weight of PET bottle preform was determined every 24 h. (D) The shape changes caused by wild-type and W159H/F229Y
+depolymerization. Arrows indicate exfoliated particles. Circles indicate the missing part of the main body.
+X. Meng, L. Yang, H. Liu et al. International Journal of Biological Macromolecules 180 (2021) 667–676
+672
+produced a double mutant S238F/W159H to makeIsPETase more
+cutinase-like and narrow the binding cleft, improved PET degradation
+was observed. Premuse also designed W159H, it indicated that the ar-
+ithmetic could act as a professional designer for the protein engineering.
+The p-NPP colorimetric assay used in this study avoided slow prog-
+ress in decomposition of PET, which was rapid and effective for screen-
+ing and characterizingIsPETase variants. The successful application of
+W159H/F229Y in PET bottle biodegradation also manifested its rational-
+ity. The MD simulations suggested the effect of mutations on stability
+and activity enhancement, which explained the improvementvia a
+structural view.
+To date, a series of enzymes have been identiﬁed as PETases bio-
+chemically, which were able to hydrolyze natural polyester and retain
+broad substrate speciﬁcity [36]. The stability of these PETases varied,
+Fig. 5.Molecular-dynamics simulations carried out with WTIsPETase and the W159H/F229Y variant. (A) Comparison of root mean square deviation (RMSD) between W159H/F229Y and
+wild-type. (B) Comparison of the number of hydrogen bonds between W159H/F229Y and wild-type. (C) Comparison of protein backboneﬂexibility using average root mean square
+ﬂuctuations (RMSF) of Cα atoms calculated per residue along molecular-dynamics simulations of enzymes. The dashed box highlights the amino acids 205 to 235 with substantial
+difference. (D) Hydrogen bond distribution in the region of amino acids 205 to 235. There were more hydrogen bonds (red dashed line, circled in blue) inW159H/F229Y (green) than
+in wild type (yellow dashed line).
+X. Meng, L. Yang, H. Liu et al. International Journal of Biological Macromolecules 180 (2021) 667–676
+673
+and the PETases with higher optimal temperature could be more stable,
+so that the MSA and phylogenetic trees could be constructed to illus-
+trate the changes in stability over evolutionary time (Fig. 7). These
+PETases could be clustered into three groups with different optimal
+temperatures: low-temperature PETases (≤40 °C) [14,17,46], medium-
+temperature PETases (50 –60 °C) [47–49], and high-temperature
+PETases (≥60 °C) [50–53]. In low-temperature PETases, the amino acid
+at site 159 was tryptophan (W), isoleucine (I), or tyrosine (Y) rather
+than histidine (H), and the amino acid at site 229 was phenylalanine
+(F) instead of tyrosine (Y). However, in almost all sequences from
+medium-temperature and high-temperature groups, the amino acid
+was H at site 159, and Y at site 229. Interestingly, PET5, whose optimal
+temperature was 50 °C, was an exception, although its amino acid at
+site 229 was Y, the amino acid at site 159 was W rather than H. On
+one hand, PET5 andIsPETase had a very close genetic relationship. On
+the other hand, PET5 was in the medium-temperature PETases group,
+while the optimal temperature ofIsPETase was 40 °C. This indicated
+that PET5 could function transitionally in the process of evolving stabil-
+ity. In brief, the phylogenetic analysis also demonstrated the importance
+of W159H and F229Y for stability of PETases. First, the hypothesis at the
+basis of this strategy was accurate. Second, it meant that this strategy
+utilized evolutionary history and identi ﬁed stabilizing features
+Fig. 6.Structural effects of W159H/F229Y variant. (A) The newly formed salt bridge between Asp118 and Arg123 enhanced protein stability. (B) Structural effects of W159H mutation for
+catalytic efﬁciency.
+X. Meng, L. Yang, H. Liu et al. International Journal of Biological Macromolecules 180 (2021) 667–676
+674
+encapsulated in homologous protein sequences. In the phylogenetic
+analysis, the amino acids in almost all PETases in medium-temperature
+and high-temperature groups were the same as W159H/F229Y, which
+proved the accuracy of the theory from consensus design in reverse.
+In summary, using improved consensus protein engineering,
+W159H/F229Y-catalyzed PET bottle waste biodegradation was im-
+proved, with a mean decomposition rate of 23.4 mgPET/h/mgenzyme.
+The I. sakaiensisbacterium secretesIsPETase that catalyzes the degrada-
+tion of PET to monomers as a carbon source for catabolization. W159H/
+F229Y performed well for efﬁcient PET bottle preform degradation at a
+mild temperature, and provided concepts and solutions for construction
+of engineered bacteria in this area. Moreover, this study has demon-
+strated that the Premuse strategy can be very effectively utilized in pro-
+tein engineering to enhance stability.
+Funding
+This work was supported by the Central Public-Interest ScientiﬁcI n -
+stitution Basal Research Fund (Grant Number: Y2019XK19), Xinjiang
+Key Research and Development Program of China (Grant Number:
+2018B01006-1), Central Public-Interest Scientiﬁc Institution Basal Re-
+search Fund (No. 1610392020001) and the Agricultural Science and
+Technology Innovation Program (ASTIP).
+Ethical statement
+This article does not contain any studies with human participants or
+animals performed by any of the authors.
+CRediT authorship contribution statement
+Jian Tian and Ningfeng Wu conceived and designed research.
+Xiangxi Meng, Lixin Yang and Hanqing Liu conducted experiments.
+Xiangxi Meng, Qingbin Li, Yan Zhang and Guoshun Xu contributed
+new reagents or analytical tools. Xiangxi Meng, Feifei Guan, Yuhong
+Zhang and Wei Zhang analyzed data. Xiangxi Meng and Jian Tian
+wrote the manuscript. All authors read and approved the manuscript.
+Declaration of competing interest
+None.
+Appendix A. Supplementary data
+Supplementary data to this article can be found online athttps://doi.
+org/10.1016/j.ijbiomac.2021.03.058.
+References
+[1] V. Sinha, M.R. Patel, J.V. Patel, Pet waste management by chemical recycling: a re-
+view, J. Polym. Environ. 18 (1) (2010) 8–25, https://doi.org/10.1007/s10924-008-
+0106-7.
+[2] U.T. Bornscheuer, Feeding on plastic, Science 351 (6278) (2016) 1154–1155,
+https://doi.org/10.1126/science.aaf2853.
+[3] S.B. Borrelle, J. Ringma, K.L. Law, C.C. Monnahan, L. Lebreton, A. McGivern, E.
+Murphy, J. Jambeck, G.H. Leonard, M.A. Hilleary, M. Eriksen, H.P. Possingham, H.
+De Frond, L.R. Gerber, B. Polidoro, A. Tahir, M. Bernard, N. Mallos, M. Barnes, C.M.
+Rochman, Predicted growth in plastic waste exceeds efforts to mitigate plastic pol-
+lution, Science 369 (6510) (2020) 1515–1518, https://doi.org/10.1126/science.
+aba3656.
+[4] P. Villarrubia-Gómez, S.E. Cornell, J. Fabres, Marine plastic pollution as a planetary
+boundary threat – the drifting piece in the sustainability puzzle, Mar. Policy 96
+(2018) 213–220. doi:https://doi.org/10.1016/j.marpol.2017.11.035.
+[5] S. Selke, R. Auras, T.A. Nguyen, E. Castro Aguirre, R. Cheruvathur, Y. Liu, Evaluation of
+biodegradation-promoting additives for plastics, Environ. Sci. Technol. 49 (6)
+(2015) 3769–3777, https://doi.org/10.1021/es504258u.
+[6] R. Wei, W. Zimmermann, Microbial enzymes for the recycling of recalcitrant
+petroleum-based plastics: how far are we? Microb. Biotechnol. 10 (6) (2017)
+1308–1322, https://doi.org/10.1111/1751-7915.12710.
+[7] K. Wang, J. Li, L. Zhao, X. Mu, C. Wang, M. Wang, X. Xue, S. Qi, L. Wu, Gut microbiota
+protects honey bees (Apis mellifera L.) against polystyrene microplastics exposure
+risks, J. Hazard. Mater. 402 (2021), 123828,https://doi.org/10.1016/j.jhazmat.
+2020.123828.
+[8] M. Kosuth, S.A. Mason, E.V. Wattenberg, Anthropogenic contamination of tap water,
+beer, and sea salt, PLoS One 13 (4) (2018), e0194970,https://doi.org/10.1371/
+journal.pone.0194970.
+[9] B. Toussaint, B. Raffael, A. Angers-Loustau, D. Gilliland, V. Kestens, M. Petrillo, I.M.
+Rio-Echevarria, G. Van den Eede, Review of micro- and nanoplastic contamination
+in the food chain, Food Addit. Contam., Part A 36 (5) (2019) 639–673, https://doi.
+org/10.1080/19440049.2019.1583381.
+[10] T. Brueckner, A. Eberl, S. Heumann, M. Rabe, G.M. Guebitz, Enzymatic and chemical
+hydrolysis of poly(ethylene terephthalate) fabrics, J. Polym. Sci., Part A: Polym.
+Chem. 46 (19) (2008) 6435–6443, https://doi.org/10.1002/pola.22952.
+[11] M.A.M.E. Vertommen, V.A. Nierstrasz, M.v.d. Veer, M.M.C.G. Warmoeskerken, Enzy-
+matic surface modiﬁcation of poly(ethylene terephthalate), J. Biotechnol. 120 (4)
+(2005) 376–386, https://doi.org/10.1016/j.jbiotec.2005.06.015.
+[12] R. Wei, D. Breite, C. Song, D. Gräsing, T. Ploss, P. Hille, R. Schwerdtfeger, J. Matysik, A.
+Schulze, W. Zimmermann, Biocatalytic degradation efﬁciency of postconsumer
+polyethylene terephthalate packaging determined by their polymer microstruc-
+tures, Adv. Sci. 6 (2019)https://doi.org/10.1002/advs.201900491.
+[13] F. Kawai, T. Kawabata, M. Oda, Current knowledge on enzymatic PET degradation
+and its possible application to waste stream management and otherﬁelds, Appl.
+Microbiol. Biotechnol. 103 (11) (2019) 4253 –4268, https://doi.org/10.1007/
+s00253-019-09717-y.
+[14] Å.M. Ronkvist, W. Xie, W. Lu, R.A. Gross, Cutinase-catalyzed hydrolysis of poly(eth-
+ylene terephthalate), Macromolecules 42 (14) (2009) 5128–5138, https://doi.org/
+10.1021/ma9005318.
+[15] W. Zimmermann, S. Billig, Enzymes for the biofunctionalization of poly(ethylene
+terephthalate), Adv. Biochem. Eng. Biotechnol. 125 (2011) 97–120. doi:https://doi.
+org/10.1007/10_2010_87.
+[16] V. Tournier, C.M. Topham, A. Gilles, B. David, C. Folgoas, E. Moya-Leclair, E.
+Kamionka, M.L. Desrousseaux, H. Texier, S. Gavalda, M. Cot, E. Guémard, M.
+Dalibey, J. Nomme, G. Cioci, S. Barbe, M. Chateau, I. André, S. Duquesne, A. Marty,
+An engineered PET depolymerase to break down and recycle plastic bottles, Nature
+580 (7802) (2020) 216–219, https://doi.org/10.1038/s41586-020-2149-4.
+[17] S. Yoshida, K. Hiraga, T. Takehana, I. Taniguchi, H. Yamaji, Y. Maeda, K. Toyohara, K.
+Miyamoto, Y. Kimura, K. Oda, A bacterium that degrades and assimilates poly
+Fig. 7.Phylogenetic analysis of known PETases.IsPETase in this study is shown in bold. PET5, which is considered a transitional form in evolution, was marked by a star. Low-temperature
+PETases are in blue, medium-temperature PETases are in orange, and high-temperature PETases are in red. The residues, which were the same as theIsPETase, are in light blue. The stable
+residues are in light red. Bootstrap values are shown at the branch points.
+X. Meng, L. Yang, H. Liu et al. International Journal of Biological Macromolecules 180 (2021) 667–676
+675
+(ethylene terephthalate), Science 351 (6278) (2016) 1196–1199, https://doi.org/10.
+1126/science.aad6359.
+[18] H.F. Son, I.J. Cho, S. Joo, H. Seo, H.-Y. Sagong, S.Y. Choi, S.Y. Lee, K.-J. Kim, Rational
+protein engineering of thermo-stable PETase fromIdeonella sakaiensis for highly ef-
+ﬁcient PET degradation, ACS Catal. 9 (4) (2019) 3519–3526, https://doi.org/10.
+1021/acscatal.9b00568.
+[19] A.M. de Castro, A. Carniel, J. Nicomedes Junior, A. da Conceição Gomes, É. Valoni,
+Screening of commercial enzymes for poly(ethylene terephthalate) (PET) hydroly-
+sis and synergy studies on different substrate sources, J. Ind. Microbiol. Biotechnol.
+44 (6) (2017) 835–844, https://doi.org/10.1007/s10295-017-1942-z.
+[20] B. Liu, L. He, L. Wang, T. Li, C. Li, H. Liu, Y. Luo, R. Bao, Protein crystallography and
+site-direct mutagenesis analysis of the poly(ethylene terephthalate) hydrolase
+PETase from Ideonella sakaiensis , ChemBioChem 19 (14) (2018) 1471–1475,
+https://doi.org/10.1002/cbic.201800097.
+[21] Y. Ma, M. Yao, B. Li, M. Ding, B. He, S. Chen, X. Zhou, Y. Yuan, Enhanced poly(ethylene
+terephthalate) hydrolase activity by protein engineering, Engineering 4 (6) (2018)
+888–893, https://doi.org/10.1016/j.eng.2018.09.007.
+[22] B.T. Porebski, A.M. Buckle, Consensus protein design, Protein. Eng. Des. Sel. 29 (7)
+(2016) 245–251, https://doi.org/10.1093/protein/gzw015.
+[23] D.A. Morrison, M.J. Morgan, S.A. Kelchner, Molecular homology and multiple-
+sequence alignment: an analysis of concepts and practice, Aust. Syst. Bot. 28 (1)
+(2015) 46–62, https://doi.org/10.1071/SB15001.
+[24] C. Kemena, C. Notredame, Upcoming challenges for multiple sequence alignment
+methods in the high-throughput era, Bioinformatics 25 (19) (2009) 2455–2465,
+https://doi.org/10.1093/bioinformatics/btp452.
+[25] S.A. Olson, Emboss opens up sequence analysis, Brief. Bioinformatics. 3 (1) (2002)
+87–91, https://doi.org/10.1093/bib/3.1.87.
+[26] V.-A. Nguyen, J. Boyd-Graber, S.F. Altschul, Dirichlet mixtures, the Dirichlet process,
+and the structure of protein space, J. Comput. Biol. 20 (1) (2013) 1–18, https://doi.
+org/10.1089/cmb.2012.0244.
+[27] B. Webb, A. Sali, Comparative protein structure modeling using MODELLER, Curr.
+Protoc. Bioinformatics 47 (5.6) (2014) 1–32, https://doi.org/10.1002/0471250953.
+bi0506s47.
+[28] O. Trott, A.J. Olson, AutoDock Vina: improving the speed and accuracy of docking
+with a new scoring function, efﬁcient optimization, and multithreading, J. Comput.
+Chem. 31(2) (2010) 455–461. doi:https://doi.org/10.1002/jcc.21334.
+[29] B.H.M. Mooers, Shortcuts for faster image creation in PyMOL, Protein Sci. 29
+(4) (2020).
+[30] S. Joo, I.J. Cho, H. Seo, H.F. Son, H.-Y. Sagong, T.J. Shin, S.Y. Choi, S.Y. Lee, K.-J. Kim,
+Structural insight into molecular mechanism of poly(ethylene terephthalate) degra-
+dation, Nat. Commun. 9 (1) (2018), 382,https://doi.org/10.1038/s41467-018-
+02881-1.
+[31] X. Han, W. Liu, J.-W. Huang, J. Ma, Y. Zheng, T.-P. Ko, L. Xu, Y.-S. Cheng, C.-C. Chen, R.-
+T. Guo, Structural insight into catalytic mechanism of PET hydrolase, Nat. Commun.
+8 (1) (2017), 2106,https://doi.org/10.1038/s41467-017-02255-z.
+[32] H.P. Austin, M.D. Allen, B.S. Donohoe, N.A. Rorrer, F.L. Kearns, R.L. Silveira, B.C.
+Pollard, G. Dominick, R. Duman, K. El Omari, V. Mykhaylyk, A. Wagner, W.E.
+Michener, A. Amore, M.S. Skaf, M.F. Crowley, A.W. Thorne, C.W. Johnson, H.L.
+Woodcock, J.E. McGeehan, G.T. Beckham, Characterization and engineering of a
+plastic-degrading aromatic polyesterase, Proc. Natl. Acad. Sci. U. S. A. 115 (19)
+(2018) E4350–E4357, https://doi.org/10.1073/pnas.1718804115.
+[33] J.C. Phillips, R. Braun, W. Wang, J. Gumbart, E. Tajkhorshid, E. Villa, C. Chipot, R.D.
+Skeel, L. Kalé, K. Schulten, Scalable molecular dynamics with NAMD, J. Comput.
+Chem. 26 (16) (2005) 1781–1802, https://doi.org/10.1002/jcc.20289.
+[34] A.D. MacKerell, D. Bashford, M. Bellott, R.L. Dunbrack, J.D. Evanseck, M.J. Field, S.
+Fischer, J. Gao, H. Guo, S. Ha, D. Joseph-McCarthy, L. Kuchnir, K. Kuczera, F.T. Lau,
+C. Mattos, S. Michnick, T. Ngo, D.T. Nguyen, B. Prodhom, W.E. Reiher, B. Roux, M.
+Schlenkrich, J.C. Smith, R. Stote, J. Straub, M. Watanabe, J. Wiórkiewicz-Kuczera, D.
+Yin, M. Karplus, All-atom empirical potential for molecular modeling and dynamics
+studies of proteins, J. Phys. Chem. B 102 (18) (1998) 3586–3616, https://doi.org/10.
+1021/jp973084f.
+[35] Q. Li, Y. Yan, X. Liu, Z. Zhang, J. Tian, N. Wu, Enhancing thermostability of a psychro-
+philic alpha-amylase by the structural energy optimization in the trajectories of mo-
+lecular dynamics simulations, Int. J. Biol. Macromol. 142 (2020) 624–633, https://
+doi.org/10.1016/j.ijbiomac.2019.10.004.
+[36] I. Taniguchi, S. Yoshida, K. Hiraga, K. Miyamoto, Y. Kimura, K. Oda, Biodegradation of
+PET: current status and application aspects, ACS Catal. 9 (5) (2019) 4089–4105,
+https://doi.org/10.1021/acscatal.8b05171.
+[37] S. Kumar, G. Stecher, M. Li, C. Knyaz, K. Tamura, MEGA X: molecular evolutionary ge-
+netics analysis across computing platforms, Mol. Biol. Evol. 35(6) (2018)
+1547–1549. doi:https://doi.org/10.1093/molbev/msy096.
+[38] Y. Cui, Y. Chen, X. Liu, S. Dong, Y.e. Tian, Y. Qiao, R. Mitra, J. Han, C. Li, X. Han, W. Liu,
+Q. Chen, W. Du, S. Tang, H. Xiang, H. Liu, B. Wu, Computational redesign of a PETase
+for plastic biodegradation by the GRAPE strategy, bioRxiv (2019) 787069,https://
+doi.org/10.1101/787069.
+[39] H. Mohamadi, B.P. Vandervalk, A. Raymond, S.D. Jackman, J. Chu, C.P. Breshears, I.
+Birol, DIDA: distributed indexing dispatched alignment, PLoS One 10 (4) (2015),
+e0126409, https://doi.org/10.1371/journal.pone.0126409.
+[40] S. Henikoff, J.G. Henikoff, Position-based sequence weights, J. Mol. Biol. 243 (4)
+(1994) 574–578, https://doi.org/10.1016/0022-2836(94)90032-9.
+[41] D.L. Wheeler, D.M. Church, A.E. Lash, D.D. Leipe, T.L. Madden, J.U. Pontius, G.D.
+Schuler, L.M. Schriml, T.A. Tatusova, L. Wagner, B.A. Rapp, Database resources of
+the National Center for Biotechnology Information: 2002 update, Nucleic Acids
+Res. 30(1) (2002) 13–16. doi:https://doi.org/10.1093/nar/30.1.13.
+[42] A. Jacob, J. Lancaster, J. Buhler, B. Harris, R.D. Chamberlain, Mercury BLASTP: Accel-
+erating protein sequence alignment, ACM trans. reconﬁgurable. Technol. Syst. 1
+(2) (2008) 9–9. doi:https://doi.org/10.1145/1371579.1371581.
+[43] F.J. Poelwijk, D.J. Kiviet, D.M. Weinreich, S.J. Tans, Empiricalﬁt n e s sl a n d s c a p e sr e v e a l
+accessible evolutionary paths, Nature 445 (7126) (2007) 383–386, https://doi.org/
+10.1038/nature05451.
+[44] P.A. Romero, F.H. Arnold, Exploring proteinﬁtness landscapes by directed evolution,
+Nat. Rev. Mol. Cell Biol. 10 (12) (2009) 866–876, https://doi.org/10.1038/nrm2805.
+[45] Q. Mu, Y. Cui, Y.e. Tian, M. Hu, Y. Tao, B. Wu, Thermostability improvement of the
+glucose oxidase fromAspergillus niger
+for efﬁcient gluconic acid production via com-
+putational design, Int. J. Biol. Macromol. 136 (2019) 1060–1068. doi:https://doi.org/
+10.1016/j.ijbiomac.2019.06.094.
+[46] D. Ribitsch, S. Heumann, E. Trotscha, E. Herrero Acero, K. Greimel, R. Leber, R. Birner-
+Gruenberger, S. Deller, I. Eiteljoerg, P. Remler, T. Weber, P. Siegert, K.-H. Maurer, I.
+Donelli, G. Freddi, H. Schwab, G.M. Guebitz, Hydrolysis of polyethyleneterephthalate
+by p-nitrobenzylesterase from Bacillus subtilis, Biotechnol. Prog. 27 (4) (2011)
+951–960, https://doi.org/10.1002/btpr.610.
+[47] D. Danso, C. Schmeisser, J. Chow, W. Zimmermann, R. Wei, C. Leggewie, X. Li, T.
+Hazen, W.R. Streit, New insights into the function and global distribution of polyeth-
+ylene terephthalate (PET)-degrading bacteria and enzymes in marine and terrestrial
+metagenomes, Appl. Environ. Microbiol. 84(8) (2018) e02773-17. doi:https://doi.
+org/10.1128/aem.02773-17.
+[48] D. Ribitsch, E.H. Acero, K. Greimel, A. Dellacher, S. Zitzenbacher, A. Marold, R.D.
+Rodriguez, G. Steinkellner, K. Gruber, H. Schwab, G.M. Guebitz, A new esterase
+from Thermobiﬁda halotoleranshydrolyses polyethylene terephthalate (PET) and
+polylactic acid (PLA), Polymers (2012). doi:https://doi.org/10.3390/polym4010617.
+[49] D. Ribitsch, E.H. Acero, K. Greimel, I. Eiteljoerg, E. Trotscha, G. Freddi, H. Schwab,
+G.M. Guebitz, Characterization of a new cutinase fromThermobiﬁda albafor PET-
+surface hydrolysis, Biocatal. Biotransform. 30 (1) (2012) 2–9, https://doi.org/10.
+3109/10242422.2012.644435.
+[50] A. Eberl, S. Heumann, T. Brückner, R. Araujo, A. Cavaco-Paulo, F. Kaufmann, W.
+Kroutil, G.M. Guebitz, Enzymatic surface hydrolysis of poly(ethylene terephthalate)
+and bis(benzoyloxyethyl) terephthalate by lipase and cutinase in the presence of
+surface active molecules, J. Biotechnol. 143 (3) (2009) 207–212, https://doi.org/
+10.1016/j.jbiotec.2009.07.008.
+[51] F. Kawai, M. Oda, T. Tamashiro, T. Waku, N. Tanaka, M. Yamamoto, H. Mizushima, T.
+Miyakawa, M. Tanokura, A novel Ca2+−activated, thermostabilized polyesterase
+capable of hydrolyzing polyethylene terephthalate from Saccharomonospora viridis
+AHK190, Appl. Microbiol. Biotechnol. 98 (24) (2014) 10053–10064, https://doi.org/
+10.1007/s00253-014-5860-y.
+[52] A.N. Shirke, C. White, J.A. Englaender, A. Zwarycz, G.L. Butterfoss, R.J. Linhardt, R.A.
+Gross, Stabilizing leaf and branch compost Cutinase (LCC) with glycosylation: mech-
+anism and effect on PET hydrolysis, Biochemistry 57 (7) (2018) 1190–1200, https://
+doi.org/10.1021/acs.biochem.7b01189.
+[53] S. Sulaiman, S. Yamato, E. Kanaya, J.-J. Kim, Y. Koga, K. Takano, S. Kanaya, Isolation of
+a novel cutinase homolog with polyethylene terephthalate-degrading activity from
+leaf-branch compost by using a metagenomic approach, Appl. Environ. Microbiol.
+78 (5) (2012) 1556–1562, https://doi.org/10.1128/aem.06725-11.
+X. Meng, L. Yang, H. Liu et al. International Journal of Biological Macromolecules 180 (2021) 667–676
+676

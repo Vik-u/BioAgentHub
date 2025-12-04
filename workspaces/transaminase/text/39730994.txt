@@ -1,0 +1,1668 @@
+Chen et al. Molecular Medicine          (2024) 30:278  
+https://doi.org/10.1186/s10020-024-01022-3
+RESEARCH Open Access
+© The Author(s) 2024. Open Access  This article is licensed under a Creative Commons Attribution 4.0 International License, which 
+permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the 
+original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or 
+other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line 
+to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory 
+regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this 
+licence, visit http:// creat iveco mmons. org/ licen ses/ by/4. 0/.
+Molecular Medicine
+Bioinformatics based exploration 
+of the anti-NAFLD mechanism of Wang’s 
+empirical formula via TLR4/NF-κB/COX2 
+pathway
+Suhong Chen1,3,4†, Chuanjie Zhou1,3†, Jiahui Huang1,3†, Yunlong Qiao1,3†, Ning Wang1,3, Yuzhen Huang1,3, 
+Bo Li1,3, Wanfeng Xu1,3, Xinglishang He1,3, Kungen Wang2,5*, Yihui Zhi2,5*, Guiyuan Lv4* and Shuhua Shen2,5* 
+Abstract 
+Background Nonalcoholic fatty liver disease (NAFLD) has developed as a leading public wellness challenge 
+as a result of changes in dietary patterns. Unfortunately, there is still a lack of effective pharmacotherapy methods 
+for NAFLD. Wang’s empirical formula (WSF) has demonstrated considerable clinical efficacy in treating metabolic 
+disorders for years. Nevertheless, the protective effect of WSF against NAFLD and its underlying mechanism remains 
+poorly understood.
+Methods The NAFLD model was established using a 17-week high-sucrose and high-fat (HSHF) diet with 32 ICR 
+mice. In assessing the therapeutic efficacy of WSF on NAFLD, we detected changes in body weight, viscera weight, 
+biomarkers of glycolipid metabolism in serum and liver, transaminase levels and histopathology of liver with H&E 
+and Oil Red O staining after oral administration. The chemical components in WSF were extensively identified 
+and gathered utilizing the HPLC-Q-TOF/MS system, database mining from HMDB, MassBank, and TCMSP databases, 
+alongside literature searches from CNKI, Wanfang and VIP databases. The forecast of network pharmacology approach 
+was then utilized to investigate the probable mechanisms by which WSF improves NAFLD based on the performance 
+of prospective target identification and pathway enrichment analysis. Besides, molecular docking was also conducted 
+for the verification of combination activities between active components of WSF and core proteins related to NAFLD. 
+In final, validation experiments of obtained pathways were conducted through ELISA, immunohistochemistry (IHC), 
+and western blot (WB) analysis.
+Results Pharmacodynamic outcomes indicated that WSF intervention effectively mitigated obesity, fat accumula-
+tion in organs, lipid metabolism disorders, abnormal transaminase levels and liver pathology injury in NAFLD mice 
+†Suhong Chen, Chuanjie Zhou, Jiahui Huang and Yunlong Qiao shared co-first 
+authorship.
+*Correspondence:
+Kungen Wang
+wkg1220@163.com
+Yihui Zhi
+medcat4@163.com
+Guiyuan Lv
+zjtcmLgy@163.com
+Shuhua Shen
+linda0358@163.com
+Full list of author information is available at the end of the article
+Page 2 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+(P < 0.05, 0.01). A total of 72 existent ingredients of WSF were acquired by HPLC-Q-TOF/MS and database, and 254 
+common targets (11.6% in total targets) of NAFLD and WSF were identified. Network pharmacology revealed that WSF 
+presses NAFLD via modulating TNF, IL6, AKT1, IL1B, PTGS2 (COX2), and other targets, and the probable pathways were 
+primarily inflammatory signaling pathways, as confirmed by molecular docking. Molecular biology experiments fur-
+ther conformed that WSF could decrease levels of inflammatory factors like IL-1β, IL-6 and TNF-α (P < 0.01) and expres-
+sion of TLR4, NF-κB and COX-2 (P < 0.05, 0.01) in the liver.
+Conclusion WSF treatment effectively protects against lipid metabolism disorders and liver inflammation injury 
+in HSHF diet-induced NAFLD mice, and its molecular mechanism might be via suppressing the TLR4/NF-κB/COX-2 
+inflammatory pathway to reduce the release of inflammatory cytokines in the liver.
+Keywords Nonalcoholic fatty liver disease, Wang’s empirical formula, Liver inflammation, HPLC-Q-TOF/MS, 
+Bioinformatics, Network pharmacology
+Graphical abstract
+
+Page 3 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+Introduction
+Due to alterations in dietary patterns, nonalcoholic fatty 
+liver disease (NAFLD) caused by overnutrition and meta-
+bolic disorders has become a common chronic liver dis -
+ease globally (Younossi et al. 2018). NAFLD is appraised 
+to afflict approximately 25% of the world population with 
+a gradual upward trend (Younossi et al. 2019). The total 
+adult NAFLD prevalence have been reported as high as 
+29.81% in China, and it is predicated that there will be 
+314.58 million NAFLD patients in 2030 if without effec -
+tive control (Li et al. 2019a , b; Zhou et al. 2019). NAFLD 
+is typically divided into two subtypes: nonalcoholic fatty 
+liver (NAFL, with mild symptoms) and nonalcoholic ste -
+atohepatitis (NASH, with steatosis of hepatocytes, aggra -
+vated inflammatory reaction, and irreversible hepatocyte 
+damage like ballooning transformation)  (Loomba et  al. 
+2021). Progression from NAFLD can lead to liver fibrosis, 
+cirrhosis and even liver cancer at a later stage, causing a 
+tremendous burden on human health. Therefore, a pen -
+etrative study on the pathophysiology and management 
+of NAFLD has important practical significance.
+At present, there is still a lack of effective pharmaco -
+therapy methods for NAFLD  (Tilg et  al. 2023). Instead, 
+it is recommended to change unhealthy lifestyle like 
+improving dietary structure and lifestyle modifications 
+such as exercise to mitigate the progression of NAFLD 
+firstly (Houttu et al. 2021; Xiong et al. 2021). The main -
+stay of drug treatments for NAFLD lies in the inhibition 
+of lipid accumulation and protection of liver damage 
+(include hepatic fibrosis). However, some drugs suffer 
+from incomplete therapeutic efficacy or adverse reac -
+tions during clinical use, for instance statins might cause 
+elevations of hepatic aminotransferase levels, high risks 
+of new-onset diabetes, myopathy and even myalgias or 
+rhabdomyolysis (Dong et al. 2014). Therefore, search for 
+safer and more effective drugs for NAFLD treatment is 
+imperative.
+Traditional Chinese medicine (TCM) is recognized for 
+its unique action modes of multi-target and multi-chan -
+nel, and there is plenty of testimony that TCM plays a 
+significant role in NAFLD prevention and treatment (Shi 
+et  al. 2020; Chen et  al. 2021a , b). Wang’s empirical for -
+mula (WSF) was a clinical empirical formula developed 
+for the remedy of metabolic diseases by Prof. Wang 
+Kun-Gen, the first national famous doctor of TCM and 
+national academic leader of “spleen and stomach dis -
+ease of TCM”  (Shen et  al. 2018). WSF is derived from 
+the classic traditional formula Er-Chen Decoction, and is 
+composed of Gynostemmae Herba (Jiaogulan), Astragali 
+Radix (Huangqi), Crataegi Fructus (Shanzha), Salviae 
+Miltiorrhizae Radix et Rhizoma (Danshen), and Poria 
+(Fuling), etc. Meanwhile, WSF has the impact of “invigor-
+ating the spleen and benefiting the stomach, clearing heat 
+and promoting diuresis” , which is congruent with the 
+TCM’s therapy theory for NAFLD. Despite WSF demon -
+strates a certain therapeutic efficacy in treating NAFLD, 
+the underlying mechanism of its action remains elusive.
+At present, the pathogenesis and development process 
+of NAFLD are quite complex and without comprehen -
+sive explanation. The “two-hit” hypothesis initially pro -
+posed in 1998 is considered as the classic pathogenesis 
+of NAFLD  (Day and James 1998). The first hit mainly 
+included factors like the sedentary lifestyle and poor 
+nutritional habits, resulting in excessive intrahepatic fat 
+accumulation (triglyceride in main) and insulin resist -
+ance. The second hit was characterized by the overpro -
+duction of lipid-induced reactive oxidative metabolites, 
+which in turn led to the cytokines-mediated inflamma -
+tion, hepatic cell apoptosis, necrosis, fibrosis and cirrho -
+sis in final  (Berardo et  al. 2020). With the deepening of 
+research, the “two-hit” hypothesis gradually evolved into 
+the “multiple-hit” hypothesis for a precise explanation 
+of the etiology and pathogenesis behind NAFLD. The 
+core idea of this theory suggested that multiple hits like 
+nutritional factors, insulin resistance, lipotoxicity, inflam-
+matory cascades, gut microbiota could play a role at the 
+same time, and each factor contributed to the further 
+progression of the disease (Buzzetti et al. 2016; Wu et al. 
+2022).
+The TLR4/NF-κB-dependent release of inflammatory 
+cytokines (such as TNF-α, IL-6 and IL-1β) is regarded 
+as one of important mechanisms of NAFLD  (Bessone 
+et al. 2019). Existing studies have proved that inhibiting 
+this pathway can improve lipid metabolism disorders 
+in NAFLD mice and alleviate the inflammatory state of 
+the liver  (Chen et  al. 2024; Deng et  al. 2024), proving 
+that inhibition of the TLR4/NF-κB signaling pathway is 
+a potential therapeutic approach for NAFLD. COX-2 is 
+highly expressed in inflamed tissues and it can produce 
+inflammatory cytokines prostaglandin E2 (PGE2) from 
+arachidonic acid  (Yagami et  al. 2016). Moreover, TLR4/
+NF-κB signaling also regulates the activation of the 
+COX2/PGE2 axis in liver fibrosis, indicating that COX2 
+also plays a role in the inflammatory regulation of liver 
+diseases (Chen et al. 2021a, b; Yang et al. 2020).
+Network pharmacology employs high-throughput 
+omics data analysis, network database retrieval and com -
+puter simulation to uncover the network relationship of 
+herb-gene-target-disease interaction. Through delineat -
+ing these intricate networks, it can predict the evaluate 
+medicine efficacy and exact mechanisms of medicine 
+action in disease treatment of TCM.  (Shi et  al. 2023; Li 
+et  al. 2022; Zheng et  al. 2024). Based on this theoreti -
+cal method, Wu et  al. verified the mechanism of Qutan 
+Huoxue decoction on NASH via inhibiting the SOCS1/
+TLR4/NF-κB inflammatory pathway with network 
+Page 4 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+pharmacology and in vitro experiments (Wu et al. 2023). 
+Widespread application of HPLC-Q-TOF/MS has been 
+employed in the structural determination of unknown 
+chemicals in complicated mixtures via retention time, 
+molecular mass and fragment information, which is 
+effective in identifying probable active substances in 
+TCM (Zhou et al. 2021; Jin et al. 2023). In addition, the 
+integration of HPLC-Q-TOF/MS with network phar -
+macology has also greatly promoted the credibility of 
+research conclusions (Zhi et al. 2023; Wang et al. 2022).
+Molecular docking represents a pivotal structure-
+guided technique that facilitates the meticulous examina-
+tion of the intricate binding interactions between protein 
+targets and potential small-molecule ligands (Kaur et al. 
+2019). It was integrated synergistically within phar -
+macological investigations of TCM alongside network 
+pharmacology, wherein their computationally derived 
+predictions undergo experimental validation as a means 
+to substantiate their findings  (Liu et  al. 2022; Bai et  al. 
+2023; Jiao et  al. 2021). The comprehensive advantage of 
+network pharmacology combined with molecular dock -
+ing is that it provides concepts for the investigation of 
+complex TCM, which is progressively being used in the 
+study of NAFLD pathogenesis and treatment (Ren et al. 
+2022).
+Therefore, we firstly detected the therapeutic effects 
+of WSF against NAFLD by evaluating the biochemical 
+indices and histopathology in a high-sucrose and high-
+fat (HSHF) diet mice. Moreover, HPLC-Q-TOF/MS, bio -
+informatics in conjugation with molecular docking were 
+applied to plumb the probable mechanism of WSF for 
+the therapy of NAFLD in this research. Finally, we further 
+validated the predicted pathway by immunohistochem -
+istry, ELISA and western blot using liver tissue from the 
+efficacy experiment in  vivo. This study would offer per -
+suasive evidence for the clinical promotion of WSF later.
+Materials and methods
+Chemical and biological reagents
+Polyene Phosphatidylcholine (Essentiale, PPC) capsule 
+was gained from Sanofi–Aventis Pharmaceutical Co., 
+Ltd. (Beijing, China). Total cholesterol (TC), triglycer -
+ide (TG), high density lipoprotein cholesterol (HDL-c), 
+glucose (GLU), aspartate transaminase (AST), alanine 
+transferase (ALT) assay kits were obtained from Ningbo 
+Medical System Biotechnology Co., Ltd. (Ningbo, China). 
+Hematoxylin–Eosin (H&E) reagent was acquired from 
+Shanghai Yuanye Biotechnology Co., Ltd. (Shanghai, 
+China). Oil red O reagent was purchased from BBI Life 
+Science Corporation (Shanghai, China). TC and TG assay 
+kits for liver were both attained from Nanjing Jiancheng 
+Bioengineering Institute (Nanjing, China). The ELISA 
+kits of IL-1β and TNF-α were derived from Jiangsu 
+Meimian Industrial Co., Ltd. (Yancheng, China). Instant 
+immunohistochemistry kits were gained from Wuhan 
+Boster Biological Technology Co., Ltd. (Wuhan, China). 
+The DAB staining kit, BCA assay kit, RIPA buffer, and 
+protein free rapid blocking buffer were got from Beyo -
+time Biotechnology Reagent Co., Ltd. (Shanghai, China). 
+The antibodies of COX2, IL-6 and secondary antibodies 
+were purchased from Proteintech Group Inc. (Wuhan, 
+China). The antibodies for TLR4, NF-κB and β-actin were 
+acquired from Beijing Biosynthesis Biotechnology Co., 
+Ltd. (Beijing, China), Hangzhou DiagBio Biotechnol -
+ogy Co., Ltd. (Hangzhou, China), and Wuhan Servicebio 
+Technology Co., Ltd. (Wuhan, China), respectively. The 
+enhanced chemiluminescent assay kit was attained from 
+Nature Biosciences Ltd. (Hangzhou, China). The catalog 
+numbers of utilized regents are included in supplemen -
+tary file.
+Drug preparation
+WSF was prepared by the Traditional Chinese Medi -
+cine Health Products Institute of Zhejiang University of 
+Technology, and was then condensed to concentration of 
+2.853 g/mL in crude herb amounts. It was then refriger -
+ated in 4 ℃ for later use.
+Animal experiment
+ICR mice (male, n = 32) were purchased from Labora -
+tory Animal Center of Zhejiang Academy of Medical Sci -
+ences (SYXK(Zhe)2019–002, Hangzhou, China). All the 
+animals were reared in standardized environmental con -
+ditions characterized by a 12-h light–dark photoperiod 
+with unrestricted access to water and food. The animal 
+procedures were meticulously conducted in strict adher -
+ence to the Zhejiang University of Technology’s Guide -
+lines for the Care and Use of Laboratory Animals.
+Our group previously established that the ideal con -
+centration of WSF for treating rats with glucose and 
+lipid metabolic disorders is 14.26  g/kg (detailed data 
+is in supplementary file). And for this study, the dosage 
+for NAFLD mice was determined to be 28.53 g/kg based 
+on the specific surface area method for animal dose 
+conversion.
+Considering the optimal dosage was determined and 
+the principle of reduction in animal experiments, we 
+used a single dosage in this study. After adaptive feed -
+ing for 1 week, a total of 32 ICR mice were randomly 
+assigned into four groups according to their body 
+weight with the random number method: the normal 
+group (NC), the model group (MC), PPC administra -
+tion group (PPC) and WSF administration group (WS), 
+each consisting of 8 mice. The NC mice was fed with 
+standard diet, while mice in the MC, PPC and WS 
+group were all received a high-sucrose and high-fat 
+Page 5 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+(HSHF) diet over a period of 17  weeks. The PPC and 
+WS mice were daily administered PPC or WSF at 
+a dose of 273.6 mg/kg or 28.53  g/kg (i.g.) adjusted to 
+the volume of 1 ml/100 g in accordance with the body 
+weight, respectively. The HSHF diet, consisting of 10% 
+lard, 10% egg yolk powder, 5% sucrose, 2% cholesterol, 
+0.5% sodium cholate was derived from Trophic Animal 
+Feed High-Tech Co.,Ltd. (Nantong, China).
+Upon conclusion of the experiment, mice were sub -
+jected to an overnight fasting before blood was drawn 
+from the ocular venous plexus. Obtained blood samples 
+were centrifuged for 10 min twice at 3600 rpm to attain 
+serum for biochemical analysis. The mice were subse -
+quently anesthetized (isoflurane inhalation) with remov -
+ing their liver as quickly as possible. Part of liver was 
+put in 4% paraformaldehyde tissue fixation solution for 
+hepatic pathology and immunohistochemistry analysis, 
+part of liver was put in ethanol absolute for liver homoge-
+nate and remaining parts were preserved at − 80 °C.
+Moreover, we conducted a separate 28-day oral toxicity 
+experiment (detailed data are provided in the supplemen-
+tary file), which demonstrated that administration at 12 
+times the human clinical dose did not exhibit significant 
+toxic effects on the liver or glucose and lipid metabolism 
+in normal mice.
+Histological staining
+The Hematoxylin–eosin (H&E) and Oil Red O staining 
+procedures were conducted consistent with the methods 
+detailed in prior literature (Lei et al. 2019). H&E staining 
+were undergone on 4 μm paraffin-embedded tissue slices 
+and liver pathology scores for NAFLD were decided 
+in line with NAFLD activity score (NAS) nominated by 
+American Association for the Study of Liver Diseases as 
+Table 1 described (Kleiner et al. 2005). The specific pro -
+cedures of tissue dehydration and the H&E staining are 
+described in the supplementary file.
+Oil Red O staining serves as a reliable method for both 
+the identification of lipid accumulation and the semi-
+quantitative assessment of hepatic steatosis. In brief, liver 
+tissue specimens were first dehydrated in a 30% sucrose 
+solution prior to being embedded in OCT as well as 
+sliced into 10 μm-thick frozen sections. The 0.5% Oil Red 
+O solution was subsequently stained on the obtained cry-
+osections, followed by hematoxylin counterstaining on 
+the nuclei. All H&E and Oil Red O stains were captured 
+under the biological microscope (BX43, Olympus, Japan) 
+and subjected to semi-analysis using the Image J software 
+(version 1.54f). The code used for Oil Red O analysis are 
+included in supplementary file.
+Measurement of biomarkers in serum and liver
+Serum blood glucose (GLU), transaminase (AST and 
+ALT), and lipid levels (TC, TG, and HDL-c) were deter -
+mined with the respective assay reagents on the auto -
+mated biochemical analyzer (HITACHI-7020, Japan). The 
+level of serum LDL-c was further calculated by Friedwald 
+formula (Molavi et al. 2020).
+To measure the concentrations of TC and TG in the 
+liver, liver organs (circa 100  mg) were put into ethanol 
+absolute (9 times in volume), homogenized for a 10% 
+(w/v) homogenate solution and centrifuged at 2500 rpm 
+for 10  min twice later for the acquisition of superna -
+tant. After mixing the 2.5 μL tissue extract solution with 
+250  μL working solution and allowing it to stand for 
+10 min at 37  ℃, we measured the absorbance at a wave -
+length of 500 nm (TC) or 510 nm (TG), respectively. The 
+specific concentrations of TC and TG were calculated 
+through the standard curve.
+Qualitative identification of components in WSF
+Sample preparation
+The WSF powder was obtained using the vacuum freeze 
+dryer (−  55  ℃, 20  Pa). Then, 3.0  g WSF powder was 
+extracted ultrasonically (40 kHz, 300 W, likewise below) 
+for 60  min with 30  mL methanol (chromatographic 
+purity, likewise below) and the resultant solution was 
+evaporated in an 85  ℃ water bath until dryness. Another 
+3  mL methanol was used to redissolve the residue with 
+ultrasound for 30 min. Finally, 1.0 mL supernatant fluid 
+underwent filtration via a 0.22  μm organic phase filter 
+Friedwald formula: LDL − c = TC − HDL − c − TG/5
+Table 1 Scoring standard of NAFLD activity
+NAS (0–8 points)
+1. Steatosis (0–3 points)
+ 0  < 5%
+ 1 5–33%
+ 2 33–66%
+ 3  > 66%
+2. Lobular inflammation (0–3 points)
+ 0 No foci
+ 1  < 2 foci in 200 × vision
+ 2 2–4 foci in 200 × vision
+ 3  > 4 foci in 200 × vision
+3. Ballooning (0–2 points)
+ 0 None
+ 1 Few
+ 2 Many or prominent ballooning
+Page 6 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+membrane with the syringe and relocated in a sampling 
+vial for qualitative analysis.
+HPLC‑Q‑TOF/MS conditions
+The HPLC-Q-TOF/MS system was composed of a 
+1290 Infinity II liquid chromatography and a 6545XT 
+AdvanceBio Quadruple Time-of-Flight mass spectrom -
+etry (Agilent Technologies, USA).
+The chromatographic conditions were as follows: (1) 
+Column: Welch Ultimate LP-C18 (4.6 × 250  mm, 5  μm); 
+(2) Injection volume: 10  μL; (3) Column temperature: 
+30℃; (4) Flow rate: 1 mL/min; (5) Mobile phase A: water 
+(comprising 0.1% formic acid, analytical purity), B: ace -
+tonitrile (chromatographic purity) with the changeable 
+gradient of 0 min, 5% B; 10 min, 10% B; 40 min, 13% B; 
+55 min, 16% B; 65 min, 20% B; 90 min, 21% B; 100 min, 
+26% B; 120 min, 28% B.
+The operating conditions of mass spectrometry were 
+set as follows: (1) Ion source: Agilent jet stream electro -
+spray ionization source (AJS-ESI); (2) Gas flow rate: 8 L/
+min; (3) Gas temperature: 300 ℃; (4) Sheath gas tempera-
+ture: 350 ℃; (5) Nebulizer gas pressure: 35 psi; (6) Sheath 
+gas flow rate: 11 L/min; (7) Capillary voltage: 3100 V; (8) 
+Fragmentor voltage: 175  V; (9) Nozzle Voltage: 1000 V. 
+Scanning with a range of m/z 50–3200 was utilized for 
+sample mass spectrometry signal acquisition in positive 
+and negative ion modes, respectively. All of the collected 
+data were processed utilizing the Agilent MassHunter 
+workstation software (version B.08.00).
+Bioinformatics analysis
+Prediction of prospective WSF targets associated to NAFLD
+The components of herbs in WSF were also collected 
+with the TCMSP database (https:// old. tcmsp-e. com/ 
+tcmsp. php, version 2.3), while the bioactive ingredients 
+of Shanzha were identified by a supplemented literature 
+search due to the lack in the TCMSP database  (Cheng 
+et  al. 2023). The chemical components obtained from 
+HPLC-Q-TOF/MS and database mining were sifted with 
+a criterion of oral bioavailability (OB ≥ 30%) and drug-
+like properties (DL ≥ 0.18) as well as further screened 
+through the Swiss ADME (http:// www. swiss adme. ch/ 
+index. php) platform with a score of “High” for gastro -
+intestinal absorption and at least two “Yes” for drug like 
+properties. The filtered ingredients were later transmit -
+ted to the Swiss Target Prediction platform (http:// www. 
+swiss targe tpred iction. ch) for protein target search with 
+their canonical SMILES attained from PubChem data -
+base ( https:// pubch em. ncbi. nlm. nih. gov). The targets 
+with a credibility value of 0 were deleted.
+GeneCards (https:// www. genec ards. org, version 5.22.0 
+Build 1354), DisGENET (https:// www. disge net. org, ver -
+sion 24.3) and OMIM database (https:// www. omim. org) 
+were applied to obtain the NAFLD-relevant protein tar -
+gets, and the keywords were set as “non-alcoholic fatty 
+liver disease” . Targets from GeneCards database that not 
+exceeding the median relevance scores were eliminated, 
+and duplicate entries were consolidated to derive the 
+set of NAFLD-related targets. Finally, the herbs-active 
+components-targets network was constructed and visual-
+ized via Cytoscape 3.7.1 software after standardization of 
+names with Uniprot database (https:// www. unipr  ot. org, 
+release 2024_05).
+“Network analyzer” function in Cytoscape 3.7.1 was 
+conducted to evaluate the overall situation of the net -
+work with topological parameters encompassing degree, 
+average shortest path length (ASPL), betweenness cen -
+trality (BNC) and closeness centrality (CNC).
+Coincident targets identification and protein–protein 
+interaction (PPI) network analysis
+The intersectional analysis of Venny 2.1.0 (https:// bioin 
+fogp. cnb. csic. es/ tools/ venny/ index. html) was utilized to 
+collect the coincident targets shared between biologically 
+active constitutes of WSF and NAFLD-associated tar -
+gets which were regarded as prospective targets of WSF 
+to ameliorate NAFLD. The STRING database (https:// 
+string- db. org, version 12.0) was employed to build the 
+PPI networks with constraints of a medium confidence 
+threshold of 0.400 and homo sapiens. Subsequently, the 
+resulting data was submitted to Cytoscape 3.7.1 for visu -
+alization purposes. Core targets were further discerned 
+through the topological analysis of the CentiScaPe 2.2 
+plug-in in terms of parameters like betweenness, close -
+ness and degree.
+Gene ontology (GO) function and Kyoto encyclopedia 
+of genes and genomes (KEGG) enrichment analysis
+The intersecting targets derived above were uploaded 
+into DAVID database (https:// david. ncifc rf. gov, v2024q2) 
+for KEGG and GO enrichment analysis, encompassing 
+biological process (BP), cellular component (CC) and 
+molecular function (MF) analysis. In the KEGG analysis, 
+pathways with less than 0.05 P-values and their accordant 
+enriched targets were selectively retained to identify cru -
+cial pathways and pivotal targets related to the impact of 
+WSF on NAFLD. Finally, Weishengxin (http:// www. bioin 
+forma tics. com. cn) was utilized for visualization purposes 
+of the top 20 BP and KEGG pathway results according to 
+gene counts or ratios in bubble and bar graphs.
+Molecular docking
+The bioactive components with degree values ≥ 10 in 
+the “active components-target-pathway” network were 
+regarded as ligands in subsequent molecular docking 
+analysis. The 2D structure of aforesaid components were 
+Page 7 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+obtained from the PubChem database (https:// pubch em. 
+ncbi. nlm. nih. gov), while the 3D structures with mini -
+mum energy were drawn through Chem3D software. 
+The protein structure database Protein Data Bank data -
+base ( http:// www. rcsb. org) was utilized to retrieve the 
+structural details about the core targets in inflammation 
+related pathways with restrictions of homo sapiens, X-ray 
+diffraction, refinement resolution ≤ 2.5 Å. The water 
+molecules and original ligand structures in the selected 
+proteins were removed, as well as hydrogen atoms were 
+added by PyMoL software. Subsequently, molecular 
+docking explorations were conducted to evaluate the 
+optimal semi-flexible binding modes with retained rotat -
+able bonds of the biochemicals by using the AutoDock 
+Vina with Vina default force field and scoring func -
+tion (Trott and Olson 2010).
+In an effort to improve the precision of molecular dock-
+ing predictions, we conducted additional flexible docking 
+simulations. Building upon the minimum binding energy 
+conformation derived from a semi-flexible docking pro -
+tocol, we designated amino acid residues within a 5 Å 
+sphere centered on the ligand as flexible, permitting free 
+rotation of their side chains. AutoDock Vina was then 
+re-employed for docking, and conformations exhibiting 
+intramolecular hydrogen bonds were discarded.
+To determine the final ranking, we calculate the sum of 
+the rankings of the lowest binding energies of a certain 
+molecule to all proteins firstly, and then sort the numeri -
+cal values of the ranking sums of all molecules in ascend -
+ing order. Ultimately, the hydrogen bond linkage with 
+protein residues of the top two optimal biomolecules 
+with the minimum binding energy ranking were visual -
+ized by PyMoL software.
+Immunohistochemistry (IHC) analysis of related proteins 
+in the liver
+The expression and localization of Toll-like receptor 4 
+(TLR4), nuclear factor-kappa B (NF-κB), cyclooxyge -
+nase 2 (COX-2) and interleukin-6 (IL-6) in the liver were 
+determined by IHC analysis. The procedures for IHC 
+staining were comparable to we described previously (Li 
+et al. 2019a, b). In brief, the tissue slices were subjected 
+to procedural deparaffinization, antigen retrieval with 
+citrate buffer liquid (pH 6.0), incubation with appropriate 
+primary antibodies (1:200 dilution) and HRP-conjugated 
+secondary antibodies in turn, respectively. Subsequently, 
+the positive expression signals were visualized under 
+the optical microscope via DAB staining in yellow color, 
+while the nuclei underwent counterstaining with hema -
+toxylin. The protein expression data were subjected to 
+semi-quantitative analysis through the computation 
+of integrated optical density (IOD) values within the 
+positively stained areas of microphotographs with the 
+Image-Pro Plus software (version 6.0). The catalog and 
+lot numbers of utilized antibodies are included in supple-
+mentary file.
+ELISA determination of inflammation factors in the liver
+The liver tissues were precisely weighed with the subse -
+quent addition of an equivalent volume of saline solu -
+tion at a 1:10 (w/v) ratio and thorough mixing. Then, 
+the supernatants schemed for the following trails were 
+subjected to homogenization and centrifugation at 
+12,000 rpm from the resultant mixtures above at 4 °C for 
+10 min. In final, the mouse ELISA kits of tumor necrosis 
+factor α (TNF-α) and interleukin-1β (IL-1β) were utilized 
+for their concentration determination in the liver as per 
+the provided instructions.
+Western blot (WB) analysis of related proteins in the liver
+In short, precisely weighted liver tissue was lysed in the 
+RIPA buffer containing protease inhibitor and EDTA 
+(100:1:1, v/v/v) at 4  ℃ with subsequent homogenate cen -
+trifugation for 10 min to get supernatants at 12,000 rpm 
+for further WB analysis, prior to the concentration’s 
+detection of total protein via the BCA assay kit. After 
+being degenerated with loading buffer at 95  ℃, protein 
+samples were isolated via 10% SDS-PAGE under condi -
+tions of 80  V for 30  min, followed by 120  V for 90  min 
+and subsequently electrotransferred onto a nitrocellulose 
+membrane in ice (200 mA with TLR4: 90 min, NF-κB and 
+COX2: 60  min, β-actin: 40  min). Membranes were then 
+blocked at room temperature with protein-free rapid 
+blocking buffer for 20  min, followed by overnight incu -
+bation with respective primary antibodies (TLR4 1:1000, 
+NF-κB 1:1000, COX-2 1:750, dilution) at 4  ℃. β-actin 
+(1:1000, dilution) was served as the loading control. After 
+a 1-h incubation with paired HRP-conjugated second -
+ary antibodies, the protein bands were visualized via an 
+enhanced chemiluminescent detection system (Chemi -
+Scope 6000, CLINX, China). The semi-quantification of 
+gauging protein expressions was standardized against 
+β-actin densitometry conducted with ImageJ software 
+(version 1.53K).
+Statistical analysis
+All data were presented as the average values ± standard 
+deviation (SD). Statistical analyses entailed one-way anal-
+ysis of variance (ANOVA), supplemented with Tukey’s 
+honest significant difference (HSD) test for intergroup 
+comparisons. A statistical significance threshold was 
+set at P ≤ 0.05. All analyses of statistics were performed 
+through an updated version of SPSS software. Diagram 
+visualization was implemented by GraphPad Prims.
+Page 8 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+Results
+WSF attenuated body weight and visceral fat accumulation
+Animal experiment procedures are show in Fig.  1A. 
+The body weight of the MC mice increased significantly 
+since modeling since the 5th weeks compared with the 
+NC group (P < 0.05) (Fig.  1B). And after modeling for 
+17  weeks, the weight gain, liver mass, and epididymal 
+adipose (EA) mass of the MC mice also increased sig -
+nificantly (P < 0.01) (Fig.  1C–E). PPC, a key component 
+of essential phospholipids renowned for its efficacy in 
+treating NAFLD, is instrumental in preserving hepatic 
+cell membrane fluidity and functionality (Lu et al. 2022). 
+Compared to the MC group, the body weight of the 
+PPC and WS mice decreased significantly, starting from 
+the 5th and 7th weeks of PPC and WSF administration 
+(P < 0.01), respectively (Fig. 1B). Besides, the weight gain, 
+EA mass and its index of the PPC and WS mice decreased 
+(P < 0.01), while PPC has no obvious effect on EA index 
+(Fig. 1C–G). These results indicated that WSF treatment 
+could reverse abnormal weight gain and visceral fat accu-
+mulation caused by the HSHF diet.
+WSF improved liver function and pathological lesions
+After modeling for 17 weeks of the HSHF diet, the serum 
+levels of AST and ALT in the MC mice increased signifi -
+cantly compared with the NC group (P < 0.01) (Fig.  2B, 
+C). The H&E and Oil Red O staining demonstrated an 
+increase of inflammatory foci (indicated by arrowheads), 
+extensive hepatocyte ballooning lesions, and aberrant 
+lipid accumulation in the liver of NAFLD mice (Fig.  2A, 
+E). Besides, the NAS score of the MC mice also increased 
+significantly (P < 0.01) (Fig.  2D), demonstrating that the 
+normal physiological structure of the liver was severely 
+damaged. Compared with the MC group, PPC and WSF 
+could lessened the levels of serum AST and ALT signifi -
+cantly (P < 0.01) (Fig.  2B, C). Meanwhile, the inflamma -
+tory cell infiltration was reduced and other pathological 
+changes of the liver were reversed as attested by H&E and 
+Oil Red O staining (Fig.  2A). In addition, the NAS score 
+and Oil Red O area ratio decreased in various degrees 
+(P < 0.05, 0.01) (Fig.  2D, E). Collectively, these results 
+showing that WSF improved liver function and attenu -
+ated pathological lesions of inflammatory and steatosis.
+WSF ameliorated lipid metabolism
+In divergence from the NC group, the levels of serum 
+TC, TG, LDL-c as well as liver TC, TG in the MC mice 
+increased significantly (P < 0.01) (Fig.  3A, B, D-F), while 
+serum HDL-c levels decreased obviously (P < 0.01) 
+(Fig.  3C) after modeling for 17  weeks, suggesting that 
+there might be abnormal lipid metabolism in HSHF diet-
+induced NAFLD mice. Compared with the MC group, 
+PPC and WSF treatment could suppress the increase 
+of serum TG and liver TG and the  decrease of serum 
+HDL-c in various degrees (P < 0.05, 0.01), but had no 
+effect on serum TC and LDL-c (Fig.  3A–F). Moreover, 
+Fig. 1 Effects of WSF on body weight and visceral fat accumulation. A Animal experiment procedures. B Body weight change during the whole 
+experiment. C Weight gain. D Liver mass. E Liver index. F Epididymis adipose mass. G Epididymis adipose index. All values were presented 
+as mean ± SD with significance markers of *P < 0.05 and **P < 0.01
+Page 9 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+we observed that after 17 weeks of modeling, there was 
+a trend towards elevated serum GLU levels in MC mice 
+(without significant difference), whereas administration 
+of PPC and WSF could normalize the serum GLU levels. 
+These results suggested that WSF could ameliorated and 
+lipid metabolism disorder induced by NAFLD through 
+regulating the serum levels of TG and HDL-c and TG 
+accumulation in the liver.
+Identification of phytochemical components in WSF
+The Agilent HPLC-Q-TOF/MS system was exploited to 
+evaluate phytochemical components of WSF, and total 
+ion chromatogram profiles were acquired via full scan 
+under both positive and negative electrospray ionization 
+modes (Fig.  4). In comparison with the HMDB, Mass -
+Bank, TCMSP databases and data from related litera -
+ture searched from CNKI, Wanfang and VIP databases, 
+39 potential compounds were tentatively recognized in 
+accordance with their retention time (RT), molecular 
+formulas, differences in theoretical and observed quasi-
+molecular ion mass (m/z), errors in ppm, scores of Agi -
+lent Masshunter and MS/MS fragment ion circumstances 
+in total. Wherein, 7 kinds of mutual compounds were 
+identified simultaneously in positive and negative modes. 
+The majority of the detected components were attributed 
+to flavonoids (including flavone glycosides), alkaloids, 
+phenylpropanoids (including coumarins and lignans) and 
+phenolic acids. The specific information of components 
+identified tentatively in WSF was listed in Table 2.
+Bioinformatics‑based analysis
+Acquisition of WSF component targets and NAFLD disease 
+targets
+A total of 72 chemical components from WSF were 
+acquired from the HPLC-Q-TOF/MS results, TCMSP 
+database and literature search after Swiss ADME plat -
+form screening. Subsequently, 878 protein targets for the 
+72 active ingredients present in WSF were identified by 
+Fig. 2 Effects of WSF on liver function and hepatic pathology. A Representative graphs of morphology and pathological changes in liver (H&E 
+400 × ; Oil Red O 400 ×). B Serum AST. C Serum ALT. D NAFLD activity scores. E Oil Red O staining area ratio. All values were presented as mean ± SD 
+with significance markers of *P < 0.05 and **P < 0.01
+Page 10 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+using the Swiss Target Prediction platform after remov -
+ing repetitive targets with their canonical SMILES. After 
+deduplication, a total of 1573 unique NAFLD-related 
+targets were compiled from a combination of the Gen -
+eCards, DisGENET and OMIM databases, which were 
+used as disease targets of NAFLD for later analysis. The 
+Venny 2.1.0 website was further subjected to coincide 
+targets associated with the WSF with the NAFLD dis -
+ease-related targets, yielding 254 shared targets in total 
+as prospective therapeutic targets for the NAFLD treat -
+ment by the WSF (Fig. 5A).
+Construction of the herbs‑active components‑targets 
+network map
+Cytoscape 3.7.1 was utilized to construct an interaction 
+map of the herbs-active components-targets network, 
+consisting of 338 nodes and 2037 edges (Fig.  5B). The 
+nodes in the network were distinguished by size, which 
+had a positive correlation with the degree values. The 
+map was further subjected to additional topological anal -
+ysis across “Network analyzer” tool. Topological results 
+implied that the centralization of the network is 0.135 
+and the heterogeneity is 1.033, while the average CNC is 
+0.35, showing that some nodes in the network were more 
+concentrated and contributive than others. The average 
+degree of the network is 12.05, and there are 63 com -
+ponent nodes and 55 target nodes above this value. The 
+gypentonoside A_qt node has the highest degree value 
+with connections to 56 targets, and the target CYP19A1 
+is connected to 46 components of WSF. It is indicated 
+that bioactive components could interact with singu -
+lar or multiple targets, while various components might 
+also share common targets. Collectively, these insights 
+propose a multi-component and multi-target mode of 
+action for WSF in eliciting complex pathophysiological 
+alterations pertinent to NAFLD therapy. Details of com -
+ponents in WSF that ranked within the top 10 based on 
+their degree values were listed in Table 3.
+Construction of the PPI network map
+To further investigate the therapeutic mechanisms of 
+WSF on NAFLD, PPI analysis of the coincident targets 
+was implemented with the STRING database. The origi -
+nal PPI network comprised 253 nodes interconnected by 
+4943 edges with a degree value of 39.075 on average and 
+a clustering coefficient of 0.547 on average, which charac-
+terized the intricate protein interaction collectively. Uti -
+lizing the CentiScaPe 2.2 plugin for topological analysis, 
+the processed PPI network was subsequently visualized 
+through Cytoscape 3.7.1 software (Fig.  5C), employing 
+stringent selection criteria of degree > 39.075, between -
+ness centrality > 251.65, and closeness centrality > 0.002 to 
+discern top 50 key genes. The brighter color and larger 
+size of circles were positive correlation with the degree 
+Fig. 3 Effects of WSF on glycolipid metabolism. A–D Levels of TC, TG, HDL-c, and LDL-c in serum. E, F Levels of TC and TG in liver. G Levels of GLU 
+in serum. All values were presented as mean ± SD with significance markers of *P < 0.05 and **P < 0.01
+Page 11 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+values, while the thicker width and brighter color of 
+edges were positive correlation with the combined score. 
+In final, a total of 50 core targets with 873 edges were 
+screened out, and TNF (162), IL6 (157), AKT1 (157), 
+IL1B (142), and PPARG (136) were the top 5 targets 
+according to their degree values, and PTGS2 also has a 
+relatively high degree value of 109, which were all consid-
+ered as the key anti-NAFLD targets of WSF.
+GO and KEGG analysis
+GO analysis of the coincident targets mutual to WSF 
+and NAFLD was conducted via the DAVID database. 
+The outcomes of GO analysis disclosed that BP-related 
+alterations were primarily in linkage with 882 functional 
+annotations, comprising positive regulation of transcrip -
+tion from RNA polymerase II promoter, signal transduc -
+tion, protein phosphorylation, inflammatory response 
+(rank 10), and the response to lipopolysaccharide (LPS, 
+rank 13), etc. (Fig.  6A). Wherein, LPS constitutes a pri -
+mary composition of the outer membrane in Gram-neg -
+ative bacterial cell walls and could participate in NAFLD 
+inflammatory progression via activation of the gut-liver 
+axis LPS/TLR4/NF-κB pathway (Han et al. 2022). Besides, 
+alterations related to CC primarily encompassed 97 func-
+tional annotations, with a substantial focus on locations 
+of the cytosol, cytoplasm and plasma membrane etc. 
+Fig. 4 The total ion chromatogram (TIC) profiles in positive (A) and negative ion mode (B). Peaks 1–39 correlate with the compounds enumerated 
+in Table 2
+Page 12 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+Table 2 Identification of chemical compounds in WSF via HPLC-Q-TOF/MS
+No RT (min) Putative compounds Molecular formula Observed m/z Theoretical m/z Error (ppm) Score ESI mode CAS number
+1 14.021 Higenamine C16H17NO3 272.1273 271.1208 3.59 94.64  + 5843-65-2
+2 19.589 Chlorogenic acid C16H18O9 355.1011 354.0951 3.85 91.21  + 327-97-9
+19.404 Chlorogenic acid C16H18O9 353.0879 354.0951 0.20 97.67 – 327-97-9
+3 23.777 Sinapine C16H24NO5 310.1642 310.1654 2.32 95.86  + 18696-26-9
+4 33.151 Phenprobamate C10H13NO2 180.1008 179.0946 6.05 93.81  + 673-31-4
+5 38.053 (-)-Armepavine C19H23NO3 314.1745 313.1678 2.20 96.73  + 524-20-9
+6 40.895 (-)-N-Methylcoclaurine C18H21NO3 300.1589 299.1521 2.24 95.60  + 5096-70-8
+7 47.909 Asimilobine C17H17NO2 268.1323 267.1259 3.91 93.42  + 6871-21-2
+8 48.757 Coclaurine C17H19NO3 286.1435 285.1365 1.71 97.00  + 486-39-5
+9 51.466 N-nornuciferine C18H19NO2 282.1482 281.1416 2.61 97.28  + 3153-55-7
+10 54.823 Calycosin 7-galactoside C22H22O10 447.1280 446.1213 1.77 96.77  + 114272-30-9
+11 59.310 Rutin C27H30O16 611.1598 610.1534 2.00 94.97  + 153-18-4
+59.310 Rutin C27H30O16 609.1455 610.1534 1.28 97.92 – 153-18-4
+12 61.570 Quercituron C21H18O13 479.0810 478.0747 2.56 95.12  + 22688-79-5
+61.652 Quercituron C21H18O13 477.0671 478.0747 1.09 98.32 – 22688-79-5
+13 67.404 Naringin C27H32O14 581.1857 580.1792 1.90 96.19  + 10236-47-2
+67.369 Naringin C27H32O14 579.1712 580.1792 1.57 97.49 – 10236-47-2
+14 73.321 Hesperidin C28H34O15 611.1960 610.1898 1.96 96.28  + 520-26-3
+73.269 Hesperidin C28H34O15 609.1818 610.1898 1.48 97.56 – 520-26-3
+15 75.082 O-nornuciferine C18H19NO2 282.1482 281.1416 2.61 97.28  + 3153-55-7
+16 76.695 (-)-Nuciferine C19H21NO2 296.1638 295.1572 3.23 95.11  + 475-83-2
+17 83.243 Ononin C22H22O9 431.1322 430.1264 3.83 89.01  + 486-62-4
+18 95.807 Methylnissolin C17H16O5 301.1055 300.0998 5.57 87.22  + 73340-41-7
+19 100.261 Wogonin C16H12O5 285.0750 284.0685 3.14 95.60  + 632-85-9
+100.110 Wogonin C16H12O5 283.0613 284.0685 0.26 97.79 – 632-85-9
+20 100.943 Quercetin C15H10O7 303.0492 302.0427 2.89 95.01  + 117-39-5
+100.841 Quercetin C15H10O7 301.0353 302.0427 0.62 98.27 – 117-39-5
+21 104.200 Poncirin C28H34O14 595.2003 594.1949 3.52 88.63  + 14941-08-3
+22 10.280 Danshensu C9H10O5 197.0457 198.0528 − 0.65 98.48 – 42085-50-7
+23 10.895 Vanillic acid C8H8O4 167.0351 168.0423 − 0.48 98.74 – 121-34-6
+24 12.161 Protocatechuic acid C7H6O4 153.0195 154.0266 − 0.82 86.79 – 99-50-3
+25 13.305 Neochlorogenic acid C16H18O9 353.0877 354.0951 0.80 97.77 – 906-33-2
+26 16.928 Protocatechualdehyde C7H6O3 137.0246 138.0317 − 0.73 99.29 – 139-85-5
+27 21.731 Cryptochlorogenic acid C16H18O9 353.0877 354.0951 0.65 97.38 – 905-99-7
+28 63.845 Triphasiol C19H24O6 347.1493 348.1573 2.48 94.09 – 81445-98-9
+29 65.241 Carinol C20H26O7 377.1592 378.1679 4.04 92.22 – 58139-12-1
+30 68.998 Azelaic acid C9H16O4 187.0977 188.1049 − 0.12 98.67 – 123-99-9
+31 69.612 Astragalin C21H20O11 447.0921 448.1006 2.55 44.64 – 480-10-4
+32 74.831 Paramiltioic acid C19H24O5 331.1549 332.1624 0.91 98.82 – 140396-85-6
+33 75.928 Rosmarinic acid C18H16O8 359.0774 360.0845 0.19 98.15 – 20283-92-5
+34 76.992 Marmin C19H24O5 331.1551 332.1624 0.55 98.30 – 14957-38-1
+35 80.964 Salvianolic acid A C26H22O10 493.1145 494.1213 0.16 96.16 – 96574-01-5
+36 84.687 Isorhamnetin C16H12O7 315.0516 316.0583 − 0.84 96.37 – 480-19-3
+37 92.215 Salvianolic acid B C36H30O16 717.1455 718.1534 0.99 97.51 – 121521-90-2
+38 104.564 Monomethyl lithosper-
+mate
+C28H24O12 551.1190 552.1268 1.69 95.46 – 933054-33-2
+39 118.009 Ombuin C17H14O7 329.0670 330.0740 − 0.28 97.70 – 552-54-5
+Page 13 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+And the majority of alterations related to MF were pre -
+dominantly characterized by 208 functional annotations, 
+encompassing protein binding, identical protein binding 
+and ATP binding, etc. The CC and MF outcomes of GO 
+analysis were not visualized in this article.
+The coincident targets between WSF and NAFLD were 
+also submitted to the DAVID database for an in-depth 
+analysis of the KEGG, and the 156 related pathways were 
+screened with a criterion of P < 0.01. The enrichment 
+bar chart of the top 20 key pathways was drawn accord -
+ing to gene counts using Weishengxin website (Fig.  6B). 
+Wherein, we found that pathways in cancer, metabolic 
+pathways and lipid and atherosclerosis have the top 3 
+largest gene counts.
+In accordance with PPI analysis results, we discovered 
+that core proteins like TNF, IL6, IL1B and PTGS2 (COX2) 
+were canonical pro-inflammatory cytokines. Moreover, 
+the BP results also revealed the potential of WSF to ame -
+liorate NAFLD by modulating inflammatory responses. 
+Therefore, we conducted an in-depth exploration of 
+the KEGG analysis results and found that inflamma -
+tion related pathways like TNF, IL-17, Toll-like receptor 
+and NF-kappa B signaling pathway were also involved 
+in enrichment pathways with gene counts ≥ 15 (Fig. 6C). 
+These selected 4 pathways (in brown gray) involved 41 
+related targets (in blue) and 67 chemical components (in 
+green) with 112 nodes and 408 edges (Fig.  6D). In con -
+clusion, the combination results of KEGG and PPI anal -
+ysis indicated that WSF might act on NAFLD through 
+proteins in inflammation related pathways above, which 
+would be validated with further experiments later.
+Molecular docking
+For the further affinity verification, molecular dock -
+ing was carried out of the core proteins in inflammation 
+related pathways (TLR4, NF-κB, COX-2, IL-1β, IL-6, and 
+TNF-α) with 13 active components of degree values ≥ 10 
+in the “active components-target-pathway” network. The 
+respective minimum binding energies between various 
+active components with their CAS numbers and proteins 
+with their PDB IDs were listed in Table  4. Furthermore, 
+a heat map was constructed according to the mini -
+mum binding energy for intuitive visualization purpose 
+(Fig.  7A). The stability of the ligand-receptor binding 
+was inversely proportional to the binding energy, which 
+indicated that a more stable interaction resulted in lower 
+binding energy. It is considered to have a good affinity 
+between ligands and receptors if the binding energy is 
+below − 5.0 kcal/mol (Jiang et al. 2022).
+Our results implied that all the minimum binding ener-
+gies were no more than -5.0 kcal/mol with a value of 
+−  7.17 kcal/mol on average, which indicated that most 
+of the selected chemical components of WSF were con -
+jugated tightly with pivotal proteins in inflammation 
+related pathways. These data further proved that WSF 
+might exert pharmacological effects against NAFLD 
+by mediating the activities of inflammatory related 
+proteins of the TLR4/NF-κB/COX-2 pathway at the 
+Fig. 5 Analysis of core components and proteins for WSF on NAFLD treatment. A Venn diagram of targets. B Herbs-active components-targets 
+network. C PPI network of core targets possessing the highest 50-degree values
+Page 14 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+Table 3 The information of components in WSF possessing the highest 10-degree values
+Component name Molecular formula 2D structure Degree ASPL BNC CNC
+Gypentonoside A_qt C30H48O4 57 2.448 0.045 0.408
+Gypenoside XXVIII_qt C27H44O3 53 2.478 0.037 0.404
+Gypenoside XXXV_qt C29H48O3 52 2.484 0.031 0.403
+Cerevisterol C28H46O3 51 2.531 0.052 0.395
+Danshenol A C21H20O4 48 2.555 0.035 0.391
+12-senecioyl-2E,8E,10E-atractylentriol C19H22O4 45 2.537 0.040 0.394
+Przewaquinone c C18H16O4 45 2.519 0.041 0.397
+(3R)-3-(2-hydroxy-3,4-dimethoxyphenyl)chroman-7-ol C17H18O5 43 2.596 0.024 0.385
+14-acetyl-12-senecioyl-2E,8Z,10E-atractylentriol C20H22O5 43 2.543 0.032 0.393
+Gypenoside XXVII_qt C27H46O3 43 2.531 0.030 0.395
+Page 15 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+molecular conformation level. Besides, we found that 
+JGL5 (gypenoside XXXVI), JGL8 (gypenoside XXVIII), 
+FL1 (16α-hydroxydehydrotrametenolic acid), JGL9 
+(gypentonoside·A) and JGL6 (gypenoside XXXV) have 
+lower minimum binding energies to almost all core tar -
+gets, indicating that they might be the core components 
+of WSF in NAFLD therapy. Representative simulation 
+figures of core protein-active component docking pat -
+terns were drawn by PyMoL software with links between 
+certain binding residue positions and hydrogen bonds 
+(Fig. 7B–D).
+Effects of WSF on the critical protein expressions 
+and inflammatory factor levels in the liver
+To further validate the anti-NAFLD effect of WSF across 
+the inflammatory TLR4/NF-κB/COX-2 pathway in diet-
+induced mice, IHC (Fig.  8A), WB (Fig.  9A) and ELISA 
+analyses of pivotal proteins and inflammation factors in 
+the liver were performed. Compared to the NC group, 
+the HSHF diet would induce an increase in levels of 
+TLR4, NF-κB and COX-2 expression in NAFLD mice 
+livers (P < 0.05, 0.01) (Fig.  8B–D, Fig.  9B) and promote 
+the release of inflammation factors like IL-1β, IL-6 and 
+TNF-α (P < 0.05, 0.01) (Fig. 8E–G). In contrast, interven -
+tion with WSF for 17 weeks could result in the diminu -
+tion expression of TLR4, NF-κB and COX-2 (P < 0.05, 
+0.01) (Fig.  8B–D, Fig.  9B) with reversed pro-inflamma -
+tory cytokine levels in the liver (P < 0.01) (Fig.  8E–G). 
+These findings highlighted that WSF treatment indeed 
+attenuated the NAFLD and inflammation in the liver 
+across the TLR4/NF-κB/COX-2 pathway, consistent with 
+the results obtained above by the bioinformatics and 
+molecular docking.
+Discussion
+NAFLD refers to a clinical syndrome pathologically 
+characterized by inordinate intracellular lipid deposi -
+tion in the liver due to factors other than alcohol and 
+other well-defined hepatocyte-damaging elements, with 
+a spectrum of diseases including NAFL, NASH, hepatic 
+fibrosis, cirrhosis, or even hepatocellular carcinoma 
+(HCC)  (Chalasani et  al. 2018). Nowadays, the NAFLD 
+incidence of the population in Asian countries is around 
+27.4%, with a continuous upward and younger trend (Fan 
+et al. 2017; Anderson et al. 2015). NAFLD in children is 
+characterized by rapid progression, 25.0%-50.0% have 
+Fig. 6 Enrichment analysis for WSF on NAFLD treatment. A BP results of GO analysis (top 20). B KEGG pathway analysis results (top 20). C Analytical 
+results of selected pathways. D Active components-target-pathway network of WSF on treating NAFLD
+Page 16 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+developed NASH among confirmed cases of NAFLD in 
+children, and 10.0%-25.0% have developed liver fibrosis 
+as reported (Goyal and Schwimmer 2016). However, cur -
+rent used drugs mainly focused on weight loss, metabo -
+lism regulation, antioxidation and liver protection, and 
+long-term application might induce increased risk of 
+cancer, hemorrhagic stroke and symptomatic heart fail -
+ure (Hsu et al. 2016). Therefore, there is still a lack of effi-
+cacious hepatoprotective medicine with few side effects, 
+which seriously lowers the life quality of NAFLD patients 
+of all ages.
+TCM formulas often contain a variety of herbs with a 
+myriad of active ingredients that could holistically mod -
+ulate the intricate pathogenic network of NAFLD, as 
+proven by long-term safe medication practices (Sun et al. 
+2021). In TCM theories, NAFLD was supposed to be a 
+syndrome of deficient in origin and excessive in super -
+ficiality. Additionally, spleen deficiency was considered 
+as Ben (primary aspect), while pathogenic factors like 
+blood stasis and phlegm-dampness were Biao (second -
+ary aspects)  (Zhang et  al. 2010). Synopsis of the Golden 
+Chamber noted that “treating liver by nourishing spleen” , 
+indicating that if the transportation function of spleen 
+was normal, qi and blood would be harmonized, and 
+liver diseases could be cured as soon as possible  (Wei 
+et  al. 2015). WSF was developed under the guidance of 
+Prof. Wang Kun-Gen with the efficacity of “invigorating 
+the spleen and benefiting the stomach, clearing heat and 
+promoting diuresis” , which fits in with the above TCM 
+theories of NAFLD treatment. Years of clinical experi -
+ence have also proved that WSF performs well in man -
+aging metabolic diseases like hyperlipidemia and severe 
+fatty liver  (Shen et  al. 2018). In summary, WSF has the 
+potency for NAFLD prevention and treatment, but its 
+modes of action need further systematic investigation. 
+Therefore, we detect the pharmacological effects and 
+relevant molecular pathways of WSF on NAFLD in this 
+study.
+According to expert consensus, dietary disorders (i.e., 
+overeating of fat and sweets), more leisure with less 
+labor, emotional disorders, physical weakness from pro -
+longed illness and insufficient endowment were con -
+sidered as the primary causes of NAFLD (Zhang and Li 
+2017). Epidemiology statistics also revealed that exces -
+sive sugar and lipid intake, which could increase the 
+metabolic burden of the liver, were major risk factors 
+Table 4 The respective minimum binding energy of components in WSF with core proteins
+Active components Minimum binding energy (kcal/mol)
+TLR4
+(2Z62)
+NF‑κB
+(1MY7)
+COX‑2
+(5F19)
+IL‑1β
+(4NI7)
+IL‑6
+(5R8E)
+TNF‑α
+(5UUI)
+JGL5
+(90058-55-2)
+− 8.0 − 7.9 − 12.7 − 8.1 − 6.6 − 7.4
+JGL8
+(81474-80-8)
+− 8.2 − 7.6 − 11.0 − 8.2 − 6.4 − 7.3
+FL1
+(176390-66-2)
+− 8.2 − 7.6 − 10.1 − 7.7 − 6.8 − 7.1
+JGL9
+(187277-03-8)
+− 7.5 − 7.3 − 10.7 − 7.7 − 6.5 − 7.6
+JGL6
+(90058-54-1)
+− 7.3 − 8.4 − 9.9 − 8.0 − 6.0 − 7.4
+DS27
+(2237283-20-2)
+− 7.6 − 7.4 − 9.1 − 7.3 − 6.7 − 7.1
+DS16
+(142694-58-4)
+− 7.4 − 7.1 − 8.2 − 7.7 − 6.8 − 6.8
+DS10
+(135040-83-4)
+− 7.4 − 6.1 − 9.1 − 6.6 − 6.3 − 6.6
+HQ12
+(64474-51-7)
+− 8.0 − 6.1 − 8.8 − 6.5 − 6.1 − 6.3
+DS15
+(515-03-7)
+− 7.1 − 5.9 − 8.0 − 6.2 − 5.9 − 6.0
+BZ2
+(113269-37-7)
+− 5.2 − 5.3 − 7.8 − 6.6 − 5.4 − 5.6
+BZ1
+(113269-39-9)
+− 6.4 − 5.5 − 7.4 − 5.5 − 5.3 − 5.6
+BZ3
+(113269-36-6)
+− 5.7 − 5.0 − 7.5 − 5.8 − 5.2 − 5.3
+Page 17 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+for NAFLD  (Romero-Gómez et  al. 2017). An increase 
+in insulin resistance degree and hepatic fat storage is 
+positively correlated with changes in plasma saturated 
+fatty acids  (Rosqvist et  al. 2014). Moreover, excessive 
+intake of sugar-sweetened beverages also has a positive 
+correlation with fatty liver incidence and serum ALT 
+levels  (Ma et  al. 2015). Therefore, the development of 
+NAFLD models predominantly relies on dietary inter -
+ventions with high-fat and high-sugar regimens to emu -
+late the detrimental effects of an unhealthy human diet, 
+except for drug-induced liver damage or unique strains of 
+animals (Fang et al. 2022). In this study, we found that the 
+HSHF diet would induce typical symptoms of NAFLD 
+similar to those in humans like obesity, lipid deposition 
+in organs, increased transaminase levels, lipid metabo -
+lism disorder, hepatocellular degeneration and hepatic 
+inflammatory cell infiltration, as reported in other stud -
+ies (Chen et al. 2017; Porras et al. 2017).
+In this study, we revealed a noteworthy therapeutic 
+impact of WSF across multiple dimensions on NAFLD 
+treatment. Obesity ranks as a primary risk factor in the 
+development of NAFLD. Meta-analysis results illustrated 
+Fig. 7 Molecular docking results of ingredients in WSF with pivotal proteins. A Heat map in accordance with minimum binding energies. B–D The 
+docking conformation of JGL5 and JGL8 with TLR4, NF-κB and COX-2
+Page 18 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+Fig. 8 Effects of WSF on liver inflammation via IHC and ELISA analysis. A IHC figures at the magnification of 400 × . B–E Expression levels of TLR4, 
+NF-κB, COX-2 and IL-6 in liver quantified by IHC assays. F–G Expression levels of IL-1β and TNF-α in liver quantified by ELISA assays. Black arrows refer 
+to the positive expression sites of specific proteins. All values were presented as mean ± SD with significance markers of *P < 0.05 and **P < 0.01
+Page 19 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+that 69.99% of individuals in the overweight category 
+(BMI ≥ 25.0  kg/m2) exhibited NAFLD prevalence, and 
+in the obese population (BMI ≥ 30.0 kg/m2), it increased 
+further to 75.27% (Quek et al. 2023). We found that WSF 
+decreased the body weight significantly of model mice 
+from 7 weeks after administration compared to the MC 
+group, and the weight gain of 17  weeks also decreased 
+with significance. Additionally, liver and epididymis adi -
+pose mass weight declined significantly in the model 
+mice, implying less lipid deposition in organs. Clinically, 
+the disease progression of NAFLD is positively correlated 
+with the serum levels of AST and ALT  (Chinese Soci -
+ety of Endocrinology et  al. 2018). It was identified that 
+WSF had salient hepatoprotective effects due to reduced 
+serum levels of AST and ALT in our study. Despite its 
+inherent constraints, liver biopsy continues to be the gold 
+standard for the course of NAFLD diagnosis and progno -
+sis (Wang and Malhi 2018). H&E and Oil Red O staining 
+results demonstrated that WSF could reverse pathologi -
+cal syndromes like steatosis, ballooning degeneration and 
+inflammatory cell aggregation of hepatocytes caused by 
+the HSHF diet. Meanwhile, NAS score reduction fur -
+ther proved the protective effects of WSF on hepatocyte 
+lesions.
+In 2020, an international panel advocated rechristen -
+ing NAFLD as metabolic associated fatty liver disease 
+(MAFLD) in an effort to underscore the metabolic under-
+pinnings of the NAFLD pathogenesis course (Eslam et al. 
+2020). Our results showed that WSF could improve 
+lipid metabolism by significantly modulating the serum 
+and liver levels of TG and HDL-c, but it had no obvious 
+effects on TC and LDL-c. Researches have indicated that 
+excessive intake of bile salts not only causes an increase 
+in intestinal absorption of cholesterol but also reduces 
+the excretion of cholesterol by inhibiting the conver -
+sion to bile acids, leading to excessive accumulation of 
+cholesterol in the plasma and liver of the organism (Song 
+et al. 2015; Xiao et al. 2023; Tilg et al. 2022). LDL is the 
+primary carrier of cholesterol in plasma, transport -
+ing cholesterol from the liver to peripheral tissues, and 
+accumulation of cholesterol-enriched LDL is a hallmark 
+of hypercholesterolemia  (Islam et  al. 2022). Moreover, 
+clinical research data have also demonstrated that high 
+hepatic and plasma cholesterol accompanied high lev -
+els of LDL-c with were seen in obeticholic acid admin -
+istration patients  (Neuschwander-Tetri et  al. 2015). Our 
+experimental observations revealed that neither the posi -
+tive drug nor the WSF manifested substantial reductions 
+in serum or liver TC levels and serum LDL-c levels. This 
+lack of significant reduction implies that the cholesterol 
+and sodium cholate-supplemented diet has elicited an 
+extremely severe perturbation in the organism’s choles -
+terol metabolism. In conclusion, these results denoted 
+that WSF could exert its anti-NAFLD efficacy mainly by 
+ameliorating lipid metabolism partially and recovering 
+liver inflammation and steatosis injury.
+Furthermore, WSF exhibits a significant dose-depend -
+ent regulatory effect on glucose and lipid metabolism 
+in rats with metabolic disorders, akin to the manifesta -
+tions observed in NAFLD mice. However, the precise 
+dose-dependent relationship of WSF in NAFLD models 
+remains to be definitively established, due to variations 
+in experimental animal strains and dietary compositions. 
+Concurrently, WSF does not demonstrate significant 
+toxic effects in normal mice at a dosage 12 times that of 
+the human clinical dose. The observed significant differ -
+ences in body weight may be attributed to the relatively 
+higher initial body weight of the WS mice or poten -
+tially due to WSF enhancing their metabolic efficiency. 
+The underlying mechanism warrants further investiga -
+tion, particularly focusing on the activities of enzymes 
+involved in glycolipid metabolism.
+Fig.9 Effects of WSF on hepatic inflammation via WB analysis. A Representative figures of WB. B Relative expression levels of TLR4, NF-κB and COX-2 
+to β-actin in the liver quantified by WB assays. All values were presented as mean ± SD with significance markers of *P < 0.05 and **P < 0.01.
+Page 20 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+Network pharmacology has emerged as a potent strat -
+egy for holistically discerning the therapeutic targets of 
+drugs in relation to diseases, owing to its capability of 
+synthesizing colossal datasets to conduct virtual screen -
+ings grounded in both TCM ingredients and correlated 
+symptoms (Zhong et al. 2023; Zhang et al. 2023). In the 
+study combined with HPLC-Q-TOF/MS and network 
+pharmacology, we attained 72 active components and 
+254 intersection target proteins. Sequentially, we further 
+obtained NAFLD-related hub genes including TNF, IL6, 
+AKT1, IL1B, PPARG and PTGS2, which played impor -
+tant roles in NAFLD abnormal metabolic pathways, 
+corresponding to the degree values of the PPI interac -
+tion network. We have noticed that TNF-α, IL-6, IL-1β 
+and PTGS2 (COX2) are all inflammatory factors, as well 
+as inflammation is also supposed to be an important 
+driver of NAFLD and the progression to NASH  (Rohm 
+et al. 2022; Luo and Lin 2021). Thus, we further gauged 
+the gene counts and confidence levels of inflammation 
+related pathways. The KEGG analysis showed that all 
+the gene counts of TNF, IL − 17, Toll-like receptor and 
+NF − kappa B signaling pathway were all greater than 15 
+with P values less than 0.01, indicating the key role of 
+these pathways of WSF on NAFLD treatment. Therefore, 
+inflammatory related TLR4 and  NF − κB were also con -
+sidered as the pivotal target proteins of WSF to alleviate 
+NAFLD.
+The outcomes from molecular docking analyses 
+revealed that crucial components in WSF demonstrated 
+high binding activities with pivotal targets comprised in 
+inflammation related pathways (including TLR4, NF-κB, 
+COX-2, IL-1β, IL-6 and TNF-α), with all minimum bind -
+ing energies recorded at less than -5.0  kcal/mol  (Tong 
+et al. 2021; Zhou et al. 2022). This further confirmed the 
+critical role of inflammatory pathways acquired from 
+network pharmacology, particularly the TLR4/NF-κB/
+COX-2 pathway, in the molecular mechanism of WSF 
+on NAFLD treatment. Furthermore, we found that the 
+majority of active components with both lower binding 
+energies to proteins and higher degree values in the net -
+work belonged to the saponins of Gynostemmae Herba. 
+Our prior researches have similarly demonstrated that 
+gypenosides could ameliorate hepatic inflammation in 
+high-fat diet induced NAFLD rats by attenuating the 
+LPS/TLR4/MyD88/NF-κB signaling pathway (Shen et al. 
+2020, 2022). Moreover, gypenosides could modulate 
+associated enzyme functions involved in cholesterol pro -
+duction, fatty acid synthesis, transportation and degrada -
+tion to improve lipid disorder in NAFLD as well  (Zhou 
+et al. 2023; Cheng et al. 2024). Those above implied that 
+gypenosides could be the core bioactive ingredients of 
+WSF, which need in-depth study later. In conclusion, 
+WSF might exert pharmacological effects against NAFLD 
+by mediating activities of inflammatory related proteins 
+of TLR4/NF-κB/COX-2 pathway, which would be veri -
+fied in the subsequent experiments.
+The hepatic inflammation response is a crucial feature 
+of NAFLD, and the canonical TLR4/NF-κB inflamma -
+tory pathway has been identified as a critical contributor 
+in the advancement of NAFLD (Tang et al. 2023). In nor -
+mative hepatocytic contexts devoid of stimulatory cues, 
+NF-κB complexes with its cytoplasmic inactivator, the 
+inhibitor of NF-κB (IκB), to form a suppressive ensem -
+ble that curtails the transcriptional activation potential 
+of NF-κB (Wei et al. 2022). Upon stimulation of hepato -
+cytes, TLR4 engages with the downstream adaptor pro -
+tein of myeloid differentiation factor 88 (MyD88) and 
+initiates a signaling cascade that subsequently activates 
+the IκB kinase (IKK). This activation further prompts 
+the phosphorylation and degradation of the IκB protein, 
+leading to a dissociation of the NF-κB/IκB protein com -
+plex, which is crucial for the transcriptional regulation 
+of inflammatory responses (Feng et al. 2020). Moreover, 
+NF-κB activation leads to the production of pro-inflam -
+matory cytokines comprising IL-1β, IL-6 and TNF-α, 
+which are prominently implicated in the progression of 
+NAFLD (Liu et al. 2019; Lv et al. 2023).
+Experimental evidence has illustrated the impair -
+ment of linoleic and arachidonic acid metabolism in the 
+liver of NAFLD mice induced by the high fat diet with 
+a significant upregulation of hepatic TLR4 expression, 
+leading to a substantial accumulation of inflammatory 
+cytokines  (Qin et  al. 2023). Linoleic acid is categorized 
+as an n-6 polyunsaturated fatty acids, whose downstream 
+metabolite is arachidonic acid in  vivo, and holds a sig -
+nificant role in mediating inflammatory processes (Burns 
+et al. 2018). COX-2 is a formidable enzyme that facilitates 
+the conversion of arachidonic acid into prostaglandins 
+and instigates inflammation subsequent to activation by a 
+myriad of inflammatory stimuli encompassing cytokines 
+and bacteria (Hu et al. 2020). It has been manifested that 
+excessive linoleic acid intake could result in liver steato -
+sis, inflammation injury and fibrotic response with higher 
+levels of hepatic TG and free fatty acids (FFAs) (Graham 
+et  al. 2023). Moreover, it would also promote NF-кB 
+translocation and COX-2 activation, and induce produc -
+tion of proinflammatory cytokines like IL-1β, IL-6 and 
+TNF-α by the release of arachidonic acid derived com -
+pounds (Marchix et al. 2015).
+Our results revealed a marked decrease in the expres -
+sion levels of TLR4, NF-κB and COX-2 in the liver tissue 
+by WSF intervention compared with the NAFLD mice. 
+As integrators of the inflammatory pathway in NAFLD, 
+inactivation of NF-κB and COX-2 could lead to less 
+secretion of pro-inflammatory cytokines like IL-1β, IL-6 
+and TNF-α (Huang et al. 2019; Cheng et al. 2013), which 
+Page 21 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+was consistent with the ELISA results in this study. Com-
+bined with the previous results of HPLC-Q-TOF/MS, 
+bioinformatics and molecular docking, we supposed that 
+WSF treatment could ameliorate hepatic lipid disorder 
+and inflammation injury in NAFLD through regulation of 
+the TLR4/NF-κB/COX-2 signaling pathway.
+Conclusions
+This study indicated that WSF could be used to alleviate 
+NAFLD caused by the HSHF diet via improving fat accu -
+mulation, lipid metabolism, liver function and pathologi -
+cal damage. Moreover, a new insight was provided into 
+the mechanisms through the TLR4/NF-κB/COX-2 path -
+way combined with HPLC-Q-TOF/MS, bioinformatics, 
+molecular docking and validation results. In addition, 
+these results offer a pharmacological foundation for fur -
+ther product development and clinical implementation of 
+WSF.
+Abbreviations
+ALT  Alanine aminotransferase
+ASPL  Average shortest path length
+AST  Aspartate transaminase
+BNC  Betweenness centrality
+BP  Biological process
+CC  Cellular component
+CNC  Closeness centrality
+COX-2  Cyclooxygenase 2
+DL  Drug-like properties
+EA  Epididymis adipose
+GLU  Glucose
+GO  Gene ontology
+HDL-c  High density lipoprotein cholesterol
+HSHF  High-sucrose and high-fat
+IHC  Immunohistochemistry
+IL-1β  Interleukin-1β
+IL-6  Interleukin-6
+KEGG  Kyoto encyclopedia of genes and genomes
+LDL-c  Low density lipoprotein cholesterol
+MF  Molecular function
+NAFLD  Nonalcoholic fatty liver disease
+NAS  NAFLD activity score
+NF-κB  Nuclear factor-kappa B
+OB  Oral bioavailability
+PPI  Protein–protein interaction
+RT  Retention time
+TC  Total cholesterol
+TCM  Traditional Chinese medicine
+TG  Triglyceride
+TIC  Total ion chromatogram
+TLR4  Toll-like receptor 4
+TNF-α  Tumor necrosis factor α
+WB  Western blot
+WSF  Wang’s empirical formula
+Supplementary Information
+The online version contains supplementary material available at https:// doi. 
+org/ 10. 1186/ s10020- 024- 01022-3.
+Additional file 1.
+Additional file 2.
+Acknowledgements
+All the authors would like to thank the researchers and staff of the mentioned 
+software and databases.
+Author contributions
+SH Chen: Writing – review & editing, Methodology and Supervision; CJ Zhou: 
+Writing and Data Collation; JH Huang: Writing and Data Acquisition; YL Qiao: 
+Visualization and Software; N Wang: Data Acquisition and Analysis; YZ Huang: 
+Method Investigation and Validation; B Li: Writing – review & editing and 
+Methodology; WF Xu: Methodology; XL He: Methodology; KG Wang: Supervi-
+sion; YH Zhi: Project Management; GY Lv: Funding acquisition and Supervision; 
+SH Shen: Funding acquisition, Supervision and Methodology.
+Funding
+This study was supported by the National Natural Science Foundation of 
+China (Nos. 81503527 and 82274134), the National Key Research and Develop-
+ment Plan (Nos. 2017YFC1702200 and 2017YFC1702202), the Key Research 
+and Development Program of Zhejiang Province (No. 2020C04020), and 
+Science and Technology Department of the State Administration of Traditional 
+Chinese Medicine-Zhejiang Province Joint Project (No. GZY-ZJ-KJ-24068).
+Availability of data and materials
+No datasets were generated or analysed during the current study.
+Declarations
+Ethics approval and consent to participate
+The Animal Ethics Committee of the Zhejiang University of Technology ratified 
+the experiment plan (No. 20211119097, 19–11-2021).
+Consent for publication
+Not applicable.
+Competing interests
+The authors declare no competing interests.
+Author details
+1 Collaborative Innovation Center of Yangtze River Delta Region Green 
+Pharmaceuticals, Zhejiang University of Technology, No. 18, Chaowang Road, 
+Gongshu District, Hangzhou 310014, Zhejiang, China. 2 Disease Prevention 
+and Health Management Center, The First Affiliated Hospital of Zhejiang 
+Chinese Medical University, Hangzhou 310006, Zhejiang, China. 3 Zhejiang 
+Provincial Key Laboratory of TCM for Innovative R & D and Digital Intelligent 
+Manufacturing of TCM Great Health Products. Huzhou, Zhejiang 313200, 
+China. 4 College of Pharmaceutical Science, Zhejiang Chinese Medical Uni-
+versity, No. 548, Binwen Road, Biniang District, Hangzhou 310053, Zhejiang, 
+China. 5 Kun-Gen Wang National Famous Chinese Medicine Doctor Studio, 
+Hangzhou 310006, Zhejiang, China. 
+Received: 2 July 2024   Accepted: 1 December 2024
+References
+Anderson EL, Howe LD, Jones HE, Higgins JP , Lawlor DA, Fraser A. The preva-
+lence of non-alcoholic fatty liver disease in children and adolescents: a 
+systematic review and meta-analysis. PLoS ONE. 2015;10(10): e0140908.
+Bai LJ, Wu C, Lei SH, Zou M, Wang SJ, Zhang ZY, et al. Potential anti-gout 
+properties of Wuwei Shexiang pills based on network pharmacology and 
+pharmacological verification. J Ethnopharmacol. 2023;305: 116147.
+Berardo C, Di Pasqua LG, Cagna M, Richelmi P , Vairetti M, Ferrigno A. Nonalco-
+holic fatty liver disease and non-alcoholic steatohepatitis: current issues 
+and future perspectives in preclinical and clinical research. Int J Mol Sci. 
+2020;21(24):9646.
+Bessone F, Razori MV, Roma MG. Molecular pathways of nonalcoholic 
+fatty liver disease development and progression. Cell Mol Life Sci. 
+2019;76(1):99–128.
+Page 22 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+Burns JL, Nakamura MT, Ma DWL. Differentiating the biological effects of 
+linoleic acid from arachidonic acid in health and disease. Prostaglandins 
+Leukot Essent Fatty Acids. 2018;135:1–4.
+Buzzetti E, Pinzani M, Tsochatzis EA. The multiple-hit pathogenesis of non-
+alcoholic fatty liver disease (NAFLD). Metabolism. 2016;65(8):1038–48.
+Chalasani N, Younossi Z, Lavine JE, Charlton M, Cusi K, Rinella M, et al. The 
+diagnosis and management of nonalcoholic fatty liver disease: practice 
+guidance from the American association for the study of liver diseases. 
+Hepatology. 2018;67(1):328–57.
+Chen J, Liu J, Wang Y, Hu XM, Zhou F, Hu YM, et al. Wogonin mitigates nonalco-
+holic fatty liver disease via enhancing PPARα/AdipoR2, in vivo and in vitro. 
+Biomed Pharmacother. 2017;91:621–31.
+Chen M, Xie Y, Gong S, Wang Y, Yu H, Zhou T, et al. Traditional Chinese medi-
+cine in the treatment of nonalcoholic steatohepatitis. Pharmacol Res. 
+2021a;172: 105849.
+Chen L, Ji X, Wang M, Liao X, Liang C, Tang J, et al. Involvement of TLR4 signal-
+ing regulated-COX2/PGE2 axis in liver fibrosis induced by Schistosoma 
+japonicum infection. Parasit Vectors. 2021b;14(1):279.
+Chen J, Yang S, Luo H, Fu X, Li W, Li B, et al. Polysaccharide of Atractylodes mac-
+rocephala Koidz alleviates NAFLD-induced hepatic inflammation in mice 
+by modulating the TLR4/MyD88/NF-κB pathway. Int Immunopharmacol. 
+2024;141: 113014.
+Cheng Q, Li N, Chen MQ, Zheng JM, Qian ZP , Wang XY, et al. Cyclooxygenase-2 
+promotes hepatocellular apoptosis by interacting with TNF-α and IL-6 
+in the pathogenesis of nonalcoholic steatohepatitis in rats. Dig Dis Sci. 
+2013;58(10):2895–902.
+Cheng BB, Lv GY, Wu HS, Zheng X, Huang JH, He XL, et al. Exploring the 
+mechanism of action of hawthorn to improve metabolic hypertension 
+based on network pharmacology and molecular docking. Chin J Mod 
+Appl Pharm. 2023;40(24):3377–88.
+Cheng SC, Liou CJ, Wu YX, Yeh KW, Chen LC, Huang WC. Gypenoside XIII 
+regulates lipid metabolism in HepG2 hepatocytes and ameliorates non-
+alcoholic steatohepatitis in mice. Kaohsiung J Med Sci. 2024;40(3):280–90.
+Chinese Society of Endocrinology, Chinese Medical Association. Consensus 
+on the diagnosis and treatment of non-alcoholic fatty liver disease and 
+related metabolic disorders. J Clin Hepatol. 2018;34(10):2103–8.
+Day CP , James OF. Steatohepatitis: a tale of two “hits”? Gastroenterology. 
+1998;114(4):842–5.
+Deng GH, Zhao CC, Cai X, Zhang XQ, Ma MZ, Lv JH, et al. Untargeted meta-
+bonomics and TLR4/ NF-κB signaling pathway analysis reveals potential 
+mechanism of action of Dendrobium huoshanense polysaccharide in 
+nonalcoholic fatty liver disease. Front Pharmacol. 2024;15:1374158.
+Dong YG, Guo YF, Hu DY, Li Y, Li JJ. Expert consensus on safety evaluation of 
+statins. Chin J Cardiol. 2014;42(11):890–4.
+Eslam M, Newsome PN, Sarin SK, Anstee QM, Targher G, Romero-Gomez 
+M, et al. A new definition for metabolic dysfunction-associated fatty 
+liver disease: an international expert consensus statement. J Hepatol. 
+2020;73(1):202–9.
+Fan JG, Kim SU, Wong VW. New trends on obesity and NAFLD in Asia. J Hepa-
+tol. 2017;67(4):862–73.
+Fang TY, Wang H, Pan XY, Little PJ, Xu SW, Weng JP . Mouse models of nonalco-
+holic fatty liver disease (NAFLD): pathomechanisms and pharmacothera-
+pies. Int J Biol Sci. 2022;18(15):5681–97.
+Feng ZW, Pang LJ, Chen SY, Pang XH, Huang YS, Qiao Q, et al. Didymin 
+ameliorates dexamethasone-induced non-alcoholic fatty liver disease 
+by inhibiting TLR4/NF-κB and PI3K/Akt pathways in C57BL/6J mice. Int 
+Immunopharmacol. 2020;88:10.
+Goyal NP , Schwimmer JB. The progression and natural history of pediatric 
+nonalcoholic fatty liver disease. Clin Liver Dis. 2016;20(2):325–38.
+Graham DS, Liu G, Arasteh A, Yin XM, Yan S. Ability of high fat diet to induce 
+liver pathology correlates with the level of linoleic acid and Vitamin E in 
+the diet. PLoS ONE. 2023;18(6): e0286726.
+Han X, Zhao W, Zhou Q, Chen H, Yuan J, Xiaofu Z, et al. Procyanidins from haw-
+thorn (Crataegus pinnatifida) alleviate lipid metabolism disorder via inhib-
+iting insulin resistance and oxidative stress, normalizing the gut micro-
+biota structure and intestinal barrier, and further suppressing hepatic 
+inflammation and lipid accumulation. Food Funct. 2022;13(14):7901–17.
+Houttu V, Csader S, Nieuwdorp M, Holleboom AG, Schwab U. Dietary inter-
+ventions in patients with non-alcoholic fatty liver disease: a systematic 
+review and meta-analysis. Front Nutr. 2021;8: 716783.
+Hsu WF, Sheen LY, Lin HJ, Chang HH. A review of western and Traditional chi-
+nese medical approaches to managing nonalcoholic fatty liver disease. 
+Evid Based Complement Alternat Med. 2016;2016:6491420.
+Hu Y, Yang XF, Wu SD, Xiao JH. COX-2 in liver fibrosis. Clin Chim Acta. 
+2020;506:196–203.
+Huang L, Ding W, Wang MQ, Wang ZG, Chen HH, Chen W, et al. Tanshinone IIA 
+ameliorates non-alcoholic fatty liver disease through targeting peroxi-
+some proliferator-activated receptor gamma and toll-like receptor 4. J Int 
+Med Res. 2019;47(10):5239–55.
+Islam MM, Hlushchenko I, Pfisterer SG. Low-density lipoprotein internalization, 
+degradation and receptor recycling along membrane contact sites. Front 
+Cell Dev Biol. 2022;10:826379.
+Jiang HY, Gao HY, Li J, Zhou TY, Wang ST, Yang JB, et al. Integrated spatially 
+resolved metabolomics and network toxicology to investigate the hepa-
+totoxicity mechanisms of component D of Polygonum multiflorum Thunb. 
+J Ethnopharmacol. 2022;298: 115630.
+Jiao X, Jin X, Ma Y, Yang Y, Li J, Liang L, et al. A comprehensive application: 
+molecular docking and network pharmacology for the prediction of 
+bioactive constituents and elucidation of mechanisms of action in com-
+ponent-based Chinese medicine. Comput Biol Chem. 2021;90: 107402.
+Jin ZL, Han K, Chen HY, Zhang XY, Qiao WL, Jia BX. Exploration of phytochemi-
+cals and biological functions of Kadsura coccinea pericarpium based on 
+LC-MS and network pharmacology analysis and experimental validation. 
+J Funct Foods. 2023;103: 105493.
+Kaur T, Madgulkar A, Bhalekar M, Asgaonkar K. Molecular docking in formula-
+tion and development. Curr Drug Discov Technol. 2019;16(1):30–9.
+Kleiner DE, Brunt EM, Van Natta M, Behling C, Contos MJ, Cummings OW, et al. 
+Design and validation of a histological scoring system for nonalcoholic 
+fatty liver disease. Hepatology. 2005;41(6):1313–21.
+Lei SS, Li B, Chen YH, He XL, Wang YZ, Yu HH, et al. Dendrobii Officinalis, a 
+traditional Chinese edible and officinal plant, accelerates liver recovery 
+by regulating the gut-liver axis in NAFLD mice. J Funct Foods. 2019;61: 
+103458.
+Li J, Zou BY, Yeo YH, Feng YM, Xie XY, Lee DH, et al. Prevalence, incidence, 
+and outcome of non-alcoholic fatty liver disease in Asia, 1999–2019: 
+a systematic review and meta-analysis. Lancet Gastroenterol Hepatol. 
+2019a;4(5):389–98.
+Li B, Lei SS, Su J, Cai XM, Xu H, He X, et al. Alcohol induces more severe fatty 
+liver disease by influencing cholesterol metabolism. Evid Based Comple-
+ment Alternat Med. 2019b;2019:7095684.
+Li YJ, Li S, Xue XY, Wang T, Li XJ. Integrating systematic pharmacology-based 
+strategy and experimental validation to explore mechanism of Trip-
+terygium glycoside on cholangiocyte-related liver injury. Chin Herb Med. 
+2022;14(4):563–75.
+Liu BB, Deng XL, Jiang QQ, Li GX, Zhang JL, Zhang N, et al. Scoparone alleviates 
+inflammation, apoptosis and fibrosis of non-alcoholic steatohepatitis by 
+suppressing the TLR4/NF-κB signaling pathway in mice. Int Immunophar-
+macol. 2019;75: 105797.
+Liu LL, Xu LM, Wang SJ, Wang LL, Wang XN, Xu HF, et al. Confirmation of inhibi-
+tingTLR4/MyD88/NF-κB signalling pathway by duhuo jisheng decoction 
+on osteoarthritis: a network pharmacology approach-integrated experi-
+mental study. Front Pharmacol. 2022;12: 784822.
+Loomba R, Friedman SL, Shulman GI. Mechanisms and disease consequences 
+of nonalcoholic fatty liver disease. Cell. 2021;184(10):2537–64.
+Lu Y, Feng TT, Zhao JX, Jiang PF, Xu DX, Zhou ML, et al. Polyene phosphati-
+dylcholine ameliorates high fat diet-induced non-alcoholic fatty liver 
+disease via remodeling metabolism and inflammation. Front Physiol. 
+2022;13:810143.
+Luo YF, Lin H. Inflammation initiates a vicious cycle between obesity and non-
+alcoholic fatty liver disease. Immun Inflamm Dis. 2021;9(1):59–73.
+Lv SQ, Zhang ZY, Su XH, Li WD, Wang XY, Pan BC, et al. Qingrequzhuo capsule 
+alleviated methionine and choline deficient diet-induced nonalcoholic 
+steatohepatitis in mice through regulating gut microbiota, enhancing 
+gut tight junction and inhibiting the activation of TLR4/NF-κB signaling 
+pathway. Front Endocrinol. 2023;13:1106875.
+Ma J, Fox CS, Jacques PF, Speliotes EK, Hoffmann U, Smith CE, et al. Sugar-
+sweetened beverage, diet soda, and fatty liver disease in the Framingham 
+Heart Study cohorts. J Hepatol. 2015;63(2):462–9.
+Marchix J, Choque B, Kouba M, Fautrel A, Catheline D, Legrand P . Excessive 
+dietary linoleic acid induces proinflammatory markers in rats. J Nutr 
+Biochem. 2015;26(12):1434–41.
+Page 23 of 24
+Chen et al. Molecular Medicine          (2024) 30:278 
+ 
+Molavi F, Namazi N, Asadi M, Sanjari M, Motlagh ME, Shafiee G, et al. Com-
+parison common equations for LDL-C calculation with direct assay and 
+developing a novel formula in Iranian children and adolescents: the 
+CASPIAN V study. Lipids Health Dis. 2020;19(1):129.
+Neuschwander-Tetri BA, Loomba R, Sanyal AJ, Lavine JE, Van Natta 
+ML, Abdelmalek MF, et al. Farnesoid X nuclear receptor ligand 
+obeticholic acid for non-cirrhotic, non-alcoholic steatohepatitis 
+(FLINT): a multicentre, randomised, placebo-controlled trial. Lancet. 
+2015;385(9972):956–65.
+Porras D, Nistal E, Martínez-Flórez S, Pisonero-Vaquero S, Olcoz JL, Jover R, 
+et al. Protective effect of quercetin on high-fat diet-induced non-alco -
+holic fatty liver disease in mice is mediated by modulating intestinal 
+microbiota imbalance and related gut-liver axis activation. Free Radic 
+Biol Med. 2017;102:188–202.
+Qin Y, Fan RY, Liu YX, Qiu SY, Wang L. Exploring the potential mechanism 
+of Rubus corchorifolius L. fruit polyphenol-rich extract in mitigating 
+non-alcoholic fatty liver disease by integration of metabolomics and 
+transcriptomics profiling. Food Funct. 2023;14(20):9295–308.
+Quek J, Chan KE, Wong ZY, Tan C, Tan B, Lim WH, et al. Global prevalence of 
+non-alcoholic fatty liver disease and non-alcoholic steatohepatitis in 
+the overweight and obese population: a systematic review and meta-
+analysis. Lancet Gastroenterol Hepatol. 2023;8(1):20–30.
+Ren SM, Zhang QZ, Jiang M, Chen ML, Xu XJ, Wang DM, et al. Systematic 
+characterization of the metabolites of defatted walnut powder extract 
+in vivo and screening of the mechanisms against NAFLD by UPLC-
+Q-exactive orbitrap MS combined with network pharmacology. J 
+Ethnopharmacol. 2022;285: 114870.
+Rohm TV, Meier DT, Olefsky JM, Donath MY. Inflammation in obesity, diabe -
+tes, and related disorders. Immunity. 2022;55(1):31–55.
+Romero-Gómez M, Zelber-Sagi S, Trenell M. Treatment of NAFLD with diet, 
+physical activity and exercise. J Hepatol. 2017;67(4):829–46.
+Rosqvist F, Iggman D, Kullberg J, Cedernaes J, Johansson HE, Larsson A, 
+et al. Overfeeding polyunsaturated and saturated fat causes distinct 
+effects on liver and visceral fat accumulation in humans. Diabetes. 
+2014;63(7):2356–68.
+Shen SH, Jiang ZX, Sun J, Wang KG. An analysis of Professor Wang Kungen’s 
+experience in the diagnosis and treatment of metabolic syndrome. J 
+Zhejiang Chin Med Univ. 2018;42(6):415–8.
+Shen SH, Wang KG, Zhi YH, Shen W, Huang LQ. Gypenosides improves 
+nonalcoholic fatty liver disease induced by high-fat diet induced 
+through regulating LPS/TLR4 signaling pathway. Cell Cycle. 
+2020;19(22):3042–53.
+Shen SH, Wang KG, Zhi YH, Dong Y. Gypenosides counteract hepatic 
+steatosis and intestinal barrier injury in rats with metabolic associated 
+fatty liver disease by modulating the adenosine monophosphate 
+activated protein kinase and Toll-like receptor 4/nuclear factor kappa B 
+pathways. Pharm Biol. 2022;60(1):1949–59.
+Shi TT, Wu L, Ma WJ, Ju LP , Bai MH, Chen XW, et al. Nonalcoholic fatty liver 
+disease: pathogenesis and treatment in traditional Chinese medi-
+cine and western medicine. Evid Based Complement Alternat Med. 
+2020;2020:8749564.
+Shi WB, Wang ZX, Liu HB, Jia YJ, Wang YP , Xu X, et al. Study on the mecha-
+nism of Fufang E’jiao Jiang on precancerous lesions of gastric cancer 
+based on network pharmacology and metabolomics. J Ethnopharma-
+col. 2023;304: 116030.
+Song P , Rockwell CE, Cui JY, Klaassen CD. Individual bile acids have dif-
+ferential effects on bile acid signaling in mice. Toxicol Appl Pharmacol. 
+2015;283(1):57–64.
+Sun YL, Tan ZF, Jiang ZY, Li M, Wang WQ, Huang YY, et al. Comparative 
+efficacy and safety of traditional Chinese patent medicine for NAFLD 
+in childhood or adolescence: a protocol for a Bayesian network meta 
+analysis. Medicine (Baltimore). 2021;100(3): e24277.
+Tang YL, Zhu L, Tao Y, Lu W, Cheng H. Role of targeting TLR4 signaling axis in 
+liver-related diseases. Pathol Res Pract. 2023;244: 154410.
+Tilg H, Adolph TE, Trauner M. Gut-liver axis: Pathophysiological concepts 
+and clinical implications. Cell Metab. 2022;34(11):1700–18.
+Tilg H, Byrne CD, Targher G. NASH drug treatment development: challenges 
+and lessons. Lancet Gastroenterol Hepatol. 2023;8(10):943–54.
+Tong HJ, Yu MT, Fei CH, Ji D, Dong JJ, Su LL, et al. Bioactive constituents and 
+the molecular mechanism of Curcumae Rhizoma in the treatment of 
+primary dysmenorrhea based on network pharmacology and molecu-
+lar docking. Phytomedicine. 2021;86: 153558.
+Trott O, Olson AJ. Software news and update autodock vina: improving the 
+speed and accuracy of docking with a new scoring function, efficient 
+optimization, and multithreading. J Comput Chem. 2010;31(2):455–61.
+Wang XJ, Malhi H. Nonalcoholic fatty liver disease. Ann Intern Med. 
+2018;169(9):Itc65-itc80.
+Wang LY, Du ZY, Guan Y, Wang B, Pei YL, Zhang LZ, et al. Identifying absorb -
+able bioactive constituents of Yupingfeng powder acting on COVID-19 
+through integration of UPLC-Q/TOF-MS and network pharmacology 
+analysis. Chin Herb Med. 2022;14(2):283–93.
+Wei PH, Jiang YP , Deng CY. The essence of “When one sees a disease of 
+the liver, one knows that the liver transmits to the spleen, so one 
+should first strengthen the spleen.” Lishizhen Med Mater Med Res. 
+2015;26(11):2732–3.
+Wei W, Liu LM, Liu XK, Tao Y, Gong JY, Wang Y, et al. Black ginseng protects 
+against Western diet-induced nonalcoholic steatohepatitis by modu-
+lating the TLR4/NF-κB signaling pathway in mice. J Food Biochem. 
+2022;46(12): e14432.
+Wu PX, Liang SF, He YP , Lv R, Yang BD, Wang M, et al. Network pharmacology 
+analysis to explore mechanism of Three Flower Tea against nonal-
+coholic fatty liver disease with experimental support using high-fat 
+diet-induced rats. Chin Herb Med. 2022;14(2):273–82.
+Wu X, Zhang Y, Zheng D, Yin Y, Peng M, Wang J, et al. Prediction of the 
+mechanisms of action of Qutan Huoxue decoction in non-alcoholic 
+steatohepatitis (NASH): a network pharmacology study and experi-
+mental validation. Pharm Biol. 2023;61(1):520–30.
+Xiao J, Dong L-W, Liu S, Meng F-H, Xie C, Lu X-Y, et al. Bile acids-mediated 
+intracellular cholesterol transport promotes intestinal cholesterol 
+absorption and NPC1L1 recycling. Nat Commun. 2023;14(1):6469.
+Xiong YZ, Peng QW, Cao CM, Xu ZJ, Zhang B. Effect of different exercise 
+methods on non-alcoholic fatty liver disease: a meta-analysis and 
+meta-regression. Int J Environ Res Public Health. 2021;18(6):3242.
+Yagami T, Koma H, Yamamoto Y. Pathophysiological roles of cyclooxyge -
+nases and prostaglandins in the central nervous system. Mol Neuro -
+biol. 2016;53(7):4754–71.
+Yang H, Xuefeng Y, Shandong W, Jianhua X. COX-2 in liver fibrosis. Clin Chim 
+Acta. 2020;506:196–203.
+Younossi Z, Anstee QM, Marietti M, Hardy T, Henry L, Eslam M, et al. Global 
+burden of NAFLD and NASH: trends, predictions, risk factors and pre -
+vention. Nat Rev Gastroenterol Hepatol. 2018;15(1):11–20.
+Younossi Z, Tacke F, Arrese M, Sharma BC, Mostafa I, Bugianesi E, et al. Global 
+perspectives on nonalcoholic fatty liver disease and nonalcoholic 
+steatohepatitis. Hepatology. 2019;69(6):2672–82.
+Zhang SS, Li JX. Consensus opinion of experts in traditional Chinese medi-
+cine: diagnosis and treatment of nonalcoholic fatty liver disease (2017). 
+J Tradit Chin Med. 2017;58(19):1706–10.
+Zhang SS, Li QG, Li JX. Consensus opinion on chinese medicine diagnosis 
+and treatment of non-alcoholic fatty liver disease (2009, Shenzhen). 
+Chin J Integr Tradit West Med Dig. 2010;18(4):276–9.
+Zhang HY, Ge SN, Diao FY, Song W, Zhang Y, Zhuang PW, et al. Network 
+pharmacology integrated with experimental verification reveals the 
+antipyretic characteristics and mechanism of Zi Xue powder. Pharm 
+Biol. 2023;61(1):1512–24.
+Zheng S, Xue C, Li S, Zao X, Li X, Liu Q, et al. Chinese medicine in the treat -
+ment of non-alcoholic fatty liver disease based on network pharmacol-
+ogy: a review. Front Pharmacol. 2024;15:1381712.
+Zhi GG, Shao BJ, Zheng TY, Mu J, Li JW, Feng YY, et al. Exploring the molecu-
+lar mechanism of Gan Shuang granules for the treatment of non-alco -
+holic steatohepatitis using network pharmacology, molecular docking, 
+and experimental verification. Front Pharmacol. 2023;14:1082451.
+Zhong YH, Liang J, Qin Q, Wang YJ, Peng YM, Zhang T, et al. The activities 
+and mechanisms of intestinal microbiota metabolites of TCM herbal 
+ingredients could be illustrated by a strategy integrating spectrum-
+effects, network pharmacology, metabolomics and molecular docking 
+analysis: Platycodin D as an example. Phytomedicine. 2023;115: 
+154831.
+Zhou F, Zhou JH, Wang WX, Zhang XJ, Ji YX, Zhang P , et al. Unexpected rapid 
+increase in the burden of NAFLD in China from 2008 to 2018: a system-
+atic review and meta-analysis. Hepatology. 2019;70(4):1119–33.
+Page 24 of 24Chen et al. Molecular Medicine          (2024) 30:278 
+Zhou WJ, Zhu ZY, Xiao XL, Li CL, Zhang L, Dang YQ, et al. Jiangzhi granule 
+attenuates non-alcoholic steatohepatitis by suppressing TNF/NFκB 
+signaling pathway-a study based on network pharmacology. Biomed 
+Pharmacother. 2021;143: 112181.
+Zhou BC, Qian ZH, Li QY, Gao Y, Li MH. Assessment of pulmonary infectious 
+disease treatment with Mongolian medicine formulae based on data 
+mining, network pharmacology and molecular docking. Chin Herb 
+Med. 2022;14(3):432–48.
+Zhou TT, Cao LG, Du YM, Qin L, Lu YL, Zhang QR, et al. Gypenosides ameliorate 
+high-fat diet-induced nonalcoholic fatty liver disease in mice by regulat-
+ing lipid metabolism. PeerJ. 2023;11: e15225.
+Publisher’s Note
+Springer Nature remains neutral with regard to jurisdictional claims in pub-
+lished maps and institutional affiliations.

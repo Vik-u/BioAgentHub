@@ -1,0 +1,2204 @@
+J. Math. Biol. (2018) 77:165–199
+https://doi.org/10.1007/s00285-017-1189-3 Mathematical Biology
+Multi-timescale analysis of a metabolic network
+in synthetic biology: a kinetic model for
+3-hydroxypropionic acid production via beta-alanine
+Mohit P. Dalwadi 1 · John R. King 1,2 ·
+Nigel P. Minton 1
+Received: 4 August 2016 / Revised: 4 October 2017 / Published online: 20 November 2017
+© The Author(s) 2017. This article is an open access publication
+Abstract A biosustainable production route for 3-hydroxypropionic acid (3HP), an
+important platform chemical, would allow 3HP to be produced without using fossil
+fuels. We are interested in investigating a potential biochemical route to 3HP from
+pyruvate through β-alanine and, in this paper, we develop and solve a mathematical
+model for the reaction kinetics of the metabolites involved in this pathway. We consider
+two limiting cases, one where the levels of pyruvate are never replenished, the other
+where the levels of pyruvate are continuously replenished and thus kept constant. We
+exploit the natural separation of both the time scales and the metabolite concentrations
+to make signiﬁcant asymptotic progress in understanding the system without resorting
+to computationally expensive parameter sweeps. Using our asymptotic results, we are
+able to predict the most important reactions to maximize the production of 3HP in
+this system while reducing the maximum amount of the toxic intermediate compound
+malonic semi-aldehyde present at any one time, and thus we are able to recommend
+which enzymes experimentalists should focus on manipulating.
+Keywords Asymptotic analysis · Reaction kinetics · Synthetic biology · Metabolic
+pathways
+Mathematics Subject Classiﬁcation 34E10 · 92C45
+B Mohit P. Dalwadi
+mohit.dalwadi@nottingham.ac.uk
+1 Synthetic Biology Research Centre, University of Nottingham, University Park,
+Nottingham NG7 2RD, UK
+2 School of Mathematical Sciences, University of Nottingham, University Park,
+Nottingham NG7 2RD, UK
+123
+166 M. P. Dalwadi et al.
+1 Introduction
+3-hydroxypropionic acid (3HP) can be used to produce many other valuable chemicals,
+such as acrylic acid, 1,3-propanediol, and biodegradable polyesters ( Werpy et al. 2004;
+Jiang et al. 2009 ). 3HP can be derived from biological sources and, as current industrial
+methods to produce acrylic acid involve fossil fuels, a production route through 3HP
+provides a biosustainable alternative. Although an in vivo production line in a bacterial
+or fungal host is the eventual industrial target for 3HP , performing in vitro experiments
+is an important prior step. The controlled nature of in vitro experiments allows for
+more systematic deductions to be made, and hence in vitro experiments can highlight
+potential roadblocks that may be more difﬁcult to analyse in a complex in vivo system.
+Mathematical modelling allows for further systematic progress to be made, and can
+reduce the experimental parameter space that needs to be searched.
+In Kumar et al. (2013), three thermodynamically feasible pathways from pyruvate
+to 3HP are suggested. We are interested here in mathematically modelling the route
+through aspartate and β-alanine; this is the synthetic pathway successfully introduced
+to Saccharomyces cerevisiae in Borodina et al. (2015). Thus, we consider the reactions
+Pyruvate
+k1
+−→ Oxaloacetate, (1a)
+Oxaloacetate + GLU
+k2
+−→ AKG + Aspartate, (1b)
+Aspartate + PAND
+k3
+−−⇀↽ −−
+k−3
+PANDc
+k4
+−→ β-alanine + PAND, (1c)
+β-alanine + Pyruvate + BAPAT
+k5
+−−⇀↽ −−
+k−5
+BAPATc
+k6
+−→ L-alanine + BAPAT
++ Malonic semialdehyde , (1d)
+L-alanine + AKG + ALT
+k7
+−−⇀↽ −−
+k−7
+ALTc
+k8
+−−⇀↽ −−
+k−8
+Pyruvate + GLU + ALT,
+(1e)
+Malonic semialdehyde + HPDH
+k9
+−−⇀↽ −−
+k−9
+HPDHc
+k10
+−→ 3HP + HPDH, (1f)
+and we show a schematic representation of this pathway in Fig. 1.
+Here, we do not consider enzyme mechanics for the ﬁrst two reactions in ( 1). This
+is because pyruvate and oxaloacetate are required for the citric acid cycle, and we are
+not interested in altering any enzymatic processes that may signiﬁcantly change this
+important metabolic cycle. Thus, the enzyme kinetics for the latter four reactions are
+the most appropriate targets for enhancement, and we therefore include these.
+We note that ( 1e), the reaction between l-alanine and pyruvate, is not necessary
+for a connected pathway between pyruvate and 3HP. However, as ( 1e) recycles l-
+alanine and α-ketoglutarate (AKG) back into pyruvate and glutamic acid (GLU), used
+in ( 1a) and ( 1b), respectively, the inclusion of ( 1e) may enhance the efﬁciency of the
+123
+A kinetic model for 3-hydroxypropionic acid production... 167
+Pyruvate ([S1])
+Oxaloacetate ([S2]) Aspartate ([ S3])
+β-alanine ([S4])
+L-alanine ([S5]) Malonic semialdehyde ([ S6])
+3HP ([P])
+PAND ([E1])
+BAPAT ([E2])
+HPDH ([E3])
+ALT ([E4])
+Fig. 1 A schematic network diagram for the pathway we consider in this paper, where arrows denote the
+direction of the reactions. The dashed lines denote reactions which additionally require GLU ( [R1])a n d
+produce AKG ( [R2]), and the dotted lines denote reactions which additionally require AKG and produce
+GLU. If we consider the enzyme mechanics for a reaction, we include the name of that enzyme next to the
+reaction arrow
+pathway. In Borodina et al. (2015), it was hypothesized that ( 1e) may have an effect on
+the overall 3HP production, and we investigate this hypothesis here. More generally,
+we are interested in determining which of the reactions are the most important for
+3HP production. Additionally, malonic semialdehyde is a toxic compound, and so
+we will also look for ways to reduce the amount of malonic semialdehyde present
+in the system. To summarize, the general goal of this system, so far as possible, is
+to maximize the 3HP produced whilst minimizing the maximum level of malonic
+semialdehyde present in the system.
+We will assume that there are enough molecules of each metabolite to use the law
+of mass action and that the entire system is well-mixed and thus spatially independent.
+Moreover, in any given reaction, we neglect any inhibitory effects from metabolites
+not involved in the reaction and from any products of the reaction. We do so to limit the
+number of parameters in the model, and to enable us to make analytic progress, thus
+allowing us to develop physical insight into the system. Additionally, the production
+levels of pyruvate within the system will vary in time. We consider two limiting cases,
+pyruvate being a ﬁnite resource which is never replenished in the ﬁrst, but an inﬁnite
+resource held at a constant concentration in the second. Whilst the actual levels of
+pyruvate will, in practice, fall somewhere between these two cases, it is useful to
+analyse both in detail: exploring and comparing these two extreme cases will provide
+insight into the general pathway kinetics in intermediate cases.
+As there are many parameters involved in this problem, a fully experimental
+approach would be very time consuming. For the same reason, investigating its math-
+ematical model using a purely numerical approach would also be a protracted process,
+albeit shorter than the fully experimental one. We perform an asymptotic analysis (see,
+for example, Kevorkian and Cole 2013 ; Hinch 1991 ; O’Malley Jr (2012)) to investi-
+gate our model, thus enhancing our physical insight into the underlying system and
+123
+168 M. P. Dalwadi et al.
+enabling us to determine how the concentrations vary as functions of the experimental
+parameters. Due to this approach, exact knowledge of each kinetic parameter is not
+required, just an estimate of the order of magnitude of each parameter.
+We introduce a mathematical model to describe the nonlinear reaction kinetics in
+§2. We solve this for non-replenished and continuously replenished pyruvate in § 3 and
+§4, respectively, where we give both numerical and asymptotic solutions to describe
+the system behaviour. We also consider the problem of general pyruvate production
+in “Appendix C”, where we derive asymptotic solutions in one time regime for the
+metabolite concentrations at leading order in terms of the pyruvate in the system. We
+ﬁnish by discussing our results and comparing the two regimes in § 5,w h e r ew ea l s o
+suggest future avenues of inquiry that follow from this work.
+2 Model description
+We assume that the reaction kinetics are governed by the law of mass action, yielding
+the system
+d[S
+1]
+dτ =− k1[S1]− k5[S1][S4][E2]+ k−5[C2]+ k8[C4]− k−8[S1][R1][E4], (2a)
+d[S2]
+dτ = k1[S1]− k2[S2][R1], (2b)
+d[S3]
+dτ = k2[S2][R1]− k3[S3][E1]+ k−3[C1], (2c)
+d[S4]
+dτ = k4[C1]− k5[S4][S1][E2]+ k−5[C2], (2d)
+d[S5]
+dτ = k6[C2]− k7[S5][R2][E4]+ k−7[C4], (2e)
+d[S6]
+dτ = k6[C2]− k9[S6][E3]+ k−9[C3], (2f)
+d[R1]
+dτ =− k2[S2][R1]+ k8[C4]− k−8[S1][R1][E4], (2g)
+d[R2]
+dτ = k2[S2][R1]− k7[S5][R2][E4]+ k−7[C4], (2h)
+d[E1]
+dτ =− k3[S3][E1]+ k−3[C1]+ k4[C1], (2i)
+d[E2]
+dτ =− k5[S4][S1][E2]+ k−5[C2]+ k6[C2], (2j)
+d[E3]
+dτ =− k9[S6][E3]+ k−9[C3]+ k10[C3], (2k)
+d[E4]
+dτ =− k7[S5][R2][E4]+ k−7[C4]+ k8[C4]− k−8[S1][R1][E4], (2l)
+d[C1]
+dτ = k3[S3][E1]− k−3[C1]− k4[C1], (2m)
+d[C2]
+dτ = k5[S4][S1][E2]− k−5[C2]− k6[C2], (2n)
+123
+A kinetic model for 3-hydroxypropionic acid production... 169
+Table 1 Dimensional and dimensionless variable deﬁnitions
+Original variable Description Nondimensionalisation
+[S1] Pyruvate [S1]= S0 S1
+[S2] Oxaloacetate [S2]= S0 S2
+[S3] Aspartate [S3]= εS0 S3
+[S4] β-Alanine [S4]= εS0 S4
+[S5] L-Alanine [S5]= εS0 S5
+[S6] Malonic semialdehyde [S6]= ε4 S0 S6
+[R1] Glutamic acid (GLU) [R1]= S0 R1
+[R2] α-Ketoglutarate (AKG) [R2]= εS0 R2
+[E1] Aspartate decarboxylase (PAND) [E1]= εa1 S0 E1
+[E2] β-Alanine-pyruvate aminotransferase (BAPAT) [E2]= εa2 S0 E2
+[E3] 3-Hydroxypropionate dehydrogenase (HPDH) [E3]= εa3 S0 E3
+[E4] Alanine aminotransferase (ALT) [E4]= εa4 S0 E4
+[C1] Aspartate decarboxylase complex (PAND c ) [C1]= ε2a1 S0C1
+[C2] β-Alanine-pyruvate aminotransferase complex (BAPATc ) [C2]= ε4a2 S0C2
+[C3] 3-Hydroxypropionate dehydrogenase complex (HPDH c ) [C3]= ε5a3 S0C3
+[C4] Alanine aminotransferase complex (ALT c ) [C4]= ε3a4 S0C4
+[P] 3-Hydroxypropionic acid (3HP) [P]= ε3 S0 P
+τ Time τ = t /k1
+The dimensional metabolite concentrations are denoted with square brackets and have units of moles per
+volume, as does S0
+d[C3]
+dτ = k9[S6][E3]− k−9[C3]− k10[C3], (2o)
+d[C4]
+dτ = k7[S5][R2][E4]− k−7[C4]− k8[C4]+ k−8[S1][R1][E4], (2p)
+d[P]
+dτ = k10[C3]. (2q)
+All the variables introduced here are deﬁned in Table 1, and the units and typical values
+for each kinetic parameter are given in Table 2. We model a scenario where each of
+the enzymes are introduced to a solution containing only pyruvate and glutamic acid,
+and this resulting mixture is instantaneously well-mixed. We assume that the initial
+concentration of pyruvate is [S
+1](0) = S0, where S0 is around 1 mM. We will state
+the remaining initial conditions after discussing how we deal with uncertainty in the
+kinetic parameters.
+W es e ei nT a b l e2 that estimates for the kinetic parameters can vary over three orders
+of magnitude between different organisms. To investigate how the system behaves as
+these parameters vary we ﬁrst form dimensionless variables, scaling each dimensional
+metabolite concentration with S
+0 and time with 1 /k1 (the characteristic time of the
+ﬁrst reaction between pyruvate and oxaloacetate). Moreover, we form dimensionless
+123
+170 M. P. Dalwadi et al.
+parameters by scaling the kinetic parameters with k1 and the appropriate power of
+S0. We then introduce the artiﬁcial small dimensionless parameter ε = 10−2, and
+allow each dimensionless system parameter to be written as cεj where c is an O(1)
+parameter (between 0 .1 and 10), and j is an integer. The dimensionless parameters in
+our system are given in the lower half of Table 2. This approach allows us to interrogate
+the system using an asymptotic analysis. Although (as always) there may theoretically
+be an issue with this method in equating terms with the same powers of ε when large
+(or small) O(1) parameters are multiplied together, we will show that our asymptotic
+Table 2 Kinetic reaction rate parameters
+Dimensional parameter Organism Parameter range
+k1 = 10−2 s−1 Saccharomyces cerevisiaea 8 × 10−3 –2 × 10−1 s−1a ,g
+k2 = 7 × 10−5 mM−1s−1 Thermus thermophilus b 7 × 10−5 –1 × 10−3 mM−1s−1b ,h
+k3 = 102 mM−1s−1 Escherichia coli c 1 × 101 –1 .6 × 103 mM−1s−1c ,i,j
+k−3 = 2 × 101 s−1 Escherichia coli c 1 × 100 –2 × 102 s−1c ,i,j
+k4 = 1s −1 Escherichia coli c 2 × 10−1 –2 × 101 s−1c ,i,j
+k5 = 4 × 10−2 mM−2s−1 Bacillus cereus d 7 × 10−3 –2 × 10−1 mM−2s−1d ,k
+k−5 = 80 s−1 Bacillus cereus d 1 × 101 –5 × 102 s−1d ,k
+k6 = 1.5s −1 Bacillus cereus d 1 × 100 –4 × 100 s−1d ,k
+k7 = 3 × 10−2 mM−2s−1 Pyrococcus furiosus e 1 × 10−2 –2 × 100 mM−2s−1e ,l
+k−7 = 102 s−1 Pyrococcus furiosus e 5 × 100 –6 × 102 s−1e ,l
+k8 = 102 s−1 Pyrococcus furiosus e 5 × 100 –6 × 102 s−1e ,l
+k−8 = 4 × 10−2 mM−2s−1 Pyrococcus furiosus e 1 × 10−2 –1 × 100 mM−2s−1e ,l
+k9 = 102 mM−1s−1 Metallosphaera sedula f 5 × 101 –2 × 102 mM−1s−1f
+k−9 = 5s −1 Metallosphaera sedula f 1 × 100 –1 × 101 s−1f
+k10 = 30 s−1 Metallosphaera sedula f 1 × 100 –1 × 102 s−1f ,m
+Dimensionless parameter
+¯k2 = k2 S0/(εk1) = 0.7
+¯k3 = k3a1 S0ε2/k1 = a1
+¯k−3 = k−3a1ε2/k1 = 0.2a1
+¯k4 = k4a1ε/k1 = a1
+¯k5 = k5a2 S2
+0 /k1 = 4a2
+¯k−5 = k−5a2ε2/k1 = 0.8a2
+¯k6 = k6a2ε/k1 = 1.5a2
+¯k7 = k7a4 S2
+0 /k1 = 3a4
+¯k−7 = k−7a4ε2/k1 = a4
+¯k8 = k8a4ε2/k1 = a4
+¯k−8 = k−8a4 S2
+0 /k1 = 4a4
+¯k9 = k9a3 S0ε2/k1 = a3
+123
+A kinetic model for 3-hydroxypropionic acid production... 171
+Table 2 continued
+Dimensionless parameter
+¯k−9 = k−9a3ε/k1 = 5a3
+¯k10 = k10a3ε2/k1 = 0.3a3
+In general, it is only ratios of kinetic parameters that are known for a given reaction, as substrate binding
+to an enzyme is too quick to accurately measure the reaction rate. We therefore choose parameter values
+(using the ratios given in the references) that lead to the enzyme complexes being formed over a time
+period that is much shorter than the time period over which the metabolite concentrations change. This,
+experimental uncertainty, and differences in enzymes in different organisms lead to a large possible range
+for the parameter values. In scaling the kinetic parameters with S0 and powers of ε, we have used the values
+S0 = 1mM, ε = 10−2. The values of k1 and k2 are chosen to be effective reaction rates as we are not
+interested in modifying native enzymes. Thus, k1 is the ratio of the PYC turnover number to the Michaelis
+constant for pyruvate multiplied by an estimated concentration of PYC, chosen to be around 1 µM. k2
+is the ratio of the AAT turnover number to the product of the Michaelis constants for oxaloacetate and
+GLU, multiplied by an estimated concentration of AAT, chosen to be around 0 .1 µM. The references are:
+a Branson et al. (2002), b Nobe et al. (1998), c Ramjee et al. (1997), d Nakano et al. (1977), e Ward et al.
+(2000), f Kockelkorn and Fuchs (2009), g Jitrapakdee et al. (2007), h Yagi et al. (1982), i Chopra et al.
+(2002), j Williamson and Brown (1979), k Hayaishi et al. (1961), l Umemura et al. (1994), m Berg et al.
+(2007)
+and numerical results show excellent agreement, and thus the approach is reliable for
+this system.
+For the initial conditions, we assume that the initial levels of pyruvate and of glu-
+tamic acid are of comparable size and, to mimic the environment within a cell, that
+these concentrations are much larger than the initial concentrations of each enzyme.
+Additionally, we assume that the initial concentrations of each enzyme are of com-
+parable size. Although enzyme-to-substrate levels will vary, a reasonable assumption
+is that this ratio is around 1:100 and thus of O(ε) for our problem ( Albe et al. 1990 ).
+Thus, recalling that [S
+1](0) = S0,w ea l s oh a v e [R1](0) = αS0, [E1](0) = εa1 S0,
+[E2](0) = εa2 S0, [E3](0) = εa3 S0, and [E4](0) = εa4 S0, noting that the remain-
+ing metabolite concentrations start at zero. The dimensionless parameters α, a1, a2,
+a3, and a4 are of O(1). These conditions will allow us to investigate how the system
+changes as the initial conditions of the system vary when we perform our asymptotic
+analysis. From the initial conditions and ( 2i–2p), we can immediately deduce that
+[Ei ]+[ Ci ]=[ Ei ](0), (3)
+where i = 1,2,3,4.
+As we now have our dimensionless variables in terms of powers of ε, we can
+scale each concentration variable with the appropriate power of ε to obtain the correct
+leading-order system for t = O(1). This will allow us to immediately perform an
+asymptotic analysis for small ε. We give the correct scalings for these variables in
+Table 1, obtained by considering a dominant balance for each equation in the system
+and the non-zero initial conditions discussed above. We will perform a similar proce-
+dure to determine the correct asymptotic scalings over longer timescales, for which
+we will use effective ‘initial’ conditions obtained by asymptotic matching between
+123
+172 M. P. Dalwadi et al.
+timescales. The dimensionless form of ( 3) yields the relationships E1 = 1 − εC1,
+E2 = 1 − ε3C2, E3 = 1 − ε4C3, and E4 = 1 − ε2C4. Replacing each instance of
+Ei (for i ∈{ 1,2,3,4}) with the appropriate function of Ci allows us to reduce the
+dimension of the system of ODEs, accounting for ( 2i–2l). The remaining dimension-
+less system is
+˙S1 =−S1 −ε2 ¯k5 S1 S4
+(
+1−ε3C2
+)
++ ε2 ¯k−5C2 +ε¯k8C4 − ε¯k−8 S1 R1
+(
+1 − ε2C4
+)
+,
+(4a)
+˙S2 = S1 − ε¯k2 S2 R1, (4b)
+ε ˙S3 = ε¯k2 S2 R1 − ¯k3 S3 (1 − εC1) + ¯k−3C1, (4c)
+˙S4 = ¯k4C1 − ε¯k5 S1 S4
+(
+1 − ε3C2
+)
++ ε¯k−5C2, (4d)
+˙S5 = ε2 ¯k6C2 − ε2 ¯k7 S5 R2
+(
+1 − ε2C4
+)
++ ¯k−7C4, (4e)
+ε ˙S6 = ¯k6C2 − ¯k9 S6
+(
+1 − ε4C3
+)
++ ε¯k−9C3, (4f)
+˙R1 =− ε¯k2 S2 R1 + ε¯k8C4 − ε¯k−8 S1 R1
+(
+1 − ε2C4
+)
+, (4g)
+˙R2 = ¯k2 S2 R1 − ε2 ¯k7 S5 R2
+(
+1 − ε2C4
+)
++ ¯k−7C4, (4h)
+ε2 ˙C1 = ¯k3 S3 (1 − εC1) − ¯k−3C1 − ε¯k4C1, (4i)
+ε2a2 ˙C2 = ¯k5 S1 S4
+(
+1 − ε3C2
+)
+− ¯k−5C2 − ε¯k6C2, (4j)
+ε2a3 ˙C3 = ¯k9 S6
+(
+1 − ε4C3
+)
+− ε¯k−9C3 − ¯k10C3, (4k)
+ε2a4 ˙C4 = ε2 ¯k7 S5 R2
+(
+1 − ε2C4
+)
+− ¯k−7C4 − ¯k8C4 + ¯k−8 S1 R1
+(
+1 − ε2C4
+)
+, (4l)
+˙P = ¯k10C3, (4m)
+where the dimensionless parameters are deﬁned in Table 2 and an overdot denotes
+d/dt . In the following two sections, we solve the system presented in ( 4) for non-
+replenished and constantly replenished pyruvate, respectively. The non-replenished
+case is governed by ( 4), and the replenished case by ( 4b–m), with ( 4a) replaced by
+S1 ≡ 1. For future reference, we note the immediate consequence of ( 4c) and ( 4i),
+that
+˙S3 + ε ˙C1 = ¯k2 S2 R1 − ¯k4C1, (5)
+which is a statement about the evolution of aspartate from oxaloacetate and towards
+PANDc—( 5) follows on dividing the sum of ( 4c) and ( 4i)b y ε, and will furnish an
+additional leading-order equation in the limit ε → 0, in which ( 4c) and ( 4i)a st h e y
+stand lead to a duplication of information.
+123
+A kinetic model for 3-hydroxypropionic acid production... 173
+10-1 100 101 102 103
+×10-9 ×10-4
+0
+1
+2
+3
+4
+5
+6
+7
+8
+100 102
+10-14
+10-12
+10-10
+10-8
+(a)
+S6
+t
+10-1 100 101 102 103
+0
+1
+2
+3
+4
+5
+6
+7
+ai =1
+a1 =2
+a2 =2
+a3 =2
+a4 =2
+(b)
+P
+t
+Fig. 2 Numerical solutions in the non-replenished pyruvate case for the dynamic concentrations of a
+malonic semialdehyde and b 3HP. We use the parameter values given in Table 2 for all simulations, and initial
+dimensionless enzyme concentrations of 1 unless speciﬁed in the legend. The solid black line corresponds
+to the reference simulation where ai = 1f o r i = 1, 2, 3,4
+3 Non-replenished pyruvate
+3.1 Numerical results
+We solve the system ( 4) numerically, using ode15s in MATLAB. Our asymptotic
+solutions will reveal that the system is stiff, and our choice of numerical approach
+reﬂects this. We use the parameter values given in Table 2, and see that there are
+two important timescales, where t = O(1) and t = O(1/ε) (recalling that ε = 10−2),
+respectively (Fig. 2). Over each of these timescales, the levels of malonic semialdehyde
+rise then fall, and the levels of 3HP rise to a plateau. Additionally, the levels of malonic
+semialdehyde and 3HP can vary signiﬁcantly when the initial concentration of different
+enzymes is increased (over-expression). We model the effect of over-expressing a
+particular enzyme by starting the simulation with twice the levels of that enzyme
+compared to the black reference line in Fig. 2. We emphasize that the parameter
+values we give are not likely to be exact but, as we will later derive solutions to our
+system as functions of these parameters, we will be able to determine which reactions
+are the most important to the system by analyzing the form of these solutions without
+knowledge of the exact values that these parameters take.
+We now discuss how the over-expression of a given enzyme affects the system. A
+schematic for the metabolic network is given in Fig. 1. Increasing the levels of PAND
+has a positive but small effect on the levels of both malonic semialdehyde and 3HP .
+Over-expressing BAPAT has a much larger effect, signiﬁcantly increasing the levels of
+both malonic semialdehyde and 3HP . In contrast, we see that over-expressing HPDH
+does not appear to have any effect on the levels of 3HP and, in fact, signiﬁcantly
+decreases the maximum amount of malonic semialdehyde in the system. Finally, we
+see that over-expressing ALT has a very small negative effect on the levels of malonic
+semialdehyde, and a signiﬁcant positive effect on the levels of 3HP .
+123
+174 M. P. Dalwadi et al.
+In the next section, we explore the system ( 4) using an asymptotic analysis. This will
+allow us to determine how the system depends on the dimensionless parameters, and
+thus to explore the experimental parameter space without resorting to computationally
+expensive parameter sweeps.
+3.2 Asymptotic structure
+We now investigate the system ( 4) by exploiting the small parameter, ε, using an
+asymptotic analysis. There are two main asymptotic regions of interest in time, where
+t = O(1) and t = O(1/ε), which we refer to as medium and long time, respectively
+(Fig. 2).
+When t = O(1), the system is governed by the release of pyruvate and GLU
+through the main pathway to 3HP and towards the production of l-alanine. When
+t = O(1/ε), the levels of pyruvate have diminished, and the system is governed
+by the degradation of oxaloacetate with GLU into aspartate and AKG. Additionally,
+the l-alanine produced when t = O(1) is now converted back into pyruvate which,
+although only a small amount, is enough to have a leading-order effect on the reaction
+with β-alanine, and thus a leading-order effect on the amount of 3HP produced. Thus,
+the l-alanine acts as a store of pyruvate over t = O(1), and this is released over
+t = O(1/ε). In the next section, we solve the leading-order versions of the system ( 4)
+in each of these asymptotic regions.
+3.3 Asymptotic solutions
+The early-time behaviour of the system is given in “Appendix A”, obtained by Tay-
+lor expanding the initial conditions as t → 0
++. The more interesting behaviour for
+malonic semialdehyde and 3HP production occurs for medium and long time, and we
+now consider the system dynamics over these timescales in turn.
+3.3.1 Medium time: t = O(1)
+As ε → 0, the full system ( 4) becomes the differential-algebraic system
+˙S
+1 =− S1, ˙S2 = S1, ˙S3 = ¯k2 S2 R1 − ¯k4C1, ˙S4 = ¯k4C1, ˙S5 = ¯k−7C4,
+˙R1 = 0, ˙R2 = ¯k2 S2 R1 + ¯k−7C4, ˙P = ¯k10C3, (6a)
+¯k9 S6 = ¯k6C2, ¯k−3C1 = ¯k3 S3, ¯k−5C2 = ¯k5 S1 S4, ¯k10C3 = ¯k9 S6,
+( ¯k−7 + ¯k8
+)
+C4 = ¯k−8 S1 R1, (6b)
+on using ( 5).
+We solve the leading-order system ( 6) explicitly as ε → 0, and the solutions are
+given by
+S1 = e−t , (7a)
+123
+A kinetic model for 3-hydroxypropionic acid production... 175
+S2 = 1 − e−t , (7b)
+S3 = β3
+(
+1 − ωe−t − e−ωt
+ω − 1
+)
+, (7c)
+S4 = β4
+(
+t + ω2e−t − e−ωt + 1 − ω2
+ω(ω − 1)
+)
+, (7d)
+S5 = β5
+(
+1 − e−t )
+, (7e)
+S6 = β6
+(
+t + ω2e−t − e−ωt + 1 − ω2
+ω(ω − 1)
+)
+e−t , (7f)
+R1 = α, (7g)
+R2 = β4
+(
+t + e−t − 1
+)
++ β5
+(
+1 − e−t )
+, (7h)
+C1 = γ1
+(
+1 − ωe−t − e−ωt
+ω − 1
+)
+, (7i)
+C2 = γ2
+(
+t + ω2e−t − e−ωt + 1 − ω2
+ω(ω − 1)
+)
+e−t , (7j)
+C3 = γ3
+(
+t + ω2e−t − e−ωt + 1 − ω2
+ω(ω − 1)
+)
+e−t , (7k)
+C4 = γ4e−t , (7l)
+P = λ
+((
+e−ωt
+ω
+(
+ω2 − 1
+) − t + 1
+ω − ωe−t
+2 (ω − 1)
+)
+e−t + ω
+2 (ω + 1)
+)
+, (7m)
+where we deﬁne the parameters
+β3 = α¯k2/ω, β 4 = α¯k2,β 5 = α¯k−7 ¯k−8/(¯k−7 + ¯k8), β 6 = α¯k2 ¯k5 ¯k6/(¯k−5 ¯k9),
+γ1 = α¯k2/¯k4,γ 2 = α¯k2 ¯k5/¯k−5,γ 3 = α¯k2 ¯k5 ¯k6/(¯k−5 ¯k10),
+γ4 = α¯k−8/(¯k−7 + ¯k8), λ= α¯k2 ¯k5 ¯k6/¯k−5,ω = ¯k3 ¯k4/¯k−3. (8)
+From Table 2, we see that the parameter ω = ¯k3 ¯k4/¯k−3 is associated with ( 1c), the
+reaction from aspartate to β-alanine. That is, ω is proportional to both the ratio of the
+forward to backward reaction rate constants in ( 1c) and to the initial concentration of
+PAND, the enzyme that controls ( 1c). Thus, from the prevalence of ω in the solution
+(7), we see that ( 1c) affects the timing of the system when t = O(1), and the other
+reactions control the concentration levels of the metabolites. For later analysis, we
+additionally note that the parameter grouping ¯k5 ¯k6/¯k−5 is associated with ( 1d), the
+reaction from β-alanine and pyruvate to l-alanine and malonic semialdehyde.
+We note there is an implicit assumption that ω ̸= 1 in writing ( 7), but the apparent
+singularities are removable in this limit and, as such, they do not change the nature of
+the solutions. We see that these solutions are excellent approximations to the numerical
+solutions (dashed lines in Fig. 3).
+Whilst the solutions ( 7) do satisfy the given initial conditions, several were not
+formally imposed in the solution derivation. This is because the system ( 4) is singular
+123
+176 M. P. Dalwadi et al.
+t
+10 -6 10 -4 10 -2 10 0 10 2 10 4
+Concentration
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+S2
+S4
+R2
+t
+10 -5 10 0 10 5
+Concentration
+10 -20
+10 -15
+10 -10
+10 -5
+10 0
+(a)
+t
+10 -6 10 -4 10 -2 10 0 10 2 10 4
+Concentration
+10 -35
+10 -30
+10 -25
+10 -20
+10 -15
+10 -10
+10 -5
+10 0
+S1
+S3
+S5
+S6
+R1
+(b)
+t
+10 -6 10 -4 10 -2 10 0 10 2 10 4
+Concentration
+10 -35
+10 -30
+10 -25
+10 -20
+10 -15
+10 -10
+10 -5
+10 0
+C1
+C2
+C3
+C4
+(c)
+t
+10 -6 10 -4 10 -2 10 0 10 2 10 4
+Concentration
+10 -35
+10 -30
+10 -25
+10 -20
+10 -15
+10 -10
+10 -5
+10 0
+P
+(d)
+Fig. 3 The numerical and asymptotic solutions for the metabolite concentrations in the non-replenished
+pyruvate case. The solid light lines denote the numerical solutions, and the broken darker lines denote the
+asymptotic solutions. Dashed lines represent the t = O(1) solutions given in ( 7), dash-dotted lines represent
+the early-time solutions given in “Appendix A”, and dotted lines represent the late time solutions given in
+(11, B2), and ( B4). We use parameter values α = 0.5, a
+1 = 1, a2 = 1, a3 = 1, and a4 = 1. We have split
+the metabolite concentrations into a the substrates that tend to a non-zero constant value for large time,
+b the substrates which tend to zero for large time, c the enzyme complexes, and d the product. We plot
+([Si ], [Ri ],[Ci ],[P])/S0
+as ε → 0. Although we could formally match the solution ( 7) with an early-time
+solution, it is not useful for our eventual goal of determining 3HP production. Instead,
+we show that there are further early-time regions by Taylor expanding the initial
+conditions as t → 0+ in “Appendix A”. We see that these early-time solutions are
+excellent approximations to the numerical solutions (dash-dotted lines in Fig. 3).
+3.3.2 Late time: t = O(1/ε)
+The more interesting behaviour occurs for longer time. The solutions for S4 and R2,
+given in ( 7d) and ( 7h), respectively, appear to be unbounded. As we start with a
+ﬁnite level of nonreplenishable pyruvate, this is unphysical and suggests that there are
+further dynamics at play. We can obtain the correct scaling by looking for a change in
+leading-order terms in the system ( 4), which occurs when t = O(1/ε). To investigate
+this, we introduce t = T /ε, where T = O(1), and we make the asymptotic scalings
+(S4, R2) = ε−1(S4, R2), (S6,C2,C3,C4) = ε(S6,C 2,C3,C4), and S1 = ε2 S1.T h e
+long-term version of the system ( 4)i s
+123
+A kinetic model for 3-hydroxypropionic acid production... 177
+εdS1
+dT =−S1 − ε¯k5 S1 S4
+(
+1−ε4C2
+)
++ε¯k−5C2 + ¯k8C4 +ε¯k−8 S1 R1
+(
+1 − ε3C4
+)
+,
+(9a)
+dS2
+dT = εS1 − ¯k2 S2 R1, (9b)
+ε2 dS3
+dT = ε¯k2 S2 R1 − ¯k3 S3
+(
+1 − ε2C1
+)
++ ¯k−3C1, (9c)
+dS4
+dT = ¯k4C1 − ε2 ¯k5 S1 S4
+(
+1 − ε4C2
+)
++ ε2 ¯k−5C2, (9d)
+dS5
+dT = ε2 ¯k6C2 − ¯k7 S5 R2
+(
+1 − ε3C4
+)
++ ¯k−7C4, (9e)
+ε2 dS6
+dT = ¯k6C2 − ¯k9 S6
+(
+1 − ε5C3
+)
++ ε¯k−9C3, (9f)
+dR1
+dT =− ¯k2 S2 R1 + ε¯k8C4 − ε2 ¯k−8 S1 R1
+(
+1 − ε3C4
+)
+, (9g)
+dR2
+dT = ¯k2 S2 R1 − ε¯k7 S5 R2
+(
+1 − ε3C4
+)
++ ε¯k−7C4, (9h)
+ε3 dC1
+dT = ¯k3 S3
+(
+1 − ε2C1
+)
+− ¯k−3C1 − ε¯k4C1, (9i)
+ε3a2
+dC2
+dT = ¯k5 S1 S4
+(
+1 − ε4C2
+)
+− ¯k−5C2 − ε¯k6C2, (9j)
+ε3a3
+dC3
+dT = ¯k9 S6
+(
+1 − ε5C3
+)
+− ε¯k−9C3 − ¯k10C3, (9k)
+ε3a4
+dC4
+dT = ¯k7 S5 R2
+(
+1 − ε3C4
+)
+− ¯k−7C4 − ¯k8C4 + ε¯k−8 S1 R1
+(
+1 − ε3C4
+)
+, (9l)
+dP
+dT = ¯k10C3, (9m)
+and ( 5) becomes
+εdS3
+dT + ε2 dC1
+dT = ¯k2 S2 R1 − ¯k4C1. (9n)
+The leading-order version of ( 9) is the differential-algebraic system
+dS2
+dT =− ¯k2 S2 R1, dS4
+dT = ¯k4C1, dS5
+dT =− ¯k7 S5 R2 + ¯k−7C4, dR1
+dT =− ¯k2 S2 R1,
+dR2
+dT = ¯k2 S2 R1, dP
+dT = ¯k10C3, (10a)
+S1 = ¯k8C4, ¯k3 S3 = ¯k−3C1, ¯k9 S6 = ¯k6C2, ¯k4C1 = ¯k2 S2 R1, ¯k−5C2 = ¯k5 S1 S4,
+¯k10C3 = ¯k9 S6,
+( ¯k−7 + ¯k8
+)
+C4 = ¯k7 S5 R2. (10b)
+123
+178 M. P. Dalwadi et al.
+Now the system is controlled by the nonlinear dynamics of S2 and R1, and the
+solutions to the leading-order system ( 10)a r e
+S1 = β4β5Ω e ¯k2(α−1)T − 1
+αe ¯k2(α−1)T − 1
+(
+e−α¯k2 T − αe−¯k2 T
+1 − α
+) Ω
+, (11a)
+S2 = α − 1
+αe ¯k2(α−1)T − 1
+, (11b)
+S3 = β3(α − 1)2 e ¯k2(α−1)T
+(αe ¯k2(α−1)T − 1)2 , (11c)
+S4 = α e ¯k2(α−1)T − 1
+αe ¯k2(α−1)T − 1
+, (11d)
+S5 = β5
+(
+e−α¯k2 T − αe−¯k2 T
+1 − α
+) Ω
+, (11e)
+S6 = αβ5β6Ω
+(
+e ¯k2(α−1)T − 1
+αe ¯k2(α−1)T − 1
+) 2 (
+e−α¯k2 T − αe−¯k2 T
+1 − α
+) Ω
+, (11f)
+R1 = α(α − 1) e ¯k2(α−1)T
+αe ¯k2(α−1)T − 1
+, (11g)
+R2 = α e ¯k2(α−1)T − 1
+αe ¯k2(α−1)T − 1
+, (11h)
+C1 = γ1(α − 1)2 e ¯k2(α−1)T
+(αe ¯k2(α−1)T − 1)2 , (11i)
+C2 = αβ5β6γ2Ω
+(
+e ¯k2(α−1)T − 1
+αe ¯k2(α−1)T − 1
+) 2 (
+e−α¯k2 T − αe−¯k2 T
+1 − α
+) Ω
+, (11j)
+C3 = αβ5γ3Ω
+(
+e ¯k2(α−1)T − 1
+αe ¯k2(α−1)T − 1
+) 2 (
+e−α¯k2 T − αe−¯k2 T
+1 − α
+) Ω
+, (11k)
+C4 = β4β5Ω e ¯k2(α−1)T − 1
+αe ¯k2(α−1)T − 1
+(
+e−α¯k2 T − αe−¯k2 T
+1 − α
+) Ω
+, (11l)
+P = λω
+2 (ω + 1) + αβ5λΩ
+¯k2 (1 − α)Ω
+∫ ¯k2 T
+0
+(
+e−αs − e−s )2 (
+e−αs − αe−s )Ω−2 ds,
+(11m)
+where Ω = ¯k7 ¯k8/(¯k2(¯k−7 + ¯k8)), which is proportional to the initial concentration of
+ALT, the enzyme controlling ( 1e). Thus, Ω is associated with the reversible reaction
+between l-alanine and pyruvate, and terms that are raised to the power of Ω arise due
+to this reaction. In contrast, the terms not raised to the power of Ω in the integrand of
+(11m) arise due to the conversion of pyruvate into β-alanine.
+123
+A kinetic model for 3-hydroxypropionic acid production... 179
+To match the long-term solutions ( 11) with the t = O(1) solutions ( 7), we would
+have to consider intermediate matching regions where exponentially decreasing terms
+balance algebraically growing terms. These regions occur between t = O(1) and
+t = O(1/ε), and thus generally involve a translation in time of some multiple of
+log(1/ε). As these regions are uninteresting—the decreasing and increasing terms
+pass by each other without interacting—we omit further discussion of these regions.
+The long-time dynamics described by ( 11) are sensitive to the sign of α − 1, with
+the singularities as α → 1 being removable. Moreover, the steady states in ( 11)a s
+T →∞ depend on the sign of α − 1, and thus are sensitive to the initial ratio of
+pyruvate to GLU. The exponential decay to these steady states slows down as α → 1,
+and becomes algebraic decay in the limit.
+There is further long-time behaviour that can occur in this system, though only for
+certain parameter regimes. We discuss this behaviour in “Appendix B.1”.
+3.4 Discussion
+Of the reactions given in ( 1), ( 1c–f) are heterologous in Saccharomyces cerevisiae
+(that is, they are not native to the microorganism), and are the most appropriate targets
+for enhancement. Thus, identifying and enabling the correct enzymes within cells for
+these reactions is paramount. To this end, we discuss our results in the context of being
+able to vary parameters from reactions ( 1c–f).
+The general goal of the metabolic system we have considered is to maximise the
+total 3HP produced, whilst minimizing the malonic semialdehyde ( S6) produced, as
+the latter is toxic. The total 3HP produced at leading order, Ptot, can be obtained by
+taking the limit as t →∞ in ( 7m), and is given by
+Ptot = λ
+( ω
+2 (ω + 1) + β5
+¯k2
+I (α, Ω)
+)
+, (12a)
+I (α, Ω) = αΩ
+(1 − α)Ω
+∫ ∞
+0
+(
+e−αs − e−s )2 (
+e−αs − αe−s )Ω−2 ds. (12b)
+The integral ( 12b) has asymptotic behaviour I ∼ 1a s α → 0, I ∼ 1/α as α →∞ ,
+I ∼ 1a s Ω → 0f o r α< 1, I ∼ 1/α as Ω → 0f o r α> 1, and I ∼ √π/(2αΩ)
+as Ω →∞ , which agree well with the numerical solutions of ( 12b) (Fig. 4). To
+numerically evaluate ( 12b), we make the substitution u = e−s to switch to a ﬁnite
+domain and use an asymptotic approximation to evaluate the integral near u = 0,
+where the integrand has an integrable singularity.
+The amount of S6 present in the system is at its maximum when t = O(1), and we
+give an analytic expression for this in ( 7f), from which we see that
+max
+t >0
+S6(t ) = β6 f (ω;u(ω)), (13a)
+f (ω;u(ω)) =
+(
+u + ω2e−u − e−ωu + 1 − ω2
+ω(ω − 1)
+)
+e−u , (13b)
+123
+180 M. P. Dalwadi et al.
+10 -3 10 -2 10 -1 10 0 10 1 10 2 10 310 -3
+10 -2
+10 -1
+10 0
+Ω = 0.1
+Ω = 1
+Ω = 10
+I
+α
+(a)
+10 -3 10 -2 10 -1 10 0 10 1 10 2 10 3 104
+10 -2
+10 -1
+10 0 α = 0.1
+α = 0.5
+α = 2
+α = 10
+I
+Ω
+(b)
+Fig. 4 The function I (α, Ω)deﬁned in ( 12b). a Constant Ω and varying α. b Constant α and varying Ω.
+The solid curves are the numerically derived values, and the dashed and dotted curves are the asymptotic
+approximations for the small and large varying parameter, respectively. These approximations are deﬁned
+in the text immediately below ( 12)
+ω
+10-3 10-2 10-1 100 101 102 103
+f(ω)
+10-4
+10-3
+10-2
+10-1
+Fig. 5 The function f (ω; u(ω)) deﬁned in ( 13) is given by the grey curve. The dashed and dotted black
+curves are the small and large ω approximations, respectively. These approximations are deﬁned in the text
+immediately below ( 13)
+where u(ω) > 0 satisﬁes
+1 + 2ω
+ω + 1 + ω
+ω(ω − 1)e−ωu = u + 2ω
+ω − 1 e−u . (13c)
+The function f is monotonically increasing in ω, and bounded above (Fig. 5). For
+small ω, we ﬁnd that f ∼ ωu2e−u /4 ≈ 0.127ω where u satisﬁes e−u = 1 −u +u2/4
+(thus, u ≈ 2.56). For large ω, we ﬁnd that f ∼ ue−u /2 ≈ 0.162 where u satisﬁes
+e−u = 1 − u/2 (thus, u ≈ 1.59). The numerical approximations we give are all to
+three signiﬁcant ﬁgures.
+From the solutions for the total 3HP produced, ( 12a), and the maximum value of
+malonic semialdehyde, ( 13), we see that increasing ω will increase both metabolites,
+but there is a limiting effect. Increasing ω corresponds to increasing the reaction rate
+123
+A kinetic model for 3-hydroxypropionic acid production... 181
+through ( 1c), from aspartate to β-alanine, and thus we can deduce that this reaction
+step is important to our goals, but there are diminishing returns.
+There is a greater effect on the system from the pre-factor constants λand β6 = λ/¯k9
+for 3HP and malonic semialdehyde, respectively. λ is a measure of the reaction rate
+through ( 1d), from β-alanine to malonic semialdehyde and l-alanine, and we can
+deduce that increasing the ﬂux through this reaction will result in higher levels of
+3HP and malonic semialdehyde. Moreover, a larger value of ¯k
+9 will result in a lower
+maximum value of malonic semialdehyde, without affecting the levels of 3HP at
+leading order. This physically corresponds to choosing or designing an enzyme to
+which malonic semialdehyde will bind very quickly in the reaction ( 1f) from malonic
+semialdehyde to 3HP . Moreover, we see that increasing λ, and hence increasing the
+reaction rate through ( 1d), increases the levels of both 3HP and malonic semialdehyde
+without diminishing returns. Thus, ( 1d) is an important reaction in the system with
+regards to our goal, and the extra malonic semialdehyde produced by higher reaction
+rates through this system could be balanced by increasing ¯k
+9.
+The reaction ( 1e), where l-alanine reacts with AKG to produce pyruvate and GLU,
+and vice versa , is important for the long-time production of 3HP . The reversibility
+of this reaction means that the initial pyruvate is stored as l-alanine, then is able to
+be converted back into pyruvate due to the excess AKG produced by the reaction
+(1b), from oxaloacetate and GLU to aspartate and AKG. This process provides more
+pyruvate for the important reaction ( 1d), allowing it to proceed for a longer time.
+Bypassing the long route to β-alanine from pyruvate is important for this system,
+as the pyruvate runs out whilst the levels of β-alanine tend to a ﬁnite value. Thus,
+diverting pyruvate from producing to reacting with β-alanine will result in a more
+efﬁcient system and thus increase the total 3HP produced. This effect manifests in the
+second term in ( 12a), where we ﬁnd that increasing β5, a measure of the backwards
+r e a c t i o ni n(1e), from pyruvate to l-alanine, increases the total 3HP produced for the
+reasons stated above. However, as the enzyme ALT used in this reaction also affects
+the value of Ω, care must be taken in interpreting this result. In particular, a large value
+of Ω will reduce the amount of 3HP produced (Fig. 4).
+With regards to over- or under-expressing enzymes in the system, we can use Table 2
+to determine that ω ∼ a1, λ ∼ a2, β5 ∼ a4, β6 ∼ a2/a3, and Ω ∼ a4, where a1, a2,
+a3, and a4 relate to the initial concentrations of the enzymes PAND, BAPAT, HPDH,
+and ALT, respectively, in the system. Hence, using the arguments presented above, we
+may also deduce the following results for enzyme expression (a schematic of these
+results is given in Fig. 6). Over-expressing PAND will monotonically increase the
+levels of both 3HP and the maximum malonic semialdehyde present, but the effect of
+this over-expression has diminishing returns and is bounded above. Similarly, over-
+expressing BAPAT will also result in higher levels of both 3HP and the maximum
+malonic semialdehyde present, but now without diminishing returns, as both scale
+linearly with a
+2. Over-expressing HPDH decreases the maximum level of malonic
+semialdehyde present (scaling with 1 /a3), but has no leading-order effect on the levels
+on 3HP . Finally, over-expressing ALT will increase the amount of 3HP produced
+(scaling with √
+a4 for large a4), without affecting the maximum (leading-order) level
+of malonic semialdehyde present. Thus, the effect of over-expressing ALT does have
+diminishing returns, but is not bounded above.
+123
+182 M. P. Dalwadi et al.
+Pyruvate ([S1])
+Oxaloacetate ([S2]) Aspartate ([ S3])
+β-alanine ([S4])
+L-alanine ([S5]) Malonic semialdehyde ([ S6])
+3HP ([P])
+PAND ([E1])
+BAPAT ([E2])
+HPDH ([E3])
+ALT ([E4])
+(a)
+Pyruvate ([S1])
+Oxaloacetate ([S2]) Aspartate ([ S3])
+β-alanine ([S4])
+L-alanine ([S5]) Malonic semialdehyde ([ S6])
+3HP ([P])
+PAND ([E1])
+BAPAT ([E2])
+HPDH ([E3])
+ALT ([E4])
+(b)
+Fig. 6 A schematic to highlight the effect of over-expressing a given enzyme in the no replenishment
+case on a malonic semialdehyde and b 3HP. The underlying network and the arrows between the nodes
+are explained in Fig. 1. An enzyme that is boxed and red/green means that over-expressing this enzyme
+causes a/an decrease/increase in the metabolite of interest. Our goal is to reduce the levels of malonic
+semialdehyde whilst increasing the levels of 3HP, where possible. A dashed box denotes that the over-
+expression has diminishing returns with no upper bound, and a dotted box denotes that the over-expression
+has diminishing returns with an upper bound (colour ﬁgure online)
+4 Continuously replenished pyruvate
+4.1 Numerical results
+We now investigate the system ( 4b–m), setting S1 ≡ 1. Thus, the concentration of
+pyruvate is no longer governed by ( 4a). This models a system where pyruvate is
+being constantly replenished and maintained at a given value. Solving this system
+numerically, we see that there are two main timescales for 3HP production, where
+t = O(1) and t = O(10
+1), respectively (Fig. 7). In the t = O(1) timescale, the
+levels of both malonic semialdehyde and 3HP are increasing, before the t = O(101)
+timescale, where the levels of malonic semialdehyde increases at a much slower rate,
+and the levels of 3HP tends to a constant production rate. There is a further timescale
+when t = O(10
+2), and the levels of malonic semialdehyde slightly increase to a steady
+state in this timescale.
+As with the never-replenished pyruvate case, the levels of malonic semialdehyde
+and 3HP can vary signiﬁcantly when different enzymes are over-expressed. We show a
+schematic for the metabolic network in Fig. 1. Increasing the initial amount of PAND
+has no discernible effect on the levels of both malonic semialdehyde and 3HP . In
+contrast, over-expressing BAPAT signiﬁcantly increases the levels of both malonic
+semialdehyde and 3HP . We see that over-expressing HPDH does not appear to have
+any effect on the levels of 3HP and, in fact, signiﬁcantly decreases the maximum
+amount of malonic semialdehyde in the system. Finally, we see that over-expressing
+ALT has a small positive effect on the levels of malonic semialdehyde overall (though
+a small negative effect over t = O(10
+1)), and a small negative effect on the levels of
+3HP.
+We proceed in the same manner as § 3, using an asymptotic analysis to explore the
+system (4b–m), setting S1 ≡ 1. This will allow us to determine how the system depends
+123
+A kinetic model for 3-hydroxypropionic acid production... 183
+10-1 100 101 102 103
+×10-6
+0
+1
+2
+3
+4
+5
+6
+7
+(a)
+S6
+t
+0 5 10 15 20 25 30
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+ai
+a1
+a2
+a3
+a4
+=1
+=2
+=2
+=2
+=2
+(b)
+P
+t
+Fig. 7 Numerical solutions in the continuously replenished pyruvate case for the dynamic concentrations
+of a malonic semialdehyde and b 3HP. We use the parameter values given in Table 2 for all simulations,
+and initial dimensionless enzyme concentrations of 1 unless speciﬁed in the legend. The solid black line
+corresponds to the reference simulation where ai = 1f o r i = 1,2, 3, 4
+on the dimensionless parameters, and thus to explore the experimental parameter space
+without resorting to computationally expensive parameter sweeps.
+4.2 Asymptotic structure
+As we did with § 3, we now consider this system by exploiting the small parameter, ε,
+and using an asymptotic analysis. There are two main asymptotic regions of interest
+in time, where t = O(1) and t = O(1/ε
+1/2), and we refer to these as medium and
+intermediate time, respectively (Fig. 7).
+When t = O(1), the system is governed by the release of pyruvate through the main
+pathway to 3HP and towards the production of l-alanine. There is a signiﬁcant increase
+in the levels of all metabolites apart from pyruvate and GLU, the only metabolites that
+are initially present. When t = O(1/ε1/2), the initial rate of metabolite production is
+slowed and most metabolites approach their steady state. There is a further asymptotic
+region when t = O(1/ε), and the system responds to the overproduction of l-alanine
+due to the continuous replenishment of pyruvate. We consider this region in “Appendix
+B.2 ”, as 3HP production is not affected by this redistribution. In the next section, we
+solve the leading-order versions of the system ( 4b–m), with S
+1 ≡ 1 in these asymptotic
+regions.
+4.3 Asymptotic solutions
+The early-time behaviour of the system is the same as for the never-replenished case,
+and this is given in “Appendix A”. The more interesting behaviour for malonic semi-
+aldehyde and 3HP production occurs over longer timescales, which we now discuss
+in turn.
+123
+184 M. P. Dalwadi et al.
+4.3.1 Medium time: t = O(1)
+The leading-order system ( 4b–m), with S1 ≡ 1, as ε → 0 is given by the differential-
+algebraic system
+˙S2 = 1, ˙S3 = ¯k2 S2 R1 − ¯k4C1, ˙S4 = ¯k4C1, ˙S5 = ¯k−7C4, ˙R1 = 0,
+˙R2 = ¯k2 S2 R1 + ¯k−7C4, ˙P = ¯k10C3, (14a)
+¯k9 S6 = ¯k6C2, ¯k−3C1 = ¯k3 S3, ¯k−5C2 = ¯k5 S1 S4, ¯k10C3 = ¯k9 S6,
+( ¯k−7 + ¯k8
+)
+C4 = ¯k−8 S1 R1, (14b)
+on using ( 5) .T h es o l u t i o nt o(14)i s
+S2 = t, (15a)
+S3 = β3
+ω
+(
+e−ωt − 1 + ωt
+)
+, (15b)
+S4 = β4
+ω2
+(
+1 − ωt + ω2t 2
+2 − e−ωt
+)
+, (15c)
+S5 = β5t, (15d)
+S6 = β6
+ω2
+(
+1 − ωt + ω2t 2
+2 − e−ωt
+)
+, (15e)
+R1 = α, (15f)
+R2 = β4
+t 2
+2 + β5t, (15g)
+C1 = γ1
+ω
+(
+e−ωt − 1 + ωt
+)
+, (15h)
+C2 = γ2
+ω2
+(
+1 − ωt + ω2t 2
+2 − e−ωt
+)
+, (15i)
+C3 = γ3
+ω2
+(
+1 − ωt + ω2t 2
+2 − e−ωt
+)
+, (15j)
+C4 = γ4, (15k)
+P = λ
+ω3
+(
+e−ωt − 1 + ωt − ω2t 2
+2 + ω3t 3
+6
+)
+, (15l)
+where the parameters are deﬁned in ( 8). The solutions ( 15) show excellent agreement
+with the numerical results (dashed lines in Fig. 8). As with the case considered in
+§3, we did not have to impose all of the initial conditions to determine ( 15). That is,
+there is an early-time solution as t → 0+. For early time, the diminishing pyruvate
+case considered in the previous section is equivalent to the constant pyruvate case we
+consider here. Thus, the early-time behaviour for this case is also given in “Appendix
+A” and shows excellent agreement with the numerical results (dashed-dotted lines for
+early time in Fig. 8).
+123
+A kinetic model for 3-hydroxypropionic acid production... 185
+t
+10 -2 10 0 10 2 10 4
+Concentration
+10 -10
+10 -8
+10 -6
+10 -4
+10 -2
+10 0
+S3
+R1
+(a)
+t
+10 -6 10 -4 10 -2 10 0 10 2 10 4
+Concentration
+10 -25
+10 -20
+10 -15
+10 -10
+10 -5
+10 0
+S4
+S6
+R2
+C2
+C3
+(b)
+t
+10 -6 10 -4 10 -2 10 0 10 2 10 4
+Concentration
+10 -10
+10 -8
+10 -6
+10 -4
+10 -2
+10 0
+S5
+C1
+C4
+(c)
+t
+10 -4 10 -2 10 0 10 2 10 4
+Concentration
+10 -25
+10 -20
+10 -15
+10 -10
+10 -5
+10 0
+P
+(d)
+Fig. 8 The numerical and asymptotic solutions for the metabolite concentrations in the continuously-
+replenished pyruvate case. The solid light lines denote the numerical solutions, and the broken darker
+lines denote the asymptotic solutions. Dash-dotted lines for t < 10−3 represent the early-time solutions
+given in “Appendix A” (not shown in a), dashed lines represent the t = O(1) solutions given in ( 15),
+dotted lines represent the intermediate-time solutions given in ( 18), and dash-dotted lines for t > 101
+represent the late-time solutions given in ( B7) (not shown for c, d). We use parameter values α = 0.5,
+a1 = 1,a2 = 1,a3 = 1, and a4 = 1. We have split the metabolite concentrations into a metabolites whose
+early-time behaviour is described by the t = O(1) behaviour, b metabolites whose late-time behaviour is
+described by the intermediate-time behaviour, c metabolites whose behaviour is distinct in each asymptotic
+region we have discussed, and d the product. We plot ([Si ],[Ri ], [Ci ], [P])/S0
+4.3.2 Intermediate time: t = O(1/ε1/2)
+We can see that several terms in the system are promoted to leading order
+when t = O(ε−1/2).U s i n g t = τ/ε1/2 with the scalings (S2, S3, S5,C1) =
+( ˆS2, ˆS3, ˆS5, ˆC1)/ε1/2, (S4, S6, R2,C2,C3) = ( ˆS4, ˆS6, ˆR2, ˆC2, ˆC3)/ε, and P =
+ˆP/ε3/2, where all the new variables are O(1), the medium-time system ( 4) becomes
+d ˆS2
+dτ = 1 − ε1/2 ¯k2 ˆS2 R1, (16a)
+ε3/2 d ˆS3
+dτ = ε¯k2 ˆS2 R1 − ¯k3 ˆS3
+(
+1 − ε1/2 ˆC1
+)
++ ¯k−3 ˆC1, (16b)
+d ˆS4
+dτ = ¯k4 ˆC1 − ε1/2 ¯k5 ˆS4
+(
+1 − ε2 ˆC2
+)
++ ε1/2 ¯k−5 ˆC2, (16c)
+123
+186 M. P. Dalwadi et al.
+d ˆS5
+dτ = ε¯k6 ˆC2 − ε1/2 ¯k7 ˆS5 ˆR2
+(
+1 − ε2C4
+)
++ ¯k−7C4, (16d)
+ε3/2 d ˆS6
+dτ = ¯k6 ˆC2 − ¯k9 ˆS6
+(
+1 − ε3 ˆC3
+)
++ ε¯k−9 ˆC3, (16e)
+dR1
+dτ =− ¯k2 ˆS2 R1 + ε1/2 ¯k8C4 − ε1/2 ¯k−8 R1
+(
+1 − ε2C4
+)
+, (16f)
+d ˆR2
+dτ = ¯k2 ˆS2 R1 − ε¯k7 ˆS5 ˆR2
+(
+1 − ε2C4
+)
++ ε1/2 ¯k−7C4, (16g)
+ε5/2 d ˆC1
+dτ = ¯k3 ˆS3
+(
+1 − ε1/2 ˆC1
+)
+− ¯k−3 ˆC1 − ε¯k4 ˆC1, (16h)
+ε5/2a2
+d ˆC2
+dτ = ¯k5 ˆS4
+(
+1 − ε2 ˆC2
+)
+− ¯k−5 ˆC2 − ε¯k6 ˆC2, (16i)
+ε5/2a3
+d ˆC3
+dτ = ¯k9 ˆS6
+(
+1 − ε3 ˆC3
+)
+− ε¯k−9 ˆC3 − ¯k10 ˆC3, (16j)
+ε5/2a4
+dC4
+dτ = ε1/2 ¯k7 ˆS5 ˆR2
+(
+1 − ε2C4
+)
+− ¯k−7C4 − ¯k8C4 + ¯k−8 R1
+(
+1 − ε2C4
+)
+,
+(16k)
+d ˆP
+dτ = ¯k10 ˆC3, (16l)
+and ( 5) becomes
+ε1/2 d ˆS3
+dτ + ε3/2 d ˆC1
+dτ = ¯k2 ˆS2 R1 − ¯k4 ˆC1. (16m)
+The leading-order version of ( 16) is given by the differential-algebraic system
+d ˆS2
+dτ = 1, d ˆS4
+dτ = ¯k4 ˆC1, d ˆS5
+dτ = ¯k−7C4, dR1
+dτ =− ¯k2 ˆS2 R1, d ˆR2
+dτ = ¯k2 ˆS2 R1,
+d ˆP
+dτ = ¯k10 ˆC3, (17a)
+¯k3 ˆS3 = ¯k−3 ˆC1, ¯k9 ˆS6 = ¯k6 ˆC2, ¯k4 ˆC1 = ¯k2 ˆS2 R1, ¯k−5 ˆC2 = ¯k5 ˆS4,
+( ¯k−7 + ¯k8
+)
+C4 = ¯k−8 R1, (17b)
+and is solved by
+ˆS2 = τ, (18a)
+ˆS3 = β3τe−¯k2τ2/2, (18b)
+ˆS4 = α
+(
+1 − e−¯k2τ2/2
+)
+, (18c)
+ˆS5 = β5
+√ π
+2 ¯k2
+erf
+⎛
+⎝τ
+√
+¯k2
+2
+⎞
+⎠ , (18d)
+123
+A kinetic model for 3-hydroxypropionic acid production... 187
+ˆS6 = β6
+¯k2
+(
+1 − e−¯k2τ2/2
+)
+, (18e)
+R1 = αe−¯k2τ2/2, (18f)
+ˆR2 = α
+(
+1 − e−¯k2τ2/2
+)
+, (18g)
+ˆC1 = γ1τe−¯k2τ2/2, (18h)
+ˆC2 = γ2
+¯k2
+(
+1 − e−¯k2τ2/2
+)
+, (18i)
+ˆC3 = γ3
+¯k2
+(
+1 − e−¯k2τ2/2
+)
+, (18j)
+C4 = γ4e−¯k2τ2/2, (18k)
+ˆP = λ
+¯k2
+⎛
+⎝τ −
+√ π
+2 ¯k2
+erf
+⎛
+⎝τ
+√
+¯k2
+2
+⎞
+⎠
+⎞
+⎠ , (18l)
+where the error function erf (z) is deﬁned as
+erf(z) = 2√π
+∫ z
+0
+e−s2
+ds. (19)
+These solutions show excellent agreement with the numerical results (dotted lines in
+Fig. 8).
+Similarly to the analysis in § 3, there is further long-time behaviour arising from
+higher-order terms becoming important as lower-order terms exponentially decrease.
+These can be obtained by proceeding to higher orders in the above analysis, but it
+is simpler to investigate the asymptotic balances in ( 16) using the solutions ( 18). As
+this does not affect the 3HP production at leading order, we discuss this in “Appendix
+B.2”.
+4.4 Discussion
+We discuss our results in the same context as for the previous section. That is, we
+consider the effect of varying parameters from the heterologous reactions ( 1c–f), and
+with the goal of maximizing 3HP production whilst minimizing the maximum level
+of malonic semialdehyde, S
+6.
+We see from the long-time solution ( 18l) that 3HP ends up being produced at a con-
+stant rate λ/¯k2, and hence the concentration of 3HP ends up linearly increasing with
+time. Additionally, from ( 18e), the concentration of malonic semialdehyde monoton-
+ically increases and tends to a constant value of β6/¯k2 = λ/(¯k2 ¯k9). Hence, although
+there are clear differences in the long-time behaviour of this system compared to the
+never-replenished pyruvate case, there is a similar reaction dependence between sys-
+tems. Speciﬁcally, whilst increasing the reaction rate through ( 1d), from β-alanine
+to malonic semialdehyde and l-alanine, will result in greater levels of 3HP and mal-
+onic semialdehyde, the levels of malonic semialdehyde produced can be reduced by
+123
+188 M. P. Dalwadi et al.
+Pyruvate ([S1])
+Oxaloacetate ([S2]) Aspartate ([ S3])
+β-alanine ([S4])
+L-alanine ([S5]) Malonic semialdehyde ([ S6])
+3HP ([P])
+PAND ([E1])
+BAPAT ([E2])
+HPDH ([E3])
+ALT ([E4])
+(a)
+Pyruvate ([S1])
+Oxaloacetate ([S2]) Aspartate ([ S3])
+β-alanine ([S4])
+L-alanine ([S5]) Malonic semialdehyde ([ S6])
+3HP ([P])
+PAND ([E1])
+BAPAT ([E2])
+HPDH ([E3])
+ALT ([E4])
+(b)
+Fig. 9 A schematic to highlight the effect of over-expressing a given enzyme in the continuous replenish-
+ment case on a malonic semialdehyde and b 3HP. The underlying network and the arrows between the nodes
+are explained in Fig. 1. An enzyme that is boxed and red/green means that over-expressing this enzyme
+causes a/an decrease/increase in the metabolite of interest. Our goal is to reduce the levels of malonic
+semialdehyde whilst increasing the levels of 3HP, where possible (colour ﬁgure online)
+increasing ¯k9. That is, by selecting an enzyme to which malonic semialdehyde has a
+large binding afﬁnity.
+In contrast to the never-replenished pyruvate case, the continuously-replenished
+pyruvate case has no leading-order dependence on ( 1c), the reaction from aspartate
+to β-alanine, nor on ( 1e), the reaction where l-alanine reacts with AKG to produce
+pyruvate and GLU, and vice versa . Increasing the ﬂux through the former and the
+reverse reaction of the latter had a positive effect on 3HP production, where the latter
+allowed l-alanine to initially act as a pyruvate store, before releasing pyruvate to react
+with β-alanine. Thus, for long-time, the rate of 3HP production and the levels of
+malonic semialdehyde are only dependent on the reaction ( 1d), compared to § 3 where
+these quantities are dependent on ( 1c–e).
+With regards to over- or under-expressing enzymes in the system, we can use Table 2
+to determine that λ ∼ a2 and ¯k9 ∼ a3, where a2 and a3 relate to the initial concen-
+trations of the enzymes BAPAT and HPDH, respectively, in the system (a schematic
+of these results is given in Fig. 9). Hence, using the arguments presented above, we
+may also deduce that over-expressing BAPAT will result in higher levels of both 3HP
+and the maximum malonic semialdehyde present, both scaling linearly with a
+2.H o w -
+ever, over-expressing HPDH decreases the maximum level of malonic semialdehyde
+present, which is inversely proportional to a3, but has no leading-order effect on the lev-
+els on 3HP . Importantly, we also ﬁnd that, in contrast to the non-replenished-pyruvate
+case, there is no leading-order dependence on the initial concentrations of PAND or
+ALT. Thus, our model suggests that the over-expression of PAND or ALT will not
+result in signiﬁcant differences in the maximum level of malonic semialdehyde or the
+3HP production for continuous replenishment of pyruvate.
+5 Conclusions
+In this paper, we develop and solve a mathematical model for 3-hydroxypropionic acid
+(3HP) production from pyruvate via aspartate and β-alanine. We consider two limit-
+123
+A kinetic model for 3-hydroxypropionic acid production... 189
+×10-9
+0
+1
+2
+3
+4
+5
+(a)
+maxS6
+i ii iii iv i ii iii iv
+×10-3
+0
+1
+2
+3
+(b)
+P
+Fig. 10 a The maximum level of malonic semialdehyde in the system, b the total 3HP produced, both
+in the no replenishment of pyruvate case. In both ﬁgures, the labels on the x-axis denote i Reference
+value (using the initial enzyme concentrations a1 = a2 = a3 = a4 = 1). (ii) Over-expressing PAND
+(a1 = 10,a2 = a3 = a4 = 1), (iii) Concurrently over-expressing BAPAT and HPDH ( a1 = a4 = 1,
+a2 = a3 = 10), (iv) Over-expressing ALT ( a1 = a2 = a3 = 1, a4 = 10). The units of the y-axis are mM
+ing cases, where the initial level of pyruvate is never and continuously replenished,
+respectively. In both cases, we make substantial asymptotic progress to gain physical
+insight into the system behaviour, successfully comparing these results with numerical
+solutions to check their accuracy. Our asymptotic model (including relatively straight-
+forward explicit expressions) allows us to predict and quantify ways to increase the
+levels of 3HP produced without increasing the levels of malonic semialdehyde, a toxic
+compound produced as an intermediate in the pathway.
+In terms of over-expressing enzymes, we ﬁnd that for both cases the strongest
+positive effect comes from simultaneously over-expressing both BAPAT and HPDH.
+This signiﬁcantly increase the levels of 3HP produced, but provides no signiﬁcant
+increase in the maximum malonic semialdehyde present ((iii) in Figs. 10 and 11).
+Our results also show that over-expressing just one of BAPAT or HPDH will not have
+as strong an effect. We see a similar (though weaker) effect when over-expressing
+ALT for a limited supply of pyruvate, and the maximum level of malonic semialde-
+hyde is slightly reduced ((iv) in Fig. 10). However, when pyruvate is continuously
+replenished, over-expressing ALT leads to a small increase in both the maximum level
+of malonic semialdehyde and the rate of 3HP production ((iv) in Fig. 11). Finally,
+over-expressing PAND only has a signiﬁcant effect when there is a limited supply of
+pyruvate, where the over-expression leads to a slight increase in the maximum level of
+malonic semialdehyde present ((ii) in Fig. 10). This effect vanishes when the pyruvate
+is continuously replenished ((ii) in Fig. 11). We provide schematics outlining the effect
+of over-expressing a given enzyme on both malonic semialdehyde and 3HP in Figs. 6
+and 9 for the never and continuous replenishment cases, respectively.
+Another approach to optimizing metabolite pathways is to explore alternative
+enzymes for a given reaction. Our results can also be used to expedite this process, as
+we are able to determine how the system behaves as a function of the kinetic parame-
+ters of the enzymes, which will differ for alternative enzymes. Thus, we may interpret
+123
+190 M. P. Dalwadi et al.
+× 10-6
+0
+1
+2
+3
+4
+(a)
+maxS6
+ii i i i i i v i ii iii iv
+0
+0.05
+0.1
+0.15
+0.2
+(b)
+P
+t
+Fig. 11 a The maximum level of malonic semialdehyde in the system, b the eventual rate of 3HP production,
+both in the continuous replenishment of pyruvate case. In b,w eu s e P/t as the label for the y-axis as the
+levels of 3HP linearly increase with time (this continuous production is due to the continuous replenishment
+of pyruvate), and thus the appropriate measure here is the long-time production rate of 3HP. In both ﬁgures,
+the labels on the x-axis denote (i) Reference value (using the initial enzyme concentrations a1 = a2 = a3 =
+a4 = 1). (ii) Over-expressing PAND ( a1 = 10, a2 = a3 = a4 = 1), (iii) Concurrently over-expressing
+BAPAT and HPDH ( a1 = a4 = 1, a2 = a3 = 10), (iv) Over-expressing ALT ( a1 = a2 = a3 = 1,a4 =
+10). The units of the y-axis are mM
+our results to determine the optimal targets for enzyme replacement. We ﬁnd that,
+in both cases, the kinetic parameters involving the enzyme BAPAT ( ¯k5, ¯k−5, and ¯k6,
+deﬁned in Table 2) have the most signiﬁcant effect on 3HP production, and our model
+suggests that focusing attention on maximizing the parameter grouping ¯k5 ¯k6/¯k−5 will
+have the greatest effect on 3HP yield. Although increasing ¯k5 ¯k6/¯k−5 also has the effect
+of increasing the levels of malonic semialdehyde, we further show that choosing an
+HPDH enzyme to which malonic semialdehyde will quickly bind can negate this issue
+(that is, increasing ¯k9, deﬁned in Table 2), and we show in Figs. 10 and 11 that this
+combined effect of increasing the 3HP production whilst maintaining the maximum
+level of malonic semialdehyde can also be achieved by over-expressing BAPAT and
+HPDH.
+We additionally show that the kinetic parameters involving the enzyme ALT ( ¯k
+7,
+¯k−7, ¯k8, and ¯k−8, deﬁned in Table 2) have a leading-order effect on the 3HP levels
+when the initial level of pyruvate is never replenished. This is because the reversibility
+of the reaction effectively allows pyruvate to be stored and converted back when
+required. This storage effect is negligible in the continuous replenishment case as the
+pyruvate is plentiful (by deﬁnition) and thus there is no beneﬁt to having additional
+storage of pyruvate. The important parameter groupings here are ¯k
+7 ¯k8/(¯k−7 + ¯k8)
+and ¯k−7 ¯k−8/(¯k7 ¯k8), where increasing both of these dimensionless groupings leads to
+more 3HP produced, with no effect on the maximum levels of malonic semialdehyde
+present at leading order. We ﬁnd that the combined effect of these parameters means
+that ¯k
+−7 and ¯k−8 should be increased, whereas ¯k7 and ¯k8 should be decreased, and we
+note that there are diminishing returns on increasing ¯k−7.W es h o wi nF i g .10 that this
+effect can be weakly obtained by over-expressing ALT.
+123
+A kinetic model for 3-hydroxypropionic acid production... 191
+The kinetic parameters of the remaining enzyme we consider, PAND, given by ¯k3,
+¯k−3, and ¯k4 deﬁned in Table 2, are only signiﬁcant at leading order in the never-
+replenished pyruvate case. In this case, we ﬁnd that increasing the value of the
+parameter grouping ¯k
+3 ¯k4/¯k−3 increases both the amount of 3HP produced, and also the
+maximum levels of malonic semialdehyde present. However, the effect of increasing
+this parameter grouping is bounded above, and thus these diminishing returns suggest
+that this parameter grouping is unlikely to be particularly useful to exploit for the
+eventual goal of industrial production of 3HP .
+We show that, although the full reaction dynamics are different between the never-
+replenished and continuously-replenished pyruvate cases, there are general similarities
+between predictions of the important reactions in both cases. Namely, our model
+suggests that over-expressing BAPAT or using a version of BAPAT with different
+kinetic parameters will increase levels of both 3HP and malonic semialdehyde, and
+that over-expressing HPDH or using an alternate that can very quickly bind to malonic
+semialdehyde will decrease the levels of malonic semialdehyde. The main differences
+between the two cases are as follows. Firstly, the kinetic parameters involved in the
+PAND and ALT reactions have a leading-order effect in the never-replenished pyruvate
+case, but not in the continuously-replenished case. Secondly, the time taken to reach
+the ‘long-time’ stage of 3HP production is asymptotically larger in the continuously-
+replenished pyruvate case, an effect relating to the continuous production of 3HP in
+this case. Thirdly, the malonic semialdehyde reaches its maximum value at a ﬁnite
+time in the never-replenished case, but tends to its maximum (constant) value in the
+continuously-replenished case.
+We have made signiﬁcant use of asymptotic analysis in this paper. This method
+has allowed us to determine the key parameter groupings involved in the production
+of 3HP and malonic semialdehyde. Moreover, there are some interesting aspects of
+the asymptotic analysis in its own right. For example, we have leading-order expo-
+nentially decreasing terms that become subdominant to algebraically increasing terms.
+Resolving this issue without going to higher asymptotic orders requires matching over
+a timescale that involves logarithmic functions of the small parameter ε,a ss h o w ni n
+“Appendix B.1”. Another interesting facet of the asymptotic analysis we perform is
+that, in the never-replenished pyruvate case, there are effects that occur over two
+asymptotic timescales that contribute to the levels of 3HP at leading order, and the
+system behaviour over the longer timescale highlights how l-alanine acts as a store
+for pyruvate, yielding deeper physical insight into the system.
+The two limiting cases of pyruvate replenishment that we have considered in this
+paper are chosen as modelling assumptions. In reality, the levels of pyruvate will fall
+somewhere between these two extremes, as some time-dependent level of pyruvate will
+be generated from glucose via glycolysis. Whilst our model does highlight the BAPAT
+enzyme as the most important to 3HP production in both of the extreme cases we
+consider, it may be interesting to investigate whether this is true for any given pyruvate
+production. This could be examined by imposing a certain time-dependent form for the
+pyruvate concentration (as we did by imposing that pyruvate was constant in the second
+case we considered) if it were known, or by including a known source of pyruvate in the
+governing equations and solving the full system. From ( 4), the governing equations for
+O(1) time, we can see that the leading-order metabolite concentrations can be written
+123
+192 M. P. Dalwadi et al.
+in terms of integrals of (time-dependent) imposed pyruvate concentrations or pyruvate
+sources, and these are given in “Appendix C”. It may be instructive to analysis these
+general results further.
+Additionally, we chose somewhat arbitrary initial conditions which modelled the
+instantaneous addition of pyruvate to a well-mixed solution of enzymes. In reality,
+there is no clean starting point to such a set of reactions and there are likely to be small
+initial levels of every metabolite. We have tested our results for small but non-zero
+initial values of each metabolite and found that the early-time solutions we derived in
+“Appendix A” were inaccurate, but that the system relaxed into the remaining solutions
+we derived in this paper (results not shown).
+Care must be taken with applying these results to in vivo experiments. Some of
+the metabolite concentrations we have derived are very small and, whilst this is not
+an issue for reactions occurring within a well-mixed beaker in vitro , it may pose a
+problem if the situation being modelled is reactions occurring within cells. For one
+molecule within a cell, the resulting macroscale concentration within a bacteria cell
+would be roughly 10
+−9 M ≈ ε3 S0 using the typical parameter values in this paper.
+Hence, care needs to be taken when interpreting our results for reactions occurring
+within bacterial cells. One option to accurately model a small number of molecules is
+is to perform stochastic simulations of the molecule numbers, assigning a probability
+of each reaction occurring. Additionally, for small numbers of molecules it may be
+that spatial effects are important. It would be useful to include these extra features
+in an extension of this work to check whether our conclusions still applied for in
+vivo experiments, but we note that this would signiﬁcantly increase the computational
+expense of solving the model.
+Finally, we note that this work highlights how mathematical models can be used
+to understand a complicated system, even one exhibiting nonlinear behaviour. From
+our model, we were able to highlight the strong positive effect of over-expressing
+two enzymes, BAPAT and HPDH, at the same time to increase 3HP production while
+maintaining the levels of malonic semialdehyde. Such theoretical results should allow
+signiﬁcant reductions in the time taken to explore the experimental parameter space,
+and to aid in other ways the understanding of biological systems.
+Acknowledgements MPD would like to thank Dr Katalin Kovács and Dr Klaus Winzer for helpful dis-
+cussions regarding the background of this work. This work was supported by the Biotechnology and
+Biological Sciences Research Council [grant number BB/L013940/1]; and the Engineering and Physical
+Sciences Research Council, jointly funding the ﬁrst grant number.
+Open Access This article is distributed under the terms of the Creative Commons Attribution 4.0 Interna-
+tional License ( http://creativecommons.org/licenses/by/4.0/ ), which permits unrestricted use, distribution,
+and reproduction in any medium, provided you give appropriate credit to the original author(s) and the
+source, provide a link to the Creative Commons license, and indicate if changes were made.
+123
+A kinetic model for 3-hydroxypropionic acid production... 193
+Appendix A: Early-time solution
+By Taylor expanding the system ( 4) around the initial conditions, we can deduce the
+leading-order behaviour
+S1 ∼ 1, S2 ∼ t, S3 ∼ α¯k2
+t 2
+2!, S4 ∼ α¯k2 ¯k3 ¯k4
+ε2
+t 4
+4!,
+S5 ∼ α¯k−7 ¯k−8
+a4ε2
+t 2
+2!, S6 ∼ α¯k2 ¯k3 ¯k4 ¯k5 ¯k6
+a2ε5
+t 6
+6!,
+R1 ∼ α, R2 ∼ α¯k−7 ¯k−8
+a4ε2
+t 2
+2!,
+C1 ∼ α¯k2 ¯k3
+ε2
+t 3
+3!, C2 ∼ α¯k2 ¯k3 ¯k4 ¯k5
+a2ε4
+t 5
+5!, C3 ∼ α¯k2 ¯k3 ¯k4 ¯k5 ¯k6 ¯k9
+a2a3ε7
+t 7
+7!, C4 ∼ α¯k−8
+a4ε2 t,
+P ∼ α¯k2 ¯k3 ¯k4 ¯k5 ¯k6 ¯k9 ¯k10
+a2a3ε7
+t 8
+8!,
+as t → 0+. These results are expansions in which t , rather than ε, is the small
+parameter, and yield the earliest behaviour of the system. In Figs. 3 and 8,w es e e
+that these asymptotic solutions agree very well with the numerical solutions at early
+time. We note that these early-time solutions will be sensitive to any change in initial
+conditions.
+Appendix B: Long-time behaviour
+In the main text, we have given the long-time behaviour of the system for times up
+to the asymptotic orders at which the levels of 3HP are affected. There is further
+interesting transient behaviour for the rest of the system and, in this Appendix, we
+discuss this behaviour.
+B.1 Never-replenished pyruvate
+There is further long-time behaviour that can occur for the never-replenished pyruvate
+case which physically corresponds to a slower decay of metabolites than predicted in
+the main text. We see from the long-time solutions ( 11) that the metabolites that decay
+have decay rates of |1 − α| or min (Ω, αΩ). Thus, if higher order terms have slower
+decay rates than lower order terms in the long-time system ( 9), the asymptotic order
+of terms will eventually switch. We ﬁnd that asymptotic switching occurs for α< 1
+if and only if Ω< 1/α − 1, and for α> 1 if and only if Ω<α − 1 (Fig. 12a).
+When α< 1 and Ω< 1/α − 1, we look into the region in ( 9) where
+T − log(1/ε)
+¯k2(1 − α − αΩ) = O(1), (B1)
+123
+194 M. P. Dalwadi et al.
+0 0.5 1 1.5 20
+0.2
+0.4
+0.6
+0.8
+1
+1.2
+1.4
+1.6
+1.8
+2
+Ω
+α
+Ω <α − 1
+Ω < 1
+α − 1
+(a)
+t
+10 1 10 2 10 3 10 4
+Concentration
+10 -30
+10 -25
+10 -20
+10 -15
+10 -10
+10 -5
+10 0
+(b)
+Fig. 12 a The shaded areas denote the regions in which there is switching of asymptotic orders in the
+long-time solution for limited initial pyruvate. In the region where Ω< 1/α − 1, solutions ( B2) hold. In
+the region where Ω<α − 1, solutions ( B4) hold. b Results for S3, taking ki = a j = 1 for all i, j ,a n d
+α = 0.5, thus falling into the region where α< 1a n d Ω< 1/α − 1. The solid grey curve shows the
+numerical result, the dashed black curve shows the O(1) term in ( B2a), and the dotted black curve shows
+the full expression given in ( B2a). The latter two asymptotic results show excellent agreement with the
+numerical result until t ≈ 103, where asymptotic switching occurs, and the O(ε) term in ( B2a) dominates
+to determine the leading-order corrections
+S3 ∼ β3(1 − α)2e ¯k2(α−1)T + ε β4β5Ω ¯k8
+ω(1 − α)Ω−1(1 − α − αΩ) e−α¯k2ΩT , (B2a)
+R1 ∼ α(1 − α)e ¯k2(α−1)T + ε β4β5Ω ¯k8
+¯k2(1 − α)Ω(1 − α − αΩ) e−α¯k2ΩT , (B2b)
+C1 ∼ γ1(1 − α)2e ¯k2(α−1)T + ε β4β5Ω ¯k8
+¯k4(1 − α)Ω−1(1 − α − αΩ) e−α¯k2ΩT , (B2c)
+as T →∞ .T h eO(ε) terms in (B2) arise because the O(1)term has a larger exponential
+decay rate than the O(ε) term in ( 9g), and thus these terms will eventually balance.
+When α> 1 and Ω<α − 1, we look into the region in ( 9) where
+T − log(1/ε)
+¯k2(α − 1 − Ω) = O(1), (B3)
+to determine the leading-order corrections
+S2 ∼ α − 1
+α e ¯k2(1−α)T + ε
+( α
+α − 1
+) Ω β5Ω
+(α − 1 − Ω) e−¯k2ΩT , (B4a)
+S3 ∼ β3
+( α − 1
+α
+) 2
+e ¯k2(1−α)T + ε
+( α
+α − 1
+) Ω−1 β4β5Ω
+ω(α − 1 − Ω) e−¯k2ΩT , (B4b)
+C1 ∼ γ1
+( α − 1
+α
+) 2
+e ¯k2(1−α)T + ε
+( α
+α − 1
+) Ω−1 β4β5Ω
+¯k4(α − 1 − Ω) e−¯k2ΩT , (B4c)
+123
+A kinetic model for 3-hydroxypropionic acid production... 195
+as T →∞ .T h eO(ε) terms in (B4) arise because the O(1)term has a larger exponential
+decay rate than the O(ε) term in ( 9b), and thus these terms will eventually balance.
+We see that these solutions are excellent approximations to the numerical solution.
+This further long-time behaviour occurs when ( 1e), the reaction between l-alanine
+and pyruvate, is slow. The physical interpretation of the solutions in this appendix
+is that this slow reaction allows a slow replenishment of pyruvate which, in turn,
+is converted through the metabolites in the pathway to β-alanine. This slow release
+allows for a more gradual depletion of these intermediates.
+B.2 Continuously-replenished pyruvate
+There is further long-time behaviour that can occur for the continuously-replenished
+pyruvate case which physically corresponds to some metabolites reaching a steady
+state rather than vanishing as predicted in the main text. Using τ = T /ε
+1/2 (and
+hence t = T /ε) with the scalings ( ˆS2, ˆP) = ε−1/2( ˜S2, ˜P), ˆC4 = ε1/2 ˜C4, ( ˆS3, ˆC1) =
+ε( ˜S3, ˜C1), and R1 = ε3/2 ˜R1, where all the new variables are O(1), the long-time
+system ( 16) becomes
+d ˜S2
+dT = 1 − ε3/2 ¯k2 ˜S2 ˜R1, (B5a)
+ε2 d ˜S3
+dT = ε¯k2 ˜S2 ˜R1 − ¯k3 ˜S3
+(
+1 − ε3/2 ˜C1
+)
++ ¯k−3 ˜C1, (B5b)
+d ˆS4
+dT = ε1/2 ¯k4 ˜C1 − ¯k5 ˆS4
+(
+1 − ε2 ˆC2
+)
++ ¯k−5 ˆC2, (B5c)
+d ˆS5
+dT = ε1/2 ¯k6 ˆC2 − ¯k7 ˜S5 ˆR2
+(
+1 − ε5/2 ˜C4
+)
++ ¯k−7 ˜C4, (B5d)
+ε2 d ˆS6
+dT = ¯k6 ˆC2 − ¯k9 ˆS6
+(
+1 − ε3 ˆC3
+)
++ ε¯k−9 ˆC3, (B5e)
+εd ˜R1
+dT =− ¯k2 ˜S2 ˜R1 + ¯k8 ˜C4 − ε¯k−8 ˜R1
+(
+1 − ε5/2 ˜C4
+)
+, (B5f)
+d ˆR2
+dT = ε1/2 ¯k2 ˜S2 ˜R1 − ε1/2 ¯k7 ˜S5 ˆR2
+(
+1 − ε5/2 ˜C4
+)
++ ε1/2 ¯k−7 ˜C4, (B5g)
+ε3 d ˜C1
+dT = ¯k3 ˜S3
+(
+1 − ε3/2 ˜C1
+)
+− ¯k−3 ˜C1 − ε¯k4 ˜C1, (B5h)
+ε3a2
+d ˆC2
+dT = ¯k5 ˆS4
+(
+1 − ε2 ˆC2
+)
+− ¯k−5 ˆC2 − ε¯k6 ˆC2, (B5i)
+ε3a3
+d ˆC3
+dT = ¯k9 ˆS6
+(
+1 − ε3 ˆC3
+)
+− ε¯k−9 ˆC3 − ¯k10 ˆC3, (B5j)
+ε3a4
+d ˜C4
+dT = ¯k7 ˆS5 ˆR2
+(
+1 − ε5/2 ˜C4
+)
+− ¯k−7 ˜C4 − ¯k8 ˜C4 + ε¯k−8 ˜R1
+(
+1 − ε5/2 ˜C4
+)
+,
+(B5k)
+123
+196 M. P. Dalwadi et al.
+d ˜P
+dT = ¯k10 ˆC3. (B5l)
+To fully explain the long-term behaviour is it useful to consider some of the solutions up
+to O(ε1/2). Hence, we give ( B5)u pt o O(ε1/2), resulting in the following differential-
+algebraic system
+d ˜S2
+dT =1, d ˆS4
+dT = ε1/2 ¯k4 ˜C1 − ¯k5 ˆS4 + ¯k−5 ˆC2, d ˆS5
+dT = ε1/2 ¯k6 ˆC2 − ¯k7 ˜S5 ˆR2 + ¯k−7 ˜C4,
+d ˆR2
+dT = ε1/2 ¯k2 ˜S2 ˜R1 − ε1/2 ¯k7 ˜S5 ˆR2 + ε1/2 ¯k−7 ˜C4, d ˜P
+dT = ¯k10 ˆC3, (B6a)
+¯k3 ˜S3 = ¯k−3 ˜C1, ¯k9 ˆS6 = ¯k6 ˆC2, ¯k2 ˜S2 ˜R1 = ¯k8 ˜C4, ¯k4 ˜C1 = ¯k2 ˜S2 ˜R1, ¯k−5 ˆC2 = ¯k5 ˆS4,
+¯k10 ˆC3 = ¯k9 ˆS6,
+( ¯k−7 + ¯k8
+) ˜C4 = ¯k7 ˆS5 ˆR2, (B6b)
+on using ( 5) with the scalings introduced in this section.
+T h es o l u t i o nt o(B6)i s
+˜S2 = T , (B7a)
+˜S3 = 1
+ω
+((
+β4λΩ
+√ π
+2 ¯k2
+− ε1/2 λ
+¯k2
+)
+e−β4ΩT + ε1/2 λ
+¯k2
+)
+, (B7b)
+ˆS4 = α, (B7c)
+˜S5 = 1
+β4Ω
+((
+β4λΩ
+√ π
+2 ¯k2
+− ε1/2 λ
+¯k2
+)
+e−β4ΩT + ε1/2 λ
+¯k2
+)
+, (B7d)
+ˆS6 = β6
+¯k2
+, (B7e)
+˜R1 = 1
+¯k2T
+((
+β4λΩ
+√ π
+2 ¯k2
+− ε1/2 λ
+¯k2
+)
+e−β4ΩT + ε1/2 λ
+¯k2
+)
+, (B7f)
+ˆR2 = α, (B7g)
+˜C1 = 1
+¯k4
+((
+β4λΩ
+√ π
+2 ¯k2
+− ε1/2 λ
+¯k2
+)
+e−β4ΩT + ε1/2 λ
+¯k2
+)
+, (B7h)
+ˆC2 = γ2
+¯k2
+, (B7i)
+ˆC3 = γ3
+¯k2
+, (B7j)
+˜C4 = 1
+¯k8
+((
+β4λΩ
+√ π
+2 ¯k2
+− ε1/2 λ
+¯k2
+)
+e−β4ΩT + ε1/2 λ
+¯k2
+)
+, (B7k)
+˜P = λ
+¯k2
+T , (B7l)
+where we give the solutions up to O(ε1/2) for the metabolites where the O(1) term is
+exponentially decreasing. In these cases, there is a constant O(ε1/2) term, and we wish
+123
+A kinetic model for 3-hydroxypropionic acid production... 197
+to avoid introducing a further boundary layer when T = (1/(2β4Ω)) log(1/ε)+O(1)
+to switch the asymptotic order of terms. To give the O(ε1/2) terms for the remaining
+metabolites, we would need to match with higher order terms from the t = O(ε−1/2)
+region which, in turn, we would need to match with higher order terms from the
+t = O(1) region. As we are satisﬁed with our current level of accuracy, we omit this
+for brevity. The solutions ( B7) show excellent agreement with the numerical results
+(dash-dotted lines for late time in Fig. 8).
+The long-time behaviour ( B7) allows the levels of aspartate and l-alanine to attain
+their correct steady state values which are limited by ( 1d), the BAPAT reaction. The
+levels of aspartate sharply decrease when t = O(1/ε1/2) as aspartate is converted into
+β-alanine which is free to react with all the excess pyruvate in the system. In ( B7),
+this sharp decrease is balanced by a slow but steady conversion of pyruvate (through
+oxaloacetate) into aspartate, allowing for a ﬁnite steady state. The levels of l-alanine
+are artiﬁcially high when t = O(1/ε1/2) due to the reaction of β-alanine with all the
+excess pyruvate into l-alanine (and malonic semialdehyde). This large production of
+l-alanine is balanced in ( B7) by the conversion of l-alanine into pyruvate.
+Appendix C: General solutions for t = O(1)
+The general problem for t = O(1) is given by ( 6), ignoring the equation ˙S1 =− S1.
+Instead, S1 is either imposed to be a speciﬁc function of time, or governed by
+˙S1 = f (t ) − S1, (C1)
+at leading order for small ε, where f (t )represents a time-dependent source of pyruvate.
+In this paper, we have considered the cases f ≡ 0 and S1 ≡ 1 (equivalent to f ≡ 1
+at leading order) in more detail, corresponding to no replenishment and continuous
+replenishment of pyruvate, respectively. As ( C1)i ss o l v e db y
+S1 = e−t +
+∫ t
+0
+es−t f (s)ds, (C2)
+we can determine S1(t ) in either case. Hence, we give the solution to ( 6) in terms of
+a general S1(t ) (ignoring the equation ˙S1 =− S1), as follows
+S2 =
+∫ t
+0
+S1(s)ds, (C3a)
+S3 = β3
+∫ t
+0
+(
+1 − eω(s−t )
+)
+S1(s)ds, (C3b)
+S4 = β4
+∫ t
+0
+(
+t − s + eω(s−t ) − 1
+ω
+)
+S1(s)ds, (C3c)
+S5 = β5
+∫ t
+0
+S1(s)ds, (C3d)
+123
+198 M. P. Dalwadi et al.
+S6 = β6 S1(t )
+∫ t
+0
+(
+t − s + eω(s−t ) − 1
+ω
+)
+S1(s)ds, (C3e)
+R1 = α, (C3f)
+R2 =
+∫ t
+0
+(β4 (t − s) + β5) S1(s)ds, (C3g)
+C1 = γ1
+∫ t
+0
+(
+1 − eω(s−t )
+)
+S1(s)ds, (C3h)
+C2 = γ2 S1(t )
+∫ t
+0
+(
+t − s + eω(s−t ) − 1
+ω
+)
+S1(s)ds, (C3i)
+C3 = γ3 S1(t )
+∫ t
+0
+(
+t − s + eω(s−t ) − 1
+ω
+)
+S1(s)ds, (C3j)
+C4 = γ4 S1(t ), (C3k)
+P = λ
+∫ t
+0
+S1(s)
+∫ s
+0
+(
+s − v + eω(v−s) − 1
+ω
+)
+S1(v) dv ds. (C3l)
+References
+Albe KR, Butler MH, Wright BE (1990) Cellular concentrations of enzymes and their substrates. J Theor
+Biol 143(2):163–195
+Berg IA, Kockelkorn D, Buckel W, Fuchs G (2007) A 3-hydroxypropionate/4-hydroxybutyrate autotrophic
+carbon dioxide assimilation pathway in archaea. Science 318(5857):1782–1786
+Borodina I, Kildegaard KR, Jensen NB, Blicher TH, Maury J, Sherstyk S, Schneider K, Lamosa P, Herrgård
+MJ, Rosenstand I, Öberga F, Forstera J, Nielsena J (2015) Establishing a synthetic pathway for high-
+level production of 3-hydroxypropionic acid in saccharomyces cerevisiae via β-alanine. Metab Eng
+27:57–64
+Branson JP, Nezic M, Wallace JC, Attwood PV (2002) Kinetic characterization of yeast pyruvate carboxylase
+isozyme pyc1. Biochemistry 41(13):4459–4466
+Chopra S, Pai H, Ranganathan A (2002) Expression, puriﬁcation, and biochemical characterization of
+mycobacterium tuberculosis aspartate decarboxylase, pand. Protein Express Purif 25(3):533–540
+Hayaishi O, Nishizuka Y , Tatibana M, Takeshita M, Kuno S (1961) Enzymatic studies on the metabolism
+of β-alanine. J Biol Chem 236(3):781–790
+Hinch EJ (1991) Perturbation methods. Cambridge University Press, Cambridge
+Jiang X, Meng X, Xian M (2009) Biosynthetic pathways for 3-hydroxypropionic acid production. Appl
+Microbiol Biotechnol 82(6):995–1003
+Jitrapakdee S, Adina-Zada A, Besant PG, Surinya KH, Cleland WW, Wallace JC, Attwood PV (2007)
+Differential regulation of the yeast isozymes of pyruvate carboxylase and the locus of action of acetyl
+coa. Int J Biochem Cell Biol 39(6):1211–1223
+Kevorkian J, Cole JD (2013) Perturbation methods in applied mathematics. Springer, Berlin
+Kockelkorn D, Fuchs G (2009) Malonic semialdehyde reductase, succinic semialdehyde reductase,
+and succinyl-coenzyme a reductase from metallosphaera sedula: enzymes of the autotrophic 3-
+hydroxypropionate/4-hydroxybutyrate cycle in sulfolobales. J Bacteriol 191(20):6352–6362
+Kumar V , Ashok S, Park S (2013) Recent advances in biological production of 3-hydroxypropionic acid.
+Biotechnol Adv 31(6):945–961
+Nakano Y , Tokunaga H, Kitaoka S (1977) Two ω-amino acid transaminases from Bacillus cereus. J Biochem
+81(5):1375–1381
+123
+A kinetic model for 3-hydroxypropionic acid production... 199
+Nobe Y , Kawaguchi S, Ura H, Nakai T, Hirotsu K, Kato R, Kuramitsu S (1998) The novel substrate
+recognition mechanism utilized by aspartate aminotransferase of the extreme thermophile Thermus
+thermophilus hb8. J Biol Chem 273(45):29554–29564
+O’Malley Jr RE (2012) Singular perturbation methods for ordinary differential equations. Springer, Berlin
+Ramjee MK, Genschel U, Abell C, Smith AG (1997) Escherichia coli l-aspartate-α-decarboxylase: prepro-
+tein processing and observation of reaction intermediates by electrospray mass spectrometry. Biochem
+J 323(3):661–669
+Umemura I, Yanagiya K, Komatsubara S, Sato T, Tosa T (1994) Puriﬁcation and some properties of alanine
+aminotransferase from Candida maltosa . Biosci Biotechnol Biochem 58(2):283–287
+Ward DE, Kengen SWM, van der Oost J, de V os WM (2000) Puriﬁcation and characterization of the
+alanine aminotransferase from the hyperthermophilic archaeon Pyrococcus furiosus and its role in
+alanine production. J Bacteriol 182(9):2559–2566
+Werpy T, Petersen G, Aden A, Bozell J, Holladay J, White J, Manheim A, Eliot D, Lasure L, Jones S (2004)
+Top value added chemicals from biomass, volume 1-results of screening for potential candidates from
+sugars and synthesis gas. Technical report, DTIC Document
+Williamson JM, Brown GM (1979) Puriﬁcation and properties of l-aspartate-alpha-decarboxylase, an
+enzyme that catalyzes the formation of beta-alanine in Escherichia coli . J Biol Chem 254(16):8074–
+8082
+Yagi T, Kagamiyama H, Nozaki M (1982) Aspartate: 2-oxoglutarate aminotransferase from bakers’ yeast:
+crystallization and characterization. J Biochem 92(1):35–43
+123

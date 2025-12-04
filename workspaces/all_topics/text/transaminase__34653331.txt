@@ -1,0 +1,1192 @@
+Computational Prediction ofω‑Transaminase Speciﬁcity by a
+Combination of Docking and Molecular Dynamics Simulations
+Carlos Ramírez-Palacios, Hein J. Wijma, Sebastian Thallmair, Siewert J. Marrink, and Dick B. Janssen*
+Cite This: J. Chem. Inf. Model.2021, 61, 5569−5580 Read Online
+ACCESS Metrics & More Article Recommendations *sı Supporting Information
+ABSTRACT: ω-Transaminases (ω-TAs) catalyze the conversion
+of ketones to chiral amines, often with high enantioselectivity and
+speciﬁcity, which makes them attractive for industrial production
+of chiral amines. Tailoringω-TAs to accept non-natural substrates
+is necessary because of their limited substrate range. We present a
+computational protocol for predicting the enantioselectivity and
+catalytic selectivity of anω-TA from Vibrio ﬂuvialis with diﬀerent
+substrates and benchmark it against 62 compounds gathered from
+the literature. Rosetta-generated complexes containing an external
+aldimine intermediate of the transamination reaction are used as
+starting conformations for multiple short independent molecular
+dynamics (MD) simulations. The combination of molecular
+docking and MD simulations ensures su ﬃcient and accurate sampling of the relevant conformational space. Based on the
+frequency of near-attack conformations observed during the MD trajectories, enantioselectivities can be quantitatively predicted. The
+predicted enantioselectivities are in agreement with a benchmark dataset of experimentally determinedee% values. The substrate-
+range predictions can be based on the docking score of the external aldimine intermediate. The low computational cost required to
+run the presented framework makes it feasible for use in enzyme design to screen thousands of enzyme variants.
+■ INTRODUCTION
+ω-Transaminases (ω-TAs) are pyridoxal-5′-phosphate-(PLP)-
+dependent enzymes that catalyze the reversible transfer of an
+amino group from an amino donor to a keto acceptor, yielding
+a keto product and a chiral amine in the process.
+1 The high
+enantioselectivity of most ω-TAs makes them attractive
+catalysts in the industrial production of chiral amines. 2,3
+Classical chemical synthesis methods usually involve the use of
+expensive catalysts and hazardous conditions. Usingω-TAs for
+the production of chiral amines can be advantageous because
+ω-TAs oﬀer high enantioselectivity, do not require external
+cofactors, allow high reactant concentrations, and give good
+product yields under mild reaction conditions.
+4 However, the
+selectivity of ω-TAs needs to be tailored to the substrate of
+interest for industrial application.
+The range of substrates that can be accepted byω-TAs of
+the class III transaminases (fold-type I PLP enzymes) is mainly
+limited by the size of the small binding pocket, which rarely
+accommodates side chains larger than a methyl group. These
+ω-TAs also have a large binding pocket that can easily accept
+more bulky substituents such as an aryl or alkyl group.
+5 The
+size duality of the small and large binding pockets is what
+confers ω-TAs their high enantioselectivity. Both binding
+pockets are hydrophobic, and both can be targeted to expand
+the substrate range of the enzymes.
+6,7 Tailoring the reactivity
+of ω-TAs to accept non-natural substrates is usually achieved
+via repetitive rounds of mutagenesis and testing. In general,
+rational design and in silico approaches can be very eﬀective
+for enzyme selectivity engineering but require case-speci ﬁc
+ﬁne-tuning to produce reliable results.8 Therefore, we aimed to
+develop a computational framework that can be used in
+enzyme design for assessing the substrate scope and
+enantioselectivity of ω-TA variants. The accuracy of the
+presented framework for the prediction of enantioselectivity
+and substrate scope was evaluated on a benchmark dataset of
+62 compounds gathered from the literature.
+The (S)-selective ω-TA from Vibrio ﬂuvialis (Vf-TA) was
+chosen as the model system for the benchmarking of the
+presented framework because it is a well-characterized enzyme.
+Vf-TA was ﬁrst described in 1999 by Shin and Kim,
+9 and a
+high-resolution crystal structure was reported in 2013.10 Vf-TA
+has enzymatic activity toward both aliphatic and aromatic
+substrates,
+5 generally producing highly enantiopure amines
+from ketones.Vf-TA tolerates mutations in both the small and
+large binding pockets. TailoringVf-TA to accept non-natural
+substrates via computational methods has previously been
+Received: May 28, 2021
+Published: October 15, 2021
+Articlepubs.acs.org/jcim
+© 2021 The Authors. Published by
+American Chemical Society
+5569
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+
+attempted with varying degrees of success.11,12 A common
+feature of these studies is their qualitative nature and the small
+range (less than 5) of screened substrates.11,13
+Previous computational approaches aimed at understanding
+or engineering the reactivity ofω-TAs have examined the keto
+substrate,11−14 amino substrate,15 quinonoid intermediate,12,16
+ketimine intermediate,17 or external aldimine intermediate17 as
+the ligand. The external aldimine intermediate was chosen for
+the current study because it is theﬁrst chiral intermediate in
+the second half reaction and is involved in the rate-limiting
+transamination step. Protonation of the quinonoid intermedi-
+ate by the catalytic lysine leads to the formation of the external
+aldimine, which is subsequently cleaved to form the resting
+enzyme and the amine product. Cassimjee et al.
+1 estimated the
+energy proﬁles of a half-transamination reaction catalyzed by
+an ω-TA from Chromobacterium violaceum (Cv-TA) going
+from (S)-1-phenylethylamine to acetophenone using density
+functional theory calculations of all the involved intermediates
+and transition states. The energy pro ﬁle showed that the
+external aldimine intermediate is fenced by two large energy
+barriers corresponding to transition states in the forward or
+backward reaction direction, to form the quinonoid or the
+geminal diamine intermediates, respectively. Hence, we
+hypothesized that the enantiomer better accommodated by
+the enzyme in the external aldimine form would display a
+higher overall turnover rate.
+To test the hypothesis that modeling the external aldimine
+intermediate is enough to predict the enantioselectivity (and
+substrate scope) of Vf-TA, we compared the results of the
+presented molecular modeling protocol against experimentally
+measured values for the asymmetric synthesis reactions
+(ketone → amine). The approach makes three assumptions:
+Figure 1.Compound dataset used in this study as benchmark to test the reliability of the developed protocol. The dataset was gathered from the
+existing literature, and sources are cited inTable 1. The enantiomeric excess for the asymmetric synthesis reactions used to obtain amines01−49
+from their respective ketones has been reported. Compounds50−62 were only used for substrate-scope predictions because they are nonchiral or
+the experimentalee% for asymmetric synthesis was not found in the literature. All structures represent the preferred enantiomer ofVf-TA and are
+drawn with the bulkiest substituent to the left, i.e., in the position corresponding to the phenyl group of the (S)-enantiomer of01. Following CIP
+rules, all compounds are (S)-amines, except 32, 33, 35, 36, 45, and 62 which formally are (R)-enantiomers.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5570
+(1) the energy proﬁle for the half-transamination reaction is
+the same inVf-TA as inCv-TA; (2) the formation of all other
+reaction intermediates is not rate-limiting for the tested
+compounds; and (3) the forward and backward half-trans-
+amination reactions behave similarly. Theﬁrst assumption is
+based on the fact that bothVf-TA andCv-TA are (S)-selective
+ω-TAs belonging to the PLP fold-type I superfamily class III in
+which active site groups and the catalytic mechanism are
+conserved.
+18 The second assumption requires that the relative
+energy proﬁle for the half-transamination reaction described
+for (S)-1-phenylethylamine to acetophenone1 be maintained
+regardless of the substituents attached to the reacting Cα. The
+third assumption is based on the fact that the transamination
+reaction is reversible at every step of the catalytic cycle, and
+therefore, the principle of microscopic reversibility or detailed
+balance applies.
+19 An additional advantage of modeling the
+external aldimine intermediate is the reduced computational
+cost. Because the C
+α is covalently bound via a Schiﬀ base to the
+PLP cofactor, the search space in the docking stage is
+substantially reduced, thereby eliminating the need for initial
+placement algorithms.
+20
+The results demonstrate the potential of using a
+combination of docking and molecular dynamics (MD)
+simulations for computational screening of di ﬀerent trans-
+aminase substrates. The developed protocol can give
+quantitative predictions ofω-TA selectivity and enantioselec-
+tivity at a low computational cost, which can be employed in
+enzyme engineering eﬀorts aimed at tailoring catalytic activity.
+■ METHODS
+Collection of the Benchmark Dataset. A list of 62
+compounds was gathered from existing literature to test the
+accuracy of the presented computational protocol (Figure 1).
+The gathered dataset contains experimentally determined
+values for enantiomeric excess (ee%) of amines (compounds
+01−49) obtained in asymmetric synthesis catalyzed byVf-TA.
+The ee% values obtained from kinetic resolution of racemic
+amines were not included in the dataset because of the
+dependance of observed ee% values on reaction progress.
+Additionally, data of compounds50−62 were gathered for the
+substrate scope prediction task. The range of molecules
+explored is large, with the majority of the diversity coming
+from the substituent that binds to the large binding pocket. By
+contrast, the substituent that binds to the small binding pocket
+is a methyl or a short-chain alkyl group, with a few exceptions
+(e.g., compounds 28, 32, 33, 35, and 36).
+Preparation of Ligand Structures. Initial atom coor-
+dinates for the (S)- and (R)-amine dataset (Figure 1) were
+created using Avogadro software
+21 and optimized with 500
+steps of steepest descent minimization in the MMFF94 force-
+ﬁeld.
+22 The subsequent steps were made in YASARA (www.
+yasara.org).23 Each amino compound was covalently bonded
+to the pyridoxal cofactor via a Schi ﬀ base to form the
+corresponding external aldimine complex, hereafter referred to
+simply as the ligand. The geometry of the ligand was then
+optimized in AM1 with implicit solvent.24 Atomic charges were
+assigned for the ligand using the restrained electrostatic
+potential approach included in the Gaussian09 software
+package.25 A library of relevant low-energy rotamers was
+generated for each compound by random perturbation of all
+torsion angles that contained at least one heavy atom
+(SampleDih YASARA routine), with the exception of ligand
+atoms originally belonging to the PMP cofactor. The latter
+were kept frozen during the rotamer generation stage. A total
+of 32 independent libraries were created for each ligand, with
+each library containing rotamers where theχ
+1 dihedral was set
+to aﬁxed value (χ1 ={ −180°, −168.75°, −157.50°, ..., +180°})
+(Figure 2). The χ1 dihedral indicates the orientation of the
+Cα−Hα bond with respect to the PLP ring, and the precise
+deﬁnition is shown inFigure 3A. The initial size of each of the
+32 libraries was 1000 rotamers, but after pruning for
+uniqueness (pair-wise RMSD between any two rotamers
+>0.005 Å) the size of each library ended in between 100 and
+800 unique rotamers. In other words, the entire dataset
+Figure 2.General overview of the presented framework for the enantioselectivity prediction ofω-TAs. Theχ1 dihedral was set toﬁxed values,χ1 =
+{−180°, −168.75°, −157.50°, ..., +180°}, adding up to 32 independent rotamer libraries per examined ligand.
+Figure 3.(A) An enzyme−ligand complex was considered to be in a
+NAC when the following criteria were simultaneously met:d1 < 2.65
+Å, −75 <χ1 < −105°, −15 <χ2 < +15°,9 0< θ1 < 130°, and 90 <θ2 <
+130°. Distances are colored in blue, angles in green, and dihedrals in
+red. θ1 and θ2 are the angles between the abstracting hydrogen Hα, the
+NZ atom of Lys285, and either of the two HZ atoms. RL = large
+substituent and RS = small substituent. (B) Structure of a NAC
+obtained from a simulation frame of the external aldimine of
+compound 01S.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5571
+contained 49 unique chemical compounds, each compound
+had two external aldimine forms (one for the (S)- and one for
+the (R)-enantiomer), each of them had 32 unique rotamer
+libraries, and each of those libraries contained 100−800 unique
+rotamers.
+Preparation of the Enzyme Scaﬀold Structure. The
+crystal structure of an (S)-selective ω-TA from Vibrio ﬂuvialis
+(PDB: 4E3Q) was used as scaﬀold.10 Molecular modeling was
+performed using the dimer derived from subunits A and B. The
+dimer contains two PMP cofactors located in the subunit
+interface approximately 15 Å apart, forming two binding sites.
+Se-Met residues were converted into Met by the YASARA
+CleanObj routine. The protonation states of Asp, Glu, His, and
+Lys were predicted by a YASARA automated routine
+(OptHyd).
+26 All Asp, Glu, and Lys were in their standard
+protonation states at neutral pH, and histidine residues were in
+the HIP (charge +1, bothδ- andε-nitrogens protonated; His at
+26 and 178), HID (neutral,δ-nitrogen protonated; His at 35,
+151, and 362), and HIE (neutral,ε-nitrogen protonated, His at
+65, 83, 132, 183, 319, and 326) forms. All water molecules
+were removed from the crystal structure for the docking stage
+but were later added back in for the MD simulations.
+Rosetta Docking of the External Aldimines.Docking of
+the external aldimine intermediates (ligand) into the active site
+of Vf-TA was performed with the Rosetta Enzyme Design
+application (build number 57927).
+27 The following steps were
+performed on the binding site that is mainly composed of
+subunit A residues. Ligands were initially placed in the binding
+site by superimposing the pyridine ring heavy atoms to the
+equivalent PMP atoms found in the crystal structure. The
+following command-line arguments were used when running
+Rosetta: −enzdes, −cst_predock, −cst_design, −cut1 0.0,
+−cut2 0.0, −cut3 8.0, −cut4 10.0, −cst_min, −chi_min,
+−bb_min, −packing::use_input_sc, −packing::soft_rep_de-
+sign, −design_min_cycles 3, −ex1:level 4, −ex2:level 4,
+−ex1aro:level 4, −ex2aro:level 4.
+27 For the enantioselectivity
+predictions, 10 docking structures were produced for eachχ1
+dihedral, and from the resulting 320 structures (32× 10), the
+top-scoring solutions, that is, the low energy conformations,
+were selected to serve as starting conformations for MD
+simulations. The selection was carried out on the basis of the
+Rosetta interface energy, adding up to a total of 64 (top20%)
+or 32 (top10%) starting structures for MD simulations. For
+substrate-range predictions, 200 Rosetta structures were
+generated for each enzyme−ligand complex (all with χ
+1 =
+−90°).
+MD Simulations of the Docked Structures.Short MD
+simulations were performed using the top-ranking docked
+complexes to estimate the enantiomeric excess. All simulations
+were carried out in YASARA, using the knowledge-based
+YAMBER3 force ﬁeld
+28 for protein residues and the GAFF
+force ﬁeld29 for ligands. As for the identity of the ligands, the
+binding site of subunit A contained the docked external
+aldimine form of the query compound, while the binding site
+of subunit B contained the crystallographic PMP cofactor. The
+protein−ligand complexes were placed in a cubic simulation
+cell extending at least 10 Å beyond the protein. Crystallo-
+graphic water molecules, formerly removed in the docking
+stage, were added back to the enzyme. Any water molecule
+with its center of mass closer than 1.1 Å from any non-water
+Scheme 1. Transamination Reaction Mechanisma
+aThe fully reversible reaction consists of two half-transamination reactions.1 In the ﬁrst half reaction (green arrows), L-alanine is converted into
+pyruvate, resulting in the generation of the E/PMP intermediate (PMP is pyridoxamine-5′-phosphate). The second half (red arrows) consists of
+substrate entry and formation of the Michaelis complex with E:PMP. A nucleophilic attack on the carbonyl carbon of the substrate (acetophenone
+shown as an example) by the amino group of PMP leads to the formation of the ketimine intermediate. A further rearrangement involves the
+catalytic lysine (Lys285), actingﬁrst as a base and later as an acid, to form the quinonoid and external aldimine intermediates, respectively. Finally,
+Lys285 performs a nucleophilic attack on the iminium carbon of the external aldimine, resulting in the formation of amine (1-phenylethylamine)
+and an internal aldimine (E-PLP).
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5572
+heavy atom was deleted from the simulation box. Enough
+TIP3P water molecules were added toﬁll the simulation cell,
+along with Na+ and Cl− ions to aﬁnal concentration of 0.150
+M. The pKa values for residues Asp, Glu, His, and Lys were
+predicted using the YASARA neutralization experiment
+routine30 at pH 8, resulting in standard protonation states
+for Asp, Glu, and Lys, and the following protonation states for
+histidine: HID (35, 151, and 362) and HIE (26, 65, 83, 132,
+178, 183, 319, and 326). The protonation states of histidine
+residues 26 and 178 di ﬀered from the protonation states
+obtained using theOptHyd YASARA routine. The cell charge
+was neutralized with Na
++ ions. Next, 25 steps of steepest
+descent minimization were carried out to remove conforma-
+tional stress followed by simulated annealing toﬁnd an energy-
+minimum conformation. Simulated annealing was performed
+by slowly cooling down the system for 100 steps from 298 to 0
+K by rescaling atom velocities by a factor of 0.9 each step, after
+which 100 steps of classical MD are performed at 298 K. After
+obtaining an energy-minimized conformation, the system was
+gradually warmed up from 0 to 298 K in 3.0 ps. A short
+equilibration of 2.0 ps (timestep = 2.0 fs) preceded the
+production run of 20.0 or 100.0 ps. The simulations were
+performed using the leap-frog integration step method of
+YASARA,
+31 with a timestep of 2.5 fs. To gain performance, the
+nonbonded interactions were evaluated every second step. To
+enable such a large timest ep for the intermolecular
+interactions, high-frequency bonds and angles (involving
+hydrogens) were replaced by constraints. LINCS was used to
+constrain all covalent bonds involving hydrogen atoms with a
+relative geometric tolerance of 10
+−4.32 Pressure (1.0 bar) and
+temperature (298 K) were maintained with a modi ﬁed
+Berendsen barostat and thermostat, respectively. 28,33 Long-
+range electrostatic interactions were treated with the particle
+mesh Ewald algorithm and short-range interactions with direct-
+space Coulombic interactions with a cutoﬀ of 8.0 Å.
+34 The
+production run was 20 ps in length withﬁve seeds (5× 20 ps
+setup) or 100 ps with one seed (1× 100 ps setup), bringing
+the total simulation time to 6400 ps per examined ligand in
+either setup.
+Calculation of ee% from MD Trajectories. The MD
+trajectories of each ligand were scored by counting the number
+of frames in which a near-attack-conformation (NAC) was
+observed (Figure 3). NACs were measured on-the-ﬂy every 20
+fs, adding up to 1000 datapoints for a 20 ps trajectory. For each
+compound (01−49 in Figure 1), the relative frequency of
+NACs produced by the docked complexes of the (S)- and (R)-
+enantiomer was used to calculate the expected ee% and
+compared against the experimentally determined value.
+NAC Criteria. NACs were deﬁned by a combination of
+geometric parameters important for the transamination
+reaction to take place, in particular the nucleophilic proton
+abstraction of the external aldimine intermediate to form the
+quinonoid intermediate (Scheme 1). In order for Lys285 to
+perform a nucleophilic attack on the external aldimine, the
+Table 1. Comparison between theee%calc and ee%exp Enantioselectivities for the Benchmarka Dataset15,47−65
+aThe ee% was calculated from the 5× 20 ps setup usingeq 1. The ee%calc of most compounds closely matches theee%exp compounds with
+deviations indicating an error in energy calculations larger than 2 kcal/mol shaded in gray. The formulas to calculate deviations are provided in the
+Supporting Information. bNo: query compound number (Figure 1) with literature reference in superscript.cdev: ΔΔG‡ deviation (kcal/mol)
+between calculated and experimental values.dPositive ee% values mean preference for the (S)-enantiomer. ePreferred enantiomer with a similar
+stereoconﬁguration to (S)-01 but a diﬀerent R/S notation because of the shift in CIP.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5573
+reacting atoms must be positioned at a short distance, where
+their van der Waals radii start overlapping (d1). Furthermore,
+the cleavable bond H α−Cα needs to be positioned
+perpendicular to the Schiﬀ base (χ1 ≈− 90°) to allow the
+nascent p orbital to align with the electrons of the PLP-
+conjugated π system (χ
+2 ≈ 0°). Additionally, the free electrons
+of the attacking lysine nitrogen (:NZ) need to be pointing
+directly toward H α (θ1, θ2 >9 0°). The complete set of
+geometric criteria for a frame to be considered a NAC is listed
+in Figure 3. The precise criteria have been found to have a
+large inﬂuence on the absolute NAC values but not on the
+relative ratios observed between di ﬀerent states that are
+compared.
+35−43
+■ RESULTS
+General Approach.As outlined inFigure 2, the ﬁrst step
+of the approach for predicting the activity ofVf-TA toward a
+query compound was to generate enzyme−ligand conforma-
+tions by Rosetta docking. The ligand is the external aldimine
+intermediate of the query compound. The generated docked
+structures were ranked based on the Rosetta interface energy,
+and the top-scoring structures (top10% or top20%) were used
+as starting conformations for MD simulations. The MD
+trajectories (1× 100 ps or 5× 20 ps) were scored based on a
+set of geometric parameters. In particular, we looked at the
+occurrence of NACs during the trajectories. NACs are ground-
+state conformers that lie close to the transition path of a
+chemical reaction.
+44
+For prediction of stereoselectivity, anee% value is obtained
+from MD simulations by combining the proportion of NACs
+found in the simulation for the (R)- and the (S)-enantiomer,
+using the following formula:
+= −
++ ×
+i
+k
+jj
+j
+jj
+y
+{
+zz
+z
+zzee% NAC NAC
+NAC NAC 100%
+calc
+SR
+SR (1)
+We thus use docking algorithms to reach the ground-state
+conformations of the external aldimine and MD simulations to
+sample the Boltzmann distribution of ground-state conformers
+and their propensity to adopt reactive poses. The proportion of
+ground-state conformers that are NACs gives an estimate of
+the free energy of NAC formation.
+45 Comparing the free
+energy of NAC formation for the (R)- and (S)-enantiomer
+gives a direct estimate of theee%. The use of NAC frequencies
+as indication of enzymatic selectivity has been adopted
+successfully in previous studies on a variety of enzymes.
+36−42,46
+For the substrate-range prediction, we found the Rosetta
+interface energy between the enzyme and the external aldimine
+form of the query compound to be in agreement with the
+experimental activities of the whole transamination reaction.
+Conversely, there was no apparent correlation between the
+percentage of NACs and the enzymatic activity (results not
+shown).
+Enantioselectivity Predictions with the Benchmark
+Compounds. To estimate theee% of compounds01−49, the
+best Rosetta structures were selected to serve as starting
+conformations for short MD simulations, and the trajectories
+were scored by computing the NAC occurrence. The
+enantiomeric excess was calculated with eq 1, where the
+number of NACs produced by each enantiomer is thought of
+as being an indication of the ability of the enantiomer to adopt
+a conformation optimal for catalysis. The calculatedee%( ee
+%
+calc) was then compared against the experimentalee% values
+(ee%exp). In most cases, theee%calc matched the expected values
+(Table 1).
+The high enantioselectivity ofω-TAs is an attractive feature
+in the synthesis of chiral amines but also hinders validation of
+the presented protocol because the dataset gathered from the
+literature is strongly unbalanced. Most of the compounds in
+the presented dataset have anee%
+exp of around 99%, and the
+ee%calc values are correctly predicted to be in this range. The
+enantioselectivity calculations situated the numeric ee%calc
+values of most compounds as large and positive (a positive
+sign means (S)-enantiopreference, and a negative sign means
+(R)-enantiopreference), which is in agreement with the highly
+(S)-enantioselective nature of Vf-TA (Table 1). Compounds
+32, 33, 35, 36, and45 are the exception, but32, 33, and45 are
+only designated as (R)-amines because of CIP rules and retain
+a similar stereoconﬁguration to (S)-01 (the bulky substituent
+binds in the large pocket). By contrast, compounds35 and 36
+do not maintain the stereoconﬁguration of (S)-01. Here, theee
+%calc for 35 (42%) and36 (9%) was not in agreement with the
+ee%exp (−99 and −98%, respectively). While the predictions
+incorrectly favor the ( S)-enantiomer, the experiments
+suggested that the (R)-enantiomer was preferred in both35
+and 36. Theee%exp reported by Höhne et al.51 suggests thatVf-
+TA would strongly prefer to place the N-Boc substituent of
+compounds 35 and 36 in the small binding pocket to yield the
+corresponding amines. Nevertheless, structural analysis of the
+docked complexes of ligands35(R/S) and 36(R/S) did not
+provide an explanation as to why Vf-TA should prefer one
+enantiomer over the other (Figure S1).
+Additionally, it can be noted that there are a few compounds
+in the dataset with low absoluteee%
+exp values (i.e.,34, 40, 41,
+45, 47, and 48) that were correctly predicted to have a poor
+enantioselectivity. For example, theee%exp of 47 is 15%, which
+suggests that Vf-TA does not produce an enantiopure mixture
+of amines (ratio of (S)- to (R)-amine is 1.35:1), and theee%calc
+has a low absolute value of 56% (3.5:1). On the other hand,
+there are a few compounds in the dataset with high absoluteee
+%exp values (i.e., 13, 15, 32, 35, 36, 42, and 43) that were
+incorrectly predicted to have much loweree%calc values. For
+example, the ee%exp of 13 (99%) suggests a strong preference
+for the (S)-enantiomer, but the ee%calc (4%) would wrongly
+predict thatVf-TA produces both enantiomers in almost equal
+amounts. Compounds35 and 36 were discussed earlier, and an
+explanation for the failure of the protocol in predicting the
+enantiopreference of compounds 13 and 15 could not be
+found.
+The enantioselectivity predictions for compounds contain-
+ing the indan or tetralin moieties (i.e., 32, 40−45) were
+generally not in agreement with the reported experimental
+values. For example, for compounds 42 and 43, Vf-TA was
+expected to have a strong preference toward the ( S)-
+enantiomer, but theee%
+calc values (1 and−11%, respectively)
+suggest no preference. Inspection of the docked structures
+provided no explanation for these inaccurate ee%calc values.
+Within the tetralin compounds, the ee%calc (−31%) for 40
+deviates in 49 percentual points from theee%exp (18%), which
+might lead to the conclusion that the prediction for 40 is
+incorrect. However, because the enantiomeric excess does not
+follow a linear scale, these deviations need to be interpreted
+accordingly. The ee%
+calc for compound 40 corresponds to a
+small enantiopreference for the (R)-enantiomer (enantiomeric
+ratio 0.52:1), whereas theee%exp suggests a slight enantiopre-
+ference for the ( S)-enantiomer (1.4:1). Accordingly, the
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5574
+energy deviations suggest that the enantioselectivity calcu-
+lations are rather accurate (0.6 kcal/mol deviation), and the
+same holds for compounds34, 45, and47. Gawley66 provides
+an excellent overview of the limitations of using enantiomeric
+excess as a metric to describe the enantiomeric composition.
+For that reason, we also calculated theΔΔG‡ deviations from
+experimental data (see the Supporting Information for
+calculation details). In many cases (26 out of 49), the
+deviations are below ±1.0 kcal/mol ( Table 1 ), which
+corroborates the predictive power of the presented method-
+ology for modeling the enantioselectivity ofω-TAs.
+The ability of Arg415 to form salt bridge interaction with
+carboxyl groups is corroborated by the enantiopreference of
+Vf-TA toward compounds 19 (L-alanine) and 33 (3-
+ﬂuoroalanine). Synthesis of (S)-19 and (R)-33 requires placing
+the carboxyl substituent in the large binding pocket, where
+Arg415 is located (Figure S2). The formation of a salt bridge
+between the guanidinium group of Arg145 and the COO
+−
+group of the ligand to occur, the carboxyl substituent needs to
+be deprotonated. In fact, when the simulations (docking and
+MD) were performed with the carboxyl groups in the neutral
+form (COOH), theee%
+calc of compounds19 and 33 was found
+to be 76 and −36%, respectively. The results presented in
+Table 1 are from simulations with the deprotonated form
+(COO−), where the preference is toward salt bridge formation
+(ee%calc was 95 and −96% for compounds 19 and 33,
+respectively).
+Additional Simulation Setups. Additional simulation
+setups were used to test the robustness of the presented
+protocol (Table S1). We tested whether the number and
+length of the simulations (5× 20 ps vs 1× 100 ps), or the
+fraction of docked structures selected for MD (top20% vs
+top10%), aﬀected the outcome of the calculations. When
+comparing the 5 × 20 ps against the 1× 100 ps setups, no
+large diﬀerences were found in the predictedee% values. In
+fact, NAC-producing frames were found to be evenly spaced
+across the MD trajectories (Figure S5), which means that the
+percentage of NACs produced by a trajectory was not
+dependent on the simulation length. Still, the length of the
+simulations should be long enough to generate conformational
+sampling of the ground-state region set at the docking stage,
+but short enough to maintain a conformation close to the
+initial structure. Our research group has previously shown that
+ps-scale MD simulations are long enough to allow meaningful
+counting of binding poses and that running multiple-
+independent MD simulations is better for sampling than
+performing a single long simulation.
+36,37,46,67 Additionally, no
+large diﬀerence was found when comparing theee% obtained
+from using the top10% or top20% of Rosetta structures for
+MD simulations ( Table S1 ). Again, only low-energy
+conformations should be used to avoid working with
+unfavorable ground states (unfavorable Rosetta interface
+energies), but the structures should be diverse enough to
+prevent single outliers from dominating the averaged frequency
+Figure 4.Comparison between the (R)- and (S)-enantiomers. (A) Preferred enantiomer (the (S)-enantiomer of compound07) can position Hα
+perpendicular to the plane of the PMP ring and ready for proton abstraction by Lys285. (B) Preference for the preferred enantiomer to adopt a
+catalytic orientation (χ1 = −90°) is evident when comparing the Rosetta score at diﬀerent χ1 values. (C) By contrast, the nonpreferred enantiomer
+is unable to adopt a catalytic orientation (χ1 = −90°), where the Hα is positioned close to the catalytic lysine, because of steric hindrance with the
+small binding pocket (S: small, L: large binding pockets). (D) Scanning through theχ1 dihedral shows that the energy minimum is not located near
+the optimal value for catalysis to take place. In panels (A) and (C), carbon atoms originally belonging to the cofactor are colored gray, while carbon
+atoms originally belonging to the amino compound are colored cyan. All panels correspond to compound07, shown as an example.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5575
+of NAC conformations. Within the set of selected structures,
+the number of NACs that each trajectory produced was not
+correlated with the Rosetta interface energy of the starting
+structure (Figure S6). All in all, the choice of limiting the
+proportion of docking structures (top20%) to be used as
+starting conformations for multiple short MD simulations (5×
+20 ps) was adequate.
+Sampling of theχ
+1 Dihedral Is Key to Modeling the
+Enantioselectivity of Vf-TA. In this section, we provide
+further results that illustrate why sampling theχ1 dihedral using
+the Rosetta energy function can be advantageous.
+The most important diﬀerence between the preferred and
+nonpreferred enantiomers is that the former can position their
+cleavable H
+α−Cα bond perpendicular to the PMP plane, ready
+for proton abstraction by Lys285. By contrast, the non-
+preferred enantiomers cannot position the Hα close to Lys285,
+because this would require placing the large substituent in the
+small binding pocket, which is unfavorable ( Figure 4 ).
+Therefore, the initial approach for modeling the enantiose-
+lectivity of Vf-TA was to dock the ligands of compounds01−
+49 in a conformation that resembled as much as possible a
+catalytic conformation (setting χ
+1 to −90°) and allow the
+nonpreferred enantiomer to reorient itself into a more
+favorable (and probably noncatalytic) conformation during
+the simulation (Figure 4A,C). In this way, the fraction of
+NACs produced by the nonpreferred enantiomer would be
+lower than the fraction produced by the preferred enantiomer
+(NAC criteriumχ
+1). However, we found that the nonpreferred
+enantiomer (i.e., the (R)-enantiomer) was not able to invert to
+a more favorable conformation in simulation time scales
+realistic for application in rapid computational screening (i.e.,
+tens of ps). When the external aldimine form of both
+enantiomers was docked in a catalytic orientation ( χ1 =
+−90°), followed by MD simulations, the ee%calc showed no
+correlation with theee%exp values (Table S1). Hence, docking
+all external aldimine intermediates in a catalytic orientation
+was unsuitable for discerning between reactive and nonreactive
+enantiomers.
+Longer MD simulations of the external aldimine complex of
+compounds 01R and 01S showed that theχ
+1 dihedral evolves
+too slowly to obtain convergence in short time scales (Figure
+S7). We sorted out this limitation by using the Rosetta energy
+function to scan through theχ1 dihedral and produce enzyme−
+ligand complexes with staggered χ1 values (χ1 ={ −180°,
+−168.75°, −157.50°, ..., +180°}) (Figure 2). The top-scoring
+Rosetta structures (top20%: 64 out of 320 total structures;
+top10%: 32 out of 320 total structures) were then used as
+starting conformations for MD simulations ( Figure 4B,D).
+This way, the docking algorithm makes larger jumps in
+conformational space, and the short MD simulations
+subsequently sample the local region of said conformational
+space, yielding a fast and accurate protocol to modelω-TA
+enantioselectivity.
+Inﬂuence of NAC Deﬁnitions onee%
+calc. Among the set
+of geometric criteria (d1, θ1, θ2, χ1, andχ2), the dihedralχ1 was
+the criterion with greater inﬂuence on the number of NACs
+produced in the trajectory because of its slow dynamics. The
+MD simulations (20−100 ps) were not of suﬃcient length as
+to allow χ
+1 to move away from the starting value set at the
+docking stage (Figure S3). Hence, ligands docked in a catalytic
+conformation ( χ1 = −90°)w e r em o r el i k e l y( b u tn o t
+guaranteed) to produce NACs than ligands docked in a
+Figure 5.Correlation between the Rosetta interface energy and substrate range. Panels A−C show the relation between the Rosetta score of the
+external aldimine of compounds13, 62, and54, respectively, and the experimental conversion across diﬀerent Vf-TA mutants. In panels D−F, we
+show the relation between the Rosetta score of wild-typeVf-TA, Vf-TA + W147G, andVf-TA + W57G, respectively, and the experimental activity
+on a dataset of 17 compounds. All Rosetta calculations were performed using the external aldimine of the (S)-amine. The red squares are outliers,
+that is, datapoints that do not follow the overall trend and were not used to do the linear regression (dotted lines). Experimental data were obtained
+from the existing literature: panels A and B from Nobili et al.;6 panel C from Genz et al.;15 and panels D and F from Cho et al.5 Abbreviations are as
+follows. For panels A and B: m1, wild-type; m2, mutant V153A; m3, mutant F85L; m4, mutant Y150F; m5, mutant Y150M; m6, mutant
+F85L_V153A; m7, mutant F85L_Y150F; m8, mutant F85L_Y150F_V153A; m9, mutant F85L_Y150M; m10, mutant F85L_Y150M_V153A;
+m11, mutant Y150F_V153A; m12, mutant Y150M_V153A. For panel C: H1R, mutant L56V_W57F_F85V; H3R, mutant L56V_W57C; H3RV,
+mutant L56V_W57C_F85V; H3RA, mutant L56V_W57C_V153A; H3RAV, mutant L56V_W57C_F85V_V153A. For panels D, E, and F, the
+numbers correspond to the dataset presented inFigure 1. REU: Rosetta Energy Units., A
+s: speciﬁc activity, Ar: relative speciﬁc activity, andρ:
+Spearman’s correlation coeﬃcient.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5576
+noncatalytic conformation ( χ1 ≠− 90°). Because a ligand
+docked in a catalytic conformation is not necessarily
+guaranteed to produce NACs (as NAC production also
+depends on other geometric parameters), performing MD
+simulations on the docked structures is still necessary to
+determine ee%
+calc. Similarly, a ligand docked in a noncatalytic
+conformation is still capable of producing NACs (Figure S4).
+Additionally, MD simulations allow the inclusion of explicit
+water molecules. All in all, the presented strategy of scanning
+the χ
+1 dihedral landscape using the Rosetta energy function
+and then performing more accurate ps-scale MD simulations of
+the top-scoring docked structures enables a fast and accurate
+way of modeling the enantioselectivity ofω-TAs.
+Substrate Scope Prediction Using the Rosetta Inter-
+face Energy. After examining enantioselectivity, we inves-
+tigated if the sole modeling of the external aldimine
+intermediate would suﬃce to predict the substrate range. Six
+independent sets of substrates were examined. Theﬁrst three
+sets keep the query compound constant but explore diﬀerent
+Vf-TA variants (Figure 5A−C), and the remaining three sets
+keep the enzyme variant constant but explore di ﬀerent
+compounds (Figure 5D−F). The Rosetta interface energy
+was found to be well correlated with the observed experimental
+activity for the six independent sets of compounds, once major
+outliers were omitted from the latter three datasets. The
+correlation is surprising because the interface energy only
+accounts for interactions between the ligand and the protein
+while ignoring other factors that may cause di ﬀerences in
+catalytic activity, such as diﬀerences in the chemical potential
+of the reacting compounds or in desolvation free energy upon
+substrate binding across substrates or mutants.
+68 Calculating
+only the interface energy of the external aldimine complex also
+ignores other steps in the catalytic cycle for a given substrate to
+undergo transamination, such as formation of the Michaelis
+complex or formation of reaction intermediates other than the
+external aldimine. However, because all these reaction
+intermediates are structurally similar ( Scheme 1), a good
+interaction energy for the modeled intermediate might also
+reﬂect a good interaction energy for the nonmodeled
+intermediates. Whereas substrate binding (a ﬃnity) would
+mainly inﬂuence K
+M, the aﬃnity of an intermediate can also
+inﬂuence kcat, which would be in agreement with inspecting the
+relationship between the Rosetta interface energy and
+experimental data, namely, yield and conversion. Another
+point to consider is the scale on which the observed correlation
+between Rosetta scores and enz ymatic activity exhibits
+monotonicity. On short scales, two mutants with di ﬀerent
+activities may receive a similar Rosetta score (e.g., mutants
+m10 and m12 inFigure 5A, m3 vs m12 and m5 inFigure 5B,
+and H3RV vs H3R in Figure 5C). Despite these potential
+pitfalls, the good correlation found between interface energies
+and experimental substrate speciﬁcity suggests that the Rosetta
+score can be used as the objective function to guide the design
+of ω-TA mutants.
+■ DISCUSSION
+Modeling the enzymatic enantioselectivity is a complicated
+task because of the small energy diﬀerences that need to be
+reproduced and the number of intermediates and transition
+states that need to be considered. Very accurate but
+computationally demanding methods, such as quantum
+mechanics (QM), molecular mechanics, empirical valence
+bond, and the quantum chemical cluster approach, have been
+used successfully in the study of enzymatic enantioselectivity.
+69
+In this work, we explored a strategy that combines molecular
+docking and MD simulations to yield a computationally
+inexpensive but accurate framework for predicting the
+speciﬁcity of Vf-TA in the production of chiral amines.
+Modeling was performed using only the external aldimine
+intermediate of the query compounds. Docking allows a
+computationally eﬃcient generation of ground-state conforma-
+tions, while the MD simulations quantify the Boltzmann
+distribution of ground-state conformers, including the
+occurrence of reactive poses. Estimating the proportion of
+ground-state conformers that resemble a NAC provides an
+indication of the free energy of NAC formation
+45 and a direct
+means for predicting theee%( Eq 1). The MD simulations are
+intended to account for the loss of accuracy arising from the
+discreteness of rotamers of docking approaches70,71 and the
+lack of explicit water molecules.72 The computational cost of
+the presented framework is around 37 CPU-h (using an HP
+workstation Z4 with Intel Xeon W-2135 Processor with six
+CPUs) per assayed compound (setup: 5× 20 ps, top20%), and
+parallel computing is possible.
+With six independent compound sets, it was shown that the
+Rosetta interface energy, measured between the enzyme
+variant and the external aldimine form of the query compound,
+correlates well with the experimental substrate scope ofVf-TA
+(Figure 5). At least for the presented datasets, this correlation
+shows that modeling the amino donor (typically
+L-alanine or
+isopropylamine) is not necessary for the reactivity prediction
+task, in contrast to the approach of Seo et al.,
+49 where
+diﬀerential binding energies were considered for the substrates
+of both half-transamination reactions. We recently also
+reported the correlation between interface energies and
+experimental conversion in otherVf-TA and Pj-TA datasets
+73
+and used the Rosetta interface energy as the target function for
+the computational engineering of thePj-TA substrate scope.68
+The protocol allowed the rapid design of Pj-TA variants
+accepting sterically hindered substrates. The computational
+cost of scanning for enzyme variants using Rosetta interface
+energy is circa 2 CPU-h per enzyme variant. Generating every
+enzyme−ligand structure takes approximately 60 s, but
+producing at least 100 structures per scanned variant is
+recommended. Other more sophisticated methodologies for
+predicting ω-TA reactivity can be useful in later stages of the
+search for new mutants but tend to be more expensive. For
+example, the methodology of Voss et al.,
+13 which used a
+combination of QM calculations and MD simulations, has a
+computational cost of around 60 CPU-h per enzyme variant.
+Although validation was made solely on aVf-TA dataset, the
+presented approach may be applicable to other (S)-selective ω-
+TAs owing to their similarities. We have tested the substrate
+scope prediction task inPj-TA
+68,73 and Cv-TA.73 In contrast,
+this approach may or may not be applicable to (R)-selective ω-
+TAs, because the two enzymes evolved separately and belong
+to a completely diﬀerent PLP fold type (fold type IV).
+18
+■ CONCLUSIONS
+We presented a framework for calculating the enantioselectiv-
+ity of anω-TA fromV. fluvialis toward a variety of compounds.
+The framework is computationally inexpensive and can assist
+in the enzyme design ofω-TAs. In general, the retrospectively
+predicted ee% values were in agreement with those found in
+the literature, but there were cases where the predictions did
+not correspond to the expected values. Furthermore, we
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5577
+showed that the Rosetta interface energy of the external
+aldimine complex is a good predictor of the activity ofVf-TA
+across mutants or across di ﬀerent compounds. Using the
+Rosetta interface energy as the target scoring function can
+therefore aid in the search for enzyme variants with a
+broadened substrate range.
+■ ASSOCIATED CONTENT
+*sı Supporting Information
+The Supporting Information is available free of charge at
+https://pubs.acs.org/doi/10.1021/acs.jcim.1c00617.
+Equations to calculate ΔΔG‡ deviations; structures of
+docked complexes; plots showing the variation of theχ1
+dihedral at the start and end of the MD simulations; 3D
+histogram of the dependency of NACs and docked
+dihedral; heatmaps showing the NAC count independ-
+ency on the simulation time window and on the Rosetta
+score of the starting conformation; time evolution of the
+χ
+1 dihedral in long MD simulations; and table comparing
+the ee%calc obtained from diﬀerent setups (PDF)
+■ AUTHOR INFORMATION
+Corresponding Author
+Dick B. Janssen− Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen, 9747 AG Groningen, The
+Netherlands;
+orcid.org/0000-0002-0834-2043;
+Email: d.b.janssen@rug.nl
+Authors
+Carlos Ramírez-Palacios − Biotransformation and
+Biocatalysis, Groningen Biomolecular Sciences and
+Biotechnology Institute (GBB), University of Groningen,
+9747 AG Groningen, The Netherlands; Molecular Dynamics,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen, 9747 AG Groningen, The
+Netherlands;
+orcid.org/0000-0003-2724-0760
+Hein J. Wijma− Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen, 9747 AG Groningen, The
+Netherlands;
+orcid.org/0000-0003-0891-6972
+Sebastian Thallmair − Molecular Dynamics, Groningen
+Biomolecular Sciences and Biotechnology Institute (GBB),
+University of Groningen, 9747 AG Groningen, The
+Netherlands; Frankfurt Institute for Advanced Studies, 60438
+Frankfurt am Main, Germany;
+orcid.org/0000-0002-
+3396-5840
+Siewert J. Marrink− Molecular Dynamics, Groningen
+Biomolecular Sciences and Biotechnology Institute (GBB),
+University of Groningen, 9747 AG Groningen, The
+Netherlands;
+orcid.org/0000-0001-8423-5277
+Complete contact information is available at:
+https://pubs.acs.org/10.1021/acs.jcim.1c00617
+Author Contributions
+C.R.P. performed the computational work and wrote the
+manuscript. H.J.W. supervised docking and initial MD
+simulations. H.J.W. and D.B.J. conceived the project. S.T.
+supervised the MD simulation work. D.B.J. supervised the
+overall project. D.B.J. and S.J.M. revised the manuscript.
+Notes
+The authors declare no competingﬁnancial interest.
+Scripts necessary for running the presented protocol are
+publicly available at: https://github.com/crp-mol/
+transaminases. Usage instructions and example input and
+output ﬁles are provided.
+■ ACKNOWLEDGMENTS
+C.R.P. thanks CONACYT for the doctoral fellowship. We
+thank the Center for Information Technology (CIT) of the
+University of Groningen for providing access to the Peregrine
+high-performance computing cluster.
+■ ABBREVIATIONS
+ω-TA, ω-transaminase; PLP, pyridoxal 5-phosphate; PMP,
+pyridoxamine 5-phosphate; E, enzyme; Vf-TA, ω-TA from
+Vibrio ﬂuvialis; Cv-TA, ω-TA fromChromobacterium violaceum;
+Pj-TA, ω-TA from Pseudomonas jessenii; NAC, near-attack
+conformation; ee%, percentual enantiomeric excess; REU,
+Rosetta energy units; MD, molecular dynamics; QM, quantum
+mechanics.
+■ REFERENCES
+(1) Cassimjee, K. E.; Manta, B.; Himo, F. A Quantum Chemical
+Study of the ω-Transaminase Reaction Mechanism. Org. Biomol.
+Chem. 2015, 13, 8453−8464.
+(2) Breuer, M.; Ditrich, K.; Habicher, T.; Hauer, B.; Keßeler, M.;
+Stürmer, R.; Zelinski, T. Industrial Methods for the Production of
+Optically Active Intermediates.Angew. Chem., Int. Ed.2004, 43, 788−
+824.
+(3) Kelly, S. A.; Pohle, S.; Wharry, S.; Mix, S.; Allen, C. C. R.;
+Moody, T. S.; Gilmore, B. F. Application ofω-Transaminases in the
+Pharmaceutical Industry. Chem. Rev. 2018, 118, 349−367.
+(4) Tufvesson, P.; Lima-Ramos, J.; Jensen, J. S.; Al-Haque, N.; Neto,
+W.; Woodley, J. M. Process Considerations for the Asymmetric
+Synthesis of Chiral Amines Using Transaminases.Biotechnol. Bioeng.
+2011, 108, 1479−1493.
+(5) Cho, B.-K.; Park, H.-Y.; Seo, J.-H.; Kim, J.; Kang, T.-J.; Lee, B.-
+S.; Kim, B.-G. Redesigning the Substrate Specificity of ω-Amino-
+transferase for the Kinetic Resolution of Aliphatic Chiral Amines.
+Biotechnol. Bioeng. 2008, 99, 275−284.
+(6) Nobili, A.; Steffen-Munsberg, F.; Kohls, H.; Trentin, I.; Schulzke,
+C.; Höhne, M.; Bornscheuer, U. T. Engineering the Active Site of the
+Amine Transaminase from Vibrio fluvialis for the Asymmetric
+Synthesis of Aryl-Alkyl Amines and Amino Alcohols.ChemCatChem
+2015, 7, 757−760.
+(7) Genz, M.; Vickers, C.; van den Bergh, T.; Joosten, H.-J.; Dörr,
+M.; Höhne, M.; Bornscheuer, U. Alteration of the Donor/Acceptor
+Spectrum of the (S)-Amine Transaminase fromVibrio fluvialis. Int. J.
+Mol. Sci. 2015, 16, 26953−26963.
+(8) Chowdhury, R.; Maranas, C. D. From Directed Evolution to
+Computational Enzyme EngineeringA Review. AIChE J. 2020, 66,
+No. e16847.
+(9) Shin, J.-S.; Kim, B.-G. Asymmetric Synthesis of Chiral Amines
+with ω-Transaminase. Biotechnol. Bioeng. 1999, 65, 206−211.
+(10) Midelfort, K. S.; Kumar, R.; Han, S.; Karmilowicz, M. J.;
+McConnell, K.; Gehlhaar, D. K.; Mistry, A.; Chang, J. S.; Anderson,
+M.; Villalobos, A.; Minshull, J.; Govindarajan, S.; Wong, J. W.
+Redesigning and Characterizing the Substrate Specificity and Activity
+of Vibrio fluvialis Aminotransferase for the Synthesis of Imagabalin.
+Protein Eng., Des. Sel.2013, 26,2 5−33.
+(11) Sirin, S.; Kumar, R.; Martinez, C.; Karmilowicz, M. J.; Ghosh,
+P.; Abramov, Y. A.; Martin, V.; Sherman, W. A Computational
+Approach to Enzyme Design: Predicting ω-Aminotransferase
+Catalytic Activity Using Docking and MM-GBSA Scoring.J. Chem.
+Inf. Model. 2014, 54, 2334−2346.
+(12) Dourado, D. F. A. R.; Pohle, S.; Carvalho, A. T. P.; Dheeman,
+D. S.; Caswell, J. M.; Skvortsov, T.; Miskelly, I.; Brown, R. T.; Quinn,
+D. J.; Allen, C. C. R.; Kulakov, L.; Huang, M.; Moody, T. S. Rational
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5578
+Design of a (S)-Selective-Transaminase for Asymmetric Synthesis of
+(1S)-1-(1,1′-biphenyl-2-yl)ethanamine. ACS Catal. 2016, 6, 7749−
+7759.
+(13) Voss, M.; Das, D.; Genz, M.; Kumar, A.; Kulkarni, N.; Kustosz,
+J.; Kumar, P.; Bornscheuer, U. T.; Höhne, M. In Silico Based
+Engineering Approach to Improve Transaminases for the Conversion
+of Bulky Substrates.ACS Catal. 2018, 8, 11524−11533.
+(14) Han, S.-W.; Kim, J.; Cho, H.-S.; Shin, J.-S. Active Site
+Engineering of ω-Transaminase Guided by Docking Orientation
+Analysis and Virtual Activity Screening.ACS Catal. 2017, 7, 3752−
+3762.
+(15) Genz, M.; Melse, O.; Schmidt, S.; Vickers, C.; Dörr, M.; van
+den Bergh, T.; Joosten, H.-J.; Bornscheuer, U. T. Engineering the
+Amine Transaminase from Vibrio fluvialis towards Branched-Chain
+Substrates. ChemCatChem 2016, 8, 3199−3202.
+(16) Humble, M. S.; Cassimjee, K. E.; Abedi, V.; Federsel, H.-J.;
+Berglund, P. Key Amino Acid Residues for Reversed or Improved
+Enantiospecificity of an ω-Transaminase. ChemCatChem 2012, 4,
+1167−1172.
+(17) López-Iglesias, M.; González-Martínez, D.; Rodríguez-Mata,
+M.; Gotor, V.; Busto, E.; Krout il, W.; Gotor-Fernández, V.
+Asymmetric Biocatalytic Synthesis of Fluorinated Pyridines through
+Transesterification or Transamination: Computational Insights into
+the Reactivity of Transaminases.Adv. Synth. Catal.2017, 359, 279−
+291.
+(18) Steffen-Munsberg, F.; Vickers, C.; Kohls, H.; Land, H.; Mallin,
+H.; Nobili, A.; Skalden, L.; van den Bergh, T.; Joosten, H.-J.;
+Berglund, P.; Höhne, M.; Bornscheuer, U. T. Bioinformatic Analysis
+of a PLP-Dependent Enzyme Superfamily Suitable for Biocatalytic
+Applications. Biotechnol. Adv. 2015, 33, 566−604.
+(19) Fersht, A.Structure and Mechanism in Protein Science: A Guide to
+Enzyme Catalysis and Protein Folding; Series in Structural Biology;
+World Scientiﬁc, 2017; Vol.9, 656.
+(20) DeLuca, S.; Khar, K.; Meiler, J. Fully Flexible Docking of
+Medium Sized Ligand Libraries with Rosetta Ligand.PLoS One2015,
+10, No. e0132508.
+(21) Hanwell, M. D.; Curtis, D. E.; Lonie, D. C.; Vandermeersch, T.;
+Zurek, E.; Hutchison, G. R. Avogadro: An Advanced Semantic
+Chemical Editor, Visualization, and Analysis Platform.Aust. J. Chem.
+2012, 4, 17.
+(22) Halgren, T. A. Merck Molecular Force Field. I. Basis, Form,
+Scope, Parameterization, and Performance of MMFF94.J. Comput.
+Chem. 1996, 17, 490−519.
+(23) Krieger, E.; Vriend, G. YASARA ViewMolecular Graphics for
+All Devices from Smartphones to Workstations. Bioinformatics
+2014, 30,2 .
+(24) Klamt, A. Conductor-like Screening Model for Real Solvents: A
+New Approach to the Quantitative Calculation of Solvation
+Phenomena. J. Phys. Chem.1995, 99, 2224−2235.
+(25) Frisch, M. J.; Trucks, G. W.; Schlegel, H. B.; Scuseria, G. E.;
+Robb, M. A.; Cheeseman, J. R.; Scalmani, G.; Barone, V.; Mennucci,
+B.; Petersson, G. A.; Nakatsuji, H.; Caricato, M.; Li, X.; Hratchian, H.
+P.; Izmaylov, A. F.; Bloino, J.; Zheng, G.; Sonnenberg, J. L.; Hada, M.;
+Ehara, M.; Toyota, K.; Fukuda, R.; Hasegawa, J.; Ishida, M.;
+Nakajima, T.; Honda, Y.; Kitao, O.; Nakai, H.; Vreven, T.;
+Montgomery, J. A., Jr.; Peralta, J. E.; Ogliaro, F.; Bearpark, M.;
+Heyd, J. J.; Brothers, E.; Kudin, K. N.; Staroverov, V. N.; Keith, T.;
+Kobayashi, R.; Normand, J.; Raghavachari, K.; Rendell, A.; Burant, J.
+C.; Iyengar, S. S.; Tomasi, J.; Cossi, M.; Rega, N.; Millam, J. M.;
+Klene, M.; Knox, J. E.; Cross, J. B.; Bakken, V.; Adamo, C.; Jaramillo,
+J.; Gomperts, R.; Stratmann, R. E.; Yazyev, O.; Austin, A. J.; Cammi,
+R.; Pomelli, C.; Ochterski, J. W.; Martin, R. L.; Morokuma, K.;
+Zakrzewski, V. G.; Voth, G. A.; Salvador, P.; Dannenberg, J. J.;
+Dapprich, S.; Daniels, A. D.; Farkas, O.; Foresman, J. B.; Ortiz, J. V.;
+Cioslowski, J.; Fox, D. J..Gaussian 09, Revision D.01; 2013.
+(26) Krieger, E.; Dunbrack, R. L.; Hooft, R. W. W.; Krieger, B.
+Assignment of Protonation Sta tes in Proteins and Ligands:
+Combining pKa Prediction with Hydrogen Bonding Network
+Optimization. In Computational Drug Discovery and Design; Baron,
+R., Ed.; Springer New York: New York, NY, 2012; Vol.819, pp. 405−
+421.
+(27) Richter, F.; Leaver-Fay, A.; Khare, S. D.; Bjelic, S.; Baker, D. De
+Novo Enzyme Design Using Rosetta3. PLoS One 2011, 6,
+No. e19230.
+(28) Krieger, E.; Darden, T.; Nabuurs, S. B.; Finkelstein, A.; Vriend,
+G. Making Optimal Use of Empirical Energy Functions: Force-Field
+Parameterization in Crystal Space. Proteins: Struct., Funct., Bioinf.
+2004, 57, 678−683.
+(29) Wang, J.; Wolf, R. M.; Caldwell, J. W.; Kollman, P. A.; Case, D.
+A. Development and Testing of a General Amber Force Field. J.
+Comput. Chem. 2004, 25, 1157−1174.
+(30) Krieger, E.; Nielsen, J. E.; Spronk, C. A. E. M.; Vriend, G. Fast
+Empirical pKa Prediction by Ewald Summation. J. Mol. Graphics
+Modell. 2006, 25, 481
+−486.
+(31) Krieger, E.; Vriend, G. New Ways to Boost Molecular
+Dynamics Simulations. J. Comput. Chem.2015, 36, 996−1007.
+(32) Hess, B.; Bekker, H.; Berendsen, H. J. C.; Fraaije, J. G. E. M.
+LINCS: A Linear Constraint Solver for Molecular Simulations. J.
+Comput. Chem. 1997, 18, 1463−1472.
+(33) Berendsen, H. J. C.; Postma, J. P. M.; van Gunsteren, W. F.;
+DiNola, A.; Haak, J. R. Molecular Dynamics with Coupling to an
+External Bath. J. Chem. Phys.1984, 81, 3684−3690.
+(34) Essmann, U.; Perera, L.; Berkowitz, M. L.; Darden, T.; Lee, H.;
+Pedersen, L. G. A Smooth Particle Mesh Ewald Method.J. Chem.
+Phys. 1995, 103, 8577−8593.
+(35) Hur, S.; Bruice, T. C. The near Attack Conformation Approach
+to the Study of the Chorismate to Prephenate Reaction.Proc. Natl.
+Acad. Sci. U. S. A.2003, 100, 12015−12020.
+(36) Wijma, H. J.; Marrink, S. J.; Janssen, D. B. Computationally
+Efficient and Accurate Enantioselectivity Modeling by Clusters of
+Molecular Dynamics Simulations. J. Chem. Inf. Model. 2014, 54,
+2079−2092.
+(37) Wijma, H. J.; Floor, R. J.; Bjelic, S.; Marrink, S. J.; Baker, D.;
+Janssen, D. B. Enantioselective Enzymes by Computational Design
+and In Silico Screening.Angew. Chem., Int. Ed.2015, 127, 3797−3801.
+(38) Noey, E. L.; Tibrewal, N.; Jiménez-Osés, G.; Osuna, S.; Park, J.;
+Bond, C. M.; Cascio, D.; Liang, J.; Zhang, X.; Huisman, G. W.; Tang,
+Y.; Houk, K. N. Origins of Stereoselectivity in Evolved Ketor-
+eductases. Proc. Natl. Acad. Sci. U. S. A.2015, 112, E7065−E7072.
+(39) Kiss, G.; Röthlisberger, D.; Baker, D.; Houk, K. N. Evaluation
+and Ranking of Enzyme Designs.Protein Sci. 2010, 19, 1760−1773.
+(40) Capoferri, L.; Leth, R.; ter Haar, E.; Mohanty, A. K.;
+G r o o t e n h u i s ,P .D .J . ;V o t t e r o ,E . ;C o m m a n d e u r ,J .N .M . ;
+Vermeulen, N. P. E.; Jørgensen, F. S.; Olsen, L.; Geerke, D. P.
+Insights into Regioselective Metabolism of Mefenamic Acid by
+Cytochrome P450 BM3 Mutants through Crystallography, Docking,
+Molecular Dynamics, and Free Energy Calculations.Proteins 2016, 84
+,
+383−396.
+(41) Eichler, A.; Gricman,Ł.; Herter, S.; Kelly, P. P.; Turner, N. J.;
+Pleiss, J.; Flitsch, S. L. Enantioselective Benzylic Hydroxylation
+Catalysed by P450 Monooxygenases: Characterisation of a P450cam
+Mutant Library and Molecular Modelling.ChemBioChem 2016, 17,
+426−432.
+(42) Bruice, T. C. A View at the Millennium: The Efficiency of
+Enzymatic Catalysis. Acc. Chem. Res.2002, 35, 139−148.
+(43) Scheiner, S.; Lipscomb, W. N.; Kleier, D. A. Molecular Orbital
+Studies of Enzyme Activity. 2. Nucleophilic Attack on Carbonyl
+Systems with Comments on Orbital Steering.J. Am. Chem. Soc.1976,
+98, 4770−4777.
+(44) Sadiq, S. K.; Coveney, P. V. Computing the Role of Near
+Attack Conformations in an Enzyme-Catalyzed Nucleophilic
+Bimolecular Reaction. J. Chem. Theory Comput.2015, 11, 316−324.
+(45) Bruice, T. C. Computational Approaches: Reaction Trajecto-
+ries, Structures, and Atomic Motions. Enzyme Reactions and
+Proficiency. Chem. Rev. 2006, 106, 3119−3139.
+(46) Arabnejad, H.; Bombino, E.; Colpa, D. I.; Jekel, P. A.;
+Trajkovic, M.; Wijma, H. J.; Janssen, D. B. Computational Design of
+Enantiocomplementary Epoxide Hydrolases for Asymmetric Synthesis
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5579
+of Aliphatic and Aromatic Diols. ChemBioChem 2020, 21, 1893−
+1904.
+(47) Mutti, F. G.; Fuchs, C. S.; Pressnitz, D.; Turrini, N. G.; Sattler,
+J. H.; Lerchner, A.; Skerra, A.; Kroutil, W. Amination of Ketones by
+Employing Two New (S)-Selective ω-Transaminases and the His-
+Tagged ω-TA from Vibrio fluvialis. Eur. J. Org. Chem. 2012, 2012,
+1003−1007.
+(48) Shin, J.-S.; Kim, B.-G. Comparison of the ω-Transaminases
+from Different Microorganisms and Application to Production of
+Chiral Amines. Biosci., Biotechnol., Biochem.2001, 65, 1782−1788.
+(49) Seo, J.-H.; Kyung, D.; Joo, K.; Lee, J.; Kim, B.-G. Necessary and
+Sufficient Conditions for the Asymmetric Synthesis of Chiral Amines
+Using ω-Aminotransferases. Biotechnol. Bioeng. 2011, 108, 253−263.
+(50) López-Iglesias, M.; González-Martínez, D.; Gotor, V.; Busto, E.;
+Kroutil, W.; Gotor-Fernández, V. Biocatalytic Transamination for the
+Asymmetric Synthesis of Pyridylalkylamines. Structural and Activity
+Features in the Reactivity of Transaminases. ACS Catal. 2016, 6,
+4003−4009.
+(51) Höhne, M.; Kühl, S.; Robins, K.; Bornscheuer, U. T. Efficient
+Asymmetric Synthesis of Chiral Amines by Combining Transaminase
+and Pyruvate Decarboxylase.ChemBioChem 2008, 9, 363−365.
+(52) Tauber, K.; Fuchs, M.; Sattler, J. H.; Pitzer, J.; Pressnitz, D.;
+Koszelewski, D.; Faber, K.; Pfeffer, J.; Haas, T.; Kroutil, W. Artificial
+Multi-Enzyme Networks for the Asymmetric Amination of Sec
+-Alcohols. Chem. − Eur. J. 2013, 19, 4030−4035.
+(53) Schätzle, S. Identiﬁcation, Characterization and Application of
+Novel (R)-Selective Amine Transaminases , Inaugural dissertation,
+University of Greifswald: Greifswald, 2011.
+(54) Mutti, F. G.; Kroutil, W. Asymmetric Bio-Amination of Ketones
+in Organic Solvents.Adv. Synth. Catal.2012, 354, 3409−3413.
+(55) Holzer, A. K.; Hiebler, K.; Mutti, F. G.; Simon, R. C.;
+Lauterbach, L.; Lenz, O.; Kroutil, W. Asymmetric Biocatalytic
+Amination of Ketones at the Expense of NH 3 and Molecular
+Hydrogen. Org. Lett. 2015, 17, 2431−2433.
+(56) Fuchs, M.; Koszelewski, D.; Tauber, K.; Kroutil, W.; Faber, K.
+Chemoenzymatic Asymmetric Total Synthesis of (S)-Rivastigmine
+Using ω-Transaminases. Chem. Commun. 2010, 46, 5500.
+(57) Yun, H.; Kim, J.; Kinnera, K.; Kim, B.-G. Synthesis of
+Enantiomerically Pure trans-(1R,2R)- and cis-(1S,2R)-1-amino-2-
+indanol by Lipase andω-Transaminase. Biotechnol. Bioeng. 2006, 93,
+391−395.
+(58) Bea, H.-S.; Lee, S.-H.; Yun, H. Asymmetric Synthesis of (R)-3-
+Fluoroalanine from 3-Fluoropyruvate Using Omega-Transaminase.
+Biotechnol. Bioprocess Eng.2011, 16, 291−296.
+(59) Meadows, R. E.; Mulholland, K. R.; Schürmann, M.; Golden,
+M.; Kierkels, H.; Meulenbroeks, E.; Mink, D.; May, O.; Squire, C.;
+Straatman, H.; Wells, A. S. Efficient Synthesis of ( S)-1-(5-
+Fluoropyrimidin-2-yl)ethylamine Using an ω-Transaminase Biocata-
+lyst in a Two-Phase System.Org. Process Res. Dev.2013, 17, 1117−
+1122.
+(60) Fuchs, M.; Koszelewski, D.; Tauber, K.; Sattler, J.; Banko, W.;
+Holzer, A. K.; Pickl, M.; Kroutil, W.; Faber, K. Improved
+Chemoenzymatic Asymmetric Synthesis of (S)-Rivastigmine.Tetrahe-
+dron 2012, 68, 7691−7694.
+(61) Pressnitz, D.; Fuchs, C. S.; Sattler, J. H.; Knaus, T.; Macheroux,
+P.; Mutti, F. G.; Kroutil, W. Asymmetric Amination of Tetralone and
+Chromanone Derivatives Employing ω-Transaminases. ACS Catal.
+2013, 3, 555−559.
+(62) Shin, J.-S.; Kim, B.-G. Transaminase-Catalyzed Asymmetric
+Synthesis of l-2-Aminobutyric Acid from Achiral Reactants.Biotechnol.
+Lett. 2009, 31, 1595−1599.
+(63) Koszelewski, D.; Pressnitz, D.; Clay, D.; Kroutil, W.
+Deracemization of Mexiletine Biocatalyzed by ω-Transaminases.
+Org. Lett. 2009, 11, 4810−4812.
+(64) Simon, R. C.; Grischek, B.; Zepeck, F.; Steinreiber, A.; Belaj, F.;
+Kroutil, W. Regio- and Stereoselective Monoamination of Diketones
+without Protecting Groups.Angew. Chem., Int. Ed.2012, 51, 6713−
+6716.
+(65) Wu, X.; Fei, M.; Chen, Y.; Wang, Z.; Chen, Y. Enzymatic
+Synthesis of L-Norephedrine by Coupling Recombinant Pyruvate
+Decarboxylase andω-Transaminase. Appl. Microbiol. Biotechnol.2014,
+98, 7399−7408.
+(66) Gawley, R. E. Do the Terms“%e e” and “%d e” Make Sense as
+Expressions of Stereoisomer Composition or Stereoselectivity?J. Org.
+Chem. 2006, 71, 2411−2416.
+(67) Marjanovic, A.; Ramírez-Palacios, C. J.; Masman, M. F.;
+Drenth, J.; Otzen, M.; Marrink, S.-J.; Janssen, D. B. Thermostable D-
+Amino Acid Decarboxylases Derived from Thermotoga maritima
+Diaminopimelate Decarboxylase. Protein Eng., Des. Sel. 2021, 34,
+No. gzab016.
+(68) Meng, Q.; Ramírez-Palacios, C.; Capra, N.; Hooghwinkel, M.
+E.; Thallmair, S.; Rozeboom, H. J.; Thunnissen, A.-M. W. H.; Wijma,
+H. J.; Marrink, S. J.; Janssen, D. B. Computational Redesign of anω-
+Transaminase from Pseudomonas jessenii for Asymmetric Synthesis of
+Enantiopure Bulky Amines.ACS Catal. 2021, 11, 10733−10747.
+(69) Sheng, X.; Kazemi, M.; Planas, F.; Himo, F. Modeling
+Enzymatic Enantioselectivity Using Quantum Chemical Method-
+ology. ACS Catal. 2020, 10, 6430−6449.
+(70) Gainza, P.; Roberts, K. E.; Donald, B. R. Protein Design Using
+Continuous Rotamers. PLoS Comput. Biol.2012, 8, No. e1002335.
+(71) Kaufmann, K. W.; Lemmon, G. H.; DeLuca, S. L.; Sheehan, J.
+H.; Meiler, J. Practically Useful: What the R
+OSETTA Protein Modeling
+Suite Can Do for You.Biochemistry 2010, 49, 2987−2998.
+(72) Hu, X.; Maffucci, I.; Contini, A. Advances in the Treatment of
+Explicit Water Molecules in Docking and Binding Free Energy
+Calculations. Curr. Med. Chem.2019, 26, 7598−7622.
+(73) Dong, L.; Meng, Q.; Ramírez-Palacios, C.; Wijma, H. J.;
+Marrink, S. J.; Janssen, D. B. Asymmetric Synthesis of Optically Pure
+Aliphatic Amines with an Engineered Robust ω-Transaminase.
+Catalysts 2020, 10, 1310.
+Journal of Chemical Information and Modeling pubs.acs.org/jcim Article
+https://doi.org/10.1021/acs.jcim.1c00617
+J. Chem. Inf. Model.2021, 61, 5569−5580
+5580

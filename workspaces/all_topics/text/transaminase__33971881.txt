@@ -1,0 +1,1980 @@
+Prell et al. Microb Cell Fact           (2021) 20:97  
+https://doi.org/10.1186/s12934-021-01586-3
+RESEARCH
+Adaptive laboratory evolution accelerated 
+glutarate production by Corynebacterium 
+glutamicum
+Carina Prell1, Tobias Busche2, Christian Rückert2, Lea Nolte3, Christoph Brandenbusch3 and 
+Volker F. Wendisch1*  
+Abstract 
+Background: The demand for biobased polymers is increasing steadily worldwide. Microbial hosts for produc-
+tion of their monomeric precursors such as glutarate are developed. To meet the market demand, production hosts 
+have to be improved constantly with respect to product titers and yields, but also shortening bioprocess duration is 
+important.
+Results: In this study, adaptive laboratory evolution was used to improve a C. glutamicum strain engineered for 
+production of the  C5-dicarboxylic acid glutarate by flux enforcement. Deletion of the l-glutamic acid dehydrogenase 
+gene gdh coupled growth to glutarate production since two transaminases in the glutarate pathway are crucial for 
+nitrogen assimilation. The hypothesis that strains selected for faster glutarate-coupled growth by adaptive labora-
+tory evolution show improved glutarate production was tested. A serial dilution growth experiment allowed isolating 
+faster growing mutants with growth rates increasing from 0.10  h−1 by the parental strain to 0.17  h−1 by the fastest 
+mutant. Indeed, the fastest growing mutant produced glutarate with a twofold higher volumetric productivity of 
+0.18 g  L−1  h−1 than the parental strain. Genome sequencing of the evolved strain revealed candidate mutations for 
+improved production. Reverse genetic engineering revealed that an amino acid exchange in the large subunit of 
+l-glutamic acid-2-oxoglutarate aminotransferase was causal for accelerated glutarate production and its beneficial 
+effect was dependent on flux enforcement due to deletion of gdh. Performance of the evolved mutant was stable 
+at the 2 L bioreactor-scale operated in batch and fed-batch mode in a mineral salts medium and reached a titer 
+of 22.7 g  L−1, a yield of 0.23 g  g−1 and a volumetric productivity of 0.35 g  L−1  h−1. Reactive extraction of glutarate 
+directly from the fermentation broth was optimized leading to yields of 58% and 99% in the reactive extraction and 
+reactive re-extraction step, respectively. The fermentation medium was adapted according to the downstream pro-
+cessing results.
+Conclusion: Flux enforcement to couple growth to operation of a product biosynthesis pathway provides a basis to 
+select strains growing and producing faster by adaptive laboratory evolution. After identifying candidate mutations 
+by genome sequencing causal mutations can be identified by reverse genetics. As exemplified here for glutarate 
+production by C. glutamicum, this approach allowed deducing rational metabolic engineering strategies.
+© The Author(s) 2021. This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, 
+adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and 
+the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material 
+in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material 
+is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the 
+permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit http:// creat iveco 
+mmons. org/ licen ses/ by/4. 0/. The Creative Commons Public Domain Dedication waiver (http:// creat iveco mmons. org/ publi cdoma in/ 
+zero/1. 0/) applies to the data made available in this article, unless otherwise stated in a credit line to the data.
+Open Access
+Microbial Cell Factories
+*Correspondence:  volker.wendisch@uni-bielefeld.de
+1 Genetics of Prokaryotes, Faculty of Biology & CeBiTec, Bielefeld 
+University, Universitätsstr. 25, 33615 Bielefeld, Germany
+Full list of author information is available at the end of the article
+Page 2 of 20Prell et al. Microb Cell Fact           (2021) 20:97 
+Introduction
+Plastics still are synthesized primarily from natural gas 
+and petroleum and only a fraction of 1% is bio-based. 
+The demand for environmentally friendly alternatives 
+is steadily increasing and the annual market volume of 
+bioplastics is predicted to increase to 18% until 2025 [1]. 
+Biopolyamides are gaining more interest for use in the 
+textile and construction industries. Polyamides can be 
+obtained either by condensation of dicarboxylic acids 
+with diamines or by anionic ring-opening polymerization 
+of lactams, the cyclization products of ω-amino acids [2]. 
+Bio-based production of monomeric building blocks for 
+polyamides has been established in metabolically engi -
+neered C. glutamicum and E. coli [3, 4]. Fermentative 
+production of the C4-ω-amino acid γ-aminobutyrate 
+(GABA) [5, 6] and the C5-ω-amino acid 5-aminovaler -
+ate (5AVA) has been established [7, 8] and, e.g., ring-
+opening polymerization of 5AVA can be used to produce 
+the polyamide 5 (PA 5) [9, 10]. Moreover, diamines like 
+putrescine [11, 12] and cadaverine [13, 14] as well as the 
+dicarboxylic acids succinate and glutarate [15–17] were 
+successfully produced in high titers. Glutarate, e.g., is 
+used as a building block for polyamides such as PA 4.5 
+[18], PA 6.5, PA 12.5 [19] or PA 5.5 the latter of which  is 
+synthesized by polycondensation of the C5-dicarboxylic 
+acid glutarate with C5-diamine cadaverine [20]. Notably, 
+the C5 polyamide building blocks cadaverine, 5AVA and 
+glutarate can be synthesized from a common precursor, 
+the amino acid l-lysine. Industrial l-lysine production by 
+fermentation with Corynebacterium glutamicum is oper -
+ated at large scale with an annual production volume of 
+about 2.6 million metric tonnes in 2018 [4].
+Glutarate can be derived from l-lysine by four different 
+pathways. All four pathways converge to 5-aminovalerate 
+(5AVA), which then is converted to glutarate in two enzy-
+matic steps catalyzed by GABA/5AVA aminotransferase 
+(GabT) and succinate/glutarate semialdehyde dehydro -
+genase (GabD). The first pathway from l -lysine to 5AVA 
+employs l-lysine-α-oxidase (RaiP) from Scomber japoni -
+cus that catalyzes oxidative deamination of l-lysine using 
+molecular oxygen followed by spontaneous decarboxyla -
+tion [21]. The second pathway to 5AVA combines oxida -
+tive decarboxylation by l -lysine monooxygenase (DavA) 
+using molecular oxygen followed by desamidation by 
+γ-aminovaleramidase (DavB) from Pseudomonas putida 
+[20]. The third pathway is based on l -lysine decarboxy-
+lase from E. coli, putrescine oxidase PuO from Rhodoc -
+occus qingshengii, which requires molecular oxygen, and 
+γ-aminobutyraldehyde dehydrogenase PatD from E. coli 
+[8]. The fourth pathway does not require molecular oxy -
+gen as it cascades l-lysine decarboxylase, 2-oxoglurate-
+dependent putrescine/cadaverine transaminase PatA, and 
+NAD-dependent γ-aminobutyraldehyde dehydrogenase 
+PatD from E. coli [ 7]. The pathway combinations LdcC-
+PuO-PatD-GabT-GabD and LdcC-PatA-PatD-GabT-
+GabD couple conversion of l -lysine to glutarate either to 
+one (GabT) or two (PatA, GabT) transaminase reactions, 
+respectively, which generate l-glutamic acid from 2-oxo -
+glutarate. Deletion of gdh, the gene for the major ammo -
+nium assimilating enzyme l-glutamic acid dehydrogenase 
+[8, 16], enabled flux enforcement (Fig.  1, left panel), i.e., 
+the metabolic setup in which growth requires produc -
+tion of glutarate. In general, GDH is active under nitro -
+gen surplus conditions and has a low affinity towards its 
+substrates ammonia and 2-oxoglutarate [22]. By contrast, 
+the enzyme pair glutamine synthetase (GS) and l -glu-
+tamic acid-2-oxoglutarate aminotransferase (GOGAT, 
+also known as l-glutamic acid synthase) synthesizes 
+l-glutamic acid in an ATP dependent manner during 
+ammonium starvation at ammonium concentrations 
+below 5  mM [23]. The GS/GOGAT system is encoded 
+by glnA for GS and gltBD for the large and small subu -
+nits  of GOGAT (Fig.  1, right panel). The net reaction of 
+the combined activities of GS and GOGAT results in ATP 
+and NADPH dependent conversion of 2-oxoglutarate to 
+l-glutamic acid, while GDH only requires NADPH for 
+reductive amination of 2-oxoglutarate to l-glutamic acid. 
+It is known that GS/GOGAT can compensate for the lack 
+of GDH [24] also at higher nitrogen concentrations (up to 
+40 mM) [25].
+Systems metabolic engineering proved successful to 
+achieve high titer glutarate production by metabolically 
+engineered C. glutamicum [16, 17, 26]. In this study, we 
+aimed to accelerate glutarate production by evolution -
+ary engineering. Adaptive Laboratory Evolution (ALE) 
+allows to leverage natural selection to optimize a target 
+property of a production strain without the requirement 
+of a priori knowledge of the genetic background [27, 28]. 
+This approach is straightforward if a growth advantage 
+can be selected for. This was easily implemented, e.g., 
+when higher tolerance against a compound is sought or 
+to improve substrate utilization and to optimize growth 
+rates [29, 30]. Moreover, it can also be used to identify 
+non‐intuitive targets for strain engineering, and ulti -
+mately to gain a comprehensive understanding of bio -
+logical pathway regulation [31]. In C. glutamicum, ALE 
+Keywords: Corynebacterium glutamicum, Glutarate, Adaptive laboratory evolution, Metabolic engineering, Reverse 
+genetics, Volumetric productivity, Reactive extraction
+Page 3 of 20
+Prell et al. Microb Cell Fact           (2021) 20:97 
+ 
+allowed to accelerate growth of the wild-type [32, 33], to 
+increase tolerance towards higher temperatures [34] and 
+methanol [35, 36], to improve consumption of xylose and 
+cellobiose [37, 38], and to increase production of putres -
+cine and ornithine [39, 40].
+We have chosen to apply ALE in order to accelerate glu-
+tarate production via the LdcC-PatA-PatD-GabT-GabD 
+pathway since two of the involved transaminase reactions 
+(PatA, GabT) provide l-glutamic acid from 2-oxoglutar -
+ate and, thus, compensate for the lack of GDH due to the 
+deletion of its gene [8, 16]. The resulting flux enforcement 
+provides a selectable trait by linking metabolic productiv-
+ity to growth. In this metabolic setup, the rate of growth 
+(requiring l-glutamic acid) is coupled to the rate of gluta-
+rate production (providing l-glutamic acid) and selection 
+of faster growing mutants yielded strains with increased 
+volumetric productivity. Mutations identified by genome 
+sequencing could be rationalized by reverse genetics.
+Moreover, in order to complement strain development, 
+purification of glutarate from the fermentation broth 
+using a combination of reactive extraction and reactive re-
+extraction was considered. For this purpose, we adapted 
+an approach, which was previously used for the purifica -
+tion of itaconic acid and is based on an aqueous organic 
+extraction system and tertiary amines as (reactive) extract-
+ants [41], to serve for the recovery of glutarate by identifi-
+cation of optimal (reactive) extractants and organic phases 
+in dedicated screening experiments. During the reactive 
+extraction, the amine extractant interacts with glutarate 
+building a hydrophobic complex, which is then extracted 
+to the organic phase (separation from impurities). The 
+results reveal that the concept allows for an efficient sepa-
+ration of glutarate from a crude fermentation broth show-
+ing high yields and selectivities, opening the window for 
+industrial production.
+Fig. 1 Schematic representation of the metabolic pathway for glutarate production, flux enforcement by deletion of gdh (left panel) and 
+ammonium assimilation by the GS/GOGAT system (right panel). Gene names are shown next to enzyme reactions (arrows), gene deletions are 
+indicated by red crosses. Enzymes from P . stutzeri (dark grey), E. coli (light grey) and native enzymes (orange) are highlighted. gabT, GABA/5AVA 
+amino transferase; gabD, succinate/glutarate-semialdehyde dehydrogenase; ldcC, l-lysine decarboxylase; patA, putrescine transaminase; patD, 
+γ-aminobutyraldehyde dehydrogenase;glnA, glutamine synthetase (GS); gltBD, l-glutamic acid-2-oxoglutarate aminotransferase (GOGAT); gdh, 
+l-glutamic acid dehydrogenase
+Page 4 of 20Prell et al. Microb Cell Fact           (2021) 20:97 
+Results
+Adaptive laboratory evolution of flux enforced 
+glutarate production improved volumetric productivity 
+by metabolically engineered C. glutamicum
+By serendipity, we found that repeated cultivation of 
+strain GluA [16] starting from single colonies yielded 
+a variant that showed faster growth (named GluA T0). 
+Plasmid insert sequencing revealed that a point muta -
+tion occurred in the gene coding for succinate semi -
+aldehyde dehydrogenase GabD from P. stutzeri. This 
+resulted in amino acid exchange P134L in GabD. The 
+maximal growth rate of glutarate producer GluA T0 
+with  GabDP134L was increased to 0.12 ± 0.00  h−1 in com-
+parison to 0.05 ± 0.00   h−1 for the isogenic strain with 
+wild-type GabD (Fig.  2a). Since growth was coupled 
+to production by flux enforcement, an almost twofold 
+higher glutarate production resulted using  GabDP134L 
+(45 ± 2  mM) instead of the native version of GabD 
+(25 ± 1  mM). A Phyre model of the succinate semialde -
+hyde dehydrogenase GabD from P. stutzeri [22] revealed 
+that P134 is part of the oligomerization interface of the 
+protein [42]. GabD from P. putida [43] and E. coli [44] are 
+homotetramers. CUPSAT calculations of  GabDP134L sug-
+gested decreased protein stability as compared to GabD 
+[45]. This prompted us to determine GabD activities in 
+crude extracts of E. coli strains DH5α (pEC-XT99A-
+gabTD) and DH5α (pEC-XT99A-gabTD P134L). The com -
+bined in  vitro enzyme activities of GABA transaminase 
+GabT and GabD were monitored spectrophotometrically. 
+To study if the amino acid exchange P134L affects a pos -
+sible feedback inhibition by glutarate, these assays were 
+performed in the presence of glutarate concentrations 
+up to 40 mM. Feedback-inhibition by 30 and 40 mM glu -
+tarate was found for both GabD and  GabDP134L (Fig. 2b), 
+while at 10 mM glutarate their activities were increased. 
+Notably, in the presence of 10 and 20  mM glutarate 
+ GabDP134L activity was significantly higher than that of 
+GabD (Fig. 2b).
+This initial finding of a mutation of the original strain 
+that led to faster growth and better glutarate produc -
+tion prompted us to perform an ALE experiment. There -
+fore, strain GluA T0 was used to start a serial transfer 
+and after it grew from the  OD600 of 1 at inoculation to 
+an  OD600 of approximately 8. At every transfer, one ali -
+quot was streaked out on agar plates and three single 
+colonies were selected and used to make glycerol stocks 
+(triplicate glycerol stocks GluA T1 until triplicate glyc -
+erol stocks GluA T8). A second aliquot was used to inoc -
+ulate the subsequent transfer culture to an initial  OD600 
+of 1. This process was repeated until the eighth transfer 
+culture (GluA T8) and times to reach an  OD600 about 8 
+were shortened from transfer to transfer. For compari -
+son, a growth and glutarate production experiment was 
+performed in the BioLector microcultivation system 
+starting from the frozen glycerol stocks of strains GluA 
+T0 to GluA T8. Confirming the observations during the 
+a b
+GluA GluA T0
+0
+10
+20
+30
+40
+50
+60
+Strain
+Glutarate [mM]
+***
+0.00
+0.05
+0.10
+0.15
+0.20
+µ[ h-1]
+05 10 15 20 25 30 35 40
+0
+20
+40
+60
+80
+100
+120
+140
+160
+180
+GabTD activity [mU mg-1]
+Glutarate concentration [mM]
+GabTD
+GabTDP134L*
+*
+Fig. 2 Influence of the amino acid exchange  GabDP134L on a growth and glutarate production and b the combined in vitro enzyme activities 
+of GABA transaminase GabT and succinate semialdehyde dehydrogenase GabD. a Strain GluA and GluA T0 were cultivated in the BioLector 
+microcultivation system with 40 g  L−1 glucose in CGXII minimal medium supplemented with 1 mM IPTG. Supernatant concentrations of glutarate 
+were determined after 96 h and are given as means and standard deviations of three independent cultivations. b Crude extracts of DH5α 
+(pEC-XT99A-gabTD) and DH5α (pEC-XT99A-gabTDP134L) were assayed for combined in vitro enzyme activities of GABA transaminase GabT and 
+succinate semialdehyde dehydrogenase GabD with 20 mM 5AVA as substrate and increasing glutarate concentrations. Statistical significance was 
+assessed in Student’s unpaired t-test (*p < 0.05)
+Page 5 of 20
+Prell et al. Microb Cell Fact           (2021) 20:97 
+ 
+ALE transfer experiment, growth of the evolved strains 
+gradually accelerated (Fig.  3a). The characterization of 
+the evolved strains revealed that the maximal growth rate 
+µmax increased gradually from 0.10   h−1 for the parental 
+glutarate producer (GluA T0) to 0.17   h−1 for GluA T5, 
+but it did not increase further for the following three 
+transfers (Fig. 3b).
+As growth was coupled to production by flux enforce -
+ment, glutarate productivity increased when growth was 
+accelerated (Fig. 3b). The maximal product titers of gluta-
+rate and its precursor 5AVA were reached after the sev -
+enth transfer and ALE strain GluA T7 accumulated 10% 
+more glutarate and tenfold more 5AVA (20 ± 1 mM com-
+pared to 2 ± 0  mM) than the parent strain (Fig.  3b). As 
+consequence of the combined beneficial effects of faster 
+growth and increased production, ALE strain GluA T7 
+reached its maximal biomass already after 24 h (Fig.  3a). 
+The volumetric productivity of 0.18 ± 0.00  g   L−1  h−1 
+was twofold higher than that of the parental GluA T0 
+(0.09 ± 0.00  g   L−1  h −1). GluA T5 had its maximum 
+ OD600 after 30  h with a volumetric productivity of 
+0.13 ± 0.00 g  L−1  h−1.
+RNAseq analysis of global gene expression patterns in ALE 
+strains GluA T5 and GluA T7
+The ALE experiment allowed to select strain GluA T5, 
+which grew faster and produced more glutarate than 
+the parent strain, and strain GluA T7 that grew as fast 
+as GluA T5, but which produced more 5AVA than GluA 
+T5. In order to reveal gene expression changes between 
+GluA T5, GluA T7 and the parental strain GluA T0, RNA 
+was isolated from cells growing exponentially in CGXII 
+minimal medium supplemented with 40  g   L−1 glucose 
+and 1  mM IPTG in triplicates, sequenced and mapped 
+to the reference genome (Additional file  2: Tables S1, 
+S2). Of the 110 genes differentially expressed in the 
+comparison between strains GluA T5 and GluA T0, 52 
+genes were downregulated in GluA T5. Among them, 
+sucCD (cg2835, cg2837), coding for succinyl-CoA syn -
+thetase, and aceA (cg2560), encoding isocitrate lyase, are 
+key enzymes of the TCA cycle and the glyoxylate shunt. 
+Of the 62 genes upregulated in GluA T5, seven code 
+for transporters, e.g., mediating uptake of phosphate 
+(cg1651),  Na+ (cg1624, cg3027, cg3028),  Co2+ (cg3134) 
+or iron (cg0770, cg0771), and one for an uncharacterized 
+transcriptional regulator (cg3291). Since flux enforce -
+ment involved deletion of the dehydrogenase gene gdh , 
+it is noteworthy that the gene for the putative l-glutamic 
+acid exporter YggB (cg1434) was downregulated in both 
+GluA T5 and GluA T7.
+Of the 173 genes differentially expressed in the com -
+parison between GluA T7 and the parental strain GluA 
+T0, 107 were downregulated in GluA T7. Many of those 
+genes are involved in the nitrogen starvation response 
+and they belong to AmtR regulon: ureABCEFGD (encod -
+ing urease), urtABCDE (encoding ABC-transporter 
+for urea), amt-ocd-soxA (coding for ammonium per -
+mease, ornithine decarboxylase and sarcosine oxidase), 
+ab
+01 22 43 64 86 0
+10
+100Backscatter Gain 20
+Time [h]
+T0 T1 T2 T3 T4
+T5 T6 T7 T8
+01 23 45 67 8
+0
+10
+20
+30
+40
+50
+60
+70
+80Concentration [mM]
+5AVA
+Glutarate
+0.00
+0.06
+0.12
+0.18
+µmax [h-1]
+Number of transfers
+Fig. 3 Characterization of the evolved strains after eight transfers (T0–T8) regarding a growth and b production of glutarate and 5AVA. Cells were 
+grown in the BioLector microcultivation system using 40 g  L−1 glucose minimal medium supplemented with 1 mM IPTG and harvested after 56 h. 
+Values and error bars represent mean and standard deviation values (n = 3 cultivations)
+Page 6 of 20Prell et al. Microb Cell Fact           (2021) 20:97 
+amtB-glnK-glnD (ammonium transporter, GlnK, uri -
+dylyltrasnferase) and gltBD (glutamine 2-oxoglutarate 
+amidotransferase) [22, 46]. Thus, the gene expression 
+changes observed in ALE strains GluA T5 and GluA T7 
+affected nitrogen assimilation, l-glutamic acid metab -
+olism and transport processes, but not genes of the 
+synthetic LdcC-PatA-PatD-GabT-GabD pathway for glu-
+tarate production. At first sight, the transcriptome analy -
+sis was not instructive to explain the improved glutarate 
+production of the strains selected by ALE.
+Genome sequencing and reverse genetics for identification 
+of mutations causal for improved glutarate production 
+by ALE strains GluA T5 and GluA T7
+The genomes of the ALE strains GluA T5, which grew 
+faster and produced more glutarate than the parental 
+strain, and GluA T7 that did not grow faster than GluA 
+T5, but produced more 5AVA and glutarate than GluA 
+T5, were sequenced to identify genetic differences to the 
+parental strain. Subsequently, reverse engineering was 
+performed to identify those mutations that are causal for 
+improved growth and/or glutarate production.
+Surprisingly, genome sequencing of strain GluA T5 did 
+neither reveal genome-based nor plasmid-based muta -
+tions in comparison to the non-evolved strain GluA T0. 
+However, analysis of the sequence reads mapped to DNA 
+of the three expression plasmids showed increased plas -
+mid copy numbers (PCN) of all three plasmids. In the 
+absence of changes in the DNA sequence of the plas -
+mids, we can only invoke epigenetic changes, e.g. due 
+to methylation. It is known that plasmid DNA methyla -
+tion is required for plasmid replication contributing to 
+regulation of replication reinitiation and the accuracy 
+of the copy-number control [47]. The PCN of plasmid 
+pVWEx1-ldcC carrying the gene for the first step of glu -
+tarate production was 13 ± 1, and 17 ± 1 for strains GluA 
+T0 and GluA T5, respectively. For plasmid pEKEx3-
+patDA comprising genes coding for step two and three of 
+the pathway the PCN increased from 107 ± 2 (GluA T0) 
+to 121 ± 11 (GluA T5). The PCN for the plasmid pEC-
+XT99A-gabTDP134L with the genes of the last two steps 
+was 10 ± 1 for GluA T0 and 14 ± 0 for GluA T5. Taken 
+together, genome sequencing revealed only increased 
+PCN for all three plasmids that provide the glutarate bio -
+synthesis pathway and this may explain faster growth of 
+GluA T5 as compared to GluA T0.
+Genome sequencing of strain GluA T7 revealed compa-
+rable PCN for plasmids pVWEx1-ldcC (17 ± 1 vs. 17 ± 1) 
+and pEKEx3-patDA (124 ± 2 vs. 121 ± 11) as compared to 
+GluA T5, while the PCN of plasmid pEC-XT99A-gabT -
+DP134L was higher (19 ± 0 vs. 14 ± 0). Importantly, two 
+mutations were identified in GluA T7 that were absent 
+from strains GluA T0 and GluA T5. The first mutation 
+was found in plasmid pEC-XT99A-gabTDP134L: a deletion 
+of 21 bp in the coding sequence of the antibiotic resist -
+ance marker of this plasmid, i.e. in for tetracycline efflux 
+permease gene tetA(Z), shortened the encoded protein 
+by 7 amino acids. The deletion comprised a direct repeat 
+(5′-TGA CTG CTC GCT ACT CTC ATC-3′ (tetA(Z) Δ21bp, 
+Additional file  1: Figure S1A). As consequence the TetZ 
+protein was shortened and lacked amino acids 8 to 14 in 
+the N-terminal part before the first transmembrane helix. 
+RNAseq data confirmed the deletion and showed that the  
+mutated gene was transcribed. Analysis of the shortened 
+protein by SignalP [48] and by TMHMM [49] suggested 
+that there is no signal peptide and predicted twelve trans-
+membrane helices as in the intact tetracycline efflux per -
+mease protein, thus, the sequence is shortened before the 
+first transmembrane helices of the protein. Deletion of 
+direct repeats on plasmids are known and the frequency 
+of these events depends on the location and the length of 
+the repeats [50, 51]. Moreover, the absence of the anti -
+biotic resistance and the growth rate are crucial for the 
+frequency [52]. To investigate the influence of shortage 
+on the protein function, we determined the minimum 
+inhibitory concentration (MIC) for tetracycline. GluA 
+T0 displayed a MIC of 20 µg   mL−1 tetracycline, whereas 
+a strain carrying the mutated plasmid only had a MIC of 
+10 µg   mL−1 (Additional file  1: Figure S1B). Possibly, the 
+higher PCN of plasmid pEC-XT99A-gabTD P134L in GluA 
+T7 as compared to GluA T0 and GluA T5 compensated 
+for the reduced antibiotic resistance level by mutation 
+pEC-XT99A-tetA(Z)Δ21bp.
+The second mutation affected an enzyme involved in 
+l-glutamic acid biosynthesis from 2-oxoglutarate, glu -
+tamine 2-oxoglutarate aminotransferase (Fig. 1). This sin-
+gle nucleotide polymorphism (SNP) was named gltB E686Q 
+as it resulted in an exchange of amino acid 686 in the 
+large subunit of glutamine 2-oxoglutarate aminotrans -
+ferase GltB from l-glutamic acid (E) to glutamine (Q). 
+Analysis of the 3D structure of GltB by Phyre2 [42] did 
+neither suggest that the active center nor the binding of 
+the small subunit GltD was affected. CUPSAT analysis 
+[45] suggested that this amino acid exchange may have 
+a destabilizing effect. COACH-D based modeling [53] 
+did not indicate altered interaction with the substrates 
+2-oxoglutarate and NADPH, but may indicate changed 
+binding of the substrate glutamine. The determination of 
+the Km for glutamine in the crude extract of GRLys1ΔgltB 
+overexpressing the native and the mutated version of 
+gltBD revealed that the SNP in GltB resulted in a twofold 
+higher Km of 0.52 ± 0.04 mM than the wild-type enzyme 
+(0.25 ± 0.03 mM) (Additional file  1: Figure S2). The wild-
+type Km was comparable to that reported for the related 
+C. glutamicum subsp. flavum (0.24 mM) [54].
+Page 7 of 20
+Prell et al. Microb Cell Fact           (2021) 20:97 
+ 
+To test if the identified mutations are causal for 
+improved glutarate production, they were introduced 
+into the parental strain GluA T0 either individually or 
+combined. First, the mutated vector named pEC-XT99A-
+tetA(Z)Δ21bp-gabTDP134L was isolated from the evolved 
+strain GluA T7 and used to replace the unmutated vec -
+tor pEC-XT99A-gabTD P134L in GluA T0. To this end, 
+pEC-XT99A-tetA(Z)Δ21bp-gabTDP134L was used to trans -
+form the precursor strain GSLA2G (pVWEx1-ldcC) 
+(pEKEx3-patDA) and the obtained strain was named 
+GluA RG1. Next, the SNP gltB E686Q was introduced into 
+GluA T0 (via two-step recombination in the genome of 
+the plasmid-less precursor strain GSLA2G, followed 
+by transformation with the plasmids pVWEx1-ldcC, 
+pEKEx3-patDA and pEC-XT99A-gabTD P134L) yield -
+ing strain GluA RG2. Strain GluA RG3 was constructed 
+to contain both, the SNP gltB E686Q and the plasmid 
+pEC-XT99A-tetA(Z)Δ21bp-gabTDP134L.
+Strain GluA RG1 grew very slowly (0.04 ± 0.01  h−1) to 
+a reduced biomass concentration and glutarate produc -
+tion (23 ± 1  mM) was reduced to half as compared to 
+the parental strain GluA T0 (45 ± 2  mM). However, the 
+glutarate yield per biomass of 1.2 g   g−1 was comparable 
+to that of GluA T0 (1.0 g   g−1) (Table 1). Thus, as a result 
+of the 21 bp off-frame deletion in the coding sequence of 
+tetA(Z) in plasmid pEC-XT99A-tetA(Z) Δ21bp-gabTDP134L, 
+growth was perturbed, while the cell-specific glutarate 
+production was not affected.
+As consequence of introducing the amino acid 
+exchange E686Q in GltB, strain GluA RG2 produced 
+more glutarate (55 ± 2 mM; + 22%) and more of its direct 
+precursor 5AVA (7 ± 1 mM; + 250%; Fig. 4) as compared 
+to the parental GluA T0. Due to flux enforcement, strain 
+GluA RG2 also grew faster than GluA T0 (0.13   h−1; 
++ 30%). This result is commensurate with the finding by 
+RNAseq analysis that the nitrogen starvation response is 
+triggered in strains GluA T0 and GluA T5 that lack the 
+amino acid exchange E686Q in GltB, but not in GluA T7 
+that carries this mutation.
+The reverse engineered strain GluA RG3 that carried 
+the 21 bp deletion in pEC-XT99A in addition to  GltBE686Q 
+showed a higher growth rate (Fig.  4). Since the glutar -
+ate titer was comparable for GluA RG2 and GluA RG3, 
+a higher volumetric productivity for glutarate resulted 
+when mutations  GltBE686Q and the 21  bp deletion were 
+both present (Table  1). Thus,  GltBE686Q and the 21  bp 
+deletion showed covariance with the beneficial effect 
+on glutarate by  GltBE686Q being epistatic over the 21  bp 
+deletion. In other words, this may indicate that only after 
+ GltBE686Q improved l-glutamic acid biosynthesis, the 
+21 bp deletion supported faster growth and, thus, higher 
+volumetric productivity for glutarate.
+The beneficial effect of  GltBE686Q depends on the deletion 
+of gdh
+Next, we tested if the beneficial effect of  GltBE686Q 
+requires (a) deletion of gdh  or (b) is only seen upon flux 
+enforced glutarate production via the LdcC-PatA-PatD-
+GabT-GabD route. Therefore, the  GltBE686Q mutation 
+was introduced either into the plasmid-less precursor 
+strain GSLA2, which overproduces l-lysine, or its deriva-
+tive GSLA2G that carries the gdh  deletion. Production 
+of l-lysine by these strains, named GSLA2::gltB E686Q and 
+GSLA2G::gltBE686Q, was compared to l-lysine produc -
+tion by their parental strains GSLA2 and GSLA2G that 
+carry wild-type gltB. As consequence of the gdh  deletion, 
+production of l-lysine was decreased by about 38% (com-
+pare strains GSLA2 and GSLA2G in Fig.  5). While dele -
+tion of gdh  is known to be dispensable for biosynthesis 
+Table 1 Effect of the SNP gltB E686Q and the plasmid pEC-XT99A-
+tetA(Z)Δ21bp-gabTDP134L on biomass formation (CDW), substrate 
+specific yield  (YP/S), biomass specific yield  (YP/X) and volumetric 
+productivity (VP)
+Strain CDW (g  L−1) YP/S (g  g−1) YP/X (g  g−1) VP (g  L−1  h−1)
+GluA T0 6.2 ± 0.6 0.15 ± 0.01 1.0 ± 0.1 0.13 ± 0.00
+GluA T7 6.5 ± 0.3 0.16 ± 0.00 1.0 ± 0.0 0.24 ± 0.00
+GluA RG1 2.6 ± 0.1 0.08 ± 0.00 1.1 ± 0.0 0.03 ± 0.00
+GluA RG2 6.5 ± 0.5 0.18 ± 0.01 1.1 ± 0.0 0.14 ± 0.00
+GluA RG3 6.4 ± 0.3 0.18 ± 0.00 1.2 ± 0.1 0.19 ± 0.00
+GluA T0 GluA RG1G luA RG2G luA RG3G luA T7
+0
+10
+20
+30
+40
+50
+60
+70
+80
+Strain
+Concentration [mM]
+5AVA
+Glutarate
+0.00
+0.06
+0.12
+0.18
+µmax [h-1]
+Fig. 4 Influence of the SNP gltBE686Q and the plasmid pEC-XT99A-tet
+A(Z)Δ21bp-gabTDP134L on maximal growth rate, and glutarate and 5AVA 
+production by stepwise reverse genetics. Cells were grown in the 
+BioLector microcultivation system using 40 g  L−1 glucose minimal 
+medium supplemented with 1 mM IPTG and harvested after 96 h. 
+Values and error bars represent mean and standard deviation values 
+(n = 3 cultivations)
+Page 8 of 20Prell et al. Microb Cell Fact           (2021) 20:97 
+of L-glutamic acid for growth requirements [24], deletion 
+of gdh was negative for overproduction of lysine (Fig.  5). 
+This indicated that the GS/GOGAT system suffices to 
+replace gdh for growth requirements, but not to provide 
+enough  assimilated nitrogen for overproduction of the 
+amino acid l -lysine. Introduction of the  GltBE686Q muta-
+tion into strain GSLA2 did not change l-lysine production 
+significantly (compare strain GSLA2::gltBE686Q with GSLA2 
+in Fig.  5). Upon introduction of the  GltBE686Q mutation 
+into the gdh deletion mutant GSLA2G, significantly more 
+l-lysine was produced (compare strain GSLA2G::gltBE686Q 
+with GSLA2G in Fig.  5). This indicated that provision of 
+assimilated nitrogen via the mutant GS/GOGAT system 
+in the gdh deletion mutant was apparently high enough to 
+support production of l-lysine to a titer comparable to that 
+of the gdh-positive parental strain GSLA2. Thus, the ben-
+eficial effect of  GltBE686Q is dependent on deletion of gdh.
+Moreover, since the combined presence of the  GltBE686Q 
+mutation and the gdh deletion improved both production 
+of l-lysine (Fig. 5) and of glutarate (Fig.  4), the beneficial 
+effect of  GltBE686Q is independent of conversion of l-lysine 
+to glutarate via the LdcC-PatA-PatD-GabT-GabD route. 
+This mutation pair (gltBE686Q, Δgdh) may be helpful for pro-
+duction processes that involve l-lysine as intermediate.
+Fermentative glutarate production by evolved strain GluA 
+T7 in comparison to GluA T0
+Since stable performance of a production host in reac -
+tor scale is essential for the biotechnological applica -
+tion, we compared the evolved strain GluA T7 with the 
+parental strain GluA T0 in batch-mode bioreactor culti -
+vation (3.7 L). The parental strain GluA T0 grew with a 
+maximal growth rate of 0.11  h−1 and reached its maximal 
+biomass concentration of 13.1 g   L−1 after 32 h (Fig.  6a). 
+The final titer was 2.0 g   L−1 glutarate and remained sta -
+ble after 36 h of cultivation. The volumetric productivity 
+was 0.05  g   L−1  h−1, the biomass-specific yield of 0.19  g 
+(g CDW)−1 and the substrate-specific yield 0.04 g   g−1. By 
+comparison, GluA T7 grew with a growth rate of 0.19  h−1 
+GSLA2 GSLA2::gltBE686Q GSLA2G GSLA2G::gltBE686Q
+0
+10
+20
+30
+40
+50
+60
+70
+L-Lysin e [mM]
+Strain
+n.s.
+***
+*
+Fig. 5 Influence of the SNP  GltBE686Q on l-lysine production in 
+dependency of the gdh deletion. Cells were grown in the BioLector 
+microcultivation system using 40 g  L−1 glucose minimal medium 
+and harvested after 48 h. Values and error bars represent mean and 
+standard deviation values (n = 3 cultivations). Statistical significance 
+was assessed in Student’s unpaired t-test (***p < 0.001, *p < 0.05, n.s. 
+not significant)
+a
+b
+06 12 18 24 30 36 42 48
+0
+5
+10
+15
+CDW[ g L-1]G lutarate[ g L-1] 5AVA [g L-1]
+Time [h]
+0
+20
+40
+60
+80
+100
+Glucose [g L-1] rDOS [%]
+06 12 18 24 30 36 42 48
+0
+5
+10
+15
+CDW[ g L-1]G lutarate [g L-1]5 AVA[ g L-1]
+Time [h]
+0
+20
+40
+60
+80
+100
+Glucose [g L-1] rDOS [%]
+Fig. 6 Glutarate production by C. glutamicum GluA T0 (a) and GluA 
+T7 (b) in bioreactors operated in batch mode. Both strains were 
+cultivated in CGXII minimal medium in batch mode over 48 h, 
+containing 40 g  L−1 glucose. Glutarate production is indicated in 
+green squares (g  L−1), biomass concentration (CDW) is shown in 
+black diamonds (g  L−1), glucose concentration (g  L−1) is plotted 
+as pink hollow triangles, and 5AVA concentration (g  L−1) in red 
+diamonds and the relative dissolved oxygen saturation (rDOS) is 
+indicated in light blue (%). Cultivation was performed at 30 °C and 
+pH 7.0 regulated with 10% (v/v)  H3PO4 and 4 M KOH. 0.6 mL  L−1 of 
+antifoam agent AF204 (Sigma Aldrich, Taufkirchen, Germany) was 
+added to the medium manually before inoculation
+Page 9 of 20
+Prell et al. Microb Cell Fact           (2021) 20:97 
+ 
+and reached its maximal biomass of 10.1  g   L−1 already 
+after 20  h cultivation (Fig.  6b). The glutarate titer was 
+4.3 g  L−1 and 1.2 g  L−1 5AVA accumulated as by-product. 
+The volumetric productivity was 0.21  g   L−1   h−1 with a 
+substrate-specific yield of 0.10 g   g−1 and a biomass-spe -
+cific yield of 0.51  g   g−1. Thus, in batch-mode fermenta -
+tion, GluA T7 clearly outcompeted its precursor strain 
+regarding product titer, volumetric productivity, and 
+yield (Fig. 6).
+Next, fed-batch mode cultivation of GluA T7 was 
+performed to achieve higher glutarate titers. In the 
+batch phase (0–24  h), the cells grew with a growth rate 
+of 0.15   h−1 up to 7.7  g   L−1 cell dry weight (CDW) and 
+4.4 g   L−1 glutarate was produced (Fig.  7). After 24 h the 
+feed was started and in the following 40 h around 890 mL 
+feed solution (ρ = 1.1  kg   m−3) were added. In total, 
+22.7 g  L−1 of glutarate were produced within 64 h with a 
+volumetric productivity of 0.35 g   L−1  h−1. The glutarate 
+yield on glucose was 0.23 g   g−1. With a maximal biomass 
+concentration of 14.0  g   L−1, 1  g cells produced 1.64  g 
+glutarate.
+Reactive extraction of glutarate from the cultivation broth
+After strain engineering enabled an efficient bioreac -
+tor process, we sought to develop efficient downstream 
+processing for glutarate. To this end, reactive extraction 
+experiments were conducted with molar ratios of amine 
+extractant/glutarate ranging from 1/1 to 10/1 in order to 
+investigate the required amount of amine extractant for 
+an optimal reactive extraction (maximizing the yield). 
+Amine extractants screened for this purpose were tri-n-
+hexylamine (T-C6) and tri-n-octylamine (T-C8) and ethyl 
+oleate was chosen as organic phase due to its hydropho -
+bic nature and biocompatibility [55].
+If T-C6 was used as (reactive) amine extractant in com-
+bination with ethyl oleate organic phase, the formation of 
+a third-phase was observed for all amine concentrations 
+applied. To circumvent the formation of a third phase, 
+1-dodecanol was added to the organic extraction phase 
+as (polar) modifier to increase the polarity of the organic 
+phase, and, thus, to enhance the solubility of the hydro -
+phobic acid–amine complex in the organic phase. The 
+optimal amount of modifier in the organic phase, i.e., the 
+lowest amount necessary to prevent third-phase forma -
+tion, was identified to be 10 wt% for the reactive extrac -
+tion system containing T-C6 (ratio of amine extractant/
+glutarate = 10/1). The results of reactive extraction exper-
+iments at T = 25  °C and p = 1  bar using T-C6 as amine 
+extractant in ethyl oleate containing 10  wt% of 1-dode -
+canol are illustrated in Fig. 8a.
+The results clearly showed that with increasing T-C6 
+content, the amount of glutarate being extracted from 
+the aqueous phases increased until reaching a plateau 
+at 58.1% glutarate yield (for molar ratios of T-C6/glu -
+tarate = 9/1 or higher). In contrast to T-C6 as amine 
+extractant, reactive extraction systems containing T-C8 
+as amine extractant only showed a formation of a third-
+phase at molar ratios of T-C8/glutarate = 6/1 or higher. 
+Thus, 1-dodecanol was used as polar modifier (10  wt% 
+1-dodecanol in the organic phase) for extractions at 
+molar ratios exceeding 6/1. The results of reactive extrac-
+tion experiments at T = 25  °C and p = 1  bar using T-C8 
+as amine extractant are shown in Fig.  8b. The yield 
+increased with increasing amount of T-C8 in the organic 
+phase reaching a near plateau for high ratios of T-C8/glu-
+tarate, namely 8/1 and 10/1, where yield only increased 
+from 52.5 to 54.1%. As higher reactive extraction yields 
+could be achieved using T-C6 at a lower molar ratio of 
+9/1 (up to 58.1%), higher molar ratios of T-C8 (exceeding 
+10/1) were not investigated. As a result of these experi -
+ments, the system containing T-C6 as amine extract -
+ant, ethyl oleate as organic phase containing 10  wt% of 
+1-dodecanol as polar modifier, served as basis for the fol -
+lowing re-extraction experiments described hereafter.
+Upon reactive re-extraction, the acid–amine com -
+plex in the organic phase is brought into contact with a 
+water-soluble amine (WSA) in a (fresh) aqueous phase. 
+As the WSA forms a stronger complex with the acid, 
+01 22 43 64 86 0
+0
+5
+10
+15
+20
+25CDW[ gL -1] Glutarate[ gL -1] 5AVA [g L-1]
+Time [h]
+0
+20
+40
+60
+80
+100
+Glucose[ gL -1] rDOS [%]
+0
+200
+400
+600
+800
+1000
+Feed solution [mL]
+Fig. 7 Glutarate production by C. glutamicum GluA T7 in fed-batch 
+mode. GluA T7 was cultivated in CGXII minimal medium in fed-batch 
+mode over 64 h, containing 40 g  L−1 glucose and 150 g  L−1 glucose 
+from the feeding solution. Glutarate production is indicated in green 
+squares (g  L−1), biomass concentration (CDW) is shown in black 
+diamonds (g  L−1), glucose concentration (g  L−1) is plotted as pink 
+hollow triangles, and 5AVA concentration (g  L−1) in red diamonds, 
+feed solution (mL) is plotted as pink line and the relative dissolved 
+oxygen saturation (rDOS) is indicated in light blue (%). Cultivation 
+was performed at 30 °C and pH 7.0 regulated with 10% (v/v)  H3PO4 
+and 4 M KOH. An overpressure of 0.4 bar was applied. 0.6 mL  L−1 of 
+antifoam agent AF204 (Sigma Aldrich, Taufkirchen, Germany) was 
+added to the medium manually before inoculation
+Page 10 of 20Prell et al. Microb Cell Fact           (2021) 20:97 
+the acid is displaced from the organic to the aqueous 
+phase forming a water-soluble complex with the WSA. 
+The results for re-extraction experiments conducted 
+with the water-soluble amines n-propylamine (M-C3) 
+and n-butylamine (M-C4) at molar ratios of WSA/glu -
+tarate (organic) ranging from 1/1 to 5/1 at T = 25 °C and 
+p = 1 bar are illustrated in Fig.  9. Increasing amounts of 
+both WSA’s led to increasing re-extraction yields until 
+the maximum respective re-extraction yield was reached 
+in systems containing a molar ratio of WSA/glutarate 
+(organic) = 3.5/1 or higher. The use of both WSA’s as 
+amine extractant led to maximum re-extraction yields of 
+99%. Taken together, efficient downstream processing of 
+glutarate containing fermentation broth based on a com -
+bination of reactive extraction and reactive re-extraction 
+of glutarate was developed.
+Discussion
+In this study, flux enforcement coupling growth to 
+l-glutamic acid production by C. glutamicum provided 
+the basis to select strains growing and producing faster 
+by adaptive laboratory evolution. Among the candi -
+date mutations determined by genome sequencing two 
+causal mutations were identified by reverse genetics. 
+This approach almost doubled volumetric productivity 
+and in fed-batch bioreactor cultures a titer of 22.7 g   L−1, 
+a yield of 0.23  g   g−1 and a volumetric productivity of 
+0.35  g   L−1  h−1 were achieved. Purification of glutarate 
+directly from the fermentation broth leading to yields of 
+58% and 99% in the reactive extraction and reactive re-
+extraction step, respectively, was established.
+This report is not the first on metabolic engineering of 
+C. glutamicum for glutarate production [8, 16, 17, 26], 
+but the first example of improving volumetric productiv -
+ity by flux enforcement and ALE. Notably, engineering 
+of the GS/GOGAT system, which was identified here as 
+crucial to accelerate glutarate production, has not been 
+reported previously as metabolic engineering target for 
+glutarate production by C. glutamicum. Strain engineer -
+ing, e.g., by overexpressing ynfM encoding the recently 
+discovered glutarate exporter, media optimization, e.g., 
+by using mixtures of glucose and sucrose, and process 
+intensification, e.g., by using a pH–stat feeding strategy 
+in fed-batch cultures, have been described to boost glu -
+tarate production to titers of more than 100  g   L−1 [17]. 
+Thus, the mutation pair identified here  (GltBE686Q and 
+deletion of gdh ) complements the previously described 
+metabolic engineering strategies for glutarate production 
+by C. glutamicum. It has to be noted that yggB RNA levels 
+were reduced in both ALE strains and this gene codes for 
+a transport system involved in export of l-glutamic acid 
+out of the C. glutamicum cell [56], although l-glutamic 
+acid export is not abolished in its absence [57]. Since the 
+flux enforcement strategy used here relied on gdh  dele -
+tion, thus, the major enzyme for synthesis of l-glutamic 
+acid is absent, the reduced yggB RNA levels may help to 
+avoid loss of l-glutamic acid from the C. glutamicum cell 
+by export. Possibly, deletion of yggB may increase strin -
+gency of the flux enforcement by gdh  deletion. Trans -
+port engineering has proven important for improving C. 
+1/1
++ Mod.
+2/1
++ Mod.
+4/1
++ Mod.
+6/1
++ Mod.
+8/1
++ Mod.
+9/1
++ Mod.
+10/1
++ Mod.
+0.00
+0.20
+0.40
+0.60
+0.80
+1.00
+Molar ratio T-C6/glutarate
+XRE [-]
+1/1 2/14 /1 6/1
++ Mod.
+8/1
++ Mod.
+9/1
++ Mod.
+10/1
++ Mod.
+0.00
+0.20
+0.40
+0.60
+0.80
+1.00
+Molar ratio T-C8/glutarate
+XRE [-]
+a
+b
+Fig. 8 Reactive extraction yields of glutarate from fermentation broth 
+at T = 25 °C and p = 1 bar using either T-C6 (a) or T-C8 (b) as amine 
+extractant. The pH of the fermentation broth was adjusted to 2.5 
+using highly concentrated sulfuric acid before reactive extraction. a 
+T-C6 was used as amine extractant in the organic solvent ethyl oleate 
+at molar ratios of T-C6/glutarate ranging from 1/1 to 10/1. 10 wt% of 
+1-dodecanol were added to the organic phase as modifier. b T-C8 
+was used as amine extractant in the organic solvent ethyl oleate at 
+molar ratios of T-C8/glutarate ranging from 1/1 to 10/1. Systems with 
+a molar ratio of T-C8/glutarate = 6/1 or higher contained 10 wt% 
+1-dodecanol as modifier in the organic solvent (+Mod.)
+Page 11 of 20
+Prell et al. Microb Cell Fact           (2021) 20:97 
+ 
+glutamicum processes [58], not only regarding substrate 
+uptake [59] or product export (e.g., ynfM, [17]), but also 
+to avoid loss of intermediates (used here to avoid export 
+of the intermediate cadaverine).
+The strains analysed here lacked gdh . The growth rate 
+of a gdh  deletion mutant is reduced due to a partially 
+triggered nitrogen starvation response as evidenced by, 
+e.g., partial adenylylation of GlnK, such that ammonium 
+is assimilated by GS/GOGAT. However, since the intra -
+cellular l-glutamic acid pool is not completely restored 
+and the GS/GOGAT has an increased energy demand 
+(1 ATP per  NH3 fixed), growth in the absence of gdh  
+is slower than in its presence. The SNP in gltB resulted 
+in amino acid exchange E686Q in the large subunit of 
+GOGAT  (GltBE686Q). The large subunit serves two func -
+tions allocated to two domains: hydrolysis of l-glutamine 
+to  NH3 and l-glutamic acid on the one hand and com -
+bining the produced  NH3 with 2-oxoglutarate to pro -
+duce a second molecule of l-glutamic acid on the other 
+hand. The small subunit transfers electrons from the co-
+substrate NADPH. The SNP may interfere with binding 
+of glutamine according to our inspection of the struc -
+ture by Phyre2, CUPSAT and COACH-D [42, 53, 60]. 
+Currently, it is unknown how the amino acid exchange 
+E686Q in the large subunit of GOGAT supports faster 
+glutarate production by the strains analysed here. Since it 
+is known that at high  NH3 concentrations (up to 40 mM) 
+GS/GOGAT compensates for the lack of GDH [25], it is 
+conceivable that the GOGAT mutant  GltBE686Q is active 
+at higher nitrogen concentrations. The media used here 
+contains 468 mM  NH3, which is particularly relevant in 
+the early growth and production phase. RNAseq analy -
+sis revealed higher expression of genes belonging to the 
+AmtR regulon of nitrogen starvation in GluA T5 and the 
+parental strain GluA T0 than in GluA T7, which carries 
+ GltBE686Q (Additional file 2: Tables S1 and S2). Binding to 
+operator DNA by homodimeric AmtR is not released by 
+a small-molecule effector, but by GlnK when adenylylated 
+at tyrosine residue 51 [61], likely in a 6:6 stoichiometric 
+ (AmtR2)3–(GlnK3)2 complex [62]. The adenylation status 
+of PII-type signal transduction protein GlnK is controlled 
+by adenyltransferase GlnD under nitrogen starvation, 
+which is most likely perceived as ammonium limitation 
+[63]. Thus, ammonium starvation is less pronounced or 
+less perceived in the  GltBE686Q carrying mutant GluA 
+T7 than in the native GltB carrying strains GluA T0 
+and GluA T5. Besides possible effects due to transcrip -
+tional and post-translational regulation, the higher Km of 
+ GltBE686Q for glutamine as compared to native GltB may 
+provide a clue why  GltBE686Q performed better regard -
+ing glutarate production. GOGAT competes with the 
+transaminases GabT and PatA for the substrate 2-oxo -
+glutarate, and according to the BRENDA database the 
+Km for 2-oxoglutarate is lower for GOGAT from C. glu -
+tamicum subsp. flavum  (0.06  mM) than for GabT from 
+P. aeruginosa (0.75 mM) and PatA from E. coli (19 mM). 
+Thus, these kinetic parameters suggest that GOGAT 
+may outcompete the transaminases used in the syn -
+thetic glutarate pathway. The variant  GltBE686Q selected 
+by ALE showed a two-fold higher Km for glutamine, the 
+ab
+1/12 /1 3/13 .5/1 4/15 /1
+0.00
+0.20
+0.40
+0.60
+0.80
+1.00
+Molar ratio M-C3/glutarate
+XREEX [-]
+1/12 /1 3/13 .5/1 4/15 /1
+0.00
+0.20
+0.40
+0.60
+0.80
+1.00
+Molar ratio M-C4/glutarate
+XREEX [-]
+Fig. 9 Re-extraction yields of glutarate from the organic phase after reactive extraction using T-C6 (T-C6/glutarate = 9/1) in ethyl oleate (containing 
+10 wt% of 1-dodecanol) at T = 25 °C and p = 1 bar. The water-soluble amines a M-C3 and b M-C4 were used for re-extraction at molar ratios of WSA/
+glutarate (organic) ranging from 1/1 to 5/1
+Page 12 of 20Prell et al. Microb Cell Fact           (2021) 20:97 
+other substrate of GOGAT. Thus, this mutation likely 
+favors a higher ratio of 2-oxoglutarate conversion via 
+the transaminases, which is in line with the observed 
+increase in glutarate productivity. However, it has to be 
+noted that while nitrogen-replete E. coli cells show rela -
+tively low intracellular glutamine (0.2 to 0.5  mM) and 
+2-oxoglutarate (0.1 to 0.9  mM) concentrations [64], C. 
+glutamicum has been described to accumulate about 
+10  mM glutamine under nitrogen-replete conditions 
+[65]. Future research will have to unravel the mechanism 
+and to distinguish whether nitrogen metabolism and/or 
+regulation is altered due to  GltBE686Q.
+Two changes affected expression and activities of the 
+heterologous 5AVA amino transferase GabT and glutar -
+ate-semialdehyde dehydrogenase GabD: the amino acid 
+exchange P134L in GabD led to higher combined GabD-
+GabT in  vitro activity in crude extracts and a higher 
+PCN of plasmid pEC-XT99A-tetA(Z) Δ21bp-gabTDP134L 
+that differed from pEC-XT99A-gabTD P134L by a 21  bp 
+off-frame deletion in the antibiotic resistance marker 
+tetA(Z). The first change,  GabDP134L, accelerated growth 
+and increased the glutarate titer by about two fold to 
+0.12 ± 0.00  h−1 and 45 ± 2 mM, respectively. The second 
+change, pEC-XT99A-tetA(Z) Δ21bp-gabTDP134L, improved 
+the growth rate to 0.14 ± 0.00   h−1 (compare isogenic 
+strains GluA RG2 and GluA RG3 in Fig.  4). Although the 
+glutarate titer was not increased, the volumetric produc -
+tivity was increased (Fig.  4). 5AVA remained a by-prod -
+uct of accelerated, flux enforced glutarate production. 
+In the fermentations performed in batch and fed-batch 
+mode, it was demonstrated that as long as residual glu -
+cose is present 5AVA accumulated, but once it is neg -
+ligible, only glutarate accumulated. C. glutamicum 
+possesses the native operon gabTDP  on its chromosome 
+and its expression is reduced in the presence of glucose, 
+gluconate, and myo -inositol, presumably via the cAMP-
+dependent global regulator GlxR, for which a binding site 
+is present downstream of the gabT  transcriptional start 
+site [66]. Thus, while plasmid-borne expression of ldcC, 
+patD and patA was sufficient for conversion of lysine to 
+5AVA, plasmid-borne expression of gabTD  was limiting 
+for conversion of 5AVA to glutarate and glutarate pro -
+duction benefitted from expression of the native gabTDP  
+from the chromosome. Since flux enforcement by gdh  
+deletion is more efficient when coupled to one transam -
+ination reaction rather than to two [8], either pathways 
+with just one transamination reaction shall be used or 
+flux enforcement has to be accentuate further, e.g., by 
+combined deletion or attenuation of gdh and gltBD.
+With the aim to ensure appropriate industrially appli -
+cable purification, reactive extraction followed by a reac -
+tive re-extraction step proved to be a successful recovery 
+strategy for glutarate produced by fermentation. Reactive 
+extraction systems containing any amount of T-C6 or 
+high amounts of T-C8 (molar ratio of T-C8/glutar -
+ate = 6/1 or higher) led to the formation of a third solid 
+phase. Increasing the polarity of the organic phase by 
+addition of 1-dodecanol as (polar) modifier successfully 
+prevented the third-phase formation. An optimal reac -
+tive extraction system was identified containing T-C6 
+as amine extractant at a molar ratio of 9/1 including 
+10  wt% of 1-dodecanol as polar modifier in the organic 
+phase. Within these experiments, a yield of 58.1% was 
+achieved. Only small amounts of l-glutamic acid and 
+5-aminovalerate were co-extracted within this step. Reac-
+tive re-extraction using both WSA’s led to maximum re-
+extraction yield of 99%.
+One reason that a full recovery of glutarate from fer -
+mentation broth could not be achieved in the initial 
+reactive extraction step is the presence of strong elec -
+trolytes like chloride ions in the aqueous phase, which 
+significantly lowers the reactive extraction performance 
+[41, 67]. Other acids as e.g. hydrochloric acid can form 
+complexes with the amine extractant as well, hence com -
+peting with the carboxylic acid for the amine extractant 
+and lowering reactive extraction yield [67, 68]. Previous 
+studies showed that the effect of sulfate ions on reactive 
+extraction yield of carboxylic acids is less pronounced 
+[41, 67]. Therefore, choosing sulfuric acid in this study 
+to adjust the pH of the aqueous phase before reactive 
+extraction was beneficial for the efficiency of the process. 
+Furthermore, it was shown in experiments investigating 
+reactive extraction of carboxylic acids from fermentation 
+broth, that exchanging the ammonium source  NH4Cl for 
+ammonium sulfate ((NH 4)2SO4) did increase the extrac -
+tion yield significantly [41]. Therefore, this approach 
+could lead to higher extraction yields for glutarate as well 
+and should be considered in future studies as omitting 
+chloride in CGXII did not affect glutarate production in 
+the evolved strain (Additional file  1: Figure S3). In con -
+clusion, recovery of glutarate from fermentation broth 
+applying the reactive extraction/reactive re-extraction 
+concept for the purification of carboxylic acids was suc -
+cessful, hence adding to the feasibility of the industrial 
+applicability of glutarate production by C. glutamicum.
+Material and methods
+Microorganisms and cultivation conditions
+E. coli strain  DH5α was used as a cloning host [69], 
+grown in lysogeny broth (LB) at 37 °C and supplemented 
+with appropriate antibiotics (25  μg   mL−1 kanamycin, 
+100 μg   mL−1 spectinomycin, 5 μg   mL−1 tetracycline). C. 
+glutamicum ATCC 13032 derived strains were cultivated 
+in brain heart infusion with 0.5 M sorbitol (BHIS), sup -
+plemented with 25  μg   mL−1 kanamycin, 100  μg   mL−1 
+spectinomycin, 5  μg   mL−1 tetracycline if appropriate. 
+Page 13 of 20
+Prell et al. Microb Cell Fact           (2021) 20:97 
+ 
+All bacterial strains and plasmids are listed in Tables  2 
+and 3. Growth experiments with C. glutamicum were 
+performed in CGXII minimal medium [70] supple -
+mented with 40 g   L−1 glucose as sole carbon source and 
+induced with 1 mM IPTG. Overnight cultures in 10 mL 
+BHIS supplemented with the respective antibiotics 
+were harvested and washed twice in TN buffer (50 mM 
+Tris–HCl, 50  mM NaCl, pH 6.3) before inoculation 
+to an initial  OD600 of 1. The cultivations in the BioLec -
+tor microfermentation system (m2p-labs, Baesweiler, 
+Germany) were performed in 3.2  mL FlowerPlates at 
+1100  rpm and 30°C with filling volume of 1000  μL. To 
+omit chloride from the culture medium,  CaCl2 ×  2H2O 
+was substituted in equimolar amounts by calcium ace -
+tate, whereas  NiCl2 ×  6H2O was  replaced by  NiSO4. For 
+the titration of tetracycline the washed cells were inoc -
+ulated to an initial  OD600 of 0.5 and the cultivation was 
+performed in BHIS containing increasing concentra -
+tions of tetracycline (0, 0.3125, 0.625, 1.25, 2.5, 5, 10, 20, 
+40, 80 µg   mL−1) in 10 mL Duetz microcultivation plates 
+(Kuhner Shaker GmbH, Herzogenrath, Germany) with a 
+culture volume of 3 mL at 220 rpm in an Ecotron ET25-
+TA-RC (Infors HT, Einsbach, Germany). Growth was 
+Table 2 Bacterial strains used in this study
+Strain Relevant characteristics References
+E. coli DH5α ∆lacU169 (φ80lacZ ∆M15), supE44, hsdR17, recA1, endA1, gyrA96, thi-1, relA1 [69]
+E. coli S17-1 recA, pro, hsdR, RP4- 2Tc∷Mu Km∷Tn7 integrated into the chromosome [71]
+C. glutamicum GRLys1 
+(DM1933ΔCGP123)
+C. glutamicum ATCC 13032 with modifications: Δpck, pycP458S, homV59A, 2 copies of lysCT311I, 2 copies 
+of asd, 2 copies of dapA, 2 copies of dapB, 2 copies of ddh, 2 copies of lysA, 2 copies of lysE, in-frame 
+deletion of prophages CGP1 (cg1507-cg1524), CGP2 (cg1746-cg1752) and CGP3 (cg1890-cg2071)
+[72]
+GRLys1ΔgltB GRLys1 with in-frame deletion: gltB (cg0229) This study
+GSLA2 GRLys1 with in-frame deletions: sugR (cg2115), ldhA (cg3219), snaA (cg1722), cgmA (cg2893) [16]
+GSLA2G GSLA2 with in-frame deletion: gdh (cg2280) [16]
+GSLA2::gltBE686Q GSLA2 carrying the mutation gltBE686Q This study
+GSLA2G::gltBE686Q GSLA2G carrying the mutation gltBE686Q This study
+GluA GSLA2G (pVWEx1-ldcC) (pEKEx3-patDA) (pEC-XT99A-gabTD) [16]
+GluA T0 GSLA2G (pVWEx1-ldcC) (pEKEx3-patDA) (pEC-XT99A-gabTDP134L) [73]
+GluA T5 Strain evolved from GluA T0 after five transfers This study
+GluA T7 Strain evolved from GluA T0 after seven transfers This study
+GluA RG1 GSLA2G (pVWEx1-ldcC) (pEKEx3-patDA) (pEC-XT99A-tetA(Z)Δ21bp-gabTDP134L) This study
+GluA RG2 GSLA2G::gltBE686Q (pVWEx1-ldcC) (pEKEx3-patDA) (pEC-XT99A-gabTDP134L) This study
+GluA RG3 GSLA2G::gltBE686Q (pVWEx1-ldcC) (pEKEx3-patDA) (pEC-XT99A-tetA(Z)Δ21bp-gabTDP134L) This study
+Table 3 Plasmids used in this study
+Plasmid Relevant characteristics References
+pEC-XT99A TetR, C. glutamicum/E. coli shuttle vector  (Ptrc, lacIq, pGA1 oriVCg) [74]
+pEC-XT99A-gabTD pEC-XT99A expressing gabT and gabD from P . stutzeri ATCC 17588 [16]
+pEC-XT99A-gabTDP134L pEC-XT99A expressing gabT and gabD with SNP P134L from P . stutzeri ATCC 17588 [73]
+pEC-XT99A-tetA(Z)Δ21bp-gabTDP134L pEC-XT99A with 21 bp off-frame deletion in tetA(Z) expressing gabT and gabD with SNP P134L 
+from P . stutzeri ATCC 17588
+This study
+pEKEx3 SpecR, C. glutamicum/E. coli shuttle vector  (Ptac lacIq pBL1, oriVEc) [75]
+pEKEx3-patDA pEKEx3, expressing patD and patA from E. coli MG1655 [16]
+pEKEx3-gltBD pEKEx3, expressing gltBD from C. glutamicum ATCC 13032 This study
+pEKEx3-gltBE686QD pEKEx3, expressing gltBD with an amino acid exchange gltBE686Q from C. glutamicum ATCC 13032 This study
+pVWEx1 KanR, C. glutamicum/E. coli shuttle vector  (Ptac, lacIq) [76]
+pVWEx1-ldcC pVWEx1 expressing ldcC from E. coli MG1655 [77]
+pK19mobsacB KanR, mobilizable E. coli vector mutagenesis (oriV, sacB) [78]
+pK19mobsacB-gltBE686Q pK19mobsacB to introduce SNP gltBE686Q This study
+pK19mobsacB-ΔgltB pK19mobsacB for deletion of gltB from C. glutamicum ATCC 13032 This study
+Page 14 of 20Prell et al. Microb Cell Fact           (2021) 20:97 
+monitored by determination of the  OD600 with a V-1200 
+Spectrophotometer (VWR, Radnor, PA, USA).
+ALE experiments
+ALE of C. glutamicum strain GluA T0 was carried out 
+in repeated batch cultivations. Therefore, the replicate 
+with the highest cell density in the exponential phase 
+was transferred to fresh CGXII minimal medium supple -
+mented with 40 g  L−1 glucose as a sole carbon source and 
+1 mM IPTG for induction with an initial  OD600 of 1. The 
+experiment was performed in 10  mL Duetz microtiter 
+plates (MTPs) with culture volumes of 3 mL at 220 rpm 
+and 30°C  in an Ecotron ET25-TA-RC (Infors HT, Eins -
+bach, Germany). Growth was monitored by determi -
+nation of the  OD600 with a V-1200 Spectrophotometer 
+(VWR, Radnor, PA, USA).
+Molecular biology methods
+Isolation of genomic DNA of C. glutamicum and classi -
+cal methods which include plasmid isolation, molecu -
+lar cloning and heat-shock transformation of E. coli and 
+electroporation of C. glutamicum were performed as 
+described previously [71, 79]. ALLin HiFi DNA Polymer-
+ase (HighQu, Kraichtal, Germany) was used to amplify 
+DNA sequences with genomic DNA as template. The oli -
+gonucleotides which were used as primers in this study 
+are listed in Table  4. For the construction of the deletion 
+vector the genomic flanking regions of gltB were ampli -
+fied from genomic DNA of C. glutamicum ATCC13032 
+using the primer pairs JJ49/JJ50 and JJ51/JJ52. The PCR 
+products were purified and linked by crossover PCR and 
+the resulting product was cloned as XbaI/HindIII restric -
+tion site in pK19mobsacB. For introduction of the point 
+mutation, plasmid pK19mobsacB [78] digested with 
+BamHI was assembled with amplified DNA fragments 
+flanking 500 bp upstream and downstream the mutation 
+site of the gene gltB (cg0229) using Gibson Assembly. The 
+SNP was introduced over the primers GltBB and GltBC. 
+The constructed suicide vectors were transferred into E. 
+coli S17-1 to follow a protocol for gene deletion routinely 
+applied [70]. For the construction of pEKEx3-gltBD and 
+pEKEx3-gltBE686QD the DNA sequence was amplified 
+from the genomic DNA of C. glutamicum ATCC13032 
+and GSLA2G::gltBE686Q, respectively. The amplified genes 
+were assembled with pEKEx3 digested with BamHI using 
+Gibson assembly.
+Quantification of amino acids, carbohydrates and organic 
+acids by HPLC
+The quantification of extracellular amino acids and their 
+derivatives, carbohydrates and carboxylic acids in the 
+cultivation medium was performed with a high-per -
+formance liquid chromatography system (1200 series, 
+Agilent Technologies Deutschland GmbH, Böblingen, 
+Germany). After centrifugation of 1  mL of cell cultures 
+at 14,000 rpm for 10 min the supernatant was stored at 
+− 20 °C prior to analysis. Analysis of l-lysine, 5AVA and 
+the diamine cadaverine was performed by an automatic 
+pre-column derivatization with ortho-phthaldialdehyde 
+(OPA) and separated on a reversed phase HPLC using 
+pre- and main column (LiChrospher 100 RP8 EC-5μ, 
+Table 4 Oligonucleotides used as primers in this study
+Overlaps to the vector are indicated in italics, nucleotides for amino acid exchanges are underlined, restriction sites are marked in bold
+Primer Sequence (5′–3′)
+JJ49 GGC AAG CTT ATC CGT CCC AGT GGG CCT 
+JJ50 CCC ATC CAC TAA ACT TAA ACA GAG TCC TTG TGG TTT CAT 
+JJ51 TGT TTA AGT TTA GTG GAT GGG GAC CCA GCA ATC AAG ATC ATG GAG GCA GTG AGC TAA 
+JJ52 CGG TCT AGA TGC ACC CAG CCT TCG CGG 
+JJ108 CAT TTG GAA CCG GCA TGT CCC 
+JJ109 GGT GCC GGT TGC GAG GAG GATC 
+GltBA GCA TGC CTG CAG GTC GAC TCT AGA GCAC CGT TGG ACT CTA TCC G
+GltBB TCG ATG GTTT GAAA TGC CATG 
+GltBC CAT GGC ATTT CAAA CCA TCGA 
+GltBD AAT TCG AGC TCG GTA CCC GGG GAT CCTG AAC TCA AAC AGT CCA CG
+GltBE CAA CTA CAT GGC GCA CTC TC
+GltBF GTT CCA CAT CAA ATC GGC GG
+gltB-for CCT GCA GGT CGA CTC TAG AGG ATT CCG AAA GGA GGC CCT TCA GAT GAA ACC ACA AGGAC 
+gltB-rev TTG ATG AAT CCT TGT GGG TCG GCC ATT AGC TCA CTG CCTC 
+gltD-for CAA GAT CAT GGA GGC AGT GAG CTA ATG GCC GAC CCA CAAG 
+gltD-rev AGT GAA TTC GAG CTC GGT ACC CGG GCT AGA CAG CCA GCGG 
+Page 15 of 20
+Prell et al. Microb Cell Fact           (2021) 20:97 
+ 
+125 mm × 4.6 mm, CS Chromatographie Service GmbH) 
+with l-asparagine as internal standard [80]. The elu -
+tion buffer gradient consisted of 0.25% Na-acetate (pH 
+6.0), as the polar phase and methanol as the nonpolar 
+phase [77]. Detection of the fluorescent derivatives was 
+carried out with a fluorescence detector with an excita -
+tion wavelength of 230 nm and an emission wavelength 
+of 450  nm. Glutarate and glucose concentrations were 
+measured with an amino exchange column (Aminex, 
+300 mm × 8 mm, 10 μm particle size, 25 Å pore diame -
+ter, CS Chromatographie Service GmbH) under isocratic 
+conditions with 5 mM sulphuirc acid as described previ -
+ously with a flow of 0.8  mL   min−1 [81]. The substances 
+were detected with a refractive index detector (RID 
+G1362A, 1200 series, Agilent Technologies) and a diode 
+array detector (DAD G1315B, 1200 series, Agilent Tech -
+nologies) at 210 nm.
+Coupled in vitro activity of GabT and GabD
+The apparent activities of GABA transaminase GabT 
+and succinate semialdehyde oxidoreductase GabD were 
+assayed in combination by monitoring NADPH for -
+mation after the addition of 5AVA. Pellets from E. coli 
+strains were obtained from cultivations in 50 mL LB sup -
+plemented with 1 mM IPTG and 5 µg   mL−1 tetracycline. 
+The pellets were washed in 20  mL 50  mM phosphate 
+buffer (pH 7.0) and centrifuged for 10 min at 4000 rpm 
+and 4  °C, and resuspended in 1  mL of lysis buffer 
+(50  mM phosphate buffer pH 7.0 with 9% glycerol and 
+1  mM DTT). Cells were disrupted by sonication (cycle. 
+0.5, amplitude of 55%, on ice) for 2  min. To remove 
+cells debris, centrifugation was performed for 1  h at 
+14,000 rpm and 4 °C. The supernatant was used for meas-
+uring the apparent enzyme activities. The 1 mL assay mix 
+contained 150  mM phosphate buffer (pH 9.0), 0.1  mM 
+pyridoxal-5′-phophate, 1  mM  NADP+, 15  mM 2-oxo -
+glutarate, and 0.5  mg   mL−1 crude extract. To compare 
+the different GabD variants, glutarate was added in dif -
+ferent concentrations of 0 mM, 10 mM, 20 mM, 30 mM 
+and 40 mM, respectively. The reaction was started by the 
+addition of 20  mM 5AVA. Protein concentrations were 
+determined with the Bradford assay kit (Bio-Rad Labo -
+ratories, Hercules, CA, United States) using BSA (bovine 
+serum albumin) as standard. The formation of NADPH 
+was monitored photometrically at 340 nm and 30 °C for 
+3  min using a Shimadzu UV-1202 spectrophotometer 
+(Shimadzu, Duisburg, Germany).
+In vitro activity of GltBD
+The apparent activity of GOGAT at different glutamine 
+concentrations was assayed by monitoring  NADP+ for -
+mation after the addition of glutamine. Pellets of C. glu -
+tamicum strains were harvested from a 50  mL CGXII 
+minimal culture supplemented with 40  g   L−1 glucose, 
+1 mM IPTG and appropriate antibiotics in the exponen -
+tial phase. The pellets were washed with 20 mL 100 mM 
+phosphate buffer (pH 7.0) and centrifuged for 10 min at 
+4000 rpm and 4 °C, and resuspended in 2 mL of 100 mM 
+phosphate buffer (pH 7.0). Cells were disrupted by soni -
+cation (cycle. 0.5, amplitude of 55%, on ice) for 9  min. 
+To remove cells debris, centrifugation was performed 
+for 1  h at 14,000  rpm and 4  °C. The supernatant was 
+used for measuring the apparent enzyme activities. The 
+1  mL assay mix contained 100  mM phosphate buffer 
+(pH 7.0), 1.5  mM NADPH, 35  mM 2-oxoglutarate, and 
+0.5 mg  mL−1 crude extract [82]. To determine the Km glu-
+tamine was added in different concentrations of 0  mM, 
+0.1 mM, 0.25 mM, 0.5 mM, 1 mM, 2 mM, 3.5 mM, 5 mM 
+and 10  mM, respectively. The reaction was started by 
+the addition of glutamine. Protein concentrations were 
+determined with the Bradford assay kit (Bio-Rad Labora -
+tories, Hercules, CA, United States) using bovine serum 
+albumin (BSA) as standard. The formation of  NADP+ 
+was monitored photometrically at 340 nm and 30 °C for 
+3  min using a Shimadzu UV-1202 spectrophotometer 
+(Shimadzu, Duisburg, Germany).
+Fermentative production
+A baffled bioreactor with total a volume of 3.7  L was 
+used (KLF, Bioengineering AG, Switzerland). Three six-
+bladed Rushton turbines were placed on the stirrer axis 
+with a distance from the bottom of the reactor of 6, 12, 
+and 18 cm. The aspect ratio of the reactor was 2.6:1.0 and 
+the stirrer to reactor diameter ratio was 0.39. Automatic 
+control of the stirrer speed between 400 and 1500  rpm 
+kept the relative dissolved oxygen saturation at 30%. A 
+constant airflow of 2 NL   min−1 was maintained from the 
+bottom through a sparger, corresponding to an aeration 
+of 1 vvm. The pH was kept constant at 7.0 ± 0.1 by auto-
+matic addition of phosphoric acid (10% (v/v)) and potas -
+sium hydroxide (4 M). The temperature was maintained 
+at 30 °C. To prevent foaming 0.6 mL   L−1 of the antifoam 
+agent AF204 (Sigma Aldrich, Darmstadt, Germany) was 
+added and a mechanical foam breaker was present to 
+serve as an additional foam control. The initial working 
+volume of 2 L was inoculated to an  OD600 of 1.2 from a 
+shake flask pre-culture in CGXII minimal medium sup -
+plemented with 40 g   L−1 glucose and 1 mM IPTG. Sam -
+ples were collected by an autosampler and cooled down 
+to 4 °C until further use.
+The fed-batch fermentation was performed with a head 
+space overpressure of 0.4  bar and 42  g   L−1 MOPS was 
+added to the medium. The feed (ρ = 1.1 ± 0.0  kg   m−3) 
+consisted of 150  g   L−1 glucose, 40  g   L−1  (NH4)2SO4, 
+1  mL  L−1 PCA-solution (30  mg   mL−1 of 3,4-dihydroxy -
+benzoic acid), 0.55  mL   L−1 of filtered  FeSO4-citrate 
+Page 16 of 20Prell et al. Microb Cell Fact           (2021) 20:97 
+solution (20 g  L−1  FeSO4 heptahydrate and 20.2 g  L−1 cit-
+rate monohydrate), 0.4  mL   L−1 filtered vitamin solution 
+(0.3 g  L−1 biotin, 0.5 g  L−1 thiamin hydrochloride, 2 g  L−1 
+calcium pantothenate, and 0.6  g   L−1 nicotinamide) and 
+1  mM IPTG as described before [16, 83]. It was started 
+when the  pO2 fell below 30% for the first time. The feed 
+solution was applied when the  pO2 surpassed 60%. Fur -
+ther feed was only added, when the pO2 decreased to 
+30% after addition of the feed solution to prevent over -
+saturation with glucose.
+Whole‑genome sequencing
+For isolation of genomic DNA (gDNA), C. glutamicum 
+GluA T0 and the evolved strains GluA T5 and GluA T7 
+were cultivated in triplicates in BHIS in 100  mL baffled 
+shake flasks at 120  rpm and 30  °C overnight. 10  mL of 
+the cultures were harvested and gDNA was isolated using 
+the NucleoSpin Microbial DNA kit for DNA, RNA and 
+protein purification (Macherey–Nagel, Düren, Germany) 
+according to the manufacturer’s manual.
+Whole-genome sequencing was performed with iso -
+lated gDNA from the originating strain C. glutamicum 
+GluA T0 and the evolved strains GluA T5 and GluA T7. 
+Quality of isolated gDNA was analyzed using a spec -
+trophotometer (NanoDrop ®, ND-1000). The Illumina 
+TruSeq DNA PCR-free high-throughput library prep 
+kit (Illumina Inc.) was used according to manufactures 
+instructions and Illumina genome sequencing was per -
+formed with a HiSeq1500 sequencer system 2 × 250  nt 
+PE v2 HT rapid mode with 0.5% flow cell loading per 
+sample (Illumina, San Diego, USA). The raw sequencing 
+data are available via BioProject: PRJNA691520. Trim -
+ming and mapping of NGS raw reads was performed with 
+Bowtie2 [84] paired end mode on the reference genome 
+C. glutamicum ATCC13032 (CP025533) and plasmids 
+(pVWEx1-ldcC; pEKEx3-patDA; pEC-XT99A-gabT -
+DP134L) [13] using standard settings. Mapped sequencing 
+data was imported in the software readXplorer v.2.2.3 
+[85] for visualization and SNP detection. SNP detec -
+tion in all coding sequences of C. glutamicum was per -
+formed in readXplorer using 90% minimum percentage 
+of variation and a  minimum of 20 Reads as thresholds. 
+Additionally, genomic DNA and plasmids of the strains 
+were sequenced using Nanopore sequencing technology 
+(Oxford Nanopore Technologies Oxford, UK [ONT]). 
+Libraries were prepared with ONT SQK-LSK109 ligation 
+sequencing kit and long read sequencing was performed 
+on the ONT GridION platform with an R9.4.1 flow cell. 
+Base calling and demultiplexing were performed using 
+Guppy v3.1.5. Nanopore data were processed with Canu 
+v1.8 [86] (parameters: genomeSize = 3.5  m, rawError -
+Rate = 0.3, correctedErrorRate = 0.1). Canu contigs were 
+polished with Racon v1.3.3 [87] (parameters: − c 6, 
+− m 8, − x − 6, − g − 8, − w 500), followed by medaka 
+v0.11.0 [88] (parameters: − b 100, − m r941_min_high_
+g303) and Pilon v1.22 [89]. Unicycler v0.4.6 [90] was used 
+for hybrid assembly of the Illumina data and the contigs 
+from the polished Canu assembly. The unicycler assem -
+blies were then analyzed via mauve [91] used for genome 
+comparisons.
+RNA isolation, cDNA library preparation and sequencing
+To explore differences in the gene expression in the 
+evolved strains, C. glutamicum GluA T0, GluA T5 and 
+GluA T7 were grown in CGXII minimal medium with 
+40  g  L−1 glucose supplemented with 1  mM IPTG using 
+three glycerol stocks of the respective strains. 1  mL of 
+exponentially growing cells  (OD600 ~ 6.0) were harvested 
+by centrifugation (14,000×g, 1 min) and kept at − 80 °C. 
+RNA isolation, purification and quality control was per -
+formed as described [92] and the high quality RNA (RNA 
+integrity number > 9.0) was kept at − 80 °C until further 
+use. Ribo-Zero rRNA Removal Kit (Bacteria) from Illu -
+mina (San Diego, CA, USA) was used to remove the 
+ribosomal RNA molecules from the isolated total RNA. 
+Preparation of cDNA libraries were performed accord -
+ing to the manufacturer’s instructions of TruSeq stranded 
+mRNA Kit (Illumina, San Diego, USA). Subsequently, 
+each cDNA library was sequenced on a HiSeq1500 
+(2 × 70  nt PE rapid v2) and NextSeq 500 (2 × 75  nt PE 
+mid output v2.5) Sequencer system (Illumina, San Diego, 
+USA). The software Bowtie2 [84] was used for mapping 
+to the respective genome Corynebacterium glutamicum 
+ATCC13032 (CP025533) and plasmids (pVWEx1-ldcC; 
+pEKEx3-patDA; pEC-XT99A-gabTDP134L) [13]. In order 
+to perform differential gene expression analysis DEseq2 
+[93] was used as a module of the software ReadX -
+plorer(2). Statistically significant expression changes with 
+an adjusted p-value ≤ 0.05 and a log2 fold change > 1.0 or 
+< − 1.0 were regarded as true. The transcriptomic data 
+have been deposited in the ArrayExpress database at 
+EMBL-EBI1 under accession number E-MTAB-10025.
+Reactive extraction of glutarate
+A detailed description of the applied method for the 
+recovery of carboxylic acids from fermentation broth 
+via complex formation with amine extractants can be 
+found in literature [41, 55, 94]. The following is a brief 
+description: using water immiscible amine extractants in 
+a hydrophobic organic solvent, the undissociated carbox-
+ylic acid is first extracted (via complex formation) into 
+an organic phase at a pH value of the fermentation broth 
+which is lower than the  pKa of the acid. Subsequently, the 
+carboxylic acid is re-extracted into an aqueous phase via 
+complex formation with water-soluble amine extractants. 
+Page 17 of 20
+Prell et al. Microb Cell Fact           (2021) 20:97 
+ 
+In the case that a third, solid phase is formed because 
+of a low polarity of the organic phase, a modifier can be 
+added to the organic phase in order to increase the polar-
+ity and thus prevent third-phase formation.
+In this work, tri-n-hexylamine (T-C6, 96% purity), pur -
+chased from Sigma-Aldrich (St. Louis, MO, USA) and 
+tri-n-octylamine (T-C8, 97% purity), purchased from TCI 
+(Tokyo, Japan), were applied to recover glutarate from 
+the fermentation broth (extraction step). For re-extrac -
+tion, the water-soluble primary amines n-propylamine 
+(M-C3, 98% purity) from Sigma-Aldrich and n-butyl -
+amine (M-C4, 99% purity) purchased from AlfaAesar 
+(Karlsruhe, Germany) were applied as amine extractants. 
+The ester ethyl oleate (AlfaAesar, techn., 70%) was chosen 
+as hydrophobic organic solvent, providing the advantage 
+of being biocompatible [55]. If necessary, 1-dodecanol 
+(Sigma-Aldrich, 98% purity) was added as suitable modi -
+fier to the organic phase (for extraction systems with a 
+third phase). Prior to the reactive extraction, in order to 
+obtain glutaric acid in its undissociated form (desired for 
+complex formation), the pH of the fermentation broth 
+was adjusted to 2.5 (<  pKa1 = 4.32 of glutarate) using 
+highly concentrated sulfuric acid (98%, from Merck, 
+Darmstadt, Germany).
+Reactive extraction and reactive re-extraction experi -
+ments were conducted in 15  mL centrifugal tubes with 
+sealed screw caps manufactured by VWR International 
+(Radnor, PA, USA). The phase ratio was 1/1 aqueous to 
+organic ( V aq /V org ) with a total volume of 5 mL (4 mL in 
+case of re-extraction) of each experiment. The chemi -
+cals were added in the order fermentation broth, solvent, 
+modifier (if necessary) and amine extractant (re-extrac -
+tion: water, amine extractant, organic phase after reactive 
+extraction) and each compound was weighed using a BP 
+301S (Sartorius, Göttingen, Germany) mass balance with 
+an accuracy of ± 1  mg. The centrifugal tubes were then 
+transferred to an overhead shaker (Trayster Digital from 
+IKA, Staufen, Germany) and mixed for 24 h at T = 25 °C 
+to ensure equilibration of the system. Centrifugation of 
+the 15 mL tubes was done in a Centrifuge 5804 R Eppen -
+dorf (Hamburg, Germany) equipped with an A4-44 rotor 
+at 3500 rpm and a temperature of T = 25 °C for 15 min. 
+For analysis of the aqueous phase, a sample of the aque -
+ous phase after reactive extraction was taken by punch -
+ing a cannula through the bottom of the centrifugal tube.
+Concentration analysis of the aqueous phase was per -
+formed via HPLC with an Agilent 1200 Series HPLC 
+(Santa Clara, CA, USA) and a Nucleogel Sugar 810 H, 
+7.8 × 300  mm column including the corresponding 
+guard column (both by Macherey–Nagel, Düren, Ger -
+many). The temperature was kept constant at T = 35 °C. 
+5 mM sulfuric acid was used as eluent at a volume flow 
+of 0.6 mL  min−1. Detection was realized with a refractive 
+index detector. All aqueous samples were filtrated using 
+a poly-ethersulphonate syringe filter (0.45 µm) by VWR 
+International (Radnor, USA) and diluted with eluent at 
+a ratio of 1/5 ( V aq /V eluent ) before analysis. The injected 
+sample amount was 5 µL.
+The reactive extraction yield XRE was calculated using 
+Eq. 1, where naq1
+GA,0 is the molar amount of glutarate in the 
+fermentation broth before reactive extraction, whereas 
+naq1
+GA  is the molar amount of glutarate in the aqueous 
+phase after reactive extraction.
+The molar amount of glutarate in the organic phase 
+after reactive extraction norg
+GA,0  was calculated via mass 
+balance of glutarate in the aqueous phase.
+The re-extraction yield XREEX was calculated using 
+Eq. 2, in which naq2
+GA  is the molar amount of glutarate in 
+the aqueous phase after re-extraction and norg
+GA  is the 
+molar amount of glutarate in the organic phase after 
+reactive extraction and before re-extraction.
+Supplementary Information
+The online version contains supplementary material available at https:// doi. 
+org/ 10. 1186/ s12934- 021- 01586-3.
+Additional file 1: Figure S1. (A) DNA region of the plasmid pEC-XT99A-
+gabTDP134L with the 21 bp sequence deleted in ALE strain GluA T7 (boxed 
+in red). (B) Determination of the minimum inhibitory concentration 
+for tetracycline for strain GluA T0 with the orginal plasmid pEC-XT99A-
+gabTDP134L and GluA RG1 carrying this plasmid with the 21 bp deletion. 
+Cells were grown in Duetz cultivation system using BHIS supplemented 
+with increasing concentrations of tetracycline (0–80 µg µL−1). The ΔOD600 
+values were determined after 48 hours and are shown as means with 
+standard deviations (n = 3 cultivations). Figure S2. Dependence of the 
+specific acitvity of GOGAT on the glutamine concentration determined 
+for GRLys1ΔgltB overexpressing the native version of gltBD (A) or the 
+mutated gltBE686QD (B). Crude extracts of GRLys1ΔgltB (pEKEx3-gltBD) and 
+GRLys1ΔgltB (pEKEx3-gltBE686QD) were assayed for specific activity of the 
+glutamate synthase (GOGAT) in the presence of increasing glutamine 
+concentrations (0 mM, 0.1 mM, 0.25 mM, 0.5 mM, 0.75 mM, 1 mM, 2 mM, 
+5 mM, 10 mM). Values represent means and standard deviations of 
+triplicate measurements. Figure S3. Glutarate production by GluA T7 in 
+chloride-free medium. Cells were grown in Duetz cultivation system using 
+either standard CGXII minimal medium or CGXII minimal medium without 
+chloride supplemented with 40 g  L−1 glucose, induced with 1 mM IPTG, 
+and harvested after 48 h. Values and error bars represent means and 
+standard deviations of glutarate (green) and 5AVA concentrations (red) in 
+the culture supernatants (n = 3 cultivations).
+Additional file 2: Table S1. DESeq2 differential gene expression analysis 
+of Corynebacterium glutamicum ALE strain GluA T5 compared with control 
+strain GluA T0. Table S2. DESeq2 differential gene expression analysis of 
+Corynebacterium glutamicum ALE strain GluA T7 compared with control 
+strain GluA T0.
+(1)XRE = naq1
+GA,0 − naq1
+GA
+naq1
+GA,0
+= norg
+GA
+naq1
+GA,0
+.
+(2)XREEX = naq2
+GA,0
+norg
+GA
+.
+Page 18 of 20Prell et al. Microb Cell Fact           (2021) 20:97 
+Acknowledgements
+We thank Dr. Joe Risse and Dipl.-Ing. Thomas Schäffer from Fermentation 
+Technology, Technical Faculty & CeBiTec, University of Bielefeld, for technical 
+assistance and kind advice. Additionally, we thank Dr. João Jorge for construc-
+tion of the strain GRLys1ΔgltB. Moreover, we want to thank Luisa Blöbaum, 
+Tobias Pommerenk and Maximilian Schöne for technical assistance.
+Authors’ contributions
+CP , LN and TB carried out experimental procedures of the present study. CP , 
+LN, TB, CR, CB and VFW analysed data. CP , LN and TB prepared a draft of the 
+manuscript. CP , LN, TB, CR, CB and VFW finalized the manuscript. VFW coordi-
+nated the study. All authors read and approved the final manuscript.
+Funding
+Open Access funding enabled and organized by Projekt DEAL. This research 
+was funded in part by the European Regional Development Fund (ERDF) and 
+the Ministry of Economic Affairs, Innovation, Digitalization and Energy of the 
+State of North Rhine-Westphalia by grant “Cluster Industrial Biotechnology 
+(CLIB) Kompetenzzentrum Biotechnologie (CKB)” (34.EFRE-0300095/1703FI04). 
+Support for the Article Processing Charge by the Deutsche Forschungsge-
+meinschaft and the Open Access Publication Fund of Bielefeld University is 
+acknowledged. The funding bodies had no role in the design of the study or 
+the collection, analysis, or interpretation of data or in writing the manuscript.
+Availability of data and materials
+All data generated or analysed during this study are included in this published 
+article and its additional files. The mapped genome sequencing data is 
+available via BioProject: PRJNA691520 and the transcriptomic data is avail-
+able via the ArrayExpress database at EMBL-EBI1 under Accession Number 
+E-MTAB-10025.
+Declarations
+Ethics approval and consent to participate
+This article does not contain any studies with human participants or animal 
+experiments performed by any of the authors.
+Consent for publication
+Not applicable.
+Competing interests
+The authors declare that the research was conducted in the absence of any 
+commercial or financial relationships that could be construed as a potential 
+conflict of interest. The authors declare that they have no conflict of interest.
+Author details
+1 Genetics of Prokaryotes, Faculty of Biology & CeBiTec, Bielefeld Univer-
+sity, Universitätsstr. 25, 33615 Bielefeld, Germany. 2 Technology Platform 
+Genomics, Center for Biotechnology (CeBiTec), Bielefeld University, Sequenz 
+1, 33615 Bielefeld, Germany. 3 Laboratory of Thermodynamics, Depart-
+ment of Biochemical and Chemical Engineering, TU Dortmund University, 
+Emil-Figge-Str. 70, 44227 Dortmund, Germany. 
+Received: 3 March 2021   Accepted: 26 April 2021
+References
+ 1. European Bioplastics e.V. Bioplastics market data 2021. https:// www. 
+europ ean- biopl astics. org/ market/. Accessed 22 Feb 2021.
+ 2. Radzik P , Leszczyńska A, Pielichowski K. Modern biopolyamide-based 
+materials: synthesis and modification. Polym Bull. 2020;77:501–28. https:// 
+doi. org/ 10. 1007/ s00289- 019- 02718-x.
+ 3. Chae TU, Ahn JH, Ko Y-S, Kim JW, Lee JA, Lee EH, et al. Metabolic engineer-
+ing for the production of dicarboxylic acids and diamines. Metab Eng. 
+2020;58:2–16. https:// doi. org/ 10. 1016/j. ymben. 2019. 03. 005.
+ 4. Wendisch VF. Metabolic engineering advances and prospects for amino 
+acid production. Metab Eng. 2020;58:17–34. https:// doi. org/ 10. 1016/j. 
+ymben. 2019. 03. 008.
+ 5. Choi JW, Yim SS, Lee SH, Kang TJ, Park SJ, Jeong KJ. Enhanced produc-
+tion of gamma-aminobutyrate (GABA) in recombinant Corynebacterium 
+glutamicum by expressing glutamate decarboxylase active in expanded 
+pH range. Microb Cell Fact. 2015;14:21. https:// doi. org/ 10. 1186/ 
+s12934- 015- 0205-9.
+ 6. Nguyen AQD, Schneider J, Reddy GK, Wendisch VF. Fermentative 
+production of the diamine putrescine: system metabolic engineering of 
+Corynebacterium glutamicum. Metabolites. 2015;5:211–31. https:// doi. 
+org/ 10. 3390/ metab o5020 211.
+ 7. Jorge JMP , Pérez-García F, Wendisch VF. A new metabolic route for the 
+fermentative production of 5-aminovalerate from glucose and alternative 
+carbon sources. Bioresour Technol. 2017;245:1701–9. https:// doi. org/ 10. 
+1016/j. biort ech. 2017. 04. 108.
+ 8. Haupka C, Delépine B, Irla M, Heux S, Wendisch VF. Flux enforcement for 
+fermentative production of 5-aminovalerate and glutarate by Corynebac-
+terium glutamicum. Catalysts. 2020;10:1065. https:// doi. org/ 10. 3390/ catal 
+10091 065.
+ 9. Chae TU, Ko Y-S, Hwang K-S, Lee SY. Metabolic engineering of Escherichia 
+coli for the production of four-, five- and six-carbon lactams. Metab Eng. 
+2017;41:82–91. https:// doi. org/ 10. 1016/j. ymben. 2017. 04. 001.
+ 10. Zhang J, Barajas JF, Burdu M, Wang G, Baidoo EE, Keasling JD. Application 
+of an Acyl-CoA ligase from Streptomyces aizunensis for lactam biosyn-
+thesis. ACS Synth Biol. 2017;6:884–90. https:// doi. org/ 10. 1021/ acssy nbio. 
+6b003 72.
+ 11. Qian Z-G, Xia X-X, Lee SY. Metabolic engineering of Escherichia coli for 
+the production of putrescine: a four carbon diamine. Biotechnol Bioeng. 
+2009;104:651–62. https:// doi. org/ 10. 1002/ bit. 22502.
+ 12. Schneider J, Eberhardt D, Wendisch VF. Improving putrescine production 
+by Corynebacterium glutamicum by fine-tuning ornithine transcarbamoy-
+lase activity using a plasmid addiction system. Appl Microbiol Biotechnol. 
+2012;95:169–78. https:// doi. org/ 10. 1007/ s00253- 012- 3956-9.
+ 13. Na D, Yoo SM, Chung H, Park H, Park JH, Lee SY. Metabolic engineering 
+of Escherichia coli using synthetic small regulatory RNAs. Nat Biotechnol. 
+2013;31:170–4. https:// doi. org/ 10. 1038/ nbt. 2461.
+ 14. Kind S, Neubauer S, Becker J, Yamamoto M, Völkert M, von Abendroth G, 
+et al. From zero to hero—production of bio-based nylon from renewable 
+resources using engineered Corynebacterium glutamicum. Metab Eng. 
+2014;25:113–23. https:// doi. org/ 10. 1016/j. ymben. 2014. 05. 007.
+ 15. Okino S, Noburyu R, Suda M, Jojima T, Inui M, Yukawa H. An efficient suc-
+cinic acid production process in a metabolically engineered Corynebacte-
+rium glutamicum. Appl Microbiol Biotechnol. 2008;81:459–64. https:// doi. 
+org/ 10. 1007/ s00253- 008- 1668-y.
+ 16. Pérez-García F, Jorge JMP , Dreyszas A, Risse JM, Wendisch VF. Efficient 
+production of the dicarboxylic acid glutarate by Corynebacterium 
+glutamicum via a novel synthetic pathway. Front Microbiol. 2018;9:2589. 
+https:// doi. org/ 10. 3389/ fmicb. 2018. 02589.
+ 17. Han T, Kim GB, Lee SY. Glutaric acid production by systems metabolic 
+engineering of an l-lysine–overproducing Corynebacterium glutamicum. 
+Proc Natl Acad Sci USA. 2020;117:30328–34. https:// doi. org/ 10. 1073/ pnas. 
+20174 83117.
+ 18. Chung H, Yang JE, Ha JY, Chae TU, Shin JH, Gustavsson M, et al. Bio-based 
+production of monomers and polymers by metabolically engineered 
+microorganisms. Curr Opin Biotechnol. 2015;36:73–84. https:// doi. org/ 10. 
+1016/j. copbio. 2015. 07. 003.
+ 19. Navarro E, Subirana JA, Puiggali J. The structure of nylon 12,5 is character-
+ized by two hydrogen bond directions as are other polyamides derived 
+from glutaric acid. Polymer. 1997;38:3429–32. https:// doi. org/ 10. 1016/ 
+S0032- 3861(97) 00017-7.
+ 20. Adkins J, Jordan J, Nielsen DR. Engineering Escherichia coli for renewable 
+production of the 5-carbon polyamide building-blocks 5-aminovalerate 
+and glutarate. Biotechnol Bioeng. 2013;110:1726–34. https:// doi. org/ 10. 
+1002/ bit. 24828.
+ 21. Cheng J, Luo Q, Duan H, Peng H, Zhang Y, Hu J, et al. Efficient whole-cell 
+catalysis for 5-aminovalerate production from l-lysine by using engi-
+neered Escherichia coli with ethanol pretreatment. Sci Rep. 2020;10:990. 
+https:// doi. org/ 10. 1038/ s41598- 020- 57752-x.
+Page 19 of 20
+Prell et al. Microb Cell Fact           (2021) 20:97 
+ 
+ 22. Schulz AA, Collett HJ, Reid SJ. Nitrogen and carbon regulation of glu-
+tamine synthetase and glutamate synthase in Corynebacterium glutami-
+cum ATCC 13032. FEMS Microbiol Lett. 2001;205:361–7. https:// doi. org/ 
+10. 1111/j. 1574- 6968. 2001. tb109 73.x.
+ 23. Abe S, Takayama K-I, Kinoshita S. Taxonomical studies on glutamic acid-
+producing bacteria. J Gen Appl Microbiol. 1967;13:279–301. https:// doi. 
+org/ 10. 2323/ jgam. 13. 279.
+ 24. Börmann-El Kholy ER, Eikmanns BJ, Gutmann M, Sahm H. Glutamate 
+dehydrogenase is not essential for glutamate formation by Corynebacte-
+rium glutamicum. Appl Environ Microbiol. 1993;59:2329–31. https:// doi. 
+org/ 10. 1128/ AEM. 59.7. 2329- 2331. 1993.
+ 25. Tesch M, Eikmanns BJ, de Graaf AA, Sahm H. Ammonia assimilation in 
+Corynebacterium glutamicum and a glutamate dehydrogenase-deficient 
+mutant. Biotechnol Lett. 1998;20:953–7. https:// doi. org/ 10. 1023/A: 10054 
+06126 920.
+ 26. Rohles CM, Gläser L, Kohlstedt M, Gießelmann G, Pearson S, del Campo A, 
+et al. A bio-based route to the carbon-5 chemical glutaric acid and to bio-
+nylon-6,5 using metabolically engineered Corynebacterium glutamicum. 
+Green Chem. 2018;20:4662–74. https:// doi. org/ 10. 1039/ C8GC0 1901K.
+ 27. Sandberg TE, Salazar MJ, Weng LL, Palsson BO, Feist AM. The emergence 
+of adaptive laboratory evolution as an efficient tool for biological discov-
+ery and industrial biotechnology. Metab Eng. 2019;56:1–16. https:// doi. 
+org/ 10. 1016/j. ymben. 2019. 08. 004.
+ 28. Godara A, Kao KC. Adaptive laboratory evolution for growth coupled 
+microbial production. World J Microbiol Biotechnol. 2020;36:175. https:// 
+doi. org/ 10. 1007/ s11274- 020- 02946-8.
+ 29. Portnoy VA, Bezdan D, Zengler K. Adaptive laboratory evolution—har-
+nessing the power of biology for metabolic engineering. Curr Opin 
+Biotechnol. 2011;22:590–4. https:// doi. org/ 10. 1016/j. copbio. 2011. 03. 007.
+ 30. Dragosits M, Mattanovich D. Adaptive laboratory evolution—principles 
+and applications for biotechnology. Microb Cell Fact. 2013;12:64. https:// 
+doi. org/ 10. 1186/ 1475- 2859- 12- 64.
+ 31. Stella RG, Wiechert J, Noack S, Frunzke J. Evolutionary engineering of 
+Corynebacterium glutamicum. Biotechnol J. 2019;14:1800444. https:// doi. 
+org/ 10. 1002/ biot. 20180 0444.
+ 32. Pfeifer E, Gätgens C, Polen T, Frunzke J. Adaptive laboratory evolution of 
+Corynebacterium glutamicum towards higher growth rates on glucose 
+minimal medium. Sci Rep. 2017;7:16780. https:// doi. org/ 10. 1038/ 
+s41598- 017- 17014-9.
+ 33. Wang Z, Liu J, Chen L, Zeng A-P , Solem C, Jensen PR. Alterations in the 
+transcription factors GntR1 and RamA enhance the growth and central 
+metabolism of Corynebacterium glutamicum. Metab Eng. 2018;48:1–12. 
+https:// doi. org/ 10. 1016/j. ymben. 2018. 05. 004.
+ 34. Oide S, Gunji W, Moteki Y, Yamamoto S, Suda M, Jojima T, et al. Ther-
+mal and solvent stress cross-tolerance conferred to Corynebacterium 
+glutamicum by adaptive laboratory evolution. Appl Environ Microbiol. 
+2015;81:2284–98. https:// doi. org/ 10. 1128/ AEM. 03973- 14.
+ 35. Leßmeier L, Wendisch VF. Identification of two mutations increasing the 
+methanol tolerance of Corynebacterium glutamicum. BMC Microbiol. 
+2015;15:216. https:// doi. org/ 10. 1186/ s12866- 015- 0558-6.
+ 36. Hennig G, Haupka C, Brito LF, Rückert C, Cahoreau E, Heux S, et al. 
+Methanol-essential growth of Corynebacterium glutamicum: adaptive 
+laboratory evolution overcomes limitation due to methanethiol assimila-
+tion pathway. Int J Mol Sci. 2020;21:3617. https:// doi. org/ 10. 3390/ ijms2 
+11036 17.
+ 37. Lee J, Saddler JN, Um Y, Woo HM. Adaptive evolution and metabolic engi-
+neering of a cellobiose- and xylose-negative Corynebacterium glutami-
+cum that co-utilizes cellobiose and xylose. Microb Cell Fact. 2016;15:20. 
+https:// doi. org/ 10. 1186/ s12934- 016- 0420-z.
+ 38. Radek A, Tenhaef N, Müller MF, Brüsseler C, Wiechert W, Marienhagen J, 
+et al. Miniaturized and automated adaptive laboratory evolution: evolv-
+ing Corynebacterium glutamicum towards an improved d-xylose utiliza-
+tion. Bioresour Technol. 2017;245:1377–85. https:// doi. org/ 10. 1016/j. biort 
+ech. 2017. 05. 055.
+ 39. Jiang L-Y, Chen S-G, Zhang Y-Y, Liu J-Z. Metabolic evolution of Corynebac-
+terium glutamicum for increased production of l-ornithine. BMC Biotech-
+nol. 2013;13:47. https:// doi. org/ 10. 1186/ 1472- 6750- 13- 47.
+ 40. Li Z, Shen Y-P , Jiang X-L, Feng L-S, Liu J-Z. Metabolic evolution and a com-
+parative omics analysis of Corynebacterium glutamicum for putrescine 
+production. J Ind Microbiol Biotechnol. 2018;45:123–39. https:// doi. org/ 
+10. 1007/ s10295- 018- 2003-y.
+ 41. Gorden J, Geiser E, Wierckx N, Blank LM, Zeiner T, Brandenbusch C. 
+Integrated process development of a reactive extraction concept for 
+itaconic acid and application to a real fermentation broth. Eng Life Sci. 
+2017;17:809–16. https:// doi. org/ 10. 1002/ elsc. 20160 0253.
+ 42. Kelley LA, Mezulis S, Yates CM, Wass MN, Sternberg MJE. The Phyre2 
+web portal for protein modeling, prediction and analysis. Nat Protoc. 
+2015;10:845–58. https:// doi. org/ 10. 1038/ nprot. 2015. 053.
+ 43. Yeung CK, Yep A, Kenyon GL, McLeish MJ. Physical, kinetic and spectro-
+photometric studies of a NAD(P)-dependent benzaldehyde dehydro-
+genase from Pseudomonas putida ATCC 12633. Biochim Biophys Acta 
+Proteins Proteom. 2008;1784:1248–55. https:// doi. org/ 10. 1016/j. bbapap. 
+2008. 04. 015.
+ 44. Langendorf CG, Key TLG, Fenalti G, Kan W-T, Buckle AM, Caradoc-Davies T, 
+et al. The X-ray crystal structure of Escherichia coli succinic semialdehyde 
+dehydrogenase; structural insights into NADP+/enzyme interactions. 
+PLoS ONE. 2010. https:// doi. org/ 10. 1371/ journ al. pone. 00092 80.
+ 45. Parthiban V, Gromiha MM, Schomburg D. CUPSAT: prediction of protein 
+stability upon point mutations. Nucleic Acids Res. 2006;34:W239–42. 
+https:// doi. org/ 10. 1093/ nar/ gkl190.
+ 46. Beckers G, Bendt AK, Krämer R, Burkovski A. Molecular identification of 
+the urea uptake system and transcriptional analysis of urea transporter- 
+and urease-encoding genes in Corynebacterium glutamicum. J Bacteriol. 
+2004;186:7645. https:// doi. org/ 10. 1128/ JB. 186. 22. 7645- 7652. 2004.
+ 47. Abeles AL, Austin SJ. P1 plasmid replication requires methylated DNA. 
+EMBO J. 1987;6:3185–9.
+ 48. Almagro Armenteros JJ, Tsirigos KD, Sønderby CK, Petersen TN, Winther 
+O, Brunak S, et al. SignalP 5.0 improves signal peptide predictions using 
+deep neural networks. Nat Biotechnol. 2019;37:420–3. https:// doi. org/ 10. 
+1038/ s41587- 019- 0036-z.
+ 49. Sonnhammer EL, von Heijne G, Krogh A. A hidden Markov model for 
+predicting transmembrane helices in protein sequences. Proc Int Conf 
+Intell Syst Mol Biol. 1998;6:175–82.
+ 50. Oliveira PH, Prather KJ, Prazeres DMF, Monteiro GA. Analysis of DNA 
+repeats in bacterial plasmids reveals the potential for recurrent instability 
+events. Appl Microbiol Biotechnol. 2010;87:2157–67. https:// doi. org/ 10. 
+1007/ s00253- 010- 2671-7.
+ 51. Mazin AV, Kuzminov AV, Dianov GL, Salganik RI. Mechanisms of deletion 
+formation in Escherichia coli plasmids: II. Deletions mediated by short 
+direct repeats. Mol Gen Genet. 1991;228:209–14. https:// doi. org/ 10. 1007/ 
+BF002 82467.
+ 52. Ribeiro SC, Oliveira PH, Prazeres DMF, Monteiro GA. High frequency plas-
+mid recombination mediated by 28 bp direct repeats. Mol Biotechnol. 
+2008;40:252. https:// doi. org/ 10. 1007/ s12033- 008- 9082-3.
+ 53. Wu Q, Peng Z, Zhang Y, Yang J. COACH-D: improved protein-ligand bind-
+ing sites prediction with refined ligand-binding poses through molecular 
+docking. Nucleic Acids Res. 2018;46:W438–42. https:// doi. org/ 10. 1093/ 
+nar/ gky439.
+ 54. Sung H-C, Tachiki T, Kumagai K, Tochikura T. Properties of glutamate 
+synthase from Brevibacterium flavum. J Ferment Technol. 1984;62:569–75.
+ 55. Gorden J, Zeiner T, Brandenbusch C. Reactive extraction of cis, cis-
+muconic acid. Fluid Phase Equilib. 2015;393:78–84. https:// doi. org/ 10. 
+1016/j. fluid. 2015. 02. 030.
+ 56. Nakayama Y, Hashimoto K, Sawada Y, Sokabe M, Kawasaki H, Martinac 
+B. Corynebacterium glutamicum mechanosensitive channels: towards 
+unpuzzling “glutamate efflux” for amino acid production. Biophys Rev. 
+2018;10:1359–69. https:// doi. org/ 10. 1007/ s12551- 018- 0452-1.
+ 57. Lubitz D, Wendisch VF. Ciprofloxacin triggered glutamate production by 
+Corynebacterium glutamicum. BMC Microbiol. 2016;16:235. https:// doi. 
+org/ 10. 1186/ s12866- 016- 0857-6.
+ 58. Pérez-García F, Wendisch VF. Transport and metabolic engineering of 
+the cell factory Corynebacterium glutamicum. FEMS Microbiol Lett. 
+2018;365:fny166. https:// doi. org/ 10. 1093/ femsle/ fny166.
+ 59. Krahn I, Bonder D, Torregrosa L, Stoppel D, Krause JP , Rosenfeldt N, et al. 
+Evolving a new efficient mode of fructose utilization for improved 
+bioproduction in Corynebacterium glutamicum. Front Bioeng Biotechnol. 
+2021;9:669093. https:// doi. org/ 10. 3389/ fbioe. 2021. 669093.
+ 60. Wass MN, Kelley LA, Sternberg MJE. 3DLigandSite: predicting ligand-bind-
+ing sites using similar structures. Nucleic Acids Res. 2010;38:W469–73. 
+https:// doi. org/ 10. 1093/ nar/ gkq406.
+ 61. Strösser J, Lüdke A, Schaffer S, Krämer R, Burkovski A. Regulation of 
+GlnK activity: modification, membrane sequestration and proteolysis as 
+Page 20 of 20Prell et al. Microb Cell Fact           (2021) 20:97 
+regulatory principles in the network of nitrogen control in Corynebacte-
+rium glutamicum: GlnK of C. glutamicum. Mol Microbiol. 2004;54:132–47. 
+https:// doi. org/ 10. 1111/j. 1365- 2958. 2004. 04247.x.
+ 62. Sevvana M, Hasselt K, Grau FC, Burkovski A, Muller YA. Similarities in the 
+structure of the transcriptional repressor AmtR in two different space 
+groups suggest a model for the interaction with GlnK. Acta Crystallogr 
+F Struct Biol Commun. 2017;73:146–51. https:// doi. org/ 10. 1107/ S2053 
+230X1 70024 85.
+ 63. Rehm N, Burkovski A. Engineering of nitrogen metabolism and its regula-
+tion in Corynebacterium glutamicum: influence on amino acid pools and 
+production. Appl Microbiol Biotechnol. 2011;89:239–48. https:// doi. org/ 
+10. 1007/ s00253- 010- 2922-7.
+ 64. van Heeswijk WC, Westerhoff HV, Boogerd FC. Nitrogen assimilation 
+in Escherichia coli: putting molecular data into a systems perspective. 
+Microbiol Mol Biol Rev. 2013;77:628–95. https:// doi. org/ 10. 1128/ MMBR. 
+00025- 13.
+ 65. Nolden L, Ngouoto-Nkili C-E, Bendt AK, Krämer R, Burkovski A. Sensing 
+nitrogen limitation in Corynebacterium glutamicum: the role of glnK and 
+glnD. Mol Microbiol. 2001;42:1281–95. https:// doi. org/ 10. 1046/j. 1365- 
+2958. 2001. 02694.x.
+ 66. Zhu L, Mack C, Wirtz A, Kranz A, Polen T, Baumgart M, et al. Regulation of 
+γ-aminobutyrate (GABA) utilization in Corynebacterium glutamicum by 
+the PucR-type transcriptional regulator GabR and by alternative nitrogen 
+and carbon sources. Front Microbiol. 2020;11:544045. https:// doi. org/ 10. 
+3389/ fmicb. 2020. 544045.
+ 67. Schunk A, Maurer G. On the influence of some strong electrolytes on 
+the partitioning of acetic acid to aqueous/organic two-phase systems in 
+the presence of tri-n-octylamine. Fluid Phase Equilib. 2006;239:223–39. 
+https:// doi. org/ 10. 1016/j. fluid. 2005. 11. 022.
+ 68. San-Martín M, Pazos C, Coca J. Reactive extraction of lactic acid with 
+alamine 336 in the presence of salts and lactose. J Chem Technol Biotech-
+nol. 2007;54:1–6. https:// doi. org/ 10. 1002/ jctb. 28054 0102.
+ 69. Hanahan D. Techniques for transformation of E. coli. DNA cloning: a prac-
+tical approach, vol. 1. Oxford: IRL Press Limited; 1985. p. 109–35.
+ 70. Eggeling L, Bott M, editors. Handbook of Corynebacterium glutamicum. 
+1st ed. Boca Raton: CRC Press; 2005. https:// doi. org/ 10. 1201/ 97814 20039 
+696.
+ 71. Simon R, Priefer U, Pühler A. A broad host range mobilization system for 
+in vivo genetic engineering: transposon mutagenesis in gram negative 
+bacteria. Nat Biotechnol. 1983;1:784–91. https:// doi. org/ 10. 1038/ nbt11 
+83- 784.
+ 72. Unthan S, Baumgart M, Radek A, Herbst M, Siebert D, Brühl N, et al. Chas-
+sis organism from Corynebacterium glutamicum—a top-down approach 
+to identify and delete irrelevant gene clusters. Biotechnol J. 2015;10:290–
+301. https:// doi. org/ 10. 1002/ biot. 20140 0041.
+ 73. Prell C, Burgardt A, Meyer F, Wendisch VF. Fermentative Production of 
+l-2-hydroxyglutarate by engineered Corynebacterium glutamicum via 
+pathway extension of l-lysine biosynthesis. Front Bioeng Biotechnol. 
+2021;8:630476. https:// doi. org/ 10. 3389/ fbioe. 2020. 630476.
+ 74. Kirchner O, Tauch A. Tools for genetic engineering in the amino acid-
+producing bacterium Corynebacterium glutamicum. J Biotechnol. 
+2003;104:287–99. https:// doi. org/ 10. 1016/ S0168- 1656(03) 00148-2.
+ 75. Stansen C, Uy D, Delaunay S, Eggeling L, Goergen J-L, Wendisch VF. Char-
+acterization of a Corynebacterium glutamicum lactate utilization operon 
+induced during temperature-triggered glutamate production. AEM. 
+2005;71:5920–8. https:// doi. org/ 10. 1128/ AEM. 71. 10. 5920- 5928. 2005.
+ 76. Peters-Wendisch PG, Schiel B, Wendisch VF, Katsoulidis E, Möckel B, 
+Sahm H, et al. Pyruvate carboxylase is a major bottleneck for glutamate 
+and lysine production by Corynebacterium glutamicum. J Mol Microbiol 
+Biotechnol. 2001;3:295–300.
+ 77. Jorge JMP , Leggewie C, Wendisch VF. A new metabolic route for the pro-
+duction of gamma-aminobutyric acid by Corynebacterium glutamicum 
+from glucose. Amino Acids. 2016;48:2519–31. https:// doi. org/ 10. 1007/ 
+s00726- 016- 2272-6.
+ 78. Schäfer A, Tauch A, Jäger W, Kalinowski J, Thierbach G, Pühler A. Small 
+mobilizable multi-purpose cloning vectors derived from the Escherichia 
+coli plasmids pK18 and pK19: selection of defined deletions in the chro-
+mosome of Corynebacterium glutamicum. Gene. 1994;145:69–73. https:// 
+doi. org/ 10. 1016/ 0378- 1119(94) 90324-7.
+ 79. Eikmanns BJ, Thum-Schmitz N, Eggeling L, Lüdtke KU, Sahm H. Nucleo-
+tide sequence, expression and transcriptional analysis of the Corynebac-
+terium glutamicum gltA gene encoding citrate synthase. Microbiology. 
+1994;140:1817–28. https:// doi. org/ 10. 1099/ 13500 872- 140-8- 1817.
+ 80. Schneider J, Wendisch VF. Putrescine production by engineered 
+Corynebacterium glutamicum. Appl Microbiol Biotechnol. 2010;88:859–68. 
+https:// doi. org/ 10. 1007/ s00253- 010- 2778-x.
+ 81. Schneider J, Niermann K, Wendisch VF. Production of the amino acids 
+l-glutamate, l-lysine, l-ornithine and l-arginine from arabinose by 
+recombinant Corynebacterium glutamicum. J Biotechnol. 2011;154:191–8. 
+https:// doi. org/ 10. 1016/j. jbiot ec. 2010. 07. 009.
+ 82. Wakisaka S, Sung H-C, Aikawa T, Tachiki T, Tochikura T. Glutamate forma-
+tion by a new in vitro enzyme system consisting of purified glutamine 
+synthetase and glutamate synthase. J Ferment Bioeng. 1989;67:395–8. 
+https:// doi. org/ 10. 1016/ 0922- 338X(89) 90047-0.
+ 83. Pérez-García F, Ziert C, Risse JM, Wendisch VF. Improved fermenta-
+tive production of the compatible solute ectoine by Corynebacterium 
+glutamicum from glucose and alternative carbon sources. J Biotechnol. 
+2017;258:59–68. https:// doi. org/ 10. 1016/j. jbiot ec. 2017. 04. 039.
+ 84. Langmead B, Trapnell C, Pop M, Salzberg SL. Ultrafast and memory-
+efficient alignment of short DNA sequences to the human genome. 
+Genome Biol. 2009;10:R25. https:// doi. org/ 10. 1186/ gb- 2009- 10-3- r25.
+ 85. Hilker R, Stadermann KB, Schwengers O, Anisiforov E, Jaenicke S, Weis-
+shaar B, et al. ReadXplorer 2—detailed read mapping analysis and visu-
+alization from one single source. Bioinformatics. 2016;32:3702–8. https:// 
+doi. org/ 10. 1093/ bioin forma tics/ btw541.
+ 86. Koren S, Walenz BP , Berlin K, Miller JR, Bergman NH, Phillippy AM. Canu: 
+scalable and accurate long-read assembly via adaptive k-mer weighting 
+and repeat separation. Genome Res. 2017;27:722–36. https:// doi. org/ 10. 
+1101/ gr. 215087. 116.
+ 87. Vaser R, Sović I, Nagarajan N, Šikić M. Fast and accurate de novo genome 
+assembly from long uncorrected reads. Genome Res. 2017;27:737–46. 
+https:// doi. org/ 10. 1101/ gr. 214270. 116.
+ 88. nanoporetech/medaka. Oxford Nanopore Technologies; 2020.
+ 89. Walker BJ, Abeel T, Shea T, Priest M, Abouelliel A, Sakthikumar S, et al. 
+Pilon: an integrated tool for comprehensive microbial variant detection 
+and genome assembly improvement. PLoS ONE. 2014;9:e112963. https:// 
+doi. org/ 10. 1371/ journ al. pone. 01129 63.
+ 90. Wick RR, Judd LM, Gorrie CL, Holt KE. Unicycler: Resolving bacterial 
+genome assemblies from short and long sequencing reads. PLOS Com-
+put Biol. 2017;13:e1005595. https:// doi. org/ 10. 1371/ journ al. pcbi. 10055 95.
+ 91. Darling ACE, Mau B, Blattner FR, Perna NT. Mauve: multiple alignment 
+of conserved genomic sequence with rearrangements. Genome Res. 
+2004;14:1394–403. https:// doi. org/ 10. 1101/ gr. 22897 04.
+ 92. Dostálová H, Busche T, Holátko J, Rucká L, Štěpánek V, Barvík I, et al. 
+Overlap of promoter recognition specificity of stress response sigma 
+factors SigD and SigH in Corynebacterium glutamicum ATCC 13032. Front 
+Microbiol. 2019;9:03287. https:// doi. org/ 10. 3389/ fmicb. 2018. 03287.
+ 93. Love MI, Huber W, Anders S. Moderated estimation of fold change and 
+dispersion for RNA-seq data with DESeq2. Genome Biol. 2014;15:550. 
+https:// doi. org/ 10. 1186/ s13059- 014- 0550-8.
+ 94. Gorden J, Zeiner T, Sadowski G, Brandenbusch C. Recovery of cis, cis-
+muconic acid from organic phase after reactive extraction. Sep Purif 
+Technol. 2016;169:1–8. https:// doi. org/ 10. 1016/j. seppur. 2016. 05. 032.
+Publisher’s Note
+Springer Nature remains neutral with regard to jurisdictional claims in pub-
+lished maps and institutional affiliations.

@@ -1,0 +1,1239 @@
+Citation: Shilova, S.A.; Khrenova,
+M.G.; Matyuta, I.O.; Nikolaeva, A.Y.;
+Rakitina, T.V .; Klyachko, N.L.;
+Minyaev, M.E.; Boyko, K.M.; Popov,
+V .O.; Bezsudnova, E.Y. To the
+Understanding of Catalysis by
+D-Amino Acid Transaminases: A
+Case Study of the Enzyme from
+Aminobacterium colombiense. Molecules
+2023, 28, 2109. https://doi.org/
+10.3390/molecules28052109
+Academic Editor: Alicia Prieto
+Received: 31 January 2023
+Revised: 17 February 2023
+Accepted: 21 February 2023
+Published: 23 February 2023
+Copyright: © 2023 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+molecules
+Article
+To the Understanding of Catalysis by D-Amino Acid
+Transaminases: A Case Study of the Enzyme from
+Aminobacterium colombiense
+Soﬁa A. Shilova 1,† , Maria G. Khrenova 1,2,†
+ , Ilya O. Matyuta 1
+ , Alena Y. Nikolaeva 1,3 , Tatiana V . Rakitina1,4
+ ,
+Natalia L. Klyachko 2
+ , Mikhail E. Minyaev 5
+ , Konstantin M. Boyko 1
+ , Vladimir O. Popov 1,6
+and Ekaterina Yu. Bezsudnova 1, *
+1 Bach Institute of Biochemistry, Research Centre of Biotechnology of the Russian Academy of Sciences,
+119071 Moscow, Russia
+2 Department of Chemistry, Lomonosov Moscow State University, 119991 Moscow, Russia
+3 Complex of NBICS Technologies, National Research Center “Kurchatov Institute”, 123098 Moscow, Russia
+4 Shemyakin-Ovchinnikov Institute of Bioorganic Chemistry of the Russian Academy of Sciences,
+117997 Moscow, Russia
+5 N.D. Zelinsky Institute of Organic Chemistry, Russian Academy of Sciences, 119991 Moscow, Russia
+6 Department of Biology, Lomonosov Moscow State University, 119991 Moscow, Russia
+* Correspondence: eubez@inbi.ras.ru
+† These authors contributed equally to this work.
+Abstract: Pyridoxal-5′-phosphate (PLP)-dependent transaminases are highly efﬁcient biocatalysts for
+stereoselective amination. D-amino acid transaminases can catalyze stereoselective transamination
+producing optically pure D-amino acids. The knowledge of substrate binding mode and substrate
+differentiation mechanism in D-amino acid transaminases comes down to the analysis of the transam-
+inase from Bacillus subtilis. However, at least two groups of D-amino acid transaminases differing
+in the active site organization are known today. Here, we present a detailed study of D-amino
+acid transaminase from the gram-negative bacterium Aminobacterium colombiense with a substrate
+binding mode different from that for the transaminase from B. subtilis. We study the enzyme using
+kinetic analysis, molecular modeling, and structural analysis of holoenzyme and its complex with
+D-glutamate. We compare the multipoint binding of D-glutamate with the binding of other substrates,
+D-aspartate and D-ornithine. QM/MM MD simulation reveals that the substrate can act as a base
+and its proton can be transferred from the amino group to the α-carboxylate group. This process
+occurs simultaneously with the nucleophilic attack of the PLP carbon atom by the nitrogen atom
+of the substrate forming gem-diamine at the transimination step. This explains the absence of the
+catalytic activity toward (R)-amines that lack an α-carboxylate group. The obtained results clarify
+another substrate binding mode in D-amino acid transaminases and underpinned the substrate
+activation mechanism.
+Keywords: transaminase; D-amino acids; substrate-assisted catalysis; enzymes; structure; X-ray
+analysis
+1. Introduction
+Chiral amines are important pharmaceutical ingredients and building blocks for drugs.
+Transamination reaction is an effective biocatalytic route for obtaining optically pure amines,
+as transaminases demonstrate excellent enantioselectivity and enantiomeric excess of more
+than 99% [1]. Transaminases (TAs, aminotransferases, EC 2.6.1) are well-established in
+large-scale chemistry [2–4]. These are pyridoxal-5′-phosphate (PLP)-dependent enzymes
+that catalyze the stereoselective transfer of an amino group from an amino donor (amine
+or amino acid) to a keto compound (ketone, keto acid, or aldehyde) to form new amino
+and keto products [5–7]. The transamination reaction consists of two half-reactions: the
+Molecules 2023, 28, 2109. https://doi.org/10.3390/molecules28052109 https://www.mdpi.com/journal/molecules
+Molecules 2023, 28, 2109 2 of 21
+amino group of the ﬁrst amino substrate is transferred to PLP to produce pyridoxamine
+5′-phosphate (PMP) and keto acid (ketone). In the second step, the keto substrate accepts
+the amino group of PMP to yield a new amino acid (amine) and regenerates PLP [ 5,8].
+The catalytic unit of TAs is a homodimer, with two active sites formed by the amino acid
+residues of both subunits [9–12]. Stereospeciﬁcity of TAs results from the position of the
+bound substrate relative to the PLP molecule [ 5,13,14], which forms Schiff base linkage
+with the side chain of a lysine residue in the active site, thus dividing the latter into two
+pockets: the O-pocket (on the phenyl side of PLP) and the P-pocket (on the phosphate side
+of PLP) [13,15]. The residues lining the O- and P-pockets are involved in substrate binding
+and determine the substrate speciﬁcity of TAs. TAs belong to I and IV fold types according
+to the organization of PLP-binding fold [ 16]. TAs of PLP fold type IV are distinguished
+by both (L)-speciﬁc and (R)-speciﬁc amination of keto compounds and include branched-
+chain L-amino acid TAs (BCATs, EC 2.6.1.46) producing L-amino acids, D-amino acid TAs
+(DAATs, EC 2.6.1.21) producing D-amino acid and (R)-amine: pyruvate TAs producing
+primary (R)-amines (R-TAs, EC 2.6.1.B21) [9,13,17].
+DAATs are found in bacteria and plants [18]. DAATs catalyze synthesis of D-amino
+acids that in vivo are further involved in antibiotics synthesis, peptidoglycan metabolism,
+plant growth metabolism, etc. [ 19–21]. In vitro, the benchmark reaction of DAATs is a
+transamination between D-alanine and α-ketoglutarate (Scheme 1) [22,23].
+Molecules 2023, 28, 2109 2 of 22 
+ 
+ 
+excess of more than 99% [1]. Transaminases (T As, aminotransferases, EC 2.6.1) are well-
+established in large-scale chemistry [2–4]. These are pyridoxal-5 ′-phosphate (PLP)-de-
+pendent enzymes that catalyze the stereoselective transfer of an amino group from an 
+amino donor (amine or amino acid) to a keto compound (ketone, keto acid, or aldehyde) 
+to form new amino and keto products [5–7]. The transamination reaction consists of two 
+half-reactions: the amino group of the first am ino substrate is transferred to PLP to pro-
+duce pyridoxamine 5 ′-phosphate (PMP) and keto acid (ketone). In the second step, the 
+keto substrate accepts the amino group of PMP to yield a new amino acid (amine) and 
+regenerates PLP [5,8]. The catalytic unit of TAs is a homodimer, with two active sites 
+formed by the amino acid residues of both subunits [9–12]. Stereospecificity of TAs results 
+from the position of the bound substrate relative to the PLP molecule [5,13,14], which 
+forms Schiff base linkage with the side chain of a lysine residue in the active site, thus 
+dividing the latter into two pockets: the O- pocket (on the phenyl side of PLP) and the P-
+pocket (on the phosphate side of PLP) [13,15] . The residues lining the O- and P-pockets 
+are involved in substrate binding and determine the substrate specificity of TAs. TAs be-
+long to I and IV fold types according to the organization of PLP-binding fold [16]. TAs of 
+PLP fold type IV are distinguished by both (L)-specific and (R)-specific amination of keto 
+compounds and include branched-chain L-amino acid TAs (BCATs, EC 2.6.1.46) produc-
+ing L-amino acids, D-amino acid TAs (DAATs, EC 2.6.1.21) producing D-amino acid and 
+(R)-amine: pyruvate TAs producing primary (R)-amines (R-TAs, EC 2.6.1.B21) [9,13,17]. 
+DAATs are found in bacteria and plants [18]. DAATs catalyze synthesis of D-amino 
+acids that in vivo are further involved in antibiotics synthesis, peptidoglycan metabolism, 
+plant growth metabolism, etc. [19–21]. In vitro,  the benchmark reaction of DAATs is a 
+transamination between D-alanine and α-ketoglutarate (Scheme 1) [22,23]. 
+ 
+Scheme 1. Transamination reaction between D-alanine and α-ketoglutarate, catalyzed by DAAT. 
+The properties of several DAATs have been described, namely: DAATs from the bac-
+teria Bacillus sp. YM-1 (bsDAAT) [22], Bacillus sphaericus  (bsphDAAT) [24], Geobacillus 
+toebii SK1 (SK1DAAT) [25], Lactobacillus salivarius (lsDAAT) [25], Curtobacterium pusillum 
+(CpuTA) [26], Haliscomenbacter hydrossis (Halhy) [27] and from plant Arabidopsis thaliana 
+(atDAAT) [18]. The substrate spectrum of the DAATs includes various D-amino acids and 
+α-keto acids, with CpuTA being also active with primary ( R)-amines. Crystal structures 
+of some bacterial DAATs are known, these are bsDAAT (PDB ID: 1DAA, 3DAA), CpuTA 
+(PDB ID: 5K3W), and Halhy (PDB ID: 7P7X) and two putative DAATs—from Burkholderia 
+thailandensis (btDAAT, PDB ID: 4TM5) and Mycobacterium tuberculosis (mtDAAT, PDB ID: 
+6Q1R). 
+Currently, two variants of substrate binding in DAATs are revealed (Figure 1). The 
+first one, canonical (applied for identification of specificity-determining sequence motifs 
+and described by Hőhne et al. [28]), was observed in bsDAAT [11,29–31]. The triad of the 
+amino acids in the O-pocket Y31, R98*, and H100* (* here and after indicates residues from 
+the adjacent subunit of the functional dimer) form a carboxylate trap that binds the α-
+carboxylate group of D-amino acids [31]. Later, Ro et al. proposed that the binding of α-
+ketoglutarate in bsDAAT is supported by the coordination of the γ-carboxylate group in 
+the P-pocket via K35 [32]. Another non-cano nical substrate binding mode has been pro-
+posed for CpuTA and Halhy [26,27]. The O-pockets of both TAs lacked a canonical triad, 
+however, possessed two positively charged residues, nonequivalent to the R98* and 
+H100* of bsDAAT—R51*, K117 in CpuTA [26] and R28*, R90 in Halhy [27]. These residues 
+Scheme 1. Transamination reaction between D-alanine and α-ketoglutarate, catalyzed by DAAT.
+The properties of several DAATs have been described, namely: DAATs from the
+bacteria Bacillus sp. YM-1 (bsDAAT) [22], Bacillus sphaericus (bsphDAAT) [24], Geobacillus
+toebii SK1 (SK1DAAT) [25], Lactobacillus salivarius (lsDAAT) [25], Curtobacterium pusillum
+(CpuTA) [26], Haliscomenbacter hydrossis (Halhy) [27] and from plant Arabidopsis thaliana
+(atDAAT) [18]. The substrate spectrum of the DAATs includes various D-amino acids and
+α-keto acids, with CpuTA being also active with primary (R)-amines. Crystal structures
+of some bacterial DAATs are known, these are bsDAAT (PDB ID: 1DAA, 3DAA), CpuTA
+(PDB ID: 5K3W), and Halhy (PDB ID: 7P7X) and two putative DAATs—from Burkholderia
+thailandensis (btDAAT, PDB ID: 4TM5) and Mycobacterium tuberculosis (mtDAAT, PDB
+ID: 6Q1R).
+Currently, two variants of substrate binding in DAATs are revealed (Figure 1). The
+ﬁrst one, canonical (applied for identiﬁcation of speciﬁcity-determining sequence motifs
+and described by H˝ ohne et al. [28]), was observed in bsDAAT [ 11,29–31]. The triad of
+the amino acids in the O-pocket Y31, R98*, and H100* (* here and after indicates residues
+from the adjacent subunit of the functional dimer) form a carboxylate trap that binds the
+α-carboxylate group of D-amino acids [31]. Later, Ro et al. proposed that the binding of
+α-ketoglutarate in bsDAAT is supported by the coordination of theγ-carboxylate group
+in the P-pocket via K35 [ 32]. Another non-canonical substrate binding mode has been
+proposed for CpuTA and Halhy [26,27]. The O-pockets of both TAs lacked a canonical triad,
+however, possessed two positively charged residues, nonequivalent to the R98* and H100*
+of bsDAAT—R51*, K117 in CpuTA [ 26] and R28*, R90 in Halhy [27]. These residues were
+suggested to bind the α-carboxylate group of substrates D-amino acids [ 26]. Positively
+charged residues, nonequivalent to the K35 of bsDAAT, were observed in identical positions
+in the P-pockets of CpuTA and Halhy—R273 and K241, respectively. However, nothing was
+suggested about their roles in the binding of the γ-carboxylate group of α-ketoglutarate.
+Molecules 2023, 28, 2109 3 of 21
+Molecules 2023, 28, 2109 3 of 22 
+ 
+ 
+were suggested to bind the α-carboxylate group of substrates D-amino acids [26]. Posi-
+tively charged residues, nonequivalent to the K35 of bsDAAT, were observed in identical 
+positions in the P-pockets of CpuTA and Halhy—R273 and K241, respectively. However, 
+nothing was suggested about their roles in the binding of the γ-carboxylate group of α-
+ketoglutarate.  
+ 
+Figure 1. Variants of the active sites in DAATs. ( A) The active site of bsDAAT in complex with D-
+alanine (PDB ID 3DAA). ( B) The active site of CpuTA (PDB ID 5K3W). The small domain of one 
+subunit is colored in light green, the large domain—in light pink, and the adjacent subunit—in grey. 
+The O-pocket α-helix is colored in yellow, the O-pocket loop—in blue, the βX- and βY-strands—in 
+orange, the interdomain loop—in magenta, the β-turn1—in red, and the β-turn2—in black. PLP 
+molecule and important residues are shown in sticks . The O-pocket is to the left from PLP, the P-
+pocket is to the right from PLP. Residues of the adjacent dimer subunit are marked with asterisks. 
+Herein, we report insights into substrat e binding in DAAT from the gram-negative 
+mesophilic bacterium Aminobacterium colombiense (AmicoTA) [33]. Using kinetic analysis, 
+we observed the activity of AmicoTA toward different D-amino acids, with D-glutamate 
+being the most specific substrate. Structure-based sequence alignment revealed the iden-
+tical active site residues between AmicoTA and both canonical and non-canonical DAATs. 
+Thus, both substrate binding modes were allowed in the active site of AmicoTA. To clarify 
+this issue, we investigated AmicoTA usin g X-ray crystallography and molecular model-
+ing. Finally, molecular dynamic simulations with combined quantum mechanics/molecu-
+lar mechanics potentials were performed to clarify the molecular mechanism of the for-
+mation of gem-diamine from the Michaelis complex that initiates transimination.  
+2. Results 
+2.1. Structure-Based Sequence Alignment of AmicoTA and Known DAATs  
+According to [9,13,28], the active site of DAATs is formed by secondary structural 
+elements (SSE), grouped into the O-pocket and P-pocket (Figure 1). The O-pocket is lined 
+by residues of βX- and βY-strands, β-turn1, and O-pocket α-helix, and is partially capped 
+by the residues of the O-pocket loop. The O-pocket is responsible for the binding of the α-
+carboxylate group of substrates, and the P-pocket—for the binding of a side group of sub-
+strates. Structure-based sequence alignment of homologous DAATs (Figure S1) revealed 
+two groups of DAATs (canonical and non-canonical) differing in the O-pocket organiza-
+tion: DAATs with canonical “carboxylate trap” and DAATs with two R/K residues in the 
+O-pocket (Table 1). The P-pockets in both gr oups of DAATs do not contain conservative 
+residues. However, in several DAATs P-pockets contain a positively charged R/K residue 
+from βX-strand (bsDAAT, bsphDAAT, SK1DAAT) or β-turn2 (btDAAT, CpuTA, and 
+Halhy). Similar to bsDAAT, these R/K residues could coordinate the γ-carboxylate group 
+of substrate α-ketoglutarate. The interdomain loop in the known structures of DAATs is 
+out of the active site (Figure 1) and seems not to participate in catalysis [27,31,34]. The 
+Figure 1. Variants of the active sites in DAATs. ( A) The active site of bsDAAT in complex with
+D-alanine (PDB ID 3DAA). (B) The active site of CpuTA (PDB ID 5K3W). The small domain of one
+subunit is colored in light green, the large domain—in light pink, and the adjacent subunit—in grey.
+The O-pocket α-helix is colored in yellow, the O-pocket loop—in blue, the βX- and βY-strands—in
+orange, the interdomain loop—in magenta, the β-turn1—in red, and the β-turn2—in black. PLP
+molecule and important residues are shown in sticks. The O-pocket is to the left from PLP , the
+P-pocket is to the right from PLP . Residues of the adjacent dimer subunit are marked with asterisks.
+Herein, we report insights into substrate binding in DAAT from the gram-negative
+mesophilic bacterium Aminobacterium colombiense (AmicoTA) [33]. Using kinetic analysis,
+we observed the activity of AmicoTA toward different D-amino acids, with D-glutamate
+being the most speciﬁc substrate. Structure-based sequence alignment revealed the identical
+active site residues between AmicoTA and both canonical and non-canonical DAATs. Thus,
+both substrate binding modes were allowed in the active site of AmicoTA. To clarify this
+issue, we investigated AmicoTA using X-ray crystallography and molecular modeling.
+Finally, molecular dynamic simulations with combined quantum mechanics/molecular
+mechanics potentials were performed to clarify the molecular mechanism of the formation
+of gem-diamine from the Michaelis complex that initiates transimination.
+2. Results
+2.1. Structure-Based Sequence Alignment of AmicoTA and Known DAATs
+According to [9,13,28], the active site of DAATs is formed by secondary structural
+elements (SSE), grouped into the O-pocket and P-pocket (Figure 1). The O-pocket is lined
+by residues of βX- and βY-strands, β-turn1, and O-pocket α-helix, and is partially capped
+by the residues of the O-pocket loop. The O-pocket is responsible for the binding of the
+α-carboxylate group of substrates, and the P-pocket—for the binding of a side group of
+substrates. Structure-based sequence alignment of homologous DAATs (Figure S1) revealed
+two groups of DAATs (canonical and non-canonical) differing in the O-pocket organiza-
+tion: DAATs with canonical “carboxylate trap” and DAATs with two R/K residues in the
+O-pocket (Table 1). The P-pockets in both groups of DAATs do not contain conservative
+residues. However, in several DAATs P-pockets contain a positively charged R/K residue
+from βX-strand (bsDAAT, bsphDAAT, SK1DAAT) orβ-turn2 (btDAAT, CpuTA, and Halhy).
+Similar to bsDAAT, these R/K residues could coordinate theγ-carboxylate group of sub-
+strate α-ketoglutarate. The interdomain loop in the known structures of DAATs is out
+of the active site (Figure 1) and seems not to participate in catalysis [ 27,31,34]. The pe-
+culiar feature of canonical DAATs is the high similarity of sequence fragments encoding
+β-turn1, which borders the entrance to the active site. No similarity is observed among
+sequence fragments encoding β-turn1s in non-canonical DAATs. β-Turn2, which borders
+the P-pocket, in both DAAT groups contains Ser and Thr residues in random positions.
+Finally, the speciﬁcity-determining motifs of the two groups of DAATs differ signiﬁcantly
+(Table 2).
+Molecules 2023, 28, 2109 4 of 21
+Table 1. Structure-based sequence alignment of AmicoTA and known DAATs. Amino acid composition of SSE forming the active sites of DAATs. Crystal structures
+of the following DAATs were analyzed: DAAT from Bacillus sp. YM-1(PDB ID 1DAA), B. thailandensis (4TM5), C. pusillum (5K3W), H. hydrossis (7P7X), and M.
+tuberculosis (6Q1R). AlphaFold models (accessed on 21 February 2023) [35,36] of the following DAATs were analyzed: DAAT fromB. sphaericus (UniProt ID P54693),
+G. toebii SK1 (Q4JFX0), L. salivarius (Q1WRM6), and A. thaliana (Q8L493). Amino acid residues known to participate in substrate binding are shown in red. Similar
+residues in homologs are shown in bold. Positively charged residues in the P-pockets are shown in bold and italics. Canonical DAATs are highlighted in rose,
+non-canonical DAATs are shown in gray.
+DAAT
+from Identity, % O-Pocket
+α-Helix βX-Strand βY-Strand O-Pocket
+Loop
+Interdomain
+Loop β-turn1 β-turn2
+Bacillus sp. YM-1 100 21DRGYGFG27 29GVYEVVKVY37 85GHIYFQVT92 93RGTSPRAHQFPENTVKP109117NPRPLENLEKG128 178GSSS181 240STTS243
+B. sphaericus 68.0 22DRGYQFG28 30GIYEVIKVY38 86GHVYFQIT93 94RGTTSRNHIFPDASVPA110 119GERSIEQFEKG129 179CSSA182 241SVSS244
+B. thailandensis 37.5 32DRGFIFG38 40GVYEVVPIY48 05AIVYIQVT112 113RGVAKRGHAFPANAVP128137LALPTDAQRAQG147 198GSSS201 260SATK263
+G. toebii SK1 48.0 25ERGLQFG31 33GVYEVARIY41 90AILYLQVT97 98RGSFPRNHAFPAENRP113 122MPRKIREIEQG132 182GSSS185 244STTS247
+L. salivarius 35.9 23DRALYFG29 31GCYDATTFK39 87GILYWQTS94 95RGSGLRNHIFPEDSQP110 118PYGLVPFDTE127 177CAHS180 240SSAC242
+C. pusillum 23.1 46DLGITRG52 54GVFETIAVI62 114LFAKLILT121 122RGIEGEGRP130 139GEDFSQQRLG148 208GPTS211 270SSVR273
+H. hydrossis 25.9 23DLSILRG29 31GIFDYFLAR39 87AGIRLVLT94 95GGYSPDGYTVNP107 115DLPASAWEFSAQG127 177SARS180 238STIK241
+M. tuberculosis 23.6 21DLAAVRG27 29GVFETLLVR37 7GALRLIYS94 95RGREGGSAP103 112VPARVIGARRDG123 183GPRS186 252SSMT255
+A. thaliana 23.8 99DHMVHRG105 107GVFDTALII115 163GSLRYWLS170 171AGPGDFLLSPSQCLLP186 195TNFAINPIG203 256GPNM259 324GSGI327
+AmicoTA 28.7 22DLIIQRG28 30 GVFETISTH38 85 TMVRPYIT92 93 GDSFGKDHLFSSSRYFV110 115 IRKPDPILYEKG126 173 GSHS176 234 GTVK237
+Molecules 2023, 28, 2109 5 of 21
+Table 2. The speciﬁcity-determining motifs of two groups of DAATs. Numeration as in bsDAAT
+(PDB ID 1DAA).
+Group Sequence Motif 1 Sequence Motif 2
+26 31 33 35 x88xx 98xx
+Canonical DAATs F Y [VA] [KRPT] xYxQ RxH
+Non-canonical DAATs R F [TY] [LA] x[RK]x[IVW] Non-conservative
+Searching for TAs in the genome of bacteria A. colombiense revealed a new PLP-
+dependent DAAT (GenBank ID: WP_013049219)—AmicoTA. The identities of the amino
+acid sequences of AmicoTA with canonical bsDAAT and non-canonical CpuTA were 28.7%
+and 31.2%, respectively. The AmicoTA sequence included residues matching to motifs of
+both DAAT groups (Tables 1 and 2). While R27 (O-pocketα-helix), F32, T34 (βX-strand),
+and R88 (βY-strand) residues corresponded to non-canonical DAATs motifs, the K99 and
+H101 (O-pocket loop) residues matched to canonical DAATs motifs. To shed light on the
+properties of AmicoTA, the recombinant enzyme was expressed in a soluble form, puriﬁed
+to homogeneity (Figure S2), and characterized in detail.
+2.2. Substrate Speciﬁcity Proﬁle of AmicoTA
+An analysis of half-reactions was performed to ﬁnd amino donors. Since the overall
+transamination reaction is the sum of two consecutive half-reactions [8,37], the substrate
+spectrum (amino donors) of TA can be obtained from the analysis of the TA afﬁnity in half-
+reactions for compounds with the amino group/keto group (in the absence of the inhibition
+by the second substrate and the second product) [5,8,14]. The half-reaction analysis of the
+PLP form of AmicoTA with various amino donors demonstrated the speciﬁcity of AmicoTA
+for various D-amino acids. (Table 3, Figure S3). No activity with L-amino acids and primary
+amines was observed. The best amino donors were D-glutamate and D-alanine.
+Table 3. Kinetic parameters of half-reactions between the PLP form of AmicoTA and amino donors
+in 50 mM CHES buffer, pH 9.0, at 40◦C. ND—not detected. The values of the rate constants of the
+reverse reactions were zero for all substrates.
+Amino Donor 103 ×kmax, s−1 KD, mM k max/KD, M−1 s−1
+D-Glutamate 1080 ±40 2.1 ±0.2 515 ±70
+D-Alanine 280 ±10 50 ±6 5.6 ±0.8
+D-Aspartate 118 ±6 120 ±15 1.0 ±0.2
+D-Leucine 33 ±2 100 ±10 0.33 ±0.05
+D-Ornithine 2.1 ±0.1 10 ±1 0.21 ±0.02
+D-Phenylalanine 2.9 ±0.2 19 ±3 0.15 ±0.03
+L-Alanine ND
+L-Leucine ND
+(R)-(+)-1-phenylethylamine ND
+(S)-(−)-1-phenylethylamine ND
+AmicoTA catalyzed transamination at 30–60 ◦C and pH 6–10 (Figure 2). The optimal
+pH and temperature for the reaction between D-alanine and α-ketoglutarate were 8.5–9.0
+and 60 ◦C (Figure 2), respectively. The optimal parameters for the reverse reaction between
+D-glutamate and pyruvate were pH 8.0 and 50 ◦C, respectively (Figure 2). Kinetic parame-
+ters of the overall transamination reaction between D-alanine and α-ketoglutarate as well
+as the reverse reaction between D-glutamate and pyruvate are shown in Table 4 (Figure S4).
+Transamination reaction between D-alanine and α-ketoglutarate in 50 mM CHES buffer,
+pH 9.0, at 60 ◦C was assigned as a standard assay.
+Molecules 2023, 28, 2109 6 of 21
+Molecules 2023, 28, 2109 5 of 22 
+ 
+ 
+half-reactions for compounds with the amino group/keto group (in the absence of the in-
+hibition by the second substrate and the seco nd product) [5,8,14]. The half-reaction anal-
+ysis of the PLP form of AmicoTA with various amino donors demonstrated the specificity 
+of AmicoTA for various D-amino acids. (Table 3, Figure S3). No activity with L-amino 
+acids and primary amines was observed. The best amino donors were D-glutamate and 
+D-alanine.  
+Table 3. Kinetic parameters of half-reactions between the PLP form of AmicoTA and amino donors 
+in 50 mM CHES buffer, pH 9.0, at 40 °C. ND—not detected. The values of the rate constants of the 
+reverse reactions were zero for all substrates. 
+Amino Donor 10 3 × kmax, s−1 KD, mM kmax/KD, М−1 s−1 
+D-Glutamate 1080 ± 40 2.1 ± 0.2 515 ± 70 
+D-Alanine 280 ± 10 50 ± 6 5.6 ± 0.8 
+D-Aspartate 118 ± 6 120 ± 15 1.0 ± 0.2 
+D-Leucine 33 ± 2 100 ± 10 0.33 ± 0.05 
+D-Ornithine 2.1 ± 0.1 10 ± 1 0.21 ± 0.02 
+D-Phenylalanine 2.9 ± 0.2 19 ± 3 0.15 ± 0.03 
+L-Alanine ND 
+L-Leucine ND 
+(R)-(+)-1-phenylethylamine ND 
+(S)-(−)-1-phenylethylamine ND 
+AmicoTA catalyzed transamination at 30–60 °C and pH 6–10 (Figure 2). The optimal 
+pH and temperature for the reaction between D-alanine and α-ketoglutarate were 8.5–9.0 
+and 60 ° С (Figure 2), respectively. The optimal parameters for the reverse reaction be-
+tween D-glutamate and pyruvate were pH 8.0 and 50 ° С, respectively (Figure 2). Kinetic 
+parameters of the overall transamination reaction between D-alanine and α-ketoglutarate 
+as well as the reverse reaction between D-glutamate and pyruvate are shown in Table 4 
+(Figure S4). Transamination reaction between D-alanine and α-ketoglutarate in 50 mM 
+CHES buffer, pH 9.0, at 60 °C was assigned as a standard assay. 
+ 
+Figure 2. pH- and temperature dependences of AmicoTA activity in the overall transamination re-
+actions between D-alanine and α-ketoglutarate (black) and D-glutamate and pyruvate (red); 100% 
+corresponds to 0.62 ± 0.05 U/mg ((A), black), 0.26 ± 0.01 U/mg ((A), red), 1.55 ± 0.05 U/mg ((В), black) 
+and 0.60 ± 0.03 U/mg (( B), red). Black/red squares: mixed buffer 25 mM Tris-HCl and 25 mM K-
+phosphate, pH 6–9. Black/red triangles: 50 mM CHES buffer, pH 9–10. Bars mean standard devia-
+tion. 
+Figure 2. pH- and temperature dependences of AmicoTA activity in the overall transamination
+reactions between D-alanine and α-ketoglutarate (black) and D-glutamate and pyruvate (red); 100%
+corresponds to 0.62 ±0.05 U/mg ((A), black), 0.26 ±0.01 U/mg ((A), red), 1.55 ±0.05 U/mg ((B),
+black) and 0.60 ±0.03 U/mg ((B), red). Black/red squares: mixed buffer 25 mM Tris-HCl and 25 mM
+K-phosphate, pH 6–9. Black/red triangles: 50 mM CHES buffer, pH 9–10. Bars mean standard
+deviation.
+Table 4. Kinetic parameters of the overall transamination reactions between D-alanine and α-
+ketoglutarate (in 50 mM CHES buffer, pH 9.0) and the reverse reaction between D-glutamate and
+pyruvate (in 50 mM K-phosphate buffer, pH 8.0), catalyzed by AmicoTA, at 60◦C.
+Substrate Co-Substrate kcat, s−1 Km, mM kcat/Km, M−1 s−1
+D-alanine 5 mM
+α-ketoglutarate 9.9 ±1.3 465 ±60 22 ±6
+α-ketoglutarate 500 mM
+D-alanine 9.9 ±1.3 7.2 ±0.8 1375 ±330
+D-glutamate 500 mM
+pyruvate 1.40 ±0.06 5.2 ±0.6 270 ±40
+pyruvate 30 mM
+D-glutamate 1.40 ±0.06 160 ±20 9 ±1
+According to the kinetic analysis of thermostability, the half-life of AmicoTA was about
+10 h at 60 ◦C, 40 h at 50 ◦C, and 100 h at 40 ◦C (Figure S5A). In the presence of substrates
+(operational stability), the half-life of AmicoTA decreased to 10 min at 60 ◦C, 10 h at 50 ◦C,
+and 35 h at 40 ◦C (Figure S5B). Both experiments were performed at high concentrations of
+AmicoTA. No enzyme inactivation was observed in the standard assay at lower enzyme
+concentrations.
+The enantioselectivity of AmicoTA was evaluated in the overall reaction between 4-
+methyl-2-oxovalerate or phenylpyruvate and D-glutamate as an amino donor. The product
+yield of D-leucine and D-phenylalanine after 48 h of the reaction at 30◦C achieved 98% and
+32%, respectively (Figure S6). The enantiomeric excess of D-leucine and D-phenylalanine
+was 99.1 and 99.3%, respectively.
+2.3. The Overall Structure of AmicoTA
+The crystal structure of the holoenzyme was elucidated at 1.9 Å resolution. The
+asymmetric unit contained two subunits organized in a dimer whose buried area comprised
+15% of the total surface area of each subunit. According to gel ﬁltration, AmicoTA is a
+dimer in solution as well (Figure S7). The organization of the AmicoTA dimer (Figure 3A)
+Molecules 2023, 28, 2109 7 of 21
+corresponded to the functional units of TAs of PLP fold type IV [9–12,31,38,39], which is in
+agreement with the general conclusion about the similarity of the overall fold organization
+among TAs of PLP fold type IV [9,28]. The closest structural homologs of the AmicoTA
+were BCATs fromGeoglobus acetivorans and Archaeoglobus fulgidus [40], Halhy [27] and R-TA
+from A. fumigatus [12] (Table S1).
+Molecules 2023, 28, 2109 7 of 22 
+ 
+ 
+ 
+Figure 3. The overall structure of AmicoTA. ( A) The two subunits in th e AmicoTA dimer. In the 
+right subunit, the small domain is shown in light  pink, the large domain in light green, the inter-
+domain loop in magenta, and the adjacent subunit in gray. The PLP molecules are shown in sticks. 
+(B) The active site of AmicoTA. The impo rtant structural elements are shown: βX- and βY-strands 
+(orange), the O-pocket loop from the adjacent subunit (blue), the O-pocket α-helix from the adjacent 
+subunit (yellow), β-turn1 (red), β-turn2 (black). (C,D) Alignment of the interdomain loops ( C) and 
+the O-pocket loops (D) of AmicoTA (O-pocket loop—blue, interdomain loop—magenta), bsDAAT 
+(orange), CpuTA (green) and Halhy (yellow). 
+Each subunit of the dimer consisted of two α/β domains: a small domain (residues 
+1–114) and a large domain (residues 127–275) , connected by the interdomain loop (resi-
+dues 115–126) (Figure 3A). The interdomain loop of AmicoTA (115–126) was out of the 
+active site as in known DAATs (Figure 3B). Two proline residues make the interdomain 
+loop rigid similar to bsDAAT (Table 1). It is fixed on the verge of the active-site cavity by 
+two hydrogen bonds. This arrangement of the interdomain loop seems to be a common 
+feature of DAATs [9,11,34] (Figure 3С). The O-pocket loop (95–109) was also located out-
+side the active site in the AmicoTA dimer (Fig ure 1B,D), i.e., in an open conformation. 
+Positions of other structural elements in the active site: βX-strand (30–37), βY-strand (85–
+92), β-turn1 (173–176), and β-turn2 (234–237) were similar to those of known TAs of PLP 
+fold type IV [9–12].  
+  
+Figure 3. The overall structure of AmicoTA. (A) The two subunits in the AmicoTA dimer. In the right
+subunit, the small domain is shown in light pink, the large domain in light green, the interdomain
+loop in magenta, and the adjacent subunit in gray. The PLP molecules are shown in sticks. (B) The
+active site of AmicoTA. The important structural elements are shown: βX- and βY-strands (orange),
+the O-pocket loop from the adjacent subunit (blue), the O-pocket α-helix from the adjacent subunit
+(yellow), β-turn1 (red), β-turn2 (black). ( C,D) Alignment of the interdomain loops (C) and the O-
+pocket loops (D) of AmicoTA (O-pocket loop—blue, interdomain loop—magenta), bsDAAT (orange),
+CpuTA (green) and Halhy (yellow).
+Each subunit of the dimer consisted of two α/βdomains: a small domain (residues
+1–114) and a large domain (residues 127–275), connected by the interdomain loop (residues
+115–126) (Figure 3A). The interdomain loop of AmicoTA (115–126) was out of the active
+site as in known DAATs (Figure 3B). Two proline residues make the interdomain loop
+rigid similar to bsDAAT (Table 1). It is ﬁxed on the verge of the active-site cavity by two
+hydrogen bonds. This arrangement of the interdomain loop seems to be a common feature
+of DAATs [9,11,34] (Figure 3C). The O-pocket loop (95–109) was also located outside the
+active site in the AmicoTA dimer (Figure 1B,D), i.e., in an open conformation. Positions of
+other structural elements in the active site: βX-strand (30–37), βY-strand (85–92),β-turn1
+(173–176), and β-turn2 (234–237) were similar to those of known TAs of PLP fold type
+IV [9–12].
+Molecules 2023, 28, 2109 8 of 21
+2.4. Active Site Organization in the AmicoTA Dimer
+The AmicoTA dimer contains two identical active sites formed by the residues of two
+small domains of both subunits and a large domain of one subunit. The PLP molecules are
+clearly seen in the electron density of both active sites and are bound via Schiff base linkage
+with K142. The phosphate moiety of PLP has a common to known TAs of PLP fold type
+IV multiple coordination via hydrogen bonds with the side chains of R51, T198, and T199,
+backbone nitrogen atoms of T198, T199, and T235 as well as water-mediated hydrogen
+bonds with T34, T177, R200, and T233. The pyridine ring of PLP is sandwiched by the side
+chain of L195 and backbone atoms of H175 and S176 ( β-turn1) (Figure 4 and Figure S8).
+Y146 forms a hydrogen bond with the phenyl group of PLP ( Figure S8). E172 forms a
+hydrogen bond with the N1 atom of the pyridine ring of PLP . Noteworthily, E172 forms a
+direct hydrogen bond with the N1 atom in one subunit (Figure S8A), while it coordinates
+the N1 atom via the water molecule in the other subunit (Figure S8B). Generally, there is a
+direct hydrogen bond between the N1 atom of the pyridine ring and the carboxylate group
+of aspartate or glutamate residue among TAs of PLP fold type IV [10–12,26,41].
+Molecules 2023, 28, 2109 8 of 22 
+ 
+ 
+2.4. Active Site Organization in the AmicoTA Dimer 
+The AmicoTA dimer contains two identical active sites formed by the residues of two 
+small domains of both subunits and a large domain of one subunit. The PLP molecules 
+are clearly seen in the electron density of bo th active sites and are bound via Schiff base 
+linkage with K142. The phosphate moiety of PLP has a common to known TAs of PLP 
+fold type IV multiple coordination via hydrogen bonds with the side chains of R51, T198, 
+and T199, backbone nitrogen atoms of T198, T199, and T235 as well as water-mediated 
+hydrogen bonds with T34, T177, R200, and T233. The pyridine ring of PLP is sandwiched 
+by the side chain of L195 and backbone atoms of H175 and S176 ( β-turn1) (Figures 4 and 
+S8). Y146 forms a hydrogen bond with the phenyl group of PLP (Figure S8). E172 forms a 
+hydrogen bond with the N1 atom of the pyri dine ring of PLP. Noteworthily, E172 forms 
+a direct hydrogen bond with the N1 atom in one subunit (Figure S8A), while it coordinates 
+the N1 atom via the water molecule in the ot her subunit (Figure S8B). Generally, there is 
+a direct hydrogen bond between the N1 atom of the pyridine ring and the carboxylate 
+group of aspartate or glutamate residue among TAs of PLP fold type IV [10–12,26,41]. 
+Considering the conventional division of th e active site into O-pocket and P-pocket 
+[9,13,15], the O-pocket of AmicoTA is lined by residues of βX- and βY-strands as well as 
+β-turn1 and O-pocket α-helix. The O-pocket is open: neither the O-pocket loop nor β-turn1 
+shields it from the solvent. It contains five positively charged residues, which can bind the 
+α-carboxylate group of a substrate: R27*, R8 8, K99*, H101*, and H175 (Figure 4A). K99* 
+and H101* residues (equivalent to R98* and H100* in canonical bsDAAT) are located on 
+the O-pocket loop and are oriented away from the active site in the holoenzyme. The third 
+residue of the canonical carboxylate trap (Y31 in bsDAAT) is substituted for F32 in 
+AmicoTA; however, the nearby located T34 might bear its function. Although the residues 
+of the canonical triad are mostly in place, th e presence of a canonical carboxylate trap is 
+unclear from the holoenzyme structure. Additionally, R27* and R88 from O-pocket α-he-
+lix and βX-strand, respectively, together with T34 can organize an alternative carboxylate 
+trap. 
+ 
+Figure 4. The active site of AmicoTA in ( A) the holoenzyme with PLP bound to K142, ( B) in the 
+complex with D-glutamate. Both subunits are shown in cartoon mode: first—in light blue, second—
+in light orange. Residues of the O-pocket are shown in green, of the P-pocket—in magenta, the PLP 
+molecule is shown in yellow, and the ketimine fo rmed by PLP and D-glutamate is in purple. (*) 
+indicates residues from the adjacent subunit of th e functional dimer. Distances are given in Å and 
+depicted with dashed lines. 
+The P-pocket of the AmicoTA active site is lined by S36, M86, and 234GTVK237 residues 
+of the β-turn2 (Figure 4A). K237 forms a positively charged site in the P-pocket. The inter-
+domain loop contains the R116 residue, which might be involved in targeting a negatively 
+charged substrate. Of note, in the holoenzyme structure, the R116 side chain has no elec-
+tron density.  
+Figure 4. The active site of AmicoTA in ( A) the holoenzyme with PLP bound to K142, ( B) in the
+complex with D-glutamate. Both subunits are shown in cartoon mode: ﬁrst—in light blue, second—
+in light orange. Residues of the O-pocket are shown in green, of the P-pocket—in magenta, the
+PLP molecule is shown in yellow, and the ketimine formed by PLP and D-glutamate is in purple.
+(*) indicates residues from the adjacent subunit of the functional dimer. Distances are given in Å and
+depicted with dashed lines.
+Considering the conventional division of the active site into O-pocket and P-pocket[9,13,15],
+the O-pocket of AmicoTA is lined by residues ofβX- and βY-strands as well asβ-turn1 and
+O-pocketα-helix. The O-pocket is open: neither the O-pocket loop norβ-turn1 shields it from
+the solvent. It contains five positively charged residues, which can bind theα-carboxylate
+group of a substrate: R27*, R88, K99*, H101*, and H175 (Figure 4A). K99* and H101* residues
+(equivalent to R98* and H100* in canonical bsDAAT) are located on the O-pocket loop and
+are oriented away from the active site in the holoenzyme. The third residue of the canonical
+carboxylate trap (Y31 in bsDAAT) is substituted for F32 in AmicoTA; however, the nearby
+located T34 might bear its function. Although the residues of the canonical triad are mostly in
+place, the presence of a canonical carboxylate trap is unclear from the holoenzyme structure.
+Additionally , R27* and R88 from O-pocketα-helix andβX-strand, respectively , together with
+T34 can organize an alternative carboxylate trap.
+The P-pocket of the AmicoTA active site is lined by S36, M86, and234GTVK237 residues
+of the β-turn2 (Figure 4A). K237 forms a positively charged site in the P-pocket. The
+interdomain loop contains the R116 residue, which might be involved in targeting a
+negatively charged substrate. Of note, in the holoenzyme structure, the R116 side chain has
+no electron density.
+Molecules 2023, 28, 2109 9 of 21
+2.5. Structural Analysis of the Substrates Binding in the Complex of AmicoTA with D-Glutamate
+To shed light on the substrate binding mode in AmicoTA, the structure with D-
+glutamate was obtained at 1.9Å resolution. The RMSD for Cαatoms between subunits of
+the holoenzyme and the complex with D-glutamate did not exceed 0.4 Å. In the complex
+D-glutamate is covalently bound with PLP via Schiff linkage (Figure 4B). Considering that
+the dihedral angle C3-C4-C4 ′-N4′is 60◦and 40◦in subunits A and B, respectively, the
+adduct between D-glutamate and PLP is a ketimine rather than an aldimine. The hydrogen
+bond between the phenyl oxygen of the PLP ring and the N4 ′atom of Schiff linkage is
+unobvious. The occupancy of the adduct was found to be 0.7, the rest of the cofactor was
+in PMP form. Several residues in the active site and PLP changed their orientation upon
+D-glutamate binding, compared to holoenzyme. The pyridine ring was tilted 15 ◦from
+its position in the holoenzyme around the N1-C6 bond, and the released side chain of the
+catalytic lysine moved toward Y146, forming a hydrogen bond between its εNH2 group
+and OH group of Y146. The α-carboxylate group of D-glutamate formed a salt bridge
+with the guanidine group of R27* and a hydrogen bond with the hydroxyl group of T34.
+Backbone nitrogen atoms of V236 and K237 as well as the Nεatom of the latter coordinated
+the γ-carboxylate group of D-glutamate.
+Both the O-pocket loop and the interdomain loop did not change their conformations
+upon binding of the substrate. Neither K99* with H101* (analogs of the “carboxylate trap”
+in bsDAAT) nor R116 was found to participate in the substrate binding. The si-face of
+the ketimine was exposed to the bulk solvent, while the re-face oriented to the protein
+side was shielded from the water molecules. Of note, R88, which is located near R27*,
+was not involved in the substrate binding; it remained intact, bound by several hydrogen
+bonds with residues of both subunits of the dimer. The orientation of the side chain of
+H175 was unfavorable for hydrogen bonding with the α-carboxylate group of D-glutamate,
+although histidine could be protonated at pH 6.5 (crystallization conditions). Instead,
+H175 was oriented as in the holoenzyme, which may be a result of crystal soaking in a
+D-glutamate solution.
+To summarize, no canonical “carboxylate trap” was formed when D-glutamate entered
+the active site. No other “carboxylate trap” was formed by R27*, R88, and T34 as well.
+The α-carboxylate group of the substrate was coordinated only by R27* and T34. The
+γ-carboxylate group of D-glutamate was coordinated by the positively charged side chain
+of K237 and backbone nitrogen atoms of K237 and V236 in the P-pocket. The active site is
+open to the solvent.
+2.6. Substrate Binding Modes Revealed by Molecular Dynamic Simulations
+We performed MD simulations to examine the substrate binding in the active site
+of AmicoTA. D-glutamate was found to be the best amino substrate for the AmicoTA,
+considering both kmax and KD values. This is in line with the fact that α-ketoglutarate
+carrying the similarγ-carboxylate group is the best keto substrate. Classical MD simulations
+were carried out to obtain the ES complex of WT AmicoTA with D-glutamate (Figure 5A).
+In the ES complex, the negatively charged α-carboxylate group forms stable salt bridges
+with the side chain of R27*, and the γ-carboxylate group forms a stable salt bridge with
+the side chain of K237. We performed additional MD simulations of the ES complexes
+with other substrates considered in the study. D-aspartate carries a negatively charged
+β-carboxylate group on its side chain, which does not interact with K237 and is exposed to
+the solution. This agrees with the almost 60 times increase of the KD value compared with
+D-glutamate. Unexpectedly, D-ornithine with a protonated amino group in its side chain
+had a relatively low KD value. MD simulations demonstrate that it forms a stable complex
+between its hydrophobic part, including CβH2-CγH2-CδH2 fragment and a side chain of
+V236; the protonated amino group is exposed to the solution and shields hydrophobic
+fragments from interactions with water molecules that should stabilize the Gibbs energy of
+the entire system (Figure 5B).
+Molecules 2023, 28, 2109 10 of 21
+Molecules 2023, 28, 2109 10 of 22 
+ 
+ 
+from interactions with water molecules that should stabilize the Gibbs energy of the entire 
+system (Figure 5B).  
+ 
+ 
+Figure 5. ES complexes of the AmicoTA and D-glutamate ( A), AmicoTA and D-ornithine ( B). Hy-
+drogen bonds between the enzyme and the substrate are shown by black dashed lines. Interactions 
+discussed in the text are highlighted in yellow. 
+2.7. Michaelis Complex of AmicoTA with D-Glutamate and Substrate-Assisted Mechanism  
+of Catalysis 
+The first process during the transamination reaction is a transimination, that is, the 
+amino group of a substrate substitutes the amin o group of catalytic lysine in the internal 
+aldimine, an adduct of PLP and catalytic lysine in the active site of TAs [7,14]. It was 
+shown for TAs of PLP fold type I, that the effectiveness of this step is achieved by the 
+deprotonation of the attacking amino group and concerted protonation of the imine nitro-
+gen atom in the internal aldimine, such combination raises the nucleophilicity of the at-
+tacking group and facilitates the leaving group release [7,42]. The absorbance spectra of 
+the holo form of AmicoTA at different pH  showed the predominance of the protonated 
+internal aldimine at pH range 7.0–10.0 (Figure 6). No peak at 360–375 nm [32,43] that cor-
+responded to the deprotonated form of the internal aldimine was observed. 
+Figure 5. ES complexes of the AmicoTA and D-glutamate (A), AmicoTA and D-ornithine (B). Hy-
+drogen bonds between the enzyme and the substrate are shown by black dashed lines. Interactions
+discussed in the text are highlighted in yellow.
+2.7. Michaelis Complex of AmicoTA with D-Glutamate and Substrate-Assisted Mechanism
+of Catalysis
+The ﬁrst process during the transamination reaction is a transimination, that is, the
+amino group of a substrate substitutes the amino group of catalytic lysine in the internal
+aldimine, an adduct of PLP and catalytic lysine in the active site of TAs [7,14]. It was shown
+for TAs of PLP fold type I, that the effectiveness of this step is achieved by the deprotonation
+of the attacking amino group and concerted protonation of the imine nitrogen atom in
+the internal aldimine, such combination raises the nucleophilicity of the attacking group
+and facilitates the leaving group release [7,42]. The absorbance spectra of the holo form of
+AmicoTA at different pH showed the predominance of the protonated internal aldimine
+at pH range 7.0–10.0 (Figure 6). No peak at 360–375 nm [32,43] that corresponded to the
+deprotonated form of the internal aldimine was observed.
+Since the imine nitrogen in the internal aldimine of AmicoTA is protonated, the
+substrate binding mode should provide an assistance to the deprotonation of the amino
+group of D-amino acid. No proton acceptor was found in the active site close to the amino
+group of the substrate except the α-carboxylate of the substrate, which is common for all D-
+amino acids. Moreover, at optimal pH 8.5 and 9.0, the percentage of the deprotonated form
+of D-alanine and D-glutamate does not exceed 8% and 25%, correspondingly. Therefore,
+we examined substrate-assisted catalysis. The mechanism of the ﬁrst elementary step of the
+chemical reaction was calculated at the QM(PBE0-D3/6-31G**)/MM MD level of theory.
+Umbrella sampling procedure was utilized, and the reaction coordinate was chosen as a
+sum of the distances between the hydrogen atom of the protonated amino group and the
+oxygen atom of the α-carboxylate group of the substrate, and between the nitrogen atom
+of the substrate and the C4′atom of PLP . The Gibbs energy proﬁle is depicted in Figure 7.
+The substrate acts as a base and the reaction is initiated by the proton transfer from the
+protonated amino group of the substrate to its α-carboxylate group. In the transition state
+region, the proton is already transferred to the carboxylate of the α-carboxylate group;
+the lone pair of the neutral amino group is oriented toward the PLP carbon atom and the
+distance of the nucleophilic attack is 2.8–2.9 Å that is favorable for the following C—N bond
+Molecules 2023, 28, 2109 11 of 21
+formation. The neutral α-carboxylate group of the substrate is stabilized by the hydrogen
+bond with the phenyl group of PLP . Thus, at the ﬁrst step, the gem-diamine is obtained,
+and the entire system is stabilized by about 6 kcal/mol relative to the ES complex.
+Molecules 2023, 28, 2109 11 of 22 
+ 
+ 
+ 
+Figure 6. The absorption spectra of the Amico PLP form  at a concentration of 30 µM in different 
+buffers: mixed buffer 25 mM Tris-HCl and 25 mM K- phosphate pH 7 (black), pH 8 (red), pH 8.5 
+(blue), pH 9 (green), 50 mM CHES buffer pH 9 (mag enta), pH 9.5 (orange), pH 10 (dark cyan). The 
+insert shows the absorption spectra at 310–465 nm. The spectra were obtained with three independ-
+ent preparations. 
+Since the imine nitrogen in the internal aldimine of AmicoTA is protonated, the sub-
+strate binding mode should provide an assistance to the deprotonation of the amino group 
+of D-amino acid. No proton acceptor was found in the active site close to the amino group 
+of the substrate except the α-carboxylate of the substrate, which is common for all D-
+amino acids. Moreover, at optimal pH 8.5 and 9.0, the percentage of the deprotonated 
+form of D-alanine and D-glutamate does not exceed 8% and 25%, correspondingly. There-
+fore, we examined substrate-assisted catalysis. The mechanism of the first elementary step 
+of the chemical reaction was calculated at the QM(PBE0-D3/6-31G**)/MM MD level of 
+theory. Umbrella sampling procedure was utilized, and the reaction coordinate was cho-
+sen as a sum of the distances between the hydrogen atom of the protonated amino group 
+and the oxygen atom of the α-carboxylate group of the substrate, and between the nitro-
+gen atom of the substrate and the C4 ′ atom of PLP. The Gibbs energy profile is depicted 
+in Figure 7. The substrate acts as a base and the reaction is initiated by the proton transfer 
+from the protonated amino group of the substrate to its α-carboxylate group. In the tran-
+sition state region, the proton is already transferred to the carboxylate of the α-carboxylate 
+group; the lone pair of the neutral amino gr oup is oriented toward the PLP carbon atom 
+and the distance of the nucleophilic attack is  2.8–2.9 Å that is favorable for the following 
+C—N bond formation. The neutral α-carboxylate group of the substrate is stabilized by 
+the hydrogen bond with the phenyl group of PLP. Thus, at the first step, the gem-diamine 
+is obtained, and the entire system is stabilized by about 6 kcal/mol relative to the ES com-
+plex. 
+Figure 6. The absorption spectra of the Amico PLP form at a concentration of 30 µM in different
+buffers: mixed buffer 25 mM Tris-HCl and 25 mM K-phosphate pH 7 (black), pH 8 (red), pH 8.5
+(blue), pH 9 (green), 50 mM CHES buffer pH 9 (magenta), pH 9.5 (orange), pH 10 (dark cyan). The
+insert shows the absorption spectra at 310–465 nm. The spectra were obtained with three independent
+preparations.
+Molecules 2023, 28, 2109 12 of 22 
+ 
+ 
+ 
+Figure 7. The first step of the reaction leading to the formation of the gem-diamine from the ES 
+complex. Gibbs energy profile is shown in blue, dashed black lines are for hydrogen bonds and 
+dashed violet lines are for the interatomic distances comprising reaction coordinate. 
+3. Discussion 
+AmicoTA is a transaminase of PLP fold type IV, which is active toward D-amino 
+acids and α-keto acids. The highest conversion rate is achieved in transamination between 
+D-alanine and α-ketoglutarate at pH 8.5–9.0, 60 °C. It concedes bsDAAT [34] and Halhy 
+[27] in a catalytic turnover rate in the reaction between D-alanine and α-ketoglutarate 15–
+25 times in the optimal conditions. At the same time, if we consider Km meaning as «the 
+affinity of the enzyme for the substrates in  the steady state» [44], these values for α-ke-
+toglutarate are similar in DAATs. It appears that a proper binding of α-ketoglutarate is a 
+key feature of DAATs. In this case, the specif icity for other substrates depends on the ef-
+ficiency of their binding in the active site optimized for α-ketoglutarate. The efficient bind-
+ing of α-ketoglutarate means the coordination of  both carboxylate groups. In AmicoTA, 
+two sites of carboxylate group binding were found: one in the O-pocket formed by R27* 
+and T34, and another in the P-pocket formed by K237 and V236.  
+Noteworthy, the O-pocket loop is considered to be a specificity-determining struc-
+tural element in TAs of fold type IV [9,13,28]  because it contains residues for substrate 
+binding. Additionally, the O-pocket loop in closed conformation together with the inter-
+domain loop shields the active site from the solvent. The closed active sites in complexes 
+with substrates are observed for R-TAs and BCATs but not for canonical bsDAAT 
+[10,31,39,40,45,46]. This is not the case for AmicoTA as well. Despite the open active site, 
+in the transamination reaction catalyzed by  AmicoTA both the enantiomeric excess and 
+the product yield of the D-amino acids surpass 99% and 98%, correspondingly. These ob-
+servations support the substrate-differentiation role of the active site closure but not the 
+catalytic one in TAs [9,10,47]. To summarize, the substrate binding in AmicoTA is 
+achieved by multiple interactions with residu es located on the fixed structural elements 
+of the active site. The substrate differentiation mechanism should be clarified. Moreover, 
+it remains unclear how DAATs escape the side reaction of racemization. 
+The mechanism of the overall transamination  reaction including the transimination 
+step was established for aspa rtate aminotransferase from E.coli [8,14,48], which demon-
+strated maximal activity at pH 7.0–8.0 and had deprotonated imine nitrogen at this pH 
+range. In the Michaelis complex, the attacking protonated aspartate donates its proton to 
+imine nitrogen of the internal aldimine, and transimination proceeds [7,14]. The estab-
+lished mechanism of transi mination became disputable for DAATs and BCATs 
+[10,22,24,49,50], as the imine nitrogen of the internal aldimine was protonated in the pH 
+Figure 7. The ﬁrst step of the reaction leading to the formation of the gem-diamine from the ES
+complex. Gibbs energy proﬁle is shown in blue, dashed black lines are for hydrogen bonds and
+dashed violet lines are for the interatomic distances comprising reaction coordinate.
+Molecules 2023, 28, 2109 12 of 21
+3. Discussion
+AmicoTA is a transaminase of PLP fold type IV , which is active toward D-amino acids
+and α-keto acids. The highest conversion rate is achieved in transamination between D-
+alanine and α-ketoglutarate at pH 8.5–9.0, 60◦C. It concedes bsDAAT [34] and Halhy [27] in
+a catalytic turnover rate in the reaction between D-alanine and α-ketoglutarate 15–25 times
+in the optimal conditions. At the same time, if we consider Km meaning as «the afﬁnity
+of the enzyme for the substrates in the steady state» [44], these values for α-ketoglutarate
+are similar in DAATs. It appears that a proper binding ofα-ketoglutarate is a key feature
+of DAATs. In this case, the speciﬁcity for other substrates depends on the efﬁciency of
+their binding in the active site optimized for α-ketoglutarate. The efﬁcient binding of
+α-ketoglutarate means the coordination of both carboxylate groups. In AmicoTA, two sites
+of carboxylate group binding were found: one in the O-pocket formed by R27* and T34,
+and another in the P-pocket formed by K237 and V236.
+Noteworthy, the O-pocket loop is considered to be a speciﬁcity-determining structural
+element in TAs of fold type IV [9,13,28] because it contains residues for substrate binding.
+Additionally, the O-pocket loop in closed conformation together with the interdomain loop
+shields the active site from the solvent. The closed active sites in complexes with substrates
+are observed for R-TAs and BCATs but not for canonical bsDAAT [10,31,39,40,45,46]. This
+is not the case for AmicoTA as well. Despite the open active site, in the transamination
+reaction catalyzed by AmicoTA both the enantiomeric excess and the product yield of
+the D-amino acids surpass 99% and 98%, correspondingly. These observations support
+the substrate-differentiation role of the active site closure but not the catalytic one in
+TAs [9,10,47]. To summarize, the substrate binding in AmicoTA is achieved by multiple
+interactions with residues located on the ﬁxed structural elements of the active site. The
+substrate differentiation mechanism should be clariﬁed. Moreover, it remains unclear how
+DAATs escape the side reaction of racemization.
+The mechanism of the overall transamination reaction including the transimination
+step was established for aspartate aminotransferase from E.coli [8,14,48], which demon-
+strated maximal activity at pH 7.0–8.0 and had deprotonated imine nitrogen at this pH
+range. In the Michaelis complex, the attacking protonated aspartate donates its proton to
+imine nitrogen of the internal aldimine, and transimination proceeds [7,14]. The established
+mechanism of transimination became disputable for DAATs and BCATs [10,22,24,49,50],
+as the imine nitrogen of the internal aldimine was protonated in the pH optima of these
+TAs [22,24,49,51]. Goto and coauthors suggested for BCAT from E. coli that a proton from
+the substrate amino group migrated to a negatively charged hole formed in the active
+site by the phosphate group of cofactor and the adjacent α-carboxylate group of L-amino
+acid substrate [52]. This hypothesis does not suit for DAATs. In the active site of DAATs,
+the α-carboxylate group of a substrate and the phosphate group of the cofactor occupy
+opposite pockets. Here, we suggest substrate-assisted catalysis as a possible route of the
+amino group deprotonation in a Michaelis complex in the transimination step. The α-
+carboxylate group of a substrate acts as a proton acceptor, with the Schiff base of the lysine
+residue and PLP being in a protonated state in the pH range 7–10 and unable to accept
+a proton. QM/MM MD simulation for AmicoTA demonstrated that the proton transfer
+from the amino group to the α-carboxylate group in the substrate occurs together with the
+nucleophilic attack of the substrate nitrogen atom on the internal aldimine carbon atom
+forming a gem-diamine. This process results in the 6 kcal/mol lowering of the energy of
+the entire system and happens with the low energy barrier. Our ﬁndings are in line with the
+previous computational study of the related PLP-dependent ornithine decarboxylase [53].
+Similar to our ﬁndings, the amino group is neutral during the formation of the C-N bond
+in the gem-diamine and the carboxylate group is neutral as well. The only difference is that
+in [53], the substrate is already neutral in the Michaelis complex, whereas in our model it
+is a zwitterion and its transformation to the neutral species occurs in the transition state
+region of the ﬁrst elementary step.
+Molecules 2023, 28, 2109 13 of 21
+4. Materials and Methods
+4.1. Cloning, Expression, and Puriﬁcation of the Recombinant AmicoTA
+Gene AmicoTA_1844 encoding PLP type IV transaminase (275 a.a., 30.7 kDa) was
+identiﬁed in the genome of A. colombiense (strain DSM 12261/ALA-1) [33]. The optimized
+sequence (http://genomes.urv.es/OPTIMIZER/, accessed on 1 February 2022) was syn-
+thesized with 5′and 3′overhangs complementing the NdeI and HindIII restriction sites
+by ATG Service Gene (St. Petersburg, Russia) and then cloned into the pET-21d vector
+(Novagen, Darmstadt, Germany) modiﬁed as described in [54] to produce a protein fused
+at the N-terminus with a (His)6-tag and a TEV protease site. E. coli Rosetta (DE3) pLysS cells
+(Novagen, Germany) transformed with the construct were grown in LB high salt medium
+containing 100 µg/mL ampicillin and 34 µg/mL chloramphenicol (Panreac-AppliChem,
+Darmstadt, Germany) at 37 ◦C until the OD600 value reached 0.8, and then expression was
+induced with 0.2 mM IPTG. After incubation for 18 h at 30 ◦C, the cells were harvested by
+centrifugation, resuspended in a 50 mM K-phosphate buffer, pH 8.0, supplemented with
+500 mM NaCl, 20 mM imidazole, 0.5 M urea, 5 mM β-mercaptoethanol, 10% (v/v) glycerol,
+0.2 µg/mL lysozyme, 100 µM PLP , and 1 mM PMSF, and disrupted by sonication. 0.1 mg
+of DNAse (Sigma-Aldrich, St. Louis, MO, USA) was added to the crude cell extract and it
+was centrifuged for 45 min at 18,500×g at 4 ◦C. The supernatant was ﬁltered through a
+0.45 µm ﬁlter (Millipore, Burlington, MA, USA) and applied to a 5 mL HisTrap HP column
+(Cytiva, Marlborough, MA, USA), equilibrated with 50 mM K-phosphate buffer, pH 8.0,
+containing 500 mM NaCl, 20 mM imidazole and 0.1% (v/v) Triton X-100. The (His)6-tagged
+recombinant AmicoTA was eluted with a linear gradient from 20 to 500 mM imidazole
+in the same buffer without Triton X-100. The target protein was incubated for 1 h with 1
+mM PLP at 25 ◦C, concentrated up to 20–25 mg/mL with a 30 kDa cut-off centrifugal ﬁlter
+device (Millipore, USA) and transferred into storage buffer (50 mM K-phosphate, pH 8.0,
+containing 100 mM NaCl, 1 mM β-mercaptoethanol and 100 µM PLP), then diluted by
+glycerol 1:1 and stored at −20 ◦C. The (His)6-tagged recombinant AmicoTA was used for
+the biochemical characterization.
+For crystallization, the fraction of (His)6-tagged recombinant AmicoTA was incubated
+overnight at 4 ◦C with (His)6-tagged TEV protease (1 mg per 10 mg of the protein) solution,
+containing 1 mM EDTA, 5 mM β-mercaptoethanol and 10% (v/v) glycerol, then dialyzed
+against the 50 mM K-phosphate buffer, pH 8.0, containing 500 mM NaCl, 20 mM imidazole
+and 20 µM PLP , and applied to a HisTrap HP column (Cytiva, USA). A (His) 6-tagged
+TEV protease and cleaved (His)6-tag were absorbed on the column, whereas the recombi-
+nant AmicoTA without (His)6-tag was collected in the ﬂow-through mode, concentrated,
+and applied to a Superdex 200 10/300 GL column (Cytiva, USA) equilibrated in 50 mM
+HEPES buffer, pH 8.0, containing 100 mM NaCl and 100µM PLP . The collected fractions
+were transferred into 20 mM HEPES buffer, pH 8.0, and applied to a MonoQ 10/100 GL
+column (Cytiva, USA) equilibrated with the same buffer and eluted with a linear NaCl
+gradient (20–500 mM). The fractions of recombinant AmicoTA were concentrated up to
+15–20 mg/mL, transferred to the crystallization buffer: 20 mM HEPES, pH 8.0, supple-
+mented with 50 mM NaCl, 100µM PLP , and 1 mM DTT, and frozen at−70 ◦C. Recombinant
+HGDH from Acidaminococcus fermentas was obtained similarly to AmicoTA. The protein
+purity was analyzed by SDS-PAGE (12%). The protein concentration was determined
+spectrophotometrically [55].
+4.2. Enzyme Activity Assay
+The activity of the puriﬁed AmicoTA in the transamination reaction between D-
+alanine and α-ketoglutarate was determined spectrophotometrically by applying lactate
+dehydrogenase (LDH) assay on the SPECTROstar Omega (BMG Labtech, GmbH, Ortenberg,
+Germany) plate reader in the microtiter plates (200 µL) (UV-Star, Greiner Bio-One GmbH
+-Frickenhausen, Germany). The assay was performed with 5–500 mM D-alanine and
+0.5–20 mM α-ketoglutarate, 0.05–0.1 µM of the puriﬁed AmicoTA, 330 µM NADH, and
+4 U/mL LDH from rabbit muscle (Roche Diagnostics GmbH, Mannheim, Germany) in
+Molecules 2023, 28, 2109 14 of 21
+50 mM CHES buffer, pH 9.0, containing 60 µM PLP at 60 ◦C. The reaction was initiated by
+D-alanine. The reaction progress was monitored by detecting a decrease in the absorbance
+at 340 nm (ε(NADH) = 6220 M−1 cm−1). The standard assay was performed with 50 mM
+D-alanine and 5 mM α-ketoglutarate. The activity of AmicoTA was calculated from the
+initial linear region of the progress curve of the reaction. One unit (U) was deﬁned as
+the amount of the enzyme that catalyzed the conversion of 1 µmol of the substrate into a
+product per minute.
+The activity of the AmicoTA in the transamination reactions between D-glutamate
+and pyruvate was determined spectrophotometrically by applying (R)-2-hydroxyglutarate
+dehydrogenase (HGDH) assay, respectively, on the SPECTROstar Omega (BMG Labtech,
+Germany) plate reader in the microtiter plates (200 µL). The HGDH-assay was performed
+with 1–30 mM D-glutamate and 10–500 mM pyruvate, 0.1–0.3µM of the enzyme, 330 µM
+NADH, and 4 U/mL recombinant HGDH from A. fermentas in 50 mM K-phosphate buffer,
+pH 8.0, containing 60 µM PLP at 60 ◦C. The reaction was initiated by D-glutamate. The
+reaction progress in HGDH-assay was monitored by detecting a decrease in the absorbance
+at 370 nm (ε(NADH) = 2484 M−1 cm−1) because at 340 nm, the absorption from pyruvate
+at high concentrations was signiﬁcant.
+Steady-state kinetic parameters of the overall reaction catalyzed by the AmicoTA be-
+tween D-alanine and α-ketoglutarate, D-glutamate and pyruvate were calculated from the
+substrate saturation curves at the constant co-substrate concentration using the Michaelis–
+Menten model.
+The kinetic parameters were calculated by fitting the initial velocity data toEquation (1):
+V = Vmax ×A ×B
+KAm ×B + KBm ×A + A ×B (1)
+where V is the initial velocity, Vmax is the maximal velocity, A and B are substrate concen-
+tration, and KA
+m and KB
+m are the Km of substrates A and B, respectively. All measurements
+were performed at least in triplicates. The data were analyzed using Origin 8.0 software
+(OriginLab, Northampton, MA, USA).
+4.3. Effect of pH and Temperature on the Overall Transamination Reaction
+pH and temperature effects were determined in the overall transamination reaction
+between 50 mM D-alanine and 5 mM α-ketoglutarate and 5 mM D-glutamate and 50 mM
+pyruvate. The pH optimum was determined at 30 ◦C using the following buffers: 25 mM
+Tris-HCl and 25 mM K-phosphate, pH 6–9, and 50 mM CHES buffer, pH 9–10. The
+temperature dependence of the reaction rate was studied in the range from 30 to 70 ◦C in
+50 mM K-phosphate buffer, pH 8.0. When measuring activity at 65 and 70 ◦C, the pyruvate
+and α-ketoglutarate formation was monitored using a discontinuous LDH or HGDH assay,
+correspondingly, in 100 mM K-phosphate buffer, pH 7.0, at 25◦C [46].
+4.4. Analysis of Thermal Stability and Operational Stability
+The thermal stability of AmicoTA was determined by incubating 45 µM AmicoTA at
+40, 50, and 60 ◦C in 50 mM CHES buffer, pH 9.0, containing 100 µM PLP . The operational
+stability was determined by incubating 45 µM AmicoTA at 60 ◦C in 50 mM CHES buffer,
+pH 9.0, containing 100 µM PLP , 100 mM D-leucine, and 20 mMα-ketoglutarate. Residual
+activity was measured in the standard assay at several time points for 120 h.
+4.5. Half-Reaction Assay
+The PLP-form of AmicoTA was obtained by incubation with an excess of both PLP and
+α-ketoglutarate for 1 h at 25◦C, followed by transfer into 50 mM CHES buffer, pH 9.0, using
+a 5 mL Desalting column (Cytiva, USA). Half-transamination reactions of the AmicoTA PLP
+form (35–40 µM) with D-amino acids were followed spectrophotometrically at 408 nm by
+measuring a decrease in the aldimine concentration in presence of different concentrations
+of D-amino acids in 50 mM CHES buffer, pH 9.0 at 40 ◦C in UV-transparent microtiter
+Molecules 2023, 28, 2109 15 of 21
+plates (UV-Star, Greiner, Germany) using SPECTROstar Omega plate reader (BMG Labtech,
+Germany). The rate constants of half-reactions were determined by ﬁtting Equation (2):
+At = A∞ + ∆Aexp (−kobst) (2)
+where At is the absorbance at time t, ∆A is the difference between absorbance at t = 0 and
+t = ∞, A∞ is the ﬁnal absorbance, and kobs is the observed rate constant. The dissociation
+constant for the enzyme–substrate complex KD, the maximal rate constant kmax, the rate
+constant of the reverse reaction kr, and the speciﬁcity constant kmax
+KD
+were obtained by ﬁtting
+Equation (3):
+kobs = kmax[S]
+KD + [S] + kr (3)
+All measurements were performed at least in triplicates. The data were analyzed using
+Origin 8.0 software.
+4.6. Analysis of the Product Yield and Enantiomeric Excess in the Transamination Reaction
+The product yields were determined in the catalyzed by AmicoTA reactions between
+4-methyl-2-oxovalerate and D-glutamate and between phenylpyruvate and D-glutamate by de-
+termining the consumption of 4-methyl-2-oxovalerate or the formation of D-phenylalanine.
+A one-pot three-enzyme system was employed to shift the equilibrium toward the products.
+The coproduct, α-ketoglutarate, was removed from the reaction mixture by HGDG assay
+while recovering NADH in D-glucose conversion catalyzed by glucose dehydrogenase.
+The reaction mixture contained 100 mM K-phosphate buffer, pH 7.5, 100 µM PLP , 100 mM
+D-glutamate, 50 mM 4-methyl-2-oxovalerate or 50 mM phenylpyruvate, 4 mg/mL WT
+AmicoTA, 1 mM NADH, 150 mM D-glucose, 180 U/mL HGDH, and 30 U/mL glucose
+dehydrogenase (Sigma, USA). The reaction mixtures were incubated at 30◦C with 4-methyl-
+2-oxovalerate for 20 h and with phenylpyruvate for 40 h. The reactions were terminated by
+removing the enzyme using an Amicon-Ultra-15 centrifugal tube (Millipore, USA), and
+then the ﬁltrate was analyzed by HPLC (ÄKTA Puriﬁer, Marlborough, MA, Cytiva, USA)
+using a reverse-phase C18 column (Zorbax Eclipse XDB-C18, 5 µm, 4.6 ×150 mm, (Agilent,
+Santa Clara, CA, USA)). The chiral analysis of produced D-leucine and D-phenylalanine
+was performed by HPLC using a reverse-phase C18 column with a UV detector set at
+340 nm. HPLC conditions are described in the Supplementary Materials.
+4.7. Crystallization and Data Collection
+Initial crystallization screening was performed on a robotic system (Rigaku Americas
+Corporation, The Woodlands, TX USA) using 96-well VDX plates (Hampton Research,
+Aliso Viejo, CA USA) and commercial crystallization screens from Hampton Research
+(Aliso Viejo, CA USA) and Molecular Dimensions Inc (Holland, OH USA) by the “hanging
+drop” vapor diffusion method. A 15 mg/mL of the AmicoTA holo form in 20 mM HEPES
+buffer pH 8.0 containing 50 mM NaCl, 100 µM PLP , and 1 mM DTT was mixed with the
+crystallization solution in the ratios 1:1, 1:2 (0.1 µL drop volume), and 2:1 (0.2 µL drop
+volume). The volume of the precipitant solution in the reservoir was 50 µL. The initial
+crystallization hit was observed under the following conditions: 0.2 M sodium nitrate,
+0.1 M Bis-tris propane, pH 6.5, 20% PEG3350 at 1:1 ratio at 288 K. Further optimization
+of crystal growth was made using the “hanging drop” vapor-diffusion method in 24-well
+VDX plates (Hampton Research). The drop volume was increased to 3 µL, and the volume
+of the precipitant solution to 500 µL.
+Crystals of the AmicoTA complex with D-glutamic acid were obtained by soaking
+the crystal of the holoenzyme in a crystallization solution containing 100 mM substrate for
+5 min.
+Crystals of the AmicoTA holoenzyme and its complex were brieﬂy soaked in a mother
+liquor containing 20% glycerol immediately before diffraction data collection and ﬂash-
+frozen in liquid nitrogen. Datasets were collected at 100K at ID23-1 beamline (ESRF,
+Molecules 2023, 28, 2109 16 of 21
+France) [56] and Rigaku OD XtaLAB Synergy-S (IOC RAS, Russia) for holoenzyme and
+complex with D-glutamate, respectively. The datasets for holoenzyme were indexed, inte-
+grated, and scaled using the XDS package [57], while for the complex with D-glutamate the
+CrysAlisPro software v.1.0.43 (Oxford Diffraction/Agilent Technologies UK Ltd., Yarnton,
+UK) was used. Space groups were suggested by Pointless [58] as P212121 for both structures
+(Table 5).
+Table 5. Data collection and reﬁnement statistics.
+Holo form of AmicoTA The Complex of AmicoTA with D-Glutamate
+Diffraction source ESRF (ID23-1 beamline) Institute of Organic Chemistry RAS (Rigaku OD XtaLAB
+Synergy-S)
+Wavelength (Å) 0.98 1.54
+Temperature (K) 100
+Detector PILATUS 6M HyPix-6000HE
+Crystal-to-detector distance
+(mm) 250 33
+Rotation range per image (◦) 0.05 0.3
+Total rotation range (◦) 120 300
+Space group P212121 P212121
+a, b, c (Å) 61.19, 80.97, 98.96 61.55, 90.01, 100.86
+α, β, γ (◦) 90.0, 90.0, 90.0 90.0, 90.0, 90.0
+Average mosaicity (◦) 0.273 1.04
+Resolution range (Å) 43.78–1.90
+(1.94–1.90)
+21.48–1.90
+(1.94–1.90)
+Completeness (%) 93.0 (92.5) 98.8 (97.5)
+Average redundancy 4.5 (4.4) 10.8 (11.3)
+⟨I/σ(I)⟩ 10.1 (1.5) 19.3 (2.6)
+Rmeas (%) 8.9 (100.4) 11.1 (116.8)
+CC1/2 99.8 (55.8) 99.9 (83.1)
+Rfact (%) 18.9 19.5
+Rfree. (%) 24.5 21.1
+Bonds (Å) 0.02 0.01
+Angles (◦) 1.98 1.66
+Most favored (%) 98.5 98.7
+Allowed (%) 1.5 1.3
+PDB entry code 8AHR 8AYK
+4.8. Structure Solution and Reﬁnement
+The structure of the holo form of AmicoTA was solved by the molecular replacement
+method using the MOLREP program [59] with the atomic coordinates of the BCAT transam-
+inase from the archaeon Geoglobus acetivorans (PDB ID: 5E25) as a starting model, while
+the structure of the AmicoTA complex was solved using the AmicoTA holo form structure.
+Two copies of the protein were found in an asymmetric unit of both structures.
+The reﬁnement of all structures was carried out using the REFMAC5 program of the
+CCP4 suite [60]. The visual inspection of electron density maps and the manual rebuilding
+of the model were carried out using the COOT interactive graphics program [ 61]. The
+isotropic B-factor and the hydrogen atoms in ﬁxed positions were included during the
+Molecules 2023, 28, 2109 17 of 21
+reﬁnement. In both ﬁnal models, the protein subunits within the asymmetric unit have a
+similar fold with corresponding pairwise RMSD not exceeding 0.25Å.
+4.9. Structure Analysis and Validation
+The visual inspection of the modeled structure was carried out using the COOT
+program and the PyMOL Molecular Graphics System, Version 4.6 (Schrödinger, USA). The
+structure comparison and superposition were made using the PDBeFOLD program [62].
+The contacts were analyzed using the PDBePISA [63].
+4.10. Molecular Modeling
+The crystal structure of the AmicoTA in the PLP bound form obtained in this study
+was utilized as a source of coordinates of heavy atoms. Substrates were incorporated in
+the active sites of both monomers of the dimeric structure. We studied complexes with D-
+glutamate, D-aspartate, D-ornithine, and D-alanine. Simulations for all model systems were
+performed mimicking pH9; aspartate and glutamate residues were negatively charged,
+lysine and arginine residues were protonated and histidine residues were neutral. The
+protonation state of either the N δ or Nε atom of the histidine side chain was chosen
+depending on its local environment. All MD simulations were performed in NAMD3 [64]
+with the 1 fs integration time step at p = 1 atm and T = 300 K with the length of each
+trajectory 200–300 ns. CHARMM36 parameters [65] were utilized for protein, TIP3P [66]
+for water molecules and modiﬁed CGenFF [67] for the PLP .
+QM/MM MD simulations were performed in the TeraChem [68] and NAMD2 pro-
+grams [69] using a speciﬁc interface [70]. QM subsystem was described at the PBE0-D3/6-
+31G** level [71]; it included the PLP and the part of the K142, D-glutamate, and neighboring
+residues that form hydrogen bonds. Umbrella sampling simulations were performed for
+the ﬁrst step of a chemical reaction. Different reaction coordinates were tested during the
+simulations. First, we examined the possible reaction path as a set of sequential processes:
+a proton transfer followed by the nucleophilic attack as two separate steps. To do this, the
+reaction coordinate for the ﬁrst step was suggested as a difference between two distances
+along the proton transfer, N . . . H and O . . . H distances. We failed to locate a minimum
+corresponding to the neutral substrate; therefore, we next tried to use a reaction coordinate
+that comprised both proton transfer and nucleophilic attack. The reaction coordinate was
+set as a sum of the distances between the hydrogen atom of the protonated amino group
+and an oxygen atom the α-carboxylate group of the substrate and between the nitrogen
+atom of the substrate and a C4′atom of PLP . A set of 10 ps QM/MM MD simulations were
+performed with harmonic potentials added on reaction coordinate with the force constant
+of kcal/mol/Å2 and centered from 2.7 Å to 5.1 Å with 0.3 Å step. The transition state region
+corresponds to the reaction coordinate around 3.9 Å and the corresponding QM/MM MD
+trajectory is available at ZENODO (https://doi.org/10.5281/zenodo.7633915, accessed on
+21 February 2023). Umbrella integration was applied to reconstruct the Gibbs energy proﬁle.
+5. Conclusions
+D-amino acid transaminase from A. colombiense (AmicoTA) has been identiﬁed and
+characterized. The enzyme is active toward various D-amino acids and α-keto acids and
+can be applied for stereoselective amination of compounds with α-carboxylate group at
+pH 7–10 in the temperature range 30–60 ◦C. The active site of AmicoTA is set up for a
+multipoint binding of α-ketoglutarate or D-glutamate. The binding of other substrates is
+less effective. The substrate binding mode does not include residues from the O-pocket
+loop, the multipoint substrate binding is provided by the residues from the ﬁxed structural
+elements of the active site. The same binding mode seems to be realized in the homologous
+transaminases from C. pusillum, H. hydrossis, M. tuberculosis, and A. thaliana. To the best of
+our knowledge, in the studied transaminases of PLP fold type IV , the residues of mobile
+O-pocket loop typically participate in the binding of substrates, thus providing the effective
+catalysis of structurally different substrates. Obviously, in AmicoTA and homologous
+Molecules 2023, 28, 2109 18 of 21
+DAATs, the plasticity of the active site is achieved differently. The study of substrate binding
+and substrate differentiation mechanism in non-canonical DAATs will be continued.
+Supplementary Materials: The following supporting information can be downloaded at: https:
+//www.mdpi.com/article/10.3390/molecules28052109/s1, Table S1: Superposition of the AmicoTA
+subunit with the homologous TA of PLP fold type IV; Figure S1: Structure-based sequence alignment
+of AmicoTA and known DAATs. Figure S2: SDS-PAGE of fractions of AmicoTA when expressed
+in E. coli and puriﬁed. Figure S3: Half-reactions catalyzed by AmicoTA. Figure S4: Concentration
+dependences of the speciﬁc activity of AmicoTA in the overall transamination reactions. Figure S5:
+Thermal stability and operational stability of the PLP form of AmicoTA. Figure S6: HPLC analysis
+of the conﬁguration of the products of the overall transamination reaction catalyzed by AmicoTA.
+Figure S7: The gel ﬁltration elution proﬁle for Amico TA; Figure S8: Binding of PLP molecule in the
+holoenzyme.
+Author Contributions: Conceptualization, S.A.S., M.G.K. and E.Y.B.; methodology, M.G.K., E.Y.B.
+and N.L.K.; software, S.A.S., M.G.K. and I.O.M.; validation, S.A.S., M.G.K., E.Y.B., K.M.B. and T.V .R.;
+formal analysis, E.Y.B. and K.M.B.; investigation, S.A.S., K.M.B., A.Y.N., M.G.K., M.E.M. and I.O.M.;
+resources, M.E.M., A.Y.N. and T.V .R.; data curation, M.G.K. and E.Y.B.; writing—original draft
+preparation, S.A.S., M.G.K. and I.O.M.; writing—review and editing, K.M.B., M.G.K., N.L.K. and
+E.Y.B.; visualization, M.G.K., K.M.B. and S.A.S.; supervision, V .O.P .; project administration, E.Y.B.
+and M.G.K.; funding acquisition, V .O.P ., M.G.K. and E.Y.B. All authors have read and agreed to the
+published version of the manuscript.
+Funding: This research was funded by the Russian Science Foundation, grant number 19-14-00164 (in
+part of puriﬁcation, biochemical characterization, crystallization, data collection, structure solution
+and structural analysis), the Ministry of Science and Higher Education of the Russian Federation
+(in part of the structure-based sequence alignment) and the grant of the President of the Russian
+Federation (MD-1390.2022.1.4) (in part of molecular modeling).
+Institutional Review Board Statement: Not applicable.
+Informed Consent Statement: Not applicable.
+Data Availability Statement: The data presented in this study are available on request from the
+corresponding author.
+Acknowledgments: MALDI-TOF MS analysis was carried out on the equipment of the Shared-Access
+Equipment Centre “Industrial Biotechnology” of the Federal Research Center “Fundamentals of
+Biotechnology” Russian Academy of Sciences. Molecular modeling is carried out using the equipment
+of the shared research facilities of HPC computing resources at Lomonosov Moscow State University
+and the Joint Supercomputer Center of the Russian Academy of Sciences.
+Conﬂicts of Interest: The authors declare that they have no conﬂicts of interest.
+Sample Availability: Samples of AmicoTA are available from the author, other compounds can be
+ordered in Sigma.
+References
+1. Bell, E.L.; Finnigan, W.; France, S.P .; Green, A.P .; Hayes, M.A.; Hepworth, L.J.; Lovelock, S.L.; Niikura, H.; Osuna, S.; Romero, E.;
+et al. Biocatalysis. Nat. Rev. Methods Prim. 2021, 1, 46. [CrossRef]
+2. Savile, C.K.; Janey, J.M.; Mundorff, E.C.; Moore, J.C.; Tam, S.; Jarvis, W.R.; Colbeck, J.C.; Krebber, A.; Fleitz, F.J.; Brands, J.; et al.
+Biocatalytic Asymmetric Synthesis of Chiral Amines from Ketones Applied to Sitagliptin Manufacture. Science 2010, 329, 305–309.
+[CrossRef]
+3. Gu, X.; Zhao, J.; Chen, L.; Li, Y.; Yu, B.; Tian, X.; Min, Z.; Xu, S.; Gu, H.; Sun, J.; et al. Application of transition-metal catalysis,
+biocatalysis, and ﬂow chemistry as state-of-the-art technologies in the synthesis of LCZ696. J. Org. Chem. 2020, 85, 6844–6853.
+[CrossRef] [PubMed]
+4. Slabu, I.; Galman, J.L.; Lloyd, R.C.; Turner, N.J. Discovery, Engineering, and Synthetic Application of Transaminase Biocatalysts.
+ACS Catal. 2017, 7, 8263–8284. [CrossRef]
+5. Eliot, A.C.; Kirsch, J.F. Pyridoxal Phosphate Enzymes: Mechanistic, Structural, and Evolutionary Considerations. Annu. Rev.
+Biochem. 2004, 73, 383–415. [CrossRef] [PubMed]
+6. Toney, M.D. Reaction speciﬁcity in pyridoxal phosphate enzymes. Arch. Biochem. Biophys. 2005, 433, 279–287. [CrossRef]
+7. Braunstein, A.E. Amino Group Transfer. In The Enzymes; P .D., B., Ed.; Academic Press: London, UK, 1973; pp. 379–481.
+Molecules 2023, 28, 2109 19 of 21
+8. Velick, S.F.; Vavra, J. A kinetic and equilibrium analysis of the glutamic oxaloacetate transaminase mechanism.J. Biol. Chem. 1962,
+237, 2109–2122. [CrossRef]
+9. Bezsudnova, E.Y.; Popov, V .O.; Boyko, K.M. Structural insight into the substrate speciﬁcity of PLP fold type IV transaminases.
+Appl. Microbiol. Biotechnol. 2020, 104, 2343–2357. [CrossRef]
+10. Okada, K.; Hirotsu, K.; Hayashi, H.; Kagamiyama, H. Structures of Escherichia coli branched-chain amino acid aminotransferase
+and its complexes with 4-methylvalerate and 2-methylleucine: Induced ﬁt and substrate recognition of the Enzyme. Biochemistry
+2001, 40, 7453–7463. [CrossRef]
+11. Sugio, S.; Petsko, G.A.; Manning, J.M.; Soda, K.; Ringe, D. Crystal Structure of a D-Amino Acid Aminotransferase: How the
+Protein Controls Stereoselectivity. Biochemistry 1995, 34, 9661–9669. [CrossRef]
+12. Thomsen, M.; Skalden, L.; Palm, G.J.; Höhne, M.; Bornscheuer, U.T.; Hinrichs, W. Crystallographic characterization of the
+(R)-selective amine transaminase from Aspergillus fumigatus. Acta Crystallogr. Sect. D Biol. Crystallogr. 2014, 70, 1086–1093.
+[CrossRef] [PubMed]
+13. Steffen-Munsberg, F.; Vickers, C.; Kohls, H.; Land, H.; Mallin, H.; Nobili, A.; Skalden, L.; van den Bergh, T.; Joosten, H.-J.;
+Berglund, P .; et al. Bioinformatic analysis of a PLP-dependent enzyme superfamily suitable for biocatalytic applications.Biotechnol.
+Adv. 2015, 33, 566–604. [CrossRef] [PubMed]
+14. Kirsch, J.F.; Eichele, G.; Ford, G.C.; Vincent, M.G.; Jansonius, J.N.; Gehring, H.; Christen, P . Mechanism of action of aspartate
+aminotransferase proposed on the basis of its spatial structure. J. Mol. Biol. 1984, 174, 497–525. [CrossRef] [PubMed]
+15. Wybenga, G.G.; Crismaru, C.G.; Janssen, D.B.; Dijkstra, B.W. Structural Determinants of theβ-Selectivity of a Bacterial Amino-
+transferase. J. Biol. Chem. 2012, 287, 28495–28502. [CrossRef]
+16. Grishin, N.V .; Phillips, M.A.; Goldsmith, E.J. Modeling of the spatial structure of eukaryotic ornithine decarboxylases.Protein Sci.
+1995, 4, 1291–1304. [CrossRef]
+17. Rudat, J.; Brucher, B.R.; Syldatk, C. Transaminases for the synthesis of enantiopure beta-amino acids.AMB Express 2012, 2, 11.
+[CrossRef]
+18. Funakoshi, M.; Sekine, M.; Katane, M.; Furuchi, T.; Yohda, M.; Yoshikawa, T.; Homma, H. Cloning and functional characterization
+of Arabidopsis thaliana D-amino acid aminotransferase - D-aspartate behavior during germination. FEBS J. 2008, 275, 1188–1200.
+[CrossRef]
+19. Pucci, M.J.; Thanassi, J.A.; Ho, H.T.; Falk, P .J.; Dougherty, T.J.Staphylococcus haemolyticus contains two D-glutamic acid biosynthetic
+activities, a glutamate racemase and a D-amino acid transaminase. J. Bacteriol. 1995, 177, 336–342. [CrossRef]
+20. Radkov, A.D.; Moe, L.A. Bacterial synthesis of d-amino acids. Appl. Microbiol. Biotechnol. 2014, 98, 5363–5374. [CrossRef]
+21. Gao, X.; Ma, Q.; Zhu, H. Distribution, industrial applications, and enzymatic synthesis of d-amino acids. Appl. Microbiol.
+Biotechnol. 2015, 99, 3341–3349. [CrossRef]
+22. Tanizawa, K.; Masu, Y.; Asano, S.; Tanaka, H.; Soda, K. Thermostable D-amino acid aminotransferase from a thermophilicBacillus
+species. J. Biol. Chem. 1989, 264, 2445–2449. [CrossRef] [PubMed]
+23. Barber, J.E.B.; Damry, A.M.; Calderini, G.F.; Walton, C.J.W.; Chica, R.A. Continuous colorimetric screening assay for detection
+of d-amino acid aminotransferase mutants displaying altered substrate speciﬁcity. Anal. Biochem. 2014, 463, 23–30. [CrossRef]
+[PubMed]
+24. Yonaha, K.; Misono, H.; Yamamoto, T.; Soda, K. D-amino acid aminotransferase of Bacillus sphaericus. Enzymologic and
+spectrometric properties. J. Biol. Chem. 1975, 250, 6983–6989. [CrossRef]
+25. Lee, S.-G.; Hong, S.-P .; Song, J.J.; Kim, S.-J.; Kwak, M.-S.; Sung, M.-H. Functional and structural characterization of thermostable
+D-amino acid aminotransferases from Geobacillus spp. Appl. Environ. Microbiol. 2006, 72, 1588–1594. [CrossRef] [PubMed]
+26. Pavkov-Keller, T.; Strohmeier, G.A.; Diepold, M.; Peeters, W.; Smeets, N.; Schürmann, M.; Gruber, K.; Schwab, H.; Steiner, K.
+Discovery and structural characterisation of new fold type IV-transaminases exemplify the diversity of this enzyme fold. Sci. Rep.
+2016, 6, 1–12. [CrossRef]
+27. Bakunova, A.K.; Nikolaeva, A.Y.; Rakitina, T.V .; Isaikina, T.Y.; Khrenova, M.G.; Boyko, K.M.; Popov, V .O.; Bezsudnova, E.Y. The
+Uncommon Active Site of D-Amino Acid Transaminase from Haliscomenobacter hydrossis: Biochemical and Structural Insights into
+the New Enzyme. Molecules 2021, 26, 5053. [CrossRef]
+28. Höhne, M.; Schätzle, S.; Jochens, H.; Robins, K.; Bornscheuer, U.T. Rational assignment of key motifs for function guides in silico
+enzyme identiﬁcation. Nat. Chem. Biol. 2010, 6, 807–813. [CrossRef]
+29. Kishimoto, K.; Yoshimura, T.; Esaki, N.; Sugio, S.; Manning, J.M.; Soda, K. Crystal structures of L201A mutant of D-amino
+acid aminotransferase at 2.0 Å resolution: Implication of the structural role of Leu201 in transamination The leucine-to-alanine
+mutation at residue 201 of D-amino acid aminotransferase provides a unique enzym. Protein Eng. 1998, 11, 691–696.
+30. Kishimoto, K.; Yoshimura, T.; Soda, K.; Esaki, N. Mutation of Arginine 98, Which Serves as a Substrate-Recognition Site of
+D-Amino Acid Aminotransferase, Can Be Partly Compensated for by Mutation of Tyrosine 88 to an Arginyl Residue1. J. Biochem
+1997, 122, 1182–1189. [CrossRef]
+31. Peisach, D.; Chipman, D.M.; Van Ophem, P .W.; Manning, J.M.; Ringe, D. Crystallographic study of steps along the reaction
+pathway of D -amino acid aminotransferase. Biochemistry 1998, 37, 4958–4967. [CrossRef]
+32. Ro, H.-S.; Hong, S.-P .; Seo, H.-J.; Yoshimura, T.; Esaki, N.; Soda, K.; Kim, H.-S.; Sung, M.-H. Site-directed mutagenesis of the
+amino acid residues in β-strand III [Val 30 -Val 36 ] of d -amino acid aminotransferase ofBacillus sp. YM-1. FEBS Lett. 1996, 398,
+141–145. [CrossRef]
+Molecules 2023, 28, 2109 20 of 21
+33. Chertkov, O.; Sikorski, J.; Brambilla, E.; Lapidus, A.; Copeland, A.; del Rio, T.G.; Nolan, M.; Lucas, S.; Tice, H.; Cheng, J.F.; et al.
+Complete genome sequence of Aminobacterium colombiense type strain (ALA-1 T). Stand. Genomic Sci. 2010, 2, 280–289. [CrossRef]
+[PubMed]
+34. Fuchikami, Y.; Yoshimura, T.; Gutierrez, A.; Soda, K.; Esaki, N. Construction and Properties of a Fragmentary D-Amino Acid
+Aminotransferase. J. Biochem. 1998, 124, 905–910. [CrossRef] [PubMed]
+35. Jumper, J.; Evans, R.; Pritzel, A.; Green, T.; Figurnov, M.; Ronneberger, O.; Tunyasuvunakool, K.; Bates, R.; Žídek, A.; Potapenko,
+A.; et al. Highly accurate protein structure prediction with AlphaFold. Nature 2021, 596, 583–589. [CrossRef] [PubMed]
+36. Varadi, M.; Anyango, S.; Deshpande, M.; Nair, S.; Natassia, C.; Yordanova, G.; Yuan, D.; Stroe, O.; Wood, G.; Laydon, A.;
+et al. AlphaFold Protein Structure Database: Massively expanding the structural coverage of protein-sequence space with
+high-accuracy models. Nucleic Acids Res. 2022, 50, D439–D444. [CrossRef] [PubMed]
+37. Metzler, D.E.; Ikawa, M.; Snell, E.E. A General Mechanism for Vitamin B 6 -catalyzed Reactions 1. J. Am. Chem. Soc. 1954, 76,
+648–652. [CrossRef]
+38. Hirotsu, K.; Goto, M.; Okamoto, A.; Miyahara, I. Dual substrate recognition of aminotransferases. Chem. Rec. 2005, 5, 160–172.
+[CrossRef]
+39. Skalden, L.; Thomsen, M.; Höhne, M.; Bornscheuer, U.T.; Hinrichs, W. Structural and biochemical characterization of the dual
+substrate recognition of the ( R )-selective amine transaminase from Aspergillus fumigatus. FEBS J. 2015, 282, 407–415. [CrossRef]
+40. Isupov, M.N.; Boyko, K.M.; Sutter, J.-M.; James, P .; Sayer, C.; Schmidt, M.; Schönheit, P .; Nikolaeva, A.Y.; Stekhanova, T.N.;
+Mardanov, A.V .; et al. Thermostable branched-chain amino acid transaminases from thearchaea Geoglobus acetivorans and
+Archaeoglobus fulgidus: Biochemical and structural characterization. Front. Bioeng. Biotechnol. 2019, 7, 1–16. [CrossRef]
+41. Telzerow, A.; Paris, J.; Håkansson, M.; González-Sabín, J.; Ríos-Lombardía, N.; Schürmann, M.; Gröger, H.; Morís, F.; Kourist, R.;
+Schwab, H.; et al. Amine Transaminase from Exophiala Xenobiotica —Crystal Structure and Engineering of a Fold IV Transaminase
+that Naturally Converts Biaryl Ketones. ACS Catal. 2019, 9, 1140–1148. [CrossRef]
+42. Fasella, P .; Giartosio, A.; Hammes, G.G. The Interaction of Aspartate Aminotransferase withα-Methylaspartic Acid *. Biochemistry
+1966, 5, 197–202. [CrossRef] [PubMed]
+43. Yano, T.; Mizuno, T.; Kagamiyama, H. A hydrogen-bonding network modulating enzyme function: Asparagine-194 and
+tyrosine-225 of Escherichia coli aspartate aminotransferase. Biochemistry 1993, 32, 1810–1815. [CrossRef] [PubMed]
+44. Hammes, G.G. A golden era for understanding enzyme mechanisms. Protein Sci. 1998, 7, 799–802. [CrossRef] [PubMed]
+45. Sayer, C.; Martinez-Torres, R.J.; Richter, N.; Isupov, M.N.; Hailes, H.C.; Littlechild, J.A.; Ward, J.M. The substrate speciﬁcity,
+enantioselectivity and structure of the ( R )-selective amine: Pyruvate transaminase from Nectria haematococca. FEBS J. 2014, 281,
+2240–2253. [CrossRef]
+46. Boyko, K.M.; Stekhanova, T.N.; Nikolaeva, A.Y.; Mardanov, A.V .; Rakitin, A.L.; Ravin, N.V .; Bezsudnova, E.Y.; Popov, V .O. First
+structure of archaeal branched-chain amino acid aminotransferase from Thermoproteus uzoniensis speciﬁc for l-amino acids and
+R-amines. Extremophiles 2016, 20, 215–225. [CrossRef] [PubMed]
+47. Thomsen, M.; Skalden, L.; Palm, G.J.; Höhne, M.; Bornscheuer, U.T.; Hinrichs, W. Crystallization and preliminary X-ray diffraction
+studies of the ( R )-selective amine transaminase from Aspergillus fumigatus. Acta Crystallogr. Sect. F Struct. Biol. Cryst. Commun.
+2013, 69, 1415–1417. [CrossRef]
+48. Karpeisky, M.Y.; Ivanov, V .I. A Molecular Mechanism for Enzymatic Transamination. Nature 1966, 210, 493–496. [CrossRef]
+49. Inoue, K.; Kuramitsu, S.; Aki, K.; Watanabe, Y.; Takagi, T.; Nishigai, M.; Ikai, A.; Kagamiyama, H. Branched-Chain Amino Acid
+Aminotransferase of Escherichia coli: Overproduction and Properties1. J. Biochem. 1988, 104, 777–784. [CrossRef]
+50. Bezsudnova, E.Y.; Boyko, K.M.; Popov, V .O. Properties of bacterial and archaeal branched-chain amino acid aminotransferases.
+Biochem. 2017, 82, 1572–1591. [CrossRef]
+51. Amorim Franco, T.M.; Hegde, S.; Blanchard, J.S. Chemical mechanism of the branched-chain aminotransferase IlvE from
+Mycobacterium tuberculosis. Biochemistry 2016, 55, 6295–6303. [CrossRef]
+52. Goto, M.; Miyahara, I.; Hirotsu, K.; Conway, M.; Yennawar, N.; Islam, M.M.; Hutson, S.M. Structural Determinants for Branched-
+chain Aminotransferase Isozyme-speciﬁc Inhibition by the Anticonvulsant Drug Gabapentin. J. Biol. Chem. 2005, 280, 37246–37256.
+[CrossRef] [PubMed]
+53. Cerqueira, N.M.F.S.A.; Fernandes, P .A.; Ramos, M.J. Computational Mechanistic Studies Addressed to the Transimination
+Reaction Present in All Pyridoxal 5 ′-Phosphate-Requiring Enzymes. J. Chem. Theory Comput. 2011, 7, 1356–1368. [CrossRef]
+[PubMed]
+54. Boyko, K.; Gorbacheva, M.; Rakitina, T.; Korzhenevskiy, D.; Vanyushkina, A.; Kamashev, D.; Lipkin, A.; Popov, V . Expression,
+puriﬁcation, crystallization and preliminary X-ray crystallographic analysis of the histone-like HU protein from Spiroplasma
+melliferum KC3. Acta Crystallogr. Sect. FStructural Biol. Commun. 2015, 71, 24–27. [CrossRef] [PubMed]
+55. Pace, C.N.; Vajdos, F.; Fee, L.; Grimsley, G.; Gray, T. How to measure and predict the molar absorption coefﬁcient of a protein.
+Protein Sci. 1995, 4, 2411–2423. [CrossRef]
+56. Nurizzo, D.; Mairs, T.; Guijarro, M.; Rey, V .; Meyer, J.; Fajardo, P .; Chavanne, J.; Biasci, J.C.; McSweeney, S.; Mitchell, E. The ID23-1
+structural biology beamline at the ESRF. J. Synchrotron Radiat. 2006, 13, 227–238. [CrossRef]
+57. Kabsch, W. XDS. Acta Crystallogr. D. Biol. Crystallogr. 2010, 66, 125–132. [CrossRef]
+58. Evans, P . Scaling and assessment of data quality. Acta Crystallogr. Sect. D Biol. Crystallogr. 2006, 62, 72–82. [CrossRef]
+Molecules 2023, 28, 2109 21 of 21
+59. Vagin, A.A.; Isupov, M.N. Spherically averaged phased translation function and its application to the search for molecules and
+fragments in electron-density maps. Acta Crystallogr. Sect. D Biol. Crystallogr. 2001, 57, 1451–1456. [CrossRef]
+60. Winn, M.D.; Ballard, C.C.; Cowtan, K.D.; Dodson, E.J.; Emsley, P .; Evans, P .R.; Keegan, R.M.; Krissinel, E.B.; Leslie, A.G.W.;
+McCoy, A.; et al. Overview of the CCP4 suite and current developments. Acta Crystallogr. Sect. D Biol. Crystallogr. 2011, 67,
+235–242. [CrossRef]
+61. Emsley, P .; Lohkamp, B.; Scott, W.G.; Cowtan, K. Features and development of Coot.Acta Crystallogr. Sect. D Biol. Crystallogr.
+2010, 66, 486–501. [CrossRef]
+62. Krissinel, E.; Henrick, K. Secondary-structure matching (SSM), a new tool for fast protein structure alignment in three dimensions.
+Acta Crystallogr. Sect. D Biol. Crystallogr. 2004, 60, 2256–2268. [CrossRef] [PubMed]
+63. Krissinel, E.; Henrick, K. Inference of macromolecular assemblies from crystalline state. J. Mol. Biol. 2007, 372, 774–797. [CrossRef]
+[PubMed]
+64. Phillips, J.C.; Hardy, D.J.; Maia, J.D.C.; Stone, J.E.; Ribeiro, J.V .; Bernardi, R.C.; Buch, R.; Fiorin, G.; H énin, J.; Jiang, W.; et al.
+Scalable molecular dynamics on CPU and GPU architectures with NAMD. J. Chem. Phys. 2020, 153, 044130. [CrossRef] [PubMed]
+65. Best, R.B.; Zhu, X.; Shim, J.; Lopes, P .E.M.; Mittal, J.; Feig, M.; MacKerell, A.D. Optimization of the Additive CHARMM All-Atom
+Protein Force Field Targeting Improved Sampling of the Backboneφ, ψand Side-Chain χ1 and χ2 Dihedral Angles. J. Chem.
+Theory Comput. 2012, 8, 3257–3273. [CrossRef] [PubMed]
+66. Jorgensen, W.L.; Chandrasekhar, J.; Madura, J.D.; Impey, R.W.; Klein, M.L. Comparison of simple potential functions for
+simulating liquid water. J. Chem. Phys. 1983, 79, 926–935. [CrossRef]
+67. Vanommeslaeghe, K.; Hatcher, E.; Acharya, C.; Kundu, S.; Zhong, S.; Shim, J.; Darian, E.; Guvench, O.; Lopes, P .; Vorobyov,
+I.; et al. CHARMM general force ﬁeld: A force ﬁeld for drug-like molecules compatible with the CHARMM all-atom additive
+biological force ﬁelds. J. Comput. Chem. 2009, 31, 671–690. [CrossRef]
+68. Seritan, S.; Bannwarth, C.; Fales, B.S.; Hohenstein, E.G.; Isborn, C.M.; Kokkila-Schumacher, S.I.L.; Li, X.; Liu, F.; Luehr, N.; Snyder,
+J.W.; et al. TeraChem: A graphical processing unit -accelerated electronic structure package for large-scale ab initio molecular
+dynamics. WIREs Comput. Mol. Sci. 2021, 11. [CrossRef]
+69. Phillips, J.C.; Braun, R.; Wang, W.; Gumbart, J.; Tajkhorshid, E.; Villa, E.; Chipot, C.; Skeel, R.D.; Kalé, L.; Schulten, K. Scalable
+molecular dynamics with NAMD. J. Comput. Chem. 2005, 26, 1781–1802. [CrossRef]
+70. Melo, M.C.R.; Bernardi, R.C.; Rudack, T.; Scheurer, M.; Riplinger, C.; Phillips, J.C.; Maia, J.D.C.; Rocha, G.B.; Ribeiro, J.V .; Stone,
+J.E.; et al. NAMD goes quantum: An integrative suite for hybrid simulations. Nat. Methods 2018, 15, 351–354. [CrossRef]
+71. Adamo, C.; Barone, V . Toward reliable density functional methods without adjustable parameters: The PBE0 model.J. Chem.
+Phys. 1999, 110, 6158–6170. [CrossRef]
+Disclaimer/Publisher’s Note: The statements, opinions and data contained in all publications are solely those of the individual
+author(s) and contributor(s) and not of MDPI and/or the editor(s). MDPI and/or the editor(s) disclaim responsibility for any injury to
+people or property resulting from any ideas, methods, instructions or products referred to in the content.

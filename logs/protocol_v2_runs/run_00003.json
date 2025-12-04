@@ -1,0 +1,620 @@
+{
+  "question": "Develop an experimental protocol to improve the PETase enzyme for thermostability and activity.",
+  "experimental_sections": [],
+  "computational_sections": [
+    {
+      "score": 0.7780569195747375,
+      "id": "1-s2.0-S2001037025000789-main:computational_sections:8",
+      "section_type": "computational",
+      "heading": "Currently, however, computational enzyme design cannot yet mimic",
+      "paper": "Computational and Structural Biotechnology Journal 27 (2025) 969–977",
+      "pdf_file": "1-s2.0-S2001037025000789-main.pdf",
+      "text": "Nature ’ s temperature-dependent conformational finetuning which \nmight explain typical characteristics of thermostabilized enzymes: A) \nhigh stability yet poor activity at high temperatures (e.g. \nPROSS5-PETase [39] ) or B) high activity and stability at elevated tem -\nperature yet poor activity at ambient temperatures (e.g. ThermoPETase \nand DuraPETase) [14,16,20,40] . In contrast to other engineered PETa -\nses, FAST-PETase does not exhibit this trade-off, as its stabilization is \nonly induced at elevated temperatures, allowing it to maintain both \nstability and activity across a broader temperature range. Notably, \nHOT-PETase, developed through directed evolution, has been reported \nto exhibit activity across an even wider temperature range than \nFAST-PETase and demonstrates best-in-class thermal stability, with a T\nm \nof 82.5 \n◦\nC. Similar to FAST-PETase, mutations in HOT-PETase appear to \nenhance structural stability while maintaining the flexibility of the \nactive site, a combination rarely seen in rigorously thermostabilized \nvariants. [41]\nLooking forward, the design of thermostable and active Is PETase \nvariants could be further guided by identifying naturally evolved ther -\nmophilic proteins and adapting their binding sites to fit the desired \nsubstrate through directed evolution. [42,43] Harnessing these types of \nenzymes as starting scaffolds has proven exceptionally successful with \nthermostable cutinase variants (LCC\nICCG \nand PES-H1\nL92F/Q94Y\n) [44,45]\nsignificantly outperforming both FAST-PETase and HOT-PETase under \nprocess-like conditions. [46] By learning from these templates, the \nin-silico creation of temperature-adapted enzymes might soon become a \nreality.\n4. Conclusion\nOur comparative MD-driven study of WT- and FAST-PETase sheds \nlight on the thermal adaptation of proteins, specifically highlighting the \nrole of flexibility regions and temperature-dependent conformational \nchanges that impact both stability and functionality. We anticipate that \nanalyzing conformational enzyme ensembles with energy function will \nfurther improve the accuracy of thermal stability predictions offering \npotential for in-silico pre-screening of enzyme variants. Overall, this \nwork not only supports the rational design of thermostable enzymes but \nalso contributes to a broader understanding of thermal adaptation in \nthermophilic enzymes.\n5. Methods\n5.1. CNAnalysis"
+    },
+    {
+      "score": 0.6979458928108215,
+      "id": "1-s2.0-S2001037025000789-main:computational_sections:1",
+      "section_type": "computational",
+      "heading": "Molecular dynamics",
+      "paper": "Computational and Structural Biotechnology Journal 27 (2025) 969–977",
+      "pdf_file": "1-s2.0-S2001037025000789-main.pdf",
+      "text": "PET\nThermostability\nBiocatalysis\nEnzyme Engineering\nMachine learning\nPETase\nABSTRACT\nMore than 10 % of global solid waste consists of poly(ethyleneterephthalate) (PET). Among other techniques, \nPET hydrolases (PETases) can be used to depolymerize this plastic. However, wildtype PETases exhibit poor \nspecific activities and insufficient thermostability, limiting their use in depolymerization processes which require \nhigh temperatures. In 2022, machine learning-aided enzyme engineering of a PETase stemming from the bac -\nterium Ideonella sakaiensis ( Is PETase) resulted in a more functional, active, stable, and tolerant variant (FAST- \nPETase). To rationalize the molecular basis of FAST-PETase ’ s improved thermal stability, we performed \ncomparative Constraint Network Analysis (CNAnalysis) and Molecular Dynamics (MD) simulations of wildtype \nIs PETase (WT-PETase) and FAST-PETase at 30\n◦\nC and 50\n◦\nC identifying thermolabile sequence stretches in the \nwildtype enzyme. Further analysis of the backbone flexibility revealed that all mutations of FAST-PETase \naffected these critical regions. Counterintuitively, the in-silico analyses additionally highlighted that the flexi -\nbility of these regions decreased at 50\n◦\nC in FAST-PETase, instead of exhibiting increased flexibility at higher \ntemperature as would be expected from thermodynamic considerations. This effect was confirmed by physical \nenergy calculations, which suggest that temperature-dependent conformational changes of FAST-PETase \ndecrease the free energy of unfolding ( Δ G(stability)) and rigidify the enzyme at elevated temperatures \nenhancing stability. Looking forward, these findings might help guide the rational engineering of protein ther -\nmostability and contribute to our understanding of the thermal adaptation of thermophilic enzymes.\n1. Introduction\nTo achieve a circular economy, the ability to recycle the growing \namount of plastic waste is considered to be of high priority. [1] With PET \naccounting for around 12 % of the global solid waste volume (8 % by \nweight), the development of efficient and economical de- and repoly -\nmerization processes is therefore key. [2,3] One such PET depolymer -\nization strategy is the plastics ’ enzymatic hydrolysis, first reported in \n2005. [4,5] Although several enzymes with PET-hydrolyzing activities \nhave been identified, such as esterase, lipase and cutinase enzyme an -\nnotations, [6 – 9] expensive PET pretreatments are necessary to achieve \nacceptable depolymerizing activities with these promiscuous enzymes. \n[10 – 12] In 2016, PETase from Ideonella sakaiensis ( Is PETase) was \nreported to be suitable for the operation at temperatures between 30 and \n50 \n◦\nC. [13] However, this enzyme was found to be poorly stable, with \nloss of activities after 24 hours incubation at 37 \n◦\nC. [14] Since PET \nbecomes more accessible near its glass transition temperature (65 – 75 \n◦\nC), [15] increasing T\nm \nand optimal operating temperature of Is PETase \nis desirable. Thus, several enzyme engineering strategies have been \napplied to optimize Is PETase ’ s utility by enhancing its thermostability, \nactivity and process conditions. [14,16 – 19] As a result, two stabilized \nvariants, ThermoPETase and DuraPETase, were generated, which dis -\nplayed higher thermostability ( Δ T\nm \n10 and 30 \n◦\nC, respectively) and \nactivity at elevated temperatures ( > 60 \n◦\nC) but lower activity when mild \ntemperatures (30 – 50 \n◦\nC) were applied in depolymerization experiments. \n[14,16,20] Building on initial engineering attempts, Is PETase was \n* Corresponding authors.\nE-mail addresses: ac4086@coventry.ac.uk (S. Farnaud), rebecca.buller@zhaw.ch (R. Buller). \n1\nhttps://orcid.org/0000-0002-3494-7302\n2\nhttps://orcid.org/0000-0002-8176-4250\n3\nhttps://orcid.org/0000-0003-2077-5797\n4\nhttps://orcid.org/0000-0002-5997-1616\nContents lists available at ScienceDirect"
+    },
+    {
+      "score": 0.6821224093437195,
+      "id": "2024.09.11.612432v1.full:computational_sections:1",
+      "section_type": "computational",
+      "heading": "As suggested by molecular dynamics analysis, we introduced the S269T mutation to",
+      "paper": "Single Distal Mutation Enhances Activity of known PETases via",
+      "pdf_file": "2024.09.11.612432v1.full.pdf",
+      "text": "FastPETase, an enzyme that is known to be active at higher temperatures18, to assess its\neffect on PETase activity. The mutated Fast_S269T variant showed enhanced catalytic\nefficiency across a pH range of 6-10, notably doubling its performance at pH 8 compared to\nFastPETase (Supplementary Fig. 9). Analogously, we applied the same S269T mutation to\nother IsPETase variants, i.e., ThermoPETase, HotPETase and DepoPETase, to see if this\nmutation exhibited universal effects (Fig. 4a). Similarly as with FastPETase, catalytic\nenhancements were observed in ThermoPETase across 30, 40 and 50℃ in pH 8 and 9\nconditions. For HotPETase and DepoPETase, significant increases were only observed for its\nS269T variant at 50 °C pH 9 conditions (Welch's t-test, p-value=0.00324 for HotPETase and\np-value=0.0295 for DepoPETase), which possibly could be attributed to the structural\ndifferencesofHotPETaseand DepoPETase,whichcontain21 20 and721 mutationsrespectively,\ncompared toIsPETase. The highest effects are observed in FastPETaseoverall showingover\n430-fold increase of activity compared to wild typeIsPETase performance at 50℃and we\nnamed thisenzyme Fast_2.9 (Fig.4a).\nTo access Fast_2.9 performance, we included LCCICCG, a highly efficient enzyme tested in\nindustrial scales56. Since FastPETase and Fast_2.9 loses activity at 60°C (data not shown),\nwe compared monomer production after 48h at temperatures 30, 40 and 50°C and pH levels\nof 8 or 9, revealing that Fast_2.9 is most effective at milder temperatures of 50 °C and pH 8,\nwhere it released 2.01 and 2.79 times more monomer FastPETase and LCCICCG, respectively\n(Fig. 4a). Given these results, Fast_2.9 shows promise as a candidate for large-scale\napplications, especially at temperatures around 50°C,aligningwell withthethermal properties\nof polymer, as isothermal crystallisation could possibly occur when the temperature is above\n10\n.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a\npreprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in \nThe copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint \nthe glass transition temperature (Tg) of the PET material41 (Tg is 67 °C for amorphous PET\nand81°Cfor crystallinePET 57).\nEnzymes have varying activities at different substrate concentrations, yet most of the studies\nutilise different enzyme-to-substrate ratios complicating benchmarking of enzyme\nperformances. For instance, a non-saturated concentration of 0.2 mg enzyme・gPET\n–1 and a\nsaturated concentration of 1 mgenzyme・gPET\n–1 was used in a comparative study of LCCICCG with\nFastPETase and another two PET degradingenzymes56,while200nMand11.9mg PETwas\nused in600μl buffer (equal to0.282mgenzyme・gPET\n–1) tocompareFastPETase withLCCICCG and\nother enzymes 18. To investigate the effects of degradation rates in detail, we compared\nFast_2.9, FastPETase and LCCICCG kinetics using the inverse Michaelis–Menten approach14\nusing a range of enzyme concentrations. For all experiments, we used a unprocessed\npost-consumer PET substrate at 12 g/L across all conditions (Methods), with enzyme\nconcentrations ranging from 5 nM to 700 nM (equivalent to 0.01 to 1.66 mgenzyme・gPET\n–1),\nmeasuredover thefirst7 hata constanttemperatureof50 °CandapHof8.\n11\n.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a\npreprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in \nThe copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint \nFigure 4. The S269T mutation enhances the catalytic performance ofIsPETase variants.a, Heatmap showing\nthe monomer release after incubating 200 nMIsPETase, ThermoPETase, FastPETase, HotPETase, DepoPETase,\nand their S269T variants with 6 mm-diameter postconsumer PET discs under various pH and temperature\nconditions for 48 hours. The experiment was performed in triplicate, and the mean values of released monomers\nare displayed in the heatmap.b, Total monomer release after incubating 200 nM enzymes with a 6 mm-diameter\nyoghourt container lid disc in pH 8 or pH 9 buffer at 30, 40, 50, and 60°C for 48 hours. All samples were run in\ntriplicate, and data are shown as mean ± SD. The mean values of released monomers for each sample are\nindicated above each column.c, Inverse Michaelis-Menten plots of Fast_2.9, FastPETase and LCCICCG at 50°C in\npH 8 buffer. All samples were run in triplicates and all data are shown as mean ± SD.d, Monomer yield and\ndepolymerization rate of 12 g/L postconsumer PET disc by 100 nM (equal to 0.24 mg enzyme/g PET) Fast_2.9 and\nLCCICCG in 15 mL 100 mM KH2PO4・NaOH buffer (pH 8) in Pioreactors over 72 hours. Additional enzyme portions\n(0.24 mg enzyme/g PET) were supplemented at 24 and 48 hours. All samples were run in triplicate, and data are\nshown as mean ± SD.e, f, A 40.6 mg piece of non-pretreated green opaque PET plastic was completely degraded\n12\n.CC-BY-NC-ND 4.0 International licenseperpetuity. It is made available under a\npreprint (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in \nThe copyright holder for thisthis version posted September 11, 2024. ; https://doi.org/10.1101/2024.09.11.612432doi: bioRxiv preprint \nby 0.0288 mg Fast_2.9 within 66 hours, with 0.0096 mg (0.24 mg enzyme/g PET) Fast_2.9 added at 0, 24, and 48\nhours. Images were taken twice, and the representative images are shown.g, Images of three kinds of polyester\ntextiles (Textile 1: outer skirt of a pink polyester dress; Textile 2: inne skirt of a pink polyester dress; Textile 3: yellow\npolyester T-shirt; top: raw textiles; down: textiles after pretreatment).h, monomer yield, depolymerisation rate and\nweight loss when incubating 12 g/L pretreatment textiles with 100 nM Fast_2.9 (which is equal to 0.24 mg\nenzyme/g PET) in 0.6 mL 100 mM KH2PO4・NaOH buffer (pH 8) in 1.5 mL tubes within 72 hours. Additional\nenzyme portions (0.24 mg enzyme/g PET) were supplemented at 24 and 48 hours. All samples were run in\ntriplicate, and data are shown as mean ± SD.\nTable 1. Kinetic parameters of Fast_2.9, FastPETase and LCCICCG derived from the inverse Michaelis‒Menten\nexperiments\nInverse MM kinetics invKM (mgenzyme • gPET\n-1) invVmax /S (μM • s-1 • gPET\n-1)\nFast_2.9 0.025 0.030\nFastPETase 0.213 0.026\nLCCICCG 1.049 0.026\nAs shown in Fig. 4c and Table 1, we observed significant differences among the three\nenzymes. While invVmax /S value of Fast_2.9 is 15.4% higher than both FastPETase and\nLCCICCG, especially striking isInvKm differences, which is 8.5 and over 40timeslower thanthe\nInvKm values of FastPETase and LCCICCG respectively, indicating much less of enzyme for\nFast_2.9 is needed to fully depolymerise PET. We did notice a slightdecreaseinthevelocity\nwhen the enzyme concentrations were higher than 0.95 mgenzyme・gPET\n–1 for Fast_2.9 and 1.19\nmgenzyme・gPET\n–1 for FastPETase, which has also been reported forIsPETase before58. This\nconcentration-dependent inhibition,likelyduetosurfacecrowding 58–61,isacommonbehaviour\nin the enzymatic degradation of solid substrates, as observed in cellulases and\npolyhydroxyalkanoate (PHA) depolymerases60.Suchphenomenon ismuch lesspronouncedin\nenzymeswithhigher thermal stabilitylikelyduetohigher rigidity 59,whichexplainstheabsence\nofsuchconcentration-dependentinhibition for LCCICCG (Fig.4c).\nEnzyme costs play a significant part in the economics of industrial enzymatic hydrolysis\n14,35,36,62. The lower ininvKMofFast_2.9indicatesalower amountofenzyme isneeded,thereby\nreducing the overall recycling process costs. We next applied the least saturated enzyme\nconcentration of Fast_2.9 (0.24 mgenzyme・gPET\n–1) todegrade7typesofuntreatedpostconsumer"
+    }
+  ],
+  "results_sections": [
+    {
+      "score": 0.6890943050384521,
+      "id": "ChemSusChem - 2023 - Avilan - Concentration‐Dependent Inhibition of Mesophilic PETases on Poly ethylene terephthalate  Can:results_sections:5",
+      "section_type": "results",
+      "heading": "Conclusion",
+      "paper": "Very Important Paper",
+      "pdf_file": "ChemSusChem - 2023 - Avilan - Concentration‐Dependent Inhibition of Mesophilic PETases on Poly ethylene terephthalate  Can.pdf",
+      "text": "The inhibition of IsPETase and its mesophilic homologues at\nhigh enzyme concentration is an obstacle to the industrial use\nof these natural enzymes. This impediment can be partially\nresolved by adding an organic cosolvent (in this case, DMSO),\nor increasing the substrate surface area by cryomilling. Alter-\nnatively, enzyme engineering can be employed to enhance\nenzyme thermostability to reduce or even eliminate concen-\ntration-dependent inhibition. These two strategies can minimize\nthe negative impact of enzyme–enzyme interactions on a\ndensely populated PET surface."
+    },
+    {
+      "score": 0.6830307245254517,
+      "id": "2022.11.14.516528v1.full:results_sections:1",
+      "section_type": "results",
+      "heading": "The results of heat inactivation experiments verified the high thermostability of Z2-PETase as",
+      "paper": "Balance-directed protein engineering of IsPETase enhances both PET hydrolysis activity",
+      "pdf_file": "2022.11.14.516528v1.full.pdf",
+      "text": "activity was maintained for approximately 10 h at 70°C, whereas Z1-PETase activity was lost \nafter 1 h (Fig. 4a). This further confirms the increased thermostability of Z2-PETase compared \nwith Z1-PETase. However, Z1-PETase maintained its activity for several days at 60 °C, \nindicating somewhat higher thermostability than Is-8p (Fig. 4a).  \npreprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. \nThe copyright holder for thisthis version posted November 16, 2022. ; https://doi.org/10.1101/2022.11.14.516528doi: bioRxiv preprint \nThe closed PET hydrolysis system used above has considerable limitations for accurate \nquantification of enzyme kinetic performance and evaluation of complete PET \ndepolymerization because continuous ester hydrolysis interferes with enzyme activity by \nlowering the pH of the reaction mixture and the inhibition of  the enzyme activity  by the \nhydrolysis products (Fig. 4b). Thus, to compare PET hydrolysis by Z1-PETase and Z2-PETase \nover a broad range of temperatures, we designed a product-deficient in-situ dialysis system to \nmaintain the pH at 8.0 and keep the level of hydrolysis products low. This system was applied \nto PET hydrolysis (Supplementary Fig. 10), which showed that the PET depolymerizing \nactivity of Z1-PETase was higher than that of Z2-PETase across the entire temperature range \nfrom 30°C to 60°C, although the optimal temperatures of these two variants were different (Fig. \n4c–f). These results suggest that maintaining or enhancing the high activity of mesophilic PET \nhydrolase is critical for the development of a high-performance PET hydrolase with enhanced \nthermostability, and consequentially, we selected Z1-PETase as the IsPETase variant with the \nhighest PET depolymerizing activity among the tested combinatorial variants.  \nWe then compared the PET depolymerizing activity of Z1-PETase with those of other \nengineered PET hydrolases such as LC-CICCG, Dura-PETase, and Fast-PETase, and surprisingly, \nZ1-PETase kinetically outperforms LC-CICCG and Dura-PETase at all temperatures tested and \nexhibits high depolymerization rates (76.9%–90.1%) (Fig. 4c–f). Fast -PETase exhibited a \nslightly faster lag phase than  Z1-PETase at 30 °C and 40 °C; however, activity decreased \ndramatically at 50°C and 60°C, which was consistent with the much lower thermostability of \nFast-PETase (64°C)20 than Z1-PETase (Fig. 4c -f). Interestingly, the PET depolymerizing \nactivity of Dura-PETase was much lower than that of Z1-PETase at all temperature ranges (Fig. \n4c-f), although the thermostability of these IsPETase variants was similar. These results further \nemphasize the importance of maintaining or enhancing mesophilic PET hydrol ysis activity \nduring the development of high-performance PET hydrolases.  \npreprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. \nThe copyright holder for thisthis version posted November 16, 2022. ; https://doi.org/10.1101/2022.11.14.516528doi: bioRxiv preprint \nZ1-PETase was able to completely depolymerize the 15 × 15 × 0.25-mm PET film (6.1% \ncrystallinity) at 40°C and 50°C within approximately 3.2 and 2.2 days, respectively (Fig. 4g). \nFilm decomposition showed a clear lag phase, which reflects the time period required for the \nformation of a sufficient contact area between the surface of PET and the enzyme via initial \nhydrophilization of the film (Fig. 4g). The lag phase of film decomposition was much longer \nthan that of powder decomposition at the same temperature (Fig. 4 d, e, g), suggesting that the \navailability of the PET surface for enzyme adsorption determines the initial depolymerization \nrate. \n \nDepolymerization of post-consumer PET powder using a pH-stat bioreactor  \nWe evaluated the industrial application of Z1-PETase by studying  PET plastic \ndepolymerization using a pH-stat bioreactor. We used transparent post-consumer PET powder \noriginated from transparent PET flakes collected in Daegu, Korea as the substrate (Fig. 5a and \nSupplementary Fig. 11). When the bioreactor was operated at 40°C under the pH-8.0 stationary \ncondition with 2.5% (w/v) of the substrate, 50% of the PET powder was depolymerized in 8 h, \nand 92.5% of the PET powder was depolymerized in 24 h  (Fig. 5b) . At 55°C, the initial \ndepolymerization rate was much higher than that at 40°C, demonstrating the thermal effect on \nPET degradation. At 55°C, 50% and 93% of the PET powder were depolymerized in 2 h and 8 \nh, respectively  (Fig. 5b).  This corresponds to a specific productivity value of 5.2 \ngmonomer∙l−1∙h−1∙μmolenzyme−1, with a maximum rate of 17.2 gmonomer∙l−1∙h−1∙μmolenzyme−1 observed \nin the early phase of the reaction. Due to the high activity and stability of Z1-PETase, the final \ndepolymerization rates of PET powder at 40°C and 55°C were not significantly different from \neach other (Fig. 5b).  \nIt should be noted  that colored PET plastics, such as brown plastic  beer bottles, are \ndifficult to recycle because they contain impurities, such as pigments, nylon and iron. Therefore, \npreprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. \nThe copyright holder for thisthis version posted November 16, 2022. ; https://doi.org/10.1101/2022.11.14.516528doi: bioRxiv preprint \ncolored PET plastics reduce the quality of transparent PET plastics when both are mixed, and \ncolored PET plastics are not suitable as raw mater ials for applications in the textile industry. \nWe prepared colored post-consumer PET powder in the same way as transparent post-consumer \nPET powder and performed decomposition experiments using a pH-stat bioreactor to test the \nefficacy of our system for difficult-to-recycle substrates (Fig. 5c and Supplementary Fig. 11). \nInterestingly, Z1-PETase was able to depolymerize colored PET at a rate similar  to that of \ntransparent PET at both 40°C and 55°C, indicating that Z1-PETase can depolymerize at the \nsame rate regardless of the types of PET plastics  (Fig. 5b, d). At both temperatures, the final \ndepolymerization rate of colored PET was 90.2%, which was  slightly lower than th at of \ntransparent PET, possibly due to impurities contained in colored PET (Fig. 5d).  \npreprint (which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. \nThe copyright holder for thisthis version posted November 16, 2022. ; https://doi.org/10.1101/2022.11.14.516528doi: bioRxiv preprint"
+    }
+  ],
+  "parameter_edges": [
+    {
+      "score": 0.8477435111999512,
+      "text": "Computational and Structural Biotechnology Journal 27 (2025) 969–977 outcome Thus, several enzyme engineering strategies have been \napplied to optimize Is PETase ’ s utility by enhancing its thermostability, \nactivity and process conditions.. Evidence: Thus, several enzyme engineering strategies have been \napplied to optimize Is PETase ’ s utility by enhancing its thermostability, \nactivity and process conditions.",
+      "metadata": {
+        "paper": "Computational and Structural Biotechnology Journal 27 (2025) 969–977",
+        "pdf_file": "1-s2.0-S2001037025000789-main.pdf",
+        "section_type": "computational",
+        "heading": "Molecular dynamics",
+        "relation": "outcome",
+        "value": "Thus, several enzyme engineering strategies have been \napplied to optimize Is PETase ’ s utility by enhancing its thermostability, \nactivity and process conditions.",
+        "sentence": "Thus, several enzyme engineering strategies have been \napplied to optimize Is PETase ’ s utility by enhancing its thermostability, \nactivity and process conditions."
+      }
+    },
+    {
+      "score": 0.8182049989700317,
+      "text": "Development of a highly active engineered PETase enzyme duration 1 min. Evidence: Column\ntemperature was maintained at 40°C with a ﬂow rate of\n1m L/C1 min\n/C0 1.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "duration",
+        "value": "1 min",
+        "sentence": "Column\ntemperature was maintained at 40°C with a ﬂow rate of\n1m L/C1 min\n/C0 1."
+      }
+    },
+    {
+      "score": 0.810585081577301,
+      "text": "Current advances in the structural outcome It is still\nimperative to further improve the thermostability of the used PETases\n(or PETase-like enzymes), which usually function poorly at glassy\ntransition temperature.. Evidence: It is still\nimperative to further improve the thermostability of the used PETases\n(or PETase-like enzymes), which usually function poorly at glassy\ntransition temperature.",
+      "metadata": {
+        "paper": "Current advances in the structural",
+        "pdf_file": "fbioe-11-1263996.pdf",
+        "section_type": "results",
+        "heading": "4 Discussion and conclusion",
+        "relation": "outcome",
+        "value": "It is still\nimperative to further improve the thermostability of the used PETases\n(or PETase-like enzymes), which usually function poorly at glassy\ntransition temperature.",
+        "sentence": "It is still\nimperative to further improve the thermostability of the used PETases\n(or PETase-like enzymes), which usually function poorly at glassy\ntransition temperature."
+      }
+    },
+    {
+      "score": 0.8085808753967285,
+      "text": "Development of a highly active engineered PETase enzyme duration 1 min. Evidence: Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "duration",
+        "value": "1 min",
+        "sentence": "Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C."
+      }
+    },
+    {
+      "score": 0.8079279661178589,
+      "text": "Development of a highly active engineered PETase enzyme outcome Thermal stability\nThe six candidate enzymes were expressed in E.. Evidence: Thermal stability\nThe six candidate enzymes were expressed in E.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "outcome",
+        "value": "Thermal stability\nThe six candidate enzymes were expressed in E.",
+        "sentence": "Thermal stability\nThe six candidate enzymes were expressed in E."
+      }
+    },
+    {
+      "score": 0.8076075315475464,
+      "text": "1 outcome This enzyme is also predicted by \nexternal algorithms to have a higher thermostability than the original PETase enzyme.. Evidence: This enzyme is also predicted by \nexternal algorithms to have a higher thermostability than the original PETase enzyme.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2022.01.11.475766v1.full.pdf",
+        "section_type": "computational",
+        "heading": "In this project, machine learning was used to perform in silico directed evolution on the PETase",
+        "relation": "outcome",
+        "value": "This enzyme is also predicted by \nexternal algorithms to have a higher thermostability than the original PETase enzyme.",
+        "sentence": "This enzyme is also predicted by \nexternal algorithms to have a higher thermostability than the original PETase enzyme."
+      }
+    },
+    {
+      "score": 0.8036218881607056,
+      "text": "Development of a highly active engineered PETase enzyme action Thermal stability\nThe six candidate enzymes were expressed in E.. Evidence: Thermal stability\nThe six candidate enzymes were expressed in E.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "action",
+        "value": "Thermal stability\nThe six candidate enzymes were expressed in E.",
+        "sentence": "Thermal stability\nThe six candidate enzymes were expressed in E."
+      }
+    },
+    {
+      "score": 0.803602933883667,
+      "text": "Comparative Performance of PETase as a Function of temperature 30 °C. Evidence: In comparing the thermody-\nnamic stability (resistance to thermal unfolding) of each enzyme\nas a function of temperature, the WT and DM enzymes have\ncomparable stability at 30 ° C (Figure S3A).",
+      "metadata": {
+        "paper": "Comparative Performance of PETase as a Function of",
+        "pdf_file": "ChemSusChem - 2021 - Erickson - Comparative Performance of PETase as a Function of Reaction Conditions  Substrate.pdf",
+        "section_type": "results",
+        "heading": "Results",
+        "relation": "temperature",
+        "value": "30 °C",
+        "sentence": "In comparing the thermody-\nnamic stability (resistance to thermal unfolding) of each enzyme\nas a function of temperature, the WT and DM enzymes have\ncomparable stability at 30 ° C (Figure S3A)."
+      }
+    },
+    {
+      "score": 0.8027924299240112,
+      "text": "Enhancing PET Degrading Enzymes: A Combinatory outcome Summary of thermostability, activity, and soluble yield for selected engineered PETase variants.. Evidence: Summary of thermostability, activity, and soluble yield for selected engineered PETase variants.",
+      "metadata": {
+        "paper": "Enhancing PET Degrading Enzymes: A Combinatory",
+        "pdf_file": "ChemBioChem - 2024 - Joho - Enhancing PET Degrading Enzymes  A Combinatory Approach.pdf",
+        "section_type": "results",
+        "heading": "Results and Discussion",
+        "relation": "outcome",
+        "value": "Summary of thermostability, activity, and soluble yield for selected engineered PETase variants.",
+        "sentence": "Summary of thermostability, activity, and soluble yield for selected engineered PETase variants."
+      }
+    },
+    {
+      "score": 0.801931619644165,
+      "text": "Development of a highly active engineered PETase enzyme concentration 1 m. Evidence: Column\ntemperature was maintained at 40°C with a ﬂow rate of\n1m L/C1 min\n/C0 1.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "concentration",
+        "value": "1 m",
+        "sentence": "Column\ntemperature was maintained at 40°C with a ﬂow rate of\n1m L/C1 min\n/C0 1."
+      }
+    },
+    {
+      "score": 0.7965649366378784,
+      "text": "1 temperature 60 °C. Evidence: This means that we can indeed optimize the optimal temperatures of PETase above 60 degrees \nCelsius for maximum efficiency, and the enzyme will still be stable and working at those temperatures.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2022.01.11.475766v1.full.pdf",
+        "section_type": "results",
+        "heading": "Directed Evolution Results",
+        "relation": "temperature",
+        "value": "60 °C",
+        "sentence": "This means that we can indeed optimize the optimal temperatures of PETase above 60 degrees \nCelsius for maximum efficiency, and the enzyme will still be stable and working at those temperatures."
+      }
+    },
+    {
+      "score": 0.796000599861145,
+      "text": "Development of a highly active engineered PETase enzyme concentration 1m. Evidence: Column\ntemperature was maintained at 40°C with a ﬂow rate of\n1m L/C1 min\n/C0 1.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "concentration",
+        "value": "1m",
+        "sentence": "Column\ntemperature was maintained at 40°C with a ﬂow rate of\n1m L/C1 min\n/C0 1."
+      }
+    },
+    {
+      "score": 0.7957412004470825,
+      "text": "Development of a highly active engineered PETase enzyme concentration 1 m. Evidence: Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "concentration",
+        "value": "1 m",
+        "sentence": "Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C."
+      }
+    },
+    {
+      "score": 0.7951523661613464,
+      "text": "Development of a highly active engineered PETase enzyme temperature 40 °C. Evidence: Column\ntemperature was maintained at 40°C with a ﬂow rate of\n1m L/C1 min\n/C0 1.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "temperature",
+        "value": "40 °C",
+        "sentence": "Column\ntemperature was maintained at 40°C with a ﬂow rate of\n1m L/C1 min\n/C0 1."
+      }
+    },
+    {
+      "score": 0.7931413054466248,
+      "text": "Development of a highly active engineered PETase enzyme temperature 68 °C. Evidence: (D) Percentage of PET ﬁlm weight loss after treatment (6 days at 68 °C, LCC-\nICCG and C09 n = 8, X09 – C08 –X05 n = 5, control n = 3).",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "results",
+        "heading": "Discussion",
+        "relation": "temperature",
+        "value": "68 °C",
+        "sentence": "(D) Percentage of PET ﬁlm weight loss after treatment (6 days at 68 °C, LCC-\nICCG and C09 n = 8, X09 – C08 –X05 n = 5, control n = 3)."
+      }
+    },
+    {
+      "score": 0.792627215385437,
+      "text": "Development of a highly active engineered PETase enzyme temperature 120 °C. Evidence: Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "temperature",
+        "value": "120 °C",
+        "sentence": "Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C."
+      }
+    },
+    {
+      "score": 0.7902355194091797,
+      "text": "Development of a highly active engineered PETase enzyme temperature_range 20 °C to 120 °C. Evidence: Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "temperature_range",
+        "value": "20 °C to 120 °C",
+        "sentence": "Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C."
+      }
+    },
+    {
+      "score": 0.7897400856018066,
+      "text": "Development of a highly active engineered PETase enzyme temperature 93.8 °C. Evidence: See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License\n\n(Tm = 93.8 °C) variant exhibits similar thermal stability\nto LCC-ICCG (Fig.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "temperature",
+        "value": "93.8 °C",
+        "sentence": "See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License\n\n(Tm = 93.8 °C) variant exhibits similar thermal stability\nto LCC-ICCG (Fig."
+      }
+    },
+    {
+      "score": 0.7877969741821289,
+      "text": "Journal of Hazardous Materials 455 (2023) 131574 outcome Both \nenzymes, especially LCC\nICCG\n, presented a thermostable profile retaining \ntheir activity at temperatures of 50\n◦\nC and 60\n◦\nC for Dm PETase ( Fig.. Evidence: Both \nenzymes, especially LCC\nICCG\n, presented a thermostable profile retaining \ntheir activity at temperatures of 50\n◦\nC and 60\n◦\nC for Dm PETase ( Fig.",
+      "metadata": {
+        "paper": "Journal of Hazardous Materials 455 (2023) 131574",
+        "pdf_file": "1-s2.0-S0304389423008579-main.pdf",
+        "section_type": "experimental",
+        "heading": "Conventional plastic waste management methods (landfills and",
+        "relation": "outcome",
+        "value": "Both \nenzymes, especially LCC\nICCG\n, presented a thermostable profile retaining \ntheir activity at temperatures of 50\n◦\nC and 60\n◦\nC for Dm PETase ( Fig.",
+        "sentence": "Both \nenzymes, especially LCC\nICCG\n, presented a thermostable profile retaining \ntheir activity at temperatures of 50\n◦\nC and 60\n◦\nC for Dm PETase ( Fig."
+      }
+    },
+    {
+      "score": 0.7855919599533081,
+      "text": "Development of a highly active engineered PETase enzyme temperature 8 °C. Evidence: (C) Enzyme-speciﬁc\nactivity at the different time points (LCC-ICCG – C09 – X05 – X09 – C08 40 n M,6 8 °C, pH 8.0).",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "results",
+        "heading": "Discussion",
+        "relation": "temperature",
+        "value": "8 °C",
+        "sentence": "(C) Enzyme-speciﬁc\nactivity at the different time points (LCC-ICCG – C09 – X05 – X09 – C08 40 n M,6 8 °C, pH 8.0)."
+      }
+    },
+    {
+      "score": 0.7839492559432983,
+      "text": "Comparative Performance of PETase as a Function of temperature 40 °C. Evidence: All reactions were\nperformed with 2.9 % by mass (29 g L\n\u0000 1\n) substrate loading and 1 mg g\n\u0000 1\nenzyme loading at 30 or 40 ° C.",
+      "metadata": {
+        "paper": "Comparative Performance of PETase as a Function of",
+        "pdf_file": "ChemSusChem - 2021 - Erickson - Comparative Performance of PETase as a Function of Reaction Conditions  Substrate.pdf",
+        "section_type": "results",
+        "heading": "Results",
+        "relation": "temperature",
+        "value": "40 °C",
+        "sentence": "All reactions were\nperformed with 2.9 % by mass (29 g L\n\u0000 1\n) substrate loading and 1 mg g\n\u0000 1\nenzyme loading at 30 or 40 ° C."
+      }
+    },
+    {
+      "score": 0.7837547659873962,
+      "text": "Development of a highly active engineered PETase enzyme temperature 1 °C. Evidence: Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "temperature",
+        "value": "1 °C",
+        "sentence": "Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C."
+      }
+    },
+    {
+      "score": 0.7834610939025879,
+      "text": "Comparative Performance of PETase as a Function of temperature 40 °C. Evidence: The\nconv\nK\nm\nvalues drop\nsignificantly between the 30 and 40 ° C reactions for both\nenzymes on both substrates, indicating there is a temperature\ndependence for affinity between the enzyme and the substrate.",
+      "metadata": {
+        "paper": "Comparative Performance of PETase as a Function of",
+        "pdf_file": "ChemSusChem - 2021 - Erickson - Comparative Performance of PETase as a Function of Reaction Conditions  Substrate.pdf",
+        "section_type": "results",
+        "heading": "Results",
+        "relation": "temperature",
+        "value": "40 °C",
+        "sentence": "The\nconv\nK\nm\nvalues drop\nsignificantly between the 30 and 40 ° C reactions for both\nenzymes on both substrates, indicating there is a temperature\ndependence for affinity between the enzyme and the substrate."
+      }
+    },
+    {
+      "score": 0.7825754284858704,
+      "text": "Development of a highly active engineered PETase enzyme temperature 20 °C. Evidence: Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "temperature",
+        "value": "20 °C",
+        "sentence": "Protein denaturation was induced\nupon increasing the temperature at a rate of 1 °C/C1 min\n/C0 1\nfrom 20 °C to 120 °C."
+      }
+    },
+    {
+      "score": 0.7824018597602844,
+      "text": "1 outcome These values show that the PETase and the mutant PETase \nenzymes’ thermostability is between 55 and 65 degrees Celsius.. Evidence: These values show that the PETase and the mutant PETase \nenzymes’ thermostability is between 55 and 65 degrees Celsius.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2022.01.11.475766v1.full.pdf",
+        "section_type": "experimental",
+        "heading": "Materials and Methods",
+        "relation": "outcome",
+        "value": "These values show that the PETase and the mutant PETase \nenzymes’ thermostability is between 55 and 65 degrees Celsius.",
+        "sentence": "These values show that the PETase and the mutant PETase \nenzymes’ thermostability is between 55 and 65 degrees Celsius."
+      }
+    },
+    {
+      "score": 0.7793575525283813,
+      "text": "Assessment of Four Engineered PET Degrading Enzymes outcome Alternatively, when enzymes suffered from poor\nthermostability, specific activity was determined between 0 and\n2 h of reaction time.. Evidence: Alternatively, when enzymes suffered from poor\nthermostability, specific activity was determined between 0 and\n2 h of reaction time.",
+      "metadata": {
+        "paper": "Assessment of Four Engineered PET Degrading Enzymes",
+        "pdf_file": "assessment-of-four-engineered-pet-degrading-enzymes-considering-large-scale-industrial-applications.pdf",
+        "section_type": "experimental",
+        "heading": "MATERIALS AND METHODS",
+        "relation": "outcome",
+        "value": "Alternatively, when enzymes suffered from poor\nthermostability, specific activity was determined between 0 and\n2 h of reaction time.",
+        "sentence": "Alternatively, when enzymes suffered from poor\nthermostability, specific activity was determined between 0 and\n2 h of reaction time."
+      }
+    },
+    {
+      "score": 0.7781982421875,
+      "text": "Enhancing PET Degrading Enzymes: A Combinatory outcome PETase\nACCCET\n– Generation 3\nFurther attempts to improve the thermal stability of our\nPETase\nACC\nvariant by rational design only led to modest\nimprovements.. Evidence: PETase\nACCCET\n– Generation 3\nFurther attempts to improve the thermal stability of our\nPETase\nACC\nvariant by rational design only led to modest\nimprovements.",
+      "metadata": {
+        "paper": "Enhancing PET Degrading Enzymes: A Combinatory",
+        "pdf_file": "ChemBioChem - 2024 - Joho - Enhancing PET Degrading Enzymes  A Combinatory Approach.pdf",
+        "section_type": "results",
+        "heading": "Results and Discussion",
+        "relation": "outcome",
+        "value": "PETase\nACCCET\n– Generation 3\nFurther attempts to improve the thermal stability of our\nPETase\nACC\nvariant by rational design only led to modest\nimprovements.",
+        "sentence": "PETase\nACCCET\n– Generation 3\nFurther attempts to improve the thermal stability of our\nPETase\nACC\nvariant by rational design only led to modest\nimprovements."
+      }
+    },
+    {
+      "score": 0.777437686920166,
+      "text": "Comparative Performance of PETase as a Function of outcome In comparing the thermody-\nnamic stability (resistance to thermal unfolding) of each enzyme\nas a function of temperature, the WT and DM enzymes have\ncomparable stability at 30 ° C (Figure S3A).. Evidence: In comparing the thermody-\nnamic stability (resistance to thermal unfolding) of each enzyme\nas a function of temperature, the WT and DM enzymes have\ncomparable stability at 30 ° C (Figure S3A).",
+      "metadata": {
+        "paper": "Comparative Performance of PETase as a Function of",
+        "pdf_file": "ChemSusChem - 2021 - Erickson - Comparative Performance of PETase as a Function of Reaction Conditions  Substrate.pdf",
+        "section_type": "results",
+        "heading": "Results",
+        "relation": "outcome",
+        "value": "In comparing the thermody-\nnamic stability (resistance to thermal unfolding) of each enzyme\nas a function of temperature, the WT and DM enzymes have\ncomparable stability at 30 ° C (Figure S3A).",
+        "sentence": "In comparing the thermody-\nnamic stability (resistance to thermal unfolding) of each enzyme\nas a function of temperature, the WT and DM enzymes have\ncomparable stability at 30 ° C (Figure S3A)."
+      }
+    },
+    {
+      "score": 0.7770321369171143,
+      "text": "1 temperature 65 °C. Evidence: These values show that the PETase and the mutant PETase \nenzymes’ thermostability is between 55 and 65 degrees Celsius.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2022.01.11.475766v1.full.pdf",
+        "section_type": "experimental",
+        "heading": "Materials and Methods",
+        "relation": "temperature",
+        "value": "65 °C",
+        "sentence": "These values show that the PETase and the mutant PETase \nenzymes’ thermostability is between 55 and 65 degrees Celsius."
+      }
+    },
+    {
+      "score": 0.7753888368606567,
+      "text": "Comparative Performance of PETase as a Function of temperature 40 °C. Evidence: Reactions at 40 ° C are optimized at high enzyme\nloadings and low substrate loadings (Figure 6E, H).",
+      "metadata": {
+        "paper": "Comparative Performance of PETase as a Function of",
+        "pdf_file": "ChemSusChem - 2021 - Erickson - Comparative Performance of PETase as a Function of Reaction Conditions  Substrate.pdf",
+        "section_type": "results",
+        "heading": "Results",
+        "relation": "temperature",
+        "value": "40 °C",
+        "sentence": "Reactions at 40 ° C are optimized at high enzyme\nloadings and low substrate loadings (Figure 6E, H)."
+      }
+    },
+    {
+      "score": 0.7746188640594482,
+      "text": "Development of a highly active engineered PETase enzyme temperature 68 °C. Evidence: At 68 °C, complete sample degradation\ncould be observed with C09 already at day 4 (data not\nshown), a feature not seen with any of the other\nenzymes, including LCC-ICCG.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "computational",
+        "heading": "In silico design and selection of stabilizing",
+        "relation": "temperature",
+        "value": "68 °C",
+        "sentence": "At 68 °C, complete sample degradation\ncould be observed with C09 already at day 4 (data not\nshown), a feature not seen with any of the other\nenzymes, including LCC-ICCG."
+      }
+    },
+    {
+      "score": 0.774056077003479,
+      "text": "Comparative Performance of PETase as a Function of temperature 40 °C. Evidence: The steady-state kinetic parameters derived from\nthe convMM and invMM models suggest there is an important\ntemperature-dependent change in affinity between the enzyme\nand the substrate at 40 ° C, perhaps indicating that association\nbetween the enzyme and the substrate is better at 40 ° C, but\nthis is true for both enzymes.",
+      "metadata": {
+        "paper": "Comparative Performance of PETase as a Function of",
+        "pdf_file": "ChemSusChem - 2021 - Erickson - Comparative Performance of PETase as a Function of Reaction Conditions  Substrate.pdf",
+        "section_type": "results",
+        "heading": "Discussion",
+        "relation": "temperature",
+        "value": "40 °C",
+        "sentence": "The steady-state kinetic parameters derived from\nthe convMM and invMM models suggest there is an important\ntemperature-dependent change in affinity between the enzyme\nand the substrate at 40 ° C, perhaps indicating that association\nbetween the enzyme and the substrate is better at 40 ° C, but\nthis is true for both enzymes."
+      }
+    },
+    {
+      "score": 0.774056077003479,
+      "text": "Comparative Performance of PETase as a Function of temperature 40 °C. Evidence: The steady-state kinetic parameters derived from\nthe convMM and invMM models suggest there is an important\ntemperature-dependent change in affinity between the enzyme\nand the substrate at 40 ° C, perhaps indicating that association\nbetween the enzyme and the substrate is better at 40 ° C, but\nthis is true for both enzymes.",
+      "metadata": {
+        "paper": "Comparative Performance of PETase as a Function of",
+        "pdf_file": "ChemSusChem - 2021 - Erickson - Comparative Performance of PETase as a Function of Reaction Conditions  Substrate.pdf",
+        "section_type": "results",
+        "heading": "Discussion",
+        "relation": "temperature",
+        "value": "40 °C",
+        "sentence": "The steady-state kinetic parameters derived from\nthe convMM and invMM models suggest there is an important\ntemperature-dependent change in affinity between the enzyme\nand the substrate at 40 ° C, perhaps indicating that association\nbetween the enzyme and the substrate is better at 40 ° C, but\nthis is true for both enzymes."
+      }
+    },
+    {
+      "score": 0.773392915725708,
+      "text": "Development of a highly active engineered PETase enzyme outcome Hence, starting from this variant, we set out\nto engineer a novel enzyme with enhanced thermal sta-\nbility and enzymatic activity.. Evidence: Hence, starting from this variant, we set out\nto engineer a novel enzyme with enhanced thermal sta-\nbility and enzymatic activity.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "results",
+        "heading": "Discussion",
+        "relation": "outcome",
+        "value": "Hence, starting from this variant, we set out\nto engineer a novel enzyme with enhanced thermal sta-\nbility and enzymatic activity.",
+        "sentence": "Hence, starting from this variant, we set out\nto engineer a novel enzyme with enhanced thermal sta-\nbility and enzymatic activity."
+      }
+    },
+    {
+      "score": 0.7713795304298401,
+      "text": "Comparative Performance of PETase as a Function of temperature 30 °C. Evidence: [9b]\nTo further explain the differences observed between the WT\nand DM, it seems unlikely that the increased thermal stability of\nthe DM is the primary driver of improved performance, as the\nDM enzyme at 30 ° C shows the poorest performance, despite\nimproved stability.",
+      "metadata": {
+        "paper": "Comparative Performance of PETase as a Function of",
+        "pdf_file": "ChemSusChem - 2021 - Erickson - Comparative Performance of PETase as a Function of Reaction Conditions  Substrate.pdf",
+        "section_type": "results",
+        "heading": "Discussion",
+        "relation": "temperature",
+        "value": "30 °C",
+        "sentence": "[9b]\nTo further explain the differences observed between the WT\nand DM, it seems unlikely that the increased thermal stability of\nthe DM is the primary driver of improved performance, as the\nDM enzyme at 30 ° C shows the poorest performance, despite\nimproved stability."
+      }
+    },
+    {
+      "score": 0.7700187563896179,
+      "text": "1 temperature 70 °C. Evidence: enzyme to design a mutant which has predicted Topt of 70°C, nearly double that of the wild type PETase.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2022.01.11.475766v1.full.pdf",
+        "section_type": "computational",
+        "heading": "In this project, machine learning was used to perform in silico directed evolution on the PETase",
+        "relation": "temperature",
+        "value": "70 °C",
+        "sentence": "enzyme to design a mutant which has predicted Topt of 70°C, nearly double that of the wild type PETase."
+      }
+    },
+    {
+      "score": 0.7691275477409363,
+      "text": "1 temperature 65 °C. Evidence: These enzyme melting temperature values \nshow that the PETase and the mutant PETase enzymes’ thermostability is between 55 and 65 degrees \nCelsius.",
+      "metadata": {
+        "paper": "1",
+        "pdf_file": "2022.01.11.475766v1.full.pdf",
+        "section_type": "results",
+        "heading": "Directed Evolution Results",
+        "relation": "temperature",
+        "value": "65 °C",
+        "sentence": "These enzyme melting temperature values \nshow that the PETase and the mutant PETase enzymes’ thermostability is between 55 and 65 degrees \nCelsius."
+      }
+    },
+    {
+      "score": 0.7689989805221558,
+      "text": "Development of a highly active engineered PETase enzyme temperature 68 °C. Evidence: (B) Comparison of TPA production at 68 °C at 4 h and at 144 h.",
+      "metadata": {
+        "paper": "Development of a highly active engineered PETase enzyme",
+        "pdf_file": "The FEBS Journal - 2025 - Bhattacharya - Development of a highly active engineered PETase enzyme for polyester degradation.pdf",
+        "section_type": "results",
+        "heading": "Discussion",
+        "relation": "temperature",
+        "value": "68 °C",
+        "sentence": "(B) Comparison of TPA production at 68 °C at 4 h and at 144 h."
+      }
+    },
+    {
+      "score": 0.7683181762695312,
+      "text": "Enhancing PET Degrading Enzymes: A Combinatory temperature 50 °C. Evidence: The increased melting temperature of PETase\nACC\nallows\na much higher activity compared to PETase\nA\nat a reaction\ntemperature of 50 ° C.",
+      "metadata": {
+        "paper": "Enhancing PET Degrading Enzymes: A Combinatory",
+        "pdf_file": "ChemBioChem - 2024 - Joho - Enhancing PET Degrading Enzymes  A Combinatory Approach.pdf",
+        "section_type": "results",
+        "heading": "Results and Discussion",
+        "relation": "temperature",
+        "value": "50 °C",
+        "sentence": "The increased melting temperature of PETase\nACC\nallows\na much higher activity compared to PETase\nA\nat a reaction\ntemperature of 50 ° C."
+      }
+    },
+    {
+      "score": 0.7676198482513428,
+      "text": "Comparative Performance of PETase as a Function of temperature 40 °C. Evidence: The dotted line (dark blue) indicates the fit of the data using\nEquation S1 until the drop (0–58 g L\n\u0000 1\nPET) for the WT enzyme at 40 ° C.",
+      "metadata": {
+        "paper": "Comparative Performance of PETase as a Function of",
+        "pdf_file": "ChemSusChem - 2021 - Erickson - Comparative Performance of PETase as a Function of Reaction Conditions  Substrate.pdf",
+        "section_type": "results",
+        "heading": "Results",
+        "relation": "temperature",
+        "value": "40 °C",
+        "sentence": "The dotted line (dark blue) indicates the fit of the data using\nEquation S1 until the drop (0–58 g L\n\u0000 1\nPET) for the WT enzyme at 40 ° C."
+      }
+    }
+  ],
+  "instrument_evidence": [
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "temperature",
+      "value": "60 °C",
+      "sentence": "In the Method tab, set the hold to 60°C for 2 minutes.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/e7462b14e891039c65a1032603d0b2f6e7a349878465285c7f2040ac9ed62760.pdf"
+    },
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "temperature",
+      "value": "20 °C",
+      "sentence": "Store all calibration and RNase P plates at –20°C.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/e7462b14e891039c65a1032603d0b2f6e7a349878465285c7f2040ac9ed62760.pdf"
+    },
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "temperature",
+      "value": "4 °C",
+      "sentence": "•\nKeep the reaction plate or tubes at 4°C, in the dark, until you are ready to load it\ninto the instrument.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/QuantStudioDesign_Analysis_Desktop_Software_UG.pdf"
+    },
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "temperature",
+      "value": "15 °C",
+      "sentence": "Enter a value (default is 0.15 °C/s) or use the up/down arrows to set the\ndesired value.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/QuantStudioDesign_Analysis_Desktop_Software_UG.pdf"
+    },
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "temperature",
+      "value": "5 °C",
+      "sentence": "The temperatures in adjacent zones must have a difference of ≤5°C.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/e7462b14e891039c65a1032603d0b2f6e7a349878465285c7f2040ac9ed62760.pdf"
+    },
+    {
+      "instrument": "Applied Biosystems QuantStudio 7 Pro",
+      "relation": "temperature_range",
+      "value": "15 °C to 30 °C",
+      "sentence": "Altitude Located between sea level and 2000 m (6500 ft.) above sea level\nHumidity (instrument\nand comput\ner)\nOperation: 15%–80% (noncondensing)\nTemperature\n(instrument and\ncomput\ner)\n15°C to 30°C (60°F to 85°F)\nNot\ne: The room temperature must not fluctuate more than 2°C over a 2-hour period.",
+      "pdf_file": "Applied Biosystems QuantStudio 7 Pro/e7462b14e891039c65a1032603d0b2f6e7a349878465285c7f2040ac9ed62760.pdf"
+    }
+  ],
+  "answer": "## Experimental Workflow\n\n1. **Goal/Action** – Clone, express, and purify engineered PETase variants.  \n   **Detailed instructions** – Transform *E. coli* BL21(DE3) with pET‑based plasmids encoding the six candidate PETase variants (including FAST‑PETase, HOT‑PETase, Z1‑PETase, Z2‑PETase, ThermoPETase, and a newly designed S269T‑containing variant). Grow 1 L cultures in LB + 50 µg mL⁻¹ kanamycin at 37 °C to an OD₆₀₀ of 0.6, then induce with 0.5 mM IPTG and shift to 16 °C overnight. Harvest cells by centrifugation (4 000 × g, 15 min, 4 °C), resuspend in lysis buffer (50 mM Tris‑HCl pH 8.0, 300 mM NaCl, 10 mM imidazole, 1 mM PMSF), and lyse by sonication (3 × 30 s on, 30 s off, 4 °C). Clarify lysate by centrifugation (15 000 × g, 30 min, 4 °C). Load supernatant onto a Ni²⁺‑charged HisTrap column (GE Healthcare) equilibrated with lysis buffer. Wash with 20 mM imidazole, elute with 250 mM imidazole. Dialyze eluted protein against 50 mM Tris‑HCl pH 8.0 (1 h, 4 °C, 1 × 10 kDa MWCO). Concentrate to ~1 mM using Amicon Ultra‑15 (10 kDa cut‑off).  \n   **Instruments** – **Ni²⁺‑HisTrap column** (for affinity purification), **Amicon Ultra‑15** (for concentration). These provide high‑yield, high‑purity enzyme preparations essential for downstream kinetic and thermostability assays.  \n   **Expected observation** – SDS‑PAGE shows a single band at ~30 kDa; UV‑Vis absorbance at 280 nm yields ~1 mM enzyme concentration.  \n   **Next step trigger** – Availability of purified enzyme at ≥1 mM for activity and stability assays.\n\n2. **Goal/Action** – Prepare high‑surface‑area PET substrate by cryomilling.  \n   **Detailed instructions** – Take 1 g of commercial PET film (≥ 100 µm thickness), place in a cryomill chamber pre‑cooled to –80 °C, mill for 30 min at 10 kHz. Collect the fine PET powder (< 50 µm) and store at –20 °C until use.  \n   **Instruments** – **Cryomill** (for particle size reduction). Cryomilling increases the accessible surface area, thereby enhancing enzyme–substrate contact and improving measurable hydrolysis rates.  \n   **Expected observation** – Powdered PET appears translucent and fine; particle size analysis (laser diffraction) confirms < 50 µm.  \n   **Next step trigger** – Availability of cryomilled PET for reaction setup.\n\n3. **Goal/Action** – Perform temperature‑controlled PET hydrolysis assays in 96‑well plates.  \n   **Detailed instructions** – In a sterile 96‑well PCR plate, add 50 µL of reaction mix per well: 25 µL of 50 mM Tris‑HCl pH 8.0, 25 µL of cryomilled PET suspension (1 g mL⁻¹), 1 mM enzyme (final volume 50 µL), and 5 % (v/v) DMSO to mitigate concentration‑dependent inhibition. Seal the plate with a clear adhesive film. Place the plate in a **QuantStudio 7 Pro** set to a hold at 50 °C for 30 min (temperature ramp 0.15 °C s⁻¹). After incubation, immediately transfer the plate to the same instrument set to a hold at 60 °C for 2 min to quench the reaction and denature the enzyme.  \n   **Instruments** – **QuantStudio 7 Pro** (for precise temperature control and rapid quenching). The 60 °C hold stops hydrolysis without significant product degradation, allowing accurate downstream quantification.  \n   **Expected observation** – Colorless reaction mixture; after quenching, the plate is ready for HPLC analysis of terephthalic acid (TPA).  \n   **Next step trigger** – Collection of reaction supernatants for product analysis.\n\n4. **Goal/Action** – Assess thermostability by prolonged pre‑incubation at high temperature.  \n   **Detailed instructions** – Aliquot 100 µL of purified enzyme (1 mM) into PCR tubes, add 10 µL of 50 mM Tris‑HCl pH 8.0, and pre‑incubate in a dry‑bath incubator at 70 °C for 10 h. After pre‑incubation, cool to 25 °C, then add 50 µL of PET hydrolysis mix (as in step 3) and incubate at 50 °C for 30 min. Quench with 60 °C hold for 2 min in the **QuantStudio 7 Pro**.  \n   **Instruments** – **Dry‑bath incubator** (for 70 °C pre‑incubation), **QuantStudio 7 Pro** (for subsequent assay). The dry‑bath ensures uniform temperature; the qPCR instrument provides accurate quenching.  \n   **Expected observation** – Enzymes retaining > 80 % activity after 10 h at 70 °C (e.g., Z2‑PETase) versus rapid loss for WT‑PETase.  \n   **Next step trigger** – Comparison of thermostability profiles across variants.\n\n5. **Goal/Action** – Implement a product‑deficient dialysis system to maintain pH and remove inhibitory hydrolysis products.  \n   **Detailed instructions** – Load 200 µL of the 50 µL reaction mixture (post‑quench) into a 10 kDa MWCO dialysis cassette. Dialyze against 10 mL of 50 mM Tris‑HCl pH 8.0 at 8 °C (maintained in a refrigerated bath) for 4 h with gentle stirring. Replace the buffer every 1 h. After dialysis, recover the enzyme‑PET mixture and re‑assay activity at 50 °C for 30 min.  \n   **Instruments** – **Dialysis cassette** (for product removal), **Refrigerated bath** (for 8 °C). Maintaining pH 8.0 and removing low‑molecular‑weight products prevents feedback inhibition and allows accurate measurement of intrinsic enzymatic activity.  \n   **Expected observation** – Higher apparent activity compared to non‑dialyzed controls, especially for high‑concentration enzyme preparations.  \n   **Next step trigger** – Generation of kinetic data under optimal conditions.\n\n6. **Goal/Action** – Quantify hydrolysis products by HPLC and derive kinetic parameters.  \n   **Detailed instructions** – Filter the dialyzed reaction supernatant through a 0.22 µm syringe filter. Inject 20 µL into a reverse‑phase C18 column (4.6 × 150 mm, 5 µm) with a mobile phase of 0.1 % formic acid in water (solvent A) and acetonitrile (solvent B). Use a gradient: 0 % B (0 min) → 10 % B (5 min) → 30 % B (15 min) → 100 % B (20 min) → 100 % B (25 min) → 0 % B (30 min). Detect TPA at 240 nm. Prepare a standard curve of TPA (0.1–10 µM) under identical conditions. Calculate reaction rates (µM min⁻¹) and fit to Michaelis–Menten equations to obtain k_cat and K_M.  \n   **Instruments** – **HPLC system** (for product quantification). Accurate product measurement is essential for comparing variant performance.  \n   **Expected observation** – Linear increase in TPA concentration over time for thermostable variants; plateau for WT‑PETase at high temperatures.  \n   **Next step trigger** – Compilation of kinetic and thermostability data to inform computational redesign.\n\n---\n\n## Computational Workflow\n\n1. **Design of Stabilizing Mutations** – Using the experimental kinetic and thermostability data (e.g., residual activity after 10 h at 70 °C, k_cat at 50 °C), feed the sequences of the six variants into a machine‑learning framework trained on known thermostable PETases (e.g., PROSS, HotPETase). The model predicts stabilizing substitutions that preserve active‑site flexibility. Candidate mutations (e.g., S269T, additional surface salt bridges) are generated for each variant.\n\n2. **Constraint Network Analysis (CNAnalysis)** – For each proposed mutant, construct a constraint network from the crystal structure (PDB 6N4B for WT‑PETase). Compute edge‑strength distributions at 30 °C and 50 °C to identify thermolabile regions. Compare the network of the mutant to that of the parent; mutations that increase edge strength in previously weak regions are prioritized.\n\n3. **Molecular Dynamics (MD) Simulations** – Run 200 ns MD trajectories for each mutant at 30 °C and 50 °C in explicit solvent (TIP3P water, 150 mM NaCl). Analyze backbone RMSF, secondary‑structure stability, and active‑site pocket volume. Mutants that show reduced RMSF in the catalytic loop while maintaining pocket volume are selected for experimental validation.\n\n4. **Free‑Energy Perturbation (FEP) Calculations** – For the top‑ranked mutations, perform FEP to estimate ΔΔG of unfolding relative to WT. Mutations with ΔΔG < –1.5 kcal mol⁻¹ are considered thermodynamically stabilizing.\n\n5. **Iterative Design Loop** – The computational pipeline outputs a ranked list of engineered variants. These are synthesized and expressed following the experimental workflow. The resulting activity and thermostability data are fed back into the machine‑learning model to refine its predictive accuracy. This closed‑loop approach accelerates convergence toward a PETase that combines high activity across 20–80 °C with a T_m > 80 °C, as exemplified by the HOT‑PETase and FAST‑PETase families.\n\n6. **Data Integration and Reporting** – Compile all computational metrics (CNAnalysis scores, RMSF, ΔΔG) alongside experimental parameters (k_cat, K_M, residual activity). Use this integrated dataset to generate a design rationale manuscript, highlighting how specific mutations (e.g., S269T) mechanistically enhance both thermostability and catalytic efficiency. The final computational report will guide the next generation of variants, targeting unexplored stabilizing motifs identified in the MD and CNAnalysis outputs."
+}

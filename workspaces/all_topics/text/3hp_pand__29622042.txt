@@ -1,0 +1,1184 @@
+Wang et al. Microb Cell Fact  (2018) 17:56 
+https://doi.org/10.1186/s12934-018-0903-1
+RESEARCH
+Engineering CRISPR interference system 
+in Klebsiella pneumoniae for attenuating lactic 
+acid synthesis
+Jingxuan Wang1, Peng Zhao1, Ying Li2, Lida Xu1 and Pingfang Tian1*
+Abstract 
+Background: Klebsiella pneumoniae is a promising industrial species for bioproduction of bulk chemicals such as 
+1,3-propanediol, 2,3-butanediol and 3-hydroxypropionic acid (3-HP). However, lactic acid is a troublesome by-product 
+when optimizing for 3-HP production. Therefore, it is highly desirable to minimize lactic acid.
+Results: Here, we show that lactic acid synthesis can be largely blocked by an engineered CRISPR interference 
+(CRISPRi) system in K. pneumoniae. EGFP was recruited as a reporter of this CRISPRi system. Fluorescence assay of this 
+CRISPRi system showed that enhanced green fluorescent protein (EGFP) expression level was repressed by 85–90%. To 
+further test this CRISPRi system, guide RNAs were designed to individually or simultaneously target four lactate-pro-
+ducing enzyme genes. Results showed that all lactate-producing enzyme genes were significantly repressed. Notably, 
+d-lactate dehydrogenase (ldhA) was shown to be the most influential enzyme for lactic acid formation in micro-aero-
+bic conditions, as inhibiting ldhA alone led to lactic acid level similar to simultaneously repressing four genes. In shake 
+flask cultivation, the strain coexpressing puuC (an aldehyde dehydrogenase catalyzing 3-hydroxypropionaldehyde 
+to 3-HP) and dCas9-sgRNA inhibiting ldhA produced 1.37-fold 3-HP relative to the reference strain. Furthermore, in 
+bioreactor cultivation, this CRISPRi strain inhibiting ldhA produced 36.7 g/L 3-HP , but only generated 1 g/L lactic acid. 
+Clearly, this engineered CRISPRi system largely simplified downstream separation of 3-HP from its isomer lactic acid, 
+an extreme challenge for 3-HP bioprocess.
+Conclusions: This study offers a deep understanding of lactic acid metabolism in diverse species, and we believe 
+that this CRISPRi system will facilitate biomanufacturing and functional genome studies of K. pneumoniae or beyond.
+Keywords: CRISPR interference, Klebsiella pneumoniae, 3-Hydroxypropionic acid, Lactic acid, Lactate dehydrogenase
+© The Author(s) 2018. This article is distributed under the terms of the Creative Commons Attribution 4.0 International License 
+(http://creativecommons.org/licenses/by/4.0/), which permits unrestricted use, distribution, and reproduction in any medium, 
+provided you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons license, 
+and indicate if changes were made. The Creative Commons Public Domain Dedication waiver (http://creativecommons.org/
+publicdomain/zero/1.0/) applies to the data made available in this article, unless otherwise stated.
+Background
+For bioproduction of chemicals, byproducts are prob -
+lematic because they not only consume cellular resources 
+but also entangle downstream separation. Conventional 
+genetic engineering strategies to attenuate byproducts 
+formation mainly rely on deletion or repression of their 
+biosynthesis genes [ 1–4]. However, these approaches in 
+most cases compromise cell growth which in turn ham -
+pers the production of desired metabolites [ 5]. In recent 
+years, Klebsiella pneumoniae   has attracted much atten -
+tion because it can naturally convert glycerol to a range 
+of economically important bulk chemicals including 
+1,3-propanediol (1,3-PDO), 2,3-butanediol (2,3-BDO), 
+3-hydroxypropionic acid (3-HP) and d-lactic acid [ 1, 2, 
+6–11]. Glycerol metabolism in K. pneumoniae is medi -
+ated by the dha and glp regulons in anaerobic or micro-
+aerobic conditions [ 6, 9, 12]. The dha regulon involves 
+glycerol reduction and oxidation pathways (Fig. 1). In the 
+reduction pathways, glycerol is converted to 3-hydroxy -
+propionaldehyde (3-HPA) by GDHt (encoded by dhaB 
+cluster, GenBank No. U30903). Next, 3-HPA is converted 
+to 1,3-PDO by 1,3-propanediol dehydrogenase (PDOR, 
+encoded by dhaT) [13]. 3-HPA is also converted to 3-HP 
+Open Access
+Microbial Cell Factories
+*Correspondence:  tianpf@mail.buct.edu.cn 
+1 Beijing Key Laboratory of Bioprocess, College of Life Science 
+and Technology, Beijing University of Chemical Technology, 
+Beijing 100029, People’s Republic of China
+Full list of author information is available at the end of the article
+Page 2 of 12Wang et al. Microb Cell Fact  (2018) 17:56 
+by aldehyde dehydrogenase (ALDH) with  NAD+ as a 
+cofactor [9]. In the glycerol oxidation pathways, a series 
+of metabolites such as ATP ,  NAD+, 2,3-BDO and lactic 
+acid are generated to sustain cell growth and benefit 1,3-
+PDO and 3-HP production [9]. Of various metabolites, 
+lactic acid is the major byproduct in the production of 
+1,3-PDO, 2,3-BDO and 3-HP [14]. The formation of lactic 
+acid not only consumes carbon source but also entangles 
+downstream separation [2]. It is extremely challenging to 
+separate lactic acid (2-hydroxy propionic acid) from 3-HP 
+(3-hydroxy propionic acid) because they are isomers. On 
+the other hand, although the formation of lactic acid con
+-
+sumes carbon flux, it also augments carbon flux toward 
+glycerol reduction pathways. Especially, when dissolved 
+oxygen is insufficient, lactic acid synthesis leads to  NAD
++ 
+regeneration which in return drives 3-HP production 
+because  NAD
++ is the cofactor of aldehyde dehydrogenase 
+that catalyzes 3-HPA to 3-HP [7, 9]. In other words, 3-HP 
+production consumes  NAD+, and the lack of  NAD+ in 
+turn necessitates lactic acid synthesis. Clearly, there is 
+G-3-P
+Glycerol
+Glycerol
+DHA
+DHAP
+PEP
+Pyr
+3-HPA3 -HP
+1,3-PDO
+NADH
+NAD+
+methylglyoxal
+D-lactate
+L-lactate
+L-lactaldehyde
+Acetyl-CoA Acetate
+Ethanol
+Oxalacetic acid 
+2,3-BDO
+Succinate
+Formate
+NADH
+NAD+
+NADHNAD+
+CO2
+H2
+TCA Cycle
+2N
+AD
+H
+2NAD+
+NADHNAD+
+NAD
+H
+NA
+D+
+mgsA
+aldAldhA
+pmd
+aminoactone
+amino acid 
+metabolism
+Fig. 1 Glycerol and lactic acid pathways in Klebsiella pneumoniae. 3-HPA, 3-hydroxypropionaldehyde; 3-HP , 3-hydroxypropionic acid; 1,3-PDO, 
+1,3-propanediol; G-3-P , sn-glycerol 3-phosphate; DHA, dihydroxyacetone; DHAP , dihydroxyacetone phosphate; PEP , phosphoenolpyruvate; Pyr, pyru-
+vate; 2,3-BDO, 2,3-butanediol; ldhA, d-lactate dehydrogenase gene; pmd, l-lactate dehydrogenase gene; mgsA, methylglyoxal synthase gene; aldA, 
+lactaldehyde dehydrogenase gene. Red cross indicates enzyme genes to be repressed by CRISPRi system
+Page 3 of 12
+Wang et al. Microb Cell Fact  (2018) 17:56 
+interdependence between lactic acid formation and 3-HP 
+production. Hence, knockdown instead of deletion of lac-
+tic acid pathways is beneficial for 3-HP production.
+CRISPR technology opens avenue for simultaneous 
+knockdown or knockout of multiple genes due to an array 
+of single guide RNAs (sgRNAs) that direct dCas9 or Cas9 
+to interference or edit target genes [15–19]. The dCas9-
+sgRNA-based CRISPR interference (CRISPRi) tools 
+mainly include CRISPR activation and CRISPR repres
+-
+sion [20, 21]. The dCas9-sgRNA complex activates gene 
+expression when dCas9 is fused with the omega subu -
+nit of RNA polymerase, while it represses gene expres -
+sion when dCas9 binds a promoter or an open reading 
+frame (ORF) [21]. The Cas9-based DNA cleavage largely 
+relies on DNA repair mechanisms including homologous 
+recombination in prokaryotes and non-homologous end 
+joining (NHEJ) in eukaryotes [17]. Unlike Cas9-based 
+DNA editing, CRISPRi is independent of DNA repair and 
+thus can be easily applied in microbes lacking the NHEJ 
+pathway or for which no efficient homologous recom
+-
+bination approach is available. Furthermore, compared 
+with CRISPR editing that may lead to slowed cell growth 
+or even cell death, CRISPRi could be more appropriate 
+for modulating multiple genes.
+In view of above information, we anticipated that CRIS
+-
+PRi may be ideal for modulating lactic acid metabolism 
+which is subjected to multiple factors. To validate this 
+prediction, in this study we developed CRISPRi system 
+in K. pneumoniae. Detailed analysis of glycerol consump
+-
+tion, cell growth, metabolites formation and gene tran -
+scription was to systematically assess the performance 
+of CRISPRi system in K. pneumoniae. Shake-flask and 
+bioreactor cultivation of the recombinant K. pneumo
+-
+niae strain harboring CRISPRi vectors (hereafter refers 
+to as CRISPRi strain) were to determine the key enzymes 
+affecting lactic acid synthesis. Overall, this study was to 
+exploit CRISPRi system for basic research and metabolic 
+engineering of K. pneumoniae.
+Results
+Fluorescence assay of dCas9‑gRNA‑mediated transcription 
+repression in K. pneumoniae
+The dCas9 was derived from Streptococcus pyogenes, 
+and CRISPRi system was developed to dissect lactic acid 
+metabolism. To determine whether it functioned in K. 
+pneumoniae, EGFP was employed as a reporter under tac 
+promoter. To ensure CRISPRi efficiency, two candidate 
+guide RNAs  T
+1 and  T2 toward the different regions of tac 
+promoter were designed and chemically synthesized. The 
+CRISPRi vector with non-targeting sgRNA was used as 
+a control. The fluorescence intensity of single strain was 
+calculated as the total  fluorescence  intensity  divided 
+by  OD
+600  value. Results showed that EGFP expression 
+was significantly down-regulated by CRISPRi system 
+(Fig.  2). Compared with the control strain NT with 
+non-targeting guide RNA, strains T1 and T2 showed a 
+remarkable decrease in the fluorescence intensity even if 
+anhydrotetracycline (aTc) was absent. Strains  T
+1 and  T2 
+respectively exhibited 65 and 23% inhibition on EGFP 
+when aTc was absent. Notably,  T
+1 and  T2 respectively 
+displayed 85 and 90% inhibition on EGFP level when 
+aTc was added into medium. Overall these results indi
+-
+cated that CRISPRi system significantly repressed EGFP 
+expression, although tet promoter failed to tightly con
+-
+trol dCas9 expression in K. pneumoniae. Namely, there 
+existed leaky expression of dCas9.
+Repression of lactate‑producing enzyme genes by CRISPRi 
+system
+To further validate the CRISPRi system, it was harnessed 
+to repress lactate-producing enzyme genes. In K. pneu -
+moniae, many enzymes potentially contribute to lactic 
+acid synthesis, including l-lactate dehydrogenase (pmd), 
+d-lactate dehydrogenase (ldhA), lactaldehyde dehy
+-
+drogenase (aldA) and methylglyoxal (mgsA ). To deter -
+mine the key enzymes affecting lactic acid formation, an 
+array of sgRNAs targeting enzyme genes were designed 
+and chemically synthesized. For each lactate-producing 
+enzyme gene, two or three candidate sgRNAs were sub
+-
+jected to screening. The sgRNAs were designed by using 
+online software CRISPR direct (http://crispr.dbcls.jp/
+doc/) [22]. In principle, sgRNA sequence should tar
+-
+get transcription initiation site especially that in non-
+template strand [23]. In addition, sgRNA sequence 
+was used as a query to search against K. pneumoniae 
+0
+500
+1000
+1500
+2000
+2500
+3000
+3500
+EGFP Fluorescence/OD600(a.u.)
+-+ -+ -+
+NT NT T1 T1 T2 T2
+aTc
+sgRNA
+**
+*
+**
+**
+Fig. 2 Fluorescence assay of the engineered CRISPRi system in K. 
+pneumoniae using EGFP as a reporter. NT, K. pneumoniae strain har-
+boring CRISPRi vector without guide RNA;  T1 and  T2, K. pneumoniae 
+strains harboring CRISPRi vectors targeting the different regions of 
+promoter upstream of EGFP gene; aTc, anhydrotetracycline; “+” , aTc 
+induction; “−” , without aTc. *P < 0.05; **P < 0.01
+Page 4 of 12Wang et al. Microb Cell Fact  (2018) 17:56 
+genome to avoid targeting homologous sequence and 
+off-target. The secondary structure of sgRNAs were 
+predicted by using online Quikfold algorithm from the 
+UNAFold package [24]. All engineered vectors were con
+-
+firmed by sequencing. The CRISPRi vectors targeting 
+different lactate-producing enzyme genes were trans
+-
+formed into the previously engineered 3-HP-produc -
+ing strain Kp(ptac-puuC) [2], resulting in recombinant 
+strain Kp(ptac-puuC + placiL), Kp(ptac-puuC + placiD), 
+Kp(ptac-puuC + placiA) and Kp(ptac-puuC + placiM). 
+Next, quantitative real-time PCR (qRT-PCR) was per
+-
+formed to examine CRISPRi efficiency toward lactate-
+producing enzyme genes. Results showed that guide 
+RNAs L1 and L2 failed to significantly inhibit pmd gene 
+(Fig.  3a). However, for three CRISPRi strains targeting 
+ldhA, aldA and mgsA, at least one sgRNA showed inhibi
+-
+tion activity (Fig.  3b–d). To simultaneously repress four 
+lactate-producing enzyme genes, four well-functioned 
+sgRNAs (L3 for pmd, D1 for ldhA, A2 for aldA, M2 for 
+mgsA) were joined together to form a new vector named 
+placiMALD. To investigate the performance of CRIS
+-
+PRi system, we engineered a vector named Kp(ptac-
+puuC + placiMALD), where vectors dCas9-sgRNA and 
+puuC were coexpressed. The qRT-PCR assay showed that 
+CRISPRi vector placiMALD significantly repressed all 
+lactate-producing enzyme genes (Fig. 3e).
+Shake flask cultivation of the CRISPRi strains
+To overproduce 3-HP and attenuate lactic acid for -
+mation, PuuC was coexpressed with dCas9. To do so, 
+we engineered five recombinant strains designated 
+Kp(ptac-puuC + placiL), Kp(ptac-puuC + placiD), 
+Kp(ptac-puuC + placiA), Kp(ptac-puuC + placiM) and 
+Kp(ptac-puuC + placiMALD). These strains were fer
+-
+mented in micro-aerobic conditions with Kp(ptac-
+puuC + pdCas9) as the control. In 15 h cultivation, these 
+strains showed retarded growth and postponed log phase 
+with exception of the strain Kp(ptac-puuC + placiM), 
+where “placiM” indicates CRISPRi vector targeting 
+mgsA gene (Fig.  4a). Interestingly, in stationary phase, 
+all these strains demonstrated similar  OD
+600 value with 
+the control Kp(ptac-puuC + pdCas9). However, due to 
+harboring of two vectors pSg and ptac-puuC + Cas9, 
+glycerol consumption was largely retarded (Fig.  4b). 
+For lactic acid formation, the strain harboring CRIS -
+PRi vector targeting mgsA had highest lactic acid peak 
+(Fig. 4c). In contrast, the strains Kp(ptac-puuC + placiD) 
+and Kp(ptac-puuC + placiMALD) produced less lac -
+tic acid (Fig.  4c). For other strains, lactic acid accumu -
+lated in log phase but declined in stationary phase. In 
+addition, strains Kp(ptac-puuC + placiD) and Kp(ptac-
+puuC + placiMALD) produced more 3-HP and 1,3-
+PDO at 30  h than other strains did. Only the strain 
+Kp(ptac-puuC + placiM) produced less 3-HP than the 
+control. For acetic acid and 2,3-BDO production, no sig
+-
+nificant difference was observed in all strains (Fig. 4d).
+Fed‑batch cultivation of CRISPRi strains
+As mentioned, the strains Kp(ptac-puuC + placiD) and 
+Kp(ptac-puuC + placiMALD) produced less lactic acid 
+in shake flasks relative to other strains (Fig.  4c). To fur-
+ther investigate the performance of CRISPRi system, the 
+above two strains were independently cultivated in 5  L 
+bioreactor. Results showed that only trace amount of lac
+-
+tic acid was generated during entire fermentation pro -
+cess (Fig. 5b, c). In addition, due to PuuC overexpression, 
+the strain Kp(ptac-puuC + placiD) generated 36.7  g/L 
+3-HP at 36  h (Fig.  5b), with 41.7% of glycerol conver -
+sion ratio (GCR) and 1.02 g/L/h of productivity (Table 1). 
+The GCR is calculated as the each metabolite concen -
+tration divided by the total glycerol concentration. We 
+also found that the strain Kp(ptac-puuC + placiMALD) 
+harboring CRISPRi vector targeting all four lactate-pro
+-
+ducing enzyme genes produced 26.9  g/L 3-HP at 48  h 
+(Fig.  5c), with GCR of 34.6% and 0.56  g/L/h of produc
+-
+tivity (Table 2). Compared with Kp(ptac-puuC + placiD), 
+the strain Kp(ptac-puuC + placiMALD) produced more 
+acetic acid to compensate cofactor for cell growth. For 
+above two strains, the overall conversion ratio from glyc
+-
+erol to major metabolites was around 60–70%, indicating 
+that partial carbon source flowed into other pathways. 
+It should be pointed out that CRISPRi system imposed 
+a burden on cell growth. This finding is consistent with 
+other study [25]. As Fig.  5 shown, the highest  OD
+600 was 
+only 20–30.
+Dissecting interactions of lactate‑producing enzyme genes 
+by CRISPRi strains
+A number of enzymes potentially contribute to lactic acid 
+synthesis (Additional file  1: Fig. S1). To decipher their 
+interactions, a total of four CRISPRi strains targeting 
+different lactic acid-producing enzyme genes were sub
+-
+jected to qRT-PCR analysis. Results showed that repress -
+ing anyone of lactic acid-producing enzyme genes led to 
+up-regulation or down-regulation of other enzyme genes 
+(Fig.  6). For example, in strain Kp(ptac-puuC + placiL) 
+targeting pmd gene, both ldhA and aldA genes were 
+upregulated, while mgsA  gene was less affected (Fig.  6a). 
+By contrast, the mgsA  gene was significantly upregu
+-
+lated in both Kp(ptac-puuC + placiD) and Kp(ptac-
+puuC + placiA) (Fig.  6b, c), where ldhA and aldA genes 
+were respectively targeted by CRISPRi. In strain Kp(ptac-
+puuC + placiM) targeting mgsA, both pmb and aldA 
+genes were downregulated (Fig. 6d).
+Page 5 of 12
+Wang et al. Microb Cell Fact  (2018) 17:56 
+control A1 A2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+c
+Target gene: aldA 
+**
+Relative expression
+control L1 L2 L3
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2a
+Target gene: pmd 
+*
+Relative expression
+controlD 1D 2
+0.0
+0.4
+0.8
+1.2
+1.6
+**
+b
+Target gene: ldhA 
+**
+Relative expression
+controlM 1M 2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+d
+Target gene: mgsA 
+*
+Relative expression
+pmdl dhA aldA mgsA
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+e
+******
+Relative expression
+ Kp(ptac-puuC+plv-dCas9)
+ Kp(ptac-puuC+placiMALD)
+**
+Fig. 3 Relative expression levels of lactate-producing enzyme genes in K. pneumoniae harboring CRISPRi system. a Relative expression level of 
+pmd gene. L1, L2 and L3 indicate three candidate guide RNAs targeting pmd gene. b Relative expression level of ldhA gene. D1 and D2 indicate two 
+candidate guide RNAs targeting ldhA gene. c Relative expression level of aldA gene. A1 and A2 stand for two candidate guide RNAs targeting aldA 
+gene. d Relative expression level of mgsA gene. M1 and M2 refer to two candidate guide RNAs targeting mgsA gene. Control, without guide RNA. 
+e Relative expression levels of pmd, ldhA, aldA and mgsA genes in Kp(ptac-puuC + placiMALD) at 12 h. Kp(ptac-puuC + plv-dCas9), recombinant K. 
+pneumoniae strain harboring vector ptac-puuC and vector plv-dCas9 where Cas9 was inactive; Kp(ptac-puuC + placiMALD), recombinant K. pneumo-
+niae strain harboring vector ptac-puuC and CRISPRi vector placiMALD simultaneously targeting four lactate-producing enzyme genes pmd, ldhA, 
+aldA and mgsA. *P < 0.05; **P < 0.01
+Page 6 of 12Wang et al. Microb Cell Fact  (2018) 17:56 
+Discussion
+In this work, we developed CRISPRi system in K. pneu-
+moniae to attenuate lactic acid formation. The dCas9 
+was derived from S. pyogenes, and considering the per -
+formance of CRISPRi system is largely dependent on 
+guide RNA, we designed several candidate guide RNAs 
+and screened the best. The qRT-PCR results showed 
+that all four lactate-producing enzyme genes were 
+transcriptionally repressed (Figs.  3e, 6). In micro-aer
+-
+obic conditions, the strain Kp(ptac-puuC + placiD) 
+coexpressing PuuC and ldhA-targeting dCas9-sgRNA 
+complex produced similar level of lactic acid with the 
+strain Kp(ptac-puuC + placiMALD) coexpressing puuC 
+and dCas9-sgRNA targeting four lactate-producing 
+enzyme genes (Figs.  4c, 5b, c), indicating that ldhA is the 
+predominant gene for lactic acid synthesis. Importantly, 
+0369 12 15 18 21 24 27 30
+0.00
+0.05
+0.10
+0.15
+0.20
+0.25
+a
+ Kp(ptac-puuC+pdCas9)
+ Kp(ptac-puuC+placiL)
+ Kp(ptac-puuC+placiD)
+ Kp(ptac-puuC+placiA)
+ Kp(ptac-puuC+placiM)
+ Kp(ptac-puuC+placiMALD)
+OD600
+Time (h)
+0 369 12 15 18 21 24 27 30
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45bResidual glycerol (g/L)
+Time (h)
+ Kp(ptac-puuC+pdCas9)
+ Kp(ptac-puuC+placiL)
+ Kp(ptac-puuC+placiD)
+ Kp(ptac-puuC+placiA)
+ Kp(ptac-puuC+placiM)
+ Kp(ptac-puuC+placiMALD)
+0369 12 15 18 21 24 27 30
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+cLactic acid (g/L)
+Time (h)
+ Kp(ptac-puuC+pdCas9)
+ Kp(ptac-puuC+placiL)
+ Kp(ptac-puuC+placiD)
+ Kp(ptac-puuC+placiA)
+ Kp(ptac-puuC+placiM)
+ Kp(ptac-puuC+placiMALD)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+1.6
+1.8
+2.0
+2.2
+2.4
+d
+3-HP AC 1,3-PDO 2,3-BDO
+Final concentration of metabolites (g/L)
+ Kp(ptac-puuC+pdCas9)
+ Kp(ptac-puuC+placiL)
+ Kp(ptac-puuC+placiD)
+ Kp(ptac-puuC+placiA)
+ Kp(ptac-puuC+placiM)
+ Kp(ptac-puuC+placiMALD)
+Fig. 4 Shake-flask cultivation of K. pneumoniae strain harboring CRISPRi system. a Growth curve of the recombinant K. pneumoniae strain harboring 
+CRISPRi vector and aldehyde dehydrogenase puuC expression vector. b Residual glycerol concentration. c Lactic acid concentration. d Metabolites 
+concentration after 30 h cultivation. 3-HP , 3-hydroxypropionic acid; AC, acetic acid; 1,3-PDO, 1,3-propanediol; 2,3-BDO, 2,3-butanediol. placiL, CRISPRi 
+vector targeting 
+l-lactate dehydrogenase gene pmb; placiD, CRISPRi vector targeting d-lactate dehydrogenase gene ldhA; placiA, CRISPRi vector 
+targeting lactaldehyde dehydrogenase gene aldA; placiM, CRISPRi vector targeting methylglyoxal synthase gene mgsA; placiMALD, CRISPRi vector 
+targeting all above four genes. Kp(ptac-puuC + pdCas9), recombinant K. pneumoniae strain harboring tac promoter-driven puuC expression vector 
+and dCas9 expression vector; Kp(ptac-puuC + placiL), recombinant K. pneumoniae strain harboring puuC expression vector and CRISPRi vector 
+targeting 
+l-lactate dehydrogenase gene pmb; Kp(ptac-puuC + placiD), recombinant K. pneumoniae strain harboring puuC expression vector and 
+CRISPRi vector targeting d-lactate dehydrogenase gene ldhA; Kp(ptac-puuC + placiA), recombinant K. pneumoniae strain harboring puuC expression 
+vector and CRISPRi vector targeting lactaldehyde dehydrogenase gene alhA; Kp(ptac-puuC + placiM), recombinant K. pneumoniae strain carrying 
+puuC expression vector and CRISPRi vector targeting methylglyoxal synthase gene mgsA; Kp(ptac-puuC + placiMALD), recombinant K. pneumoniae 
+strain harboring puuC expression vector and CRISPRi vector simultaneously targeting four genes mgsA, aldA, pmb and ldhA
+Page 7 of 12
+Wang et al. Microb Cell Fact  (2018) 17:56 
+0369 12 15 18 21 24 27 30 33 36 39 42 45 48
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45a
+ Glycerol
+ 3-HP
+ LA
+ AC
+ 1.3-PDO
+ 2,3-BDO
+ OD600
+Time (h)
+Metabolites (g/L)
+0
+5
+10
+15
+20
+25
+30
+0369 12 15 18 21 24 27 30 33 36
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+ Glycerol
+3-HP
+ LA
+ AC
+ 1.3-PDO
+ 2,3-BDO
+ OD600
+Time (h)
+Metabolites (g/L)
+0
+5
+10
+15
+20
+25
+30b
+0369 12 15 18 21 24 27 30 33 36 39 42 45 48
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45c
+ Glycerol
+ 3-HP
+ LA
+ AC
+ 1.3-PDO
+ 2,3-BDO
+ OD600
+Time (h)
+Metabolites (g/L)
+0
+5
+10
+15
+20
+25
+30
+OD600
+OD600
+OD600
+Fig. 5 Bioreactor cultivation of the K. pneumoniae strains harboring CRISPRi system. a Kp(ptac-puuC + pdCas9), recombinant K. pneumoniae strain 
+harboring aldehyde dehydrogenase puuC expression vector and dCas9 expression vector; b Kp(ptac-puuC + placiD), recombinant K. pneumoniae 
+strain harboring aldehyde dehydrogenase puuC expression vector and CRISPRi vector targeting d-lactate dehydrogenase gene ldhA; c Kp(ptac-
+puuC + placiMALD), recombinant K. pneumoniae strain harboring puuC expression vector and CRISPRi vector targeting four lactate-producing 
+enzyme genes mgsA, aldA, pmb and ldhA. 3-HP , 3-hydroxypropionic acid; LA, lactic acid; AC, acetic acid; 1,3-PDO, 1,3-propanediol; 2, 3-BDO, 
+2,3-butanediol
+Table 1 Carbon distribution of Kp(ptac-puuC + placiD) in a 5 L bioreactor (36 h)
+3-HP 3-hydroxypropionic acid, LA lactic acid, AA acetic acid, 1,3-PDO 1,3-propanediol, 2,3-BDO 2,3-butanediol, GCR glycerol conversion ratio
+Kp(ptac-puuC + placiD), recombinant K. pneumoniae strain harboring vector overexpressing puuC and CRISPRi vector targeting ldhA gene
+Metabolites 3‑HP LA AA 1, 3‑PDO 2, 3‑BDO Total
+Titer (mM) 407 7 123 126 0 976
+Titer (g/L) 36.7 0.7 7.4 9.6 0 54.4
+GCR (%) 41.7 0.7 12.6 12.9 0 67.9
+Table 2 Carbon distribution of Kp(ptac-puuC + placiMALD) in a 5 L bioreactor (48 h)
+3-HP 3-hydroxypropionic acid, LA lactic acid, AA acetic acid, 1,3-PDO 1,3-propanediol, 2,3-BDO 2,3-butanediol, GCR glycerol conversion ratio
+Kp(ptac-puuC + placiD), recombinant K. pneumoniae harboring vector overexpressing puuC and CRISPRi vector simultaneously targeting four lactate-producing 
+enzyme genes ldhA, aldA, pmd and mgsA
+Metabolites 3‑HP LA AA 1,3‑PDO 2,3‑BDO Total
+Titer (mM) 298 7 163 84 7 861
+Titer (g/L) 26.9 0.7 9.8 6.4 0.7 44.5
+GCR (%) 34.6 0.8 18.9 9.8 0.8 64.9
+Page 8 of 12Wang et al. Microb Cell Fact  (2018) 17:56 
+in fed-batch cultivation, although all CRISPRi strains 
+produced similar levels of lactic acid at 24–30 h (Fig.  4c), 
+however the strains Kp(ptac-puuC + placiD) and 
+Kp(ptac-puuC + placiMALD) generated low levels of 
+lactic acid during entire fermentation process. Clearly, 
+this offers flexibility for fermentation, because lactic acid 
+maintains minimal throughout (Fig.  5b, c). It should be 
+pointed out that leaky expression of dCas9 occurred. 
+This could be partially ascribed to unknown aTc analogs 
+in yeast extract or possible influences of TetR/tetO on 
+aTc. This engineered CRISPRi system needs amelioration 
+prior to real-world application.
+Our previous study reported the high titer of 3-HP 
+(83.8  g/L) in K. pneumoniae (2), which is higher than 
+CRISPRi strains. The low 3-HP production in CRISPRi 
+strains could be partially attributed to the expression of 
+dCas9 which imposed a heavy burden on cells. Despite 
+low 3-HP production, lactic acid was attenuated by the 
+engineered CRISPRi system, which simplified down
+-
+stream separation. The remaining lactic acid in bioreac -
+tor is limited, and can be converted to other metabolites 
+by expressing an enzyme. Alternatively, lactic acid can be 
+separated using preparative chromatography. Clearly, this 
+is uneconomical for large-scale fermentation. If 3-HP is 
+ldhA aldA mgsA
+0.0
+0.4
+0.8
+1.2
+1.6
+2.0
+2.4
+2.8
+3.2a
+Target gene: pmd
+**
+*
+Relative expression
+  Kp (ptac-puuC+pdCas9)
+  Kp (ptac-puuC+placiL)
+pmb aldAm gsA0.0
+0.5
+1.0
+1.5
+2.0
+2.5b
+Target gene: ldhA
+*
+Relative expression
+  Kp (ptac-puuC+pdCas9)
+  Kp (ptac-puuC+placiD)
+pmb ldhA mgsA0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+c
+Target gene: aldA
+**
+Relative expression
+  Kp (ptac-puuC+pdCas9)
+  Kp (ptac-puuC+placiA)
+pmbl dhA aldA0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+1.6d
+Target gene: mgsA
+**
+*
+Relative expression
+ Kp(ptac-puuC+pdCas9)
+Kp(ptac-puuC+placiM)
+Fig. 6 Relative expression levels of lactate-producing enzyme genes in K. pneumoniae strain harboring CRISPRi system. a Relative expression levels 
+of ldhA, aldA and mgsA genes in K. pneumoniae strain harboring CRISPRi system targeting pmd gene; b Relative expression levels of pmd, aldA and 
+mgsA genes in K. pneumoniae strain harboring CRISPRi system targeting ldhA; c Relative expression levels of pmd, ldhA and mgsA genes in K. pneu-
+moniae strain harboring CRISPRi system targeting aldA; d Relative expression levels of pmd, ldhA and aldA genes in K. pneumoniae strain harboring 
+CRISPRi system targeting mgsA. Kp(ptac-puuC + pdCas9), recombinant K. pneumoniae strain harboring aldehyde dehydrogenase puuC expression 
+vector and dCas9 expression vector; Kp(ptac-puuC + placiL), recombinant K. pneumoniae strain harboring puuC expression vector and CRISPRi vec-
+tor targeting 
+l-lactate dehydrogenase gene pmb; Kp(ptac-puuC + placiD), recombinant K. pneumoniae strain harboring puuC expression vector and 
+CRISPRi vector targeting d-lactate dehydrogenase gene ldhA; Kp(ptac-puuC + placiA), recombinant K. pneumoniae strain harboring puuC expression 
+vector and CRISPRi vector targeting lactaldehyde dehydrogenase gene aldA; Kp(ptac-puuC + placiM), recombinant K. pneumoniae strain harboring 
+puuC expression vector and CRISPRi vector targeting methylglyoxal synthase gene mgsA. *P < 0.05; **P < 0.01
+Page 9 of 12
+Wang et al. Microb Cell Fact  (2018) 17:56 
+converted to acrylic acid simply by high temperature, the 
+remaining lactic acid may not affect this process. In fact, 
+separation of 3-HP from lactic acid is extremely challeng
+-
+ing because they are isomers. So far, nearly no techniques 
+can efficiently separate 3-HP from lactic acid. Lactic acid 
+is mainly generated from pyruvate and its synthesis path
+-
+ways are conserved in nearly all organisms (Additional 
+file  1: Fig. S1). Conventional approaches to block lactic 
+acid formation rely mainly on the deletion of enzyme 
+genes or optimization of fermentation conditions [2, 7]. 
+However, these approaches neglect the complexity of lac
+-
+tic acid pathways and their contribution to the produc -
+tion of desired metabolites such as 3-HP and 1,3-PDO 
+[9]. From the viewpoint of evolution, the complexity of 
+lactic acid pathways enable bacteria to buffer external 
+stimuli and adapt harsh environment. Deduced from 
+Additional file 1: Fig. S1, deletion of one or two lactic acid 
+pathways might not be lethal to K. pneumoniae owing to 
+tailored compensation mechanism of lactic acid synthe
+-
+sis. That is, repression rather than deletion of lactic acid-
+synthesizing enzyme genes is appropriate for metabolic 
+engineering purposes. As such, CRISPRi was exploited to 
+decipher and tune lactic acid metabolism.
+In this study, the ldhA gene was shown to be pivotal 
+for lactic acid accumulation when glycerol was the sole 
+carbon source and micro-aerobic conditions were main
+-
+tained. As shown in Figs.  4c, 5b, inhibiting ldhA gene 
+alone almost completely blocked lactic acid synthesis. 
+This may be explained by the following reasons: (i) 3-HP 
+production relies on PuuC overexpression which con
+-
+sumes  NAD+ and ATP [2]. Since lactic acid biosynthe -
+sis is accompanied by the generation of  NAD+ and ATP , 
+lactic acid was thus synthesized. (ii) Although l-lactate 
+dehydrogenase (pmb) and lactaldehyde dehydrogenase 
+(aldA) catalyze the formation of l-lactic acid (Fig.  1, 
+Additional file  1: Fig. S1), however, the corresponding 
+CRISPRi strains produced more lactic acid compared 
+with the CRISPRi strain targeting d-lactate-producing 
+enzyme gene (Fig.  4c). Presumably, d-lactate dehydro
+-
+genase contributed largely to lactic acid level. (iii) It 
+has been reported that lactaldehyde can be synthesized 
+through fucose and rhamnose metabolisms [26] (Addi
+-
+tional file  1: Fig. S1) and lactaldehyde may serve as an 
+intermediate to alleviate the cytotoxicity of methylgly -
+oxal. However, CRISPRi-based inactivation of lactalde -
+hyde dehydrogenase (aldA) and methylglyoxal synthase 
+(mgsA) failed to effectively block lactic acid production 
+(Fig. 4c), indicating that lactic acid biosynthesis through 
+methylglyoxal and lactaldehyde pathways may be mini
+-
+mal in current conditions, and methylglyoxal detoxifi -
+cation has little impacts on lactate production and cell 
+growth. Another finding of this study is carbon flux 
+compensation between lactate-producing pathways, as 
+repressing one pathway elicited other pathways (Fig. 6).
+CRISPRi can simultaneously repress multiple genes 
+due to recruitment of guide RNAs ([18, 25, 27], Fig.  4c). 
+For enzymes in central pathways, deleting their synthe
+-
+sis genes may impede cell growth or even elicit cell death 
+[5]. CRISPRi is an ideal tool to coordinate cell growth 
+and bioproduction of desired metabolites. Furthermore, 
+unlike RNA interference which represses gene expression 
+at posttranscriptional level, CRISPRi suppresses gene 
+expression at transcriptional level and thus consumes less 
+cellular resources. More importantly, CRISPRi can be 
+easily applied in microbes lacking NHEJ pathway or for 
+which no efficient homologous recombination approach 
+is available. Hence, we believe that the CRISRPi system 
+developed in this study will facilitate functional charac
+-
+terization of key genes and metabolic engineering of K. 
+pneumoniae.
+Methods
+Strains, medium and chemicals
+Strains of K. pneumoniae DSM 2026 and E. coli Top10 
+were purchased from DSMZ GmbH, Germany. Strain K. 
+pneumoniae DSM 2026 was used as the host for devel
+-
+opment of CRISPRi system. E. coli Top10 was used 
+for gene cloning (Additional file  2: Fig. S2, Additional 
+file 3: Table S1). In vector construction experiments, all 
+strains were grown in LB medium containing the follow -
+ing components per liter: 5  g yeast extract, 10  g NaCl, 
+10 g peptone, and 50 mg kanamycin or 34 mg chloram
+-
+phenicol. In CRISPRi experiments, strains were grown 
+in fermentation medium containing the following com
+-
+ponents per liter:  K2HPO4·3H2O, 3.4  g;  KH2PO4, 1.3  g; 
+ (NH4)2SO4, 4 g;  MgSO4·7H2O, 0.5 g;  CaCO3, 0.1 g; yeast 
+extract, 3 g; glycerol, 40 g; and 1.25 mL of trace element 
+solution. The trace element solution contained the fol -
+lowing components per liter:  FeSO4, 32  g;  ZnCl2·6H2O, 
+2.72 g;  MnCl2·4H2O, 0.68 g;  CoCl2·6H2O, 1.88 g;  H3BO3, 
+0.24 g;  Na2MoO4, 0.02 g;  CuCl2·2H2O, 1.88 g and 40 mL 
+concentrated HCl. Restriction enzymes, taq DNA poly -
+merase and T4 DNA ligase were purchased from TaKaRa 
+(Dalian, China). Primer synthesis and DNA sequencing 
+were performed by Biomed Co., Ltd. Other chemicals for 
+fluorescence assay, gel electrophoresis, and HPLC analy
+-
+sis were products of Sigma.
+Construction of recombinants
+To develop CRISPRi system in K. pneunomiae, enhanced 
+green fluorescent protein (EGFP) was used as a reporter. 
+Vector ptac-egfp was constructed by insertion of tac-egfp  
+expression cassette into pET-28a between BglII and XhoI. 
+The CRISPRi vectors targeting egfp  gene or lactate-pro
+-
+ducing enzyme genes were constructed by replacement 
+Page 10 of 12Wang et al. Microb Cell Fact  (2018) 17:56 
+of the sgRNA sequence in vector plv-dCas9-sgRNA 
+[28] (Additional file  2: Fig. S2, Additional file  3: Table 
+S1). Briefly, two complementary single-stranded target 
+sequences were chemically synthesized and annealed 
+to form a 23 bp double-stranded DNA owning cohesive 
+ends matching the BspQI-digested vector. Subsequent 
+ligation resulted in desired CRISPRi vectors. Vector 
+pdCas9 was achieved by deleting the sgRNA sequence in 
+vector plv-dCas9-sgRNA with Xma I/NgoMIV, followed 
+by ligation. To ensure efficient inhibition, two candidate 
+guide RNAs targeting the different regions of EGFP pro
+-
+moter were synthesized and the resultant vectors were 
+designated  ptaciT
+1 and  ptaciT2 (Additional file  3: Table 
+S1). For each lactate-producing enzyme gene, two or 
+three CRISPRi vectors were constructed and named after 
+respective gene (Additional file 4: Table S2). For example, 
+‘placiM’ indicates the CRISPRi vector targeting methyl
+-
+glyoxal synthase gene mgsA ; ‘placiD’ refers to CRISPRi 
+vector targeting d-lactate dehydrogenase gene ldhA; 
+‘placiL’ indicates CRISPR vector targeting l-lactate dehy
+-
+drogenase (EC:1.1.1.27) gene pmb; ‘placiA’ represents the 
+CRISPR vector targeting lactaldehyde dehydrogenase 
+alhA; while ‘placiMALD’ indicates CRISPRi vector simul
+-
+taneously targeting above four genes (Additional file  3: 
+Table S1).
+Electro‑transformation and screening
+The Eppendorf tube containing competent K. pneuno-
+miae cells was embedded in ice for 30 min and then cen -
+trifuged to harvest cells. The cells were extensively rinsed 
+with cold  ddH
+2O to remove ions and subsequently mixed 
+with vectors. The mixture was added into a MicroPulser 
+Cuvette for electroporation (0.2  cm, 2.5  kV, time dura
+-
+tion > 0.5 ms) based on manufacturer’s instructions. After 
+cultivation in LB medium at 37 °C for 1 h, the cells were 
+plated on LB-agar medium containing chlorampheni
+-
+col (34  µg/mL), kanamycin (50  µg/mL) or both of them 
+depending on experimental requirements (Additional 
+file 4: Table S2).
+Fluorescence assay of CRISPRi strains targeting 
+lactate‑producing enzyme genes
+To establish CRISPRi system in K. pneunomiae, a panel 
+of recombinant K. pneunomiae strains were constructed 
+with EGFP as a reporter. Briefly, vectors ptac-egfp , 
+ placiT1,  placiT2 (CRISPRi vectors targeting different 
+region of the promoter sequence of EGFP) (Fig.  2), and 
+the control vector plv-dCas9-sgRNA with non-targeting 
+sgRNA, were individually transformed into component 
+K. pneunomiae cells, resulting in recombinant strains K. 
+pneunomiae(ptac-egfp), K. pneunomiae(ptac-placiT
+1), 
+K. pneunomiae(ptac-placiT2) and K. pneunomiae(plv-
+dCas9-sgRNA), respectively. These recombinant strains 
+were grown in LB medium for 15–20 h, and then trans -
+ferred to 250  m: flasks containing 100  mL fermentation 
+medium, 85 µg/mL chloramphenicol and 50 µg/mL kana
+-
+mycin. The strains were cultivated in a rotary shaker at 
+200 rpm and 37 °C. After 3 h cultivation, IPTG and aTc, 
+at final concentrations of 0.5 mM and 2 µM, respectively, 
+were added into fermentation broth, and the cultivation 
+conditions were adjusted to 30 °C and 150 rpm to induce 
+dCas9 expression. At 18  h, fermentation broth was 
+diluted tenfold to examine  OD
+600 using a visible spectro -
+photometer (APL instrument, Shanghai). The fermenta -
+tion broth was directly used for fluorescence assay by a 
+fluorescence spectrophotometer (HITACHI).
+Real‑time PCR analysis of CRISPRi strains targeting 
+lactate‑producing enzyme genes
+Klebsiella pneumoniae cells were harvested by centrifu -
+gation at 12,000  rpm and 4  °C and immediately chilled 
+with liquid nitrogen to avoid RNA degradation. The 
+cells were used for extracting total RNA. For CRISPRi 
+strains Kp(ptac-puuC + placiL), Kp(ptac-puuC + placiD), 
+Kp(ptac-puuC + placiA), Kp(ptac-puuC + placiM) and 
+Kp(ptac-puuC + placiMALD), total RNA was extracted 
+using the RNA prep pure Cell/Bacteria Kit (Tiangen, 
+Beijing, China). The cDNA was synthesized using HiFi-
+MMLV cDNA Synthesis Kit (CWbio Co. Ltd). The 
+chemically synthesized cDNA was mixed and subjected 
+to gradient dilution and served as template to deter
+-
+mine the specificity and efficiency of the primers. qRT-
+PCR was carried out using UltraSYBR mixture (with 
+ROX) (CWbio. Co. Ltd). The cDNA from each sample 
+was diluted to determine the linear range for qRT-PCR 
+(Fig. 3). 16S rRNA was recruited as the internal standard 
+in qRT-PCR analysis. The statistics was analyzed using 
+ 2
+−∆∆Ct strategy.
+Shake‑flask cultivation of CRISPRi strains targeting 
+lactate‑producing enzyme genes
+The CRISPRi vectors targeting one or four lactate-
+producing enzyme genes were transformed into K. 
+pneumoniae(ptac-puuC), generating recombinant 
+strains Kp(ptac-puuC + placiM), Kp(ptac-puuC + pla
+-
+ciA), Kp(ptac-puuC + placiL), Kp(ptac-puuC + placiD) 
+and Kp(ptac-puuC + placiMALD). The strain harbor -
+ing vector plv-dCas9 was used as a control (Additional 
+file  3: Table S1). All above recombinant K. pneumoniae 
+strains were grown in LB medium for 10  h and subse
+-
+quently transferred to shake flasks containing fermenta -
+tion medium, 85 µg/mL chloramphenicol and 50 µg/mL 
+kanamycin. These strains were cultivated at 37  °C and 
+150 rpm. After 3 h cultivation, IPTG and aTc at final con
+-
+centrations of 0.5 mM and 2 µM, respectively, were added 
+to induce dCas9 expression. The fermentation broth was 
+Page 11 of 12
+Wang et al. Microb Cell Fact  (2018) 17:56 
+sampled every 3 h to examine cell growth, glycerol con -
+sumption and metabolites formation.
+Bioreactor cultivation of CRISPRi strains targeting 
+lactate‑producing enzyme genes
+Strains Kp(ptac-puuC + placiD) and Kp(ptac-
+puuC + placiMALD) were grown in shake-flasks con -
+taining LB medium at 37  °C and shaken at 150  rpm. 
+After 24  h cultivation, strains were transferred to 5  L 
+bioreactor (Baoxing, China) containing antibiotics, IPTG 
+and fermentation medium aforementioned. Fermenta
+-
+tion conditions were similar to previously reported [2]. 
+Briefly, agitation speed was 400 rpm, air was supplied at 
+1.5 vvm, pH was maintained at 7.0 by titration with 5 M 
+NaOH. The initial glycerol concentration was 40 g/L. Dis
+-
+solved oxygen was monitored with electrode. Fermenta -
+tion broth was sampled every 3  h to examine biomass, 
+residual glycerol and metabolites. Glycerol was supple
+-
+mented when its concentration dropped below 10 g/L.
+Analytical methods
+Cell concentrations were measured by using micro -
+plate reader (Multiskan FC, Thermo) at 600  nm with 
+200 µL fermentation broth added in a cuvette. To meas
+-
+ure metabolites, fermentation broth was centrifuged 
+at 12,000 rpm for 10 min to remove bacteria. The 3-HP , 
+lactic acid and acetic acid in supernatant were analyzed 
+by HPLC (Shimazu, Tokyo, Japan) system equipped with 
+a  C
+18 column and a SPD-20A UV detector at 210  nm. 
+The column was maintained at 25 °C. The mobile phase 
+was 0.05% phosphoric acid at a flow rate of 0.8 mL/min. 
+1,3-PDO and 2,3-BDO were analyzed by GC (Persee). 
+Briefly, the sample were evaporated at 80 °C for 40 min 
+to remove water, and then dissolved in ethanol for GC 
+analysis. Analytical pure of 1,3-PDO and 2,3-BDO were 
+used as standard for quantification.
+Abbreviations
+EGFP: enhanced green fluorescent protein; 3-HPA: 3-hydroxypropionaldehyde; 
+1,3-PDO: 1,3-propanediol; 2,3-BDO: 2,3-butanediol; 3-HP: 3-hydroxypropionic 
+acid; CRISPRi: CRISPR interference; ALDH: aldehyde dehydrogenase; qRT-PCR: 
+quantitative real-time PCR; GCR: glycerol conversion ratio; GC: gas chroma-
+tography; sgRNA: single guide RNA; NHEJ: non-homologous end joining; aTc: 
+anhydrotetracycline; HPLC: high performance liquid chromatography.
+Additional files
+Additional file 1: Fig. S1. Conserved lactic acid pathways in diverse 
+species.
+Additional file 2: Fig. S2. Schematic diagram of CRISPRi vectors and 
+PuuC expression vector.
+Additional file 3: Table S1. Strains and vectors used in this study.
+Additional file 4: Table S2. Primers for engineering CRISPRi vectors.
+Authors’ contributions
+JW and PT conceived and designed the experiments. JW and PZ performed 
+experiments. YL and LX analyzed data. PT wrote the manuscript. All authors 
+read and approved the final manuscript.
+Author details
+1 Beijing Key Laboratory of Bioprocess, College of Life Science and Technology, 
+Beijing University of Chemical Technology, Beijing 100029, People’s Republic 
+of China. 2 College of Biochemical Engineering, Beijing Union University, 
+Beijing 100023, People’s Republic of China. 
+Acknowledgements
+We thank Professor George Guoqiang Chen from Tsinghua University for 
+providing pdCas9 plasmid. We appreciate Geran Tian from Cornell University 
+for polishing of this manuscript.
+Competing interests
+The authors declare that they have no competing interests.
+Availability of data and materials
+The datasets supporting the conclusions of this article are included within the 
+article and its additional files.
+Consent for publication
+All authors agree to submission and publication.
+Ethics approval and consent to participate
+The manuscript does not include any experiments on vertebrates or regula-
+tory invertebrates.
+Funding
+This work was supported by grants from National High Technology Research 
+and Development Program (863 Program) (No. 2015AA021003), National 
+Natural Science Foundation of China (Nos. 21276014, 21476011), National 
+Basic Research Program of China (973 Program) (No. 2012CB725200), and 
+Fundamental Research Funds for the Central Universities (YS1407).
+Publisher’s Note
+Springer Nature remains neutral with regard to jurisdictional claims in pub-
+lished maps and institutional affiliations.
+Received: 22 October 2017   Accepted: 31 March 2018
+References
+ 1. Zhang Y, Li Y, Du C, Liu M, Cao Z. Inactivation of aldehyde dehydrogenase: 
+a key factor for engineering 1,3-propanediol production by Klebsiella 
+pneumoniae. Metab Eng. 2006;8:578–86.
+ 2. Li Y, Wang X, Ge XZ, Tian PF. High production of 3-hydroxypropionic acid 
+in Klebsiella pneumoniae by systematic optimization of glycerol metabo-
+lism. Sci Rep. 2016;6:26932.
+ 3. Yang Y, Lin Y, Li L, Linhardt RJ, Yan Y. Regulating malonyl-CoA metabolism 
+via synthetic antisense RNAs for enhanced biosynthesis of natural prod-
+ucts. Metab Eng. 2015;29:217–26.
+ 4. Williams TC, Averesch NJH, Winter G, Plan MR, Vickers CE, Nielsen LK, 
+Kromer JO. Quorum-sensing linked RNA interference for dynamic 
+metabolic pathway control in Saccharomyces cerevisiae. Metab Eng. 
+2015;29:124–34.
+ 5. Wu G, Yan Q, Jones JA, Tang YJ, Fong SS, Koffas MAG. Metabolic burden: 
+cornerstones in synthetic biology and metabolic engineering applica-
+tions. Trends Biotechnol. 2016;34:652–64.
+ 6. Celinska E. Debottlenecking the 1,3-propanediol pathway by metabolic 
+engineering. Biotechnol Adv. 2010;28:519–30.
+ 7. Ashok S, Raj SM, Ko Y, Sankaranarayanan M, Zhou S, Kumar V, Park S. Effect 
+of puuC overexpression and nitrate addition on glycerol metabolism and 
+anaerobic 3-hydroxypropionic acid production in recombinant Klebsiella 
+pneumoniae ΔglpKΔdhaT. Metab Eng. 2013;15:10–24.
+Page 12 of 12Wang et al. Microb Cell Fact  (2018) 17:56 
+•
+ 
+fast, convenient online submission
+ •
+  
+thorough peer review by experienced researchers in your ﬁeld
+• 
+ 
+rapid publication on acceptance
+• 
+ 
+support for research data, including large and complex data types
+•
+  
+gold Open Access which fosters wider collaboration and increased citations 
+ 
+maximum visibility for your research: over 100M website views per year •
+  At BMC, research is always in progress.
+Learn more biomedcentral.com/submissions
+Ready to submit y our researc h ?  Choose BMC and benefit fr om: 
+ 8. Ashok S, Sankaranarayanan M, Ko Y, Jae KE, Ainala SK, Kumar V, Park S. 
+Production of 3-hydroxypropionic acid from glycerol by recombinant 
+Klebsiella pneumoniae ΔdhaTΔyqhD which can produce vitamin B12 
+naturally. Biotechnol Bioeng. 2013;110:511–24.
+ 9. Kumar V, Ashok S, Park S. Recent advances in biological production of 
+3-hydroxypropionic acid. Biotechnol Adv. 2013;31:945–61.
+ 10. Ko Y, Seol E, Sundara Sekar B, Kwon S, Lee J, Park S. Metabolic engineering 
+of Klebsiella pneumoniae J2B for co-production of 3-hydroxypropionic 
+acid and 1,3-propanediol from glycerol: reduction of acetate and other 
+by-products. Bioresour Technol. 2017;244(Pt 1):1096–103.
+ 11. Feng X, Jiang L, Han X, Liu X, Zhao Z, Liu H, Xian M, Zhao G. Production of 
+d-lactate from glucose using Klebsiella pneumoniae mutants. Microb Cell 
+Fact. 2017;16(1):209–19.
+ 12. Forage RG, Lin EC. DHA system mediating aerobic and anaerobic 
+dissimilation of glycerol in Klebsiella pneumoniae NCIB 418. J Bacteriol. 
+1982;151:591.
+ 13. Skraly FA, Lytle BL, Cameron DC. Construction and characterization of a 
+1,3-propanediol operon. Appl Environ Microbiol. 1998;64:98–105.
+ 14. Xu YZ, Guo NN, Zheng ZM, Ou XJ, Liu HJ, Liu DH. Metabolism in 1,3-pro-
+panediol fed-batch fermentation by a 
+d-lactate deficient mutant of 
+Klebsiella pneumoniae. Biotechnol Bioeng. 2009;104(5):965–72.
+ 15. Jiang Y, Chen B, Duan C, Sun B, Yang J, Yang S. Multigene editing in the 
+Escherichia coli genome via the CRISPR–Cas9 system. Appl Environ Micro-
+biol. 2015;81:2506–14.
+ 16. Choi KR, Lee SY. CRISPR technologies for bacterial systems: current 
+achievements and future directions. Biotechnol Adv. 2016;34:1180–209.
+ 17. Mougiakos I, Bosma EF, de Vos WM, van Kranenburg R, van der Oost J. 
+Next generation prokaryotic engineering: the CRISPR–Cas toolkit. Trends 
+Biotechnol. 2016;34:575–87.
+ 18. Kim SK, Seong W, Han GH, Lee DH, Lee SG. CRISPR interference-guided 
+multiplex repression of endogenous competing pathway genes 
+for redirecting metabolic flux in Escherichia coli. Microb Cell Fact. 
+2017;16:188–202.
+ 19. Zerbini F, Zanella I, Fraccascia D, Konig E, Irene C, Frattini LF, Tomasi M, 
+Fantappie L, Ganfini L, Caproni E, Parri M, Grandi A, Grandi G. Large scale 
+validation of an efficient CRISPR/Cas-based multi gene editing protocol 
+in Escherichia coli. Microb Cell Fact. 2017;16:68–85.
+ 20. Park J, Shin H, Lee SM, Um Y, Woo HM. RNA-guided single/double gene 
+repressions in Corynebacterium glutamicum using an efficient CRISPR 
+interference and its application to industrial strain. Microb Cell Fact. 
+2018;17:4–13.
+ 21. Bikard D, Jiang W, Samai P , Hochschild A, Zhang F, Marraffini LA. Program-
+mable repression and activation of bacterial gene expression using an 
+engineered CRISPR–Cas system. Nucleic Acids Res. 2013;41:7429–37.
+ 22. Naito Y, Hino K, Bono H, Ui-Tei K. CRISPRdirect: software for designing 
+CRISPR/Cas guide RNA with reduced off-target sites. Bioinformatics. 
+2015;31:1120–3.
+ 23. Qi LS, Larson MH, Gilbert LA, Doudna JA, Weissman JS, Arkin AP , Lim WA. 
+Repurposing CRISPR as an RNA-guided platform for sequence-specific 
+control of gene expression. Cell. 2013;152:1173–83.
+ 24. Larson MH, Gilbert LA, Wang X, Lim WA, Weissman JS, Qi LS. CRISPR 
+interference (CRISPRi) for sequence-specific control of gene expression. 
+Nat Protoc. 2013;8:2180–96.
+ 25. Westbrook AW, Moo-Young M, Chou CP . Development of a CRISPR–Cas9 
+tool kit for comprehensive engineering of Bacillus subtilis. Appl Environ 
+Microb. 2016;82(16):4876–95.
+ 26. Baldoma L, Aguilar J. Metabolism of 
+l-fucose and l-rhamnose in Escheri-
+chia coli: aerobic–anaerobic regulation of l-lactaldehyde dissimilation. J 
+Bacteriol. 1988;170(1):416–21.
+ 27. Jakociunas T, Bonde I, Herrgard M, Harrison SJ, Kristensen M, Pedersen LE, 
+Jensen MK, Keasling JD. Multiplex metabolic pathway engineering using 
+CRISPR/Cas9 in Saccharomyces cerevisiae. Metab Eng. 2015;28:213–22.
+ 28. Lv L, Ren YL, Chen JC, Wu Q, Chen GQ. Application of CRISPRi for prokary-
+otic metabolic engineering involving multiple genes, a case study: 
+controllable P(3HB-co-4HB) biosynthesis. Metab Eng. 2015;29:160–8.

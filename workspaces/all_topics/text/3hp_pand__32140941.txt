@@ -1,0 +1,1697 @@
+Bulletin of Mathematical Biology (2020) 82:36
+https://doi.org/10.1007/s11538-020-00714-1
+ORIGINAL ARTICLE
+An Asymptotic Analysis of the Malonyl-CoA Route to
+3-Hydroxypropionic Acid in Genetically Engineered
+Microbes
+Mohit P. Dalwadi 1,2 · John R. King 2,3
+Received: 12 December 2019 / Accepted: 24 February 2020 / Published online: 6 March 2020
+© The Author(s) 2020
+Abstract
+There has been recent interest in creating an efﬁcient microbial production route
+for 3-hydroxypropionic acid, an important platform chemical. We develop and
+solve a mathematical model for the time-dependent metabolite concentrations in the
+malonyl-CoA pathway for 3-hydroxypropionic acid production in microbes, using
+a combination of numerical and asymptotic methods. This allows us to identify the
+most important targets for enzyme regulation therein under conditions of plentiful and
+sparse pyruvate, and to quantify their relative importance. In our model, we account
+for sinks of acetyl-CoA and malonyl-CoA to, for example, the citric acid cycle and
+fatty acid biosynthesis, respectively. Notably, in the plentiful pyruvate case we deter-
+mine that there is a bifurcation in the asymptotic structure of the system, the crossing
+of which corresponds to a signiﬁcant increase in 3-hydroxypropionic acid production.
+Moreover, we deduce that the most signiﬁcant increases to 3-hydroxypropionic acid
+production can be obtained by up-regulating two speciﬁc enzymes in tandem, as the
+inherent nonlinearity of the system means that a solo up-regulation of either does not
+result in large increases in production. The types of issue arising here are prevalent in
+synthetic biology applications, and it is hoped that the system considered provides an
+instructive exemplar for broader applications.
+Keywords Multiscale · Bifurcation · 3HP · Kinetic model · Synthetic biology ·
+Microbial production route
+Mathematics Subject Classiﬁcation 34E10 · 34E15 · 37N25 · 92C45
+B Mohit P . Dalwadi
+mohit.dalwadi@maths.ox.ac.uk
+1 Mathematical Institute, University of Oxford, Oxford OX2 6GG, UK
+2 Synthetic Biology Research Centre, University of Nottingham, Nottingham NG7 2RD, UK
+3 School of Mathematical Sciences, University of Nottingham, Nottingham NG7 2RD, UK
+123
+36 Page 2 of 31 M. P. Dalwadi, J. R. King
+1 Introduction
+3-Hydroxypropionic acid (3HP) is a platform chemical which can be converted into
+several valuable chemicals, for example acrylic acid and acrylamide (Werpy et al.
+2004). There has been signiﬁcant recent interest in introducing metabolic pathways to
+microorganisms in order to produce 3HP at industrially viable levels (Borodina et al.
+2015; Chen et al. 2014, 2017; Kim et al. 2014; Son et al. 2017; Matsakas et al. 2018).
+The manipulation of metabolic pathways in microorganisms is an exciting avenue
+of research arising in synthetic biology. As enzyme production within an organism
+is genetically controlled, introducing speciﬁc genes allows an organism to produce
+chemicals that it could not previously. One of the most successful examples of a chem-
+ical synthesized by this procedure is amorpha-4,11-diene (a precursor to artemisinin,
+an antimalarial) from Escherichia coli (Martin et al. 2003). It can be expensive and
+time-consuming to introduce a new chemical pathway to a microorganism and opti-
+mize the production of a given metabolite. Moreover, adding and blocking pathways
+can have unintended consequences for the metabolism of the microorganism, and the
+experimental parameter space is extensive. Mathematical modelling allows system-
+atic progress to be made in understanding a pathway and can signiﬁcantly reduce the
+experimental parameter space that needs to be searched.
+In Kumar et al. ( 2013), three thermodynamically feasible pathways from pyruvate
+to 3HP are suggested. In previous work, we investigated 3HP production via the
+β-alanine route using mathematical modelling (Dalwadi et al. 2017). Here, we are
+interested in mathematically modelling 3HP production via the malonyl coenzyme
+A (malonyl-CoA) route, with the aim of determining the most appropriate enzyme
+targets for regulation. We consider the reactions
+Pyruvate
+k1
+−→ Acetyl-CoA, (1a)
+Acetyl-CoA
+k2
+−→ Malonyl-CoA, (1b)
+Malonyl-CoA
+k3
+−→ Malonic semialdehyde , (1c)
+Malonic semialdehyde
+k4
+⇌
+k−4
+3HP, (1d)
+Malonic semialdehyde
+k5
+−→ Acetyl-CoA, (1e)
+Acetyl-CoA
+A
+−→ Sink, (1f)
+Malonyl-CoA
+B
+−→ Sink, (1g)
+where ( 1f) and ( 1g) represent the loss of acetyl-CoA and malonyl-CoA to other
+metabolic pathways, such as the citric acid cycle or fatty acid biosynthesis. We do
+not track any metabolites once they reach the sink. We show a schematic representa-
+tion of this pathway in Fig. 1.
+Our general aim is to determine how the system behaves as a function of its param-
+eters, with our main goal being to understand how to maximize 3HP production while
+minimizing the levels of malonic semialdehyde, a toxic intermediate, where possible.
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 3 of 31 36
+Fig. 1 A schematic network diagram for the metabolic pathway we consider in this paper, from pyruvate to
+3HP via malonyl-CoA. The arrows denote the direction of the reactions and are labelled by their respective
+catalytic constants (also referred to as turnover numbers). We only track the metabolites included in this
+ﬁgure and, speciﬁcally, not any involved in the acetyl-CoA or malonyl-CoA sinks. The subscript for a given
+enzyme E
+i (for i = 1,..., 5) corresponds to the subscript of the related maximal reaction rate. The exception
+here is for the reversible reaction between malonic semialdehyde and 3HP , where both reactions use the
+enzyme E
+4. Hence, E1 corresponds to the pyruvate dehydrogenase complex (EC 1.2.4.1, EC 2.3.1.12, and
+EC 1.8.1.4), E2 corresponds to acetyl-CoA carboxylase (EC 6.4.1.2), E3 corresponds to malonyl-CoA
+reductase (EC 1.2.1.75), E4 corresponds to 3-hydroxypropionate dehydrogenase (EC 1.1.1.298), and E5
+corresponds to malonate semialdehyde dehydrogenase (acetylating) (EC 1.2.1.18)
+To derive and solve our mathematical model, we make several modelling assumptions.
+We consider a system that is well mixed and thus spatially independent. This means
+that we are able to formulate a mathematical system in terms of ordinary differential
+equations in time, rather than partial differential equations in time and space. These
+differential equations require initial conditions, and we consider the case where pyru-
+vate is instantaneously introduced to a system containing all of the relevant enzymes,
+but none of the intermediate metabolites. This assumption facilitates a mathematical
+analysis by reducing the number of unknown parameters in the system. Moreover,
+we follow the approach of Dalwadi et al. ( 2017) and Dalwadi et al. ( 2018) and inves-
+tigate two simpliﬁed cases of pyruvate replenishment, which model the extremes of
+the actual time-dependent pyruvate replenishment. The ﬁrst of these is continuous
+pyruvate replenishment, where the pyruvate is held at a constant concentration, which
+could represent a continuous culture, and the second is no pyruvate replenishment
+which could represent a batch culture. Understanding these extreme cases allows us to
+determine the key targets for enzyme regulation. Finally, we assume that the formation
+rate of enzyme complex production is much quicker than the rate of substrate con-
+sumption, and thus, the reaction rates are governed by Michaelis–Menten-type laws,
+the speciﬁc form of which we obtain from the literature.
+To analyse the nonlinear governing equations that we derive, we use a combination
+of numerical and asymptotic methods. The latter enhances our physical insight into
+the underlying system and allows us to derive closed-form expressions for how the
+123
+36 Page 4 of 31 M. P. Dalwadi, J. R. King
+metabolite concentrations vary as functions of the experimental parameters. Asymp-
+totic techniques (see, for example, Holmes 2012; Kevorkian and Cole 2013)a l l o wu st o
+largely bypass the issue of uncertainty in the parameters, as deriving analytic approx-
+imations of the dynamic metabolite concentrations only requires an understanding of
+the relative order of magnitude of each experimental parameter. Moreover, the non-
+linear nature of the system means that a broad understanding of the system behaviour
+cannot be obtained by simply varying one parameter at a time and collecting system
+outputs, so asymptotic solutions allow for a quicker and more comprehensive under-
+standing of the system. We note that there is a bifurcation in the asymptotic structure
+of the system for the case of continuous pyruvate replenishment, and we investigate
+this in terms of our goal of maximizing 3HP production.
+In Sect. 2, we introduce a mathematical model to describe the reaction kinetics.
+We solve this system numerically and asymptotically, in Sect. 3 for the case with a
+continuous replenishment of pyruvate, and in Sect. 4 for the case with no replenishment
+of pyruvate. Finally, in Sect. 5 we discuss our results.
+2 Model Description
+The method we use to set up our governing equations is similar to that of Dalwadi
+et al. ( 2018), but for a different metabolic network. Thus, to describe the dynam-
+ics of the network from pyruvate to 3HP , shown in Fig. 1, we obtain corresponding
+Michaelis–Menten-type reaction velocities from the literature. The resulting dimen-
+sional governing system is
+d[S
+1]
+dτ =− k1 E1 K i
+1[S1]
+K i
+1
+(
+[S1]+ K M
+1
+)
++[ S1][S2], (2a)
+d[S2]
+dτ = k1 E1 K i
+1[S1]
+K i
+1
+(
+[S1]+ K M
+1
+)
++[ S1][S2] − k2 E2[S2]
+[S2]+ K M
+2
++ k5 E5[S4]
+[S4]+ K M
+5
+− A[S2], (2b)
+d[S3]
+dτ = k2 E2[S2]
+[S2]+ K M
+2
+− k3 E3[S3]
+[S3]+ K M
+3
+− B[S3], (2c)
+d[S4]
+dτ = k3 E3[S3]
+[S3]+ K M
+3
+− k4 E4[S4]
+[S4]+ K M
+4
++ k−4 E4[P]
+[P]+ K M
+−4
+− k5 E5[S4]
+[S4]+ K M
+5
+, (2d)
+d[P]
+dτ = k4 E4[S4]
+[S4]+ K M
+4
+− k−4 E4[P]
+[P]+ K M
+−4
+, (2e)
+where each variable is deﬁned in Table 1. We will consider two extreme cases of sys-
+tem ( 2), corresponding to continuous and no replenishment of pyruvate, respectively,
+noting that the reality will lie somewhere between these two extremes. In ( 2), most of
+the reaction velocity terms are in standard Michaelis–Menten form, and we obtain the
+kinetic parameters for these reaction velocities from the corresponding references in
+Table2. A lower-case k represents a catalytic constant, and an upper-case K represents
+a Michaelis (or Michaelis-type) constant. We include a modiﬁed Michaelis–Menten
+term for reaction ( 1a), which encompasses the uncompetitive inhibitory effect that
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 5 of 31 36
+Table 1 Dimensional and dimensionless variable deﬁnitions
+Original variable Description Dimensionless variable
+[S1] Pyruvate [S1]= S0 S1
+[S2] Acetyl-CoA [S2]= S0 S2
+[S3] Malonyl-CoA [S3]= S0 S3
+[S4] Malonic semialdehyde [S4]= S0 S4
+[P] 3HP [P]= S0 P
+τ Time τ = (S0/k1 E1)t
+acetyl-CoA has with pyruvate (Kresze and Ronft 1981a). Therefore, we use the stan-
+dard form for uncompetitive inhibition for this reaction velocity (Y ung-Chi and Prusoff
+1973). Reactions ( 1f) and ( 1g) correspond to the aggregated loss of acetyl-CoA and
+malonyl-CoA, respectively, to other metabolic pathways present in the microorganism,
+such as the citric acid cycle or fatty acid biosynthesis. We model each of these aggre-
+gated losses as a sink with ﬁrst-order reaction kinetics, using the parameters A and B
+to represent the strength of each sink for acetyl-CoA and malonyl-CoA, respectively.
+To get around the issue that these parameters are unknown, we will later consider a
+distinguished asymptotic limit (in a sense to be made formal later) where both of these
+sink reactions balance the other reactions. The parameters E
+i , where i = 1,..., 5,
+denote the initial enzyme concentrations for the reactions they control, noting that the
+reversible reaction with maximal reaction rates k
+4 and k−4 are both controlled by E4.
+The initial levels of each metabolite present in the system are relatively unknown.
+Thus, we make a modelling choice to reduce the number of uncertain parameters in
+the system to facilitate a simpliﬁed analysis of the system. We use initial conditions
+corresponding to the case in which pyruvate is instantaneously introduced to a system
+containing all of the relevant enzymes, but none of the intermediate metabolites. That
+is, we use [S
+1](0) = S0, where S0 represents the prescribed initial or typical level of
+pyruvate present in the system, with none of remaining metabolites initially present:
+[S2](0) =[ S3](0) =[ S4](0) =[ P](0) = 0.
+We now nondimensionalize the system and exploit various small dimensionless
+parameter ratios to introduce a small parameter into the system, thus allowing us to
+write the system in terms of O(1) constants and one small parameter to quantify the
+relative size of each term. This is useful because kinetic parameters can vary between
+different environments, as shown in Table 2. To side-step the issues associated with this
+parameter uncertainty, we seek to quantitatively understand how the system behaves
+as these parameters vary by interrogating the system using an asymptotic analysis
+(see, for example, Holmes 2012; Kevorkian and Cole 2013).
+We provide our nondimensional variable scalings in Table 1. Essentially, we scale
+each dimensional metabolite concentration with S0, the initial concentration of pyru-
+vate, and we scale time with S0/(k1 E1), the characteristic time of the ﬁrst reaction,
+which occurs between pyruvate and acetyl-CoA. To form the dimensionless parameters
+in the system, we ﬁrst scale each rate constant with the rate constant of the ﬁrst reac-
+tion, each Michaelis constant with the initial pyruvate concentration, and each enzyme
+123
+36 Page 6 of 31 M. P. Dalwadi, J. R. King
+Table 2 Parameter values
+Dimensional Organism Range Dimensionless
+k1 = 15 s−1 Lactococcus lactis
+(Snoep et al. 1992)
+4–30 s −1 (Kresze and Ronft
+1981a, b; Snoep et al. 1992)
+k2 = 12 s−1 Acinetobacter
+baumannii (Alves
+et al. 2011)
+12–30 s −1 (Alves et al. 2011;
+Hügler et al. 2003)
+¯k2 = k2 E2/ϵk1 E1 = 11.4
+k3 = 28 s−1 Sulfolobus toko-
+daii (Alber et al.
+2006)
+3–50 s −1 (Hügler et al. 2002;
+Alber et al. 2006)
+¯k3 = k3 E3/k1 E1 = 0.19
+k4 = 100 s−1 Nitrosopumilus
+maritimus (Otte
+et al. 2015)
+100–120 s −1 (Otte et al. 2015;
+Kockelkorn and Fuchs 2009)
+¯k4 = k4 E4/k1 E1 = 0.67
+k−4 = 2.1s −1 Nitrosopumilus
+maritimus (Otte
+et al. 2015)
+0.2–2.1s −1 (Otte et al. 2015;
+Yao et al. 2010)
+¯k−4 = k−4 E4/ϵk1 E1 = 2
+k5 = 20 s−1 Pseudomonas ﬂu-
+orescens (Y amada
+and Jakoby 1960)
+9–20 s −1 (Y amada and Jakoby
+1960; Anderson and Maga-
+sanik 1971)
+¯k5 = k5 E5/k1 E1 = 0.13
+K M
+1 = 1m M Lactococcus lactis
+(Snoep et al. 1992)
+0.13–1 mM (Kresze and Ronft
+1981a; Pronk 1996; Snoep
+et al. 1992)
+¯K M
+1 = K M
+1 /S0 = 0.5
+K i
+1 = 0.014 mM Saccharomyces
+cerevisiae (Kresze
+and Ronft 1981a)
+0.014–0.018 mM (Kresze and
+Ronft 1981a; Pronk 1996)
+ϵ = K i
+1/S0 = 0.007
+K M
+2 = 0.01 mM Acinetobacter
+baumannii (Alves
+et al. 2011)
+0.01–0.06 mM (Alves et al.
+2011; Hügler et al. 2003)
+¯K M
+2 = K M
+2 /ϵ S0 = 0.71
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 7 of 31 36
+Table 2 continued
+Dimensional Organism Range Dimensionless
+K M
+3 = 0.04 mM Sulfolobus toko-
+daii (Alber et al.
+2006)
+0.03–0.1 mM (Hügler et al.
+2002; Alber et al. 2006)
+¯K M
+3 = K M
+3 /ϵ S0 = 2.86
+K M
+4 = 0.11 mM Nitrosopumilus
+maritimus (Otte
+et al. 2015)
+0.07–0.11 mM (Otte et al.
+2015; Kockelkorn and Fuchs
+2009)
+¯K M
+4 = K M
+4 /ϵ S0 = 7.86
+K M
+−4 = 7.9m M Nitrosopumilus
+maritimus (Otte
+et al. 2015)
+7.9–17 mM (Otte et al. 2015;
+Yao et al. 2010)
+¯K M
+−4 = K M
+−4/S0 = 3.95
+K M
+5 = 0.03 mM Pseudomonas ﬂu-
+orescens (Y amada
+and Jakoby 1960)
+0.03–0.06 mM (Y amada and
+Jakoby 1960; Anderson and
+Magasanik 1971)
+¯K M
+5 = K M
+5 /ϵ S0 = 2.14
+A [s−1] ¯A = AS0/k1 E1 = ϵ
+B [s−1] ¯B = BS0/k1 E1 = 1/ϵ
+To give an idea of the range of these parameter values, we provide data from several organisms. As we use an asymptotic analysis, it is the relative magni tude of these values,
+rather than their exact values, which are important. As discussed in the main text, we use the value S0 = 2 mM, assume that Ei /E1 = 0.1f o r i ∈{ 2,... 5}, and we scale
+extreme parameter ratios with the small dimensionless parameter ϵ, deﬁned as the ratio of K i
+1 and S0. As there is a distinguished asymptotic limit when ¯A = O(ϵ) and
+¯B = O(1/ϵ), we use these scalings in our asymptotic analysis, choosing ¯A = ϵ and ¯B = 1/ϵ in our simulations
+123
+36 Page 8 of 31 M. P. Dalwadi, J. R. King
+concentration with the concentration of the ﬁrst enzyme. Then, using the typical dimen-
+sional values in Table 2, we note that the parameter ratio ϵ := K i
+1/S0 = 7 × 10−3
+is very small. Hence, we scale the other extreme parameter ratios in our system with
+the small dimensionless parameter ϵ, allowing us to write each additional dimension-
+less parameter as cϵ j , where c is an O(1) parameter (in practice, we take this to be
+between ϵ1/2 and ϵ−1/2), and j is an integer. This allows us to quantify the “small-
+ness” of each parameter while allowing each parameter c to vary over approximately
+three orders of magnitude, yielding a system in terms of a small parameter. We take
+the typical concentration of pyruvate within a microorganism to be S0 = 2 mM, and
+we assume that Ei /E1 = 0.1f o r i ∈{ 2,... 5}. We make this assumption since we
+expect the levels of pyruvate dehydrogenase complex (PDC), corresponding to E1,t o
+be more abundant than the other enzymes in this pathway since PDC is fundamental
+to cellular respiration in that it links glycolysis to the citric acid cycle. However, we
+emphasize that different values of E
+i can be considered if required by varying the
+appropriate dimensionless parameter. The resultant dimensionless parameters we use
+in our system are given in Table 2.
+The dimensionless system is then given by
+dS
+1
+dt =− ϵ S1
+ϵ
+(
+S1 + ¯K M
+1
+)
++ S1 S2
+, (3a)
+dS2
+dt = ϵ S1
+ϵ
+(
+S1 + ¯K M
+1
+)
++ S1 S2
+− ϵ ¯k2 S2
+S2 + ϵ ¯K M
+2
++
+¯k5 S4
+S4 + ϵ ¯K M
+5
+− ¯AS2, (3b)
+dS3
+dt = ϵ ¯k2 S2
+S2 + ϵ ¯K M
+2
+−
+¯k3 S3
+S3 + ϵ ¯K M
+3
+− ¯BS3, (3c)
+dS4
+dt =
+¯k3 S3
+S3 + ϵ ¯K M
+3
+−
+¯k4 S4
+S4 + ϵ ¯K M
+4
++ ϵ ¯k−4 P
+P + ¯K M
+−4
+−
+¯k5 S4
+S4 + ϵ ¯K M
+5
+, (3d)
+d P
+dt =
+¯k4 S4
+S4 + ϵ ¯K M
+4
+− ϵ ¯k−4 P
+P + ¯K M
+−4
+, (3e)
+where ϵ is a small parameter. The dimensionless initial conditions are: S1(0) = 1,
+S2(0) = 0, S3(0) = 0, S4(0) = 0, and P(0) = 0.
+We emphasize that the asymptotic sizes of ¯A and ¯B are not currently set, and that
+we have not yet scaled our dependent variables with ϵ. As we are not able to accurately
+estimate the typical sizes of ¯A and ¯B, we instead consider the distinguished asymptotic
+limit in which they balance the core reaction velocities over the same timescale: from
+pyruvate to acetyl-CoA, from acetyl-CoA to malonyl-CoA, from malonyl-CoA to
+malonic semialdehyde, and from malonic semialdehyde to 3HP . The reaction velocity
+from pyruvate to acetyl-CoA has asymptotic size O(min(1, S
+1,ϵ/ S2)). The reaction
+velocity from acetyl-CoA to malonyl-CoA has asymptotic size O(min(ϵ, S2)).B a l -
+ancing these two reaction velocities, and noting that we start with S1 = O(1),w e
+may deduce that the size of these reaction velocities must be of O(ϵ), and hence
+we obtain the scaling S2 = O(1). For these reaction velocities to balance with ¯AS2,
+we must consider the distinguished limit ¯A = O(ϵ). Balancing these terms with the
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 9 of 31 36
+reaction velocity from malonyl-CoA to malonic semialdehyde, with asymptotic size
+O(min(1, S3/ϵ)), we obtain the scaling S3 = O(ϵ2). Then, the balance with ¯BS3
+yields the distinguished limit ¯B = O(1/ϵ). Therefore, we use the scalings ¯A = ϵ ˆA
+and ¯B = ˆB/ϵ, where ˆA, ˆB = O(1). This appears to be the only distinguished limit of
+interest.
+We now solve this system for two different cases of pyruvate replenishment. The ﬁrst
+is continuous pyruvate replenishment, where the pyruvate dynamics are not governed
+by ( 3a), and instead we impose S1(t) ≡ 1. The second is no pyruvate replenishment,
+and ( 3a) does hold. We will deduce that the two systems are equivalent for t = O(1),
+and only diverge when t = O(1/ϵ). In both cases, we are interested in determining
+how to maximize 3HP production. For the continuous-replenishment case, we are
+also interested in trying to minimize the long-time levels of malonic semialdehyde,
+a toxic intermediate compound, present in the cell over a long timescale. As the no-
+replenishment-of-pyruvate case eventually tends to no metabolites in the system, the
+long-time levels of malonic semialdehyde in that case are trivial. We now consider the
+continuous-pyruvate-replenishment case.
+3 Continuous Replenishment of Pyruvate
+We ﬁrst consider the case where the pyruvate is continuously replenished, modelling
+the bacteria being harvested in a continuous culture. A numerical simulation of system
+(3b–e) with S1(t) ≡ 1 shows that the 3HP concentration is bounded above as t →∞
+(Fig. 2). For our goal of maximizing 3HP production, we would like to understand how
+to improve the 3HP production by regulating the enzymes in the system. In this section,
+we solve the nonlinear system ( 3b–e) with S1(t) ≡ 1 through an asymptotic analysis,
+exploiting the small parameter ϵ. Our analysis reveals that there is a bifurcation in the
+asymptotic structure for the large-time behaviour of 3HP with important implications
+for 3HP production. Our results allow us to quantify this bifurcation in terms of the
+system parameters, providing physical insight and suggesting which reactions should
+be the key targets for genetic manipulation.
+3.1 Asymptotic Structure
+We now discuss the asymptotic structure of the continuous-replenishment case, with
+reference to the metabolic network shown in Fig. 1. In this case, there are two important
+timescales in the system: early time, where t = O(ϵ), and late time, where t = O(1/ϵ).
+Over the early timescale, the levels of malonyl-CoA and malonic semialdehyde reach
+a steady and quasi-steady state, respectively. The remaining metabolite concentrations
+increase through this early timescale, with a change in the power law governing their
+growth. Over the late timescale, the levels of acetyl-CoA reach a steady state, but the
+behaviour of the 3HP depends on the system parameters. There is a bifurcation in
+the asymptotic structure for the large-time behaviour of 3HP , the levels of which are
+bounded above unless some critical parameter ratio is reached. We investigate this
+bifurcation when we consider the late-time behaviour.
+123
+36 Page 10 of 31 M. P. Dalwadi, J. R. King
+Fig. 2 The dynamics of each metabolite in the system when pyruvate is continually replenished. The solid
+grey lines are the numerical solutions from system ( 3b–e) with S1 ≡ 1, the dashed blue lines are the
+early-time asymptotic results from ( 6), and the dotted black lines are the late-time results, where we use
+the asymptotic results ( 11), ( 12), and ( 15)f o r S3, S4,a n d P, respectively. These asymptotic results yield
+a single reduced ODE for S2, given in ( 9), and it is the numerical solution to this that we plot for S2 as a
+dotted black line. We use the parameter values given in Table 2 (Color ﬁgure online)
+3.2 Early Time: t = O(/SI)
+We start our analysis over the distinguished timescale t = O(ϵ), and thus, we make
+the scaling t = ϵ ˆt. By balancing reaction velocities, we ﬁnd that the appropri-
+ate scalings for the dependent variables over this timescale are (S2, S3, S4, P) =
+(ϵ ˆS2,ϵ 2 ˆS3,ϵ 2 ˆS4,ϵ 2 ˆP), which converts system ( 3b–e) into
+d ˆS2
+dˆt = 1
+1 + ¯K M
+1 + ˆS2
+− ϵ ¯k2 ˆS2
+ˆS2 + ¯K M
+2
++ ϵ ¯k5 ˆS4
+ϵ ˆS4 + ¯K M
+5
+− ϵ2 ˆA ˆS2, (4a)
+d ˆS3
+dˆt =
+¯k2 ˆS2
+ˆS2 + ¯K M
+2
+−
+¯k3 ˆS3
+ϵ ˆS3 + ¯K M
+3
+− ˆB ˆS3, (4b)
+d ˆS4
+dˆt =
+¯k3 ˆS3
+ϵ ˆS3 + ¯K M
+3
+−
+¯k4 ˆS4
+ϵ ˆS4 + ¯K M
+4
++ ϵ2 ¯k−4 ˆP
+ϵ2 ˆP + ¯K M
+−4
+−
+¯k5 ˆS4
+ϵ ˆS4 + ¯K M
+5
+, (4c)
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 11 of 31 36
+d ˆP
+dˆt =
+¯k4 ˆS4
+ϵ ˆS4 + ¯K M
+4
+− ϵ2 ¯k−4 ˆP
+ϵ2 ˆP + ¯K M
+−4
+. (4d)
+The leading-order version of ( 4)i s
+d ˆS2
+dˆt = 1
+1 + ¯K M
+1 + ˆS2
+, d ˆS3
+dˆt =
+¯k2 ˆS2
+ˆS2 + ¯K M
+2
+−
+(
+¯v3 + ˆB
+)
+ˆS3,
+d ˆS4
+dˆt =¯v3 ˆS3 − (¯v4 +¯v5) ˆS4, d ˆP
+dˆt =¯v4 ˆS4, (5)
+where vi = ki /K M
+i for i ∈{ 3,4,−4,5}.W em a ys o l v e( 5) to obtain
+ˆS2(ˆt) =
+(
+2ˆt +
+(
+1 + ¯K M
+1
+) 2) 1/2
+−
+(
+1 + ¯K M
+1
+)
+, (6a)
+ˆS3(ˆt) = ¯k2
+∫ ˆt
+0
+ˆS2(s)
+ˆS2(s) + ¯K M
+2
+e(¯v3+ ˆB)(s−ˆt) ds, (6b)
+ˆS4(ˆt) =
+¯k2 ¯v3
+¯v3 + ˆB −¯v4 −¯v5
+∫ ˆt
+0
+ˆS2(s)
+ˆS2(s) + ¯K M
+2(
+e(¯v4+¯v5)(s−ˆt) − e(¯v3+ ˆB)(s−ˆt)
+)
+ds, (6c)
+ˆP(ˆt) =
+¯k2 ¯v3 ¯v4
+¯v3 + ˆB −¯v4 −¯v5
+∫ ˆt
+0
+ˆS2(s)
+ˆS2(s) + ¯K M
+2(
+1 − e(¯v4+¯v5)(s−ˆt)
+¯v4 +¯v5
+− 1 − e(¯v3+ ˆB)(s−ˆt)
+¯v3 + ˆB
+)
+ds. (6d)
+We see that the early-time results ( 6) (dashed black lines) agree very well with the
+numerical results (solid grey lines) when t = O(ϵ) = O(10−2) in Fig. 2. However, the
+metabolite concentrations stray from these asymptotic results (with the exception of
+ˆS3)a s t becomes larger than of O(ϵ). This is because new terms in the system become
+of leading order, and so we must explore a new asymptotic region to understand the
+system fully. We investigate this in the next section. As such, it is helpful to state the
+large-ˆt limits of solutions ( 6), as these will allow us to match appropriately into the
+next timescale. In this limit, we obtain the following expressions
+ˆS2 ∼
+√
+2ˆt, ˆS3 ∼
+¯k2
+¯v3 + ˆB
+, ˆS4 ∼
+¯k2 ¯v3
+(¯v4 +¯v5)
+(
+¯v3 + ˆB
+) ,
+ˆP ∼
+¯k2 ¯v3 ¯v4 ˆt
+(¯v4 +¯v5)
+(
+¯v3 + ˆB
+) as ˆt →∞ , (7)
+123
+36 Page 12 of 31 M. P. Dalwadi, J. R. King
+and hence we see that ˆS3 and ˆS4 reach a steady state over t = O(ϵ), while ˆS2 and
+ˆP continue to grow over the same timescale. In the next subsection, we consider the
+remaining important timescale t = O(1/ϵ).
+3.3 Late Time: t = O(1//SI)
+The second and ﬁnal distinguished timescale for continuous replenishment is t =
+O(1/ϵ),s ow en o wu s et h es c a l i n g t = T /ϵ. This is the timescale over which there
+is a balance between the source from pyruvate and the sinks from acetyl-CoA and
+malonyl-CoA. Over this timescale, S2 and P are both of O(1), and the scalings for the
+remaining metabolites are still (S3, S4) = (ϵ2 ˆS3,ϵ 2 ˆS4), which follow from ( 7), the
+large-time limits of the early-time solutions. Using the scalings mentioned above, we
+obtain the late-time version of ( 3b–e):
+dS
+2
+dT = 1
+ϵ
+(
+1 + ¯K M
+1
+)
++ S2
+−
+¯k2 S2
+S2 + ϵ ¯K M
+2
++
+¯k5 ˆS4
+ϵ ˆS4 + ¯K M
+5
+− ˆAS2, (8a)
+ϵ2 d ˆS3
+dT =
+¯k2 S2
+S2 + ϵ ¯K M
+2
+−
+¯k3 ˆS3
+ϵ ˆS3 + ¯K M
+3
+− ˆB ˆS3, (8b)
+ϵ2 d ˆS4
+dT =
+¯k3 ˆS3
+ϵ ˆS3 + ¯K M
+3
+−
+¯k4 ˆS4
+ϵ ˆS4 + ¯K M
+4
++
+¯k−4 P
+P + ¯K M
+−4
+−
+¯k5 ˆS4
+ϵ ˆS4 + ¯K M
+5
+, (8c)
+d P
+dT =
+¯k4 ˆS4
+ϵ ˆS4 + ¯K M
+4
+−
+¯k−4 P
+P + ¯K M
+−4
+. (8d)
+From ( 8), we obtain the leading-order differential–algebraic system, given by
+dS2
+dT = 1
+S2
+− ¯k2 +¯v5 ˜S4 − ˆAS2, (9a)
+d P
+dT =¯v4 ˆS4 −
+¯k−4 P
+P + ¯K M
+−4
+, (9b)
+0 = ¯k2 −
+(
+¯v3 + ˆB
+)
+˜S3, (9c)
+0 =¯v3 ˆS3 −¯v4 ˆS4 +
+¯k−4 P
+P + ¯K M
+−4
+−¯v5 ˆS4. (9d)
+The “initial” conditions of the system are obtained by matching with the large-time
+results of the early-time system ( 7), to yield
+S2(0) = 0, ˆS3(0) =
+¯k2
+¯v3 + ˆB
+, ˆS4(0) =
+¯k2 ¯v3
+(¯v4 +¯v5)
+(
+¯v3 + ˆB
+) , P(0) = 0. (10)
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 13 of 31 36
+From ( 9c), we can immediately deduce that ˜S3 is constant over this timescale. That
+is, over the late timescale, ˜S3 takes the constant value
+˜S3 =
+¯k2
+¯v3 + ˆB
+. (11)
+From ( 9)–(11), we can write ˜S4 in terms of P as follows:
+˜S4 = 1
+¯v4 +¯v5
+( ¯k2 ¯v3
+¯v3 + ˆB
++
+¯k−4 P
+P + ¯K M
+−4
+)
+. (12)
+Substituting ( 12)i n t o( 9), we obtain the following closed ODE for P(T ):
+d P
+dT =
+¯k−4 ¯v5
+¯v4 +¯v5
+( ¯k4
+¯k∗ − P
+P + ¯K M
+−4
+)
+, (13)
+where the critical parameter ¯k∗ is deﬁned as
+¯k∗ =
+¯K M
+4 ¯k−4 ¯v5
+(
+¯v3 + ˆB
+)
+¯k2 ¯v3
+, (14)
+and we shall justify shortly the critical nature of ¯k∗. The differential equation ( 13)i s
+solved implicitly by
+¯k−4 ¯v5
+( ¯k4 − ¯k∗)2
+¯k∗ (¯v4 +¯v5) T =
+( ¯k4 − ¯k∗)
+P − ¯k∗ ¯K M
+−4 log
+(
+1 +
+¯k4 − ¯k∗
+¯k4 ¯K M
+−4
+P
+)
+. (15)
+The asymptotic late-time results ( 11), ( 12), and ( 15) (dotted black lines) agree well
+with the numerical results (solid grey lines) when t = O(1/ϵ) = O(102) in Fig. 2.T h e
+remaining nonlinear differential equation ( 9a) decouples from the rest of the system,
+and solving this equation is not required to understand the dynamics of the rest of the
+system. However, we note that the remaining equation will be important when there
+is no replenishment of pyruvate, which we consider in the next section. To understand
+the dynamics of S
+2,( 9a) must be solved numerically, and the solution to this agrees
+well with the full numerical solution of S2 in Fig. 2.
+Given that the argument of the logarithm in ( 15) will vanish for some positive value
+of P if and only if ¯k4 < ¯k∗, we may deduce that the large-time behaviour of P has
+a critical dependence on the sign of ¯k4 − ¯k∗. Thus, ¯k∗ is the bifurcation point for the
+parameter ¯k4, in terms of changing the asymptotic structure of the solution. Speciﬁ-
+cally, when ¯k4 < ¯k∗, corresponding to a weak reaction from malonic semialdehyde to
+3HP , we obtain the bounded large-time behaviour
+P →
+¯k4 ¯K M
+−4
+¯k∗ − ¯k4
+as T →∞ ; (16a)
+123
+36 Page 14 of 31 M. P. Dalwadi, J. R. King
+(a) (b)
+Fig. 3 The large-time limits of a 3HP production and b malonic semialdehyde varying over the critical
+parameter ¯k4 = ¯k∗. The grey lines denote the asymptotic predictions [from ( 16)a n d( 18)], and the black
+crosses denote numerical results (solving ( 3b–e) with S1 ≡ 1). The subcritical and supercritical regimes are
+to the left and right, respectively, of the dashed lines in each subﬁgure. To obtain the large-time numerical
+limits, we run the simulations until t = tend := 1012; we approximate lim t→∞ d P/dt ≈ P(tend)/tend and
+limt→∞ S4 ≈ S4(tend). Apart from ¯k4, which we vary in this ﬁgure, we use the parameter values given in
+Table 2, and these correspond to an asymptotic value of the critical parameter ¯k∗ ≈ 1.3951
+however when ¯k4 > ¯k∗, corresponding to a strong reaction from malonic semialdehyde
+to 3HP , we obtain the unbounded large-time behaviour
+P ∼
+¯k2 ¯v3
+( ¯k4 − ¯k∗)
+¯K M
+4
+(
+¯v3 + ˆB
+)
+(¯v4 +¯v5)
+T as T →∞ . (16b)
+We show this bifurcation behaviour in Fig. 3a, including a comparison between the
+numerical and asymptotic results. We see that our numerical results show the bifurca-
+tion behaviour predicted by our asymptotic results. Moreover, our asymptotic results
+are good predictions of both the location of the bifurcation and the long-time behaviour.
+It is of mathematical interest to brieﬂy note that when ¯k4 = ¯k∗, the solution to ( 13)
+is
+P = ¯K M
+−4
+[ (
+1 + 2 ¯v−4 ¯v5T
+¯v4 +¯v5
+) 1/2
+− 1
+]
+as T →∞ . (17)
+Hence, as ¯k4 passes through the bifurcation point, the long-time behaviour of P is to
+increase with the square root of time.
+From ( 12), we see that ˜S4 will tend to a constant in the far-ﬁeld; for ¯k4 < ¯k∗,w e
+have the subcritical regime
+˜S4 →
+¯k2 ¯v3
+¯v5
+(
+¯v3 + ˆB
+) as T →∞ , (18a)
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 15 of 31 36
+and for ¯k4 > ¯k∗, we have the supercritical regime
+˜S4 → 1
+¯v4 +¯v5
+( ¯k2 ¯v3
+¯v3 + ˆB
++ ¯k−4
+)
+as T →∞ . (18b)
+We show this bifurcating behaviour in Fig. 3b, including a comparison between the
+numerical and asymptotic results. As before, we see that our numerical results display
+the bifurcation behaviour predicted by our asymptotic results, and that the latter are a
+good predictor of the bifurcation behaviour. Recall that our goal for the continuous-
+pyruvate-replenishment case is to maximize 3HP production while minimizing the
+large-time levels of malonic semialdehyde, the latter being a toxic intermediate com-
+pound. Therefore, as large-time 3HP production is zero and malonic semialdehyde
+levels are higher in the subcritical regime, Fig. 3b tells us immediately that the sub-
+critical regime is a bad regime for industrially viable 3HP production, and that the
+parameter regime ¯k
+4 > ¯k∗ is much better for our goal. From Table 2, we note that the
+critical parameter ¯k∗ ≈ 1.3951, but ¯k4 = 0.67. Therefore, the simulations in Fig. 2
+occur in the subcritical regime, as can be deduced by noting that the 3HP concentra-
+tion is bounded above. Our model predicts that one can achieve large gains in 3HP
+production if one is able to move into the supercritical regime.
+3.4 Physical Implications
+To frame our discussion around parameters that can be varied experimentally (essen-
+tially the levels of each enzyme, regulated by the over- or under-expression of the
+genes that control their production), we rewrite our results in terms of dimensional
+quantities. In dimensional terms, the bifurcation occurs when k
+4 = k∗, where
+k∗ = k−4k5 K M
+4 E5
+k2 K M
+5 E2
+(
+1 + BK M
+3
+k3 E3
+)
+. (19)
+From ( 19), we see that an up-regulation of E2 and a down-regulation of E5 have
+the most signiﬁcant effect on lowering k∗, the critical bifurcation parameter, and
+thus hopefully moving into the supercritical regime for signiﬁcantly increased 3HP
+production. Additionally, an up-regulation of E3 will also have an effect in lowering
+k∗, but with diminishing returns. Notably, our model suggests that regulation of neither
+E1 nor E4 has a signiﬁcant effect on this critical bifurcation parameter (see below for
+a potential important role for E4, however).
+The supercritical regime occurs when k4 > k∗, and this corresponds to a nonzero
+large-time production of 3HP , which is the target if we are to attain the goal of indus-
+trially viable 3HP production. In this case, the dimensional large-time production of
+3HP is
+d[P]
+dτ ∼
+k2 E2
+(
+1 − k−4k5 K M
+4 E5
+k2k4 K M
+5 E2
+(
+1 + BK M
+3
+k3 E3
+))
+(
+1 + BK M
+3
+k3 E3
+)(
+1 + k5 K M
+4 E5
+k4 K M
+5 E4
+) , (20)
+123
+36 Page 16 of 31 M. P. Dalwadi, J. R. King
+and the dimensional large-time levels of malonic semialdehyde in the system are
+[S4]∼
+k2 K M
+4 E2
+(
+1 + k−4 E4
+k2 E2
+(
+1 + BK M
+3
+k3 E3
+))
+k4 E4
+(
+1 + BK M
+3
+k3 E3
+)(
+1 + k5 K M
+4 E5
+k4 K M
+5 E4
+) . (21)
+As our goal for the continuous-replenishment case is to maximize 3HP production
+while minimizing the large-time levels of malonic semialdehyde, we consider the
+ratio of the large-time levels of d [P]/dτ to [S4], to obtain
+d[P]
+dτ
+[S4] ∼
+k2k4 E2 E4
+(
+1 − k−4k5 K M
+4 E5
+k2k4 K M
+5 E2
+(
+1 + BK M
+3
+k3 E3
+))
+K M
+4
+(
+k2 E2 + k−4 E4
+(
+1 + BK M
+3
+k3 E3
+)) . (22)
+While ( 22) appears to have a convoluted form, it provides a quantitative value that we
+wish to maximize. In particular, we are able to see that the most signiﬁcant gains can
+be made by up-regulating E2 and E4 in tandem. Our model suggests that an increase
+in only one of these enzymes will increase ratio ( 22), but with diminishing returns
+(Fig. 4). However, increasing both enzymes will result in signiﬁcant increases in the
+3HP production to malonic semialdehyde ratio (Fig. 4). Additionally, we note that
+3HP production can also be increased by up-regulating E3 and down-regulating E5,
+though this will have diminishing returns. We emphasize that maximizing ( 22) should
+not be considered a deﬁnitive metric, since the toxic effect of malonic semialdehyde
+([S4]) will have its own nonlinear effects for which to account. Other relevant metrics
+could involve keeping the maximum value of malonic semialdehyde below a critical
+value or keeping the cumulative presence of malonic semialdehyde low. Our multiscale
+approach allows for the efﬁcient analysis of any such metric.
+4 No Replenishment of Pyruvate
+We now consider the case where the pyruvate is never replenished. Due to the con-
+nectivity of the metabolic network and the sinks in the system, this problem results
+in a long-term decay of each metabolite. As the only metabolite initially present in
+the system is pyruvate, the remaining metabolites will each reach a maximum level at
+some (generally different) point in time. Our main goal in this subsection is to obtain
+an asymptotic expression for the maximum level of 3HP present in the system, and
+the time at which this occurs. In a batch culture system, where nothing is added or
+removed to the system until the run is stopped for harvesting, this time provides an
+approximation for when to stop the run and harvest the product. We will summarize
+the system that governs this optimal time and product yield, but we relegate the details
+to “Appendix A” for brevity.
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 17 of 31 36
+Fig. 4 The effect of regulating enzymes in the pathway shown in Fig. 1 on the key ratio ( 22), obtained
+by solving ( 3b–e) with S1 ≡ 1. We use the parameter values in Table 2, but with increased enzyme
+concentrations as speciﬁed on the x-axis. While up-regulating E2 yields improvement, this has diminishing
+returns. However, even though up-regulating E4 by itself does not appear to have a signiﬁcant effect on the
+ratio, up-regulating E2 and E4 in tandem does have a signiﬁcant effect (Color ﬁgure online)
+4.1 Asymptotic Structure
+We now discuss the asymptotic structure of the no-replenishment case, with reference
+to the metabolic network shown in Fig. 1. The no-replenishment-of-pyruvate case is
+equivalent to the continuous-replenishment case at leading order until we reach the
+timescale t = O(1/ϵ) (as shown in Fig. 5 for S2, S3, S4, and P), at which point the
+depletion of pyruvate occurs as a leading-order effect.
+Over this longer timescale, the rest of the system remains unchanged until the levels
+of pyruvate are of O(ϵ), which we deﬁne to occur at t = Td /ϵ = O(1/ϵ).T h ep y r u v a t e
+is then depleted to a negligible level at a relatively quicker rate, over a timescale of
+t − Td /ϵ = O(1), as can be seen in Fig. 6, while the remaining metabolites are
+unchanged at leading order. After this rapid depletion of pyruvate, the reaction from
+pyruvate to acetyl-CoA is negligible and so the levels of acetyl-CoA start to deplete,
+again over the timescale of t = O(1/ϵ). When the levels of acetyl-CoA become
+of O(ϵ), which we deﬁne to occur at t = T ∗/ϵ = O(1/ϵ), the Michaelis–Menten
+reaction from acetyl-CoA to malonyl-CoA becomes unsaturated, and the lower levels
+of acetyl-CoA are felt through the rest of the system. After this point, all the remaining
+metabolites start to deplete over a timescale of t = O(1/ϵ), and so t = T
+∗/ϵ marks
+the time at which the level of 3HP in the system is maximal. In the next section, we
+present the reduced system required to be solved to determine T ∗.
+123
+36 Page 18 of 31 M. P. Dalwadi, J. R. King
+Fig. 5 A comparison between the metabolic dynamics in the continuous- and no-replenishment-of-pyruvate
+cases. The solid grey lines are the numerical solutions from the continuous-replenishment-of-pyruvate
+system (3b–e) with S
+1 ≡ 1, and the dashed blue lines are the numerical solutions from the no-replenishment-
+of-pyruvate system ( 3). We see that the two cases are essentially equivalent until around t = 5, after which
+the metabolite levels drop in a sharp manner for S2, S3,a n d S4, and at a slower rate for P. The maximal
+level of 3HP occurs around the time of the sharp drop. We use the parameter values given in Table 2 for
+these ﬁgures (Color ﬁgure online)
+4.2 Reduced System for T∗
+The time at which the level of 3HP in the system is maximal is given by t = T ∗/ϵ +
+O(1), where T ∗ = O(1). To determine T ∗ at leading order, it sufﬁces to solve the
+reduced system
+dS2
+dT = f (S2) − ¯k2 +¯v5 ˆS4(T ) − ˆAS2(T )
+for 0 < T < T ∗, with S2 ∼ (2T )1/2 as T → 0+, (23a)
+and we provide a derivation of this reduced system in “Appendix A”. In ( 23a), the
+nonlinear function f is given by
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 19 of 31 36
+Fig. 6 The dynamics of pyruvate ( S1) when it is never replenished, obtained from solving ( 3). We see that
+it becomes exponentially small shortly after t = 12. We use the parameter values given in Table 2
+f (S2) =
+⎧
+⎨
+⎩
+1
+S2
+if 0 < T < Td ,
+0i f Td < T < T ∗.
+(23b)
+Additionally, since the remaining metabolite concentrations are equivalent to those in
+the continuous-replenishment case until acetyl-CoA depletion occurs, the concentra-
+tion of malonic semialdehyde ˆS
+4 is given by the implicit representation ( 12), (14)–(15).
+As shown in “Appendix A”, the asymptotic leading-order time at which pyruvate
+depletion occurs is T = Td , where Td satisﬁes the implicit equation
+∫ Td
+0
+f (S2(s))ds = 1. (23c)
+The time at which there is a maximal amount of 3HP in the system T = T ∗ is
+when acetyl-CoA depletion occurs, since this is when the remaining metabolites in
+the system start to feel the lack of the previous metabolites. Asymptotically, this occurs
+when S2(T ∗) = 0 or, equivalently, for T ∗ satisfying the implicit equation
+1 +¯v5
+∫ T ∗
+0
+ˆS4(s)ds = ¯k2T ∗ + ˆA
+∫ T ∗
+0
+S2(s)ds, (23d)
+which is obtained by integrating ( 23a) in time and using ( 23c). It is a simple task to
+solve this system numerically for any speciﬁed parameter values. Then, the maximal
+amount of 3HP in the system can be obtained by substituting T ∗ into ( 15) to yield the
+implicit equation
+123
+36 Page 20 of 31 M. P. Dalwadi, J. R. King
+Fig. 7 A comparison of numerical solutions for the full system in ( 3) and the reduced system presented in
+Sect. 4.2. Our solutions for the reduced system are valid for 0 < t < T ∗/ϵ. Here, t = T ∗/ϵ is the asymptotic
+result for the point at which the 3HP in the system is maximal, and P(T ∗) in ( 24) gives the asymptotic
+result for the maximal level of 3HP . We mark the maximal value of 3HP in the system with a cross in the
+appropriate colour for the numerical and asymptotic solutions, respectively. We use the parameter values
+given in Table 2 (Color ﬁgure online)
+¯k−4 ¯v5
+( ¯k4 − ¯k∗)2
+¯k∗ (¯v4 +¯v5) T ∗ =
+( ¯k4 − ¯k∗)
+P(T ∗) − ¯k∗ ¯K M
+−4 log
+(
+1 +
+¯k4 − ¯k∗
+¯k4 ¯K M
+−4
+P(T ∗)
+)
+.
+(24)
+Comparing this reduced system to the full system in Fig. 7, we see that the maximal
+3HP produced is very similar between the asymptotic and numerical results, and
+that there is an O(1) difference in the predicted time at which this maximal 3HP is
+produced between the two, as predicted by the error in our asymptotic results. We
+show this excellent agreement for a range of relative concentrations of E
+5 (Fig. 8), the
+enzyme which recycles malonic semialdehyde back into acetyl-CoA. Moreover, we
+see that more 3HP is produced when E5 is down-regulated.
+An alternative implicit equation for T ∗ is given by ( 45), which uses the analytic
+solution for S2 when Td < T < T ∗, stated in ( 44).
+4.3 Asymptotic Expression for T∗ when ¯v5 → 0
+Our model predicts that 3HP production can be improved by under-expressing the
+enzyme that controls the reaction from malonic semialdehyde to acetyl-CoA, which
+has maximal reaction rate ¯k5 (Fig. 8). If this reaction is completely removed from the
+metabolic network, we are able to provide an analytic expression for T ∗ and P(T ∗).
+This corresponds to taking the limit ¯k5 → 0, equivalent to ¯v5 → 0. In this limit, there
+is no further production or depletion of 3HP when t > T ∗/ϵ, and the total amount of
+3HP produced is given by P(T ∗).
+As ¯v5 → 0, there are several scalings that reduce the parameter dependence of the
+system. We scale T = ¯T / ˆA and S2(T ) = ¯k2Y ( ¯T )/ ˆA,t ot u r n( 23a)i n t o
+dY
+d ¯T = ¯f (Y ) − 1 − Y for 0 < ¯T < ¯T ∗, with Y ∼
+(
+2α ¯T
+)1/2 as ¯T → 0+, (25a)
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 21 of 31 36
+Fig. 8 The maximum amount of 3HP in the system as the concentration of E5 is varied, for the full numerical
+system ( 3) and the reduced system presented in Sect. 4.2. We use parameter values from Table 2, with E5
+modiﬁed as speciﬁed on the x-axis. The maximum discrepancy between numerical and asymptotic solutions
+for the maximum value of 3HP is around 4%, which occurs for smaller relative concentrations of E5
+where α = ˆA/¯k2
+2 , T ∗ = ¯T ∗/ ˆA, the nonlinear function ¯f is deﬁned as
+¯f (Y ) =
+{ α
+Y if 0 < ¯T < ¯Td ,
+0i f ¯Td < ¯T < ¯T ∗,
+(25b)
+and Td = ¯Td / ˆA has the form
+∫ ¯Td
+0
+d ¯T
+Y ( ¯T ) = 2β, (25c)
+where β = ¯k2/2, which will be useful later for notational purposes.
+When 0 < ¯T < ¯Td , the system ( 25a) is solved implicitly by
+−2 ¯T = log
+( α − Y − Y 2
+α
+)
++ 2√1 + 4α tanh−1
+[ (√1 + 4α
+)
+Y
+2α − Y
+]
+. (26)
+We are able to obtain an explicit expression for Y ( ¯Td ) by re-writing ( 25c)a s
+2β =
+∫ Y ( ¯Td )
+0
+dY
+Y ˙Y =
+∫ Y ( ¯Td )
+0
+dY
+α − Y − Y 2 = 2√1 + 4α tanh−1
+[ (√1 + 4α
+)
+Y ( ¯Td )
+2α − Y ( ¯Td )
+]
+,
+(27)
+123
+36 Page 22 of 31 M. P. Dalwadi, J. R. King
+where we use ( 25a)f o r ˙Y ≡ dY /d ¯T . Re-arranging ( 27), we obtain
+Y ( ¯Td ) = 2α tanh
+(
+β√1 + 4α
+)
+√1 + 4α + tanh
+(
+β√1 + 4α
+) . (28a)
+We can then obtain an explicit expression for ¯Td by substituting ( 27)–(28a)i n t o( 26),
+to yield
+¯Td = log
+[ √1 + 4α + tanh
+(
+β√1 + 4α
+)
+√1 + 4α sech
+(
+β√1 + 4α
+)
+]
+− β. (28b)
+When ¯Td < ¯T < ¯T ∗,s y s t e m(25a) is solved explicitly by
+Y ( ¯T ) =
+(
+1 + Y ( ¯Td )
+)
+e ¯Td − ¯T − 1, (29a)
+and as ¯T ∗ satisﬁes Y ( ¯T ∗) = 0, we can state ¯T ∗ in terms of ¯Td as follows:
+¯T ∗ = ¯Td + log
+(
+1 + Y ( ¯Td )
+)
+, (30)
+where each term in ( 30) can be determined explicitly from ( 28).
+As we provide the general implicit result for maximal 3HP in ( 24), we can derive a
+reduced version for the limit we consider in this subsection by taking the same limit,
+¯v5 → 0, noting that ¯k∗ also scales with ¯v5.U s i n g(30), the reduced result for the time
+at which the levels of 3HP are maximal, the total amount of 3HP produced is given
+explicitly by
+P(T ∗) =
+( ¯v3
+¯v3 + ˆB
+)
+F(α, β), (31a)
+F(α, β) := 1
+2αβ
+(
+log
+[ √1 + 4α + (1 + 2α) tanh
+(
+β√1 + 4α
+)
+(√1 + 4α
+)
+sech
+(
+β√1 + 4α
+)
+]
+− β
+)
+. (31b)
+To visualize (31), we provide a plot of F(α, β)in Fig. 9, but as a function of αβ2 = ˆA/4
+and β = ¯k2/2, as these are proxies for the strength of the sink and source in the system,
+respectively. As F is bounded above by 1 and this limit is attained as α → 0, decreasing
+α (and hence ˆA) to zero will have a more signiﬁcant effect than any ﬁnite increase in
+β (and hence ¯k2), as long as the organism is able to survive with low values of ˆA.
+4.3.1 Physical Implications
+In a similar manner to the analysis in Sect. 3.4, we now discuss the physical implica-
+tions of our results from this subsection and we reintroduce dimensional variables to
+our key results.
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 23 of 31 36
+Fig. 9 The asymptotic result for F(α, β), the total 3HP produced with no replenishment of pyruvate in the
+limit of ¯v5 → 0, given in ( 31). We use axes 4 αβ2 and 2 β, which are proxies for the strength of the sink
+and source in the system, respectively (Color ﬁgure online)
+The ﬁrst key result is the time at which the 3HP levels are maximal, τ = τ∗, where
+τ∗ = S0T ∗
+k1 E1ϵ . (32)
+The effective production rate of 3HP is
+[P](τ∗)
+τ∗ = k2k3 E2 E3
+k3 E3 + BK M
+3
+, (33)
+which can be increased by increasing E2 or E3, though the latter has diminishing
+returns. The total amount of 3HP produced is given by
+[P](τ∗) = S0k3 E3
+k3 E3 + BK M
+3
+F
+(
+Ak1 E1 K i
+1
+k2
+2 E2
+2
+, S0k2 E2
+2K i
+1k1 E1
+)
+, (34)
+where F is deﬁned in ( 31). Deﬁning
+ˆα = 1
+αβ2 = 4K i
+1k1 E1
+AS2
+0
+, ˆβ = 1
+αβ = 2k2 E2
+AS0
+, (35)
+123
+36 Page 24 of 31 M. P. Dalwadi, J. R. King
+Fig. 10 A plot showing F(ˆα, ˆβ), the asymptotic result for the total 3HP produced with no replenishment of
+pyruvate in the limit of ¯v5 → 0, given in ( 31). In contrast to Fig. 9,w ep r e s e n tF in terms of a variation in
+the parameters E1 and E2 (as shown in ( 35)), corresponding to regulation of enzymes (Color ﬁgure online)
+as proxies for E1 and E2, we see that up-regulating E2 results in higher levels of 3HP ,
+whereas up-regulating E1 results in lower levels of 3HP , with signiﬁcant diminishing
+returns as E1 increases (Fig. 10). The negative effect of up-regulating E1 may appear
+counter-intuitive, since E1 is required for a connected pathway. However, it can be
+explained by noting that the effect of increasing E1 is to increase the amount of acetyl-
+CoA in the system, which has the result of greatly increasing the amount of acetyl-CoA
+that is taken up by the sink, but only slightly increasing the amount converted into
+malonyl-CoA. This is because we have assumed that we are in a regime where the
+sink has ﬁrst-order kinetics, whereas the reaction from acetyl-CoA to malonyl-CoA
+follows Michaelis–Menten-type kinetics. This effect may be reduced if we were in a
+regime where the acetyl-CoA sink was saturating. Hence, our model suggests that a
+slow conversion of pyruvate into acetyl-CoA is better for 3HP production if it is not
+possible to over-regulate E
+2. We note that this down-regulation is only important for
+the maximum amount of 3HP produced when the time taken to produce this 3HP is
+taken into account, as there is no dependence on E
+1 in the effective production rate
+(33). We emphasize that E1 → 0 is a singular limit in the system, which appears
+because we are in the no-replenishment-of-pyruvate regime. As E1 → 0, the early-
+time kinetics of the problem would vary, and we would not have the same late-time
+problem that we consider here. We do not analyse this limit further, since it is not of
+particular physical interest.
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 25 of 31 36
+5 Discussion
+We develop and solve a mathematical model for the reaction kinetics of the 3-
+hydroxypropionic acid (3HP) pathway from pyruvate via malonyl-CoA. We consider
+two main cases, continuous and no replenishment of pyruvate, to model the metabolite
+dynamics in the two extreme cases of plentiful and scarce pyruvate. Our main goal
+is to understand how to maximize 3HP production, and in the case of a continuous
+pyruvate replenishment to additionally minimize the maximum levels of the toxic
+intermediary malonic semialdehyde in the system, where possible. We summarize our
+enzyme regulation recommendations for each case in Table 3.
+We note that while our regulation recommendations suffer from diminishing returns
+if implemented on a single enzyme at a time, we can overcome this issue in the
+continuous-replenishment-of-pyruvate case if we up-regulate acetyl-CoA carboxy-
+lase (EC 6.4.1.2) in tandem with 3-hydroxypropionate dehydrogenase (EC 1.1.1.298).
+Even though a solo up-regulation of either of these enzymes has diminishing returns
+on improving the ratio of 3HP production rate to maximum malonic semialdehyde,
+our analysis demonstrates that the up-regulation of both enzymes at the same time has
+the nonlinear effect of strongly increasing this ratio with no diminishing returns, as
+shown in Fig. 4.
+We also emphasize that the regulation of pyruvate dehydrogenase complex (EC
+1.2.4.1, EC 2.3.1.12, and EC 1.8.1.4) is only important when the pyruvate is scarce.
+In this case, the total 3HP produced can be increased, perhaps counterintuitively, by a
+slight down-regulation of pyruvate dehydrogenase complex. This is because there are
+competing destinations for acetyl-CoA—either a sink out of the system or onwards
+to malonyl-CoA—and the route out of the system becomes favoured as the amount of
+acetyl-CoA in the system increases. Hence, a slower production of acetyl-CoA from
+pyruvate is preferable to channel more acetyl-CoA towards malonyl-CoA rather than
+to the sink, which means a down-regulation of pyruvate dehydrogenase complex. We
+note that this effect disappears when we account for the time taken to produce the
+maximal 3HP; the effective production rate of 3HP in this case has no dependence on
+pyruvate dehydrogenase complex. Moreover, we emphasize that this down-regulation
+effect is a singular limit of the system. Hence, one cannot obtain maximal 3HP by
+completely removing pyruvate dehydrogenase complex from the system—in fact the
+amount of 3HP produced would be zero if this enzyme were completely removed from
+the system.
+To deal with an inherent uncertainty in the parameter values, we maximize our
+analytic progress by using an asymptotic analysis to solve the system, exploiting the
+signiﬁcant difference in typical parameter ratios. This allows us to systematically
+understand the effect of up- and down-regulating different enzymes without resorting
+to an expensive parameter sweep. In the continuous-replenishment-of-pyruvate case,
+our asymptotic analysis reveals a bifurcation in the asymptotic structure of the problem;
+we quantify the effect of this bifurcation for 3HP production and derive an analytic
+expression for the critical surface in parameter space at which this occurs. Physically,
+this bifurcation corresponds to a sudden change in the large-time 3HP production
+across the critical parameter.
+123
+36 Page 26 of 31 M. P. Dalwadi, J. R. King
+Table 3 A summary of the enzyme regulations we recommend based on the results of our model
+Enzyme [EC number(s)] Continuous replenishment No replenishment
+Pyruvate dehydrogenase complex [1.2.4.1, 2.3.1.12, 1.8.1.4] No effect Down-regulate
+Acetyl-CoA carboxylase [6.4.1.2] Up-regulate Up-regulate
+Malonyl-CoA reductase [1.2.1.75] Up-regulate Up-regulate
+3-Hydroxypropionate dehydrogenase [1.1.1.298] Up-regulate Up-regulate
+Malonate semialdehyde dehydrogenase (acetylating) [1.2.1.18] Down-regulate Down-regulate
+We give results for the two cases of continuous and no replenishment of pyruvate
+These are the extremes of the actual time-dependent pyruvate replenishment in the cell and can model continuous and batch culture, respectively
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 27 of 31 36
+For reactions between the metabolites we tracked, we use modiﬁed Michaelis–
+Menten reaction velocities obtained from the literature, including the effect of
+inhibition in the reaction from pyruvate to acetyl-CoA from both of these metabolites.
+We add the effect of acetyl-CoA and malonyl-CoA loss to other metabolic pathways by
+including an aggregate sink from these metabolites, governed using ﬁrst-order reaction
+kinetics. The initial conditions we used corresponded to an instantaneous introduction
+of pyruvate to a well-mixed solution of enzymes containing no other metabolites. We
+choose these conditions for mathematical convenience, as the real cells are likely to
+contain an unknown level of the other metabolites in the system when production is
+initiated. We do not expect this to be an issue for the case with a continuous replenish-
+ment of pyruvate, in that we expect a small initial amount of intermediate metabolites
+to change the early-time problem only. However, this is not true for the case with no
+replenishment of pyruvate, as the depletion dynamics will be sensitive to the initial
+conditions. Obtaining these measurements for the initial conditions would be difﬁcult
+in vivo , though can be achieved by rapidly quenching the cellular metabolism before
+using mass spectrometry to examine the metabolites (Bennett et al. 2009). In addition,
+there may be cases where the assumption of a well-mixed system does not hold, in
+particular over larger lengthscales, e.g. a colony of bacteria. In such cases, one could
+determine effective reaction rates by coupling the nonlinear reaction dynamics we
+consider here to spatial transport processes over longer lengthscales. This procedure
+could be carried out in a computationally efﬁcient manner if one exploited the extreme
+ratios of the different lengthscales in the system, as performed in Dalwadi et al. ( 2018)
+for diffusive transport and linear reactions.
+In this paper, we have accounted for the toxicity of malonic semialdehyde by con-
+structing appropriate metrics to evaluate our results. That is, the toxic effect is not
+directly included in our model assumptions, only analysed post hoc . Since this tox-
+icity has a negative effect on biomass production, it could be included as a negative
+feedback in ( 1) if appropriately quantiﬁed.
+Finally, we note how this works highlights how mathematical modelling and asymp-
+totic techniques can be used to understand a biological system, and to address the key
+questions facing experimentalists. In this case, to identify a combination of enzyme
+regulation with a greater theoretical output than could be obtained by measuring out-
+puts from regulating just one enzyme at a time. This key insight into the system
+behaviour was possible due to the asymptotic analysis allowing us to overcome uncer-
+tainty in parameter values. We hope that these methods can be used to understand
+other biological systems, and to reduce the time taken to explore their experimental
+parameter space.
+Acknowledgements We thank Christian Arenas, Katalin Kovács, Jessica Locker, Nigel Minton, and Klaus
+Winzer for helpful discussions. This work was supported by the Biotechnology and Biological Sciences
+Research Council [Grant No. BB/L013940/1]; and the Engineering and Physical Sciences Research Council,
+jointly funding the ﬁrst grant number.
+Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which
+permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give
+appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence,
+and indicate if changes were made. The images or other third party material in this article are included
+in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If
+123
+36 Page 28 of 31 M. P. Dalwadi, J. R. King
+material is not included in the article’s Creative Commons licence and your intended use is not permitted
+by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the
+copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by/4.0/ .
+A Depletion Dynamics
+In the case where the pyruvate is not replenished, the system we consider is ( 3), and we
+no longer impose S1 ≡ 1. However, in the no-replenishment case, the leading-order
+system is equivalent to the leading-order system for the continuous-replenishment case
+until t = O(1/ϵ). Thus, it is helpful to work in the long timescale T = ϵt = O(1),
+over which the full system is given by ( 8b)–(8d), along with
+dS
+1
+dT =− S1
+ϵ
+(
+S1 + ¯K M
+1
+)
++ S1 S2
+, (36a)
+dS2
+dT = S1
+ϵ
+(
+S1 + ¯K M
+1
+)
++ S1 S2
+−
+¯k2 S2
+S2 + ϵ ¯K M
+2
++
+¯k5 ˆS4
+ϵ ˆS4 + ¯K M
+5
+− ˆAS2. (36b)
+A.1 Slow Depletion of Pyruvate: 0 <T<T d
+Over the timescale T = O(1) and until the pyruvate becomes of O(ϵ), the leading-
+order system for S2, ˜S4, ˜S3, and P is still given by ( 9), the leading-order system for the
+continuous-replenishment case. The leading-order equation for S1 is obtained from
+(36a) to yield
+dS1
+dT =− 1
+S2
+, (37)
+which we can integrate to obtain the leading-order solution
+S1(T ) = 1 −
+∫ T
+0
+ds
+S2(s), (38)
+in terms of S2. The solution ( 38) is valid until S1 = O(ϵ), at which point a new
+asymptotic balance occurs. This occurs when T = Td (equivalently t = Td /ϵ), where
+S1(Td ) = 0, (39)
+with an O(ϵ) correction (equivalently O(1) in terms of t). Hence, Td can be obtained
+by solving
+dS2
+dT = 1
+S2
+− ¯k2 +¯v5 ˆS4(T ) − ˆAS2, with S2 ∼ (2T )1/2 as T → 0+, (40)
+forward in time, using ( 12), ( 14)–(15)f o r ˆS4, and terminating the calculation when
+S1 = 0. Thus, this analysis is valid for T < Td .
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 29 of 31 36
+A.2 Rapid Depletion of Pyruvate: t − Td//SI= O(1)
+The next timescale is an interior layer (Holmes 2012), which occurs when t −Td /ϵ =
+(T −Td )/ϵ = ¯t = O(1). Over this timescale, S1 varies from being of O(ϵ) to exponen-
+tially small, while the remaining dependent variables are unchanged at leading order.
+Making the scaling S1 = ϵY , the leading-order equation for the pyruvate concentration
+in this interior layer is given by
+dY
+d¯t =− Y
+¯K M
+1 + YS 2
+, (41)
+with appropriate matching conditions as ¯t →− ∞ . This depletion results in the
+exponential decay of Y , and hence S1, and is a slightly modiﬁed version of the coupled
+pyruvate and acetyl-CoA depletion dynamics considered in Appendix B in Dalwadi
+et al. ( 2018). As these depletion dynamics are not required to calculate details of 3HP
+production, we do not consider the dynamics of S1 any further here for brevity; the
+analysis will be similar to that in Dalwadi et al. ( 2018) and require ﬁrst-order correction
+terms to match to an appropriate accuracy. Since S1 is exponentially small as we move
+forward in time out of this interior layer, we henceforth treat it as zero in the remaining
+timescales.
+A.3 Slow Depletion of Acetyl-CoA: Td <T<T ∗
+After the depletion of pyruvate, we remain in the timescale T = t/ϵ = O(1), but now
+with T > Td . The system is thus given by ( 8b)–(8d), replacing ( 8a) with
+dS2
+dT =−
+¯k2 S2
+S2 + ϵ ¯K M
+2
++
+¯k5 ˆS4
+ϵ ˆS4 + ¯K M
+5
+− ˆAS2. (42)
+As each non-pyruvate dependent variable remains unchanged over the previous interior
+layer, the correct matching conditions are obtained by imposing continuity of each
+dependent variable across T = Td . The leading-order system is given by ( 9), replacing
+the ﬁrst equation with
+dS2
+dT =− ¯k2 +¯v5 ˆS4 − ˆAS2. (43)
+This system is solved by ( 11)–(12) and ( 15), along with
+S2(T ) =−
+¯k2
+ˆA
++
+(
+S2(Td ) +
+¯k2
+ˆA
+)
+e− ˆA(T −Td ) + e− ˆA(T −Td )
+∫ T
+Td
+¯v5 ˆS4(s)e ˆA(s−Td ) ds,
+(44)
+123
+36 Page 30 of 31 M. P. Dalwadi, J. R. King
+and these solutions are valid until S2 = O(ϵ), at which point a new asymptotic balance
+will occur. This occurs when T = T ∗ (equivalently t = T ∗/ϵ), where
+0 = S2(T ∗) =−
+¯k2
+ˆA
++
+(
+S2(Td ) +
+¯k2
+ˆA
+)
+e− ˆA(T ∗−Td )
++ e− ˆA(T ∗−Td )
+∫ T ∗
+Td
+¯v5 ˆS4(s)e ˆA(s−Td ) ds, (45)
+with an O(ϵ) correction (equivalently O(1)in terms of t). After this point, the remaining
+metabolites will all start to deplete, so P(T ∗) represents the maximal level of 3HP
+in the system with no replenishment of pyruvate. Physically, t = T ∗/ϵ gives the
+asymptotic “optimal” time at which to terminate a batch run and harvest the 3HP that
+has been produced.
+A.4 The Remaining Depletion Dynamics
+The remaining depletion dynamics are unimportant to the task of determining the
+maximal 3HP in the system, so we only state them brieﬂy here for completion. The
+exact details of the transition of S
+2 from O(1) to O(ϵ) occur in another interior layer
+over the timescale t − T ∗/ϵ = (T − T ∗)/ϵ = O(1), where ˆS3 and ˆS4 also vary but
+do not change in asymptotic order. Over this timescale, the levels of P do not vary. In
+the forward-in-time far-ﬁeld of this interior layer, the levels of each metabolite tend
+to a constant.
+The ﬁnal depletion dynamics occur over the timescale T = t/ϵ = O(1), but with
+T > T ∗. Over this timescale, the metabolites decay exponentially, governed by an
+ODE for P with the remaining metabolites coupled to the levels of P in a quasi-steady
+manner.
+References
+Alber B, Olinger M, Rieder A, Kockelkorn D, Jobst B, Hügler M, Fuchs G (2006) Malonyl-coenzyme
+a reductase in the modiﬁed 3-hydroxypropionate cycle for autotrophic carbon ﬁxation in archaeal
+Metallosphaera and Sulfolobus spp. J Bacteriol 188(24):8551–8559
+Alves J, Westling L, Peters EC, Harris JL, Trauger JW (2011) Cloning, expression, and enzymatic activity of
+acinetobacter baumannii and klebsiella pneumoniae acetyl-coenzyme a carboxylases. Anal Biochem
+417(1):103–111
+Anderson W A, Magasanik B (1971) The pathway of myo-inositol degradation in Aerobacter aerogenes:
+conversion of 2-deoxy-5-keto-D-gluconic acid to glycolytic intermediates. J Biol Chem 246(18):5662–
+5675
+Bennett BD, Kimball EH, Gao M, Osterhout R, V an Dien SJ, Rabinowitz JD (2009) Absolute metabolite
+concentrations and implied enzyme active site occupancy in Escherichia coli. Nat Chem Biol 5(8):593
+Borodina I, Kildegaard KR, Jensen NB, Blicher TH, Maury J, Sherstyk S, Schneider K, Lamosa P , Herrgård
+MJ, Rosenstand I, Öberg F, Forster J, Nielsen J (2015) Establishing a synthetic pathway for high-level
+production of 3-hydroxypropionic acid in Saccharomyces cerevisiae via β-alanine. Metab Eng 27:57–
+64
+Chen Y , Bao J, Kim I-K, Siewers V , Nielsen J (2014) Coupled incremental precursor and co-factor supply
+improves 3-hydroxypropionic acid production in Saccharomyces cerevisiae. Metab Eng 22:104–109
+123
+An Asymptotic Analysis of the Malonyl-CoA Route to... Page 31 of 31 36
+Chen Z, Huang J, Wu Y , Wu W, Zhang Y , Liu D (2017) Metabolic engineering of Corynebacterium glutam-
+icum for the production of 3-hydroxypropionic acid from glucose and xylose. Metab Eng 39:151–158
+Dalwadi MP , King JR, Minton NP (2017) Multi-timescale analysis of a metabolic network in synthetic
+biology: a kinetic model for 3-hydroxypropionic acid production via beta-alanine. J Math Biol 77(1):1–
+35
+Dalwadi MP , Garavaglia M, Webb JP , King JR, Minton NP (2018) Applying asymptotic methods to synthetic
+biology: modelling the reaction kinetics of the mevalonate pathway. J Theor Biol 439:39–49
+Dalwadi MP , Wang Y , King JR, Minton NP (2018) Upscaling diffusion through ﬁrst-order volumetric sinks:
+a homogenization of bacterial nutrient uptake. SIAM J Appl Math 78(3):1300–1329
+Holmes MH (2012) Introduction to perturbation methods, vol 20. Springer, Berlin
+Hügler M, Menendez C, Schägger H, Fuchs G (2002) Malonyl-coenzyme A reductase from Chloroﬂexus
+aurantiacus, a key enzyme of the 3-hydroxypropionate cycle for autotrophic CO
+2 ﬁxation. J Bacteriol
+184(9):2404–2410
+Hügler M, Krieger RS, Jahn M, Fuchs G (2003) Characterization of acetyl-CoA/propionyl-CoA carboxylase
+in Metallosphaera sedula . FEBS J 270(4):736–744
+Kevorkian J, Cole JD (2013) Perturbation methods in applied mathematics, vol 34. Springer, Berlin
+Kim K, Kim SK, Park YC, Seo JH (2014) Enhanced production of 3-hydroxypropionic acid from glycerol by
+modulation of glycerol metabolism in recombinant Escherichia coli. Bioresour Technol 156:170–175
+Kockelkorn D, Fuchs G (2009) Malonic semialdehyde reductase, succinic semialdehyde reductase,
+and succinyl-coenzyme A reductase from Metallosphaera sedula : enzymes of the autotrophic 3-
+hydroxypropionate/4-hydroxybutyrate cycle in Sulfolobales. J Bacteriol 191(20):6352–6362
+Kresze G-B, Ronft H (1981) Pyruvate dehydrogenase complex from baker’s yeast. 1. Puriﬁcation and some
+kinetic and regulatory properties. Eur J Biochem 119(3):573–579
+Kresze G-B, Ronft H (1981) Pyruvate dehydrogenase complex from baker’s yeast. 2. Molecular structure,
+dissociation, and implications for the origin of mitochondria. Eur J Biochem 119(3):581–587
+Kumar V , Ashok S, Park S (2013) Recent advances in biological production of 3-hydroxypropionic acid.
+Biotechnol Adv 31(6):945–961
+Martin VJJ, Pitera DJ, Withers ST, Newman JD, Keasling JD (2003) Engineering a mevalonate pathway in
+Escherichia coli for production of terpenoids. Nat Biotechnol 21(7):796–802
+Matsakas L, Hr˚uzová K, Rova U, Christakopoulos P (2018) Biological production of 3-hydroxypropionic
+acid: an update on the current status. Fermentation 4(1):13
+Otte J, Mall A, Schubert DM, Könneke M, Berg IA (2015) Malonic semialdehyde reductase from
+the archaeon Nitrosopumilus maritimus is involved in the autotrophic 3-hydroxypropionate/4-
+hydroxybutyrate cycle. Appl Environ Microbiol 81(5):1700–1707
+Pronk JT, de Steensma HY , van Dijken JP (1996) Pyruvate metabolism in Saccharomyces cerevisiae. Yeast
+12(16):1607–1633
+Snoep J L, De Mattos MJ T, Starrenburg MJ, Hugenholtz J (1992) Isolation, characterization, and physio-
+logical role of the pyruvate dehydrogenase complex and alpha-acetolactate synthase of Lactococcus
+lactis subsp. lactis bv. diacetylactis. J Bacteriol 174(14):4838–4841
+Son HF, Park S, Y oo TH, Jung GY , Kim K-J (2017) Structural insights into the production of 3-
+hydroxypropionic acid by aldehyde dehydrogenase from Azospirillum brasilense . Sci Rep 7:46005
+Werpy T, Petersen G, Aden A, Bozell J, Holladay J, White J, Manheim A, Eliot D, Lasure L, Jones S (2004).
+Top value added chemicals from biomass. V olume 1—results of screening for potential candidates
+from sugars and synthesis gas. Technical report, DTIC Document
+Yamada EW, Jakoby WB (1960) Aldehyde oxidation V . Direct conversion of malonic semialdehyde to
+acetyl-coenzyme A. J Biol Chem 235(3):589–594
+Yao T, Xu L, Ying H, Huang H, Yan M (2010) The catalytic property of 3-hydroxyisobutyrate dehydrogenase
+from Bacillus cereus on 3-hydroxypropionate. Appl Biochem Biotech 160(3):694–703
+Y ung-Chi C, Prusoff WH (1973) Relationship between the inhibition constant ( K I ) and the concentration
+of inhibitor which causes 50 per cent inhibition ( I50) of an enzymatic reaction. Biochem Pharmacol
+22(23):3099–3108
+Publisher’s Note Springer Nature remains neutral with regard to jurisdictional claims in published maps
+and institutional afﬁliations.
+123

@@ -1,0 +1,647 @@
+Vol.:(0123456789)1 3
+Journal of Medical Toxicology (2023) 19:255–261 
+https://doi.org/10.1007/s13181-023-00951-5
+PRELIMINARY RESEARCH
+A Multi‑Omic Mosaic Model of Acetaminophen Induced Alanine 
+Aminotransferase Elevation
+Andrew A. Monte1,2,3,4  · Alexis Vest1 · Julie A. Reisz5 · Danielle Berninzoni1 · Claire Hart1 · Layne Dylla1,2 · 
+Angelo D’Alessandro5 · Kennon J. Heard1,4 · Cheyret Wood6 · Jack Pattee6
+Received: 23 March 2023 / Revised: 13 May 2023 / Accepted: 18 May 2023 / Published online: 25 May 2023 
+© American College of Medical Toxicology 2023, corrected publication 2023
+Abstract
+Background Acetaminophen (APAP) is the most common cause liver injury following alcohol in US patients. Predicting 
+liver injury and subsequent hepatic regeneration in patients taking therapeutic doses of APAP may be possible using new 
+‘omic methods such as metabolomics and genomics. Multi’omic techniques increase our ability to find new mechanisms of 
+injury and regeneration.
+Methods We used metabolomic and genomic data from a randomized controlled trial of patients administered 4 g of APAP 
+per day for 14 days or longer with blood samples obtained at 0 (baseline), 4, 7, 10, 13 and 16 days. We used the highest ALT 
+as the clinical outcome to be predicted in our integrated analysis. We used penalized regression to model the relationship 
+between genetic variants and day 0 metabolite level, and then performed a metabolite-wide colocalization scan to associate 
+the genetically regulated component of metabolite expression with ALT elevation. Genome-wide association study (GWAS) 
+analyses were conducted for ALT elevation and metabolite level using linear regression, with age, sex, and the first five 
+principal components included as covariates. Colocalization was tested via a weighted sum test.
+Results Out of the 164 metabolites modeled, 120 met the criteria for predictive accuracy and were retained for genetic 
+analyses. After genomic examination, eight metabolites were found to be under genetic control and predictive of ALT 
+elevation due to therapeutic acetaminophen. The metabolites were: 3-oxalomalate, allantoate, diphosphate, L-carnitine, 
+L-proline, maltose, and ornithine. These genes are important in the tricarboxylic acid cycle (TCA), urea breakdown pathway, 
+glutathione production, mitochondrial energy production, and maltose metabolism.
+Conclusions This multi’omic approach can be used to integrate metabolomic and genomic data allowing identification of 
+genes that control downstream metabolites. These findings confirm prior work that have identified mitochondrial energy 
+production as critical to APAP induced liver injury and have confirmed our prior work that demonstrate the importance of 
+the urea cycle in therapeutic APAP liver injury.
+Keywords Acetaminophen · Drug induced liver injury · Genomics · Metabolomics · Multi-omic · Precision medicine
+Supervising Editor: David H. Jang, MD, MSc
+ * Andrew A. Monte 
+ Andrew.monte@cuanschutz.edu
+1 Department of Emergency Medicine, University of Colorado 
+School of Medicine, Leprino Building, 7th Floor Campus 
+Box B-215, 12401 E. 17th Avenue, Aurora, CO 80045, USA
+2 Center for Bioinformatics & Personalized Medicine, 
+University of Colorado School of Medicine, Aurora, CO, 
+USA
+3 Skaggs School of Pharmacy, University of Colorado, Aurora, 
+CO, USA
+4 Denver Health and Hospital Authority, Rocky Mountain 
+Poison & Drug Center, Denver, CO, USA
+5 Metabolomics Core, Department of Biochemistry 
+and Molecular Genetics, University of Colorado-Denver 
+Anschutz Medical Campus, Aurora, CO, USA
+6 Department of Biostatistics & Informatics, Colorado School 
+of Public Health, University of Colorado-Denver Anschutz 
+Medical Campus, Aurora, CO, USA
+256 Journal of Medical Toxicology (2023) 19:255–261
+1 3
+Introduction
+Acetaminophen is the prototypical hepatotoxin and has 
+been used for numerous hepatotoxin models [1 ]. The 
+drug is responsible for significant liver injury following 
+overdose, and occasionally after therapeutic dosing. This 
+has led to several labs to use ‘omic techniques to examine 
+the pathophysiology of hepatic injury due to acetaminophen 
+in order to learn new insights of he mechanisms of injury 
+and hepatic regeneration [2 –5]. The increased availability 
+of ‘omic techniques has yielded numerous datasets with 
+multi’omic data, though this has not yet been performed 
+with acetaminophen. There is a strong belief that integration 
+of these increased data will lead to new understanding of 
+disease, drug therapy, and ultimately improve patient care. 
+In fact, integrative analyses of proteomic and genomic 
+data from patients with colon and rectal cancers have 
+identified new associated genes, thereby providing a 
+functional discovery framework of new disease pathways 
+[6]. Metabolomic and proteomic markers can predict sepsis 
+death with high accuracy [7 ] and clinical data paired with 
+epigenomic data can predict clinical outcomes in patients 
+with COVID-19 at initial presentation using machine 
+learning techniques [8 ]. Integrative programs have been 
+developed [9 ] and statistical packages have outlined 
+pipelines for data analysis [10]. With the exception of 
+the COVID-19 epigenomic work, these pipelines are 
+remarkably manual in their data curation, which limits 
+scalability of these approaches. New pipelines are needed 
+to adequately leverage more than one ‘omic dataset.
+Capturing more than one ‘omic dataset on a cohort raises 
+questions as to which dataset takes priority in a pipeline and 
+introduces difficulty in determining statistical and clinical 
+significance of the linked findings. Fully agnostic approaches 
+are hindered by multiple testing limitations which raise the 
+number of patients that must be examined. These analytic 
+problems become exacerbated further when clinical phe-
+notypes are polygenic and multifactorial. These complex 
+phenotypes require thousands of patients to be effectively 
+examined with currently available multi’omic pipeline meth-
+ods. Analytic methods that allow one ‘omic dataset to advise 
+the examination of another, when aligned with the biologic 
+underpinnings of disease or drug mechanism, can lead to 
+findings that are more likely to be clinically significant. New 
+multi’omic pipelines can maximize the biologic understand-
+ing of clinical conditions by allowing triangulation of find-
+ings generated from one technique in the other as well as 
+reduction of sample size needed for targeted discovery in 
+the second dataset. Additionally, new integrative pipelines 
+can minimize the chance of type 1 error.
+Toward that end, we have utilized a well character -
+ized multi’omic dataset containing detailed clinical 
+observations, metabolomic data, and genomic data to 
+develop a pipeline for multi’omic mosaic modeling of 
+acetaminophen induced alanine aminotransferase (ALT) 
+elevation. Utilizing ‘omics to characterize acetaminophen 
+induced liver injury can lead to mechanistic understanding 
+of ALT elevation triangulated by the genomic and metabo-
+lomic data generated. Integration of these datasets gives 
+a more rich understanding of which metabolites associ-
+ated with ALT elevation are under genetic control, and 
+thus, may predict ALT elevation prior to drug administra-
+tion. The objective of this study is to determine new genes 
+associated with ALT elevation using a novel integrated 
+metabolomic and genomic multi’omic method.
+Methods
+Patients and Parent Study
+The parent study was an outpatient placebo-controlled trial 
+(NCT00743093) in which patients received therapeutic 
+doses of acetaminophen, totaling 4 g/day [11]. Compliance 
+was verified by study diary, pill counts at each study visit, 
+and confirmation of acetaminophen in the plasma. ALT was 
+drawn on study days 0 (baseline), 4, 7, 10, 13 and 16 and, 
+when elevated, until it returned to baseline. Patients did not 
+change their diet throughout the study. ALT is used as the 
+marker of hepatocyte death and is specific for hepatocellular 
+injury. All subjects provided informed consent. We included 
+male and female subjects who were age 18 years or older 
+and who did not have any of the following exclusion 
+criteria: history of acetaminophen ingestion on any of 
+the four days preceding study enrollment or a measurable 
+serum acetaminophen concentration at time of enrollment; 
+laboratory testing suggesting active viral hepatitis A, B, or 
+C infection; any of the following tests greater than the upper 
+limit of normal at screening: serum aminotransferase or total 
+bilirubin, International Normalized Ratio (INR) or alkaline 
+phosphatase activity; platelet count less than 125,000/mL; 
+positive pregnancy test; history of cholelithiasis (without 
+cholecystectomy); history of heavy ethanol use defined as 
+consuming more than an average of 3 alcohol containing drinks 
+daily or 3 or more alcohol containing drinks on any given day 
+over the preceding 2 weeks prior to study enrollment; new 
+prescription medication started within the previous 30 days; 
+taking isoniazid or warfarin; currently has anorexia nervosa or 
+reports a fasting type diet; clinically intoxicated, psychiatrically 
+impaired or unable to give informed consent for any reason; 
+known hypersensitivity or allergy to acetaminophen. Only the 
+patients receiving APAP were included in these analyses. All 
+blood samples were stored at -80 °C and there was only one 
+thaw prior to ‘omic analyses.
+257Journal of Medical Toxicology (2023) 19:255–261 
+1 3
+Metabolomic and Genomic Analyses
+Plasma samples were extracted and 164 metabolites rel-
+evant to know biologic pathways and acetaminophen drug 
+mechanism were measured at day 0, as previously described 
+[12]. Quantitative metabolite levels were determined for 
+each patient and used for statistical analyses [12]. DNA was 
+extracted from patient whole blood and run on the Illumina 
+MEGA array as previously described [4]. Genotyping at 2.2 
+million loci was determined. Imputation was not performed 
+to characterize non-genotyped loci. Metabolomic data rep-
+resent the end-stage products of upstream biologic pathways 
+and thus, is the closest ‘omic technique to the clinical pheno-
+type examined. Genomic data represent the underlying code 
+that drive this downstream pathways. Thus, linking these 
+two ‘omic datasets can capture the span of biologic activity 
+from code to phenotype.
+Statistical Analysis
+We employed a one-sample colocalization analysis to iden-
+tify metabolites under genetic control associated with ALT 
+elevation. This approach can be conceptualized as an exten-
+sion of the BADGERS approach [13] where metabolites are 
+leveraged as intermediate phenotypes. Such an approach 
+has previously been applied to identify brain imaging 
+endophenotypes associated with Alzheimer’s disease [14]. 
+This approach can be conceptualized in two ways: first, as 
+an extension of the transcriptome-wide association study 
+framework to additional mediating phenotypes (i.e., not 
+limited to gene expression), and as an extension of a Men-
+delian randomization framework where polygenic scores, 
+rather than single nucleotide variants (SNVs), are used to 
+quantify the SNV-exposure relationship. Although typical 
+transcriptome wide analysis studies (TWAS) type analy -
+ses leverage two samples (one for the exposure and one 
+for the outcome), we note that one-sample colocalization 
+approaches are employed in literature, and generally shown 
+to maintain good operating characteristics [ 15]. Given the 
+difficulty of rigorously assessing the instrumental variable 
+assumptions required to draw causal conclusions about the 
+relationship between SNVs, metabolites, and ALT elevation 
+in a one-sample study of small size, we do not draw causal 
+conclusions from our analysis regarding the relationships 
+between SNVs, metabolites, and ALT elevation. We claim 
+that significant TWAS-type associations in this analysis are 
+evidence of colocalization between the metabolite and ALT 
+elevation in our sample, corresponding to the original inter-
+pretation of TWAS [16].
+We conducted a metabolite wide colocalization scan to 
+associate the genetically regulated component of metabolite 
+expression with ALT elevation. This framework can detect 
+shared genetic control of ALT elevation and metabolite level, 
+and thus is distinct from a ‘differential expression’ metabo-
+lite analysis, whereby observed metabolite level is associ-
+ated with ALT elevation. In this framework, we first model 
+the genetically regulated component of metabolite level by 
+estimating a machine learning model to predict metabolite 
+level from SNVs. This model provides coefficient estimates 
+for each SNV. We then weight the SNV-ALT association 
+statistics (Z statistics) by the SNV-metabolite coefficients to 
+conduct a ‘weighted sum’ or TWAS type test. This can be 
+interpreted as a test for colocalization of ALT and metabolite 
+regulation, and may be interpretable as a causal mediation 
+(i.e. the causal pathway whereby SNVs causally modulate 
+metabolite level, and metabolite levels causally modulate 
+ALT elevation).
+To quantify ALT elevation, we used the highest meas-
+ured ALT value across the study. To quantify metabolite 
+level, we used the observed value at day zero. Genome-wide 
+association study (GWAS) analyses were conducted for ALT 
+elevation and metabolite level using linear regression, with 
+age, sex, and the first five principal components included as 
+covariates. To model the genetically regulated component 
+of metabolite level, we estimated an elastic net penalized 
+regression model. Only the top 50,000 SNPs were included 
+in the elastic net modeling to reduce computational com-
+plexity; given the relatively few number of nonzero SNPs 
+selected (< 1,000 for all metabolites), we do not believe that 
+this screening step meaningfully affects model accuracy.
+Elastic net models were fit and assessed as follows. Data 
+was split into training and testing sets, with the training set 
+comprising 75% of the sample. fivefold cross-validation was 
+performed on the training sample and accuracy was assessed 
+on the testing sample. This training–testing split was per -
+formed ten times (thus entailing ten separate cross-validation 
+procedures). Tuning parameters were chosen to be the set 
+of parameters that produced the best testing accuracy most 
+frequently. After tuning parameters were selected, the model 
+was re-fit to the full dataset. Coefficient estimates from this 
+final model were used for the ensuing metagenome-wide 
+association study (MWAS) test. Only models with average 
+testing accuracy > 0.001 were considered for MWAS tests, 
+thus reducing weak-instrument bias.
+We note the potential risk associated with overfitting a 
+machine learning model to the SNV-metabolite relationship 
+in such a one-sample analysis. Namely, an overfit model 
+would predict some of the non-heritable metabolite variance, 
+thus potentially inducing false positive colocalization asso-
+ciations. Although our rigorous cross-validation procedure 
+reduces the likelihood of overfitting, it does not preclude the 
+possibility. To reduce the likelihood of overfitting, we use 
+a simple clumped and thresholded polygenic risk score to 
+model the SNV-metabolite relationship and likewise con-
+duct TWAS-type tests. We compare these associations to 
+those identified via the elastic net framework. Polygenic risk 
+258 Journal of Medical Toxicology (2023) 19:255–261
+1 3
+scores were estimated in PLINK using a threshold p-value 
+of 0.01 and a Linkage Disequilibrium (LD) R2 cutoff of 0.1.
+Results
+Data from 192 patients taking 4 g of APAP daily were included 
+in this analysis. All metabolites with cross-validated prediction 
+R2 > 0.01 were retained in the stage two association analysis. 
+Out of the 164 metabolites modeled, 120 met the criteria for 
+predictive accuracy and were retained (Fig. 1).
+A metabolite-ALT association was determined to be 
+significant if the TWAS-type association test statistic was 
+associated at a type I error rate of 0.05 with a Bonferroni 
+correction for the number of metabolites. Eight such asso-
+ciations were identified via both the elastic net TWAS-type 
+approach and the pruning and thresholding approach. These 
+metabolites are listed in Table  1. The correlation between 
+the negative log of the p -values for the elastic net and the 
+pruning and thresholding tests was 0.94, indicating a strong 
+degree of agreement between the two approaches (Fig.  2). 
+Given that the pruning and thresholding approach should be 
+less prone to overfitting, this is evidence that overfitting of 
+the stage 1 models is not driving the identified associations.
+Genetically Mediated Metabolites
+This multi’omic analysis identified eight metabolites 
+under genetic control predictive of ALT elevation due to 
+therapeutic acetaminophen (Table  1). These metabolic 
+pathways are associated with mitochondrial energy 
+production and hepatocyte injury and the pathways will 
+be outlined below. Interestingly, some but not all, of these 
+metabolites were identified with our isolated metabolomic 
+examination of these patients [12]. This highlights the 
+ability of this multi’omic method to identify new genes for 
+interrogation using an integrated multi’omic dataset.
+3-oxalomalate is a metabolite that interacts with the 
+of the tricarboxylic acid cycle (TCA). This metabolite 
+was not previously identified as associated with ALT 
+elevation in our prior analyses. Some organisms, and 
+some humans possess a truncated version of the TCA 
+cycle, known as the  glyoxylate-bypass, that converts 
+acetyl CoA to biosynthetic intermediates without the loss 
+of carbon dioxide [17– 19]. While in most eukaryotes the 
+conversion of malate to oxalacetic acid is catalyzed only 
+Fig. 1  Histogram showing the cross-validated accuracy of the elastic 
+net models predicting metabolite level from SNVs. Black vertical 
+line denotes the 0.01 cutoff for retaining metabolites in the stage 2 
+analysis. The y axis is the count of metabolites.
+Table 1  Significant metabolite-ALT elevation associations for the 
+TWAS-type tests.
+P-values significant after the Bonferroni correction are bolded
+Compound Elastic net P Pruning and 
+thresholding P
+3-Oxalomalate 1.9E-4 4.3E-5
+Allantoate 1.2E-5 4.6E-5
+Dimethylglycine 5.2E-6 1.2E-5
+Diphosphate 2.9E-4 1.7E-5
+L-Carnitine 2.8E-4 8.1E-4
+L-Proline 5.0E-7 2.3E-6
+Maltose 1.7E-4 2.1E-6
+Ornithine 3.2E-4 2.1E-5
+Fig. 2  Scatterplot of the negative log base 10 of p-values from the 
+elastic net TWAS-type test (x-axis) and the negative log base 10 of 
+p-values from the pruning and thresholding TWAS-type test (y axis).
+259Journal of Medical Toxicology (2023) 19:255–261 
+1 3
+by an NAD-dependent enzyme (mitochondrial malate 
+dehydrogenase [20]), prokaryotes that employ this variation 
+of the TCA cycle possess an alternative quinone-dependent 
+enzyme, RXNI-3 [21]. Variants in this gene can lead to 
+decreased ATP production, and subsequently decreased 
+mitochondrial energy production, and may be associated 
+with hepatocyte death in patients taking acetaminophen.
+Allantoate represents a metabolite of the uric acid cycle, 
+and the production of ammonia. This would be expected 
+in the setting of hepatocyte death. This metabolite is 
+under polygenic control [22] though ALLC (allantoicase) 
+regulates allantoate breakdown and urea production. Failure 
+to metabolize allantoate leads to mitochondrial energy 
+dysfunction under stress. We had identified this metabolite 
+in the past [12] and now have a genetic focus to examine.
+Dimethylglycine is a metabolite found in or produced 
+by  E. coli bacteria and has been associated with 
+hepatomegaly and ALT elevation when mice are stressed 
+with lipopolysacchride [23]. This metabolite is also 
+a precursor to glycine which is a critical precursor to 
+glutathione. This metabolite is under the control of the 
+human gene, DMGDH (dimethylglycine dehydrogenase), 
+The enzyme is found as a monomer in the mitochondrial 
+matrix and uses flavin adenine dinucleotide and folate as 
+cofactors. Mutation in this gene causes dimethylglycine 
+dehydrogenase deficiency [24] and which limits production 
+of glycine, subsequently decreasing glutathione. This 
+represents a down-regulated portion of the glutathione 
+pathway in hepatocytes that has not been associated with 
+hepatic injury due to acetaminophen in the past.
+Diphosphate, or pyrophosphate, is present in a wide range 
+of dietary compounds. In humans, diphosphate is involved in 
+several metabolic pathways, some of which include cardiolipin 
+biosynthesis. Diphosphate is also involved in several 
+metabolic disorders, some of which include hyperinsulinism-
+hyperammonemia syndrome, methionine adenosyltransferase 
+deficiency, mevalonic aciduria, and g(m2)-gangliosidosis: 
+variant B, Tay-Sachs disease [25]. These diseases are all 
+genetically mediated, though they involve different genes 
+and thus, diphosphate control associated with ALT elevation 
+is likely polygenic.  Given the polygenic nature of this 
+metabolite, it is unclear exactly which genetic region or 
+regions are associated with this clinical finding.
+L-carnitine is elevated when the mitochondrial shuttle 
+is damaged and hepatocyte death occurs. Long chain fatty 
+acids are transferred via the mitochondrial l-carnitine shuttle 
+leading to energy production and this rate-limiting enzyme 
+controls a key regulatory step for fatty acid β-oxidation 
+[26]. Genes involved in regulation of this metabolite include 
+SLC25A20, CPT1A, CPT1B, CPT2, and CPT1C [ 27]. 
+SLC35E4 has been identify in past transcriptomic work in 
+patients that have elevated ALT due to therapeutic APAP 
+ingestion [2].
+L-proline is a cyclic, nonessential amino acid in humans 
+that is a constituent of many proteins. This metabolite is a 
+breakdown product of protein, and thus, while it is likely 
+under some genetic control, it is more likely to be elevated 
+when there is protein breakdown [28]. There are numerous 
+genes associated with this metabolite since it is a product 
+of protein breakdown and the genes are spread across the 
+genome.
+Maltose elevation has been associated with fatty liver 
+disease [29]. This metabolite was found in our prior metab-
+olomic work and may represent alteration in starch and 
+sucrose metabolism which puts hepatocytes at risk. Fatty 
+liver disease is known have over 100,000 genes associated 
+and genes associated with this metabolite are spread across 
+the genome making it difficult to identify which specific 
+gene is responsible for the association in this cohort.
+Ornithine has a known role as a hepatoprotective agent. 
+Mutations in the mitochondrial ornithine transporter result in 
+hyperammonemia, hyperornithinemia, homocitrullinuria (HHH) 
+syndrome, a disorder of the urea cycle. The pathophysiology 
+of the disease may involve diminished ornithine transport 
+into mitochondria, resulting in  ornithine accumulation 
+in the cytoplasm and reduced ability to clear carbamoyle 
+phosphate and ammonia loads. This transfer is mediated by the 
+mitochondrial ornithine transporters SLC25A15, AF112968, 
+and ORNT1 [30]. Diminished ornithine transport most certainly 
+leads to hepatocyte death. Genes involved in conversion of 
+ornithine into downstream metabolites include, OAT, OTC, 
+ODC1 [31].
+Discussion
+In this multi ‘omic analysis we have identified several 
+metabolites under genetic control associated with aceta -
+minophen induced ALT elevation. This analysis builds 
+upon our prior work that utilized isolated metabolomic 
+and targeted genetic analyses and builds a multi’omic pipe-
+line that leverages the power of both datasets to identify 
+the genetic underpinning of these metabolic associations. 
+This technique allows for identification of new pathways, 
+and the genes therein, that contribute to clinical outcomes. 
+Prior studies have used the TWAS approach to link mRNA 
+variability to the genes associated [14], though this is the 
+first demonstration of a similar approach linking metabo-
+lomic data to genomic data. Typical multi’omic studies 
+that integrate metabolomic and genomic data require 
+large amounts of time to curate [32]. This technique offers 
+the advantage of rapid distillation of the most pertinent 
+metabolites and allows targeting of likely genetic etiolo-
+gies advised by the clinical data. This technique is similar 
+to a polygenic risk score within the metabolite pathways. 
+Validation of findings in a separate cohort is still necessary 
+260 Journal of Medical Toxicology (2023) 19:255–261
+1 3
+though this allows far fewer patients to be enrolled and 
+targeted genetic analysis in the subsequent study popu-
+lation. The importance of this new pipeline is the abil-
+ity to integrate two ‘omic datasets together rapidly, the 
+ability to triangulate findings in the second dataset with 
+decreased sample size and subsequently, increased power, 
+and decreased risk of type 1 error. This pipeline approach 
+can increase the biologic understanding of the mechanisms 
+of disease, drug effectiveness, safety, and maximize the 
+likelihood of reproducibility.
+Some, but not all metabolites agree with our prior 
+metabolomic work. This is encouraging as it further 
+demonstrates the validity of the prior metabolomic analyses 
+but demonstrated this complementary method for identification 
+of next genes to interrogate. In the past, we had identified 
+allantoate, maltose, and ornithine [12]. These metabolite 
+changes represent energy regulation and mitochondrial 
+dysfunction that lead to hepatocyte death. New metabolite 
+pathways under genetic control were 3-oxalomalate, 
+diphosphate, L-carnitine, and L-proline. The genes in these 
+pathways are now targeted for further exploration to determine 
+if a single SNV or a collection of SNVs results in the genetic 
+association found through this work. Additionally, we have 
+identified the upstream metabolite, dimethylgycine which is 
+regulated by the gene DMGDH. This may be the etiology of the 
+lower glutathione levels in those that had ALT elevation [12].
+This dataset is unique compared to other acetaminophen 
+liver injury data. These patients ingested therapeutic APAP 
+and were followed with serial blood work over time. This 
+allows for examination of the mechanisms of transient 
+liver injury due to a drug insult and the mechanisms of 
+hepatic regeneration. Past genomic studies have identified 
+a range of variants differentiating outcomes in overdose 
+patients including UGT2B15, UGT1A1, CYP3A5, CD44, 
+and CYP2E1 [ 33–35]. In those studies, there was not 
+adequate confirmation of acetaminophen overdose and the 
+mechanisms of liver injury in overdose are likely different 
+at therapeutic ingestions making it difficult to apply those 
+data to patients taking the drug appropriately. One well 
+conducted transcriptomic study that included 54 patients 
+(10 placebo) ingesting therapeutic APAP for 14 days and 
+5 overdose patients revealed alterations in RNA transcripts 
+in genes associated with mitochondrial energy production 
+(ZBTB16) [2]. We also found a variant in the SLC ornithine 
+transporter gene identified by this group [2 ]. We have 
+confirmed these findings in this multi’omic analysis. 
+It is not surprising that we did not identify metabolites 
+associated with immune function, as was observed in our 
+and others targeted genetic analyses [2 , 36]. There may 
+not be specific metabolites associated increased immune 
+response as the response leads to cell death which may be 
+further upstream.
+Limitations
+Limitations of this approach include the potential for 
+overfitting. This limitation was mitigated by employing 
+two methods to prevent this, pruning and thresholding. 
+Additionally, this method will not identify the specific SNPs 
+that yield the metabolite alteration, but rather the pathway 
+and the genes that may be involved. The investigator must 
+still examine each gene for deleterious variants and follow 
+with targeted genetic analyses. Our genetic platform did 
+not include full sequence data, but rather 2.2 million SNPs. 
+Thus, we may miss variants in intergenic regions which are 
+felt to be increasingly important in regulation of expression. 
+We opted not to perform imputation to limit the risk of 
+overfitting and decrease type 1 error. This cohort is not large 
+enough to determine rare variants present at less than 1% 
+frequency in the population.
+Conclusions
+This novel work uses a multi’omic approach to identify 
+genes responsible for metabolomic patterns in patients 
+with elevated ALT due to therapeutic APAP ingestion. 
+This analytic technique can be used to leverage multi’omic 
+datasets to determine which metabolites are under genetic 
+regulation.
+Sources of Funding A.A.M. received support from NIH 1R35GM124939 
+and NIH CTSI UL1 TR001082 for this work.
+Data Availability Data are available through direct inquiry from the 
+corresponding author.
+Declarations 
+Conflict of Interest None
+References
+ 1. Jaeschke H, Adelusi OB, Akakpo JY, Nguyen NT, Sanchez-
+Guerrero G, Umbaugh DS, et al. Recommendations for the use 
+of the acetaminophen hepatotoxicity model for mechanistic 
+studies and how to avoid common pitfalls. Acta Pharm Sin B. 
+2021;11(12):3740–55.
+ 2. Bushel PR, Fannin RD, Gerrish K, Watkins PB, Paules RS. 
+Blood gene expression profiling of an early acetaminophen 
+response. Pharmacogenomics J. 2017;17(3):230–6.
+ 3. Fannin RD, Gerrish K, Sieber SO, Bushel PR, Watkins PB, 
+Paules RS. Blood transcript immune signatures distinguish a 
+subset of people with elevated serum ALT from others given 
+acetaminophen. Clin Pharmacol Ther. 2016;99(4):432–41.
+261Journal of Medical Toxicology (2023) 19:255–261 
+1 3
+ 4. Monte AA, Arriaga Mackenzie I, Pattee J, Kaiser S, Willems 
+E, Rumack B, et al. Genetic variants associated with ALT ele-
+vation from therapeutic acetaminophen. Clin Toxicol (Phila). 
+2022;60(11):1198–204.
+ 5. McGill MR, Jaeschke H. Metabolism and disposition of aceta-
+minophen: recent advances in relation to hepatotoxicity and 
+diagnosis. Pharm Res. 2013;30(9):2174–87.
+ 6. Zhang B, Wang J, Wang X, Zhu J, Liu Q, Shi Z, et al. Proteog-
+enomic characterization of human colon and rectal cancer. Nature. 
+2014;513(7518):382–7.
+ 7. Langley RJ, Tsalik EL, van Velkinburgh JC, Glickman SW, Rice BJ, 
+Wang C, et al. An integrated clinico-metabolomic model improves 
+prediction of death in sepsis. Sci Transl Med. 2013;5(195):195ra95.
+ 8. Konigsberg IR, Barnes B, Campbell M, Davidson E, Zhen Y, Pal-
+lisard O, et al. Host methylation predicts SARS-CoV-2 infection 
+and clinical outcome. Commun Med (Lond). 2021;1(1):42.
+ 9. Kramer A, Green J, Pollard J Jr, Tugendreich S. Causal analysis 
+approaches in Ingenuity Pathway Analysis. Bioinformatics. 
+2014;30(4):523–30.
+ 10. Subramanian I, Verma S, Kumar S, Jere A, Anamika K. Multi-
+omics data integration, interpretation, and its application. Bioin-
+form Biol Insights. 2020;14:1177932219899051.
+ 11. Heard KJ, Green JL, James LP, Judge BS, Zolot L, Rhyee S, et al. 
+Acetaminophen-cysteine adducts during therapeutic dosing and 
+following overdose. BMC Gastroenterol. 2011;11:20.
+ 12. Sonn BJ, Heard KJ, Heard SM, D’ Alessandro A, Reynolds KM, 
+Dart RC, et al. Metabolomic markers predictive of hepatic adapta-
+tion to therapeutic dosing of acetaminophen. Clin Toxicol (Phila). 
+2022;60(2):221–30.
+ 13. Rahman A, Schelbaum E, Hoffman K, Diaz I, Hristov H, Andrews 
+R, et al. Sex-driven modifiers of Alzheimer risk: a multimodality 
+brain imaging study. Neurology. 2020;95(2):e166–78.
+ 14. Xu Z, Wu C, Pan W, Alzheimer’s Disease Neuroimaging I. Imag-
+ing-wide association study: Integrating imaging endophenotypes 
+in GWAS. Neuroimage. 2017;159:159–69.
+ 15. Deng Y, Pan W. A powerful and versatile colocalization test. PLoS 
+Comput Biol. 2020;16(4): e1007778.
+ 16. Gusev A, Ko A, Shi H, Bhatia G, Chung W, Penninx BW, et al. 
+Integrative approaches for large-scale transcriptome-wide associa-
+tion studies. Nat Genet. 2016;48(3):245–52.
+ 17. Walsh K, Koshland DE Jr. Determination of flux through the 
+branch point of two metabolic cycles. The tricarboxylic acid cycle 
+and the glyoxylate shunt. J Biol Chem. 1984;259(15):9646–54.
+ 18. Nimmo HG, Borthwick AC, el-Mansi EM, Holms WH, MacKin-
+tosh C, Nimmo GA. Regulation of the enzymes at the branchpoint 
+between the citric acid cycle and the glyoxylate bypass in Escheri-
+chia coli. Biochem Soc Symp. 1987;54:93–101.
+ 19. Holms WH. Control of flux through the citric acid cycle and 
+the glyoxylate bypass in Escherichia coli. Biochem Soc Symp. 
+1987;54:17–31.
+ 20. Zhao S, Xu W, Jiang W, Yu W, Lin Y, Zhang T, et al. Regula -
+tion of cellular metabolism by protein lysine acetylation. Science. 
+2010;327(5968):1000–4.
+ 21. Kather B, Stingl K, van der Rest ME, Altendorf K, Molenaar D. 
+Another unusual type of citric acid cycle enzyme in Helicobacter pylori: 
+the malate:quinone oxidoreductase. J Bacteriol. 2000;182(11):3204–9.
+ 22. Keseler. MetaCyc Pathway: allantoin decredation to ereidocy -
+colate II (ammonia producting). 2008. [Available from: https://  
+biocyc. org/ META/ NEW- IMAGE? type= PATHW AY& object= 
+PWY- 5698. Accessed 22 Jan 2023.
+ 23. Bai K, Xu W, Zhang J, Kou T, Niu Y, Wan X, et al. Assessment of 
+free radical scavenging activity of dimethylglycine sodium salt and 
+its role in providing protection against lipopolysaccharide-induced 
+oxidative stress in mice. PLoS ONE. 2016;11(5): e0155393.
+ 24. NCBI. PubChem Gene Summary for Gene 29958, DMGDH 
+- dimethylglycine dehydrogenase (human). 2023. [Avail-
+able from: https:// pubch em. ncbi. nlm. nih. gov/ gene/ DMGDH/ 
+human. Accessed 22 Jan 2023.
+ 25 Wishart DS, Guo A, Oler E, Wang F, Anjum A, Peters H, et al. 
+HMDB 5.0: the Human Metabolome Database for 2022. Nucleic 
+Acids Res. 2022;50(D1):D622–31.
+ 26. Ramsay RR, Gandour RD, van der Leij FR. Molecular enzymol-
+ogy of carnitine transfer and transport. Biochim Biophys Acta. 
+2001;1546(1):21–43.
+ 27. NCBI. PubChem Pathway Summary for Pathway PWY-6111, 
+mitochondrial L-carnitine shuttle. 2023. [Available from: https:// 
+pubch em. ncbi. nlm. nih. gov/ pathw ay/ BioCyc: HUMAN_ PWY- 
+6111. Accessed 22 Jan 2023.
+ 28. NCBI. PubChem Compound Summary for CID 145742, Proline. 
+2023. [Available from: https:// pubch em. ncbi. nlm. nih. gov/ compo 
+und/ Proli ne. Accessed 22 Jan 2023.
+ 29. Yang Z, Tsuchiya H, Zhang Y, Lee S, Liu C, Huang Y, et al. REV-
+ERBalpha activates C/EBP homologous protein to control small 
+heterodimer partner-mediated oscillation of alcoholic fatty liver. 
+Am J Pathol. 2016;186(11):2909–20.
+ 30. Morizono H, Woolston JE, Colombini M, Tuchman M. The use of 
+yeast mitochondria to study the properties of wild-type and mutant 
+human mitochondrial ornithine transporter. Mol Genet Metab. 
+2005;86(4):431–40.
+ 31 Sivashanmugam M, J J, U V, NS K. Ornithine and its role in 
+metabolic diseases: an appraisal. Biomed Pharmacother. 
+2017;86:185–94.
+ 32. Surendran P, Stewart ID, Au Yeung VPW, Pietzner M, Raffler J, 
+Worheide MA, et al. Rare and common genetic determinants of 
+metabolic individuality and their effects on human health. Nat 
+Med. 2022;28(11):2321–32.
+ 33. Court MH, Freytsis M, Wang X, Peter I, Guillemette C, 
+Hazarika S, et al. The UDP-glucuronosyltransferase (UGT) 1A 
+polymorphism c.2042C>G (rs8330) is associated with increased 
+human liver acetaminophen glucuronidation, increased UGT1A 
+exon 5a/5b splice variant mRNA ratio, and decreased risk of 
+unintentional acetaminophen-induced acute liver failure. J 
+Pharmacol Exp Ther. 2013;345(2):297–307.
+ 34. Court MH, Peter I, Hazarika S, Vasiadi M, Greenblatt DJ, Lee 
+WM, et al. Candidate gene polymorphisms in patients with 
+acetaminophen-induced acute liver failure. Drug Metab Dispos. 
+2014;42(1):28–32.
+ 35. Court MH, Zhu Z, Masse G, Duan SX, James LP, Harmatz JS, 
+et al. Race, gender, and genetic polymorphism contribute to 
+variability in acetaminophen pharmacokinetics, metabolism, 
+and protein-adduct concentrations in healthy African-American 
+and European-American volunteers. J Pharmacol Exp Ther. 
+2017;362(3):431–40.
+ 36. Monte AA, Sonn B, Saben J, Rumack BH, Reynolds KM, Dart 
+RC, Heard KJ. The genomics of elevated ALT and adducts in 
+therapeutic acetaminophen treatment: a pilot study. J Med Toxicol. 
+2021;17(2):160–7. https:// doi. org/ 10. 1007/ s13181- 020- 00815-2.
+Publisher's Note Springer Nature remains neutral with regard to 
+jurisdictional claims in published maps and institutional affiliations.
+Springer Nature or its licensor (e.g. a society or other partner) holds 
+exclusive rights to this article under a publishing agreement with the 
+author(s) or other rightsholder(s); author self-archiving of the accepted 
+manuscript version of this article is solely governed by the terms of 
+such publishing agreement and applicable law.

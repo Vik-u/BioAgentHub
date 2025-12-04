@@ -1,0 +1,1200 @@
+Enhancing PET Degrading Enzymes: A Combinatory
+Approach
+Yvonne Joho,
+[a, b, c]
+Santana Royan,
+[a]
+Alessandro T. Caputo,
+[a]
+Sophia Newton,
+[a]
+Thomas S. Peat,
+[d]
+Janet Newman,
+[d]
+Colin Jackson,
+[b, e, f]
+and Albert Ardevol*
+[a, c]
+Plastic waste has become a substantial environmental issue. A
+potential strategy to mitigate this problem is to use enzymatic
+hydrolysis of plastics to depolymerize post-consumer waste and
+allow it to be reused. Over the last few decades, the use of
+enzymatic PET-degrading enzymes has shown promise as a
+great solution for creating a circular plastic waste economy.
+PsPETase from Piscinibacter sakaiensis has been identified as an
+enzyme with tremendous potential for such applications. But to
+improve its efficiency, enzyme engineering has been applied
+aiming at enhancing its thermal stability, enzymatic activity,
+and ease of production. Here, we combine different strategies
+such as structure-based rational design, ancestral sequence
+reconstruction and machine learning to engineer a more highly
+active Combi-PETase variant with a melting temperature of
+70 ° C and optimal performance at 60 ° C. Furthermore, this study
+demonstrates that these approaches, commonly used in other
+works of enzyme engineering, are most effective when utilized
+in combination, enabling the improvement of enzymes for
+industrial applications.
+Introduction
+The escalating global issue of plastic waste accumulation and
+its improper disposal practices have led to significant environ-
+mental and health concerns. The adverse impacts of plastic
+pollution on ecosystems are being increasingly recognized
+[1]
+and recent discoveries highlight how the ingestion of micro-
+plastics pose potential risks to human health as well.
+[2]
+There is
+a critical need to address these global challenges and to
+minimize the ecological harm caused by plastic waste. World-
+wide, only 9 % of plastic waste gets recycled,
+[3]
+mostly by
+thermomechanical methods that result in a less valuable
+product. “Advanced recycling” is the conversion of plastic waste
+into monomers or other valuable raw materials by means of
+cracking, gasification or depolymerization, excluding energy
+recovery and incineration. The resulting materials can be used
+to manufacture recycled products of high quality, enabling a
+truly circular economy for plastic materials. Amongst the
+advanced recycling technologies, enzymatic depolymerization
+offers a relatively simple and cost-effective solution for easily
+hydrolysable plastics such as polyethylene terephthalate (PET).
+[4]
+Considerable progress has been achieved since the first reports
+of enzymatic PET degradation using Thermobifida fusca
+cutinase.
+[5]
+A breakthrough was achieved by Yoshida et al. in
+2016 with the discovery of the bacterium Ideonella sakaiensis
+(now currently known as Piscinibacter sakaiensis), the first
+microorganism that showed ability to use PET as a primary
+carbon source
+[6]
+and which was later engineered to turn non-
+biodegradable PET into biodegradable polyhydroxyalkanoates
+(PHA).
+[7,8]
+P. sakaiensis breaks down the polyester chains using a PET
+hydrolase enzyme (PsPETase aka IsPETase, basonym Ideonella
+sakaiensis), producing the monomers terephthalic acid (TPA)
+and mono-2-hydroxyethyl terephthalate (MHET). Subsequently,
+another exo-hydrolase enzyme (MHETase) cleaves the ester
+bond of MHET, yielding TPA and ethylene glycol (EG). The
+closest homologs of PsPETase are the cutinase enzymes, a
+family of natural polyester hydrolases which includes other
+enzymes that have shown promiscuous activity against PET.
+Some of these enzymes are more active at higher temperatures
+than PsPETase (e. g. LCC cutinase,
+[9]
+TfH,
+[5]
+F. solani cutinase
+(FsC)
+[10]
+) but PsPETase is the most efficient enzyme at room
+temperature.
+[6]
+Depolymerization of PET for viable recycling and
+bioremediation applications requires engineering of the natu-
+rally occurring enzymes to improve their biophysical and
+[a] Y. Joho, S. Royan, A. T. Caputo, S. Newton, A. Ardevol
+Manufacturing, Commonwealth Scientific and Industrial Research Organ-
+isation, Clayton, Victoria 3168, Australia
+E-mail: albert.ardevolgrau@csiro.au
+[b] Y. Joho, C. Jackson
+Research School of Chemistry, Australian National University, Canberra, ACT
+2601, Australia
+[c] Y. Joho, A. Ardevol
+CSIRO Advanced Engineering Biology Future Science Platform, GPO Box
+1700, Canberra, ACT 2601, Australia
+[d] T. S. Peat, J. Newman
+School of Biotechnology & Biomolecular Sciences, University of New South
+Wales, Sydney, NSW 2052, Australia
+[e] C. Jackson
+ARC Centre of Excellence for Innovations in Peptide & Protein Science,
+Research School of Chemistry, Australian National University, Canberra, ACT
+2601, Australia
+[f] C. Jackson
+ARC Centre of Excellence for Innovations in Synthetic Biology, Research
+School of Chemistry, Australian National University, Canberra, ACT 2601,
+Australia
+Supporting information for this article is available on the WWW under
+https://doi.org/10.1002/cbic.202400084
+© 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH. This is
+an open access article under the terms of the Creative Commons Attribution
+Non-Commercial License, which permits use, distribution and reproduction
+in any medium, provided the original work is properly cited and is not used
+for commercial purposes.
+Wiley VCH Dienstag, 07.05.2024
+2410 / 350675 [S. 174/183]
+1
+ChemBioChem 2024, 25, e202400084 (1 of 10) © 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+www.chembiochem.org
+Research Article
+doi.org/10.1002/cbic.202400084
+
+biochemical properties such as: thermal stability,
+[11][12]
+higher
+turnover rates,
+[13]
+and substrate specificity.
+[14,15,16]
+Indeed, without
+exception, all the natural and engineered variants of PsPETase
+and other enzymes are far more active with low-crystalline (lc-
+PET) rather than with high-crystalline PET (hc-PET).
+[17,18,19,20]
+This
+hinders their industrial application and/or requires costly
+pretreatment of the substrate before the catalytic hydrolysis
+step.
+[4]
+Additionally, the efficient production of the enzyme in
+large quantities is crucial for large-scale industrial applications.
+It is essential to assess early these critical parameters for
+upscaling enzyme-based PET depolymerization when engineer-
+ing a new variant of a PETase enzyme.
+[21]
+Even for a small protein such as PsPETase, which consists of
+290 amino acids, the number of possible amino acid mutations,
+deletions or insertions to the wild type sequence is over-
+whelming. Therefore, the focus of enzyme engineering methods
+is to provide guidance in identifying beneficial variants with
+desirable traits. Various strategies have been applied to
+engineer better variants of PsPETase, with remarkable results.
+[18]
+Typical strategies include structure- or mechanism-based
+methods (e. g. rational design),
+[11]
+bioinformatics-based methods
+(e. g. Ancestral Sequence Reconstruction),
+[22,23]
+directed
+evolution
+[24]
+or ML/AI-based methods (e. g. deep learning,
+[25]
+and
+graph convolutional networks).
+[26]
+Structure-based rational de-
+sign strategies, based on a fundamental understanding of the
+role of individual amino acids on the biochemical and
+biophysical properties of the enzyme, have produced variants
+of PsPETase with increases of 10–30 ° C in the melting
+temperature.
+[27,28]
+A good example of a PsPETase variant
+developed by structure-based enzyme engineering is the work
+of Son et al. who created the ThermoPETase variant by: i)
+structural comparison with other homologous thermophilic
+enzymes such as TfCut2; and ii) optimizing hydrogen bond
+interactions to stabilize flexible regions based on the observed
+B-factor from X-ray structures.
+[11]
+ThermoPETase has been very
+important in the field and used as a starting point for further
+development using other techniques. Computational predic-
+tions of the enzyme properties can support rational enzyme
+engineering by providing a way to screen the possible variants
+in silico, increasing the number of variants that can be explored.
+An example of this is the DuraPETase variant which showed
+remarkably higher stability temperatures, elevated by 31 ° C
+compared to the wild type.
+[12]
+Ancestral sequence reconstruction (ASR) enables the pre-
+diction of the sequence of ancestral enzymes based on the
+multi-sequence alignment of extant variants. Without the need
+of structural information or understanding contribution of each
+amino acid substitution to the biophysical properties of the
+enzyme, the ASR approach produces enzymes that are often
+more thermostable, soluble and promiscuous.
+[29,30]
+These prop-
+erties are very desirable in enzyme engineering and therefore
+ASR has been widely used for creating new functionality in
+enzymes and to improve their properties.
+[22]
+We recently applied
+ancestral sequence reconstruction to understand the evolu-
+tionary history of PsPETase.
+[23]
+This resulted in the recreation of
+ancestral enzymes containing mutations which could not have
+been found by rational design methods, as they are not close to
+the active site nor their effect could have been predicted.
+However, because of their beneficial effects on the thermo-
+stability and protein yield, we have introduced them as part of
+the multi-methodological approach to obtain an improved
+PsPETase variant.
+Machine learning and deep learning methods have been
+applied to develop both novel plastic degrading enzymes as
+well as PET hydrolase variants. Although this is an emerging
+strategy with only a limited number of examples, a few
+remarkable studies have demonstrated the synergistic effect of
+combining ML/AI and rational design methods. For instance,
+FAST-PETase is a variant of PsPETase that was developed
+combining two mutations from the rational-engineered Ther-
+moPETase and three other mutations identified with
+MutCompute.
+[13]
+Similarly, MutCompute was applied to TfCut2
+wild type cutinase to identify beneficial mutations and create
+an enhanced variant, which exhibited a 5.3-fold improved
+depolymerization of crystalline PET.
+[31]]
+Most recent examples
+include the adoption of machine learning-assisted prediction of
+the degrading activity of certain plastics
+[32]
+or the use of
+machine learning to guide the directed evolution of plastic
+degrading enzymes.
+[33]
+This paper has applied different approaches such as
+structure-based design, ancestral sequence reconstruction and
+machine learning to engineer a new variant of PsPETase. We
+show that each approach has unique benefits and limitations,
+and that they can be applied to complement each other in a
+combinatorial approach. We present a new enzyme (namely
+Combi-PETase) with improved properties that are critical for
+industrial applications.
+Results and Discussion
+Evaluation of PsPETase Variants
+Using the wild type PsPETase as our starting point, we have
+applied a combination of structure-based rational design,
+ancestral sequence reconstruction and machine learning ap-
+proaches over six generations of engineering. We have
+characterized the PET hydrolytic activity, thermal stability and
+expression levels in E. coli of over 140 variants in an iterative
+process of improving the enzyme’s properties. We determined
+the thermal stability of each variant by measuring the melting
+temperature using differential scanning fluorimetry (DSF) ex-
+periments and we used a fluorescence-based assay of TPA
+released to determine the PET hydrolytic activity (see methods).
+Figure 1 shows the characterization of the best variants that
+were passed to the following generation, accumulating benefi-
+cial mutations in the process. The optimal temperature of the
+reaction was determined by measuring the enzymatic activity.
+For the best variant in each generation, we determined the
+optimal temperature of the reaction by measuring the activity
+over a range of temperatures (Figure 1A–C, Table 1). Our best
+variant (namely Combi-PETase or PETase
+ACCCETN
+) contains seven
+accumulated mutations obtained from different enzyme engi-
+Wiley VCH Dienstag, 07.05.2024
+2410 / 350675 [S. 175/183]
+1
+ChemBioChem 2024, 25, e202400084 (2 of 10) © 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202400084
+ 14397633, 2024, 10, Downloaded from https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cbic.202400084 by Readcube (Labtiva Inc.), Wiley Online Library on [08/11/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+neering approaches and displays a 27 ° C increase in melting
+temperature, with an optimal reaction temperature of 60 ° C.
+PETase
+A
+– Generation 1
+The crystal structure of the wildtype PsPETase in complex with a
+substrate analogue (HEMT)
+[34]
+displays W185 in three different
+conformations. This residue is directly interacting with the
+HEMT moiety, but because HEMT is a small molecule, the
+structure does not reveal other residues that might be involved
+in binding the PET substrate. To identify these residues, we
+performed a model of a Michaelis complex using a 8mer-PET
+polymer as a substrate (Supplementary Figure S2). Our model
+indicated that in addition to the interactions with W185, the
+8mer-PET polymer is also interacting with residues in the β6-β7
+loop (preceded by W185). We performed molecular dynamics
+simulations of various substitutions at position 186 and found a
+strong dependence of the flexibility of the sidechain of W185
+and the β6-β7 loop on the size of residue 186 (Supplementary
+Figure S3).
+The beneficial effect of the flexibility of W185 and the loops
+in the active site with the PET hydrolytic activity has been also
+highlighted by Chen et al.
+[35]
+and Crnjar et al.
+[36]
+when studying
+the double mutant S214H/I218F. Based on the MD simulations,
+we mutated residue D186 to alanine, the residue that was
+predicted to confer the highest flexibility to the wobbly
+tryptophan and the β6-β7 loop. The PETase variant D186A
+(PETase
+A
+) exhibited an increase in melting temperature of
+~10 ° C while at the same time retaining a high level of activity
+up even at 50 ° C. In the 1.6 Å crystal structure of our variant
+Combi-PETase (Figure 2), we refined W185 and observed that
+the modelled density around the sidechain of W185 is not
+completely supported by an occupancy of 1, as well as
+additional density adjacent but not connected to this residue.
+However, the additional density was not enough to confidently
+model a second conformation as observed in previous
+structures.
+[37][34]
+Together with the high B-factors on the atoms
+of W185, it does suggest that W185 is in fact flexible
+(Supplementary Figure S6A).
+D186 is not conserved in other cutinase enzymes and is
+most commonly a histidine in thermostable homologs, so the
+single mutant of PsPETase D186A had not been explored
+before. The substitution D186H alone does not provide better
+activity but it led to the development of ThermoPETase
+[11]
+which
+served as scaffold for developing other variants like
+Figure 1. Screening parameters employed across PETase engineering generations. A Melting temperature measured by DSF recorded with six replicates. SD is
+represented as error bars. B Soluble protein yield obtained after purification. C Enzymatic activity degrading hc-PET using 500 nM enzyme at temperatures
+between 30 to 70 ° C. The reaction was performed in three replicates and at the corresponding temperature for one hour agitating at 1000 rpm.
+Table 1. Summary of thermostability, activity, and soluble yield for selected engineered PETase variants. The melting temperature was determined by
+differential scanning fluorimetry (DSF). PET degradation activity was measured as concentration of released TPA products after incubating hc-PET substrate
+with 500 nM enzyme concentration at the enzyme’s optimal temperature for one hour and shaking at 1000 rpm.
+Variant/Approach Mutations Activity [TPA mM/1 h] Tm [ ° C] Protein Yield [mg/L]
+PsPETase None 0.20 � 0.04 43.2 � 0.2 0.5
+PETase
+A
+RD (rational design)
+D186A 0.19 � 0.02 53.3 � 0.1 2.9
+PETase
+ACC
+RD
+D186A/N233C/S282C 0.54 � 0.01 64.7 � 0.1 6.6
+PETase
+ACCCET
+RD
+ACC/A179C/S136E/
+S214T
+0.77 � 0.2 68.6 � 0.2 11.1
+PETase
+ACCCETN
+(Combi-PETase) RD + ASR
+ACCCET/K95N 0.85 � 0.2 70.4 � 0.04 12.3
+PETase
+AKCETN
+RD + ASR + AI
+D186A/N233K/A179C/S136E/S214T/K95N 0.56 � 0.05 67.5 � 0.1 29
+Wiley VCH Dienstag, 07.05.2024
+2410 / 350675 [S. 176/183]
+1
+ChemBioChem 2024, 25, e202400084 (3 of 10) © 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202400084
+ 14397633, 2024, 10, Downloaded from https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cbic.202400084 by Readcube (Labtiva Inc.), Wiley Online Library on [08/11/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+Figure 2. Crystal structure of Combi-PETase. The catalytic triad of S160, D206, and H237 are coloured in magenta. The mutations of interest in this variant are
+shown in cyan. Insets to highlight the mutations labelled A–E are shown below the main structure with the same colouring scheme, and with the
+corresponding WT PsPETase residues shown in semi-transparent black. F–H Population histogram from the molecular dynamics simulation of wild type (black)
+vs. Combi-PETase (cyan). The S214T mutation changes the orientation of the residue (χ1 angle) breaking the hydrogen bond interaction with P184. The
+distances are measured between the hydrogen and the backbone oxygen atoms.
+Wiley VCH Dienstag, 07.05.2024
+2410 / 350675 [S. 177/183]
+1
+ChemBioChem 2024, 25, e202400084 (4 of 10) © 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202400084
+ 14397633, 2024, 10, Downloaded from https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cbic.202400084 by Readcube (Labtiva Inc.), Wiley Online Library on [08/11/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+HotPETase
+[24]
+and FAST-PETase.
+[13]
+This finding aligns with our
+previous work where the D186S substitution, also predicted to
+increase the flexibility of the loop and of the wobbly tryptophan
+(Supplementary Figure S3), yielded a 9 ° C improvement in the
+enzyme’s thermostability.
+[23]
+Other substitutions (e. g., D186I,
+D186F, D186 L or D186 V), although being tolerated, led to
+reduced enzymatic activity,
+[11]
+in agreement with the predicted
+reduced flexibility. Recently, using a semi-saturation muta-
+genesis experiment, Yin et al. identified the double variant
+D186A/S121P. Because the crystal structure of the S121P/D186A
+double mutant could not resolve various conformations of
+W185 side chain, the authors explained the increased activity
+was caused by a reduction in the flexibility.
+[38]
+However, the
+authors did not note that this is also common in other crystal
+structures of PsPETase variants, and that the different conforma-
+tions of the so-called wobbly tryptophan W185 is not always
+resolved in multiple conformations. Nailing down all the
+possible conformations is difficult- seeing that density is missing
+is easy.
+PETase
+ACC
+– Generation 2
+To further improve the thermal stability of our PETase
+A
+variant,
+we introduced a third disulfide bridge using the N233C and
+S282C mutations. The design of this disulfide bridge was based
+on the work of Then et al., who identified a stabilizing calcium
+binding site in TfCut2, a homolog enzyme with 51 % sequence
+similarity of PETase.
+[39]
+By engineering a disulfide bridge in that
+position, the authors mimicked the effect of calcium binding
+and increased the Tm of TfCut2 by 24.9 ° C.
+[40]
+Similar substitu-
+tions were performed on Cut190,
+[41]
+LCC,
+[42]
+and
+ThermoPETase.
+[11]
+Based on a structural alignment between
+TfCut2 and PETase
+A
+, the equivalent disulfide bridge was
+engineered between residues N233 and S282. The triple mutant
+PET
+ACC
+displayed a cooperative effect on the thermal stability
+elevating the melting temperature by another 11.4 ° C (to
+64.7 ° C). The increased melting temperature of PETase
+ACC
+allows
+a much higher activity compared to PETase
+A
+at a reaction
+temperature of 50 ° C. The formation of the disulfide bond
+between N233C and S282C was confirmed to be present and
+fully occupied in the electron density of the Combi-PETase
+structure (Supplementary Figure S6C) and the structure of the
+PETase
+ACC
+(PDB accession code 8VEL).
+PETase
+ACCCET
+– Generation 3
+Further attempts to improve the thermal stability of our
+PETase
+ACC
+variant by rational design only led to modest
+improvements. Individually, the A179C, S136E and S214T (CET)
+mutations each increased melting temperature of PETase
+ACC
+by
+ca. 3.2 ° C, 0.9 ° C and 2.1 ° C respectively (Supplementary Ta-
+ble S3). However, the effect of these mutations was additive
+and the combined mutant PETase
+ACCCET
+displayed a Tm of
+67.8 ° C (Figure 1A, Table 1), sufficient to increase the optimal
+reaction temperature to 60 ° C.
+The A179C variant fills a hydrophobic cavity in the core of
+the enzyme, a strategy that is commonly used to improve the
+thermal stability of mesophilic enzymes.
+[41]
+This effect is
+apparent in the density around residue A179C in the crystal
+structure of Combi-PETase (Supplementary Figure S6D).
+The mutant S136E has a small effect on the thermal stability
+of the enzyme as measured by DSF, but it also showed a 1.3-
+fold increase in hydrolytic activity compared to our PETase
+ACC
+variant and was compatible with the other mutations, so it was
+retained for future generations. In the crystal structure we do
+not see the direct formation of any new salt bridge by the
+S136E substitution, so the effect may be due to a transient
+intraprotein interaction or to an improvement in enzyme-
+solvent interactions.
+The S214T variant increased the enzymatic activity by 12 %
+(Supplementary Table S3). Both the crystal structure of Combi-
+PETase (this work) and of the wild type (PDB 6EQE)
+[43]
+resolve
+the sidechain of residue 214 in three different orientations with
+similar occupancies. Molecular dynamics simulations show that
+in the wild type, S214 (located in β7-α4 loop) preferably makes
+a hydrogen bond with the carbonyl of P184, located at the start
+of the β6-β7 loop, while the mutation to threonine (T214)
+breaks this interaction (Figure 2F and G). This can enhance the
+flexibility of the β6-β7 loop and the binding site, explaining the
+increased activity of this variant. Both A179C and S214T are
+newly discovered mutations, while S136E has been previously
+shown present similar beneficial effects on the wild type
+sequence.
+[44]
+PETase
+ACCCETN
+– Generation 4
+In a previous publication we performed an Ancestral Sequence
+Reconstruction (ASR) experiment on the wild type PsPETase, in
+which identified some ancestor sequences that showed
+improved thermostability.
+[20]
+Continuing from this, we inte-
+grated and tested several of the ASR designs into our
+PETase
+ACCCET
+variant (Supplementary Table S4) and identified the
+K95N mutation which exhibited a further increase in thermal
+stability (Tm = 70.4 ° C) and a 12 % increase in terms of
+enzymatic activity. Two directed evolution experiments ren-
+dered variants that included the K95N mutation: HOT-PETase
+[21]
+and PETaseTM,
+[43]
+(with 21 and 2 mutations respectively).
+Combining Machine Learning/AI Mutations to the PETase
+ACCCETN
+A new variant (FAST-PETase) has recently been developed using
+a ML-based enzyme engineering method (MutCompute)
+[13]
+and
+based on the ThermoPETase variant. The authors predicted and
+tested 159 mutations and identified three of them (N233K,
+R224Q and S121E) that when added to the ThermoPETase
+(D186H/R280A) yielded a variant with high activity at an
+optimal temperature of 50 ° C. From the FAST-PETase mutations,
+the N233K mutant is of particular interest, because introducing
+this single point mutation on other homologous PET-degrading
+enzymes also produces enzymes with higher degradation rates.
+Wiley VCH Dienstag, 07.05.2024
+2410 / 350675 [S. 178/183]
+1
+ChemBioChem 2024, 25, e202400084 (5 of 10) © 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202400084
+ 14397633, 2024, 10, Downloaded from https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cbic.202400084 by Readcube (Labtiva Inc.), Wiley Online Library on [08/11/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+Thus, it appears that this mutation is transferable to related
+enzymes. We introduced the N233K mutant into our Combi-
+PETase, noting that this mutation would break the engineered
+disulfide bridge between residue N233C and S282C. Because it
+is difficult to compare the results from the literature given that
+the reaction conditions and the substrates often differ,
+[21]
+we
+decided to order, express, purify and test the FAST-PETase
+sequence as from the literature but using our activity assay and
+substrates.
+[13]
+The new variant derived from FAST-PETase and
+Combi-PETase (namely PETase
+AKCETN
+) showed a modest Tm
+decrease to 67.5 ° C compared to Combi-PETase and a reduction
+of 10 ° C of the optimum temperature back to 50 ° C, same as the
+FAST-PETase variant. (Figure 1A and 1C, Table 1). The activity of
+PETase
+AKCETN
+at 50 ° C is the same as Combi-PETase at the same
+temperature but lower than the Combi-PETase at 60 ° C.
+However, the yield of the PETase
+AKCETN
+variant is much higher
+(Figure 1B, Table 1).
+Assessing the Enzyme’s Suitability for Industrial Applications
+Due to higher activity and protein yields, we evaluated the
+suitability of the Combi-PETase and PETase
+AKCETN
+variants for
+industrial applications. For these two variants, we performed
+long-term reaction experiments at high temperatures and high
+enzyme concentrations, and we also tested the residual activity
+of Combi-PETase against a high-crystalline PET substrate.
+Figure 3 shows the enzymes’ activity at 50 and 60 ° C for up
+to 28 hours using FAST-PETase as a control. While at 50 ° C, all
+these enzymes perform similarly after either 2 or 28 hours
+(Figure 3A, and Supplementary Figure S4), at 60 ° C Combi-
+PETase performs better than PETase
+AKCETN
+, which in turn is better
+than FAST-PETase.
+Wild type PsPETase has been noted to show a concentration
+inhibition effect when the enzyme’s concentration exceeds
+150 nM.
+[6]
+Although the reason for this inhibition is not fully
+understood, this is a problem for industrial applications. Avilan
+et al. has shown that it is also present in other mesophilic
+enzymes and that it can be improved using protein engineering
+to increase the thermal stability, by adding additives to the
+reaction (e. g. DMSO), or by modifying the substrate (increasing
+the polymer surface area).
+[45]
+HotPETase, a variant generated by
+a directed mutagenesis approach,
+[24]
+is an example of a highly
+thermostable variant that shows reduced inhibition by enzyme
+concentration. This effect is also displayed in our Combi-PETase,
+where we observe at least a 4-fold increase in the optimal
+enzyme concentration for the reaction (to ~800 nM, Figure 3C).
+PsPETase has been discovered to naturally break down low
+crystalline PET (lc-PET). However, high crystalline PET (hc-PET) is
+a prevalent waste product that is difficult to break down by all
+known PETases. To determine the effect of the crystallinity of
+the substrate on the reaction rate of our Combi-PETase, we
+tested the enzyme against both hc-PET (post-consumer Coca-
+Cola bottle, ca. 45 % crystallinity)
+[46]
+and lc-PET (powdered
+GoodFellow PET film, amorphous). We measured the degrada-
+tion products (TPA and MHET) over 28 hours using UPLC
+(Figure 4). As usual for all PET hydrolases, lc-PET is more
+susceptible to breakdown by Combi-PETase than hc-PET,
+resulting in a total of 29 mM and 19 mM of total released
+products respectively. However, this means that the Combi-
+PETase retains 65 % of the activity against hc-PET, which is very
+high compared to other PETase enzymes.
+[19,47]
+Indeed, LCC
+IGGA
+variant retains between 25–35 % activity when reacting with
+microparticles (� 250 μm) of 32–35 % crystalline PET.
+[20]
+Most
+PET degrading enzymes also show less than 50 % activity
+against PET film substrates with 13–23 % crystallinity.
+[17]
+Conclusions
+We combined different enzyme engineering approaches;
+structure-based rational design, ancestral sequence reconstruc-
+tion and mutations from AI/machine learning to develop a new
+variant of PsPETase. We found the biggest improvements in the
+enzyme’s properties from the early generations using a rational-
+based design. By the second generation (PETase
+ACC
+), the melting
+Figure 3. Enzymatic activity of Combi-PETase, PETase
+AKCETN
+and FAST-PETase at A) 50 and B) 60 ° C. All reactions were performed using 800 nM enzyme and
+90 mg of hc-PET in 0.5 mL bicine buffer at pH 9.0 and agitating at 1000 rpm. Samples were taken from the reaction mixture at times 2 h and 28 h. C)
+Enzymatic activity of Combi-PETase and PETase
+AKCETN
+variants incubated at 50 ° C with varying concentration of enzyme 50–1600 nM, using 90 mg of hc-PET
+substrate in 0.5 mL bicine buffer at pH 9.0 and agitating at 1000 rpm. In all cases the enzymatic activity was measured using the fluorometric assay as
+explained in the methods section and in reference 23.
+Wiley VCH Dienstag, 07.05.2024
+2410 / 350675 [S. 179/183]
+1
+ChemBioChem 2024, 25, e202400084 (6 of 10) © 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202400084
+ 14397633, 2024, 10, Downloaded from https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cbic.202400084 by Readcube (Labtiva Inc.), Wiley Online Library on [08/11/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+temperature was increased by 22 ° C. Further generations also
+based on rational design improved the thermostability by
+another 4 ° C and the activity by 43 % but further improvements
+were difficult. A new mutation based on the ASR method
+further improved the enzyme’s stability by another 2 ° C and
+increased the activity by 10 %. The SDS-PAGE gel shows that
+the amount of soluble Combi-PETase protein was qualitatively
+increased with respect to the wild type PsPETase (Figure S8),
+while the amount of purified Combi-PETase protein was
+increased by 25-fold (Figures S9 and S10). The increased
+solubility of Combi-PETase is also reflected in the decrease in
+the concentration-dependent inhibition, which means that the
+Combi-PETase can be efficiently used at 800 nM concentration
+instead of < 150 nM for the wild type PsPETase. Based on AI
+methods, the N233K mutation was proposed. Introducing this
+mutation to the Combi-PETase variant improved the protein
+yields, but it also reduced its thermostability and activity.
+Therefore, it was not included in our final variant.
+Each technique contributed to the advancement of the
+engineered Combi-PETase (PETase
+ACCCETN
+). We highlight the
+importance of applying these approaches simultaneously as
+each of them has its strengths and limitations. The biggest
+improvements were based on understanding the structure of
+the protein, the substrate binding mode, and the mechanism of
+action. ASR and AI-based tools were more effective in
+predicting the impact of remote mutations on the enzyme‘s
+properties, which were challenging to foresee with structure-
+based protein engineering. Although we may not fully under-
+stand how remote mutations affect the protein‘s biophysics in
+detail, their beneficial effects are evident.
+Overall, this study demonstrates a successful example of a
+combinatorial enzyme engineering experiment, using
+structure-, bioinformatics- and AI-based strategies. We have
+engineered the Combi-PETase variant to perform better in
+terms of protein yields, thermostability, activity, tolerance to
+high enzyme concentration and longer reaction times; com-
+pared to the wildtype PsPETase and most of the published
+PETase enzymes. It is highly active over a range of temperatures
+and can hydrolyze not only lc-PET but also hc-PET with high
+efficiency. These are all desirable biophysical and biochemical
+properties when considering the enzyme for industrial applica-
+tions. However, we have not upscaled the process or directly
+compared the Combi-PETase under standardized industry-like
+conditions against other PETase enzymes as done for other
+variants.
+[21]
+Materials and Methods
+Protein Expression and Purification
+The engineered variants were synthesized at GenScript (con-
+taining a C-terminal His-tag) in a modified expression vector
+pET-43.1a (+) from Novagen (Supplementary Figure S1). The
+proteins were expressed and purified as previously described. E.
+coli BL21-(DE3) was used for expression and induced at OD600
+~0.8 by addition of isopropyl β-D-1-thiogalactopyranoside
+(IPTG) to a final concentration of 0.1 mM. The cells were grown
+in 0.5 or 1 L TB medium and further incubated for ~18 h at
+16 ° C and agitated at 180 rpm. Afterwards, the cells were
+harvested by centrifugation at 6,000×g for 10 minutes at 4 ° C
+and resuspended in lysis buffer (1x PBS, 350 mM NaCl, 10 % (w/
+v) glycerol, 45μg lysozyme, 2 mM MgCl
+2
+, and 20 mM imidazole)
+and lysed by sonication. The lysed cells were harvested at
+25’000 g for 25 minutes. The soluble fraction of the variants was
+purified on an ÄKTAxpress (GE Healthcare) using a 1 mL HisTrap
+FF column (GE Healthcare), followed by automated peak
+injection onto a HiLoad Superdex 200 16/60 prep grade column
+(GE Healthcare). Unbound protein was washed off with IMAC
+wash buffer (1× PBS, 350 mM NaCl, 10 % w/v glycerol, 20 mM
+imidazole) and the bound proteins were eluted using an IMAC
+elution buffer (1x PBS, 350 mM NaCl, 10 % w/v glycerol, 500 mM
+imidazole). The proteins were run over a Superdex S200 size
+exclusion column with SEC buffer (50 mM bicine, 100 mM NaCl,
+pH 9.0), concentrated using a 10,000 MWCO concentrator
+(Amicon) and SDS-PAGE was run to assess the protein purity.
+Protein concentration was determined by nanodrop using
+ProtParam calculated (Expasy) extinction coefficient at
+280 nm.
+[46]
+The protein was snap-frozen in liquid nitrogen and
+stored in 100 μL aliquots.
+Thermostability Measurement
+The thermal stability of the purified variants was determined
+with differential scanning fluorimetry (DSF). The protein was
+diluted to a concentration of 40 μg/mL in (50 mM bicine,
+100 mM NaCl, pH 9.0). 20 μL was pipetted into a 96-well white
+PCR plate (ThermoFisher Scientific) and added 0.3 μL 75×
+SYPRO orange dye using nano-dispensing robots (Art Robbins
+Phoenix). The melting temperature shift was measured using
+the FRET channel of a CFX96 qPCR instrument (Bio-rad) from
+20–100 ° C. All protein samples were set up in six replicates.
+Figure 4. lc-PET and hc-PET (90 mg) using 2 μM Combi-PETase (PETase
+ACCCETN
+)
+enzyme incubated for 2, 6, 22 and 28 hours determining the amount of TPA
+and MHET. Both reactions were performed in three replicates each and
+incubated at 60 ° C for one hour agitating at 1000 rpm analysed using UPLC.
+Wiley VCH Dienstag, 07.05.2024
+2410 / 350675 [S. 180/183]
+1
+ChemBioChem 2024, 25, e202400084 (7 of 10) © 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202400084
+ 14397633, 2024, 10, Downloaded from https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cbic.202400084 by Readcube (Labtiva Inc.), Wiley Online Library on [08/11/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+Enzymatic Activity of Engineered PET Hydrolases
+The PET degradation reactions were prepared with 90 mg
+ground hc-PET particles (< 5 mm) from a Coca-cola bottle or
+micronized lc-PET (� 500 μm particles GoodFellow PET film,
+amorphous) in a 500 μl buffer (50 mM bicine 100 mM NaCl,
+pH 9). The reaction was initiated by adding 500 nM to 1600 nM
+enzymes and incubated for 1 to 28 hours at the enzyme’s
+optimal temperature and 1000 rpm on an Eppendorf Thermo-
+Mixer. To determine the optimal temperature, experiments
+between 30–70 ° C were performed. The hydrolysis reactions
+were stopped at 95 ° C for 10 minutes and the microplastic was
+centrifuged at 11,000 rpm for two minutes. The enzymatic
+activity of the designed variants was measured as previously
+described.
+[23]
+10-100 μL of the reaction mixture was pipetted
+into a black 96-well plate and the volume was adjusted to
+100 μL with bicine buffer. The reaction to produce fluorescent
+2-hydroxy terephthalate (HOTP), was initiated by adding 25 μL
+of 5 mM EDTA and 25 μL of 5 mM FeSO
+4
+with a multichannel
+pipet. Finally, 25 μL of 2 % H
+2
+O
+2
+was added by mixing the
+reaction mixture. Subsequently, the reaction mixture was
+incubated for 60 min at room temperature before the
+fluorescence was measured with a plate reader from CLARIOstar
+BMG-Labtech Australia (λ
+ex
+= 320 nm, and λ
+em
+= 420 nm). We
+interpolated the concentration of TPA based on a calibration
+curve of terephthalic acid (TPA) between 0–500 μM. The PET
+hydrolase variants were compared to the previous variants as a
+reference to determine whether the enzymatic activity has
+increased, and experiments were performed in triplicate.
+UPLC Analysis of PET Hydrolysis
+To determine TPA and MHET concentrations, we employed
+Ultra Performance Liquid Chromatography (UPLC) using an
+Acquity UPLC i-Class equipped with a QDa performance mass
+detector (Waters). The chromatogram extraction was conducted
+at a wavelength of 254 nm. The UPLC system utilized an
+Acquity UPLC BEH C18 column (50×2.1 mm, 1.7 μm particle
+size). The mobile phases employed were as follows: mobile
+phase A consisted of 99.9 % Milli-Q Water + 0.1 % formic acid,
+and mobile phase B was composed of 99.9 % Acetonitrile +
+0.1 % formic acid. The flow rate was maintained at 0.400 mL/
+min, and a sample volume of 1 μL was injected three times for
+each analysis. Following sample injection, the mobile phase
+composition transitioned from 95 % A to 100 % B over a 4.50-
+minute interval and remained at 100 % B for 1 minute.
+Subsequently, it was changed back to 95 % A over 0.5 minutes
+and held at that composition for an additional 1 minute. To
+interpolate the concentrations of TPA and MHET, we prepared
+calibration curves ranging from 0 to 500 μM by utilising the
+mass of each compound.
+Protein Crystallisation and Structure Determination
+Crystals of the PETase variants were grown by vapour diffusion
+in MRC 2 sitting-drop plates (Swissci) setting up drops at a 1 : 1
+ratio with 150 nl of protein and 150 nl of mother liquor using
+the Phoenix Crystal (Art Robbins) liquid handling platform with
+crystallisation conditions described in Supplementary Table S8.
+Crystals grew after a couple of days and prior to flash cooling in
+liquid nitrogen were cryoprotected with a final concentration of
+15 % glycerol added to the reservoir before overlaying onto the
+drop. Diffraction experiments were carried out at the Australian
+Synchrotron MX2 beamline
+[48]
+under nitrogen vapor at 100K
+and a wavelength of 0.974 Å. Data reduction was carried out
+with XDS
+[48]
+for indexing and integration followed by scaling
+and merging with Aimless.
+[49]
+Automated implementation of the
+same programs was utilised with autoPROC.
+[50]
+Molecular
+replacement was carried out with Phaser
+[51]
+via a model derived
+from the PDB ID 6EQE.
+[43]
+The model was iteratively built and
+refined with Coot 0.8.9
+[51]
+and Refmac 5.7
+[52]
+(Combi-PETase/
+PETase
+ACCCETN
+) via the CCP4i2 user interface,
+[53]
+Phenix
+(PETase
+ACC
+),
+[54]
+or autoBUSTER (PETase
+ACCC
+and PETase
+ACCE
+).
+[55]
+Statistics for structure solution and refinement are presented in
+Supplementary Table S7.
+Protein Modelling and Molecular Dynamics Simulations
+A model of the 8mer-PET substrate in complex with the wild
+type PsPETase enzyme was build using the 6EQE model as
+starting structure.
+[43]
+The substrate was modelled in a step-wise
+manner. First, a flexible molecule of Mono-(2-
+hydroxyethyl)terephthalic acid (MHET) was docked in the active
+site (using residue S160 as the centre of the box). Then, one by
+one, new moieties of MHET were added to both ends of the
+first molecule until the 8mer-PET substrate was finished. At
+each step, a 1μs molecular dynamics simulation was performed
+to relax the system, applying a distance harmonic constraint
+between the carbonyl oxygen atom of the first molecule
+docked and the backbone nitrogen atoms of residues Y87 and
+M161 (the residues defining the tetrahedral oxoanionic binding
+site) to ensure that the substrate remained in the active site.
+Finally, 1μs MD simulation of the 8mer-PET substrate was
+performed without any constraint. Alignment of the modelled
+complex with the crystal structure of PsPETase in complex with
+MHET (PDB 7XTW)
+[56]
+shows very good agreement in the
+docking pose of the substrate. The docking of the first MHET
+molecule was performed using AutoDock4 and the molecular
+dynamics simulations were performed using the CUDA version
+of AMBER20.
+[57,58,59,60]
+The force field used for the protein was
+ff14SB
+[61]
+and the substrate was modelled using the gaff2
+forcefield, reducing the substrate-substrate van-der-Waals self-
+interactions by 50 % to avoid aggregation. The system was
+solvated in a TIP3P water model
+[62]
+using periodic boundary
+conditions with a 12 Å distance from the protein. An 80 mM
+concentration of NaCl was used ensuring charge neutrality of
+the system. van der Waals and electrostatic interactions were
+capped at 12 Å using a smooth potential while a PM3
+Wiley VCH Dienstag, 07.05.2024
+2410 / 350675 [S. 181/183]
+1
+ChemBioChem 2024, 25, e202400084 (8 of 10) © 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202400084
+ 14397633, 2024, 10, Downloaded from https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cbic.202400084 by Readcube (Labtiva Inc.), Wiley Online Library on [08/11/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+implementation
+[63]
+was used to describe the long-range electro-
+static interactions. The initial structure was relaxed using an
+energy minimization protocol using a steepest-descent and a
+Newton-Raphson algorithms. The temperature was increased to
+300K in a 15 ns MD simulation in the NPT ensemble and then
+the production run performed in the NVT ensemble coupling
+the system to a thermostat. All molecular dynamics simulations
+were performed using a timestep of 2 fs, with a constraint on
+the hydrogen atoms. The MD simulations of the wild type
+enzyme in complex with the 8mer-PET substrate were extended
+for 1μs. The MD simulations of the mutants to produce
+Figure S3 and of Combi-PETase to produce Figure 2F   H were
+extended for 2μs. The analysis of the MD simulations was
+performed using AMBER-Tools, VMD
+[64]
+and in-house scripts.
+Mutations based on the Ancestral Sequence Reconstruction
+bioinformatics approach were chosen from our previous work
+[23]
+while AI-based mutations were based on published work.
+[13]
+Supporting Information
+The supplementary information is available at ChemBioChem.
+The structures of PETase
+ACC
+, (8VEK) PETase
+ACCCC
+, (8VEL) PETa-
+se
+ACCCE
+, (8VEM), and CombiPETase/PETase
+ACCCETN
+(8VE9) have
+been deposited to the Protein Data Bank. The data that support
+the findings of this study are available from the corresponding
+author upon reasonable request.
+Acknowledgements
+All crystallisation experiments were carried out at CSIRO’s C3
+and BBC facilities, Melbourne, Australia. This research was
+undertaken in part using the MX2 beamline at the Australian
+Synchrotron, part of ANSTO, and made use of the Australian
+Cancer Research Foundation (ACRF) detector. We acknowledge
+Lesley Pearce for help with optimising our purification process
+using the ÄKTAxpress machines. Stewart Nuttall for the original
+plasmid design of pET43 and the CSIRO Ending Plastic Waste
+mission. All UPLC experiments were performed in CSIRO HPLC/
+UPLC facility led by Megan Kruger.
+Conflict of Interests
+The authors declare no conflict of interest, they acknowledge a
+previous provisional patent application for Hydrolase variants
+(WO2022104434A1).
+Data Availability Statement
+The data that support the findings of this study are available
+from the corresponding author upon reasonable request.
+Keywords: Ancestral sequence reconstruction · Biocatalysis ·
+Machine learning · PET hydrolase (PETase) · Protein engineering
+[1] M. MacLeod, H. P. H. Arp, M. B. Tekman, A. Jahnke, Science 2021, 373,
+61–65.
+[2] C. Campanale, C. Massarelli, I. Savino, V. Locaputo, V. F. Uricchio, Int. J.
+Environ. Res. Public Health 2020, 17, 1212.
+[3] R. Geyer, J. R. Jambeck, K. L. Law, Sci. Adv. 2017, 3, e1700782.
+[4] A. Singh, N. A. Rorrer, S. R. Nicholson, E. Erickson, J. S. Desveaux, A. F. T.
+Avelino, P. Lamers, A. Bhatt, Y. Zhang, G. Avery, L. Tao, A. R. Pickford,
+A. C. Carpenter, J. E. McGeehan, G. T. Beckham, Joule 2021, 5, 2479–
+2503.
+[5] R.-J. Müller, H. Schrader, J. Profe, K. Dresler, W.-D. Deckwer, Macromol.
+Rapid Commun. 2005, 26, 1400–1405.
+[6] S. Yoshida, K. Hiraga, T. Takehana, I. Taniguchi, H. Yamaji, Y. Maeda, K.
+Toyohara, K. Miyamoto, Y. Kimura, K. Oda, Science 2016, 351, 1196–
+1199.
+[7] H. T. Tan, M. F. Chek, S. Z. Neoh, S. L. Ang, S. Yoshida, T. Hakoshima, K.
+Sudesh, Polym. Degrad. Stab. 2022, 206, 110160.
+[8] R. Fujiwara, R. Sanuki, H. Ajiro, T. Fukui, S. Yoshida, Sci. Rep. 2021, 11,
+19991.
+[9] S. Sulaiman, S. Yamato, E. Kanaya, J. J. Kim, Y. Koga, K. Takano, S.
+Kanaya, Appl. Environ. Microbiol. 2012, 78, 1556–1562.
+[10] C. M. Silva, F. Carneiro, A. O’Neill, L. P. Fonseca, J. S. M. Cabral, G.
+Guebitz, A. Cavaco-Paulo, J. Polym. Sci. Part A 2005, 43, 2448–2450.
+[11] H. F. Son, I. J. Cho, S. Joo, H. Seo, H.-Y. Sagong, S. Y. Choi, S. Y. Lee, K.-J.
+Kim, ACS Catal. 2019, 9, 3519–3526.
+[12] Y. Cui, Y. Chen, X. Liu, S. Dong, Y. E. Tian, Y. Qiao, R. Mitra, J. Han, C. Li,
+X. Han, W. Liu, Q. Chen, W. Wei, X. Wang, W. Du, S. Tang, H. Xiang, H.
+Liu, Y. Liang, K. N. Houk, B. Wu, ACS Catal. 2021, 11, 1340–1350.
+[13] H. Lu, D. J. Diaz, N. J. Czarnecki, C. Zhu, W. Kim, R. Shroff, D. J. Acosta,
+B. R. Alexander, H. O. Cole, Y. Zhang, N. A. Lynd, A. D. Ellington, H. S.
+Alper, Nature 2022, 604, 662–667.
+[14] K. Chen, Y. Hu, X. Dong, Y. Sun, ACS Catal. 2021, 11, 7358–7370.
+[15] L. Dai, Y. Qu, J. W. Huang, Y. Hu, H. Hu, S. Li, C. C. Chen, R. T. Guo, J.
+Biotechnol. 2021, 334, 47–50.
+[16] M. Furukawa, N. Kawakami, K. Oda, K. Miyamoto, ChemSusChem 2018,
+11, 4018–4025.
+[17] T. B. Thomsen, K. Almdal, A. S. Meyer, New Biotechnol. 2023, 78, 162–
+172.
+[18] R. Wei, D. Breite, C. Song, D. Gräsing, T. Ploss, P. Hille, R. Schwerdtfeger,
+J. Matysik, A. Schulze, W. Zimmermann, Adv. Sci. 2019, 6, 1900491.
+[19] S. Weinberger, K. Haernvall, D. Scaini, G. Ghazaryan, M. T. Zumstein, M.
+Sander, A. Pellis, G. M. Guebitz, Green Chem. 2017, 19, 5381–5384.
+[20] R. K. Brizendine, E. Erickson, S. J. Haugen, K. J. Ramirez, J. Miscall, D.
+Salvachúa, A. R. Pickford, M. J. Sobkowicz, J. E. McGeehan, G. T. Beck-
+ham, ACS Sustainable Chem. Eng. 2022, 10, 9131–9140.
+[21] G. Arnal, J. Anglade, S. Gavalda, V. Tournier, N. Chabot, U. T.
+Bornscheuer, G. Weber, A. Marty, ACS Catal. 2023, 13, 13156–13166.
+[22] M. A. Spence, J. A. Kaczmarski, J. W. Saunders, C. J. Jackson, Curr. Opin.
+Struct. Biol. 2021, 69, 131–141.
+[23] Y. Joho, V. Vongsouthi, M. A. Spence, J. Ton, C. Gomez, L. L. Tan, J. A.
+Kaczmarski, A. T. Caputo, S. Royan, C. J. Jackson, A. Ardevol, Biochemistry
+2023, 62, 437–450.
+[24] E. L. Bell, R. Smithson, S. Kilbride, J. Foster, F. J. Hardy, S. Ramachandran,
+A. A. Tedstone, S. J. Haigh, A. A. Garforth, P. J. R. Day, C. Levy, M. P.
+Shaver, A. P. Green, Nature Catalysis 2022, 5, 673–681.
+[25] R. Shroff, A. W. Cole, D. J. Diaz, B. R. Morrow, I. Donnell, A. Annapareddy,
+J. Gollihar, A. D. Ellington, R. Thyer, ACS Synth. Biol. 2020, 9, 2927–2935.
+[26] V. Gligorijević, P. D. Renfrew, T. Kosciolek, J. K. Leman, D. Berenberg, T.
+Vatanen, C. Chandler, B. C. Taylor, I. M. Fisk, H. Vlamakis, R. J. Xavier, R.
+Knight, K. Cho, R. Bonneau, Nat. Commun. 2021, 12, 3168.
+[27] H. F. Son, S. Joo, H. Seo, H.-Y. Sagong, S. H. Lee, H. Hong, K.-J. Kim,
+Enzyme Microb. Technol. 2020, 141, 109656.
+[28] E. Z. L. Zhong-Johnson, C. A. Voigt, A. J. Sinskey, Sci. Rep. 2021, 11.
+[29] Y. Gumulya, J.-M. Baek, S.-J. Wun, R. E. S. Thomson, K. L. Harris, D. J. B.
+Hunter, J. B. Y. H. Behrendorff, J. Kulig, S. Zheng, X. Wu, B. Wu, J. E. Stok,
+J. J. De Voss, G. Schenk, U. Jurva, S. Andersson, E. M. Isin, M. Bodén, L.
+Guddat, E. M. J. Gillam, Nature Catalysis 2018, 1, 878–888.
+[30] N. M. Hendrikse, G. Charpentier, E. Nordling, P.-O. Syrén, FEBS J. 2018,
+285, 4660–4673.
+[31] S. Meng, Z. Li, P. Zhang, F. Contreras, Y. Ji, U. Schwaneberg, Chin. J.
+Catal. 2023, 50, 229–238.
+Wiley VCH Dienstag, 07.05.2024
+2410 / 350675 [S. 182/183]
+1
+ChemBioChem 2024, 25, e202400084 (9 of 10) © 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202400084
+ 14397633, 2024, 10, Downloaded from https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cbic.202400084 by Readcube (Labtiva Inc.), Wiley Online Library on [08/11/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+[32] R. Jiang, L. Shang, R. Wang, D. Wang, N. Wei, Environ. Sci. Technol. Lett.
+2023, 10, 557–564.
+[33] A. Gupta, S. Agrawal, J. Emerg. Inv. 2023, 6, 1.
+[34] X. Han, W. Liu, J.-W. Huang, J. Ma, Y. Zheng, T.-P. Ko, L. Xu, Y.-S. Cheng,
+C.-C. Chen, R.-T. Guo, Nat. Commun. 2017, 8, 2106.
+[35] C.-C. Chen, X. Han, X. Li, P. Jiang, D. Niu, L. Ma, W. Liu, S. Li, Y. Qu, H. Hu,
+J. Min, Y. Yang, L. Zhang, W. Zeng, J.-W. Huang, L. Dai, R.-T. Guo, Nature
+Catalysis 2021, 4, 425–430.
+[36] A. Crnjar, A. Griñen, S. C. L. Kamerlin, C. A. Ramírez-Sarmiento, ACS Org,
+Inorg. Au 2023, 3, 109–119.
+[37] S. Joo, I. J. Cho, H. Seo, H. F. Son, H.-Y. Sagong, T. J. Shin, S. Y. Choi, S. Y.
+Lee, K.-J. Kim, Nat. Commun. 2018, 9, 382.
+[38] Q. Yin, J. Zhang, S. Ma, T. Gu, M. Wang, S. You, S. Ye, R. Su, Y. Wang, W.
+Qi, Green Chem. 2023, 26, 2560–2570.
+[39] M. Furukawa, N. Kawakami, A. Tomizawa, K. Miyamoto, Sci. Rep. 2019, 9.
+[40] J. Then, R. Wei, T. Oeser, A. Gerdts, J. Schmidt, M. Barth, W.
+Zimmermann, FEBS Open Bio 2016, 6, 425–432.
+[41] M. Oda, Y. Yamagami, S. Inaba, T. Oida, M. Yamamoto, S. Kitajima, F.
+Kawai, Appl. Microbiol. Biotechnol. 2018, 102, 10067–10077.
+[42] V. Tournier, C. M. Topham, A. Gilles, B. David, C. Folgoas, E. Moya-Leclair,
+E. Kamionka, M. L. Desrousseaux, H. Texier, S. Gavalda, M. Cot, E.
+Guémard, M. Dalibey, J. Nomme, G. Cioci, S. Barbe, M. Chateau, I. André,
+S. Duquesne, A. Marty, Nature 2020, 580, 216–219.
+[43] H. P. Austin, M. D. Allen, B. S. Donohoe, N. A. Rorrer, F. L. Kearns, R. L.
+Silveira, B. C. Pollard, G. Dominick, R. Duman, K. El Omari, V. Mykhaylyk,
+A. Wagner, W. E. Michener, A. Amore, M. S. Skaf, M. F. Crowley, A. W.
+Thorne, C. W. Johnson, H. L. Woodcock, J. E. McGeehan, G. T. Beckham,
+Proc. Natl. Acad. Sci. USA 2018, 115, E4350–E4357.
+[44] A. Rennison, J. R. Winther, C. Varrone, Polymers (Basel). 2021, 13, 3884.
+[45] L. Avilan, B. R. Lichtenstein, G. König, M. Zahn, M. D. Allen, L. Oliveira, M.
+Clark, V. Bemmer, R. Graham, H. P. Austin, G. Dominick, C. W. Johnson,
+G. T. Beckham, J. E. McGeehan, A. R. Pickford, ChemSusChem 2023, 16,
+e202202277.
+[46] S. Giraldo-Narcizo, N. Guenani, A. M. Sánchez-Pérez, A. Guerrero,
+ChemBioChem 2023, 24, e202200503.
+[47] M. A. M. E. Vertommen, V. A. Nierstrasz, M. v. d. Veer, M. M. C. G. War-
+moeskerken, J. Biotechnol. 2005, 120, 376–386.
+[48] D. Aragão, J. Aishima, H. Cherukuvada, R. Clarken, M. Clift, N. P.
+Cowieson, D. J. Ericsson, C. L. Gee, S. Macedo, N. Mudie, S. Panjikar, J. R.
+Price, A. Riboldi-Tunnicliffe, R. Rostan, R. Williamson, T. T. Caradoc-
+Davies, J. Synchrotron Radiat. 2018, 25, 885–891.
+[49] P. R. Evans, G. N. Murshudov, Acta Crystallogr. Sect. D 2013, 69, 1204–
+1214.
+[50] C. Vonrhein, C. Flensburg, P. Keller, A. Sharff, O. Smart, W. Paciorek, T.
+Womack, G. Bricogne, Acta Crystallogr. Sect. D 2011, 67, 293–302.
+[51] P. Emsley, B. Lohkamp, W. G. Scott, K. Cowtan, Acta Crystallogr. Sect. D
+2010, 66, 486–501.
+[52] G. N. Murshudov, P. Skubak, A. A. Lebedev, N. S. Pannu, R. A. Steiner,
+R. A. Nicholls, M. D. Winn, F. Long, A. A. Vagin, Acta Crystallogr. Sect. D
+2011, 67, 355–367.
+[53] L. Potterton, J. Agirre, C. Ballard, K. Cowtan, E. Dodson, P. R. Evans, H. T.
+Jenkins, R. Keegan, E. Krissinel, K. Stevenson, A. Lebedev, S. J.
+McNicholas, R. A. Nicholls, M. Noble, N. S. Pannu, C. Roth, G. Sheldrick, P.
+Skubak, J. Turkenburg, V. Uski, F. von Delft, D. Waterman, K. Wilson, M.
+Winn, M. Wojdyr, Acta Crystallogr. Sect. D 2018, 74, 68–84.
+[54] P. D. Adams, P. V. Afonine, G. Bunkóczi, V. B. Chen, I. W. Davis, N. Echols,
+J. J. Headd, L. W. Hung, G. J. Kapral, R. W. Grosse-Kunstleve, A. J. McCoy,
+N. W. Moriarty, R. Oeffner, R. J. Read, D. C. Richardson, J. S. Richardson,
+T. C. Terwilliger, P. H. Zwart, Acta Crystallogr. Sect. D 2010, 66, 213–221.
+[55] E. B. G. Bricogne, M. Brandl, C. Flensburg, P. Keller, W. Paciorek, P.
+Roversi, A. Sharff, O. S. Smart, C. Vonrhein, T. O. Womak, BUSTER,
+Cambridge, United Kingdom: Global Phasing Ltd., 2017.
+[56] Y. Yang, J. Min, T. Xue, P. Jiang, X. Liu, R. Peng, J.-W. Huang, Y. Qu, X. Li,
+N. Ma, F.-C. Tsai, L. Dai, Q. Zhang, Y. Liu, C.-C. Chen, R.-T. Guo, Nat.
+Commun. 2023, 14, 1645.
+[57] D. A. Case, H. M. Aktulga, K. Belfon, D. S. Cerutti, G. A. Cisneros, V. W. D.
+Cruzeiro, N. Forouzesh, T. J. Giese, A. W. Götz, H. Gohlke, S. Izadi, K.
+Kasavajhala, M. C. Kaymak, E. King, T. Kurtzman, T.-S. Lee, P. Li, J. Liu, T.
+Luchko, R. Luo, M. Manathunga, M. R. Machado, H. M. Nguyen, K. A.
+O’Hearn, A. V. Onufriev, F. Pan, S. Pantano, R. Qi, A. Rahnamoun, A.
+Risheh, S. Schott-Verdugo, A. Shajan, J. Swails, J. Wang, H. Wei, X. Wu, Y.
+Wu, S. Zhang, S. Zhao, Q. Zhu, T. E. Cheatham, III, D. R. Roe, A. Roitberg,
+C. Simmerling, D. M. York, M. C. Nagan, K. M. Merz, Jr., J. Chem. Inf.
+Model. 2023, 63, 6183–6191.
+[58] R. Salomon-Ferrer, A. W. Götz, D. Poole, S. Le Grand, R. C. Walker, J.
+Chem. Theory Comput. 2013, 9, 3878–3888.
+[59] A. W. Götz, M. J. Williamson, D. Xu, D. Poole, S. Le Grand, R. C. Walker, J.
+Chem. Theory Comput. 2012, 8, 1542–1555.
+[60] S. Le Grand, A. W. Götz, R. C. Walker, Comput. Phys. Commun. 2013, 184,
+374–380.
+[61] J. A. Maier, C. Martinez, K. Kasavajhala, L. Wickstrom, K. E. Hauser, C.
+Simmerling, J. Chem. Theory Comput. 2015, 11, 3696–3713.
+[62] W. L. Jorgensen, J. Chandrasekhar, J. D. Madura, R. W. Impey, M. L. Klein,
+J. Chem. Phys. 1983, 79, 926–935.
+[63] P. H. Hünenberger, J. Chem. Phys. 2000, 113, 10464–10476.
+[64] W. Humphrey, A. Dalke, K. Schulten, J. Mol. Graphics 1996, 14, 33–38.
+Manuscript received: January 30, 2024
+Revised manuscript received: April 2, 2024
+Accepted manuscript online: April 7, 2024
+Version of record online: May 2, 2024
+Wiley VCH Dienstag, 07.05.2024
+2410 / 350675 [S. 183/183]
+1
+ChemBioChem 2024, 25, e202400084 (10 of 10) © 2024 The Authors. ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202400084
+ 14397633, 2024, 10, Downloaded from https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cbic.202400084 by Readcube (Labtiva Inc.), Wiley Online Library on [08/11/2025]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License

@@ -1,0 +1,1033 @@
+Vol.:(0123456789)
+Journal of Computer-Aided Molecular Design (2025) 39:32 
+https://doi.org/10.1007/s10822-025-00604-5
+Thermodynamic free energy map for the non‑oxidative glycolysis 
+pathways
+Adittya Pal1
+Received: 28 March 2025 / Accepted: 13 May 2025 / Published online: 16 June 2025 
+© The Author(s) 2025
+Abstract
+Designing reaction pathways that maximize the production of a target compound in a given metabolic network is a fun-
+damental problem in systems biology. In this study, we systematically explore the non-oxidative glycolysis metabolic net-
+work, guided by the principle that reactions with negative Gibbs free energy differences are thermodynamically favored. 
+We enumerate alternative pathways that implement the net non-oxidative glycolysis reaction, categorized by their length. 
+Our analysis reveals several alternative thermodynamically favorable pathways beyond the experimentally reported ones. 
+Additionally, we identify molecules within the network, such as 3-hydroxypropionic acid, that may have significant potential 
+for further investigation.
+Keywords Non-oxidative glycolysis · Metabolic networks · Thermodynamic analysis of molecular networks · Systems 
+biology · Thermodynamics in biology · Mixed integer linear programming · 3-hydroxypropionic acid
+Introduction
+Glycolysis is a catabolic pathway that converts carbo-
+hydrates to acetylphosphate while releasing energy, 
+catalyzed by enzymes. The pathway that occurs in most 
+organisms does not achieve the theoretically optimal atom 
+efficiency because two out of every six carbon atoms in 
+the carbohydrate are released as carbon dioxide, which is 
+lost to the atmosphere. Synthetically designed pathways, 
+however, have reached the theoretical limit of 100% car -
+bon efficiency, where no carbon atoms are lost as carbon 
+dioxide molecules [1 ]. These pathways are called non-
+oxidative glycolysis pathways because no carbon atoms 
+are fully oxidized to carbon dioxide (where the carbon 
+atom has an oxidation number of +4 as compared to +3 in 
+acetylphosphate).
+While elaborating on nonoxidative glycolysis pathways, 
+the authors in [1] point out that the reaction catalyzed by the 
+enzyme phosphoketolase is an irreversible step, providing 
+the driving force for the nonoxidative glycolytic pathway. 
+The enzyme phosphoketolase can catalyze three different 
+reactions (all following the same template):
+This promiscuous activity of the phosphoketolase enzyme 
+allows for variations in the nonoxidative glycolytic path -
+way. Three experimentally observed pathways are enumer-
+ated in 1, 2, and 3. The fourth pathway, described in 4, 
+uses the phosphoketolase enzyme to cleave three sugars-
+xylulose 5-phosphate, fructose 6-phosphate, and sedohep -
+tulose 7-phosphate-in a single reaction sequence. [1 ] notes 
+that similar pathways can be derived using sedoheptulose 
+biphosphate instead of fructose biphosphate, combinations 
+of which can generate a large number of pathways for non-
+oxidative glycolysis. An example of a pathway using sedo-
+heptulose biphosphate was reported in [2 ].
+We aim to evaluate the possible pathways in the non-
+oxidative glycolysis metabolic network to develop a 
+physical justification for why some pathways are easier to 
+realize under laboratory conditions than others. Further -
+more, we aim to explain why certain by-products, such 
+(1)Xpk ∶ X5P + Pi ⟶G3P + AcP + H 2O
+(2)Fpk ∶ F6P + Pi ⟶E4P + AcP + H 2O
+(3)Spk∶ S7P + Pi ⟶R5P + AcP + H 2O
+ * Adittya Pal 
+ adpal@imada.sdu.dk
+1 Institut for Matematik og Datalogi, Syddansk Universitet, 
+Campusvej 55, 5230 Odense, Denmark
+ Journal of Computer-Aided Molecular Design (2025) 39:32
+32 Page 2 of 17
+as 3-hydroxypropionate in [ 4], are observed alongside 
+acetylphosphate in experiments attempting to optimize 
+the nonoxidative glycolytic pathway. Finally, we seek to 
+identify potential bottlenecks in these pathways and pro-
+pose a few that may be the most feasible under practical 
+conditions.
+Methods
+Traditionally, constraint-based models have been used to 
+analyze metabolic networks under the steady-state assump-
+tion. These constraint-based models can also incorporate 
+kinetic parameters for each (enzymatic) reaction as a fur -
+ther refinement [5 , 6]. However, these kinetic parameters 
+Table 1  The sequence of 
+reactions for the non-oxidative 
+glycolytic pathway using Fpk 
+only from [1] with optimal 
+carbon efficiency
+F6P + E4P ⟶ G3P + S7P
+G3P + S7P ⟶ X5P + R5P
+X5P + E4P ⟶ F6P + G3P
+F6P + Pi ⟶ E4P + AcP + H2O
+R5P ⟶ Ru5P
+Ru5P ⟶ X5P
+X5P + E4P ⟶ F6P + G3P
+F6P + Pi ⟶ E4P + AcP + H2O
+G3P ⟶ DHAP
+G3P + DHAP ⟶ FBP
+FBP + H2O ⟶ F6P + Pi
+F6P + Pi ⟶ E4P + AcP + H2O
+F6P + 2Pi ⟶ 3 AcP + 2 H2O
+Table 2  The sequence of 
+reactions for the non-oxidative 
+glycolytic pathway using Xpk 
+only from [1] with optimal 
+carbon efficiency
+F6P + E4P ⟶ G3P + S7P
+G3P + S7P ⟶ X5P + R5P
+X5P + Pi ⟶ G3P + AcP + H2O
+R5P ⟶ Ru5P
+Ru5P ⟶ X5P
+X5P + Pi ⟶ G3P + AcP + H2O
+G3P ⟶ DHAP
+G3P + DHAP ⟶ FBP
+FBP + H2O ⟶ F6P + Pi
+F6P + G3P ⟶ E4P + X5P
+X5P + Pi ⟶ G3P + AcP + H2O
+F6P + 2Pi ⟶ 3 AcP + 2 H2O
+Table 3  The sequence of 
+reactions for the non-oxidative 
+glycolytic pathway from [1] 
+using both Xpk and Fpk with 
+optimal carbon efficiency
+F6P + E4P ⟶ G3P + S7P
+G3P + S7P ⟶ X5P + R5P
+X5P + Pi ⟶ G3P + AcP + H2O
+R5P ⟶ Ru5P
+Ru5P ⟶ X5P
+X5P + Pi ⟶ G3P + AcP + H2O
+G3P ⟶ DHAP
+G3P + DHAP ⟶ FBP
+FBP + H2O ⟶ F6P + Pi
+F6P + Pi ⟶ E4P + AcP + H2O
+F6P + 2Pi ⟶ 3 AcP + 2 H2O
+Journal of Computer-Aided Molecular Design (2025) 39:32 
+ Page 3 of 17 32
+are often not available for all the reactions in the consid-
+ered network [7 , 8]. Conservation laws, such as the con-
+servation of mass, can be easily modeled to ensure that the 
+rate of production of molecules by certain reactions equals 
+the rate at which they are consumed in the system. In addi-
+tion to this conservation law, thermodynamics is another 
+governing principle for most physical processes in equi-
+librium. An important thermodynamic variable in meta-
+bolic networks, besides kinetic parameters, is the chemical 
+potential of molecules in the network. For a reaction, ΔrG  
+represents the difference in the chemical potentials of the 
+product molecules and the reactant molecules involved in 
+the reaction. Thermodynamics favors only those reactions 
+with a negative ΔrG  value (often termed as reactions that 
+proceed ‘downhill’).
+A critical variable affecting the chemical potential of mol-
+ecules in a system is their concentration. Modeling the con-
+centrations of molecules in living organisms is challenging 
+because they are actively manipulated by transport across 
+membranes through pumps and channels via active trans-
+port, which consumes energy in the form of small molecules 
+such as ATP and NADPH. These driven processes are often 
+difficult to assign free-energy differences to, and hence, 
+challenging to encapsulate within a network. Additionally, 
+different parts of a metabolic network might operate in dis-
+tinct cellular compartments, with varying concentrations of 
+the same molecule. To avoid these complexities, we assume 
+that the reactions in the analyzed metabolic network occur 
+in a well-stirred bioreactor with the required enzymes pre-
+sent, as in an in vitro assessment of a hypothesized pathway 
+before it is engineered into a living cells. It is admitted that 
+under these assumption— not accounting for the free-energy 
+differences of the transport processes and the differential 
+concentration of the same molecule in different cellular 
+compartments— would introduce errors into the modeling.
+Constructing the reaction network
+The metabolic reaction networks are generated using the 
+graph grammar approach in MØD, as elaborated in [9 , 
+10]. The generic expansion of the molecular space was 
+achieved through the recursive application of reaction 
+templates, represented as graph transformation rules, on 
+molecules represented as graphs. The procedure is illus-
+trated in Algorithm 1 and detailed in [11]. The vertices 
+in these (molecular) graphs correspond to atoms, and the 
+edges represent bonds. Hence, subraphs would correspond 
+to molecular fragments. However, this approach omits ste-
+reoinformation for the molecules, which is often critical 
+for metabolic reactions. As a result, stereoisomeric car -
+bohydrates with identical graph representations, such as 
+erythrose and threose, ribose and xylose, or ribulose and 
+xylulose, cannot be distinguished. The graph transforma-
+tion rules modeling each enzymatic reaction are listed 
+in Table  5 and elaborated in Appendix A . The molecu-
+lar space was expanded from a set of starting molecules 
+listed in Appendix Table  12 in Appendix A , until no new 
+molecules with fewer than eight carbon atoms could be 
+added. This restriction makes the molecular space finite 
+and reasonable, as carbohydrates with eight or more car -
+bons are typically unstable and rarely observed in meta-
+bolic pathways. The expanded molecular space contains 81 
+molecules, and the reaction networks generated consisted 
+of 414 individual reactions.
+Table 4  The sequence of 
+reactions for the non-oxidative 
+glycolytic pathway using all 
+Xpk, Fpk and Spk from [3] with 
+optimal carbon efficiency
+F6P + E4P ⟶ G3P + S7P
+S7P + Pi ⟶ R5P + AcP + H2O
+R5P ⟶ Ru5P
+Ru5P ⟶ X5P
+X5P + Pi ⟶ G3P + AcP + H2O
+G3P ⟶ DHAP
+G3P + DHAP ⟶ FBP
+FBP + H2O ⟶ F6P + Pi
+F6P + Pi ⟶ E4P + AcP + H2O
+F6P + 2Pi ⟶ 3 AcP + 2 H2O
+Table 5  Graph grammar transformation rules for expanding the 
+molecular space
+Abbrev. Name of the enzyme Function
+AL Aldolase performs a generic aldol addition.
+AlKe Aldose-Ketose isomerizes aldehydes to ketones.
+KeAl Ketose-Aldose isomerises ketones to aldehydes.
+PHL Phosphohydrolase hydrolyses the phosphate group.
+PK Phosphoketolase breaks C–C keto bond, adds phos-
+phate.
+TAL Transaldolase breaks an aldol bond (generally C3).
+TKL Transketolase cleaves a keto group (generally C2).
+ Journal of Computer-Aided Molecular Design (2025) 39:32
+32 Page 4 of 17
+Algorithm 1  Generating the reaction network
+phosphate subgraph, making the returned pathways more 
+realistic. The formulated ILP to search for nonoxidative gly-
+colysis pathways was:
+For pathways to 3-hydroxypropionic acid, constraint (8) was 
+replaced by outFlow[HPA]= 3 . The formulated ILP had 510 
+variables, 184 constraints and was solved using a generic 
+ILP solver; in this case, the open-source Coin-OR CBC 
+solver [12] was used. It took the ILP solver ∼ 190 seconds to 
+solve for the two pathways using seven reactions described 
+in Section 4.1. The ILP enumerates pathways based on the 
+number of distinct reactions utilized, not the total number 
+of reactions in the pathway. Therefore, if a reaction is used 
+twice (with a flow of two), it is counted only once when 
+ordering the pathways returned by the ILP solver.
+Assignment of chemical potentials to vertices
+Representing molecules as graphs preserves the connectivity 
+information of the atoms but does not include details about 
+the relative placement of the atoms in three-dimensional 
+space. To address this, we generate a three-dimensional 
+(5)min
+/parenleft.s4
+/uni2211.s1
+e∈E
+fe
+/parenright.s4
+(6)∀e ∈ E ∶ fe ≥ 0
+(4)∀v ∈ V ∶
+/uni2211.s1
+e∈out(v)
+fe −
+/uni2211.s1
+e∈in(v)
+fe = 0
+(7)inFlow[F6P]= 1
+(8)outFlow[AcP]=3
+Enumerating the relevant pathways
+Pathways in living organisms metabolize carbohydrates such 
+that two carbon atoms from a six-carbon sugar (e.g., fruc-
+tose) are lost as carbon dioxide molecules. Our goal is to 
+identify pathways that do not produce carbon dioxide from 
+starting carbohydrates but instead convert all six carbon 
+atoms into three acetylphosphate molecules. Thus, we set a 
+search query that restricts the inflow of fructose 6-phosphate 
+to one and the outflow of acetylphosphate to three. If the 
+number of acetylphosphate molecules produced by the path-
+way is less than three, the carbon efficiency of the pathway 
+would be suboptimal. The search query is formulated as an 
+integer linear program (ILP) to assign integral flows to the 
+reactions, representing the number of times each reaction 
+must occur in the pathway to produce the target molecules 
+from the given source molecule. The mass conservation law 
+is represented as a flow conservation constraint for all ver -
+tices v, where the flow fe on a hyperedge e  is the number 
+of times the reaction represented by the hyperedge occurs 
+in the pathway. For all vertices, the number of copies of 
+the molecule used by the reactions e  where v  is a reactant 
+( in(v) ) must be balanced by the number of copies of the mol-
+ecule produced by reactions e  where v is a product ( out(v) ) 
+in steady state. Mathematically,
+Multiplying the flow fe by a positive integer also produces a 
+valid flow that satisfies the mass conservation law. Therefore, 
+the inflow is restricted to one fructose 6-phosphate molecule 
+to eliminate superfluous solutions, which are base solutions 
+scaled by a positive integer. An additional constraint ensures 
+that all carbohydrate molecules in the pathway must have a 
+(4)∀v ∈ V ∶
+/uni2211.s1
+e∈in(v)
+fe =
+/uni2211.s1
+e∈out(v)
+fe
+Journal of Computer-Aided Molecular Design (2025) 39:32 
+ Page 5 of 17 32
+embedding for the atoms in the molecular graph and use 
+that embedding to assign a chemical potential to the mol-
+ecule under standard physical conditions. OpenBabel [13] 
+was used to create an initial guess for the three-dimensional 
+embedding of the molecule using a combination of elemen-
+tary rules and frequently encountered molecular subgraphs. 
+However, these initial guesses often contain substructures 
+with steric clashes or high strain and, therefore, require 
+optimization.
+The torsional angles in the molecule are adjusted to locate 
+a lower-energy conformer, where the energy of the result-
+ing conformer is estimated using an elementary force field. 
+In this work, the universal force field (UFF) [14] was used. 
+The Cartesian coordinates of the optimized embedding of 
+the molecule were written out as an .sdf file.
+The structures generated by OpenBabel cannot be directly 
+used to estimate the chemical potentials because they are 
+based on empirical knowledge of a class of molecules. 
+Semi-empirical methods, such as xTB [15], offer a fast yet 
+accurate way to estimate thermodynamic parameters after 
+optimizing the geometry of the molecule (given a reasonable 
+initial guess). However, as a chemical tool, xTB requires 
+the input file for the molecule to be in one of the standard 
+chemical formats. OpenBabel serves as a bridge, convert-
+ing graphs with only connectivity information into standard 
+structure data files readable by xTB. xTB iteratively opti-
+mizes the geometry of the molecule from the input .sdf  
+file until the energy change between iterations falls below 
+an acceptable tolerance. The optimized geometry is then 
+used to assign the chemical potential to the molecule. xTB 
+calculates the thermo-statistical translational, rotational, 
+and vibrational contributions to the electronic energy to 
+determine the chemical potentials, using the rigid-rotor and 
+harmonic-oscillator approximations.
+The workflow for assigning chemical potentials to mol-
+ecules is depicted in Figure 1.
+Thermodynamic analyses of pathways
+Pathways enumerated by the ILP solver satisfy the con-
+straints of mass conservation, but they must also be real-
+izable under practical reactor-like settings. While practical 
+realizability (encapsulated as whether a reaction is thermo-
+dynamically favorable, i.e., has a negative Gibbs free energy 
+difference under certain concentrations of the involved mol-
+ecules) can be integrated into the ILP modeling as in [16, 
+17], in this work, we perform a post-processing of the ILP 
+solutions using the calculated chemical potentials. We bor -
+row concepts from probability to understand how energy 
+tends to distribute itself in the reaction network, making 
+some reactions thermodynamically favorable. At first glance, 
+this might seem contradictory, as physical laws are universal 
+and deterministic, not probabilistic.
+We consider the following statement for the second law 
+of thermodynamics:
+When a system is composed of a large number of mol-
+ecules, it is exceedingly likely to spontaneously move 
+to a thermodynamic macrostate that maximizes the 
+number of possible microstates.
+A caveat is that the system must consist of a large number 
+of molecules, which might not always be the case in cellular 
+compartments in living organisms. The statistics become 
+overwhelming (so that they can be formulated as a statistical 
+law of large numbers) only when the number of molecules 
+in the system is large-hence the justification for using the 
+phrase exceedingly likely.
+Fig. 1  Sequence of operations 
+to estimate the chemical poten-
+tial of a molecule at standard 
+physical conditions (273.15 K 
+and 105 Pa) from the connectiv-
+ity information of a graph that 
+represents a molecule
+ Journal of Computer-Aided Molecular Design (2025) 39:32
+32 Page 6 of 17
+Not all microstates available to the system are equally 
+probable. The probability of a microstate depends on its 
+energy E, through the Boltzmann factor ∼ exp(−E∕kBT) . 
+Furthermore, there may be several microstates with the same 
+energy, which is related to the entropy S  of the system by 
+the Boltzmann–Planck equation: S = kB ln w , where w is the 
+number of microstates in the system and kB is the Boltzmann 
+constant. Therefore, the probability, P (E, T) that a system 
+is in a macrostate with energy E  and w microstates at tem-
+perature T is given by:
+In the context of reactions, we are often concerned with 
+the relative probabilities of two macrostates. The ratio of 
+probabilities of two macrostates with energy E1 and E2 is 
+given by:
+Under conditions of constant pressure (commonly 
+encountered in cellular and bioreactor environ-
+ments), the energy E can be replaced by the enthalpy 
+H. The numerator of the exponent then becomes 
+(H1 − H2)− T(S1 − S2)=Δ H − TΔS =Δ rG  . The quantity 
+ΔrG  is the Gibbs free energy difference for the reaction and 
+indicates the relative likelihood of the reaction proceeding 
+in a particular direction.
+For a reaction r ∶ LHS ⟶RHS , if ΔrG < 0 , then the 
+ratio PRHS ∕PLHS > 1 , meaning the system is more likely 
+to be in the state represented by the RHS. Conversely, if 
+ΔrG > 0 , the system prefers the state represented by the 
+LHS.
+For pathways, the Gibbs free energy is a state function 
+and thus independent of the sequence of reactions. There-
+fore, all pathways effecting the net reaction for non-oxidative 
+glycolysis:
+(9)
+P(E,T)∼ w ⋅ exp (−E∕kBT)= exp (S∕kB) ⋅ exp (−E∕kBT)
+= exp
+/parenleft.s3
+−E − TS
+kBT
+/parenright.s3
+P(E1 ,T)
+P(E2 ,T) = exp
+/parenleft.s3
+−(E1 − E2 )− T(S1 − S2 )
+kBT
+/parenright.s3
+frustose 6-phosphate + 2 phosphoric acid ⟶3 acetyl phosphate + 2H2 O
+will have the same net Gibbs free energy difference, given 
+by ΔrG = 3G(AcP)+ 2G(H 2O)− G(F 6P)−2G(P i) . How-
+ever, different pathways use different intermediate reactions, 
+resulting in varying intermediate compositions and thermo-
+dynamic free energy profiles. Ideally, all constituent reac -
+tions in a pathway should be spontaneous in the required 
+direction. For consecutive reactions with negative Gibbs free 
+energy differences, the molecules on the RHS of the first 
+reaction are more likely to appear, forming a subset that 
+serves as the LHS of the subsequent reaction. This estab-
+lishes a cascade of reactions, where molecules are consecu-
+tively transformed into ones with a high probability of being 
+observed, provided all reactions in the pathway have nega-
+tive Gibbs free energy differences.
+Conversely, a reaction with a positive Gibbs free energy 
+difference represents a bottleneck. A reaction i  with 
+ΔrG i > 0 does not imply that it will not  occur. It simply 
+means the reaction is less likely to proceed in the required 
+direction compared to the reverse reaction. In cellular envi-
+ronments, energy-driven processes and transport mecha -
+nisms actively manipulating molecule concentrations can 
+render such reactions thermodynamically favorable under 
+those conditions, even if they are not under standard physi-
+cal conditions. Furthermore, the chemical potentials of the 
+molecules, from which the free energy differences are calcu-
+lated, are estimated under certain approximations. Errors in 
+these estimations could lead to incorrect conclusions.
+Results
+We enumerate pathways in the generated reaction network, 
+and the distribution of the pathways by the number of reac-
+tions used, the number of unique reactions utilized, and the 
+biphosphate used is shown in Table 6. Intuitively, we hypoth-
+esize that pathways utilizing a smaller number of reactions 
+(‘shorter paths’ in the network) might be favored because 
+it would be simpler to construct a corresponding bioreac-
+tor if each reaction takes place in a separate compartment. 
+Table 6  Count of the different 
+pathways enumerated by the 
+ILP solver
+Type of biphosphate used XBP FBP SBP Total
+7 reactions 7 unique reactions 1 0 1 2
+8 reactions 7 unique reactions 6 0 6 12 29
+8 unique reactions 7 2 8 17
+9 reactions 7 unique reactions 3 0 3 6 207
+8 unique reactions 42 12 48 102
+9 unique reactions 38 17 44 99
+Journal of Computer-Aided Molecular Design (2025) 39:32 
+ Page 7 of 17 32
+Moreover, pathways utilizing fewer reactions would be eas-
+ier to study and monitor under laboratory conditions.
+Pathways with seven reactions
+Two non-oxidative glycolytic pathways with seven reac-
+tions were found in the expanded reaction network and are 
+shown in Figure 2a and b. The first one uses sedoheptulose-
+1,7-biphosphate, while the second uses xylulose-1,5-bi-
+phosphate. The first pathway has been studied in [2 ] under 
+laboratory conditions and was reported to “overcome bottle-
+necks from the previously reported non-oxidative glycolysis 
+cycles.” Both pathways use only four of the seven templated 
+enzymatic reactions used to expand the reaction network: 
+aldolase, aldose-ketose isomerase, phosphohydrolase, and 
+phosphoketolase.
+We elaborate on the individual reactions in the pathways 
+here. Both pathways have two reactions requiring one sub-
+strate molecule, while the remaining five reactions require 
+two substrate molecules. Only one reaction requires two car-
+bohydrate molecules as a substrate, which has been high-
+lighted in both pathways. All the other bimolecular reactions 
+use either water or phosphate molecules, which are present 
+in abundance. Steady-state simulations of the non-oxidative 
+glycolytic pathways by [2] have shown that the intermediate 
+sedoheptulose-7-phosphate starts accumulating over time, 
+limiting the efficiency of the pathway. They addressed this 
+problem by introducing a specific phosphoketolase into the 
+system, which removed the kinetic bottleneck in the path-
+way. The second pathway with seven reactions, depicted in 
+Table  8 found in the reaction network, does not produce 
+sedoheptulose-7-phosphate at all. However, a drawback 
+of this pathway is that while phosphoketolase has been 
+widely reported to be active on substrates such as fructose-
+6-phosphate, xylulose-5-phosphate [18], and sedoheptulose-
+7-phosphate [2], it has not been reported to act on erythru-
+lose-4-phosphate, as required by the third reaction in the 
+pathway shown in 8. However, if one observes the presence 
+of erythrulose-4-phosphate, glycolaldehyde-2-phosphate, 
+and xylulose-1,5-biphosphate in a reactor effecting the non-
+oxidative glycolytic pathway with optimal carbon efficiency 
+using only these four enzymes, it would act as evidence that 
+the pathway shown in 8 is also practical.
+Fig. 2  Two pathways for non-oxidative glycolysis using 7 reactions: 2ausing sedoheptulose-1,7-biphosphate (top panel) and 2busing xylulose-
+1,5-biphosphate (bottom panel)
+ Journal of Computer-Aided Molecular Design (2025) 39:32
+32 Page 8 of 17
+We determined the free energy differences for each reac-
+tion used in the two pathways in 7  and 8 . The thermody -
+namic free energy profiles for these two pathways are plotted 
+in Figure 3a and b, respectively. The green bars represent the 
+Gibbs free energy differences for thermodynamically favora-
+ble reactions ( ΔrG < 0 ), while the blue bars represent the 
+Gibbs free energy differences for reactions that are not ther-
+modynamically favorable ( ΔrG > 0 ) under standard physical 
+conditions. The bars are annotated with the numerical values 
+of the Gibbs free energy differences for the respective reac-
+tions. Since free energy is a state function, the net difference 
+in Gibbs free energy for the overall pathway is the same for 
+both pathways: −236.75 kJ mol−1.
+In both pathways, the hydrolysis of the biphosphate by 
+the phosphohydrolase is not a thermodynamically favorable 
+reaction. While the hydrolysis of sedoheptulose-1,7-biphos-
+phate has a positive Gibbs free energy difference of 0.58 
+kJ mol−1 , the hydrolysis of xylulose-1,5-biphosphate has a 
+higher value of 7.39 kJ mol −1 . The hydrolysis reaction has 
+been observed to be sensitive to the pH of the environment 
+and the activity of water molecules. The hydrolysis of the 
+biphosphate would be expected to be a thermodynamic bot-
+tleneck for both pathways. In reality, the cell might adjust 
+the physical conditions in the region where the hydrolysis 
+takes place to make the reaction favorable. Moreover, the 
+free energy of the educts and the products is not simply the 
+sum of those of individual molecules because of the complex 
+intermolecular interactions (hydrogen bonding, polar inter -
+actions, hydrophobic effects) that might take place between 
+molecules, especially in solution.
+Table 7  The sequence of 
+reactions with the respective 
+enzymes for the non-oxidative 
+glycolytic pathway using 7 
+reactions using sedoheptulose-
+1,7-biphosphate
+F6P + Pi PK
+⟶ E4P + H2O + AcP
+E4P + DHAP Al
+⟶ SBP
+SBP + H2O PHL
+⟶ S7P + Pi
+S7P + Pi PK
+⟶ R5P + H2O + AcP
+R5P AlKe
+⟶ X5P
+X5P + Pi PK
+⟶ G3P + AcP + H2O
+G3P AlKe
+⟶ DHAP
+F6P + 2Pi ⟶ 3 AcP + 2 H2O
+Table 8  The sequence of 
+reactions with the respective 
+enzymes for the non-oxidative 
+glycolytic pathway using 7 
+reactions using xylulose-1,5-
+biphosphate
+F6P + Pi PK
+⟶ E4P + H2O + AcP
+E4P AlKe
+⟶ Eu4P
+Eu4P + Pi PK
+⟶ Gly2P + H2O + AcP
+Gly2P + DHAP Al
+⟶ XBP
+XBP + H2O PHL
+⟶ X5P + Pi
+X5P + Pi PK
+⟶ G3P + AcP + H2O
+G3P AlKe
+⟶ DHAP
+F6P + 2Pi ⟶ 3 AcP + 2 H2O
+Fig. 3  Thermodynamic free 
+energy profiles for the two 
+pathways for non-oxidative 
+glycolysis using 7 reactions for 
+pathways 7 (left) and 8 (right) 
+respectively
+
+Journal of Computer-Aided Molecular Design (2025) 39:32 
+ Page 9 of 17 32
+Previously reported pathways
+In this section, we analyze the four previously reported 
+non-oxidative glycolysis pathways listed in Tables  1, 
+2, 3, and 4  and compare them to the shortest pathways 
+described in Section  4.1. Note that the count of reac-
+tions in Table  9, listing the various characteristics of the 
+pathways, is one less than those in the pathways listed in 
+Tables 1, 2, 3, and 4  because we cannot represent stereo-
+information in molecular graphs. Hence, the molecules 
+ribulose-5-phosphate and xylulose-5-phosphate have 
+the same representation as graphs. The two reactions 
+R5P ⟶Ru5P ⟶X5P are counted as one. All the path-
+ways use fructose-1,6-biphosphate.
+The reactions involving two carbohydrate molecules as 
+substrates (catalyzed by the transaldolase or the transke-
+tolase enzymes) might be potential kinetic bottlenecks in 
+the pathway. We generate the thermodynamic profiles for 
+the four pathways to deduce which reactions might act 
+as thermodynamic bottlenecks. The thermodynamic free 
+energy profiles indicate that the first reaction catalyzed 
+by the transaldolase in all four pathways is unfavorable. 
+The hydrolysis of fructose-1,6-biphosphate catalyzed by 
+phosphohydrolase has a marginally negative Gibbs free 
+energy difference. This was expected from the free energy 
+differences for the hydrolysis of the five-carbon and seven-
+carbon biphosphates. Except for the first pathway 1  (which 
+has three thermodynamically unfavorable reactions), all 
+the pathways have only one thermodynamically unfavora-
+ble reaction. Increasing the total number of reactions in the 
+pathway did not have an adverse effect on the free energy 
+differences of the individual reactions.
+Two factors might account for the large number of pos-
+sible pathways for a non-oxidative glycolytic pathway: the 
+promiscuous activity of phosphoketolase and the biphos-
+phate that might be hydrolyzed. The phosphoketolase act-
+ing on different substrates, as shown in reactions 1 , 2, and 
+3, have comparable free energy differences: −44.376 kJ 
+mol−1 , −49.666  kJ mol −1 and −53.887 kJ mol −1 , respec-
+tively. Regarding the hydrolysis of the biphosphates, the 
+hydrolysis of fructose-1,6-biphosphate has a negative 
+Gibbs free energy difference of 0.0322 kJ mol −1 , while 
+Table 9  Some characteristics of the previously experimentally 
+reported non-oxidative glycolytic pathways
+1 count of the total number of reactions used in the pathway: ∑
+e fe
+2 count of the number of unique reactions used in the pathway: ∑
+e∶fe >0 1
+3 count of the different enzymes used in the pathway
+4 3-tuple representing the count of the number of reactions using 
+(Xpk, Fpk, Spk) respectively
+5 count of the number of bimolecular reactions in the pathway
+6 count of the number of reactions where both the reactant molecules 
+are carbohydrates
+Pathway 1 2 3 4
+#reactions1 11 10 9 8
+#hyperedges2 8 8 8 8
+#enzymes3 7 7 7 6 (no 
+transke-
+tolase)
+#pk type4 (0,3,0) (3,0,0) (2,1,0) (1,1,1)
+#bimolecular5 9 8 7 6
+#two sugars6 5 4 3 2
+Fig. 4  Thermodynamic free 
+energy profiles for the experi-
+mentally reported pathways 1 
+(top left), 2 (top right), 3 (bot-
+tom left) and 4 (bottom right) 
+for non-oxidative glycolysis
+
+ Journal of Computer-Aided Molecular Design (2025) 39:32
+32 Page 10 of 17
+the hydrolysis of both xylulose-1,6-biphosphate and 
+sedoheptulose-1,7-biphosphate have positive Gibbs free 
+energy differences: 7.386 kJ mol −1 and 0.576 kJ mol −1 , 
+respectively. The free energies for reactions can be altered 
+by changing the concentrations of the molecules involved. 
+The hydrolysis of sedoheptulose-1,7-biphosphate is quite 
+close to equilibrium.
+A ratio of the concentration of only 1.26 for [SBP]/[S7P] 
+makes the reaction in thermal equilibrium at 300 K, consid-
+ering unit activities of water and phosphate molecules. The 
+corresponding value for the ratio of [XBP]/[X5P] so that 
+the reaction is in equilibrium is 19.32. These concentration 
+gradients can be maintained by the active transport of the 
+molecules involved in the reactions (Fig. 4).
+Alternative equivalent non‑oxidative glycolysis 
+pathways
+The results from the previous section indicate that the 
+hydrolysis of fructose-1,6-biphosphate is thermodynami-
+cally favored compared to the immediate higher or lower 
+ΔrG =− RT ln
+/parenleft.s3[S7P][P i]
+[SBP ][H 2O]
+/parenright.s3
+sugars. An exhaustive search for pathways in the gener -
+ated molecular space indicates that there is an alternative 
+pathway, shown in Figure  5, using eight different reac-
+tions (each used once) with the biphosphate of fructose to 
+achieve the non-oxidative glycolytic pathway.
+This pathway uses five enzymes: phosphoketolase, 
+aldose-ketose isomerase, transaldolase, aldolase, and phos-
+phohydrolase, as detailed in Table  10. The thermodynamic 
+free energy profile for this pathway is plotted in Figure  6. 
+Only one reaction, the bimolecular aldol addition reac-
+tion involving two carbohydrate molecules catalyzed by a 
+transaldolase enzyme, is thermodynamically unfavorable 
+Fig. 5  An alternative non-oxidative glycolytic pathway using fructose-1,6-biphosphate and eight reactions
+Table 10  The sequence of reactions in the alternative non-oxidative glycolytic pathway which uses eight reactions and fructose-1,6-biphosphate
+F6P + Pi PK
+⟶ E4P + AcP + H2O
+E4P AlKe
+⟶ Eu4P
+Eu4P + Pi PK
+⟶ Gly2P + H2O + AcP
+Gly2P + F6P PAL
+⟶ X5P + G3P
+X5P + Pi PK
+⟶ G3P + AcP + H2O
+G3P + AL
+⟶ DHAP
+G3P + DHAP AL
+⟶ FBP
+FBP + H2O PHL
+⟶ F6P + Pi
+F6P + 2Pi ⟶  3 ACP + 2 H2O
+Fig. 6  The thermodynamic free energy profile for the pathway in 
+Table 10
+Journal of Computer-Aided Molecular Design (2025) 39:32 
+ Page 11 of 17 32
+Fig. 7  The six pathways leading to 3-hydroxypropionic acid implementing the net reaction 10. While the first five pathways 7a-7e use six unique 
+reactions (the last reaction is used twice), the last pathway 7f uses seven distinct reactions
+ Journal of Computer-Aided Molecular Design (2025) 39:32
+32 Page 12 of 17
+( ΔrG =+ 4.27 kJ mol −1 ). The experimentally reported 
+pathway with eight reactions using the same biphosphate 
+also has a thermodynamically unfavorable reaction, albeit 
+one with a smaller positive Gibbs free energy difference 
+( ΔrG =+ 2.72 kJ mol −1 ). Based on this thermodynamic 
+analysis, one might conjecture that both these reactions 
+might proceed in parallel in a bioreactor if a phosphoke-
+tolase acting on erythrulose is added to the system.
+Formulating the search problem as an ILP query allows us 
+to exhaustively search for non-oxidative glycolytic pathways 
+in the expanded molecular network with the queried length. 
+The results from this search are summarized in Table 6. The 
+length of a pathway is the number of reactions in the path-
+way. If a reaction is used twice in the pathway, it is counted 
+twice. There are only two pathways of length seven: both of 
+them are described in Section  4.1. There are twelve path-
+ways that use eight reactions in total, but seven distinct reac-
+tions, and none of them use fructose-1,6-biphosphate. The 
+shortest pathways utilizing fructose-1,6-biphosphate are of 
+length eight, using all different reactions. They are described 
+in Sections 4.2 and 4.3. As one increases the allowed length 
+of the pathway, the number of solutions returned by the 
+ILP solver increases, as indicated in the last three rows of 
+Table 6. The complete list of the pathways enumerated in 
+the table can be found in the associated GitHub repository.
+Other pathways
+Expanding the molecular space using the eight rules led 
+to 81 molecules in the reaction network, of which 39 were 
+phosphates of carbohydrates, 14 were biphosphates of car -
+bohydrates, 23 were carbohydrates, and 5 were other small 
+molecules. These other small molecules included phos-
+phoric acid, water, ethanoic acid (isomeric to glycolalde -
+hyde), methanal, and 3-hydroxypropionic acid (isomeric to 
+glyceraldehyde). 3-Hydroxypropionic acid was listed as a 
+“proof of concept” product of biosynthesis. It is identified 
+as a precursor to prop-2-enoic acid (acrylic acid) [19] and 
+the biodegradable polymer poly(3-hydroxypropionic acid), 
+or P(3-HPA) [20, 21]. Moreover, acrylic acid can be used 
+to synthesize acrylates, which are monomers for versatile 
+polymers: poly(methyl methacrylate) (PMMA-lightweight 
+and shatter-resistant alternative to glass) and poly(ethyl 
+cyanoacrylate) (PECA-super glues), to name a few. Both eth-
+anoic acid (acetic acid) and methanal (formaldehyde) have 
+numerous industrial applications apart from being precur -
+sors to polymeric units. Therefore, it might be worthwhile to 
+explore pathways leading to these molecules in the network. 
+Pathways producing more than one formaldehyde molecule 
+could not be enumerated in this network. Given that there are 
+multiple alternative economical reaction sequences leading 
+to the production of formaldehyde [22], producing it via this 
+Fig. 8  Thermodynamic profiles for the six corresponding pathways listed in Figure 7 leading to 3-hydroxypropionic acid
+Journal of Computer-Aided Molecular Design (2025) 39:32 
+ Page 13 of 17 32
+biosynthetic method at such a low carbon efficiency might 
+not be justified.
+Pathways to 3‑hydroxypropioic acid
+Since 3-hydroxypropionic acid is a molecule containing 
+three carbon atoms, the optimal efficiency would be achieved 
+when two molecules are produced from one molecule of 
+fructose-6-phosphate, leading to the overall reaction:
+In the generated reaction network, six such pathways were 
+enumerated that carried out the overall reaction 10 in seven 
+steps. Five of these pathways used six unique reactions (one 
+reaction was used twice), while the last pathway used seven 
+distinct reactions, as shown in Figure  7. All the pathways 
+require four of the seven enzymes used to generate the net-
+work: aldolase, aldose-ketose isomerase, phosphohydrolase, 
+and phosphoketolase.
+The pathway in Fig.  8buses only two reactions with a 
+positive ΔrG  (it is, in fact, the same reaction implemented 
+(10)
+F6P + H 2O ⟶2HPA + Pi ΔrG =− 114.428 kJ mol−1
+twice), while all other pathways have more thermodynami-
+cally unfavorable reactions. This might be processed sepa -
+rately, where the phosphate of 3-hydroxypropionic acid is 
+collected as a product and the phosphate group removed 
+separately. However, in a reactor where non-oxidative gly -
+colysis is allowed to execute in parallel, the net reaction 10  
+would be overshadowed by it, because it has a much lower 
+change in free energy.
+Pathways to acetic acid
+Preserving the carbon efficiency would lead to the following 
+overall reaction, with three molecules of acetic acid as the 
+product for every molecule of fructose-3-phosphate:
+Sixty-one pathways were enumerated effecting the overall 
+reaction 11 in ten steps. Three of these pathways used six 
+different reactions (one reaction was used thrice, and a sec-
+ond reaction was used twice), six pathways used seven dif-
+ferent reactions, while the remaining 52 used eight distinct 
+(11)
+F6P + H 2O ⟶3AcH + Pi ΔrG =− 286.711 kJ mol−1
+Table 11  List of the graph 
+transformation rules used as 
+templates for the enzymatic 
+reactions
+Reaction conditions: 2‐aminophenol and 2‐aminothiol (1.2  mmol), aldehyde (1  mmol), 
+K2CO3(1.5 mmol), PEG (3 ml). Isolated yield
+ Journal of Computer-Aided Molecular Design (2025) 39:32
+32 Page 14 of 17
+reactions. Additionally, acetylphosphate on hydrolysis also 
+yields acetic acid. Therefore, in theory, any pathway pro-
+ducing acetylphosphate can also be used to produce ace-
+tic acid. Moreover, formaldehyde was also obtained in the 
+expanded molecular space. However, there might be better 
+and more efficient ways to produce formaldehyde than one 
+using enzymes. Hence, such pathways are not being dis-
+cussed here.
+Conclusion
+In this work, we attempted to generate the Gibbs free energy 
+profiles for pathways implementing non-oxidative glycoly -
+sis in the expanded molecular space. The expansion of the 
+molecular space using reaction templates for the action of 
+each enzyme, along with the ILP-based search for pathways, 
+allows us to explore the molecular space without bias. While 
+Table 12  List of the starting 
+molecules used to expand the 
+reaction network
+Reaction conditions: 2‐aminophenol and 2‐aminothiol (1.2  mmol), aldehyde (1  mmol), 
+K2CO3(1.5 mmol), PEG (3 ml). Isolated yield
+Journal of Computer-Aided Molecular Design (2025) 39:32 
+ Page 15 of 17 32
+the use of Gibbs free energy at standard physical conditions 
+might not always mirror what happens inside a cell, it can 
+assist in elucidating which pathways might be favored by 
+thermodynamics and identifying the bottlenecks in each 
+pathway.
+A recurring reaction in the pathways with a positive 
+change in Gibbs free energy was the hydrolysis of a phos-
+phate group from a molecule, whether it involved a carbo -
+hydrate biphosphate producing a monophosphate or a carbo-
+hydrate monophosphate producing a carbohydrate molecule. 
+Since this reaction involves a water molecule, performing it 
+in an aqueous medium might shift the reaction energetics 
+toward the dephosphorylated products and phosphoric acid.
+Another interesting result from the search query for 
+pathways implementing non-oxidative glycolysis was the 
+involvement of phosphoketolase acting on the phosphate 
+of an erythrose phosphate molecule. If one could develop 
+a variant of the phosphoketolase enzyme that is active on 
+this four-carbon ketose, it might be possible to achieve the 
+pathways returned by the ILP solver, provided the required 
+concentration gradients are maintained in the system. 
+Expanding the molecular space with generic rules (irrespec-
+tive of whether the resulting reactions have been previously 
+reported) provides insights into numerous possibilities for 
+pathways implementing non-oxidative glycolysis-a few of 
+which have been studied in greater detail in this work.
+While the existing work focuses on pathways ensuring opti-
+mal carbon efficiency during non-oxidative glycolysis, there 
+is a tendency to prioritize obtaining acetyl phosphate as the 
+product because of its metabolic significance. However, other 
+molecules in the generated network might also be of interest, 
+one of them being 3-hydroxypropionic acid. Under labora-
+tory conditions, the products from non-oxidative glycolysis 
+are observed because they have lower Gibbs free energy. The 
+Table 13  List of some 
+molecules encountered in 
+pathways from the reaction 
+network
+Reaction conditions: 2‐aminophenol and 2‐aminothiol (1.2  mmol), aldehyde (1  mmol), 
+K2CO3(1.5 mmol), PEG (3 ml). Isolated yield
+ Journal of Computer-Aided Molecular Design (2025) 39:32
+32 Page 16 of 17
+larger Gibbs free energy difference makes the product, acetyl 
+phosphate, e
+−236.75
+−114.28 ∼ 8 times more likely to be observed than 
+3-hydroxypropionic acid. However, pathways to 3-hydroxy-
+propionic acid require only four of the seven enzymes needed 
+for the originally proposed non-oxidative glycolysis. While 
+non-oxidative glycolysis might still be achieved using six of 
+these seven enzymes, the optimal carbon efficiency cannot 
+be achieved with only the four enzymes needed to produce 
+3-hydroxypropionic acid. Therefore, in a system with only four 
+of these enzymes, the pathway producing 3-hydroxypropionic 
+acid might be expected to dominate over some subset of non-
+oxidative glycolysis.
+The method of analyzing pathways satisfying the con-
+straints of mass balance through thermodynamic free energies 
+provides insights into pathways that might be promising under 
+practical conditions. It identifies bottlenecks in the pathways 
+that might require manipulation of the concentrations of the 
+molecules involved in those reactions to make them favora-
+ble. Lastly, it highlights potentially useful byproducts in the 
+expanded network and offers directions for further laboratory 
+exploration to synthesize the identified compounds. The results 
+discussed in this work might be found in greater detail at [23].
+Some interesting molecules and the graph 
+transformation rules used
+Appendix Table  12 lists the starting molecules used to 
+expand the molecular space using the graph transformation 
+rules depicted in Appendix Table 11. These rules represent 
+templates for the reactions effected by the corresponding 
+enzyme. In the rules R  represents a generic group satis-
+fying the valencies for the formulae that can match any 
+subgraph in the representation of the molecule as a graph. 
+Appendix Table 13 lists some of the interesting molecules 
+which have been used in the pathways studied in this work.
+Of the 81 molecules in the expanded network, 6 
+were small molecules, 22 were carbohydrates, 39 were 
+monophosphates and 14 were biphosphates. There were 
+more monophosphates than carbohydrates because a phos-
+phate group might attach to different hydroxyl positions in 
+the carbohydrate molecule leading to different monophos-
+phate molecules.
+Acknowledgements The author would like express their gratitude to 
+the Institut for Matematik og Datalogi, Syddansk Universitet for pro-
+viding the necessary computational resources for this work.
+Funding Open access funding provided by University of Southern 
+Denmark.
+Open Access This article is licensed under a Creative Commons Attri-
+bution 4.0 International License, which permits use, sharing, adapta-
+tion, distribution and reproduction in any medium or format, as long 
+as you give appropriate credit to the original author(s) and the source, 
+provide a link to the Creative Commons licence, and indicate if changes 
+were made. The images or other third party material in this article are 
+included in the article’s Creative Commons licence, unless indicated 
+otherwise in a credit line to the material. If material is not included in 
+the article’s Creative Commons licence and your intended use is not 
+permitted by statutory regulation or exceeds the permitted use, you will 
+need to obtain permission directly from the copyright holder. To view a 
+copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+References
+ 1. Bogorad IW, Lin T-S, Liao JC (2013) Synthetic non-oxida-
+tive glycolysis enables complete carbon conservation. Nature 
+502:693–697. https:// doi. org/ 10. 1038/ natur e12575
+ 2. Hellgren J, Godina A, Nielsen J, Siewers V (2020) Promis-
+cuous phosphoketolase and metabolic rewiring enables novel 
+non-oxidative glycolysis in yeast for high-yield production of 
+acetyl-coa derived products. Metabolic Eng 62:150–160. https://  
+doi. org/ 10. 1016/j. ymben. 2020. 09. 003
+ 3. Krüsemann JL, Lindner SN, Dempfle M, Widmer J, Arrivault 
+S, Debacker M, He H, Kubis A, Chayot R, Anissimova M, 
+Marlière P, Cotton CAR, Bar-Even A (2018) Artificial pathway 
+emergence in central metabolism from three recursive phospho-
+ketolase reactions. FEBS J 285(23):4367–4377. https:// doi. org/  
+10. 1111/ febs. 14682
+ 4. Guo L, Liu M, Bi Y, Qi Q, Xian M, Zhao G (2023) Using a 
+synthetic machinery to improve carbon yield with acetylphos-
+phate as the core. Nature Commun. https:// doi. org/ 10. 1038/  
+s41467- 023- 41135-7
+ 5. Liebermeister W, Klipp E (2006) Bringing metabolic networks 
+to life: convenience rate law and thermodynamic constraints. 
+Theor Biol Med Model. https:// doi. org/ 10. 1186/ 1742- 4682-3- 41
+ 6. Liebermeister W, Klipp E (2006) Bringing metabolic networks 
+to life: integration of kinetic, metabolic, and proteomic data. 
+Theor Biol Med Model. https:// doi. org/ 10. 1186/ 1742- 4682-3- 42
+ 7. Steuer R, Gross T, Selbig J, Blasius B (2006) Structural 
+kinetic modeling of metabolic networks. Proc Nat Acad Sci 
+103(32):11868–11873. https:// doi. org/ 10. 1073/ pnas. 06000 13103
+ 8. Tran LM, Rizk ML, Liao JC (2008) Ensemble modeling of meta-
+bolic networks. Biophys J 95(12):5606–5617. https:// doi. org/ 10. 
+1529/ bioph ysj. 108. 135442
+ 9. Andersen JL, Flamm C, Merkle D, Stadler PF (2018) Rule com-
+position in graph transformation models of chemical reactions. 
+MATCH, Commun Math Comput Chem 80(3):661–704
+ 10. Andersen JL, Flamm C, Merkle D, Stadler PF (2013) Infer -
+ring chemical reaction patterns using rule composition in graph 
+grammars. J Syst Chem 4(4):661–704. https:// doi. org/ 10. 1186/ 
+1759- 2208-4-4
+ 11. Andersen JL, Flamm C, Merkle D, Stadler PF (2016) In: 
+Echahed, R., Minas, M., (eds.) A Software Package for Chemi-
+cally Inspired Graph Transformation, pp. 73–88. Springer, 
+Cham. https:// doi. org/ 10. 1007/ 978-3- 319- 40530-8_5
+ 12. Forrest J, Ralphs T, Vigerske S, Santos HG, Forrest J, Hafer L, 
+Kristjansson B, jpfasano EdwinStraver Lubin M, Jan-Willem rlou-
+gee jpgoncal1 Brito S, h-i-gassmann Cristina Saltzman M, tosttost 
+Pitrus B, MATSUSHIMA F (2023) to-st: coin-or/Cbc: Release 
+releases/2.10.11. Zenodo.https:// doi. org/ 10. 5281/ zenodo. 10041 
+724
+ 13. Yoshikawa N, Hutchison GR (2019) Fast, efficient fragment-based 
+coordinate generation for open babel. J Cheminform. https:// doi. 
+org/ 10. 1186/ s13321- 019- 0372-5
+ 14. Rappe AK, Casewit CJ, Colwell KS, Goddard WAI, Skiff 
+WM (1992) Uff, a full periodic table force field for molecular 
+Journal of Computer-Aided Molecular Design (2025) 39:32 
+ Page 17 of 17 32
+mechanics and molecular dynamics simulations. J Am Chem Soc 
+114(25):10024–10035. https:// doi. org/ 10. 1021/ ja000 51a040
+ 15. Bannwarth C, Caldeweyher E, Ehlert S, Hansen A, Pracht P, 
+Seibert J, Spicher S, Grimme S (2021) Extended tight-binding 
+quantum chemistry methods. WIREs Comput Mol Sci 11(2):1493. 
+https:// doi. org/ 10. 1002/ wcms. 1493
+ 16. Pal A, Fagerberg R, Andersen JL, Flamm C, Dittrich P, Merkle D 
+(2024) Finding Thermodynamically Favorable Pathways in Reac-
+tion Networks using Flows in Hypergraphs and Mixed Integer 
+Linear Programming. https:// arxiv. org/ abs/ 2411. 15900
+ 17. Pal A, Fagerberg R, Andersen JL, Dittrich P, Merkle D (2025) 
+Finding Pathways in Reaction Networks guided by Energy Bar -
+riers using Integer Linear Programming. https:// arxiv. org/ abs/  
+2504. 10609
+ 18. Meadows A, Hawkins K, Tsegaye Y et al (2016) Rewriting yeast 
+central carbon metabolism for industrial isoprenoid production. 
+Nature 537:694–697. https:// doi. org/ 10. 1038/ natur e19769
+ 19. Bozell JJ, Petersen GR (2010) Technology development 
+for the production of biobased products from biorefinery 
+carbohydrates-the US Department of Energy’s Top 10 revisited. 
+Green Chem 12:539–554. https:// doi. org/ 10. 1039/ B9220 14C
+ 20. Andreeßen B, Taylor N, Steinbüchel A (2014) Poly(3-hydroxy -
+propionate): a promising alternative to fossil fuel-based materi-
+als. Appl Environ Microbiol 80(21):6574–6582. https:// doi. org/ 
+10. 1128/ AEM. 02361- 14
+ 21. Vollenweider S, Lacroix C (2004) 3-hydroxypropionaldehyde: 
+applications and perspectives of biotechnological production. 
+Appl Microbiol Biotechnol 64:16–27. https:// doi. org/ 10. 1007/ 
+s00253- 003- 1497-y
+ 22. Kamps JJAG, Hopkinson RJ, Schofield CJ, Claridge TDW (2019) 
+How formaldehyde reacts with amino acids. Commun Chem. 
+https:// doi. org/ 10. 1038/ s42004- 019- 0224-2
+ 23. Pal A (2024) supplementary data repository on GitHub. https:// 
+github. com/ Aditt yaPal/ Pathw aysIn NOG. git
+Publisher's Note Springer Nature remains neutral with regard to 
+jurisdictional claims in published maps and institutional affiliations.

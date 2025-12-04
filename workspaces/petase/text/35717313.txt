@@ -1,0 +1,2556 @@
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119  
+https://doi.org/10.1186/s12934-022-01849-7
+RESEARCH
+Towards synthetic PETtrophy: Engineering 
+Pseudomonas putida for concurrent 
+polyethylene terephthalate (PET) monomer 
+metabolism and PET hydrolase expression
+Oliver F. Brandenberg1*†, Olga T. Schubert1,2,3† and Leonid Kruglyak1* 
+Abstract 
+Background: Biocatalysis offers a promising path for plastic waste management and valorization, especially for 
+hydrolysable plastics such as polyethylene terephthalate (PET). Microbial whole-cell biocatalysts for simultaneous PET 
+degradation and growth on PET monomers would offer a one-step solution toward PET recycling or upcycling. We 
+set out to engineer the industry-proven bacterium Pseudomonas putida for (i) metabolism of PET monomers as sole 
+carbon sources, and (ii) efficient extracellular expression of PET hydrolases. We pursued this approach for both PET 
+and the related polyester polybutylene adipate co-terephthalate (PBAT), aiming to learn about the determinants and 
+potential applications of bacterial polyester-degrading biocatalysts.
+Results: P . putida was engineered to metabolize the PET and PBAT monomer terephthalic acid (TA) through genomic 
+integration of four tphII operon genes from Comamonas sp. E6. Efficient cellular TA uptake was enabled by a point 
+mutation in the native P . putida membrane transporter MhpT. Metabolism of the PET and PBAT monomers ethylene 
+glycol and 1,4-butanediol was achieved through adaptive laboratory evolution. We then used fast design-build-test-
+learn cycles to engineer extracellular PET hydrolase expression, including tests of (i) the three PET hydrolases LCC, HiC, 
+and IsPETase; (ii) genomic versus plasmid-based expression, using expression plasmids with high, medium, and low 
+cellular copy number; (iii) three different promoter systems; (iv) three membrane anchor proteins for PET hydrolase 
+cell surface display; and (v) a 30-mer signal peptide library for PET hydrolase secretion. PET hydrolase surface display 
+and secretion was successfully engineered but often resulted in host cell fitness costs, which could be mitigated 
+by promoter choice and altering construct copy number. Plastic biodegradation assays with the best PET hydrolase 
+expression constructs genomically integrated into our monomer-metabolizing P . putida strains resulted in various 
+degrees of plastic depolymerization, although self-sustaining bacterial growth remained elusive.
+Conclusion: Our results show that balancing extracellular PET hydrolase expression with cellular fitness under 
+nutrient-limiting conditions is a challenge. The precise knowledge of such bottlenecks, together with the vast array 
+© The Author(s) 2022. Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which 
+permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the 
+original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or 
+other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line 
+to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory 
+regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this 
+licence, visit http:// creat iveco mmons. org/ licen ses/ by/4. 0/. The Creative Commons Public Domain Dedication waiver (http:// creat iveco 
+mmons. org/ publi cdoma in/ zero/1. 0/) applies to the data made available in this article, unless otherwise stated in a credit line to the data.
+Open Access
+Microbial Cell Factories
+†Oliver F. Brandenberg and Olga T. Schubert authors contributed equally
+*Correspondence:  brandenberg.oliver@gmail.com; lkruglyak@mednet.ucla.edu
+1 Department of Human Genetics, Department of Biological Chemistry, 
+and Howard Hughes Medical Institute, University of California Los Angeles, 
+Los Angeles, USA
+Full list of author information is available at the end of the article
+Page 2 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+Introduction
+Polyethylene terephthalate (PET) is a linear aromatic 
+polyester composed of repeating units of terephthalic 
+acid (TA) and ethylene glycol (EG) and is one of the 
+most common plastics in the world. Annual production 
+of virgin PET amounts to > 60 million metric tons, with 
+roughly equal amounts processed as fiber (‘polyester’) for 
+the textile industry and as rigid containers for food and 
+beverage packaging [1–3]. Due to the short lifetimes of 
+many PET products, accumulation of PET waste in land -
+fills or terrestrial and aquatic ecosystems is a major con -
+cern [4, 5]. Therefore, better incentives for PET recycling 
+or safe options for PET disposal are urgently needed. In 
+addition, improved options for PET recycling or upcy -
+cling may translate into less use of crude oil and con -
+tribute to the establishment of a circular plastic (bio)
+economy [6–9].
+The small fraction of PET waste collected for recycling 
+is mostly processed mechanically; however, PET can be 
+recycled mechanically only a few times due to process -
+ing-induced chain scission and ensuing degradation of 
+mechanical properties [10]. To circumvent this, chemical 
+recycling (including glycolysis, hydrolysis, methanoly -
+sis, and pyrolysis, among others) can be used to depo -
+lymerize PET to its constituents TA and EG, followed 
+by synthesis of new virgin PET [11]. While this offers a 
+truly circular recycling path, chemical depolymerization 
+requires high energy input and harsh reaction condi -
+tions. Therefore, the use of enzymes for biocatalytic PET 
+depolymerization under mild, aqueous, and environmen -
+tally friendly reaction conditions has gained significant 
+interest.
+In the last two decades, a growing number of enzymes 
+from bacterial and fungal sources with PET hydrolase 
+activity have been characterized. These enzymes typically 
+encompass serine hydrolases which natively function as 
+cutinases, lipases, or carboxylesterases, and show pro -
+miscuous PET hydrolyzing activity [1, 12–16]. Enzymatic 
+PET hydrolysis by native, non-engineered enzymes typi -
+cally occurs on the order of days to weeks and is severely 
+impaired by the semi-crystalline structure of commercial 
+PET, which consists of amorphous regions interspersed 
+with crystalline regions that are highly refractory to enzy-
+matic attack [1, 17, 18]. PET hydrolases are frequently 
+engineered to function near the glass transition temper -
+ature  (Tg) of PET at ≥ 70  °C where amorphous regions 
+become more accessible, with the latest generation of 
+enzymes capable of degrading PET samples at elevated 
+temperatures within as little as 10 h [19–21].
+In addition to enzymatic PET depolymerization, biol -
+ogy can be leveraged for recycling applications down -
+stream of polymer hydrolysis. The PET monomers TA 
+and EG can be used as metabolic feedstocks for biochem-
+ical production pathways in engineered microbes. Recent 
+examples include the engineering of bacterial strains 
+capable of transforming TA and/or EG into value-added 
+products such as β-ketoadipic acid, glycolic acid, and the 
+bioplastics polyhydroxyalkanoate (PHA) and poly(amide 
+urethane) [21–25].
+Considering these two facets of biology for PET recy -
+cling, a clear continuation would be the combination of 
+enzymatic PET depolymerization and monomer metab -
+olism in the same microbial organism (Fig.  1). Indeed, 
+nature itself already delivered this solution: In 2016, 
+researchers isolated the bacterium Ideonella sakaien -
+sis 201-F6 from a PET recycling site and showed that it 
+possesses the enzymatic machinery to both depolymer -
+ize PET and utilize the resulting monomers as carbon 
+source for growth [26]. Here, we set out to replicate this 
+feature by engineering a bacterium with the capacity to 
+both degrade PET and metabolize the monomers as car -
+bon sources, a capacity we refer to as synthetic PETtro -
+phy. In addition to PET, we pursued this approach for 
+the more readily biodegradable polyester polybutylene 
+adipate co-terephthalate (PBAT). We implemented this 
+strategy using the soil bacterium Pseudomonas putida, 
+which, in contrast to I. sakaiensis, is already established 
+as a promising host for industrial biocatalytic processes 
+due to robust growth under harsh conditions and has a 
+vast array of tools and knowledge available for genetic 
+engineering [27–29]. 
+Successful engineering of synthetic PETtrophy would 
+be a step towards consolidated bioprocessing of PET 
+waste. The concept of consolidated bioprocessing 
+originated in the field of lignocellulosic biomass utili -
+zation and includes synthesis of hydrolytic enzymes, 
+polymer hydrolysis, and downstream routing of mono -
+mers into biosynthetic pathways by the same microbial 
+organism in a single fermentation setup [6 , 30, 31]. A 
+whole-cell biocatalyst for PET continuous bioprocess -
+ing would simplify the recycling workflow and may 
+be able to deal with contaminated or mixed-plastic 
+of PET hydrolase expression tools generated and tested here, may serve as a baseline for future efforts to engineer P.  
+putida or other bacterial hosts towards becoming efficient whole-cell polyester-degrading biocatalysts.
+Keywords: Polyethylene terephthalate (PET), PET hydrolase, Biodegradation, Metabolic engineering, Adaptive 
+laboratory evolution, Membrane display, Enzyme secretion, Whole-cell biocatalysis
+Page 3 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+Fig. 1 Synthetic PETtrophy in relation to other biocatalytic strategies for PET waste valorization. Top panel: PET waste can be depolymerized to 
+TA and EG using chemical means (1), with purified PET hydrolases (2), or using whole-cell biocatalysts displaying or secreting PET hydrolases (3) 
+(note: potential PET depolymerization intermediates bis(2-hydroxyethyl) terephthalate (BHET) and mono(2-hydroxyethyl) terephthalate (MHET) are 
+omitted for clarity). TA and EG can be extracted and processed into new virgin PET (A); used as feedstocks for engineered microbes and production 
+of value-added bioproducts (B); or used as feedstocks for engineered microbes producing PET hydrolases in a continuous bioprocessing-like 
+one-pot system (C). Path 2-A was explored by Tournier et al. [19] and Lu et al. [21]; path 1-B was explored by Kenny et al. [22, 94], Werner et al. [24] 
+and Kim et al.; [25] path 2-B was described by Tiso et al. [23] and Lu et al. [21]; path 3-C is what I. sakaiensis perfoms natively [26] and was explored 
+in this study. Additionally, several recent studies described whole-cell biocatalysts displaying or secreting PET hydrolases (3) without attempting 
+downstream extraction or microbial utilization of released monomers. [59, 76–83] Bottom panel: sequence of engineering steps attempted in this 
+study. First, we installed TA, EG or BD metabolism in P . putida using genetic engineering and adaptive laboratory evolution (I); secondly, we tested a 
+variety of expression systems for PET hydrolases (II); third, we attempted to combine these efforts to obtain a self-sustaining whole-cell PET or PBAT 
+depolymerization system (III). Enzyme structure PDB 5xjh. [95]
+Page 4 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+waste streams. It may also lend itself to decentralized 
+in  situ bioremediation of PET waste (e.g., in landfills 
+or dedicated composting facilities), thus rendering 
+PET a biodegradable waste and ‘ecocyclable’ [3 , 32]. 
+Additionally, we were motivated to discover potential 
+bottlenecks and dos-and-don’ts encountered in the 
+synthetic PETtrophy engineering endeavor in order to 
+understand the fundamental determinants of bacterial 
+PET utilization as a carbon source.
+We first engineered P. putida to accept TA, EG and 
+1,4-butanediol (BD, a component of PBAT) as sole car -
+bon and energy sources. Next, we used rapid design-
+build-test-learn cycles to achieve functional expression 
+of diverse PET hydrolases. Lastly, we tested the most 
+promising strains in whole-cell PET or PBAT deg -
+radation experiments. While we did not obtain fully 
+self-sustaining plastic-depolymerizing bacterial sys -
+tems, our work provides detailed insights into engi -
+neering of PET monomer metabolism, PET hydrolase 
+expression construct design, and the challenges of 
+balancing enzyme expression and cell viability under 
+nutrient-limiting conditions, all of which may prove 
+useful for future efforts towards establishing synthetic 
+PETtrophy.
+Results
+Establishing TA catabolism in Pseudomonas putida KT2440
+Our first goal was to enable Pseudomonas putida KT2440 
+to use TA as sole carbon and energy source. A common 
+aromatic acid catabolite in P. putida is protocatechuate 
+(PCA), which feeds into central carbon metabolism 
+via the β-ketoadipate pathway [33]. However, P. putida 
+KT2440 cannot convert TA to PCA; importantly though, 
+enzyme cascades catalyzing this transformation have 
+been found in various bacteria [30]. We selected four 
+genes from the tph II operon of Comamonas sp. E6 [34], 
+encoding the multi-subunit TA dioxygenase  TphAII that 
+transforms TA to 1,2-dihydroxy-3,5-cyclohexadiene-
+1,4-dicarboxylate (DCD), and the DCD dehydrogenase 
+ TphBII that transforms DCD to PCA, to endow P. putida 
+with the ability to transform TA to PCA (Fig.  2A). We 
+designed a synthetic operon consisting of the Coma -
+monas sp. E6 genes tphA1 II, tphA2II, tphA3II and tph -
+BII under control of the constitutive  PEM7 promoter 
+and endowed it with a bicistronic translational coupler 
+(BCD2) to ensure efficient transcription and translation 
+in P. putida (Additional file  1: Fig. S1) [35, 36]. We did 
+not include a selectable antibiotic resistance marker in 
+the knock-in cassette, as the capacity to catabolize TA is 
+Fig. 2 Engineering TA, EG and BD metabolism in P . putida. A Overview of the engineering steps, including genomic insertion (yellow) and ALE (red), 
+to endow P . putida with the capacity to use TA, EG and BD as sole carbon sources. B Growth of P . putida KT2440 and P . putida TA in shake flasks with 
+M9 minimal medium, 0.4% TA, pH 5.5. C Growth of P . putida TA and P . putida TA7 in shake flasks with M9 minimal medium, 0.4% TA, pH 5.5 or pH 7.5. 
+D Growth of P . putida TA7 and P . putida TA7-EG analyzed in a plate reader assay with M9 minimal medium, 10 mM EG or 10 mM EG + 10 mM TA, pH 
+7.5. E Growth of P . putida TA7 and P . putida TA7-BD analyzed in a plate reader assay with M9 minimal medium, 10 mM BD or 10 mM BD + 10 mM TA, 
+pH 7.5. Data shown are mean and SD, n = 2 (B and C) or n = 6 (D and E)
+Page 5 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+itself a selectable trait. The operon was cloned into the 
+mini-TN5 transposon vector pBAMD1-2 (yielding vec -
+tor pBAMD-tphII), enabling random integration of the 
+operon into the P. putida genome [37]. 
+pBAMD-tphII was delivered to P. putida KT2440 by 
+electroporation, and cells were cultured in M9 minimal 
+medium supplemented with 0.4% TA as sole carbon 
+source to select for cells with functional integration of the 
+synthetic tphII operon. We adjusted the culture medium 
+to pH 5.5 to ensure that a certain fraction of TA mole -
+cules is fully protonated and thus able to diffuse through 
+the cell membrane in the absence of dedicated TA trans -
+porters [34, 38]. We observed bacterial growth two 
+days post-transformation and passaged the culture over 
+10 days, followed by subsequent analysis of single clones. 
+The best-performing clone was designated as strain P. 
+putida TA; whole-genome sequencing revealed integra -
+tion of the tphII cassette into the PP_4627 (cidR) locus 
+(Additional file  1: Table  S1). This strain showed robust 
+growth in M9 minimal medium supplemented with TA, 
+while no growth was observed for P. putida KT2440 
+(Fig. 2B).
+We next set out to modify P. putida TA to grow at neu-
+tral pH. At pH 7, TA is in its partially or fully deproto -
+nated form, necessitating TA transporters for cellular 
+uptake. Considering that P. putida has a variety of mem -
+brane transporters for aromatic compounds [39], we 
+reasoned that adaptive laboratory evolution (ALE) may 
+succeed in repurposing an existing P. putida transporter 
+to function as a TA uptake transporter. Thus, we cul -
+tured P. putida TA in M9 medium with 0.4% TA adjusted 
+to pH 6.5 for six consecutive passages over seven days, 
+after which we observed improved bacterial growth 
+(Additional file  1: Fig. S2). Isolation and analysis of sin -
+gle clones yielded strain P. putida TA7, which showed 
+strongly improved growth over parent strain P. putida 
+TA at neutral pH (Fig.  2C). Whole-genome sequenc -
+ing (Additional file  1: Table  S2) of both strains revealed 
+a missense mutation in P. putida TA7 in a MarR-family 
+putative transcriptional regulator for hydroxycinnamic 
+acid degradation (PP_3359; c.151C > T, R51C) [40] and a 
+missense mutation in the putative 3-(3-hydroxyphenyl)
+proprionate transporter MhpT (PP_3349; c.1120C > G, 
+L374V) [41]. This indicated that MhpT has promiscu -
+ous TA transport activity, which was likely enhanced by 
+the L374V mutation. The mutation in the putative tran -
+scription factor PP_3359, located only 12 kbp upstream 
+of mhpT, may influence mhpT expression. We confirmed 
+the function of  MhpTL374V as a putative TA transporter 
+by rescuing growth of P. putida TA in M9-TA medium 
+at pH 7.5 by plasmid-based overexpression of mhpT L374V 
+(Additional file 1: Fig. S3).
+Overall, through genomic knock-in of four genes from 
+the TA-to-PCA pathway of Comamonas sp. E6 followed 
+by brief ALE, we obtained strain P. putida TA7 capable of 
+robust growth on TA as sole carbon and energy source.
+Establishing EG and BD metabolism in P . putida TA7
+We next aimed to establish EG metabolism in P. putida 
+TA7 based on two considerations. First, high EG con -
+centrations negatively affected growth of P. putida TA7 
+(Additional file  1: Fig. S4A). Second, turning EG from 
+a liability to a potential carbon source would support 
+robust growth on PET, especially considering that PET 
+hydrolysis is the rate-limiting step, and any released 
+monomers should be utilized as efficiently as possible.
+P. putida possesses the enzymatic machinery required 
+to utilize EG as carbon and energy source; however, tran-
+scription of the genes encoding the two key enzymes Gcl 
+and GlxR is constitutively repressed by the transcrip -
+tional repressor GclR (Additional file 1: Fig. S4B) [42–44]. 
+Thus, we attempted ALE of P. putida TA7 for growth on 
+EG, using cultures in M9 minimal medium supplemented 
+with 25 mM EG and 5 mM TA.
+We observed improved bacterial growth after approxi -
+mately one week and isolated single clones after eleven 
+days of passaging (Additional file  1: Fig. S5); the best-
+performing strain was designated P. putida TA7-EG. 
+This strain showed both a shorter lag phase and higher 
+final OD600 compared to P. putida TA7 when grown in 
+M9 supplemented with equimolar amounts of TA and 
+EG (Fig.  2D). Cell dry weight measurements of P. putida 
+TA7-EG cultures confirmed an improved capacity of 
+P. putida TA7-EG to accumulate biomass (Additional 
+file  1: Fig. S6). Both strains showed comparable growth 
+in LB medium, while P. putida TA7-EG showed a slight 
+growth advantage with TA as only carbon source (Addi -
+tional file  1: Fig. S7A, B). Whole-genome sequencing of 
+P. putida TA7-EG revealed a nonsense mutation in gclR 
+(PP_4283; c.388G > T, E130*; Additional file  1: Table S2), 
+likely resulting in GclR loss of function, which is con -
+sistent with previous studies on the molecular basis of 
+improved EG catabolism [42–44].
+For the PBAT monomer BD, we set up two ALE cul -
+tures with P. putida TA7 in M9 minimal medium supple-
+mented with either 25 mM BD and 5 mM TA, or 25 mM 
+BD, 5 mM TA, and 25 mM adipic acid (AA), the second 
+aliphatic linker in PBAT. Both ALE cultures showed 
+similar growth profiles, and we observed improved 
+growth after ten days, when we isolated and tested sin -
+gle clones (Additional file  1: Fig. S8). The strain show -
+ing best growth characteristics was designated P. putida 
+TA7-BD (Fig. 2E). Both P. putida TA7 and P. putida TA7-
+BD showed comparable growth in LB medium, while 
+Page 6 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+we observed a minor detrimental effect when AA was 
+added to the medium (Additional file  1: Fig. S7C, D). P. 
+putida TA7-BD carried a missense mutation in PP_2046 
+(c.407  T > C, V136A), a gene previously implicated as 
+a transcriptional regulator of an operon involved in BD 
+metabolism, with gain of function mutations resulting in 
+improved growth on BD [45].
+Interestingly, across all ALE experiments and engi -
+neered strains, we did not detect any mutations in the 
+tphII cassette (Additional file  1: Table S2). This indicates 
+that the chosen operon design, including the transcrip -
+tional output from the  PEM7 promoter, is likely close to 
+optimal; at least, no mutations appeared to have a posi -
+tive effect on bacterial growth strong enough to fix in the 
+population during our ALE experiments.
+In summary, ALE rapidly succeeded in endowing P. 
+putida TA7 with the ability to use either EG or BD as 
+additional carbon and energy sources, and the resulting P. 
+putida TA7-EG and P. putida TA7-BD represent robust 
+strains for engineering PET hydrolase expression.
+Engineering PET hydrolase surface display
+We next aimed to endow P. putida with the enzymatic 
+machinery required to depolymerize PET or PBAT. We 
+first attempted display of PET hydrolases on the bacterial 
+outer membrane, speculating that such surface display 
+may provide higher local enzyme concentrations and bet-
+ter adsorption of the PET hydrolase to the plastic surface, 
+thereby promoting more efficient hydrolysis.
+To obtain a stable and functional PET hydrolase dis -
+play system for P. putida, we cloned and tested three dif -
+ferent membrane display anchors, all previously shown 
+to function in P. putida (Additional file  1: Fig. S9). First, 
+we used a construct based on the E. coli autotransporter 
+EhaA [46]. This construct consists of the P. putida OprF 
+signal peptide (37 residues), the cargo domain (i.e., the 
+PET hydrolase to be displayed), a  G4SGGS(G4S)3 linker 
+[47], and the C-terminal EhaA autotransporter domain 
+(488 residues). Second, we employed a construct based 
+on the commonly used ice nucleation protein display 
+anchors, comprising the N-terminal 203 residues fused 
+to the C-terminal 97 residues of the ice nucleation pro -
+tein inaV from Pseudomonas syringae [48]. This anchor 
+domain is followed by the  G4SGGS(G4S)3 linker and the 
+PET hydrolase cargo domain. Last, we employed the P. 
+putida OprF outer membrane protein as anchor domain, 
+as previously demonstrated using OprF from Pseu -
+domonas aeruginosa [49]. This construct comprised the 
+N-terminal 206 residues of P. putida OprF, followed by 
+the  G4SGGS(G4S)3 linker and the PET hydrolase cargo 
+domain. Of note, full-length OprF has been shown to 
+adopt two different conformations, with the cargo fusion 
+site V206 predicted to be either periplasmic or extracel -
+lular [50]. Based on reports of extracellular exposure of 
+V206 in OprF homologs [51, 52], we decided to try this 
+construct for PET hydrolase display.
+All display constructs were put under control of the 
+rhamnose-inducible  PrhaB promoter, shown to provide 
+low levels of leaky transcription and high induction lev -
+els in P. putida. [53, 54] All constructs also featured the 
+BCD2 translational coupler used for our tph II operon 
+described above [36], a hexa-His tag attached to the cargo 
+domain opposite from the anchor domain, unique PstI 
+and NcoI restriction sites for facile cloning of different 
+cargo domains into the display systems, and unique AvrII 
+and HindIII sites to transfer the entire display cassettes 
+between vectors (Additional file  1: Fig. S9). Furthermore, 
+as expression of heterologous membrane proteins often 
+leads to bacterial growth defects, we implemented an 
+extra layer of control over display construct expression 
+levels by modulating gene dosage using plasmid vectors 
+with low (RK2), medium (pBBR1), and high (pRO1600/
+ColE1) cellular copy number [55]. All plasmids carried a 
+ KmR selectable marker and were constructed from plas -
+mids obtained through the Standard European Vector 
+Architecture (SEVA) repository [56]. In total, this yielded 
+nine display construct-vector combinations (Fig. 3A).
+We chose three well-known PET hydrolases for test -
+ing: the Humicola insolens cutinase (HiC), leaf compost 
+cutinase (LCC), and Ideonella sakaiensis PETase (IsP). 
+HiC is a thermostable fungal cutinase of 194 residues 
+capable of almost completely degrading low-crystallinity 
+PET film within 96 h at 70 °C, with TA as predominant 
+hydrolysis product [57]. LCC is a 293 residue protein 
+and was isolated through functional screening of a com -
+post metagenomic library [58]. LCC and variants thereof 
+have long been recognized as some of the most promis -
+ing PET hydrolases, achieving hydrolysis of amorphous 
+Fig. 3 Testing PET hydrolase membrane display systems. A Overview of combinatorial test construct design for PET hydrolase membrane 
+expression, including plasmids providing low, medium, and high cellular copy number, transcriptional control by the  PrhaB system, translation 
+initiation via the BCD2 translational coupler, three different membrane display anchors, and three different PET hydrolases. B OD600 and esterase 
+activity of P . putida TA7-EG shake flask cultures expressing the indicated display constructs from the RK2 low copy number plasmid, measured for 
+5 h post-induction (induction at t = 0 h). C OD600 and esterase activity of P . putida TA7-EG shake flask cultures expressing the indicated display 
+constructs from the pBBR1 medium copy number plasmid, measured for 5 h post-induction (induction at t = 0 h). The * in (B, C) indicates that 
+esterase activity was not measured at the t = 5 h timepoint due to obvious cell lysis. Data shown are derived from one representative experiment 
+with duplicate cultures
+(See figure on next page.)
+Page 7 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+Fig. 3 (See legend on previous page.)
+Page 8 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+PET to TA and EG on the gram to kg scale [19, 23]. IsP 
+is a 290 residue protein that is regarded as the first iden -
+tified enzyme with the native function to enable bacte -
+rial growth on PET as sole carbon and energy source. 
+IsP stands out for its high PET hydrolysis activity at 
+mesophilic temperatures (30–40  °C), where it surpasses 
+thermostable PET hydrolases; however, LCC and HiC 
+are more active when used at their optimum tempera -
+tures [26, 57, 58]. In contrast to HiC and LCC, IsP yields 
+MHET as main hydrolysis product, which is further 
+hydrolyzed to TA in I. sakaiensis by MHETase [26]. How-
+ever, we omitted MHETase from our approach, as recent 
+studies indicated TA accumulation in long-term PET 
+hydrolysis setups with IsP alone [59], and we wanted to 
+obtain a clean comparison of PET hydrolase expression 
+levels without expression of auxiliary enzymes.
+We first cloned ORFs of both HiC and LCC (omitting 
+their signal peptides) into the set of nine display vec -
+tors (IsP was included only later). Upon transformation 
+of P. putida TA7-EG with these plasmids, we observed 
+only sporadic colony formation for all pRO1600/ColE1 
+plasmids; presumably, leaky expression from these high 
+copy number plasmids was sufficient to induce bacterial 
+growth defects, and these plasmids were excluded from 
+further analyses. Additionally, initial analyses showed no 
+PET hydrolase expression for any of the InaV display con-
+structs, and they were also excluded from further analy -
+ses. For the remaining plasmids, we tested cell viability 
+and PET hydrolase expression over time in shaking cul -
+tures (Fig.  3B). As a proxy for cell viability we measured 
+OD600, while we used the commonly employed ester -
+ase model substrate para -nitrophenylbutyrate (pNPB) 
+and a spectrophotometric read-out of para -nitrophenol 
+formation to assess enzymatic activity of expressed PET 
+hydrolases (Additional file 1: Fig. S10). We performed the 
+pNPB esterase assay for both cleared culture supernatant 
+and the cell fraction.
+For P. putida TA7-EG transformed with empty vec -
+tors (lacking PET hydrolases), we observed stable growth 
+and very low esterase activity both in the cell fraction 
+and the culture supernatant following induction (Fig.  3B, 
+C). In contrast, for all strains expressing PET hydrolase 
+display constructs, we observed strong increases in cell-
+associated esterase activity, indicating functional PET 
+hydrolase surface display. The highest cell-associated 
+esterase activity was measured for OprF-HiC at 2.68 U/
+mL 3 h post-induction, 330-fold above the empty-vector 
+control. SDS-PAGE analysis of the membrane fraction 
+of PET hydrolase-expressing cells followed by LC–MS 
+analysis confirmed correct expression and localiza -
+tion of the EhaA membrane display constructs, while 
+the observed bands for OprF constructs were less clear 
+(Additional file  1: Fig. S11). Approximately 1–2  h after 
+the cell-associated esterase signal we also observed spikes 
+in esterase activity in the culture supernatant, likely origi-
+nating from cell lysis. Indeed, for all bacteria expressing 
+PET hydrolase display constructs, we observed growth 
+defects following induction, with most cultures collaps -
+ing (decrease in OD600 with visible cell lysis, clumping, 
+and increase in medium viscosity) starting 3–4  h post-
+induction (Fig.  3B, C). Plate reader analysis of OD600 
+for 24  h post-induction confirmed the collapse of PET 
+hydrolase-expressing cultures (Additional file 1: Fig. S12). 
+Growth defects appeared to be slightly more pronounced 
+for the medium copy number pBBR1 plasmids compared 
+to the low copy number RK2 plasmids.
+To investigate the observed cell death upon PET hydro-
+lase display construct expression, we first tested whether 
+cytosolic expression of the PET hydrolase ORFs (with -
+out the membrane display anchors) would cause similar 
+growth defects. Surprisingly, we observed that cytosolic 
+expression of LCC indeed resulted in a similar collapse 
+of the bacterial culture. In contrast, cytosolic expression 
+of HiC or IsP resulted in normal bacterial growth rates 
+(Additional file  1: Fig. S13). The reason for the observed 
+LCC toxicity in P. putida remains to be determined, while 
+surface display construct expression appears to be the 
+major culprit for all three enzymes.
+Next, we tested whether titration of the inducer, rham -
+nose, could mitigate the problem of expression construct 
+toxicity. We used one of the constructs showing the high-
+est PET hydrolase membrane expression and the lowest 
+apparent toxicity, EhaA-LCC in the RK2 plasmid back -
+ground, and varied rhamnose inducer concentration 
+from 0.5 to 8 mM. This revealed a very limited dynamic 
+range for expression from the  PrhaB promoter, with 
+0.5 mM rhamnose already providing high levels of induc-
+tion and leading to culture collapse, as seen for all other 
+inducer concentrations (Additional file 1: Fig. S14).
+Thus, the EhaA and OprF display anchors resulted in 
+successful cell surface display of PET hydrolases. How -
+ever, membrane display construct expression also caused 
+cellular instability, which could not be mitigated by lower 
+inducer concentrations.
+Engineering PET hydrolase secretion
+Parallel to engineering PET hydrolase cell surface display 
+we explored options for PET hydrolase secretion, which 
+we speculated may result in lower cellular toxicity com -
+pared to membrane display.
+Protein secretion is highly dependent on the N-ter -
+minal signal peptide (SP). Secretion levels can differ by 
+orders of magnitude depending on the SP , and a highly 
+efficient SP for one protein may not work well for another 
+[60]. In addition, extracellular protein secretion in 
+Gram-negative bacteria such as P. putida is incompletely 
+Page 9 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+understood [61, 62]. Therefore, we used a SP library 
+screening approach to achieve efficient PET hydrolase 
+secretion. We tested a set of 30 SPs, 28 originating from 
+Pseudomonas proteins annotated as secreted or peri -
+plasmic, and the remaining two being the SPs from the 
+I. sakaiensis PETase and MHETase (Additional file  1: 
+Table S3). Of these 30 SPs, 19 were predicted to be Sec-
+dependent, while 11 were predicted to be Tat-dependent. 
+Instead of cloning each SP individually, we cloned the 
+library in bulk using a specifically designed plasmid such 
+that the LCC, HiC and IsP ORFs were provided with the 
+SP library in-frame at the 5’ end (Fig. 4A, B). We retained 
+the  PrhaB promoter, BCD2 bicistronic translational cou -
+pler, and RK2 low copy number oriV already used for the 
+membrane display constructs.
+Using a library-based approach necessitated a screen -
+ing procedure to identify the most effective SPs for each 
+PET hydrolase. Thus, P. putida TA7-EG was transformed 
+with each of the three SP-PET hydrolase libraries, and 
+for each library 90 single clones (threefold oversam -
+pling) were analyzed in 96-well liquid shaking cultures. 
+To assess PET hydrolase secretion, we measured both 
+esterase activity in the supernatant (3  h post-induction) 
+and OD600 as proxy for cell viability (3 h and 20 h post-
+induction) (Fig. 4C); cells transformed with empty vector 
+served as controls. For both LCC and HiC, we observed 
+that almost all SP library clones showed strongly reduced 
+OD600 at 20  h post-induction; the few clones showing 
+higher, control-like OD600 showed no PET hydrolase 
+expression (i.e., no esterase activity in the culture super -
+natant). Furthermore, for both the LCC and HiC librar -
+ies, we observed a wide range of esterase activities in the 
+culture supernatants 3 h post-induction, indicative of dif-
+ferent PET hydrolase secretion efficiencies of the differ -
+ent SPs. For IsP , the low intrinsic activity of this enzyme 
+in the pNPB assay resulted in a lower resolution between 
+the library clones and controls, although it remained pos-
+sible to identify clones showing higher supernatant ester-
+ase activity. At the same time, more clones retained high 
+OD600 levels compared to LCC and HiC (Fig. 4C).
+For all three libraries, we extracted and sequenced plas-
+mids from the 10 to 14 clones showing the best combina-
+tion of supernatant esterase activity and OD600. For all 
+three enzymes, we observed recurring hits (i.e., SPs iden -
+tified more than once across the sequenced set), and the 
+SP hits across the three libraries differed from each other, 
+indicating that the assay was specific for each PET hydro-
+lase and that the libraries did not suffer from substan -
+tial cloning bias towards certain SPs. For LCC, out of 12 
+sequenced clones one SP was identified in 3 clones (ispe, 
+the SP from IsP) and three SPs were identified twice (flid, 
+efeb, and uxpb). For HiC, the dominant SP with 5 hits 
+out of 10 sequenced clones was bglx. For IsP , out of 14 
+sequenced clones one SP was identified three times (lasb) 
+and two SPs were identified twice (copb and agde) (Addi-
+tional file 1: Table S4).
+We next tested the most promising SP-PET hydrolase 
+constructs (featuring all SPs identified multiple times per 
+library) in shake flask cultures by monitoring PET hydro -
+lase activity and OD600 over time. For all LCC and HiC 
+constructs, we observed strong increases in supernatant 
+and cell-associated esterase activity over the first 4 h fol -
+lowing rhamnose induction. One of the best variants, 
+bglx-HiC, showed an esterase signal in the supernatant of 
+1.71  U/mL 4  h post-induction, a 114-fold increase over 
+the control. However, for both LCC and HiC, this was 
+again accompanied by a subsequent collapse of the bacte-
+rial cultures, similar to the growth defects observed for 
+the membrane-displayed constructs (Fig.  4D and Addi -
+tional file  1: Fig. S15). For both LCC and HiC, we also 
+observed a strong cell-associated esterase signal; by com -
+paring the esterase activity of secreted and cytosolic PET 
+hydrolase expression in culture supernatant, cell fraction, 
+and cell lysate, we concluded that this is likely an artefact 
+of PET hydrolase expression in the secretory pathway 
+(Additional file  1: Fig. S16). For IsP , we observed com -
+parably small increases in supernatant esterase activity 
+(either due to low IsP secretory expression or low activity 
+of the enzyme in the pNPB assay) with the best variant, 
+lasb-IsP , reaching 0.1  U/mL 4  h post-induction, 6.5-fold 
+above the control. Importantly, the OD600 of all IsP 
+expression cultures remained relatively stable (Fig.  4D 
+and Additional file 1: Fig. S15).
+In summary, our strategy of screening a 30-mer SP 
+library resulted in the identification of SPs successfully 
+directing the secretion of each of the three PET hydro -
+lases. However, for LCC and HiC, secretory construct 
+expression again resulted in cellular growth defects. For 
+IsP , we observed only low esterase activity in the super -
+natant, but cell fitness remained high.
+Fine‑tuning PET hydrolase expression with heat‑inducible 
+promoters
+Since both surface display and secretion of LCC, HiC 
+and IsP by our P. putida chassis was achievable but often 
+incurred fitness costs, we turned our attention towards 
+mitigating this problem. We reasoned that in both cases 
+a likely culprit is an overload of the cellular machinery 
+for protein folding, protein membrane insertion or pro -
+tein translocation across inner and outer membranes [63, 
+64]. Thus, reducing PET hydrolase expression levels may 
+result in improved cellular fitness.
+As we observed for  PrhaB, promoter systems rely -
+ing on chemical inducers often show close to an all-or-
+none response, cannot be easily switched off again, or 
+require genetic modifications to achieve a finely tunable 
+Page 10 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+expression response [65, 66]. Thus, we turned our atten -
+tion to temperature-inducible promoters, where expres -
+sion can be precisely steered by the intensity and 
+duration of a heat shock. Using such a tightly controllable 
+physical stimulus has the additional advantage of not 
+requiring any chemical inducers, which could potentially 
+be metabolized by the cells and thereby confound plastic 
+growth assays.
+Fig. 4 Engineering PET hydrolase secretion. A Overview of plasmid design to screen a 30-mer SP library for LCC, HiC, and IsP secretory expression in 
+P . putida TA7-EG. We used the RK2 low copy number plasmid, the  PrhaB induction system, BCD2 translational coupler, and a SP library cloned at the 
+5’ end of the LCC, HiC, and IsP ORFs. B Sequence view of the 3’ end of the BCD2 translational coupler, where we introduced a silent point mutation 
+(red) to create a unique BbsI restriction site. Together with a unique PstI site preceding the PET hydrolase ORFs, this allowed facile in-frame cloning 
+of the SP library. C SP library screening results, showing culture OD600 (measured 20 h post-induction) plotted against culture supernatant esterase 
+activity (measured 3 h post-induction). Each dot represents a single clone (one well of a 96-well culture plate); grey dots are e.v. controls, red dots 
+are sequenced clones, with the identified SPs indicated. D Shake flask validation of P . putida TA7-EG expressing the best identified SP-PET hydrolase 
+constructs. Data depict OD600 (top) and supernatant or cell-associated esterase activity measured for 5 h following induction (bottom). The * in (D) 
+indicates that esterase activity was not measured at the t = 5 h timepoint due to obvious cell lysis for most samples. Data shown are derived from 
+one representative experiment with duplicate cultures
+Page 11 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+We tested two heat-inducible promoter systems, 
+both cloned into the RK2 low copy number plasmid. 
+First, we used the cI857/P L system, which is frequently 
+used in E. coli and was recently shown to function effi -
+ciently in P. putida [67]. The system consists of the  PL 
+promoter blocked by the constitutively expressed heat-
+labile cI857 repressor, which is inactivated at elevated 
+temperatures (ideally, above 40  °C), thereby allowing 
+transcription from  PL. We designed this system as pre -
+viously described [67], adding the BCD2 linker at the 
+5’ end preceding the PET hydrolase surface display or 
+secretion cassettes (Fig. 5 A).
+Second, we used a short transcriptional-translational 
+control unit natively regulating expression of the heat 
+shock protein IbpA in P. putida and P. aeruginosa [68]. 
+This system consists of a promoter under control of the 
+Fig. 5 Testing  PL and  PIbpA heat shock inducible promoters. A Overview of the cI857/PL system; this transcriptional regulatory unit spans 1410 bp 
+from the PacI to the AvrII site. B Sequence overview and relevant features of the  PIbpA system used here. C Experimental protocol to test PET 
+hydrolase expression from  PL and  PIbpA upon heat shock. D OD600 of P . putida TA7-EG cultures expressing PET hydrolases in dependance on the 
+heat shock regime. E Esterase activity of cultures expressing PET hydrolases in dependance on the heat shock regime; top, esterase activity in the 
+supernatant; bottom, cell-associated esterase activity. Data shown are derived from one representative experiment with duplicate cultures
+Page 12 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+alternative heat shock sigma factor σ32. Furthermore, 
+the IbpA mRNA 5’ UTR forms an RNA thermometer 
+(RNAT) consisting of two hairpins that sequester the 
+ribosome binding site. Upon heat shock (ideally, above 
+37 °C), the hairpins melt, releasing the RBS and enabling 
+initiation of translation. We utilized the IbpA unit of P. 
+aeruginosa, providing threefold lower expression upon 
+induction compared to IbpA from P. putida. We further 
+introduced a 5’ UTR mutation (C40A) shown to further 
+lower basal expression and provide a tenfold induction 
+upon heat shock [68], and mutated the last three nucle -
+otides preceding the start codon to introduce a unique 
+NdeI restriction site (Fig.  5B). The BCD2 coupler was 
+omitted, as its two strong RBSs would interfere with this 
+system. The entire resulting transcriptional-translational 
+regulator has a length of only 115  bp. In the following, 
+we refer to this modified P. aeruginosa  PIbpa-5’ UTR con-
+struct as  PIbpA. Notably, the mere presence of the three 
+promoter systems  (PrhaB, cI857/P L, or  PIbpA) on empty 
+vector control plasmids did not influence P. putida fitness 
+(Additional file 1: Fig. S17).
+We initially tested  PL and  PIbpA with the two most 
+promising PET hydrolase expression constructs: the sur -
+face display construct EhaA-LCC and the secreted bglx-
+HiC construct. For  PIbpA only, we also tested the secreted 
+lasb-IsP , but substituted for IsP the recently described, 
+more thermostable DuraPETase (in the following 
+referred to as  IsPDura) [20]. We reasoned that this variant 
+may tolerate the necessary heat shocks better while also 
+showing enhanced catalytic activity on PET. To first test 
+the expression behavior of the constructs, we subjected 
+P. putida TA7-EG transformed with the plasmids to 1 h 
+heat shocks at 30°, 37° or 40 °C, followed by a 20 h out -
+growth phase at 30 °C during which we measured culture 
+OD600 and esterase activity in the supernatant and the 
+cell fraction (Fig. 5C).
+For  PL, all cultures regardless of the heat shock regime 
+showed good cell growth (Fig.  5D). However, we also 
+observed relatively low PET hydrolase expression lev -
+els, in agreement with previous work reporting longer 
+and higher heat shocks required for optimal expression 
+from  PL [67]. For pLo-P L-EhaA-LCC, we recorded a 2.5-
+fold induction of cell-associated esterase activity 20  h 
+after the 40 °C heat-shock, while we observed a ninefold 
+induction of supernatant esterase activity for pLo-P L-
+bglx-HiC under the same conditions (Fig. 5E, F).
+For  PIbpA, we observed mild growth defects for EhaA-
+LCC and lasb-Isp Dura, regardless of heat shock regime, 
+while bglx-HiC showed unimpaired cell growth. At the 
+same time, we observed good PET hydrolase expres -
+sion (Fig.  5E, F). For pLo-P IbpA-EhaA-LCC, we observed 
+a 104-fold induction of cell-associated esterase activity 
+20  h after the 30  °C heat shock; interestingly, this was 
+threefold higher than the esterase activity following the 
+40  °C heat shock. For pLo-P IbpA-bglx-HiC, we recorded 
+an 80-fold increase in supernatant esterase activity 20 h 
+after the 40 °C heat shock, with induction levels for the 
+30 °C and 37 °C heat shocks just slightly lower. For pLo-
+PIbpA-lasb-IsPDura, we observed a fivefold induction of 
+supernatant esterase activity. Of note, across all three 
+ PIbpA constructs, it appeared that maintaining the culture 
+at 30 °C (without a dedicated heat shock at 37 °C or 40 °C) 
+already resulted in relatively high expression levels. Over-
+all, these data pointed towards a promising function of 
+ PIbpa for achieving good PET hydrolase expression while 
+maintaining cell fitness, especially for the secreted bglx-
+HiC construct.
+Next, we further defined the temperature-depend -
+ent expression behavior of  PIbpA. Cultures of P. putida 
+TA7-EG transformed with empty vector or pLo-P IbpA-
+bglx-HiC were shifted from 25  °C to either a constant 
+expression temperature of 30 °C or a heat shock at 37 °C 
+for 2, 4, 6, or 20  h, followed by an outgrowth phase at 
+30  °C; all cultures were analyzed 20  h after the start of 
+the heat shock (Fig. 6A). We observed a constant increase 
+in supernatant esterase activity from 0.85 U/mL to 1.6 U/
+mL (empty vector: 0.025 U/mL) from the constant 30 °C 
+culture to the 6 h heat shock culture, while the 20 h heat 
+shock culture showed 2.5  U/mL (Fig.  6B). However, the 
+20 h heat shock culture also showed a strongly reduced 
+OD600, indicating that a large part of this supernatant 
+esterase activity may originate from lysed cells. For the 
+6  h heat shock culture we observed a mildly decreased 
+OD600 value, while the 0 h, 2 h and 4 h cultures showed 
+a growth behavior just slightly below empty vector con -
+trols. Thus, it appeared that shifting P. putida cultures 
+from 25 °C to 30 °C is sufficient to induce good expres -
+sion from  PIbpA, while a 2 to 4  h heat shock at 37  °C 
+provides an additional small boost to expression levels 
+without affecting cell fitness.
+Genomic integration of PIbpA PET hydrolase expression 
+constructs
+In a final engineering step, we genomically integrated 
+the  PIbpA-PET hydrolase expression constructs into 
+our P. putida strains. We reasoned that this may lessen 
+expression burden by reducing construct copy num -
+ber to one, may lead to better culture stability as poten -
+tial plasmid loss is avoided, and circumvents constant 
+antibiotic selection for plasmid maintenance, all factors 
+that may contribute to better plastic degradation per -
+formance of long-term cultures. We chose the pBAMD 
+system for genomic integration and constructed plas -
+mids encoding integration cassettes for  PIbpA-EhaA-LCC, 
+ PIbpA-bglx-HiC, and  PIbpA-lasb-IsPDura. The cassettes were 
+knocked into P. putida KT2440 and strains TA7-EG and 
+Page 13 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+TA7-BD. Single colonies were then tested in shake flask 
+cultures for their growth characteristics and PET hydro -
+lase expression following a heat shock, and the best-
+performing clones were whole-genome sequenced to 
+identify the expression cassette’s integration site and to 
+ensure absence of undesired mutations (Additional file  1: 
+Tables S1, 2).
+First, we investigated the induction behavior of the 
+genomically integrated  PIbpA constructs, using P. putida  
+KT2440 and the corresponding  PIbpA-EhaA-LCC, 
+ PIbpA-bglx-HiC and  PIbpA-lasb-Isp knock-in strains. 
+Shake flask cultures in LB medium were subjected 
+to constant 30 °C or heat shocks at 37 °C for 2 or 6 h, 
+followed by a recovery phase at 30 °C and subsequent 
+analysis of OD600 and esterase activity (Fig.  7A). As for 
+plasmid-based expression, we observed the best super -
+natant esterase signal for  PIbpA-bglx-HiC, showing a 
+fourfold induction over P. putida KT2440 for the con -
+stant 30 °C culture, 16-fold for the 2 h heat shock, and 
+over 60-fold (up to 0.95 U/mL) for the 6 h heat shock, 
+while maintaining growth comparable to the wt control 
+(Fig.  7B). For  PIbpA-EhaA-LCC and  PIbpA-lasb-Isp Dura, 
+we observed lower induction levels (2 to 4-fold over 
+Fig. 6 Defining  PIbpA temperature-dependent expression output. A Experimental protocol to test PET hydrolase expression from  PIbpA upon 
+different heat shock regimes. B OD600 and esterase activities of P . putida TA7-EG cultures transformed with pLo-PIbpA (empty vector, e.v.). or 
+pLo-PIbpA-bglx-HiC in dependance on the heat shock regime. Data shown are derived from one representative experiment with duplicate cultures
+Page 14 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+wt) while also recording slightly reduced OD600. Simi -
+lar results were obtained for the equivalent  PIbpA-PET 
+hydrolase knock-ins in strains P. putida TA7-EG and 
+TA7-BD (data not shown).
+We confirmed secretory HiC expression from the 
+plasmid-based pLo-P IbpA-bglx-HiC construct by SDS-
+PAGE and LC–MS analysis (Additional file  1: Fig. S18). 
+However, SDS-PAGE was not sensitive enough to unam -
+biguously confirm secretory expression of HiC from the 
+genomically integrated  PIbpA-bglx-HiC cassette or plas -
+mid-based expression of IsP from pLo-P IbpA-lasb-IsPDura. 
+This underscores the high secretory activity seen for the 
+bglx-HiC construct, as well as the desired effect of modu-
+lating expression levels through plasmid-based versus 
+genomic expression.
+Next, we directly compared absolute PET hydrolase 
+expression levels across constructs, using the surface 
+display construct EhaA-LCC (Additional file  1: Fig. S19). 
+EhaA-LCC expression from pLo-PrhaB-EhaA-LCC yielded 
+a cell-associated esterase activity of 1.4 U/mL (100-
+fold over empty vector), measured 3  h post-induction 
+(before culture collapse). EhaA-LCC expression from 
+Fig. 7 Testing expression of P . putida KT2440  PIbpA-PET hydrolase knock-in strains. A Experimental protocol to test the expression of genomically 
+integrated  PIbpA-PET hydrolase constructs upon different heat shock regimes. B OD600 and esterase activities of P . putida KT2440 (wt) or the 
+corresponding  PIbpA-EhaA-LCC,  PIbpA-bglx-HiC, and  PIbpA-lasb-IsPDura knock-in strains in dependance on the heat shock regime. Data depict one 
+representative experiment with duplicate cultures
+Page 15 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+pLo-PIbpA-EhaA-LCC after a 2  h, 37  °C heat shock fol -
+lowed by outgrowth at 30  °C for 18  h delivered 0.26 U/
+mL of cell-associated esterase activity, fivefold lower than 
+the expression output from pLo-P rhaB-EhaA-LCC. EhaA-
+LCC expression from the genomically integrated  PIbpA 
+construct under the same induction regime delivered 
+0.08 U/mL, 18-fold lower compared to plasmid-based 
+ PrhaB-dependent expression and threefold lower than 
+plasmid-based expression from the same  PIbpA promoter. 
+At the same time, while plasmid-based  PrhaB expression 
+cultures collapsed a few hours after induction, plas -
+mid-based  PIbpA-EhaA-LCC cultures showed reduced 
+but stable OD600, while the genomically integrated 
+ PIbpA-EhaA-LCC constructs showed an OD600 not far 
+below the control strain. Thus, our engineering strategy 
+succeeded in balancing PET hydrolase expression levels 
+with cell viability, but at the cost of lower absolute PET 
+hydrolase expression output.
+A central feature of synthetic PETtrophy would be the 
+bacterial ability to efficiently express PET hydrolases with 
+only TA and EG (or TA and BD in case of PBAT) as car -
+bon sources. Thus, we compared PET hydrolase expres -
+sion of strains P. putida KT2440, TA7-EG and TA7-BD 
+with the integrated  PIbpA-bglx-HiC cassette in either LB 
+medium or M9 minimal medium (Fig.  8). Both over -
+all cell growth (OD600) and esterase activity were dra -
+matically reduced in M9 minimal medium, especially 
+for strains TA7-EG and TA7-BD, where we recorded 
+only twofold inductions of supernatant esterase activity 
+(compared to ca. 30 to 50-fold induction in LB medium) 
+over the control strains. Thus, PET hydrolase expression 
+in minimal medium is detectable but strongly reduced, 
+likely reflecting the lower energetic value of the polyester 
+monomers compared to complete medium.
+Assessing PET and PBAT degradation by P . putida PIbpA‑PET 
+hydrolase strains
+In a final step, we assessed the capacity of our engineered 
+strains to degrade PET or PBAT plastics and maintain 
+synthetic PETtrophy. Plastic samples included amor -
+phous PET film, commercial PET bottle chips, high-
+crystallinity PET powder, polyester garment fibers, and a 
+commercial PBAT-starch-polylactic acid (PLA) copoly -
+mer film. We tested different culture formats to bring 
+plastic samples in contact with bacterial cultures, includ -
+ing static cultures in 14-mL tubes, 10-cm Petri dishes, 
+or 6-well plates, and shaking cultures in 14-mL tubes or 
+125-mL flasks. Overall, we obtained the most promising 
+results with 15-mL shaking cultures in 125-mL flasks at 
+a shake rate of 75  rpm. We also tested different culture 
+media, including LB medium (to assess maximal PET 
+hydrolase expression and plastic degradation capacity), 
+M9 minimal medium supplemented with 20 mM TA (to 
+mimic high monomer supply through efficient plastic 
+degradation), and M9 minimal medium without added 
+carbon source (to test for synthetic PETtrophy). Typical 
+PET hydrolase culture induction regimes as previously 
+established for the  PIbpA promoter consisted of a 2 h heat 
+shock at 37 °C per day, with the remaining time at 25 °C.
+We maintained cultures for up to 6 weeks; in this time -
+frame, we were unable to reliably detect synthetic PETtro-
+phy, i.e., the bacterial capacity to proliferate on polyester 
+plastics as sole carbon source. We predominantly used 
+OD600 measurements to assess bacterial growth, sup -
+plemented with visual culture inspection by eye, stereo 
+microscopy, and optical microscopy. While we occasion -
+ally observed biofilm-like structures and live bacteria in 
+cultures that were several weeks old (potentially stem -
+ming from the inoculum), this typically did not manifest 
+as reliably detectable OD600 increases and did not result 
+in reproducible weight loss of plastic substrates.
+In contrast, in nutrient-supplemented cultures (either 
+LB or M9-TA), we detected modifications of the plastic 
+substrates. For PET, we typically observed only minor 
+changes: for example, after 6  days of culturing in LB 
+medium with strain P. putida KT2440  PIbpA-bglx-HiC, 
+we observed fraying along the edges of an amorphous 
+PET film and a weight loss in the range of 1.5%, neither 
+of which was observed in control cultures of P. putida 
+KT2440 (Additional file  1: Fig. S20). For PBAT-starch-
+PLA copolymer film, results were more pronounced: 
+after 6  days of culturing in LB medium with strain P. 
+putida KT2440  PIbpA-bglx-HiC, we observed fraying and 
+tearing of the film and a weight loss of approximately 
+25%, neither of which was observed in control cultures 
+of P. putida KT2440 (Fig.  9A). Furthermore, in a 4-week 
+culture in M9-TA medium with strain P. putida TA7-BD 
+ PIbpA-bglx-HiC, we observed a striking decay of the film 
+to parts smaller than 5  mm alongside a weight loss in 
+the range of 40% (Fig.  9B, C). Scanning electron micros -
+copy (SEM) of film samples showed surface erosion 
+and development of cracks and fissures in the P. putida 
+(See figure on next page.)
+Fig. 8 Comparing  PIbpA-PET hydrolase expression in LB versus M9 minimal medium. A Experimental protocol to test genomically integrated 
+ PIbpA-bglx-HiC construct expression in different culture media. B OD600 and esterase activities of cultures in LB medium including P . putida KT2440, 
+TA7-EG, and TA7-BD, either as the non-hydrolase expressing strains (labelled wt) or with the genomically integrated  PIbpA-bglx-HiC cassette. C 
+OD600 and esterase activities of P . putida KT2440, TA7-EG, and TA7-BD, either as the wt strains or with the genomically integrated  PIbpA-bglx-HiC 
+cassette, in M9 minimal medium with 20 mM citrate (KT2440), 10 mM TA + 10 mM BD (TA7-BD) or 10 mM TA + 10 mM EG (TA7-EG). Data depict one 
+representative experiment with duplicate cultures
+Page 16 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+Fig. 8 (See legend on previous page.)
+Page 17 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+TA7-BD  PIbpA-bglx-HiC treated samples, matching the 
+observed increase in film brittleness and decay (Fig.  9D, 
+E). Despite the apparent activity of the secreted HiC 
+hydrolase on the PBAT copolymer film, we did not detect 
+sustained growth of P. putida TA7-BD  PIbpA-bglx-HiC in 
+M9 medium supplied with PBAT copolymer film as only 
+carbon source. Potentially, this is due to the reported 
+mediocre activity of HiC on PBAT oligomers, which may 
+fail to supply TA and BD monomers for cellular catabo -
+lism [69, 70]. Indeed, we did not detect TA in the culture 
+medium by high performance liquid chromatography, 
+likely because the small amounts of potentially released 
+TA were quickly consumed by the engineered strains. 
+While these observations hint towards the polyester plas-
+tic degradation potential of our strains, they also high -
+light future work required to fine-tune and improve PET 
+hydrolase expression levels, culture conditions, and cel -
+lular fitness.
+Discussion
+In this work, we followed a two-tiered strategy towards 
+endowing Pseudomonas putida with the ability to utilize 
+PET or PBAT plastics as sole carbon sources. First, we 
+used metabolic engineering and adaptive laboratory evo -
+lution to allow P. putida to catabolize the PET or PBAT 
+monomers TA, EG and BD. Second, we tested various 
+expression systems to achieve stable secretion or mem -
+brane display of PET hydrolases. The resulting monomer-
+metabolizing and PET hydrolase-expressing P. putida 
+strains were tested in different culture setups to assess 
+their plastic degradation capacity. While this approach 
+yielded mixed results and we did not, to date, observe 
+synthetic PETtrophy, we derived important insights into 
+the factors governing (and limiting) the efficiency of 
+potential whole-cell biocatalytic systems for polyester 
+plastic degradation and assimilation.
+Engineering P. putida for catabolism of polyester mon -
+omers TA, EG and BD is an active field of research, and 
+different groups recently disclosed approaches similar 
+to the results reported here. Werner et  al. utilized the 
+same tphII operon from Comamonas sp. E6, in combi -
+nation with a TA transporter (tpaK) from Rhodococcus 
+jostii, to install TA metabolism in P. putida [24]. Simi -
+larly, Narancic et  al. recently transferred a homologous 
+operon (including the TA transporter tphK) from the 
+native TA metabolizer Pseudomonas umsongensis GO16 
+to P. putida, again enabling it to use TA as sole carbon 
+source [71]. Together with our results, this demonstrates 
+that the tphA1, A2, A3, and B genes of tph-type oper -
+ons are sufficient to enable TA catabolism by P. putida. 
+Fig. 9 PBAT copolymer film degradation by engineered P . putida strains. A Weight loss of a PBAT-starch-PLA copolymer film after 6 days of 
+incubation in LB medium with P . putida KT2440 or P . putida KT2440  PIbpA-bglx-HiC. B Weight loss of a PBAT-starch-PLA copolymer film after 
+4 weeks of incubation in M9 minimal medium supplemented with 20 mM TA with P . putida TA7-BD or P . putida TA7-BD  PIbpA-bglx-HiC. C Image 
+of the PBAT-starch-PLA copolymer film after the treatment shown in (B), with the P . putida TA7-BD-treated film left and the P . putida TA7-BD 
+ PIbpA-bglx-HiC-treated film right. D, E SEM images of the same films shown in (C) at different magnifications
+Page 18 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+Notably, our work differs from the other two studies by 
+omitting a TA transporter from the genomic knock-in 
+cassette. Instead, the native P. putida transporter MhpT 
+with a L374V point mutation functions as a putative TA 
+transporter.  MhpTL374V may prove useful for future engi -
+neering efforts, as its expression may come with a lower 
+fitness cost compared to the expression of a heterolo -
+gous membrane transporter. Additional work is needed 
+to unravel the  MhpTL374V TA uptake mechanism and its 
+regulation of expression (e.g., the role of the accompany -
+ing R51C mutation in the MarR-family transcription fac -
+tor PP_3359).
+For EG, previous research has established that ALE 
+can rapidly result in loss-of-function mutations in the 
+transcriptional repressor GclR, thereby enabling effi -
+cient utilization of EG as sole carbon source by P. putida 
+[42–44]. Our observation of P. putida strains carrying a 
+likely GclR E130* loss-of-function mutation after ALE 
+for EG utilization agrees with these studies. Similarly, 
+Li et  al. recently demonstrated that ALE can enable P. 
+putida to use BD as sole carbon source [45]. The under -
+lying metabolic network is less clearly understood; how -
+ever, apparent key mutations occur in the transcription 
+factor PP_2046, which likely regulates expression of the 
+PP_2047-2051 operon involved in BD metabolism [45]. 
+In line with this, upon performing ALE for BD utiliza -
+tion, we obtained a strain carrying a mutation, V136A, in 
+PP_2046. We did not attempt to engineer metabolism of 
+adipic acid, the second PBAT aliphatic monomer; how -
+ever, Ackermann et al. recently used metabolic engineer -
+ing to allow P. putida to metabolize this compound as 
+well [72]. In summary, this body of work highlights the 
+potential of P. putida as a bacterial chassis for polyester 
+plastic monomer metabolization and upcycling, as cur -
+rently pursued by several research groups.
+To install polyester plastic depolymerization capabili -
+ties into our P. putida strains, we explored the expres -
+sion of Ideonella sakaiensis PETase (IsP) [26], Humicola 
+insolens cutinase (HiC) [57], and leaf compost cutinase 
+(LCC) [58]. We reasoned that by testing this diverse set 
+of enzymes we would maximize our chances of achiev -
+ing stable expression and catalytic function in our P. 
+putida strains. Both LCC and HiC have been described 
+to completely depolymerize PET to TA and EG. On the 
+other hand, IsP produces only small amounts of TA and 
+predominantly releases the degradation intermediate 
+product mono(2-hydroxyethyl) terephthalate (MHET), 
+which is subsequently hydrolyzed to TA and EG by the I. 
+sakaiensis auxiliary enzyme MHETase [26]. Interestingly, 
+recent studies of IsP expression in green algae found that, 
+upon prolonged incubation, TA accumulates in PET deg-
+radation cultures [59, 73]. However, it is currently unclear 
+whether this MHET degradation activity originates from 
+IsP or from unknown proteins of the microalgal hosts. 
+In this study, we chose to express IsP without MHETase 
+to establish baseline conditions for stable IsP expression 
+and to facilitate direct comparisons with HiC and LCC.
+We used rapid design-build-test-learn cycles to explore 
+PET hydrolase expression, and relied on assessing the 
+activity of expressed PET hydrolases with the spectro -
+photometric surrogate assay of para-nitrophenyl butyrate 
+(pNPB) cleavage. While this assay offers fast results and 
+is easy to scale, IsP shows markedly lower activity on pNP 
+alkanoate esters than do HiC and LCC [26]. Thus, with -
+out precise enzyme quantification (which was not feasi -
+ble for the many small-scale expression cultures typically 
+performed here), it was occasionally unclear whether the 
+low pNPB esterase activity of IsP expression cultures was 
+due to low enzyme expression or low IsP pNPB cleavage 
+activity.
+Our analyses of  PrhaB-driven PET hydrolase membrane 
+display showed that EhaA and OprF membrane anchors 
+yielded strong PET hydrolase cell surface expression but 
+also resulted in subsequent culture collapse. The latter 
+was not entirely surprising, as heterologous expression 
+of membrane proteins frequently results in compromised 
+cellular fitness [63, 64]. Indeed, the developers of the P. 
+putida EhaA display system (in their study with an ester -
+ase cargo and under control of the araBAD promoter) 
+reported a 1000-fold reduction in cell viability following 
+induction of expression [46]. Furthermore, they allowed 
+expression to proceed for only 2  h before cell analysis; 
+we speculate that the authors also encountered impaired 
+cell integrity at later timepoints post-induction. The 
+developers of the P. putida OprF display system (in their 
+study with a lipase cargo and under control of the tac 
+promoter) did not report cellular growth defects follow -
+ing induction; however, we note that the authors used a 
+relatively low IPTG inducer concentration (0.1 mM) and, 
+again, a short expression window of only 4 h before cell 
+analysis [49]. Neither of the two studies reported bacte -
+rial growth curves following induction.
+Secretory expression of the three PET hydrolases was 
+achieved by screening a library comprising 30 SPs. As the 
+joint effects of SP and enzyme cargo on secretion effi -
+ciency are incompletely understood [60, 61], we believe 
+that this screening approach was vital to identify suitable 
+SPs for each PET hydrolase. Notably, the DNA oligo pool 
+we used to clone the SP library came at a synthesis cost 
+of only around 100 USD; thus, we argue that a screening 
+strategy (as opposed to individual cloning and testing of 
+selected SPs) represents a cost-effective and fast strategy 
+to identify SPs for a given PET hydrolase (or other gene 
+of interest), especially if a fast read-out such as the pNPB 
+assay is available.
+Page 19 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+For both HiC and LCC we again observed impaired cell 
+growth following secretion construct expression, while 
+IsP secretion resulted in relatively mild growth defects. 
+While we assessed cell fitness in the initial SP library 
+screen and validated the best SP-PET hydrolase con -
+structs in shake flask cultures, there is a small possibil -
+ity that our screen did not identify the SPs resulting in 
+the most efficient enzyme secretion, but rather those SPs 
+inducing the fastest cell leakage. Thus, it would be inter -
+esting to repeat the entire SP library screen with the heat-
+inducible  PIbpA or cI857/P L promoter systems instead of 
+the strong  PrhaB promoter, to determine if a lower, more 
+sustainable construct expression would result in the same 
+SPs coming out on top.
+To ameliorate the problem of cell toxicity following 
+PET hydrolase expression, we next substituted the  PrhaB 
+promoter with the heat-inducible cI857/PL and  PIbpA pro-
+moter systems. In agreement with the literature, cI857/PL 
+required relatively harsh heat shocks (≥ 40 °C) for induc-
+tion [67]. In contrast,  PIbpA was largely inactive at 25 °C, 
+provided low expression at 30 °C, and good expression at 
+37 °C, while also maintaining better cell fitness compared 
+to  PrhaB expression constructs. Due to these favorable 
+properties and it’s easily clonable size, Pseudomonas ori -
+gin, and absence of auxiliary transcriptional regulators, 
+we proceeded with the  PIbpA expression constructs.
+In a final engineering step, we integrated the  PIbpA 
+PET hydrolase expression constructs into the genome 
+of our engineered P. putida strains. The resulting strains 
+showed good PET hydrolase expression upon induction 
+in complex medium, as well as good viability, likely due to 
+reduced expression burden from a single genomic copy. 
+On the other hand, we observed strongly reduced PET 
+hydrolase expression from cultures in minimal medium 
+containing TA, EG or BD as sole carbon sources. We 
+believe that this imperfect balance between nutrient sup -
+ply and PET hydrolase expression was a decisive factor 
+in the lack of bacterial growth on plastics as sole carbon 
+source, as discussed further below.
+Across a wide range of test cultures, including differ -
+ent PET or PBAT plastic samples and growth condi -
+tions, we were unable to detect bacterial PETtrophy, that 
+is, the envisioned capacity of our strains to depolymer -
+ize polyester plastics while maintaining growth and PET 
+hydrolase expression. The underlying reasons are likely 
+manifold. First, the low culture temperature, in the range 
+of 30–37  °C, likely poses a strong limitation, especially 
+for HiC and LCC, given the much higher activity of these 
+enzymes (and a higher absolute activity compared to IsP) 
+at temperatures closer to the glass transition tempera -
+ture of PET. For IsP-expressing strains, we would have 
+expected to see better activity, especially on amorphous 
+PET; however, the omittance of MHETase and thus lack 
+of TA and EG supply may have compromised the effi -
+ciency of our strains. Furthermore, despite our pro -
+moter-tuning efforts, our strains likely still do not strike 
+an ideal balance between PET hydrolase expression levels 
+and the available monomer concentrations as released by 
+PET hydrolase-catalyzed plastic depolymerization. This 
+represents a chicken-and-egg problem: PET hydrolase 
+expression requires plastic monomers as carbon sources; 
+however, monomer production requires a certain mini -
+mum PET hydrolase activity. This problem may be exac -
+erbated by the comparatively low yield of central carbon 
+metabolites obtained from PET monomers, as compared 
+to typical sugar feedstocks or monomers of other plas -
+tics [8]. In this context, it is also interesting to point out 
+that the original Ideonella sakaiensis PET degradation 
+cultures contained low amounts (0.01%) of yeast extract 
+[26]. This may have served precisely the purpose out -
+lined above, namely, to maintain a basal level of cellular 
+metabolism ensuring PETase and MHETase expression. 
+Lastly, we point out that we employed commonly used 
+but rather simplistic methods to assess bacterial PETtro -
+phy, such as measurements of culture OD600 and plas -
+tic weight loss. It has been argued that such methods are 
+unsuited for assessing biocatalytic plastic degradation, 
+and indeed, more fine-grained techniques capable of 
+detecting subtle changes in plastic composition or bacte -
+rial growth rate are available [74, 75]. It would be inter -
+esting to re-assess the plastic degradation and growth 
+performance of our strains using more sensitive tech -
+niques; however, at the same time, we argue that if such 
+methods are necessary to detect bacterial growth and 
+plastic degradation, the relevance of such a bacterial sys -
+tem for delivering tangible solutions to the plastic waste 
+problem is likely small.
+How does our work compare to recent studies aiming 
+to create whole-cell biocatalysts for PET plastic degrada -
+tion? To date, I. sakaiensis remains the only bacterium 
+with thoroughly characterized biochemical machinery 
+capable of sustained growth on PET substrates, albeit 
+with the caveat of requiring small amounts of extrane -
+ously added complex medium [26]. In addition, several 
+recent studies aimed to create whole-cell biocatalysts 
+for PET biodegradation, complementing the more tra -
+ditional approach of using purified PET hydrolases. In 
+most cases, these studies aimed for recombinant PET 
+hydrolase secretion or membrane display by microbial 
+hosts; unfortunately, most of these studies lack detailed 
+information on the fitness of the resulting recombinant 
+strains, which proved to be a key factor in our work. Seo 
+et al. demonstrated IsP secretion in E. coli by testing five 
+different E. coli SPs; no information on the growth char -
+acteristics of the recombinant strains was provided [76]. 
+Similarly, Shi et al. expressed IsP in E. coli with the pelB 
+Page 20 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+SP and variants thereof; while they do not comment on 
+cell growth, we note that the supernatant of their expres -
+sion strain shows a much higher overall concentration 
+of proteins on SDS-PAGE compared to the empty vec -
+tor control strain, which we interpret as indication of cell 
+leakage or lysis [77]. Cui et al. also expressed IsP in E. coli 
+using short ‘enhancer’ peptides fused to standard SPs; 
+they provide culture OD600 for their expression strains, 
+but lack crucial empty vector or uninduced controls [78]. 
+Huang et  al. demonstrated IsP secretion by the com -
+monly used gram-positive secretion host Bacillus subti-
+lis using the native IsP SP; growth curves of recombinant 
+strains were provided and showed no significant growth 
+defects compared to controls [79]. Similarly, Wang et al. 
+showed secretory expression of IsP in B. subtilis, using a 
+weak constitutive promoter and testing five different SPs; 
+they additionally performed bacterial growth tests at 22°, 
+28° and 37 °C and documented culture OD600, but unfor-
+tunately lacked an empty vector control strain for com -
+parison [80]. Moog et al. showed secretory expression of 
+ IsPR280A in the microalgae Phaeodactylum tricornutum, 
+using a P. tricornutum SP; while not providing growth 
+curves of the recombinant strains, they controlled for cell 
+lysis (and reported none) by measuring the cytoplasmic 
+marker alpha-tubulin in the culture supernatant [59]. 
+They report PET and PETG degradation by the micro -
+algal cultures under certain conditions, but also provide 
+the valuable information that several degradation setups 
+were unsuccessful, possibly due to low reaction tempera -
+tures (21–26 °C), culture agitation, or different character-
+istics of the PET substrates. Kim et al. also expressed IsP 
+in a green algae, Chlamydomonas reinhardtii, but used 
+an intracellular expression system necessitating cell lysis 
+for PET degradation assays; they do not provide growth 
+curves of their recombinant strains [73]. Yan et al. showed 
+secretory expression of LCC in the thermophilic bacte -
+rium Clostridium thermocellum, using a C. thermocellum 
+SP; they show a growth curve for their engineered strain, 
+but also lack appropriate controls [81]. Notably, they also 
+report that LCC is only actively produced in the first day 
+of a 14-day culture due to subsequent medium deple -
+tion. Regarding membrane display, Chen et al. displayed 
+IsP on the surface of the yeast Pichia pastoris, testing 
+three P. pastoris glycosylphosphatidylinositol-anchored 
+proteins as display system; they report similar growth of 
+their recombinant strains compared to a wt control [82]. 
+Lastly, Heyde et al. recently explored IsP surface display 
+on E. coli, using the Lpp-OmpA or C-IgAP display sys -
+tems; they do not provide information on cell fitness fol -
+lowing construct expression [83].
+Thus, while secretion or membrane display of PET 
+hydrolases is a growing field, there is unfortunately 
+often only very limited information on the effects of 
+such expression systems on host fitness (a trend we 
+observe across the general protein secretion or mem -
+brane display literature). While host fitness may not 
+be relevant for many biochemical applications, such 
+information is crucial to establishing continuous bio -
+processing-like applications as aimed for in this study. 
+Furthermore, if host growth characteristics are not 
+controlled for, especially in enzyme secretion systems, 
+one may confound the accumulation of the target pro -
+tein in the culture supernatant as ‘secretion’ , when it 
+may originate instead from cell leakage or lysis. Thus, 
+we advocate for assessment and reporting of host fit -
+ness for any newly developed enzyme secretion or 
+membrane display system, including the critical com -
+parison to the matched empty vector or wildtype strain. 
+This will enable scientists aiming to establish continu -
+ous bioprocessing-like processes to better gauge the 
+suitability of each expression system for their purposes.
+Finally, it remains to be discussed whether pursuing 
+PET continuous bioprocessing using a mesophilic bac -
+terium is a promising strategy. A PET continuous bio -
+processing workflow would need to incorporate both 
+PET degradation through hydrolase expression and 
+efficient monomer metabolization, of which the for -
+mer is likely the more challenging part. We chose to 
+use P. putida due to the ease of engineering PET mon -
+omer metabolization, and subsequently tackled PET 
+hydrolase expression. However, given the strict rela -
+tionship between reaction temperature and PET hydro -
+lase degradation performance, it may be promising to 
+first establish PET hydrolase expression in a thermo -
+philic host, and subsequently engineer it for monomer 
+metabolism [81]. Recent progress in the development 
+of genetic tools and knowledge for metabolic engineer -
+ing of thermophiles will undoubtedly prove useful for 
+such endeavors [84, 85]. Nevertheless, we argue that a 
+mesophilic, self-sustaining PET degrading bacterium 
+as pursued here may still have significant value. First, 
+by creating such an organism, we may learn about the 
+determinants of bacterial growth on PET in mesophilic 
+environments. Second, such organisms may prove use -
+ful for non-commercial approaches in which speed of 
+degradation is less decisive, for example for small-scale, 
+decentralized PET waste composting facilities. In this 
+regard, it would be very interesting to perform eco -
+nomic process modelling analyses for a putative whole-
+cell biocatalytic PET recycling process, as recently 
+performed by Singh et al. for a recycling process based 
+on purified enzyme [9 ], to better gauge the potential 
+merits of such a system. We look forward to seeing how 
+the next generation of highly efficient PET hydrolases, 
+Page 21 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+such as DuraPETase [20], FastPETase [21], or the LCC 
+ICCG variant [19], may be leveraged in the future to 
+develop whole-cell biocatalytic strategies as novel solu -
+tions for the PET waste problem.
+Conclusions
+What does it take to engineer a mesophilic bacterium 
+for growth on polyester plastics? Here, we addressed this 
+question using the industrial workhorse organism Pseu -
+domonas putida. Together with other recent studies, our 
+work shows that polyester plastic monomer metabolism 
+is readily achievable using genetic engineering and adap -
+tive laboratory evolution. On the other hand, attaining 
+high-level extracellular expression and activity of PET 
+hydrolases remains a challenge. Our work of testing a 
+variety of expression systems to balance host cell fit -
+ness with PET hydrolase expression may prove useful for 
+future efforts aiming to establish extracellular enzyme 
+expression in P. putida, and in particular for efforts 
+geared towards establishing synthetic PETtrophy in mes -
+ophilic bacterial hosts.
+Materials and methods
+General reagents, procedures, and bacterial culturing 
+conditions
+Bacterial strains, plasmids, and DNA oligos used in this 
+study are listed in Additional file  1: Tables S5, 6, and 7. 
+Escherichia coli and Pseudomonas putida strains were 
+routinely grown in LB medium (10 g tryptone, 5 g yeast 
+extract, 5  g NaCl per liter  ddH2O, pH 7.0) at 37  °C or 
+30  °C, supplemented with antibiotics where needed 
+(Ampicillin (Amp): 100 µg/mL; Kanamycin (Kan): 50 µg/
+mL). Adaptive laboratory evolution and assays with P. 
+putida strains for growth on terephthalic acid, ethyl -
+ene glycol, 1,4-butanediol, PET, and PBAT, were per -
+formed in modified M9 minimal medium: 47.7  mM 
+ Na2HPO4·7H2O, 22  mM  KH2PO4, 18.7  mM  NH4Cl, 
+8.5  mM NaCl, 2  mM  MgSO4, 0.1  mM  CaCl2, 1× trace 
+metals (Teknova 1000× trace metals mixture), and vary -
+ing pH (adjusted with NaOH or HCl) depending on the 
+experiment. Bacteria were routinely cultured in 125 mL 
+shake flasks (15 mL working volume) or 14 mL snap-cap 
+tubes (2–4 mL working volume) at 250 rpm. Bacterial cul-
+ture plates were prepared with 1.5% (w/v) agar. Expres -
+sion of proteins under control of the  PrhaB promoter was 
+induced by addition of a 1 M sterile rhamnose stock solu-
+tion in  ddH2O to 2 mM final concentration, unless other-
+wise indicated. Optical density (OD600) of cell cultures 
+was measured in a Beckman-Coulter DU520 spectropho -
+tometer. Bacterial growth in clear round-bottom 96-well 
+plates was measured in a Biotek Synergy plate reader with 
+constant shaking (set to the fastest shake rate, no rpm 
+provided) at 30 °C, 100 μL volume per well, and OD600 
+read-out in 15 min intervals; plates were sealed with clear 
+Breathe-Easy membranes (Sigma-Aldrich). Plasmid DNA 
+was prepared using Miniprep kits (Qiagen). DNA restric -
+tion digests and ligations (with T4 DNA ligase) were per -
+formed with enzymes from New England Biolabs (NEB). 
+DNA fragment purification by gel extraction was per -
+formed using Zymoclean gel DNA recovery kits (Zymo 
+Research). High-fidelity PCR was performed using either 
+Phusion DNA polymerase (NEB) or PfuUltra II Fusion 
+DNA polymerase (Agilent). Analytical colony PCR was 
+performed with Taq DNA polymerase (Takara). Gibson 
+assembly was performed using Gibson Assembly Mas -
+ter Mix (NEB). Bacterial transformation with plasmid 
+DNA was achieved through electroporation (see below) 
+or by chemical transformation using NEB 5-alpha E. coli 
+(NEB) according to the manufacturer’s instructions. All 
+plasmids were stored as glycerol stocks at − 80  °C in E. 
+coli CC118 λpir (pBAMD1-2 and derivatives thereof) or 
+E. coli NEB 5-alpha (all other plasmids). Synthetic DNA 
+fragments and oligonucleotides were purchased from 
+IDT. Sanger sequencing was performed by Laragen. 
+Chemicals were obtained from Sigma. PBAT-starch-pol -
+ylactic acid copolymer bags (Vove compostable sandwich 
+bags) were obtained from Amazon. Commercial bottle 
+PET was obtained from Evian water bottles. Amorphous 
+PET film (0.25  mm thickness) and PET powder (≥ 40% 
+crystallinity) were obtained from Goodfellow.
+Preparation and transformation of electrocompetent cells
+Electrocompetent E. coli and P. putida cells were pre -
+pared by a modified standard protocol. Briefly, 250  mL 
+of LB medium in a 1 L flask were inoculated with an E. 
+coli or P. putida overnight culture to an OD600 of 0.05 
+and incubated at 250  rpm and 37  °C or 30  °C, respec -
+tively, until an OD600 of 0.5 was reached. Cells were 
+cooled on ice, transferred to 250 mL centrifuge buckets, 
+and pelleted at 4 °C, 3000g, 8 min. The supernatant was 
+removed, the cells were gently resuspended by swirling 
+in 50  mL sterile 10% ice-cold glycerol in  ddH2O, trans -
+ferred to 50 mL tubes, and pelleted at 4 °C, 3000g, 8 min. 
+The cell pellet then underwent two additional washing 
+steps with 50 mL 10% glycerol, before resuspending the 
+cells in 1 mL 10% glycerol. Aliquots of 50 μL were either 
+used directly for electroporation or frozen on dry ice 
+in 0.7 mL tubes and stored at − 80 °C. For transforma -
+tion, 0.5 to 1.5 μL of plasmid DNA, ligation reaction or 
+Gibson assembly were added to a cell aliquot on ice, and 
+electroporation was performed using a BioRad Micro -
+Pulser electroporator (Ec1 setting) and 1 mm gap width 
+electroporation cuvettes (BioRad). SOC medium (600 μL; 
+NEB) was added immediately following electroporation 
+and cells were incubated at 37  °C or 30  °C (E. coli or P. 
+Page 22 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+putida, respectively) for 1  h (3–5  h in case of pBAMD 
+genomic knock-ins) before plating on selective LB-agar 
+plates. We found that for all P. putida transformations, 
+including pBAMD-based genomic knock-ins, electropo -
+ration provided sufficient transformation rates and no 
+conjugative plasmid transfer was necessary.
+Plasmid construction
+Cloning of the TA‑to‑PCA operon knock‑in vector 
+pBAMD‑tphII.
+The mini-Tn5 transposon plasmid pBAMD1-2 was 
+digested with EcoRI and PshAI (thereby excising the  KanR 
+selectable marker) and the vector fragment was purified 
+by agarose gel extraction. To construct the TA-to-PCA 
+operon, a synthetic DNA fragment containing the  PEM7 
+promoter and BCD2 translational coupler [36] (Addi -
+tional file  1: Sequence S1) was amplified using primers 
+OB40 and OB51. In parallel, the codon-optimized syn -
+thetic DNA fragments encoding tphA2 II, tphA3II, tphBII, 
+and tphA1II from Comamonas sp. E6 (Additional file  1: 
+Sequence S2–5) were amplified using primer pairs OB39 
+and OB54, OB55 and OB56, OB57 and OB58, and OB59 
+and OB53, respectively. This strategy introduced 32  bp 
+intergenic regions between the four genes, each contain -
+ing a strong ribosome binding site (ACG AGG ) [86]. In 
+addition, the outmost primers (OB51 and OB53) intro -
+duced overhangs homologous to pBAMD1-2 overlap -
+ping the EcoRI and PshAI restriction sites. Following 
+PCR and purification of the individual gene fragments, 
+overlap extension PCR was used to splice together the 
+ PEM7-BCD2, tphA2II, tphA3II fragments and the thpB II, 
+tphA1II fragments, respectively. Next, the two resulting 
+fragments were spliced together using overlap extension 
+PCR to create the complete operon fragment. The frag -
+ment was cloned into EcoRI/PshAI-digested pBAMD1-2 
+using Gibson assembly, resulting in plasmid pBAMD-
+tphII. E. coli CC118 λpir cells were transformed with the 
+Gibson assembly mix by electroporation and cells were 
+plated on LB-Amp agar plates. Plasmids isolated from 
+single clones were analyzed by Sanger sequencing to ver -
+ify correct assembly of the operon and absence of unde -
+sired mutations.
+Cloning of PET hydrolase expression plasmids.
+(A) Cloning of expression vectors: To obtain a set of 
+expression vectors harboring the rhaS-rhaR-P rhaB tran -
+scriptional regulator for rhamnose-inducible protein 
+expression and differing only in their replication system 
+(and thus cellular copy number) we first transferred the 
+rhaS-rhaR-PrhaB element from pPS39 to pSEVA328 and 
+pSEVA338 using PacI and SpeI restriction sites, gen -
+erating vectors pSEVA328-P rhaB and pSEVA338-P rhaB. 
+Next, we obtained the DNA fragment encoding the Kan 
+resistance marker from pBAMD1-2 through digest with 
+SwaI and PshAI and inserted it into the equally digested 
+pPS39, pSEVA338-P rhaB and pSEVA328-P rhaB, thereby 
+obtaining plasmids pHi-P rhaB, pMe-P rhaB and pLo-P rhaB. 
+To obtain a low copy number expression vector with the 
+ PIbpA transcriptional/translational regulator, we ordered 
+the  PIbpA fragment as a DNA oligo (Additional file  1: 
+Sequence S6), which was then transformed into dsDNA 
+and amplified by PCR using primers OB179 and OB192. 
+Next, we PCR-amplified pLo-P rhaB as two separate frag -
+ments, to simultaneously remove the rhaS-rhaR-P rhaB 
+element and to remove a NdeI site in the replication 
+protein trfA (I305; primer-encoded silent codon change 
+ATA > ATC (antisense); CAT  ATG  > CAG ATG ); primers 
+used were OB191 with OB189, and OB178 with OB190. 
+The two resulting pLo vector fragments were fused and 
+amplified using overlap extension PCR with outer prim -
+ers OB178 and OB191. Next, the vector and  PIbpA frag -
+ments were digested with PacI and NdeI and ligated to 
+obtain pLo-P IbpA. To obtain a low copy number expres -
+sion vector with the cI857/P L transcriptional regulator, 
+the cI857/PL element was ordered as synthetic DNA frag-
+ment (Additional file  1: Sequence S7) and amplified with 
+primers OB182 and OB183. Next, the resulting fragment 
+was digested with PacI and AvrII and ligated into equally 
+digested pLo-PrhaB to obtain pLo-PL.
+(B) Cloning of PET hydrolase membrane display con -
+structs. (i) Cloning of OprF display constructs: A 100 bp 
+BCD2 translational coupler fragment was amplified from 
+a synthetic DNA fragment (Additional file  1: Sequence 
+S8) with primers OB85 and OB91. Next, the OprF frag -
+ment including a C-terminal  G4SG2S(G4S)3 linker [47] 
+was amplified from a synthetic DNA fragment (Addi -
+tional file 1: Sequence S9) with primers OB92 and OB93. 
+The BCD2 and OprF fragments were fused and further 
+amplified by overlap extension PCR with outer primers 
+OB85 and OB93. The resulting fragment was digested 
+with AvrII and HindIII and ligated into equally digested 
+pHi-PrhaB, pMe-PrhaB and pLo-P rhaB, generating plasmids 
+pHi-PrhaB-OprF, pMe-P rhaB-OprF and pLo-P rhaB-OprF. 
+Next, synthetic DNA fragments encoding LCC (Addi -
+tional file  1: Sequence S8, primers OB85 and OB86), 
+HiC (Additional file  1: Sequence S10, primers OB94 and 
+OB95) and IsP (Additional file  1: Sequence S11, prim -
+ers OB132 and OB133) were amplified by PCR, digested 
+with PstI and NcoI, and ligated into equally digested 
+pHi-PrhaB-OprF, pMe-P rhaB-OprF and pLo-P rhaB-OprF 
+(note, IsP was only cloned into pLo-P rhaB-OprF). This 
+generated plasmids pHi-P rhaB-OprF-LCC, pHi-P rhaB-
+OprF-HiC, pMe-P rhaB-OprF-LCC, pMe-P rhaB-OprF-
+HiC, pLo-P rhaB-OprF-LCC, pLo-P rhaB-OprF-HiC, and 
+pLo-PrhaB-OprF-IsP . (ii) Cloning of EhaA display con -
+structs: The codon-optimized synthetic EhaA DNA 
+Page 23 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+fragment (Additional file  1: Sequence S12) including an 
+N-terminal  G4SG2S(G4S)3 linker was PCR-amplified 
+with primers OB87 and OB88. A synthetic codon-opti -
+mized DNA fragment (Additional file  1: Sequence S8) 
+encoding the N-terminal BCD2 translational coupler 
+followed by residues 1–37 of P. putida OprF, a 6xHis 
+tag, PstI restriction site, residues 35–293 of LCC and a 
+NcoI restriction site was amplified by PCR using prim -
+ers OB85 and OB86. Next, the EhaA and LCC fragments 
+were fused and further amplified by overlap extension 
+PCR with outer primers OB85 and OB88 (5% DMSO 
+were added to the PCR mix to ensure efficient amplifica -
+tion across GC-rich regions). The resulting fragment was 
+digested with AvrII and HindIII and ligated into equally 
+digested pHi-P rhaB, pMe-P rhaB and pLo-P rhaB, generating 
+plasmids pHi-P rhaB-EhaA-LCC, pMe-P rhaB-EhaA-LCC 
+and pLo-P rhaB-EhaA-LCC. To generate the correspond -
+ing EhaA-HiC and EhaA-IsP constructs, the LCC frag -
+ment was excised from these plasmids with PstI and NcoI 
+and replaced with equally digested HiC and IsP ORF 
+fragments (see OprF cloning above) (note, IsP was only 
+cloned into pLo-P rhaB-EhaA). (iii) Cloning of InaV-NC 
+display constructs: A 100 bp BCD2 translational coupler 
+fragment was amplified from a synthetic DNA fragment 
+(Additional file  1: Sequence S8) with primers OB85 and 
+OB91. Next, the InaV-NC fragment including a C-termi -
+nal  G4SG2S(G4S)3 linker was amplified from a synthetic 
+DNA fragment (Additional file  1: Sequence S13) with 
+primers OB89 and OB90. The BCD2 and InaV-NC frag -
+ments were fused and amplified by overlap extension 
+PCR with outer primers OB85 and OB89. The resulting 
+fragment was digested with AvrII and HindIII and ligated 
+into equally digested pHi-P rhaB, pMe-PrhaB and pLo-PrhaB, 
+generating plasmids pHi-P rhaB-InaV, pMe-PrhaB-InaV and 
+pLo-PrhaB-InaV. Next, synthetic DNA fragments encoding 
+LCC (Additional file  1: Sequence S8, primers OB85 and 
+OB86) and HiC (Additional file  1: Sequence S11, prim -
+ers OB94 and OB95) were amplified by PCR, digested 
+with PstI and NcoI, and ligated into equally digested 
+pHi-PrhaB-InaV, pMe-PrhaB-InaV and pLo-PrhaB-InaV. This 
+generated plasmids pHi-PrhaB-InaV-LCC, pHi-PrhaB-InaV-
+HiC, pMe-P rhaB-InaV-LCC, pMe-P rhaB-InaV-HiC, pLo-
+PrhaB-InaV-LCC, and pLo-PrhaB-InaV-HiC.
+(C) Cloning of PET hydrolase secretion constructs. First, 
+we excised the EhaA coding sequence from pLo-P rhaB-
+EhaA-LCC with NcoI and HindIII. Next, we used PCR to 
+generate a short 85 bp linker fragment from overlapping 
+oligonucleotides OB121 and OB122, spanning across the 
+NcoI and HindIII sites and introducing a stop codon after 
+the LCC coding sequence and NcoI site. Gibson assembly 
+was used to repair the pLo-P rhaB-EhaA-LCC NcoI/Hin -
+dIII-digested vector fragment with this linker fragment, 
+resulting in plasmid pLo-P rhaB-SP(OprF)-LCC. Next, we 
+used site-directed mutagenesis with primer pair OB134 
+and OB135 to introduce a silent mutation creating a 
+unique BbsI site at the C-terminal end of the BCD2 trans-
+lational coupler (V16, GTT to GTC). This generated plas-
+mid pLo-P rhaB-SPswitch-LCC, allowing facile exchange 
+of the N-terminal SP preceding the LCC coding region 
+using the BbsI/PstI restriction sites. We next generated 
+analogous plasmids pLo-P rhaB-SPswitch-HiC and pLo-
+PrhaB-SPswitch-IsP by digesting pLo-P rhaB-SPswitch-LCC 
+with PstI and NcoI to excise the LCC coding sequence 
+and replacing it with equally digested HiC and IsP coding 
+fragments obtained from pLo-P rhaB-EhaA-HiC and pLo-
+PrhaB-EhaA-Isp. To clone a library of different signal pep -
+tides (SPs) into the LCC, HiC, and IsP SPswitch vectors, 
+we ordered a 30-member SP library as oligonucleotides 
+(oPool) from IDT (Additional file 1: Table S3). The library 
+was transformed into dsDNA and further amplified by 
+PCR with outer primers OB136 and OB137. Next, the SP 
+library and plasmids pLo-PrhaB-SPswitch-LCC, pLo-PrhaB-
+SPswitch-HiC, and pLo-PrhaB-SPswitch-IsP were digested 
+with BbsI and PstI and the SP library was ligated into the 
+vector fragments. E. coli NEB5α cells were transformed 
+with the ligation reactions and serial dilutions plated on 
+LB-Kan plates and incubated o/n. The next day, colonies 
+from a dense plate (> 250 colonies) for each construct 
+were washed off with 5  mL LB and directly processed 
+by Miniprep; the isolated plasmid library was stored at 
+-20  °C and used to transform P. putida for subsequent 
+SP library screening. In parallel, plasmid DNA isolated 
+from five single colonies per library was sent for sequenc-
+ing to verify the cloning procedure and SP library diver -
+sity. Individual SP-PET hydrolase plasmids as listed in 
+Additional file  1: Table  S5 were obtained after library 
+screening.
+(D) Cloning of PET hydrolase cytoplasmic expression 
+plasmids. To obtain plasmids for cytoplasmic expression 
+of PET hydrolases (without membrane anchor or signal 
+peptide), the LCC, HiC, and IsP ORFs including a 6xHis 
+tag at the C-terminus were PCR-amplified from pLo-
+PrhaB-OprF-LCC, pLo-P rhaB-OprF-HiC, and pLo-P rhaB-
+OprF-IsP with primer pairs OB139 and OB211, OB139 
+and OB210, and OB139 and OB209, respectively. The 
+fwd primers introduced a BbsI restriction site match -
+ing the site in the pLo-P rhaB-SPswitch vectors, while the 
+reverse primer introduced a HindIII site. The PCR frag -
+ments were digested with BbsI and HindIII and ligated 
+into equally digested pLo-P rhaB-SPswitch-LCC to gener -
+ate pLo-PrhaB-LCC, pLo-PrhaB-HiC, and pLo-PrhaB-IsP .
+(E) Cloning of PET hydrolases into heat-shock promoter 
+plasmids. To obtain the EhaA-LCC display construct 
+under control of  PL, the pLo-P rhaB-EhaA-LCC plasmid 
+was digested with PacI and AvrII to excise the rhaR-rhaS-
+PrhaB element, which was then replaced with the equally 
+Page 24 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+digested cI857/P L element (obtained from pLo-P L) to 
+generate pLo-PL-EhaA-LCC. To obtain the secreted bglx-
+HiC construct under control of  PL, pLo-PL was digested 
+with AvrII and HindIII. The bglx-HiC fragment (includ -
+ing the BCD2 translational coupler) was obtained from 
+pLo-PrhaB-bglx-HiC by AvrII/HindIII digest and ligated 
+into the equally digested pLo-P L fragment to obtain 
+pLo-PL-bglx-HiC. To obtain the EhaA-LCC display con -
+struct under control of  PIbpA, the EhaA-LCC fragment 
+was obtained by PCR with primers OB201 and OB139 
+using pLo-P rhaB-EhaA-LCC as template. pLo-P IbpA was 
+digested with NdeI and HindIII, and the EhaA-LCC frag -
+ment was ligated into the vector using Gibson assembly, 
+providing pLo-P IbpA-EhaA-LCC. To obtain the secreted 
+bglx-HiC and lasB-IsP constructs under control of  PIbpA, 
+both ORFs were amplified by PCR using primer pairs 
+OB197 and OB139 and pLo-P rhaB-bglx-HiC as template, 
+and primer pairs OB195 and OB139 and pLo-P rhaB-lasb-
+IsP as template, respectively. The PCR fragments were 
+digested with NdeI and HindIII and ligated into equally 
+digested pLo-P IbpA, yielding pLo-P IbpA-bglx-HiC and 
+pLo-PIbpA-lasb-IsP . To obtain pLo-PIbpA-lasb-IsPDura, the 
+ PIbpA-IsPDura fragment was amplified from a synthetic 
+DNA fragment (Additional file  1: Sequence S14) using 
+primer pair OB220 and OB221, digested with PacI and 
+HindIII, and cloned into equally digested pLo-PIbpA.
+Cloning of  PIbpA‑PET hydrolase genomic knock‑in vectors.
+To obtain plasmids for genomic knock-in of  PIbpA-PET 
+hydrolase expression systems we used pBAMD1-2. 
+For secreted constructs, we first PCR-amplified the 
+ PIbpA-bglx-HiC and  PIbpA-lasb-IsPDura cassettes from their 
+pLo-based expression plasmids (see above) using primer 
+pairs OB143 and OB205, and OFB220 and OFB205, 
+respectively. The PCR products and pBAMD1-2 were 
+then digested with SacI and HindIII and ligated to yield 
+pBAMD-PIbpA-bglx-HiC and pBAMD-P IbpA-lasb-IsP-
+Dura. For  PIbpA-EhaA-LCC we used a Gibson assembly 
+strategy due to the presence of a SacI site in LCC. The 
+ PIbpA-EhaA-LCC cassette was PCR-amplified from the 
+corresponding pLO plasmid (see above) using primer 
+pair OB119 and OB214. The resulting fragment was 
+cloned into SacI/HindIII digested pBAMD1-2 using Gib -
+son assembly to yield pBAMD-P IbpA-EhaA-LCC. In con -
+trast to pBAMD-tphII, all  PIbpA-PET hydrolase knock-in 
+vectors retained the Kan resistance marker to allow selec-
+tion of transformants. We also cloned the corresponding 
+pBAMD-PL-PET hydrolase constructs, however, they 
+consistently showed very low knock-in efficiencies and 
+are not discussed in the main text; details are available on 
+request.
+Cloning of mhpT expression vectors.
+mhpTwt and mhpT L374V ORFs were amplified from 
+genomic DNA of P. putida TA and P. putida TA7 by PCR 
+using primer pair OB109 and OB110. The fwd primer 
+OB109 introduced an AvrII restriction site and a strong 
+ribosome binding site (ACG AGG ) in front of the mhpT  
+ATG, while the rev primer OB110 introduced a HindIII 
+restriction site after the mhpT stop codon. The fragments 
+were digested with AvrII and HindIII and ligated into 
+equally digested pMe-P rhaB, generating plasmids pMe-
+PrhaB-mhpTwt and pMe-PrhaB-mhpTL374V.
+Metabolic engineering and adaptive laboratory evolution 
+of P . putida strains
+Engineering TA‑to‑PCA catabolism
+To knock-in the TA-to-PCA cassette into P . putida, 50 μL 
+of electrocompetent P. putida KT2440 cells were trans -
+formed with pBAMD-tphII (75  ng) and incubated in 
+600 μL SOC medium for 3 h at 30 °C and 250 rpm. The 
+cells were pelleted (3000g, 3 min), resuspended in 1 mL 
+M9 medium, and added to 25 mL M9 medium, pH 5.5, 
+0.4% w/v TA, in a 125 mL flask. The culture was incubated 
+at 30  °C, 250  rpm, until after ca. 36  h noticeable bacte -
+rial growth was observed. The culture was subsequently 
+passaged daily for 10  days (dilution to OD600 = 0.01 in 
+15 mL fresh M9-TA medium), at which point the culture 
+was streaked on LB-agar plates to obtain single colo -
+nies. Five clones were processed and analyzed by PCR 
+as described by Garcia-Martinez et al. [87] to determine 
+the genomic integration site; primers used were OB96 
+and OB105 (5’ end, outer primers), OB97 and OB104 
+(5’ end, inner primers), OB96 and OB102 (3’ end, outer 
+primers) and OB97 and OB103 (3’ end, inner primers). 
+The resulting DNA fragments spanning over the 5’ and 
+3’ integration sites were sequenced using primers OB104 
+and OB103, respectively; all five clones showed the same 
+integration site, indicating that the knock-in culture was 
+dominated by a single clone likely originating from the 
+same integration event. Growth of one selected clone on 
+TA as sole carbon source was verified and the variant was 
+designated as strain P. putida TA.
+ALE for growth of P . putida TA at pH 7
+To adapt P. putida strain TA with the genomically inte -
+grated TA-to-PCA cassette for better growth at higher 
+pH, 25 mL of M9 pH 7.0, 0.4% w/v TA were inoculated 
+with 0.5  mL of the P. putida TA-to-PCA knock-in cul -
+ture after 10 days of passaging (see above) and cultured 
+at 30  °C, 250  rpm. After 7  days (6 total passages), sig -
+nificantly better bacterial growth was observed and the 
+culture was streaked out on LB-agar plates to obtain 
+single colonies. Three clones were tested for growth in 
+Page 25 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+M9, 0.4% TA at different pH in comparison to P. putida 
+TA; the best-performing clone was designated strain P. 
+putida TA7 and subjected to whole-genome sequencing 
+together with P. putida TA to identify potential genetic 
+changes.
+ALE for co‑utilization of ethylene glycol by P . putida TA7
+To adapt P. putida TA7 for co-utilization of ethylene gly-
+col, two duplicate cultures of 20  mL M9 pH 8.0, 5  mM 
+TA, 25  mM EG in 125  mL flasks were inoculated with 
+strain TA7 and cultured at 30  °C and 250  rpm. Once 
+bacterial growth was observed (typically after 24–48  h) 
+cultures were passaged to a fresh flask (to OD600 0.01). 
+After 11 days (9 passages), significantly improved bacte -
+rial growth was observed and cultures were streaked out 
+on LB-agar plates to obtain single colonies. Four single 
+clones from each culture (8 total) were tested in compari-
+son to P. putida TA7 for growth in M9 minimal medium 
+with varying concentrations of TA and EG; the best-per -
+forming strain was designated as P. putida TA7-EG and 
+analyzed by whole-genome sequencing.
+ALE for co‑utilization of 1,4‑butanediol by P . putida TA7
+To adapt P. putida TA7 for co-utilization of 1,4-butan -
+ediol, two cultures of 20  mL M9 pH 8.0 with either 
+5  mM TA and 25  mM BD, or 5  mM TA, 25  mM BD, 
+and 25  mM AA, in 125  mL flasks were inoculated with 
+strain TA7 and cultured at 30  °C and 250  rpm. Once 
+bacterial growth was observed (typically after 24–48  h) 
+cultures were passaged to fresh flasks (to OD600 0.01). 
+After 11 days (7 passages), significantly improved bacte -
+rial growth was observed and cultures were streaked out 
+on LB-agar plates to obtain single colonies. Four single 
+clones from each culture (8 total) were tested in compari-
+son to P. putida TA7 for growth in M9 minimal medium 
+with varying concentrations of TA, BD, and AA; the best-
+performing strain was designated as P. putida TA7-BD 
+and analyzed by whole-genome sequencing.
+Genomic integration of  PIbpA‑PET hydrolase cassettes
+The pBAMD-derived  PIbpA-PET hydrolase knock-in 
+plasmids (pBAMD-P IbpA-bglx-HiC, pBAMD-P IbpA-lasb-
+IsPDura, pBAMD-P IbpA-EhaA-LCC) were delivered to P. 
+putida by electroporation and cells were recovered in LB 
+medium at 25 °C, 250 rpm, o/n. Next, serial dilutions of 
+the cell suspension were plated on LB-Kan agar plates 
+and incubated at 25  °C for ca. 36  h. For each knock-in, 
+sixteen single colonies were transferred using sterile 
+toothpicks into deep 96-well plates supplemented with 
+250 μL LB-Kan per well and incubated at 25 °C, 250 rpm, 
+o/n; control wells with the parent strain were also 
+included. Next, 50 μL of the cell suspension were used to 
+inoculate a fresh deep 96-well plate supplemented with 
+500  μL LB-Kan per well and the plate was incubated at 
+25 °C, 250 rpm, for 3 h; the pre-culture plate was sealed 
+and stored at 4  °C. The expression plate was then sub -
+jected to a heat shock (37 °C, 250 rpm) for 2 h, followed 
+by an outgrowth phase at 30 °C, 250 rpm, o/n. We then 
+assessed esterase activity in the cleared supernatant and 
+cell fraction of each well using the pNBP assay. The best-
+performing strains were re-tested in shake flask cultures, 
+followed by preparation of glycerol stocks and whole-
+genome sequencing.
+pNPB assay for esterase activity measurements
+All pNPB esterase assays were carried out in Tris buffer 
+(100 mM Tris–HCl pH 8.0, 50 mM NaCl). A calibration 
+curve was prepared by measuring A405 of serial dilutions 
+of 4-nitrophenol (4NP; Sigma-Aldrich) in assay buffer (95 
+μL Tris buffer, 5 μL DMSO, in clear flat-bottom 96-well 
+plates, in a Biotek Synergy plate reader; Additional file  1: 
+Fig. S10). For measuring PET hydrolase esterase activ -
+ity, 1  mL PET hydrolase expression cultures were pel -
+leted in 1.5 mL tubes (500g, 2 min). 5 μL (in duplicates) 
+of the cleared supernatant (or further dilutions thereof 
+if esterase activity was high) were directly added to clear 
+flat-bottom 96-well plates. The remaining supernatant 
+was discarded and the cell pellet carefully resuspended 
+in 1 mL Tris buffer, followed by a second centrifugation. 
+The supernatant was discarded and the pellet carefully 
+resuspended in 1 mL Tris buffer, and 5 μL (in duplicates) 
+added to clear flat-bottom 96-well plates. We then pre -
+pared a mastermix of Tris buffer with pNPB substrate 
+(per well: 90 μL Tris buffer with 5 μL pNPB stock solu -
+tion (10 mM in DMSO)); multiples of this mix were pre -
+pared according to the number of wells to be analyzed 
+(and including a pipetting reserve), and 95 μL were added 
+to the 96-well sample plate with a multichannel pipette 
+to start the reaction (final concentrations: 0.5 mM pNPB 
+and 5% DMSO). Each plate contained blank wells (5 μL 
+clean culture medium or Tris buffer instead of culture 
+supernatant or cell suspension). The plate was imme -
+diately inserted into the plate reader, and A405 of each 
+well was measured in 31 s intervals (the shortest possible 
+measurement interval of the plate reader). The resulting 
+data were plotted as A405 over time (in s) and the data 
+points showing a linear increase were included to derive 
+the slope by linear regression (plotting and analysis were 
+performed in GraphPad Prism 9); the slope derived 
+from blank controls was subtracted. The resulting slope 
+(A405/s) was then used together with the slope of the 
+calibration curve (A405/μMol 4NP) to derive μMol 4NP/
+min = ((A405/s)/(A405/[4NP]))×60. The resulting value 
+was multiplied by 200 (as we typically used 5  μL sam -
+ple per reaction) to obtain μMol 4NP/min×mL. As the 
+Page 26 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+amount of enzyme required to release1 μMol 4NP/min is 
+defined as one Unit (U), this term represents U/mL.
+PET hydrolase expression cultures
+To test PET hydrolase expression, single colonies of P. 
+putida strains (either transformed with PET hydrolase 
+expression plasmids or strains with genomic integration 
+of PET hydrolase expression cassettes) were inoculated 
+into 3 mL medium (LB or M9 minimal medium, the lat -
+ter supplemented with TA, EG or BD) and cultured at 
+250 rpm, o/n, 30 °C (all  PrhaB constructs) or 25 °C (all  PL 
+and  PIbpA constructs). The next day, expression cultures 
+in either 125  mL shake flasks or 14  mL tubes and con -
+taining either LB or M9 medium were inoculated with 
+the pre-cultures to OD600 0.1 and incubated for an addi -
+tional 2–3  h under the same conditions detailed above, 
+typically to an OD600 of 0.2 to 0.5 (cultures in M9 mini -
+mal medium supplemented with TA, EG, or BD reached 
+lower final OD600 than cultures in LB medium and were 
+thus also induced at lower OD600). Induction of expres -
+sion was performed through addition of 2 mM rhamnose 
+(all  PrhaB constructs) or transferring the cultures to 30 °C 
+or 37 °C (all  PIbpA constructs); if  PIbpA cultures were sub -
+jected to a 37  °C heat shock, they were typically trans -
+ferred back to 30 °C at defined time points (see figures for 
+details). At selected time points post-induction, culture 
+samples were taken to analyze OD600 and pNPB esterase 
+activity in the culture supernatant and the cell fraction.
+SP library screen
+P. putida TA7-EG was transformed with the LCC, HiC, 
+and IsP SP plasmid libraries and plated on LB-Kan plates, 
+30  °C, o/n; cells transformed with pLo-P rhaB (e.v.) were 
+included as control. For each library, pre-cultures in deep 
+96-well plate with 500 μL LB-Kan per well were prepared 
+and inoculated with single colonies using toothpicks; 4 
+wells with e.v. control colonies were included per plate. 
+The plates were sealed with Breathe-Easy membranes 
+and incubated at 30  °C, 250  rpm, o/n. Next, expression 
+culture deep 96-well plates with 500  μL LB-Kan were 
+prepared and inoculated with 25 μL of the pre-cultures; 
+the pre-culture plates were sealed and stored at 4  °C. 
+The expression plates were incubated at 30 °C, 250 rpm, 
+for 2  h and induced by addition of 2  mM rhamnose 
+(final concentration), followed by continued incubation 
+at 30  °C, 250  rpm. 3  h and 20  h post-induction, 100  μL 
+cell culture per well were removed and analyzed for 
+cleared supernatant esterase activity (using an end point 
+assay, not the kinetic measurement) and OD600. Ester -
+ase activity was plotted against OD600 and those clones 
+showing the best combination of the two measurements 
+were manually selected for further analysis. For selected 
+clones, the corresponding wells from the pre-culture 
+plates were streaked out on LB-Kan agar plates to obtain 
+single colonies, and for each clone a single colony was 
+used for plasmid DNA miniprep and sequencing to iden -
+tify the SP . Those SPs showing up multiple times across 
+the set of sequenced clones were tested in shake flask 
+expression cultures and plasmid glycerol stocks in E. coli 
+NEB 5-alpha were prepared.
+Plastic degradation and synthetic PETtrophy assay setups
+Plastic degradation assays were typically carried out in 
+125 mL flasks (closed with aluminum foil) or 6-well cul -
+ture plates (closed with plastic lids). To transfer sterile 
+plastic film samples into these vessels, the plastic film 
+was sequentially washed in beakers containing 1% SDS 
+in  ddH2O,  ddH2O, and 70% EtOH. From the EtOH bath, 
+the samples were directly placed with forceps into sterile 
+flasks or plates, the vessel was closed again, and allowed 
+to dry at 30  °C o/n to ensure evaporation of remaining 
+EtOH. For powdery or ground plastic samples, the wash -
+ing steps were carried out in sterile 1.7  mL tubes with 
+centrifugation to pellet particles in between washing 
+steps, and the sample was finally taken up in 1 mL 70% 
+EtOH (using 1  mL pipette tips with cut-off tips, when 
+necessary) and transferred to the culture vessel. Sin -
+gle colonies of P. putida strains with genomically inte -
+grated  PIbpA-PET hydrolase expression cassettes (and 
+the matching control strains) were inoculated into 3 mL 
+LB medium or M9 minimal medium supplemented with 
+plastic monomers as carbon sources; generally, the pre-
+culture medium was matched to the medium used for 
+later plastic degradation assays, to ensure full activity 
+of the necessary metabolic pathways. Pre-cultures were 
+incubated at 25  °C, 250  rpm, o/n. The next day, fresh 
+3  mL cultures were inoculated with the pre-cultures to 
+OD600 0.1 and grown for 25 °C, 250 rpm, 2 h, followed 
+by a heat shock at 37 °C for 2 h and 250 rpm. Next, the 
+degradation cultures were started by addition of medium 
+to the plastic-containing vessels (15 mL per 125 mL flask, 
+or 2 mL per well for 6-well plates) and cultures were inoc-
+ulated with 1 or 0.1 mL of the post-heat shock cultures, 
+respectively. For synthetic PETtrophy cultures (in M9 
+minimal medium without carbon source), this procedure 
+introduced a small amount of carbon source-containing 
+medium, and we experimented with washing the cells in 
+M9 minimal medium prior to culture inoculation. How -
+ever, especially for secreted constructs, this also implies 
+loss of any already expressed PET hydrolases; in any case 
+we did not observe consistent synthetic PETtrophy for 
+neither of the two inoculation approaches. Cultures were 
+maintained at 30  °C, 75  rpm (125  mL flasks) or static 
+(6-well plates), with a 2  h heat shock at 37  °C per day. 
+The culture medium was changed every 1 to 7  days by 
+removing 80% of the remaining medium and resupplying 
+Page 27 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+it to a volume of 15 or 2 mL, respectively. Cultures were 
+inspected daily visually, by stereo and optical microscopy, 
+and by measuring OD600. Following culture termination, 
+plastic samples were collected, washed using the same 
+washing procedure as before, and weighed.
+Whole‑genome sequencing of P . putida strains
+Genomic DNA was extracted from one OD600 unit of P. 
+putida cells in exponential growth phase using the Qia -
+gen DNeasy kit according to the manufacturer’s instruc -
+tions. Quality of genomic DNA was checked on a 0.8% 
+agarose gel and samples were processed for sequencing 
+using an Illumina DNA Prep kit (Illumina #20018704) 
+according to the manufacturer’s instructions. Briefly, 
+genomic DNA was diluted to approximately 10 ng/μL in 
+ H2Oup, 30 μL (300 ng) were subjected to the Nextera tag-
+mentation reaction, and tagmented DNA was cleaned up 
+using magnetic beads. Next, we ran a 5-cycle PCR to add 
+unique dual indexes (IDT for Illumina DNA/RNA UD 
+Indexes, Integrated DNA Technologies). The resulting 
+PCR products were cleaned up and size-selected using 
+magnetic beads. Equal volumes were then pooled, fol -
+lowed by adjustment of the concentration to 4 nM using 
+resuspension buffer (RSB), assuming a fragment length 
+of 600 bp. Subsequently, 5 μL library were denatured by 
+adding 5  μL 0.2  M NaOH and incubating for 5  min at 
+room temperature. The denatured library (10  µL) was 
+then combined with 1323 μL hybridization buffer (HT1) 
+to yield a 15  pM library. 600  μL of this diluted library 
+were loaded on a MiSeq v2 reagent cartridge for 300 
+cycles and paired-end sequencing (2 × 150-bp reads) was 
+performed on an Illumina MiSeq instrument using a v3 
+flow cell.
+The reference genome sequence for Pseudomonas 
+putida KT2440 and annotations were downloaded 
+from the Pseudomonas Genome DB (http:// www. pseud 
+omonas. com/ strain/ show/ 110, accessed on Septem -
+ber 19, 2019) [88]. Chromosome names were adjusted 
+to match across files and sequences of the knock-in 
+cassettes were added to the sequence file. Paired-end 
+sequencing reads were then aligned against the reference 
+genome using Snippy (version 4.6.0, https:// github. com/ 
+tseem ann/ snippy). Snippy output files (snps.csv) were 
+further processed with custom R code in RStudio (R ver -
+sion 4.0.3, RStudio version 1.3). To determine cassette 
+integration sites and look for potential mutations in the 
+knock-in cassettes, the aligned reads were visualized with 
+the Integrative Genomics Viewer (IGV) [89].
+SDS‑PAGE of soluble and membrane fractions of PET 
+hydrolase expression cultures
+Isolation of the P. putida outer membrane fraction was 
+adapted from established protocols [90, 91]. 20 OD600 
+units of PET hydrolase membrane display expression cul-
+tures (harvested 3 h post-induction for  PrhaB constructs, 
+or 20 h post-induction for  PIbpA constructs) were pelleted 
+(3000g, 3 min) in 15 mL tubes and stored at − 20 °C. The 
+pellets were thawed on ice and resuspended in 3 mL PBS 
+(Gibco) supplemented with 0.5  mg/mL lysozyme and 
+2  mM EDTA. The cell suspension was sonicated on ice 
+using a Fisher Scientific Sonic Dismembrator 550 with a 
+microtip (settings: level 3, 1 min total, 5 s on/off cycles). 
+2 mL of sample were transferred to a 2 mL tube and cen -
+trifuged (21,000g, 2 min, 4 °C) to remove intact cells and 
+large debris. 1.8 mL of supernatant were transferred to a 
+fresh 2 mL tube and centrifuged (21,000g, 40 min, 4 °C). 
+The supernatant was carefully removed (and set aside 
+as cytosolic fraction) and the pellet was resuspended in 
+1 mL PBS, 2% Triton X-100. The sample was incubated at 
+37 °C for 30 min and centrifuged (21,000g, 30 min, 4 °C). 
+The supernatant was carefully removed and the pellet 
+resuspended in 45 μL PBS and 20 μL 4 × Laemmli sample 
+buffer (Biorad) supplemented with 2-mercaptoethanol. 
+Likewise, 15 μL of cytosolic fraction samples were mixed 
+with 5 μL 4 × Laemmli sample buffer. The samples were 
+heated at 95 °C for 5 min and 5 to 15 μL were loaded on 
+mini-Protean TGX precast 12% gels (Biorad). The gels 
+were run using mini-Protean Tetra cells and Tris/Gly -
+cine/SDS buffer (Biorad) according to the manufacturer’s 
+instructions. Gels were stained with Coomassie Brilliant 
+Blue R-250 (1 g/L; Biorad) in 40% methanol, 10% acetic 
+acid, in  ddH2O; the same solution without Coomassie 
+was used for gel destaining.
+SDS‑PAGE of secreted PET hydrolase expression constructs
+50  mL of PET hydrolase secretion expression cultures 
+(harvested 3  h post-induction for  PrhaB constructs, or 
+20  h post-induction for  PIbpA constructs) were collected 
+in 50  mL tubes and centrifuged (4000g, 10  min, 4  °C). 
+The supernatant was carefully transferred to a fresh tube 
+without disturbing the pellet and concentrated (3000g, 
+4  °C, 15  min centrifugation steps with intermittent car -
+ful mixing) in Amicon Ultra-15 spin concentrators (Mil -
+lipore) with 10  kDa molecular weight cut-off to a final 
+volume of ca. 500  μL. 15  μL of this concentrate were 
+mixed with 5 μL of 4 × Laemmli sample buffer and ana -
+lyzed by SDS-PAGE as described above.
+LC–MS analysis of SDS‑PAGE bands
+Protein bands of interest were excised from the gel and 
+further processed as described by Shevchenko and col -
+leagues with minor modifications [92]. Briefly, gel pieces 
+were destained, followed by in-gel protein reduction, 
+alkylation, and digestion using MS-grade trypsin (Pierce 
+Page 28 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+/ Thermo Scientific, #90057). After extraction, peptides 
+were desalted using C18 tips (Pierce / Thermo Scientific 
+#87784), dried under vacuum and reconstituted in 5% 
+formic acid (v/v). For liquid chromatography-coupled 
+tandem mass spectrometric (LC–MS/MS) analysis, 
+desalted peptides were fractionated online by nano-flow 
+reversed phase liquid chromatography coupled to an 
+Orbitrap Fusion Lumos Tribrid mass spectrometer 
+(Thermo Fisher Scientific). Data was acquired in Data-
+Dependent Acquisition mode.
+Peptide identification and quantification was per -
+formed with MaxQuant version 1.6.17.0 [93]. The search 
+was performed against a P. putida KT2440 protein data -
+base downloaded from UniProt (https:// www. unipr  ot. 
+org/ prote omes/ UP000 000556, accessed on January 20, 
+2022). To this database, which contained 5527 proteins, 
+the sequences for the three PET hydrolases and the mem-
+brane anchor EhaA were added. Only fully LysC- and 
+trypsin-digested peptides with up to one missed cleavage 
+were allowed. Carbamidomethylation of cysteines was 
+defined as a fixed modification. Peptide-spectrum-match 
+(PSM) and protein-level false discovery rates (FDRs) were 
+set to 0.01. The MaxQuant output (evidence.txt) was then 
+filtered for peptides belonging to the PET hydrolases and 
+with an intensity of > 1e9.
+SEM of plastic samples
+SEM images were taken by the Molecular Instrumenta -
+tion Center at UCLA’s Department of Chemistry and 
+Biochemistry. Briefly, plastic samples were sequentially 
+washed with 70% EtOH, 1% SDS in  ddH2O, and  ddH2O, 
+and air dried. The samples were coated with an 8 nm gold 
+layer, and images were acquired using a JEOL JSM-6700F 
+FE-SEM using the LEI detector.
+Supplementary Information
+The online version contains supplementary material available at https:// doi. 
+org/ 10. 1186/ s12934- 022- 01849-7.
+Additional file 1. Figure S1: Design of pBAMD-tphII. Figure S2: ALE with 
+P . putida TA for growth at elevated pH. Figure S3: Rescue of P . putida TA 
+growth at elevated pH by plasmid-based mhpT overexpression. Figure 
+S4: Negative effect of high EG concentrations on P . putida growth, and 
+the P . putida EG metabolic pathway. Figure S5: ALE with P . putida TA7 for 
+EG utilization. Figure S6: Cell dry weight measurements of P . putida TA7 
+and TA7-EG. Figure S7: Growth comparisons of P . putida TA7, TA7-EG, and 
+TA7-BD in LB and M9 minimal media. Figure S8: ALE with P . putida TA7 
+for BD utilization. Figure S9: Design of PET hydrolase membrane display 
+expression vectors. Figure S10: pNPB assay establishment. Figure S11: 
+SDS-PAGE analysis of EhaA and OprF membrane display constructs. Fig‑
+ure S12: Plate reader analysis of EhaA and OprF PET hydrolase membrane 
+display construct expression growth curves. Figure S13: Plate reader 
+analysis of LCC, HiC, and IsP cytosolic expression. Figure S14: Rhamnose 
+inducer titration with pLo-  PrhaB-EhaA-LCC. Figure S15: Plate reader analy-
+sis of PET hydrolase secretion construct expression growth curves. Figure 
+S16: Assessing HiC esterase activity in cell culture supernatant, whole-cell 
+fraction, and cell lysate. Figure S17: Comparing growth of P . putida TA7-
+EG transformed with different promoter system empty vector plasmids. 
+Figure S18: SDS-PAGE analysis of  PIbpA-bglx-HiC and  PIbpA-lasb-IsPDura 
+secretion constructs. Figure S19: Comparing EhaA-LCC expression output 
+from different promoter systems. Figure S20: Testing for aPET plastic 
+degradation with P . putida KT2440  PIbpA-bglx-HiC. Table S1: Genomic 
+landing sites of knock-in cassettes. Table S2: Whole-genome sequencing 
+of engineered P . putida strains. Table S3: Signal peptide oligonucleotide 
+library. Table S4: SP library screening data. Table S5: Plasmids used in this 
+work. Table S6: Bacterial strains used in this work. Table S7: Oligonu-
+cleotides used in this work. Sequence S1. Sequence S2. Sequence S3. 
+Sequence S4. Sequence S5. Sequence S6. Sequence S7. Sequence S8. 
+Sequence S9. Sequence S10. Sequence S11. Sequence S12. Sequence 
+S13. Sequence S14. 
+Acknowledgements
+We thank all members of the Kruglyak lab for helpful comments and discus-
+sions. We thank Dr. Yasaman Jami at the UCLA Department of Biological 
+Chemistry for help with LC-MS measurements. We also thank Dr. Ignacio Mar-
+tini and Dr. Gregory Khitrov at the UCLA Molecular Instrumentation Center for 
+help with SEM and HPLC measurements, respectively. We also thank the staff 
+at the SEVA database for maintaining this resource and for providing plasmids 
+and E. coli cloning strains.
+Author contributions
+OFB designed the research; OFB and OTS performed experiments; OFB and 
+OTS analyzed data; LK supervised the project; OFB wrote the manuscript; all 
+authors critically revised the manuscript. All authors read and approved the 
+final manuscript.
+Funding
+This work was supported by grants from the Howard Hughes Medical Institute 
+(to LK).
+Availability of data and materials
+The DNA sequencing read data is deposited in the NCBI Sequence Read 
+Archive under BioProject ID PRJNA808732. The sequence of pBAMD-tphII has 
+been deposited in GenBank (accession number ON192369). All other data 
+generated or analysed during this study are included in this published article 
+and its supplementary information.
+Declarations
+Ethics approval and consent to participate
+Not applicable.
+Consent for publication
+Not applicable.
+Competing interests
+The authors declare that they have no competing interests.
+Author details
+1 Department of Human Genetics, Department of Biological Chemistry, 
+and Howard Hughes Medical Institute, University of California Los Angeles, 
+Los Angeles, USA. 2 Department of Environmental Microbiology, EAWAG 
+, 8600 Dübendorf, Switzerland. 3 Department of Environmental Systems Sci-
+ence, ETH Zurich, 8092 Zürich, Switzerland. 
+Received: 22 April 2022   Accepted: 26 May 2022
+References
+ 1. Wei R, Zimmermann W. Biocatalysis as a green route for recycling the 
+recalcitrant plastic polyethylene terephthalate. Microb Biotechnol. 
+2017;10(6):1302–7. https:// doi. org/ 10. 1111/ 1751- 7915. 12714.
+Page 29 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+ 2. Geyer R, Jambeck JR, Law KL. Production, use, and fate of all plastics ever 
+made. Sci Adv. 2017;3(7):e1700782. https:// doi. org/ 10. 1126/ sciadv. 17007 
+82.
+ 3. Ellis LD, Rorrer NA, Sullivan KP , Otto M, McGeehan JE, Román-Leshkov 
+Y, Wierckx N, Beckham GT. Chemical and biological catalysis for plastics 
+recycling and upcycling. Nat Catal. 2021;4(7):539–56. https:// doi. org/ 10. 
+1038/ s41929- 021- 00648-4.
+ 4. Zalasiewicz J, Waters CN, Sul do JAI, Corcoran PL, Barnosky AD, Cearreta 
+A, Edgeworth M, Gałuszka A, Jeandel C, Leinfelder R, McNeill JR, Steffen 
+W, Summerhayes C, Wagreich M, Williams M, Wolfe AP , Yonan Y. The geo-
+logical cycle of plastics and their use as a stratigraphic indicator of the 
+anthropocene. Anthropocene. 2016;13:4–17. https:// doi. org/ 10. 1016/j. 
+ancene. 2016. 01. 002.
+ 5. Jambeck JR, Geyer R, Wilcox C, Siegler TR, Perryman M, Andrady A, 
+Narayan R, Law KL. Plastic waste inputs from land into the ocean. Science. 
+2015;347(6223):768–71. https:// doi. org/ 10. 1126/ scien ce. 12603 52.
+ 6. Blank LM, Narancic T, Mampel J, Tiso T, O’Connor K. Biotechnological 
+upcycling of plastic waste and other non-conventional feedstocks in a 
+circular economy. Curr Opin Biotech. 2020;62:212–9. https:// doi. org/ 10. 
+1016/j. copbio. 2019. 11. 011.
+ 7. Hiraga K, Taniguchi I, Yoshida S, Kimura Y, Oda K. Biodegradation of Waste 
+PET. Embo Rep. 2019;20(11):49365. https:// doi. org/ 10. 15252/ embr. 20194 
+9365.
+ 8. Tiso T, Winter B, Wei R, Hee J, Witt de J, Wierckx N, Quicker P , Bornscheuer 
+UT, Bardow A, Nogales J, Blank LM. The metabolic potential of plastics 
+as biotechnological carbon sources–review and targets for the future. 
+Metab Eng. 2022;71:77-98 https:// doi. org/ 10. 1016/j. ymben. 2021. 12. 006.
+ 9. Singh A, Rorrer NA, Nicholson SR, Erickson E, DesVeaux JS, Avelino AFT, 
+Lamers P , Bhatt A, Zhang Y, Avery G, Tao L, Pickford AR, Carpenter AC, 
+McGeehan JE, Beckham GT. Techno-economic, life-cycle, and socioeco-
+nomic impact analysis of enzymatic recycling of poly(Ethylene Tereph-
+thalate). Joule. 2021;5(9):2479–503. https:// doi. org/ 10. 1016/j. joule. 2021. 
+06. 015.
+ 10. Schyns ZOG, Shaver MP . Mechanical recycling of packaging plastics: a 
+review. Macromol Rapid Comm. 2021;42(3):2000415. https:// doi. org/ 10. 
+1002/ marc. 20200 0415.
+ 11. Barnard E, Arias JJR, Thielemans W. Chemolytic depolymerisation of PET: a 
+review. Green Chem. 2021;23(11):3765–89. https:// doi. org/ 10. 1039/ d1gc0 
+0887k.
+ 12. Austin HP , Allen MD, Donohoe BS, Rorrer NA, Kearns FL, Silveira RL, Pollard 
+BC, Dominick G, Duman R, Omari KE, Mykhaylyk V, Wagner A, Michener 
+WE, Amore A, Skaf MS, Crowley MF, Thorne AW, Johnson CW, Wood-
+cock HL, McGeehan JE, Beckham GT. Characterization and engineering 
+of a plastic-degrading aromatic polyesterase. Proc National Acad Sci. 
+2018;115(19):201718804. https:// doi. org/ 10. 1073/ pnas. 17188 04115.
+ 13. Han X, Liu W, Huang J-W, Ma J, Zheng Y, Ko T-P , Xu L, Cheng Y-S, Chen C-C, 
+Guo R-T. Structural insight into catalytic mechanism of PET Hydrolase. Nat 
+Commun. 2017;8(1):2106. https:// doi. org/ 10. 1038/ s41467- 017- 02255-z.
+ 14. Kawai F, Kawabata T, Oda M. Current Knowledge on Enzymatic PET deg-
+radation and its possible application to waste stream management and 
+other fields. Appl Microbiol Biot. 2019;103(11):4253–68. https:// doi. org/ 
+10. 1007/ s00253- 019- 09717-y.
+ 15. Papadopoulou A, Hecht K, Buller R. Enzymatic PET Degradation. Chimia 
+Int J Chem. 2019;73(9):743–9. https:// doi. org/ 10. 2533/ chimia. 2019. 743.
+ 16. Müller R-J, Schrader H, Profe J, Dresler K, Deckwer W-D. Enzymatic 
+Degradation of Poly(Ethylene Terephthalate): Rapid Hydrolyse Using a 
+Hydrolase From T. Fusca. Macromol Rapid Comm. 2005;26(17):1400–5. 
+https:// doi. org/ 10. 1002/ marc. 20050 0410.
+ 17. Marten E, Müller R-J, Deckwer W-D. Studies on the enzymatic hydrolysis 
+of polyesters II. Aliphatic-aromatic copolyesters. Polym Degrad Stabil. 
+2005;88(3):371–81. https:// doi. org/ 10. 1016/j. polym degra dstab. 2004. 12. 
+001.
+ 18. Wei R, Breite D, Song C, Gräsing D, Ploss T, Hille P , Schwerdtfeger R, 
+Matysik J, Schulze A, Zimmermann W. Biocatalytic degradation efficiency 
+of postconsumer polyethylene terephthalate packaging determined by 
+their polymer microstructures. Adv Sci. 2019;6(14):1900491. https:// doi. 
+org/ 10. 1002/ advs. 20190 0491.
+ 19. Tournier V, Topham CM, Gilles A, David B, Folgoas C, Moya-Leclair E, 
+Kamionka E, Desrousseaux M-L, Texier H, Gavalda S, Cot M, Guémard E, 
+Dalibey M, Nomme J, Cioci G, Barbe S, Chateau M, André I, Duquesne S, 
+Marty A. An Engineered PET Depolymerase to Break down and Recycle 
+Plastic Bottles. Nature. 2020;580(7802):216–9. https:// doi. org/ 10. 1038/ 
+s41586- 020- 2149-4.
+ 20. Cui Y, Chen Y, Liu X, Dong S, Tian Y, Qiao Y, Mitra R, Han J, Li C, Han X, Liu 
+W, Chen Q, Wei W, Wang X, Du W, Tang S, Xiang H, Liu H, Liang Y, Houk 
+KN, Wu B. Computational redesign of a PETase for plastic biodegra-
+dation under ambient condition by the GRAPE Strategy. Acs Catal. 
+2021;11(3):1340–50. https:// doi. org/ 10. 1021/ acsca tal. 0c051 26.
+ 21. Lu H, Diaz DJ, Czarnecki NJ, Zhu C, Kim W, Shroff R, Acosta DJ, Alexander 
+BR, Cole HO, Zhang Y, Lynd NA, Ellington AD, Alper HS. Machine learning-
+aided engineering of hydrolases for PET Depolymerization. Nature. 
+2022;604(7907):662–7. https:// doi. org/ 10. 1038/ s41586- 022- 04599-z.
+ 22. Kenny ST, Runic JN, Kaminsky W, Woods T, Babu RP , Keely CM, Blau W, 
+O’Connor KE. Up-Cycling of PET (Polyethylene Terephthalate) to the 
+Biodegradable Plastic PHA (Polyhydroxyalkanoate). Environ Sci Technol. 
+2008;42(20):7696–701. https:// doi. org/ 10. 1021/ es801 010e.
+ 23. Tiso T, Narancic T, Wei R, Pollet E, Beagan N, Schröder K, Honak A, Jiang 
+M, Kenny ST, Wierckx N, Perrin R, Avérous L, Zimmermann W, O’Connor K, 
+Blank LM. Towards Bio-Upcycling of Polyethylene Terephthalate. Metab 
+Eng. 2021;66:167–78. https:// doi. org/ 10. 1016/j. ymben. 2021. 03. 011.
+ 24. Werner AZ, Clare R, Mand TD, Pardo I, Ramirez KJ, Haugen SJ, Bratti F, Dex-
+ter GN, Elmore JR, Huenemann JD, Peabody GL, Johnson CW, Rorrer NA, 
+Salvachúa D, Guss AM, Beckham GT. Tandem chemical deconstruction 
+and biological upcycling of poly(Ethylene Terephthalate) to β-Ketoadipic 
+Acid by Pseudomonas putida KT2440. Metab Eng. 2021;67:250–61. https:// 
+doi. org/ 10. 1016/j. ymben. 2021. 07. 005.
+ 25. Kim DH, Han DO, Shim KI, Kim JK, Pelton JG, Ryu MH, Joo JC, Han JW, 
+Kim HT, Kim KH. One-pot chemo-bioprocess of PET depolymerization 
+and recycling enabled by a biocompatible catalyst betaine. Acs Catal. 
+2021;11(7):3996–4008. https:// doi. org/ 10. 1021/ acsca tal. 0c040 14.
+ 26. Yoshida S, Hiraga K, Takehana T, Taniguchi I, Yamaji H, Maeda Y, Toyohara 
+K, Miyamoto K, Kimura Y, Oda K. A Bacterium That Degrades and Assimi-
+lates Poly(Ethylene Terephthalate). Science. 2016;351(6278):1196–9. 
+https:// doi. org/ 10. 1126/ scien ce. aad63 59.
+ 27. Poblete-Castro I, Becker J, Dohnt K, Santos dos VM, Wittmann C. Industrial 
+biotechnology of Pseudomonas putida and related species. Appl Micro-
+biol Biot. 2012;93(6):2279–90. https:// doi. org/ 10. 1007/ s00253- 012- 3928-0.
+ 28. Martínez-García E, de Lorenzo V. Molecular tools and emerging strate-
+gies for deep genetic/genomic refactoring of Pseudomonas. Curr Opin 
+Biotech. 2017;47:120–32. https:// doi. org/ 10. 1016/j. copbio. 2017. 06. 013.
+ 29. Nikel PI, de Lorenzo V. Pseudomonas putida as a functional chassis for 
+industrial biocatalysis: from native biochemistry to trans-metabolism. 
+Metab Eng. 2018;50:142–55. https:// doi. org/ 10. 1016/j. ymben. 2018. 05. 
+005.
+ 30. Salvador M, Abdulmutalib U, Gonzalez J, Kim J, Smith AA, Faulon J-L, Wei 
+R, Zimmermann W, Jimenez JI. Microbial genes for a circular and sustain-
+able bio-PET economy. Genes. 2019;10(5):373. https:// doi. org/ 10. 3390/ 
+genes 10050 373.
+ 31. Zyl WH van, Haan R den, Grange DC la. Biofuel Technologies. Developing 
+Cellulolytic Organisms for Consolidated Bioprocessing of Lignocellulosics. 
+2013; pp 189–220. https:// doi. org/ 10. 1007/ 978-3- 642- 34519-7_8.
+ 32. McDevitt JP , Criddle CS, Morse M, Hale RC, Bott CB, Rochman CM. 
+Addressing the Issue of Microplastics in the Wake of the Microbead-Free 
+Waters Act—a new standard can facilitate improved policy. Environ Sci 
+Technol. 2017;51(12):6611–7. https:// doi. org/ 10. 1021/ acs. est. 6b058 12.
+ 33. Harwood CS, Parales RE. The β-ketoadipate pathway and the biology of 
+self-identity. Annu Rev Microbiol. 1996;50(1):553–90. https:// doi. org/ 10. 
+1146/ annur ev. micro. 50.1. 553.
+ 34. Sasoh M, Masai E, Ishibashi S, Hara H, Kamimura N, Miyauchi K, Fukuda M. 
+Characterization of the terephthalate degradation genes of Comamonas 
+Sp. Strain E6. Appl Environ Microb. 2006;72(3):1825–32. https:// doi. org/ 10. 
+1128/ aem. 72.3. 1825- 1832. 2006.
+ 35. Zobel S, Benedetti I, Eisenbach L, Lorenzo de V, Wierckx N, Blank LM. 
+Tn7-based device for calibrated heterologous gene expression in Pseu-
+domonas putida. Acs Synth Biol. 2015;4(12):1341–51. https:// doi. org/ 10. 
+1021/ acssy nbio. 5b000 58.
+ 36. Mutalik VK, Guimaraes JC, Cambray G, Lam C, Christoffersen MJ, Mai Q-A, 
+Tran AB, Paull M, Keasling JD, Arkin AP , Endy D. Precise and reliable gene 
+expression via standard transcription and translation initiation elements. 
+Nat Methods. 2013;10(4):354–60. https:// doi. org/ 10. 1038/ nmeth. 2404.
+ 37. Martínez-García E, Aparicio T, Lorenzo de V, Nikel PI. New transposon 
+tools tailored for metabolic engineering of gram-negative microbial cell 
+Page 30 of 31Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+factories. Frontiers Bioeng Biotechnol. 2014;2:46. https:// doi. org/ 10. 3389/ 
+fbioe. 2014. 00046.
+ 38. Nichols NN, Harwood CS. PcaK, a high-affinity permease for the aromatic 
+compounds 4-hydroxybenzoate and protocatechuate from Pseudomonas 
+putida. J Bacteriol. 1997;179(16):5056–61. https:// doi. org/ 10. 1128/ jb. 179. 
+16. 5056- 5061. 1997.
+ 39. Jiménez JI, Miñambres B, García JL, Díaz E. Genomic analysis of the 
+aromatic catabolic pathways from Pseudomonas putida KT2440. Environ 
+Microbiol. 2002;4(12):824–41. https:// doi. org/ 10. 1046/j. 1462- 2920. 2002. 
+00370.x.
+ 40. Grove A. Regulation of metabolic pathways by MarR family transcription 
+factors. Comput Struct Biotechnology J. 2017;15:366–71. https:// doi. org/ 
+10. 1016/j. csbj. 2017. 06. 001.
+ 41. Xu Y, Chen B, Chao H, Zhou N-Y. MhpT encodes an active transporter 
+involved in 3-(3-Hydroxyphenyl)Propionate Catabolism by Escherichia coli 
+K-12. Appl Environ Microb. 2013;79(20):6362–8. https:// doi. org/ 10. 1128/ 
+aem. 02110- 13.
+ 42. Franden MA, Jayakody L, Li W-J, Wagner NJ, Cleveland NS, Michener WE, 
+Hauer B, Blank LM, Wierckx N, Klebensberger J, Beckham GT. Engineer-
+ing Pseudomonas putida KT2440 for Efficient Ethylene Glycol Utilization. 
+Metab Eng. 2018;48:197–207. https:// doi. org/ 10. 1016/j. ymben. 2018. 06. 
+003.
+ 43. Mückschel B, Simon O, Klebensberger J, Graf N, Rosche B, Altenbuchner J, 
+Pfannstiel J, Huber A, Hauer B. Ethylene glycol metabolism by Pseu-
+domonas putida. Appl Environ Microb. 2012;78(24):8531–9. https:// doi. 
+org/ 10. 1128/ aem. 02062- 12.
+ 44. Li WJ, Jayakody LN, Franden MA, Wehrmann M, Daun T, Hauer B, Blank LM, 
+Beckham GT, Klebensberger J, Wierckx N. Laboratory evolution reveals 
+the metabolic and regulatory basis of ethylene glycol metabolism by 
+Pseudomonas putida KT2440. Environ Microbiol. 2019;21(10):3669–82. 
+https:// doi. org/ 10. 1111/ 1462- 2920. 14703.
+ 45. Li W-J, Narancic T, Kenny ST, Niehoff P-J, O’Connor K, Blank LM, Wierckx N. 
+Unraveling 1,4-Butanediol Metabolism in Pseudomonas putida KT2440. 
+Front Microbiol. 2020;11:382. https:// doi. org/ 10. 3389/ fmicb. 2020. 00382.
+ 46. Tozakidis IEP , Lüken LM, Üffing A, Meyers A, Jose J. Improving the 
+autotransporter-based surface display of enzymes in Pseudomonas putida 
+KT2440. Microb Biotechnol. 2020;13(1):176-84. https:// doi. org/ 10. 1111/ 
+1751- 7915. 13419.
+ 47. Quehl P , Schüürmann J, Hollender J, Jose J. Improving the Activity of 
+Surface Displayed Cytochrome P450 Enzymes by Optimizing the Outer 
+Membrane Linker. Biochimica Et Biophysica Acta Bba - Biomembr. 
+2017;1859(1):104–16. https:// doi. org/ 10. 1016/j. bbamem. 2016. 10. 022.
+ 48. Shimazu M, Nguyen A, Mulch A, Chen W. Cell surface display of organo-
+phosphorus hydrolase in Pseudomonas putida using an ice-nucleation 
+protein anchor. Biotechnol Progr. 2003;19(5):1612–4. https:// doi. org/ 10. 
+1021/ bp034 0640.
+ 49. Lee SH, Lee SY, Park BC. Cell Surface Display of Lipase in Pseudomonas 
+putida KT2442 Using OprF as an Anchoring Motif and Its Biocatalytic 
+Applications. Appl Environ Microb. 2005;71(12):8581–6. https:// doi. org/ 
+10. 1128/ aem. 71. 12. 8581- 8586. 2005.
+ 50. Sugawara E, Nestorovich EM, Bezrukov SM, Nikaido H. Pseudomonas 
+aeruginosa porin OprF exists in two different conformations. J Biol Chem. 
+2006;281(24):16220–9. https:// doi. org/ 10. 1074/ jbc. m6006 80200.
+ 51. Wong RSY, Wirtz RA, Hancock REW. Pseudomonas aeruginosa outer 
+membrane protein OprF as an expression vector for foreign epitopes: 
+the effects of positioning and length on the antigenicity of the epitope. 
+Gene. 1995;158(1):55–60. https:// doi. org/ 10. 1016/ 0378- 1119(95) 00155-y.
+ 52. Lee SH, Choi J, Han M-J, Choi JH, Lee SY. Display of Lipase on the Cell 
+Surface of Escherichia coli Using OprF as an Anchor and Its Application 
+to Enantioselective Resolution in Organic Solvent. Biotechnol Bioeng. 
+2005;90(2):223–30. https:// doi. org/ 10. 1002/ bit. 20399.
+ 53. Jeske M, Altenbuchner J. The Escherichia coli Rhamnose Promoter 
+RhaPBAD is in Pseudomonas putida KT2440 Independent of Crp–CAMP 
+Activation. Appl Microbiol Biot. 2010;85(6):1923–33. https:// doi. org/ 10. 
+1007/ s00253- 009- 2245-8.
+ 54. Calero P , Jensen SI, Nielsen AT. Broad-Host-Range ProUSER vectors 
+enable fast characterization of inducible promoters and optimization of 
+p-coumaric acid production in Pseudomonas putida KT2440. Acs Synth 
+Biol. 2016;5(7):741–53. https:// doi. org/ 10. 1021/ acssy nbio. 6b000 81.
+ 55. Jahn M, Vorpahl C, Hübschmann T, Harms H, Müller S. Copy number 
+variability of expression plasmids determined by cell sorting and droplet 
+digital PCR. Microb Cell Fact. 2016;15(1):211. https:// doi. org/ 10. 1186/ 
+s12934- 016- 0610-8.
+ 56. Martínez-García E, Aparicio T, Goñi-Moreno A, Fraile S, de Lorenzo 
+V. SEVA 2.0: an update of the standard european vector architecture 
+for de-/re-construction of bacterial functionalities. Nucleic Acids Res. 
+2015;43(D1):D1183–9. https:// doi. org/ 10. 1093/ nar/ gku11 14.
+ 57. Ronkvist ÅM, Xie W, Lu W, Gross RA. Cutinase-Catalyzed Hydrolysis of 
+Poly(Ethylene Terephthalate). Macromolecules. 2009;42(14):5128–38. 
+https:// doi. org/ 10. 1021/ ma900 5318.
+ 58. Sulaiman S, Yamato S, Kanaya E, Kim J-J, Koga Y, Takano K, Kanaya S. 
+Isolation of a novel cutinase homolog with polyethylene terephthalate-
+degrading activity from leaf-branch compost by using a metagenomic 
+approach. Appl Environ Microb. 2012;78(5):1556–62. https:// doi. org/ 10. 
+1128/ aem. 06725- 11.
+ 59. Moog D, Schmitt J, Senger J, Zarzycki J, Rexer K-H, Linne U, Erb T, Maier 
+UG. Using a marine microalga as a chassis for polyethylene terephthalate 
+(PET) Degradation. Microb Cell Fact. 2019;18(1):171. https:// doi. org/ 10. 
+1186/ s12934- 019- 1220-z.
+ 60. Brockmeier U, Caspers M, Freudl R, Jockwer A, Noll T, Eggert T. Systematic 
+screening of all signal peptides from Bacillus subtilis: a powerful strategy 
+in optimizing heterologous protein secretion in gram-positive bacteria. J 
+Mol Biol. 2006;362(3):393–402. https:// doi. org/ 10. 1016/j. jmb. 2006. 07. 034.
+ 61. Freudl R. Signal peptides for recombinant protein secretion in bacterial 
+expression systems. Microb Cell Fact. 2018;17(1):52. https:// doi. org/ 10. 
+1186/ s12934- 018- 0901-3.
+ 62. Burdette LA, Leach SA, Wong HT, Tullman-Ercek D. Developing gram-
+negative bacteria for the secretion of heterologous proteins. Microb Cell 
+Fact. 2018;17(1):196. https:// doi. org/ 10. 1186/ s12934- 018- 1041-5.
+ 63. Gubellini F, Verdon G, Karpowich NK, Luff JD, Boël G, Gauthier N, Handel-
+man SK, Ades SE, Hunt JF. Physiological response to membrane protein 
+overexpression in E. coli. Mol Cell Proteomics. 2011;10(10):M111.007930. 
+https:// doi. org/ 10. 1074/ mcp. m111. 007930.
+ 64. Wagner S, Baars L, Ytterberg AJ, Klussmeier A, Wagner CS, Nord O, Nygren 
+P-Å, Wijk van KJ, de Gier J-W. Consequences of membrane protein 
+overexpression in Escherichia Coli. Mol Cell Proteomics. 2007;6(9):1527–50. 
+https:// doi. org/ 10. 1074/ mcp. m6004 31- mcp200.
+ 65. Marschall L, Sagmeister P , Herwig C. Tunable recombinant protein expres-
+sion in E. Coli: promoter systems and genetic constraints. Appl Microbiol 
+Biot. 2017;101(2):501–12. https:// doi. org/ 10. 1007/ s00253- 016- 8045-z.
+ 66. Sathesh-Prabu C, Tiwari R, Kim D, Lee SK. Inducible and tunable 
+gene expression systems for Pseudomonas putida KT2440. Sci Rep. 
+2021;11(1):18079. https:// doi. org/ 10. 1038/ s41598- 021- 97550-7.
+ 67. Aparicio T, Lorenzo V, Martínez-García de E. Improved thermotolerance of 
+genome-reduced Pseudomonas putida EM42 enables effective function-
+ing of the PL/CI857 system. Biotechnol J. 2019;14(1):1800483. https:// doi. 
+org/ 10. 1002/ biot. 20180 0483.
+ 68. Krajewski SS, Nagel M, Narberhaus F. Short ROSE-Like RNA ther-
+mometers control IbpA synthesis in Pseudomonas species. PLoS ONE. 
+2013;8(5):e65168. https:// doi. org/ 10. 1371/ journ al. pone. 00651 68.
+ 69. Perz V, Bleymaier K, Sinkel C, Kueper U, Bonnekessel M, Ribitsch D, Guebitz 
+GM. Substrate specificities of cutinases on aliphatic-aromatic polyesters 
+and on their model substrates. New Biotechnol. 2016;33(2):295–304. 
+https:// doi. org/ 10. 1016/j. nbt. 2015. 11. 004.
+ 70. Meyer-Cifuentes IE, Werner J, Jehmlich N, Will SE, Neumann-Schaal M, 
+Öztürk B. Synergistic biodegradation of aromatic-aliphatic copolyester 
+plastic by a marine microbial consortium. Nat Commun. 2020;11(1):5790. 
+https:// doi. org/ 10. 1038/ s41467- 020- 19583-2.
+ 71. Narancic T, Salvador M, Hughes GM, Beagan N, Abdulmutalib U, Kenny ST, 
+Wu H, Saccomanno M, Um J, O’Connor KE, Jiménez JI. Genome analysis 
+of the metabolically versatile Pseudomonas umsongensis GO16: the 
+genetic basis for PET monomer upcycling into polyhydroxyalkanoates. 
+Microb Biotechnol. 2021;14(6):2463–80. https:// doi. org/ 10. 1111/ 1751- 
+7915. 13712.
+ 72. Ackermann YS, Li W-J, Hipt de LO, Niehoff P-J, Casey W, Polen T, Köbbing 
+S, Ballerstedt H, Wynands B, O’Connor K, Blank LM, Wierckx N. Engineering 
+adipic acid metabolism in Pseudomonas putida. Metab Eng. 2021;67:29–
+40. https:// doi. org/ 10. 1016/j. ymben. 2021. 05. 001.
+ 73. Kim JW, Park S-B, Tran Q-G, Cho D-H, Choi D-Y, Lee YJ, Kim H-S. Functional 
+expression of polyethylene terephthalate-degrading enzyme (PETase) 
+in green microalgae. Microb Cell Fact. 2020;19(1):97. https:// doi. org/ 10. 
+1186/ s12934- 020- 01355-8.
+Page 31 of 31
+Brandenberg et al. Microbial Cell Factories          (2022) 21:119 
+ 
+•
+ 
+fast, convenient online submission
+ •
+  
+thorough peer review by experienced researchers in your ﬁeld
+• 
+ 
+rapid publication on acceptance
+• 
+ 
+support for research data, including large and complex data types
+•
+  
+gold Open Access which fosters wider collaboration and increased citations 
+ 
+maximum visibility for your research: over 100M website views per year •
+  At BMC, research is always in progress.
+Learn more biomedcentral.com/submissions
+Ready to submit y our researc hReady to submit y our researc h  ?  Choose BMC and benefit fr om: ?  Choose BMC and benefit fr om: 
+ 74. Zumstein MT, Narayan R, Kohler HPE, McNeill K, Sander M. Dos and do 
+nots when assessing the biodegradation of plastics. Environ Sci Technol. 
+2019;53(17):9967–9. https:// doi. org/ 10. 1021/ acs. est. 9b045 13.
+ 75. Pirillo V, Pollegioni L, Molla G. Analytical Methods for the Investigation 
+of Enzyme-catalyzed Degradation of Polyethylene Terephthalate. Febs J. 
+2021;288(16):4730–45. https:// doi. org/ 10. 1111/ febs. 15850.
+ 76. Seo H, Kim S, Son HF, Sagong H-Y, Joo S, Kim K-J. Production of extracellu-
+lar PETase from Ideonella sakaiensis using sec-dependent signal peptides 
+in E. coli. Biochem Bioph Res Co. 2019;508(1):250–5. https:// doi. org/ 10. 
+1016/j. bbrc. 2018. 11. 087.
+ 77. Shi L, Liu H, Gao S, Weng Y, Zhu L. Enhanced extracellular production of 
+IsPETase in Escherichia coli via engineering of the PelB signal peptide. J 
+Agr Food Chem. 2021;69(7):2245–52. https:// doi. org/ 10. 1021/ acs. jafc. 
+0c074 69.
+ 78. Cui L, Qiu Y, Liang Y, Du C, Dong W, Cheng C, He B. Excretory expression 
+of IsPETase in E. coli by an enhancer of signal peptides and enhanced 
+PET hydrolysis. Int J Biol Macromol. 2021;188:568–75. https:// doi. org/ 10. 
+1016/j. ijbio mac. 2021. 08. 012.
+ 79. Huang X, Cao L, Qin Z, Li S, Kong W, Liu Y. Tat-Independent secretion of 
+polyethylene terephthalate hydrolase PETase in Bacillus subtilis 168 medi-
+ated by its native signal peptide. J Agr Food Chem. 2018;66(50):13217–27. 
+https:// doi. org/ 10. 1021/ acs. jafc. 8b050 38.
+ 80. Wang N, Guan F, Lv X, Han D, Zhang Y, Wu N, Xia X, Tian J. Enhancing 
+secretion of polyethylene terephthalate hydrolase petase in Bacillus sub-
+tilis WB600 Mediated by the SPamy Signal Peptide. Lett Appl Microbiol. 
+2020;71(3):235-41. https:// doi. org/ 10. 1111/ lam. 13312.
+ 81. Yan F, Wei R, Cui Q, Bornscheuer UT, Liu Y. Thermophilic whole-cell 
+degradation of polyethylene terephthalate using engineered Clostridium 
+thermocellum. Microb Biotechnol. 2021;14(2):374-85. https:// doi. org/ 10. 
+1111/ 1751- 7915. 13580.
+ 82. Chen Z, Wang Y, Cheng Y, Wang X, Tong S, Yang H, Wang Z. Efficient 
+biodegradation of highly crystallized polyethylene terephthalate through 
+cell surface display of bacterial PETase. Sci Total Environ. 2019;709:136138. 
+https:// doi. org/ 10. 1016/j. scito tenv. 2019. 136138.
+ 83. Heyde SAH, Bååth JA, Westh P , Nørholm MHH, Jensen K. Surface 
+display as a functional screening platform for detecting enzymes 
+active on PET. Microb Cell Fact. 2021;20(1):93. https:// doi. org/ 10. 1186/ 
+s12934- 021- 01582-7.
+ 84. Crosby JR, Laemthong T, Lewis AM, Straub CT, Adams MW, Kelly RM. 
+Extreme thermophiles as emerging metabolic engineering platforms. 
+Curr Opin Biotech. 2019;59:55–64. https:// doi. org/ 10. 1016/j. copbio. 2019. 
+02. 006.
+ 85. Drejer EB, Hakvåg S, Irla M, Brautaset T. Genetic tools and techniques 
+for recombinant expression in thermophilic Bacillaceae. Microorg. 
+2018;6(2):42. https:// doi. org/ 10. 3390/ micro organ isms6 020042.
+ 86. Elmore JR, Furches A, Wolff GN, Gorday K, Guss AM. Development of 
+a high efficiency integration system and promoter library for rapid 
+modification of Pseudomonas putida KT2440. Metabolic Eng Commun. 
+2017;5:1–8. https:// doi. org/ 10. 1016/j. meteno. 2017. 04. 001.
+ 87. Martínez-García E, Aparicio T, Lorenzo V, de Nikel PI. Engineering gram-
+negative microbial cell factories using transposon vectors. Methods Mol 
+Biol. 2016;1498:273–93. https:// doi. org/ 10. 1007/ 978-1- 4939- 6472-7_ 18.
+ 88. Winsor GL, Griffiths EJ, Lo R, Dhillon BK, Shay JA, Brinkman FSL. Enhanced 
+annotations and features for comparing thousands of Pseudomonas 
+genomes in the Pseudomonas genome database. Nucleic Acids Res. 
+2016;44(D1):D646–53. https:// doi. org/ 10. 1093/ nar/ gkv12 27.
+ 89. Robinson JT, Thorvaldsdóttir H, Winckler W, Guttman M, Lander ES, 
+Getz G, Mesirov JP . Integrative Genomics Viewer. Nat Biotechnol. 
+2011;29(1):24–6. https:// doi. org/ 10. 1038/ nbt. 1754.
+ 90. Hui C-Y, Guo Y, Yang X-Q, Zhang W, Huang X-Q. Surface display of metal 
+binding domain derived from PbrR on Escherichia coli specifically 
+increases lead(II) adsorption. Biotechnol Lett. 2018;40(5):837–45. https:// 
+doi. org/ 10. 1007/ s10529- 018- 2533-4.
+ 91. Muñoz-Gutiérrez I, Oropeza R, Gosset G, Martinez A. Cell surface display 
+of a β-glucosidase employing the type V secretion system on etha-
+nologenic Escherichia coli for the fermentation of cellobiose to ethanol. 
+J Ind Microbiol Biot. 2012;39(8):1141–52. https:// doi. org/ 10. 1007/ 
+s10295- 012- 1122-0.
+ 92. Shevchenko A, Wilm M, Vorm O, Mann M. Mass spectrometric sequenc-
+ing of proteins from silver-stained polyacrylamide gels. Anal Chem. 
+1996;68(5):850–8. https:// doi. org/ 10. 1021/ ac950 914h.
+ 93. Cox J, Mann M. MaxQuant enables high peptide identification rates, 
+individualized p.p.b.-range mass accuracies and proteome-wide protein 
+quantification. Nat Biotechnol. 2008;26(12):1367–72. https:// doi. org/ 10. 
+1038/ nbt. 1511.
+ 94. Kenny ST, Runic JN, Kaminsky W, Woods T, Babu RP , O’Connor KE. 
+Development of a bioprocess to convert PET derived terephthalic acid 
+and biodiesel derived glycerol to medium chain length polyhydroxyal-
+kanoate. Appl Microbiol Biot. 2012;95(3):623–33. https:// doi. org/ 10. 1007/ 
+s00253- 012- 4058-4.
+ 95. Joo S, Cho IJ, Seo H, Son HF, Sagong H-Y, Shin TJ, Choi SY, Lee SY, Kim K-J. 
+Structural insight into molecular mechanism of poly(ethylene terephtha-
+late) degradation. Nat Commun. 2018;9(1):382. https:// doi. org/ 10. 1038/ 
+s41467- 018- 02881-1.
+Publisher’s Note
+Springer Nature remains neutral with regard to jurisdictional claims in pub-
+lished maps and institutional affiliations.

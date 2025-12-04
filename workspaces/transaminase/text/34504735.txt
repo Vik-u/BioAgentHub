@@ -1,0 +1,1510 @@
+Computational Redesign of anω‑Transaminase from Pseudomonas
+jessenii for Asymmetric Synthesis of Enantiopure Bulky Amines
+Qinglong Meng, Carlos Ramírez-Palacios, Nikolas Capra, Mattijs E. Hooghwinkel, Sebastian Thallmair,
+Henriëtte J. Rozeboom, Andy-Mark W. H. Thunnissen, Hein J. Wijma, Siewert J. Marrink,
+and Dick B. Janssen*
+Cite This: ACS Catal. 2021, 11, 10733−10747 Read Online
+ACCESS Metrics & More Article Recommendations *sı Supporting Information
+ABSTRACT: ω-Transaminases (ω-TA) are attractive biocatalysts
+for the production of chiral amines from prochiral ketones via
+asymmetric synthesis. However, the substrate scope ofω-TAs is
+usually limited due to steric hindrance at the active site pockets.
+We explored a protein engineering strategy using computational
+design to expand the substrate scope of an (S)-selective ω-TA
+from Pseudomonas jessenii (PjTA-R6) toward the production of
+bulky amines. PjTA-R6 is attractive for use in applied biocatalysis
+due to its thermostability, tolerance to organic solvents, and
+acceptance of high concentrations of isopropylamine as amino
+donor. PjTA-R6 showed no detectable activity for the synthesis of
+six bicyclic or bulky amines targeted in this study. Six small
+libraries composed of 7−18 variants each were separately designed
+via computational methods and tested in the laboratory for ketone
+to amine conversion. In each library, the vast majority of the variants displayed the desired activity, and of the 40 diﬀerent designs,
+38 produced the target amine in good yield with >99% enantiomeric excess. This shows that the substrate scope and
+enantioselectivity of PjTA mutants could be predictedin silico with high accuracy. The single mutant W58G showed the best
+performance in the synthesis ofﬁve structurally similar bulky amines containing the indan and tetralin moieties. The best variant for
+the other bulky amine, 1-phenylbutylamine, was the triple mutant W58M + F86L + R417L, indicating that Trp58 is a key residue in
+the large binding pocket forPjTA-R6 redesign. Crystal structures of the two best variants conﬁrmed the computationally predicted
+structures. The results show that computational design can be an eﬃcient approach to rapidly expand the substrate scope ofω-TAs
+to produce enantiopure bulky amines.
+KEYWORDS: aminotransferase, substrate scope engineering, steric hindrance, green chemistry, computer-aided design, biocatalysis,
+protein engineering
+■ INTRODUCTION
+Transaminases are attractive biocatalysts for the synthesis of
+chiral amines, which are used as building blocks in the
+pharmaceutical industry.
+1 In the transamination reaction, an
+amino group is transferred from a donor (usually an amine or
+amino acid) to an acceptor (a ketone, keto acid, or aldehyde)
+with the enzyme acting as a molecular shuttle through its
+cofactor, the pyridoxal 5 ′-phosphate (PLP) group.
+2 The
+transaminases are very diverse, both in terms of the fold type
+and substrate range. The termω-transaminase (ω-TA) is used
+for enzymes acting on aminoalkanoic acids with the amino and
+carboxylate groups on the opposite ends of an alkyl group.
+Most of theω-TAs also act as general amine transaminases and
+do not require a carboxylate group in the amino donor or
+acceptor. Accordingly, such enzymes can be used to convert
+ketones to the corresponding amines, which is of synthetic
+importance if the products are enantiopure.
+3
+The overall catalytic cycle of transaminases consists of two
+half-reactions, each composed of several reversible steps
+(Scheme 1).
+4 In the ﬁrst half-reaction, the conserved lysine
+that forms a Schiﬀ base with the PLP in the native protein
+(internal aldimine, E-PLP) is displaced by the amino donor,
+resulting in the formation of an external aldimine. Then,via
+formation of quinonoid and ketimine intermediates and imine
+hydrolysis, the amino group is transferred to PLP, forming the
+aminated cofactor pyridoxamine 5 ′-phosphate (PMP) −
+Received: May 6, 2021
+Revised: July 26, 2021
+Published: August 13, 2021
+Research Articlepubs.acs.org/acscatalysis
+© 2021 The Authors. Published by
+American Chemical Society
+10733
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+
+enzyme complex (E:PMP). The deaminated donor is released
+as a ketone, aldehyde, or keto acid. For the second half-
+reaction, the E:PMP enzyme binds the amino acceptor to
+regenerate the E-PLP via ketimine, quinonoid, and external
+aldimine intermediates, after which the product is released as
+an amine or amino acid. In the case of non-symmetric ketones,
+ω-TAs convert the substrate to a chiral amine, oﬀering an
+attractive catalytic route for the asymmetric synthesis of chiral
+amines.
+As with most enzymes, the substrate scope of ω-TAs is
+rather restricted, often due to steric hindrance in the active
+site.
+5 Most ω-TAs are homodimeric fold-type I PLP proteins,
+with two identical active sites located at the interface of the
+monomers. Each active site of these class III transaminases has
+both a large and small binding pocket to accommodate
+substituents of the carbonyl (or amino-bound) central carbon
+atom.
+5 While the small binding pocket can seldom
+accommodate anything larger than a methyl group, the large
+binding pocket is generally capable of accepting an aryl or alkyl
+group. To expand the substrate range ofω-TAs, the binding
+pockets need to be engineered to accept larger groups. The
+main strategies forﬁnding enzyme variants capable of a desired
+conversion are directed evolution, rational redesign based on
+structure analysis, and computational redesign. 6 Several
+examples of engineering the selectivity ofω-TAs by directed
+evolution have been reported.7−9 A prominent case is the
+stepwise evolution of the (R)-selective ω-TA (a tetrameric
+PLP fold-type IV enzyme) fromArthrobacter sp. to obtain a
+variant that can be used for the synthesis of the anti-diabetic
+drug sitagliptin from prositagliptin ketone.8 Steric constraints
+in the small binding pocket and potentially undesired
+interactions in the large binding pocket prevent the
+prositagliptin ketone from being accepted by the wild-type
+enzyme. An enzyme variant with 27 mutations suitable for
+sitagliptin production was obtained after 11 rounds of stepwise
+evolution. Such a directed evolution campaign requires a
+considerable screening e ﬀort and multiple iterations of
+mutagenesis, sequencing, and testing.
+Examination of crystal structures or homology models ofω-
+TAs can be used to identify target sites for mutagenesis and
+reduce the amount of screening required forﬁnding desired
+variants.
+10 This approach of rational design based on structural
+analysis was employed to redesign an ω-TA from Chromo-
+bacterium violaceum(CvTA) (PDB 4A6T) to obtain derivatives
+that are more suitable for the kinetic resolution of 1,2-
+diphenylethylamine. 11 T h ea c t i v es i t ea r c h i t e c t u r ew a s
+investigated, and two positions in the small binding pocket
+were identiﬁed as potential targets for mutagenesis. A double
+mutant with 30-fold higher activity than the wild-type enzyme
+was identiﬁed. Another case is the redesign of an (S)-selective
+ω-TA from Ruegeria sp. TM1040 (PDB 3FCR) to produce
+diﬀerent bulky amines.
+12,13 After mutagenesis of residues
+around the active site, the best variants exhibited improved
+conversion while maintaining excellent enantioselectivity. An
+ω-TA from Vibrio ﬂuvialis (Vf TA) was engineered for the
+synthesis of bulky amines by analysis of the X-ray structure
+(PDB 4E3Q) combined with structure-based bioinformatic
+analysis.
+14 Seven residues in the active site were targeted, and
+Scheme 1. Reaction Mechanism for the Transamination of Acetophenone to Enantiopure 1-Phenylethylamine with
+Isopropylamine as an Amino Donora
+aBlue arrows indicate theﬁrst half-reaction, and green arrows indicate the second half-reaction. Computational eﬀorts were aimed at redesigning
+the binding pocket to accommodate diﬀerent external aldimine intermediates.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10734
+variants with high conversion and high enantioselectivity
+toward four amines were found.15
+The use of computational techniques in protein engineering
+is becoming an attractive option, in part due to the
+development of better energy functions and search algo-
+rithms.
+16 The caveat of using computational design is that the
+methodology is case-speciﬁc, and the choice of a good strategy
+is dependent on the enzyme family, the type of reaction, the
+type of substrate, and the limiting catalytic step. Forω-TAs,
+computational methods forﬁnding mutations that modify the
+substrate scope typically include docking of a modeled reaction
+intermediate
+17 and molecular dynamics simulations 17 or
+quantum mechanical modeling 18 of such an intermediate.
+Docking is the fastest amongst these methods, but explicit
+water molecules are generally not included to avoid a drastic
+increase in the search space. Water may play an important role
+in both the catalytic mechanism and shaping the binding site of
+ω-TAs.
+18,19 Diﬀerent reaction steps have been computationally
+modeled for the redesign ofω-TAs; hence, diﬀerent ligands,
+that is, the ketone that acts as an amine acceptor,17,20,21 the
+amine product,22,23 the quinonoid intermediate, 12 and the
+external aldimine intermediate 24 have been examined. An
+advantage of using a reaction intermediate is that the search
+space for the conformation of the ligand is smaller since the
+positions of the PLP cofactor atoms can be consideredﬁxed.
+However, working directly on a reaction intermediate
+implicitly assumes that the enzyme is capable of forming the
+Michaelis complex with the substrate (ketone or amine) and
+converting it to that intermediate and thus would neglect
+mutations that inﬂuence the entry of the substrates or their
+accommodation in a reactive orientation.
+In computational predictions based on structural modeling,
+docking, and molecular dynamics simulations, mutations are
+usually chosen manually and investigated on a one-by-one
+basis, which seriously limits the accessible sequence space and
+complicates the prediction of variants with multiple sub-
+stitutions. Alternatively, mutations can be generated in a single
+dock-and-design step from a user-deﬁned search space. This
+way of discovering new enzyme variants without preselecting
+individual mutations is o ﬀered by design algorithms,
+25 as
+implemented in, for example, Rosetta enzyme design
+software.26 Often used forde novo protein and enzyme design,
+Rosetta can also be employed to modify the activity of existing
+enzymes.
+27,28 Rosetta uses a Monte Carlo search algorithm
+that randomly mutates selected positions and searches for low-
+energy solutions by varying residue identities, protein residue
+rotamers, and ligand conformations.29 Calculations are very
+fast, and the search space can be deﬁned in terms of target
+positions, allowed mutations, and rotamer library density of
+target residues and ligands. Local backbone changes are
+allowed, and good numbers of primary designs carrying
+multiple mutations can be generated in a single dock-and-
+design step. The CASCO protocol employs Rosetta in
+combination with MD simulations for ranking.
+30 In the
+current work, we present a design strategy that uses Rosetta
+and employs the Rosetta interface energy as the main metric
+for the ranking of primary design mutants, obviating the need
+for more expensive MD simulations in the initial ranking
+phase. The strategy beneﬁts from the target ligands having
+hydrophobic and rigid substituents;
+31 hydrophobic groups do
+not form hydrogen bonding networks involving water
+molecules, which are typically absent in docking approaches.
+Furthermore, we use docking with the target substrates
+covalently bound to the PLP in the form of the external
+aldimine intermediate, which greatly reduces the degrees of
+freedom of the binding poses and thereby the search space.
+As the target enzyme, we have chosen a recently reported
+stabilized variant of the (S)-selective ω-TA from Pseudomonas
+jessenii (PjTA-R6, T
+m
+app 85 °C).32 The enzyme was engineered
+for increased stability by computational redesign of the subunit
+interface and catalyzed enantioselective production of (S)-1-
+phenylethylamine at high substrate concentration [100 mM
+acetophenone, 1 M isopropylamine (IPA)] and in the presence
+of 20% dimethyl sulfoxide (DMSO) at 56°C. In view of the
+excellent performance ofPjTA-R6 under these harsh reaction
+conditions, we considered PjTA-R6 to be a good template
+Scheme 2. Synthesis of Chiral Amines (1b−6b) from Ketones (1a−6a) by PjTA-R6 Mutants under the Employed Reaction
+Conditions
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10735
+enzyme to broaden the catalytic scope toward the production
+of enantiopure bulky and cyclic primary amines. As target
+products, we chose six diﬀerent bulky (S)-amines (Scheme 2),
+with structures that are quite di ﬀerent from the accepted
+substrate ( S)-1-phenylethylamine. First, ( S)-1-phenylbutyl-
+amine (1b) was chosen in view of the bulkiness of the propyl
+group that should be accommodated in the small binding
+pocket of PjTA-R6. Moreover, ( S)-1-phenylbutylamine has
+been the target of previous transaminase engineering
+eﬀorts.
+12,17,21,22,33 Two other target amines were (S)-(+)-1-
+aminoindan ( 2b) and ( S)-(+)-1-aminotetralin ( 3b). The
+activity of PjTA-R6 for these compounds is undetectable; the
+same is observed with most otherω-TAs.22,23,34−36 The last
+three selected bulky amines [( S)-5-methoxytetralin-1-amine
+(4b), (S)-6-methoxytetralin-1-amine (5b), and (S)-7-methox-
+ytetralin-1-amine (6b)] have not yet been synthesized byω-
+TAs and possess an even more bulky group than3b to be
+accommodated in the large binding pocket. The corresponding
+ketones used as substrates are butyrophenone ( 1a), 1-
+indanone (2a), 1-tetralone (3a), 5-methoxy-1-tetralone (4a),
+6-methoxy-1-tetralone (5a), and 7-methoxy-1-tetralone (6a)
+(Scheme 2).
+The employed strategy aims to produce, in a single Rosetta
+dock-and-design step, enzyme variants with mutations that
+facilitate the accommodation of the external aldimine
+intermediate of the target reactions. The search space included
+multiple residues around the active site (Table S1), and the
+resulting small mutant libraries selected for experimental
+veriﬁcation contained mutations at eight positions of PjTA-
+R6 (Scheme 3). The ability of the Rosetta-generated variants
+to accommodate the intended intermediates was evaluated by
+the Rosetta interface energy (docking score).
+37 The results
+showed that there is a correlation between the interface energy
+and the experimental yield, which can aid in narrowing down
+the search in future mutagenesis e ﬀorts. Experimental
+veriﬁcation showed that the majority (97%) of the mutants
+gave better reactivity than the initial scaﬀold, which was not
+able to produce any of the six targeted amines. All mutants
+showed excellent enantioselectivity for the production of the
+(S)-amine.
+■ MATERIALS AND METHODS
+Computational Library Design.The crystal structure of
+PjTA-R6 (PDB 6TB1) served as a scaﬀold for docking of the
+target ligands. The scaﬀold was prepared by explicitly adding
+hydrogen atoms to the crystal structure ofPjTA-R6 using an
+automatic Yasara procedure (the CleanAll and OptHydAll
+functions).38 All crystallized water molecules and ions were
+deleted from the structure. The modeled ligands are the
+external aldimines of 1a−6a, named, respectively, as 1EA−
+6EA in this manuscript (Figure S1). Structures of1EA−6EA
+were prepared by adding a covalent bond between the PLP
+C4′ atom and the corresponding amino substrate (1b−6b)t o
+form the respective Schiﬀ base. Geometry optimization of the
+resulting external aldimine structures was performed with the
+semiempirical AM1 method using the COSMO implicit
+solvent model.
+39 Partial charges were derived using the
+AM1/BCC procedure.40 Rotamer libraries for ligands 1EA
+and 4EA−6EA were generated by random perturbation of
+non-hydrogen atom dihedrals (SampleDih Yasara routine)
+(Figure S1 ). Atoms originally belonging to the pyridoxal
+cofactor were kept ﬁxed. Ligands 2EA and 3EA were
+represented by a single rotamer. The ligands ( 1EA−6EA)
+were initially aligned to the cofactor atoms originally found in
+the crystal structure. This initial conformation along with the
+rotamer library served as input for Rosetta design to generate
+the enzyme complexes containing the external aldimine
+ligands.
+26 For this computational design, we used Rosetta
+build number 57,849, and for comparing experimental
+activities with interface energies, we used Rosetta build
+number 60,072, which outputs energies in kcal/mol. The
+following command line arguments were used for Rosetta
+docking: -enzdes, -cst_predock, -cst_design, -cut1 0.0 -cut2
+0.0, -cut3 8.0, -cut4 10.0, -cst_min, -chi_min, -bb_min,
+-packing:use_input_sc, -packing:soft_rep_design, -design_-
+min_cycles 3, -ex1:level 4, -ex2:level 4, -ex1aro:level 4, and
+-ex2aro:level 4. All residues within 10 Å of any ligand non-
+hydrogen atom were set to repackable, but residues 152, 225,
+258, 119, 118, 324, 292, 59, 287, and 87 were set to NATRO
+(NATural ROtamer). Multiple runs were performed for each
+substrate, and varying combinations of residues were allowed
+to mutate ( Table S1 ). For each run, 1000 decoys were
+generated, and the resulting mutants were ranked by their
+Rosetta interface energy. Figures representing Rosetta designs
+were created with VMD (https://www.ks.uiuc.edu/Research/
+vmd/).
+In general, ranking mutants by the interface energy of the
+external aldimine complex proved to be a good target function
+to guide mutagenesis (see theResults section). However, as an
+extra step to explain some outliers, the water displacement that
+would accompany substrate binding was estimated using MD
+simulations. These simulations were performed with enzyme−
+cofactor and enzyme−ligand complexes generated by Rosetta
+docking using GROMACS 2020 software and the AM-
+BER99SB force ﬁeld. Details are given in the Supporting
+Information.
+Mutagenesis, Enzyme Expression, and Puriﬁcation.
+Mutations were introduced in vector pET-20b (+)-His-PjTA-
+R6
+32 via QuikChange mutagenesis and conﬁrmed by DNA
+sequencing (Euro ﬁns Genomics). PjTA variants were
+produced in Escherichia coli BL21(DE3) cultivated in 200
+mL of Terri ﬁc Broth (TB) medium with 100 μg/mL
+ampicillin. Expression was induced with IPTG at OD600 0.6,
+Scheme 3. Schematic View of the Large and Small Binding
+Pockets of PjTA-R6 Bearing the External Aldimine
+Intermediate [PLP-Schiﬀ Base with (S)-1-
+Phenylethylamine]a
+aTarget residues belonging to the large binding pocket are colored
+blue, and the target residue from the small binding pocket is colored
+red. K287 is the catalytic lysine
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10736
+and cultivation was continued at 24°C for 16 h. Cells were
+harvested by centrifugation, washed, and lysed by sonication in
+20 mM potassium phosphate, pH 7.5, containing 500 mM
+NaCl and 20 μM PLP. Centrifugation (36,000×g, 45 min, 4
+°C) gave cell-free extract, loaded on a 5 mL HisTrap column.
+Elution with a linear gradient of 0−500 mM imidazole in 20
+mM potassium phosphate, pH 7.5, containing 500 mM NaCl
+and 20μM PLP, followed by desalting with Econo-Pac 10DG
+columns (Bio-Rad) gave puriﬁed enzymes. Protein concen-
+trations were determined with the Bradford assay, and puriﬁed
+enzymes were stored in aliquots at −80 °Ci n5 0m M
+potassium phosphate, pH 8.0, with 20μM PLP.
+Thermal Shift Assays. Apparent melting temperatures
+(T
+m
+app) were measured by a ﬂuorescence-based thermal shift
+assay (Thermoﬂuor).41 Speciﬁcally, in the wells of an IQ 96-
+well PCR plate (Bio-Rad), enzyme samples of 20μL (0.5 mg/
+mL protein in 50 mM potassium phosphate buﬀer, pH 8.0)
+were mixed with 5μL of 50-fold diluted SYPRO Orange. The
+plates were sealed with the Microseal B adhesive sealer (Bio-
+Rad) and heated from 20 to 99°C in a MyiQ real-time PCR
+machine (Bio-Rad) at a heating rate of 1 °C/min. The
+temperature at which the rate ofﬂuorescence change (-dRFU/
+dT) was highest was taken asT
+m
+app.42 For determining stability
+under harsh conditions, enzyme samples for thermal shift
+assays were prepared in 50 mM phosphate buﬀer containing 1
+M IPA, 20% DMSO, or both of these. The pH was set at 8.0.
+Reagents. IPA, ketones (1a−6a), (S)-amines (1b−6b),
+and ( R)-amines ( 1c−6c) (except 4b and 4c due to
+unavailability) ( Figure S2 ) were purchased from Sigma-
+Aldrich. Synthesis of compounds 4b and 4c was attempted
+by redesignedPjTA-R6 variants; only a single enantiomer was
+obtained, and its identity was conﬁrmed by gas chromatog-
+raphy mass spectrometry (GC−MS). PLP was purchased from
+Fisher Scientiﬁc. The purity of reagents was higher than 95%.
+Enzyme Reactions. Transaminase-catalyzed amination
+reactions were performed at 1 mL scale in sealed glass vials
+at 56 °C using 50 mM potassium phosphate buﬀer, pH 8.0,
+containing 1 M IPA, 20 mM one of the ketones1a−6a, 20%
+DMSO (or 2% DMSO in the case of2a and 15% in the case of
+3a), 0.5 mM PLP, and 1 mg of puriﬁed enzyme. For analysis,
+100 μL samples were quenched by adding 20 μLo f1 0M
+NaOH, centrifuged, and extracted twice with 300μL of ethyl
+acetate. The combined extracts were treated with anhydrous
+magnesium sulfate to remove water, and a total of 200μLo f
+each sample was used for GC analysis. Because of the
+instability of amines4b, 5b, and 6b, they were derivatized to
+the acetamide before GC analysis.
+35 For this, 200μL samples
+of the extracted products were mixed with 300μL of acetic
+anhydride and 5 mg of 4-dimethylaminopyridine (DMAP).
+After 1 h reaction time (450 rpm, room temperature), samples
+were treated with 500μL of water, and the organic layers were
+dried with anhydrous magnesium sulfate. The dried samples
+were used for GC analysis.
+Kinetic parameters of transaminase reactions were deter-
+mined by measuring depletion of aromatic ketones in the 96-
+well microplate format. The reaction mixtures (1 mL)
+contained 1 M IPA, varying concentrations (0−16 mM) of
+ketones (1a−6a), 0.05 mM PLP, and 0.05 mg/mL puriﬁed
+enzyme in 50 mM potassium phosphate bu ﬀer, pH 8.0.
+Reactions were performed at 56°C and started by addition of
+the enzyme. At diﬀerent times (1 min, 2 min, 4 min, and 8
+min), 200 μL samples were quenched by adding 50μL of 0.2
+M NaOH. After centrifugation, 200 μLs a m p l e sw e r e
+transferred to a 96-well microplate, and the absorbance was
+measured in a plate reader. Samples from reaction mixtures
+with 2 −16 mM ketone were diluted 2 −16-fold before
+measurement. The depletion of ketones 1a, 2a, and 3a−6a
+was detected at 290, 310, and 320 nm, respectively, and initial
+rates were calculated using calibration curves (0−1 mM).
+GC Analysis. The concentration and enantiopurity of
+amines 1b−6b were determined by chiral GC. Calibration was
+done with mixtures of racemic amines and the corresponding
+ketones (0.2, 2, and 20 mM) dissolved in the standard reaction
+system but without addition of the enzyme. Peaks for ketone,
+(S)-amine, and (R)-amine were identiﬁed with commercial
+standards. Because of the structural similarity to5b and 6b, 4b
+was quantiﬁed using the same GC response curve. For details,
+see Supporting Information Figures S3−S9.
+Crystal Structures. Before crystallization, PjTA variants
+W58G and W58M + F86L + R417L were further puriﬁed
+using a Superdex 200 13/300 column (GE Healthcare),
+equilibrated with 20 mM HEPES, pH 7.5, 100 mM NaCl, and
+20 μM PLP. Proteins were concentrated to∼8 mg/mL using a
+Vivaspin Turbo 4 10Kﬁlter unit (Sartorius) and crystallized
+using hanging drop vapor diﬀusion in 24-well LINBRO plates
+(Molecular Dimensions Ltd). Per well, 1 μL of protein
+solution was mixed with 1μL of reservoir solution containing
+0.7−1.0 M sodium succinate, pH 7.6, as in our previous work
+on the thermostable parentPjTA-R6.32 Crystals ofPjTA-R6 +
+W58G appeared after two days and grew to an average size of
+0.4 × 0.3 × 0.3 mm
+3. Their yellow color indicated that PLP
+was bound. Large yellow crystals were also obtained forPjTA-
+R6 + W58M + F86L + R417L, with an average size of 0.3×
+0.3 × 0.2 mm3. Attempts to obtain structural information on
+the binding mode of the external aldimine included several
+soaking experiments with the amino donor IPA, the ketones1a
+and 2a, or the amines 1b and 2b for variants PjTA-R6 +
+W58M + F86L + R417L and PjTA-R6 + W58G. X-ray
+diﬀraction data were collected at beamlines I24 and I04 at
+Diamond Light Source (Oxford, UK). The diﬀraction data
+were indexed and integrated using xia2/Dials
+43 and then scaled
+and merged with Aimless44 from the CCP4 software suite.45
+The crystals of PjTA-R6 + W58G andPjTA-R6 + W58M +
+F86L + R417L belonged to the same space group asPjTA-R6,
+with nearly identical unit cell dimensions, allowing thePjTA-
+R6 structure (PDB 6TB1) to be used for initial reﬁnement and
+electron density map calculations. Subsequently, the structures
+were adjusted by model building to replace the side chains of
+the mutated residues. After a few cycles of reﬁnement with
+RefMac5
+46 followed by model building and water placement
+with Coot,47 the structure was completed. A summary of data
+collection is provided in Table S3. Figures showing crystal
+structures were produced with PyMOL.48
+■ RESULTS
+Computational Design of PjTA Variants. To examine
+the use of a single dock-and-design step for shifting the
+substrate range of a transaminase toward acceptance of more
+bulky substrates, we selected the PjTA-R6 variant of the
+transaminase from P. jessenii as the template. PjTA-R6 is a
+thermostable variant ( T
+m
+app =8 5 °C )o ft h en a t i v e6 -
+aminohexanoate transaminase (PjTA, Tm
+app =6 2 °C) of the
+caprolactam biodegradation pathway. PjTA-R6 contains six
+point mutations (P9A + E38Q + A60V + S87N + M128F +
+I154V) that increase its thermostability, of which positions 60,
+87, and 154 are located near the active site. It does not accept
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10737
+any of the ketones1a−6a as substrates for transamination to
+1b−6b, respectively.
+Derivatives with an expanded substrate acceptance were
+predicted using Rosetta in a single dock-and-design step.49
+Rosetta design calculations were performed for each of the
+substrates 1a−6a by optimizing the active site for binding of
+the corresponding external aldimine intermediates1EA−6EA
+(Figure S1). Reshaping the binding pocket of PjTA-R6 was
+mainly aimed at alleviating steric hindrance caused by the
+bulky hydrophobic substituent on the carbonyl carbon of the
+substrate. Based on structural inspection of the crystallographic
+structure of the external aldimine formed from 6-amino-
+hexanoic acid by PjTA (PDB 6G4E), the search space
+comprised residues near the binding site (Table S1).
+For each ligand, 3 −5 independent dock-and-design runs
+were performed, and in each run, 4−6 active site residues were
+allowed to mutate. The number of runs and the identity of the
+residues selected for mutagenesis were case-speciﬁc for each
+compound (Table S1).
+The runs generated approximately 100−400 unique primary
+designs per ligand. These designs were ranked on the basis of
+their Rosetta interface energy, and the top 10−20 enzyme
+variants were selected. The resulting designed libraries
+contained mutations on positions Met54, Leu57, Trp58,
+Tyr151, Ala230, Ile261, and Arg417, belonging to the large
+binding pocket, and on position Phe86, belonging to the small
+binding pocket. Finally, 7−18 of the top-scoring mutants for
+each substrate were selected for experimental veri ﬁcation
+(Table 1). No enzyme variant was manually added to the
+Table 1. Mutant Dataset for the Asymmetric Synthesis of 1b−6b
+mutant no. target amines Rosetta interface energy (kcal/mol) ΔTm
+app (°C)a yield (%) ee (%)
+PjTA-R6b 1 1b−6b -c 0 n.a. d n.m.e
+W58Gf 2 2b−6b −21.6/−22.3/−22.3/−22.8/−21.5 0 51/64/86/29/69 >99
+W58G + F86S 3 1b, 3b, 4b −21.8/−22/−21.7 −8 52/30/47 >99
+W58G + F86L 4 3b −21.9 +2 27 >99
+F86L + Y151F 5 1b −23 −11 38 >99
+L57D + Y151F 6 2b −21.6 +1 n.a. n.m.
+W58G + F86L + R417L 7 1b−4b, 6b −21.7/−21.4/−22.3/−21.3/−21.6 +3 49/12/43/72/16 >99
+W58M + F86L + R417Lf 8 1b −22.9 −5 72 >99
+W58G + F86S + A230G 9 1b −21.1 −1 2 >99
+W58G + F86S + R417L 10 1b, 2b, 3b −21.9/−21.3/−22.4 +4.5 31/6/27 >99
+W58G + F86S + I261A 11 1b, 4b −21.2/−20.6 −8 11/8 >99
+W58G + F86N + R417L 12 2b−6b −21.3/−22.4/−20.8/−19.9/−21.7 −2 7/33/62/12/32 >99
+W58G + F86N + R417F 13 3b−6b −22.4/−21.4/−20.2/−21.7 −3 33/59/12/28 >99
+W58G + F86L + R417F 14 3b−6b −22.3/−21.2/−20.5/−21.6 −6.5 44/70/17/20 >99
+W58G + F86N + R417I 15 4b −21 −5 66 >99
+W58G + F86L + R417I 16 4b −20.8 −3 69 >99
+M54T + W58G + R417L 17 4b −21.6 +2 78 >99
+M54T + W58G + R417I 18 4b −21.7 +2 57 >99
+M54T + W58G + R417Qg 19 4b −21 −34 1 >99
+M54T + W58G + F86S 20 5b −22.7 −8 1 >99
+M54T + W58G + F86L 21 5b −22.4 −3 2 >99
+W58G + F86L + I261N 22 5b −20.7 −11 1 >99
+W58G + F86C + A230P + R417L 23 1b −21.6 0 37 >99
+W58G + F86S + A230G + R417L 24 1b −21.5 −1 37 >99
+W58G + F86N + A230G + R417L 25 1b −21.5 −5.5 28 >99
+L57E + W58G + Y151F + R417K 26 2b −21 −3.5 n.a. n.m.
+W58G + F86L + I261A + R417L 27 1b, 2b −21.2/−20.7 −7 21/1 >99
+W58G + F86L + I261V + R417L 28 3b −22.1 −4 37 >99
+W58G + F86L + I261V + R417F 29 3b −22.1 +1 39 >99
+W58G + F86L + I261A + R417F 30 3b −21.5 +5.5 14 >99
+W58G + F86S + I261A + R417L 31 3b −21.6 +6 9 >99
+M54T + W58G + F86S + R417Lg 32 4b −20.8 −32 15 >99
+M54T + W58G + F86L + R417Ig 33 4b −21 −33 14 >99
+W58G + F86L + A230P + I261V 34 5b, 6b −20.8/−19.1 −5 5/4 >99
+M54T + W58G + I261A + R417L 35 5b −18.4 −1 1 >99
+W58G + F86L + A230P + I261V + R417L 36 4b, 6b −20/−19.9 −5 20/12 >99
+W58G + F86N + A230P + I261V + R417L 37 4b, 6b −19.9/−20 −2 6/7 >99
+W58G + F86L + A230P + I261V + R417I 38 4b, 5b, 6b −19.2/−19.3/−19.6 −2 14/4/4 >99
+W58G + F86L + A230P + I261V + R417Q 39 6b −21.1 0 11 >99
+M54T + W58G + F86L + A230P + I261V + R417L 40 4b, 6b −19.5/−19.1 −2 9/4 >99
+M54S + W58G + F86L + A230P + I261V + R417L 41 6b −19.1 −3 5 >99
+aThe diﬀerence inTm
+app between PjTA-R6 and mutants.bTm
+app of PjTA-R6 is 85°C. cInterface energies were not determined since no catalytic poses
+were obtained.dn.a. = no activity.en.m. = not measured.fThe mutant with the best analytic yield of the corresponding amine.gVariants with poor
+stabilities.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10738
+dataset. In total, 70 Rosetta designs were selected, which
+included 40 designs with diﬀerent sequences because some
+designs for diﬀerent substrates had the same sequence.
+Experimental Veriﬁcation of Amine Synthesis.All 40
+unique designed mutants were constructed by site-directed
+mutagenesis. They expressed well in the soluble form inE. coli
+and were puri ﬁed (Table 1). All but two of the mutant
+enzymes showed the desired catalytic activity and displayed
+high enantioselectivity (ee > 99%) for the production of chiral
+amines 1b−6b. Amine yields in these asymmetric trans-
+formation reactions varied from 1−86%, the latter value being
+similar to what was obtained withPjTA-R6 in the synthesis of
+(S)-1-phenylethylamine from its preferred substrate acetophe-
+none. Reactions were done with 1 M IPA in the presence of
+20% DMSO, indicating that the robustness that was
+engineered previously intoPjTA-R6 was well maintained.
+Gratifyingly, there was reasonable agreement between the
+docking results and yields in amine synthesis (Figure 1). In
+general, better Rosetta interface energies of the external
+aldimines 1EA−6EA correlated with higher yields in amination
+reactions. The best variant for the synthesis of amines1b−6b
+either was the top-ranking variant (for compounds2, 4, and5)
+or occurred among the top-ranking variants (compounds1, 3,
+and 6) based on the interface energy (Table 1). This indicates
+that the computed Rosetta interface energies can be helpful to
+distinguish the best-performing variants among the larger
+numbers of primary designs generated using the Rosetta search
+algorithm.
+The trend between these docking scores and experimental
+yields was not followed by all redesignedPjTA-R6 derivatives.
+A possible cause could be that underperforming variants are
+less stable and inactivated under the harsh conditions of the
+amination reactions (56°C, 1 M IPA, 2−20% DMSO). Since
+the selection of designs for experimental veriﬁcation was based
+on scoring of Rosetta interface energies and did not consider
+possible eﬀects of mutations on stability, we examined the
+thermostability of all the designedPjTA-R6 variants (Table 1).
+Only 3 out of 40 variants had substantially lower thermo-
+stability than PjTA-R6 (mutants 19, 32, and 33;ΔT
+m
+app from
+−34 to −32 °C). Of the other 37 designs, 22 had a modest
+reduction of thermostability (ΔTm
+app from −2t o −11 °C),
+whereas 12 variants showed the same or slight increase in
+stability.
+The loss of thermostability of variants 19, 32, and 33 was
+indeed accompanied by a detrimental eﬀect on the yield of
+amine 4b under the harsh conditions of the reactions (56°C,
+1M IPA, 2−20% DMSO) in comparison to variants that were
+designed for the same product and showed higher stability
+(variants 15−18) (Table 1). Nevertheless, the three unstable
+variants still gave a higher yield of amine4b than the parent
+PjTA-R6 enzyme, which may be due to some initial activity,
+followed by inactivation under turnover conditions. Mutant 20
+(ΔT
+m
+app = −8 °C) also was less thermostable than the parent
+and gave a lower yield than expected from the trends shown in
+Figure 1 (5EA).
+To further examine the role of enzyme stability under
+reaction conditions, three variants with di ﬀerent thermo-
+stabilities were used to test the eﬀect of DMSO and/or IPA in
+thermal shift assays, (i.e., variant 8, variant 19, and variant 20)
+(Table S2). Variant 8 (Tm
+app =8 0°C), which followed the trend
+between yield and Rosetta interface energy (Figure 1, 4EA),
+had normal stability in the presence of DMSO or IPA. It was
+partially inactivated and showed reduced stability only after
+prolonged incubation under reaction conditions. The less-
+thermostable variant 19 (T
+m
+app =5 1°C) was partially unfolded
+and very sensitive to a high concentration of IPA or DMSO, as
+indicated by a further reduction of Tm
+app (Table S2). Initial
+ketone conversion activities in the presence of IPA and DMSO
+were also determined, using a ketone concentration of 20 mM.
+According to the Rosetta interface energies, variant 19 was
+expected to be about half as active as variant 2, but its activity
+with ketone 4a in the presence of DMSO and IPA (0.06 U/
+Figure 1.Comparison of the Rosetta interface energies and the experimental analytical yields ofPjTA-R6 variants redesigned for the asymmetric
+synthesis of six amines. In most cases, the best mutant is correctly identiﬁed by the docking score. Outliers (i.e., variants not following the overall
+trend) are colored red. Some outliers have a large (ﬁlled triangles, mut19, mut32, and mut33) or minor (open triangles) reduction ofTm
+app. Others
+have a structure not suitable for catalysis (red squares), and the rest of outliers are in red circles. Dotted lines are linear regression (rlinear
+2), and
+continuous lines are semilog regression (rexp
+2). Non-outliers (blue circles) were used for regression. Further information about the criteria used to
+deﬁne or classify outliers is given in theSupporting Information.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10739
+mg) was more than 10-fold lower than with variant 2 (Tm
+app =
+85 °C), which had retained stability and activity under these
+conditions (0.7 U/mg). In the presence of 20% DMSO and 1
+M IPA, the initial rate of conversion of5a by variant 20 (Tm
+app =
+77 °C) was rather low (0.04 U/mg), and the yield of amine
+was also lower than expected from the Rosetta interface energy
+calculated for 5EA (Figure 1). These results indicate that the
+reduced stability found with some variants was detrimental for
+amination reactions due to the harsh reaction conditions and
+explains some of the outliers in Figure 1. Besides loss of
+stability, a possible cause of deviations from the relationship
+between interface energy and performance in synthesis is the
+occurrence of a structure unsuitable for catalysis (see below).
+Causes and Eﬀects of Reduced Thermostabilities.A
+closer inspection of mutants 32 and 33 revealed that a single
+mutation is responsible for the drastic reduction in thermo-
+stability. While mutants M54T + W58G + R417[L/I] showed
+excellent yields in the production of4b, introducing mutation
+F86[S/L] substantially lowered amine production and
+decreased the Tm
+app by more than 30 °C. The mutations
+F86[L/S] were intended to alleviate steric clashes of Phe86
+with the tetralin moiety (Figure S10). The structural models
+showed that Phe86 has π−π interactions with Tyr20 and
+Arg417. The latter in turn interacts with Asn87, which was
+previously introduced by an S87N substitution that enhances
+thermostability. Most other mutants carrying a substitution on
+position F86 showed a small reduction in thermostability [25
+F86X mutants showed decreased thermostability, whereas six
+were more thermostable (cutoﬀ of 1 °C)]. In variants 5 and
+26, which maintained Phe86, mutation of Tyr151 led to a
+reduction in thermostability, which we attribute to the loss of
+an interaction via a water molecule with the phosphate of the
+PLP group (Figure S11).50 Overall, we found the template
+PjTA-R6 to be robust enough to accept the majority of the
+proposed mutations with no substantial decrease inTm
+app, but
+the eﬀect of some of the mutations on the thermostability of
+the enzyme was diﬃcult to predict. This especially holds for
+variants carrying multiple mutations that remove and create
+interactions that contribute to stability.
+Rationalization of the Observed Activities.To examine
+if the observed activities of the Rosetta designs can be
+rationalized, we inspected the predicted structures (Figure 2).
+Variant PjTA-R6 + W58M + F86L + R417L was the best-
+performing mutant for the asymmetric synthesis of1b, giving
+an amine yield of 72%. In this and other designs optimized for
+1b, mutation of Trp58 to Met turned out to be better for
+accommodating 1EA than mutation W58G, which also
+occurred frequently ( e.g., PjTA-R6 + W58G + F86L +
+R417L; 49% yield). While mutation W58G only eliminates
+steric hindrance, mutation W58M maintains a more hydro-
+phobic binding site in addition to eliminating protein−ligand
+steric clashes ( Figure S11 ). This should lead to better
+hydrophobic contacts with the propyl substituent on the
+carbonyl carbon of1b. The larger cavity produced by mutation
+W58G will require more water molecules to be displaced upon
+substrate binding than the smaller cavity left by mutation
+W58M and oﬀers fewer stabilizing van der Waals interactions.
+In further engineering eﬀorts of PjTA-R6 aimed at improving
+activity with substrates where the large substituent is a phenyl
+group, the mutation W58M should be considered.
+Ketones containing the indane (2a) or tetralin (3a−6a)
+group required a PjTA-R6 variant with mutation W58G to
+function as an amino acceptor. In the external aldimine form,
+the aromatic ring of indane or tetralin must bind in the large
+binding pocket for production of the (S)-enantiomer of the
+amine. Unlike the aromatic ring in1EA, the indane and tetralin
+bicyclic structures of 2EA−6EA allow no rotational mobility
+for the aromatic ring, causing steric hindrance with Trp58. The
+Figure 2.Designed binding sites for external aldimines. (A−F) Rosetta-docked external aldimine complexes (orange) of enzyme variantsPjTA-R6
++ W58M + F86L + R417L for1EA (A) and PjTA-R6 + W58G for2EA−6EA (B−F). Amino acids of designed variants are colored in cyan
+(carbon), red (oxygen), and blue (nitrogen). Non-polar hydrogens are not shown, with the exception of hydrogen Hα, that is, the hydrogen
+abstracted from the external aldimine (Figure S12). The superimposed crystal structure with the non-substituted residues ofPjTA-R6 (magenta) is
+shown for comparison [i.e., Trp58, Arg417, and Phe86 in panel (A) and Trp58 in panels (B−F)]. Figures were rendered using VMD.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10740
+W58G single mutation was enough to alleviate this steric
+hindrance, and the PjTA-R6 + W58G mutant produced
+enantiopure (S)-amines 2b−6b in yields ranging from 29 to
+86% (Table 1). Additional mutations on top of W58G also
+gave active variants for conversion of ketones2a−6a to amines
+but did not have a further beneﬁcial eﬀect, which was reﬂected
+in both the Rosetta interface energy and the experimental data.
+All variants carrying multiple mutations remained active and
+highly enantioselective.
+From the experimentally tested mutant library of 40 unique
+variants (70 diﬀerent enzyme−ligand combinations), only two
+variant−ligand combinations did not exhibit catalytic activity
+toward the intended compound. The L57D + Y151F (mutant
+6) and L57E + W58G + Y151F + R417K (mutant 26)
+derivatives of PjAT-R6 were inactive on 2a (Figure 1), and
+neither was capable of accommodating2EA in a catalytic pose,
+as conﬁrmed by visual inspection of the designed structure
+(Figure S12). In variant PjTA-R6 + L57D + Y151F, the
+aromatic ring of the bicyclic indane group of2EA cannot be
+accommodated due to steric clashes with Trp58, which the
+mutations L57D + Y151F did not alleviate. Thus, no catalytic
+pose was obtained in the docking procedure, rendering the
+calculated Rosetta interface energy for this mutant irrelevant
+for predicting catalytic potential. Furthermore, mutation L57D
+introduced a hydrogen bond between the side chains of Asp57
+and Thr324, which might cause the mutant to be inactive even
+if the steric clashes with Trp58 were to be alleviated. Residue
+Thr324 is believed to assist Lys287 in catalysis by forming a
+hydrogen bonding network.
+19 Glu57 in variant PjTA-R6 +
+L57E + W58G + Y151F + R417K can be disruptive for the
+very same reasons. Additionally, the formation of a salt bridge
+between Glu57 and Lys417 may prevent free movement of
+Glu57 upon substrate binding, causing steric clashes with the
+indane moiety, rendering the enzyme inactive (Figure S12).
+The steric clashes were reﬂected in the poor interface energy of
+mutant PjTA-R6 + L57E + W58G + Y151F + R417K (Table 1
+and Figure 1). Thus, for the two designs, we propose a
+combination of steric hindrance and disruption of catalytic
+conformations as the cause of inactivity in the production of
+2b.
+The computational framework also yielded PjTA-R6
+mutants suitable for the production of3b. Due to the bicycle
+rigidity, the aromatic ring of the tetralin moiety has steric
+clashes with Trp58 of PjTA-R6 ( Figure 2 ), which were
+eliminated by mutation W58G. The tetralin diﬀers from the
+native substrate 6-aminohexanoic acid in that the latter is
+ﬂexible and points outward into the tunnel where it forms a
+salt bridge with Arg417, thus avoiding steric clashes with
+Trp58 (Figure S13). In fact, the best variant for the production
+of 3b was the single mutantPjTA-R6 + W58G, and additional
+mutations did not improve the yield. Furthermore, a design
+run in which Trp58 was not allowed to mutate did not result in
+designs with a good docking score (Table S1).
+The diﬀerent positions of the methoxy group attached to the
+tetralin moiety in intermediates4EA, 5EA, and 6EA created
+distinctive trends. Most of the mutants designed to
+accommodate 4EA showed higher yields than designs for
+5EA or 6EA. This di ﬀerence can be rationalized by the
+position of the methoxy group in the tetralin moiety. The 5-
+methoxy substituent on the phenyl group of 4EA points
+toward the binding site entrance, making it easier toﬁt 4EA in
+the large pocket (Figures 2D and S14) than 5EA or 6EA.I n
+other variants, the position of the methoxy group could act in
+favor of6EA; the mutation R417Q was found to be beneﬁcial
+for accommodating6EA, increasing the product yield from 4%
+(mutant 34) to 11% (mutant 39) (Table 1). The side chain
+−NH
+2 of Gln417 can form a hydrogen bond with the oxygen
+lone pairs of−OMet (O−H distance of 2.0 Å) in the case of
+6EA, but such a hydrogen bond would not form with4EA as
+the −OMet is too far away (>5Å) (Figure S14B). Accordingly,
+in the series M54T + W58G + R417X, where X = L, I, and Q,
+the product yields decreased from 78 to 1% (Table 1). It must
+be noted that the abovementioned rationalization only
+considers protein −ligand binding interactions of catalytic
+conformations of the complex but not the intrinsic ligand
+reactivities as the cause for diﬀerences in the observed reaction
+yields.
+Eﬀect of Mutations on the Hydrophobicity of the
+Binding Site.As mentioned above, most mutants with better
+Rosetta interface energy scores were better at converting
+ketones 1a−6a to the corresponding amines, and some variants
+deviating from this trend had a reduced thermostability. To
+explain a few outliers that dot not have a decreased
+thermostability, that is, red circles in the3EA, 4EA,o r 5EA
+datasets (Figure 1), we examined if the number of water
+molecules that would need to be displaced for the tetralin
+moiety to ﬁt in the binding pocket could play a role (Figure
+S15). A large displacement of water molecules may
+signiﬁcantly impact the binding energy of ligands.
+51,52 We
+used ns-scale MD simulations to quantify the diﬀerence in the
+water-accessible volumes of the Rosetta-generated structures
+(Figure S16). Although this approach did not explain the
+outliers of 3EA, 4EA,o r 5EA, when considering all variants
+(outliers or not), we did see a weak trend in the plot of the
+average diﬀerence in the number of water molecules between
+the enzyme−PMP complex and the enzyme−external aldimine
+complex against the experimental yield ( Figure S17). The
+trend is weak, but it might be worth considering in further
+studies because water displacement upon substrate binding
+may contribute to a larger energy barrier that is not accounted
+for in the Rosetta calculations.
+53
+Crystal Structures Conﬁrm Local Changes that Create
+Space. To further examine the structural basis of the activity
+with bulky amines and the accuracy of the Rosetta predictions,
+we determined crystal structures of thePjTA-R6 + W58G and
+PjTA-R6 + W58M + F86L + R417L variants. Crystallization
+conditions were as reported earlier.
+32 Only structures with the
+PLP- or PMP-bound enzyme were obtained; attempts to
+obtain structures of PjTA-R6 variants with bound external
+aldimines by brieﬂy soaking crystals with substrates failed. The
+crystal structures for the two best variants were reﬁned to 1.7 Å
+resolution with anR-factor of 0.173 (R
+free = 0.191) forPjTA-
+R6 + W58G and to 1.9 Å resolution with anR-factor of 0.177
+(Rfree = 0.207) forPjTA-R6 + W58M + F86L + R417L (Table
+S3).
+The PjTA-R6 + W58G structure contains the PLP cofactor
+as internal aldimine with PLP covalently linked to Lys287,
+while the PjTA-R6 + W58M + F86L + R417L structure
+contains PMP as a result of the soaking with1b. Similar to
+what was found in previous work,19 the inserted mutations did
+not aﬀect the overall backbone conformation of thesePjTA-R6
+mutants in comparison to thePjTA-R6 structure. All mutated
+residues showed well-de ﬁned electron density, allowing
+unambiguous assignment of their side chain conformations.
+The PjTA-R6-W58G crystal structure was in agreement with
+the Rosetta-predicted structure (RMSD = 0.31 Å) and showed
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10741
+no deviations from thePjTA-R6 structure beyond the aﬀected
+residues (Figure 3). Residue Trp58 is located deep in each
+subunit, above Lys287 and the PLP cofactor, and participates
+in the formation of the large binding pocket. By enlarging this
+pocket, mutation W58G contributes to an increase in the
+active site volume from 669 Å
+3 in PjTA-R6 to 768 Å3 in the
+PjTA-R6 + W58G variant, as calculated with PyVOL54 (PLP-
+omitted). This reduces the steric hindrance that interferes with
+the binding of bulky aromatic substrates. The mutation thus
+facilitates accommodation of the bicyclic structure of the
+external aldimine formed with compound3a.
+The PjTA-R6 + W58M + F86L + R417L structure is also in
+agreement with the Rosetta prediction (RMSD = 0.32 Å), with
+negligible diﬀerences in side chain orientations (not shown).
+The mutations increased the active site volume (PLP omitted)
+from 669 Å
+3 to 1187 Å 3. Superimposition of the crystal
+structure with Rosetta-docked poses for1EA showed that the
+substrate’s phenyl ring is oriented toward the additional space
+in the large binding pocket obtained by replacement of Trp58
+with a methionine. The propyl group is placed in the small
+binding pocket, which shows a slight increase in volume due to
+mutation F86L (Figure 4C). Mutation R417L further increases
+the active site volume by removing a constriction to the large
+binding pocket (Figure 4D). Thus, the W58M, F86L, and
+R417L mutations reshape the active site and reduce steric
+hindrance, which is necessary for accommodating intermediate
+1EA and enables amine synthesis.
+Yields in Amine Synthesis. In agreement with the
+purpose of the computational design work, the designed
+mutants gave higher yields of amines 1b−6b in IPA-driven
+transamination reactions thanPjTA-R6. However, yields were
+still modest in most cases. For example, only up to 29% yield
+was achieved in the synthesis of 5b (Table 1). Reaction
+progress curves showed that under standard conditions
+(Scheme 2), accumulation of amine in the reaction mixtures
+did not increase after 24 h even for the best substrate−mutant
+combinations (Figure 5A). Furthermore, even over theﬁrst 1−
+4 h reaction time, amination activities were lower than
+expected from kinetic parameters determined under initial rate
+conditions (Table 2).
+To identify the cause of partial conversion and low reaction
+rates and to ﬁnd possible remedies, diﬀerent measures were
+examined. We tested if improvement of yield could be
+achieved by extending reaction times after addition of fresh
+enzyme (1 mg), PLP (0.5 mM) or IPA (0.5 M). Also doubling
+the amount of enzyme added at the beginning and removing
+acetone by performing the reactions under low air pressure (40
+kPa) during the ﬁrst 24 h incubation time were attempted.
+However, neither of these measures had an eﬀect on the yield.
+The pH of the reaction mixtures remained constant. In
+contrast, when ketones (20 mM) were added again after 24 h
+reaction time, production of amines continued with all six
+substrates (Figure 5B, Table 2). The increase in amine product
+concentration after ketone addition suggests that the 24 h
+reactions had reached thermodynamic equilibrium.
+55 To
+examine this, the apparent reaction quotient (K Q)w a s
+calculated at 24 h and 48 h byeq 1
+Figure 3. Eﬀect of mutations on the active site. (A) Crystal structures ofPjTA-R6 (green for chain A and yellow for chain B) and (B) crystal
+structure of variantPjTA-R6 + W58G (cyan for chain A and magenta for chain B). In both structures, intermediate3EA (pink) was modeled in the
+active site. The mutant shows an increase in the pocket volume for better accommodation of the substrate, which does notﬁti nPjTA-R6 due to
+steric hindrance by Trp58. Mutation W58G greatly increases the solvent/protein contact area, which is shown as the surface (wheat).
+Figure 4. Eﬀect of mutations on the active site. (A,B) Crystal
+structure of PjTA-R6 (green, subunit A; yellow, subunit B) with the
+external aldimine intermediate1EA (light blue) modeled in the active
+site. The protein/solvent contact area is shown as the surface (wheat).
+(B) Side view of thePjTA-R6 active site, rotated by 90° along the y
+axis, highlighting the R417 side chain that constricts the large binding
+pocket. (C,D) Active site of the variantPjTA-R6 + W58M + F86L +
+R417L crystal structure (orange, subunit A; blue, subunit B; mutated
+residues are labeled in red), with the external aldimine intermediate
+1EA modeled inside shown in the same orientation as in panel (A)
+The active site volume increases due to mutations W58M and F86L.
+The protein/solvent contact area is shown as the surface (wheat). (D)
+Side view of panel (C), rotated by 90° along the y axis, showing the
+drastic eﬀect of mutation R417L on the shape of the active site.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10742
+K Am Ac
+KI P AQ = [] × [ ]
+[] × [ ] (1)
+here, [Am] and [Ac] are the concentrations of amine and
+acetone, respectively, and [K] and [IPA] are the remaining
+concentrations of ketone and IPA, respectively. [IPA]
+0 and
+[K]0 are the added concentrations of IPA and ketones,
+respectively. KQ values were calculated assuming [Ac] = [Am],
+[IPA] = [IPA]0 − [Am], and [K] = [K]0 − [Am]. Since KQ
+values at 24 h were higher than at 48 h (Table 2), only the
+former can represent equilibrium. Possibly, the enzyme loses
+activity in the 24−48 h interval, where the enzyme is exposed
+to a higher concentration (>20 mM) of the substrate. The
+results suggest that the 24 h yields reported inTable 1for each
+substrate are not limited by catalytic activity but by the
+reaction mixtures approaching thermodynamic equilibrium.
+■ DISCUSSION
+The aim of this work was to explore the use of computational
+design with the Rosetta search algorithm for broadening the
+substrate scope of a transaminase. For this, we usedPjTA-R6
+as the template because its engineered stability should result in
+high mutability.
+32 The protocol avoided multiple iterations and
+manual selection of mutations by employing Rosetta enzyme
+design to obtain, in a single step, variants that catalyze
+amination of structurally demanding ketones. The presented
+methodology for broadening the substrate scope showed a
+high hit rate (68 out of 70 designs were successful) and good
+predictive power ( Figure 1). The screening framework is
+computationally inexpensive ( ∼2 CPU hours per enzyme
+variant using the HP workstation Z4 with an Intel Xeon W-
+2135 processor) and can easily be parallelized using multiple
+cores for high-throughput screening. Another attractive feature
+of the protocol is that combinations of mutations can be found
+using the Rosetta search algorithm, without the need to
+preselect them by rational inspection; only the search space
+needs to be deﬁned. Other useful methodologies for predicting
+the catalytic potential of ω-TA variants (using a di ﬀerent
+intermediate) are computationally more expensive (e.g., ∼60
+CPU hours per enzyme variant in the methodology described
+by Vosset al.
+17) or make use of coarser categorizations such as
+active vs inactive in the work of Sirinet al.18 and high-vs low-
+reactivity grouping used by Hanet al.21 A study in which the
+activity toward 2-acetylbiphenyl ketone was engineered in
+Vf TA followed an approach in which mutations were added in
+a stepwise manner, without predicting activity for a large
+number of variants as a ranking tool.
+20
+We chose the external aldimine as the ligand for the docking
+calculations because its conversion to the geminal diamine
+intermediate in the amine synthesis half-reaction involves a
+high-energy transition state.
+19 Thus, we hypothesized that
+mutations that increase the stability of the external aldimine
+complex would have an observable e ﬀect on product
+formation.37 An added advantage of using a ligand covalently
+bound to a rigid cofactor is that the position of the reactive
+atom (C
+α) is known beforehand, which reduces both the
+docking search space and the number of variants that need to
+be screened toﬁnd a good mutant. Although the methodology
+described in this paper shows promising results for engineering
+the ω-TA activity, special attention must be paid to the identity
+Figure 5.Production of six bulky amines (1b−6b) each by their best variant. Reaction conditions: 20 mM ketones (1a−6a), 1 M IPA, 0.5 mM
+PLP, 20% DMSO (2% DMSO in the case of2a and 15% DMSO in the case of3a), 1 mg/mL of enzyme, and 50 mM potassium phosphate buﬀer,
+pH 8.0. (A) The reactions were carried out for 48 h. (B) Same as in panel (A), but after 24 h reaction time, 20 mM ketone (1a−6a) was added.
+The reactions were continued up to 48 h. Error bars indicate individual values of duplicate assays. Data in panels (A) and (B) are from separate
+experiments.
+Table 2. Catalytic Activities and Apparent Equilibria in the Synthesis of Amines (1b−6b)
+reaction best mutant
+activity
+(U/mg)a
+KM
+(1a−6a) (mM)b
+kcat
+(1a−6a)( s−1)
+kcat/KM
+(1a−6a)
+(mM−1 s−1)
+yield at
+24 h
+(%)c
+yield at
+48 h (%) KQ at 24 h KQ at 48 h
+1a → 1b W58M + F86L
++ R417L (8)
+0.12 1.5 ± 0.3 2.5 ± 0.2 1.8 ± 0.5 72 ± 15 6 ± 1 (3.6 ± 0.3) × 10−2 (2.9 ± 0.1) × 10−2
+2a → 2b W58G (2) 0.062 1.6 ± 0.1 1.2 ± 0.02 0.8 ± 0.1 46 ± 13 0 ± 1 (0.8 ± 0.04) × 10−2 (0.53 ± 0.04) × 10−2
+3a → 3b W58G (2) 0.11 0.6 ± 0.1 2 ± 0.03 3.4 ± 0.6 58 ± 24 3 ± 1 (1.6 ± 0.1) × 10−2 (1.3 ± 0.1) × 10−2
+4a → 4b W58G (2) 0.027 4.4 ± 1.3 0.6 ± 0.1 0.2 ± 0.1 86 ± 34 9 ± 1 (12 ±3) ± 10−2 (1.9 ± 0.1) × 10−2
+5a → 5b W58G (2) 0.027 4.6 ± 1.1 0.5 ± 0.01 0.1 ± 0.03 28 ± 11 8 ± 1 (0.22 ± 0.02) × 10−2 (0.16 ± 0.01) × 10−2
+6a → 6b W58G (2) 0.073 3.6 ± 0.5 1.5 ± 0.02 0.5 ± 0.1 67 ± 24 1 ± 2 (2.8 ± 0.3) × 10−2 (1.1 ± 0.1) × 10−2
+aRates of amine production calculated over 0−1hi n Figure 5. 1 U corresponds to 1μmol amine synthesis per min.bKinetic parameters were
+determined by measuring initial rates of ketone depletion at varying concentrations of1a−6a. See theMaterials and Methodsfor details. cYields
+were calculated from the data shown inFigure 5B.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10743
+of the substrates. The selected substrates are highly hydro-
+phobic, which means modest direct participation from water
+molecules, which are typically deleted before docking. The
+substrates are also rigid, which, on one hand, further reduced
+the necessary search space and, on the other hand, made
+ﬁnding better variants more challenging. For substrates with
+high ﬂexibility and high hydrogen-bonding potential, attention
+should be paid to both correct modeling of implicit or explicit
+water and including a good diversity of rotamers in the search
+space. However, this remains a serious challenge, especially due
+to the complexity of describing the behavior of water
+molecules.
+56
+The design algorithm repeatedly suggested the replacement
+of Trp58 and Phe86 of PjTA-R6 to smaller hydrophobic
+residues (Table 1). In view of the sequence similarities of
+Vf TA (PDB 4E3Q, 41% identity withPjTA-R6), CvTA (PDB
+4A6T, 40% identity with PjTA-R6), and ω-TA from
+Ochrobactrum anthropi (OaTA, PDB 5GHF, 64% identity
+with PjTA-R6), it is not surprising that the equivalent positions
+also strongly inﬂuenced activity when tested in these enzymes.
+The best variant of OaTA possessed mutation W58A and
+displayed a 105-fold higher activity in the synthesis of1b than
+its parent, that is, 90 mU/mg.21 Although the curves inFigure
+5 indicate that amine synthesis rates drop during conversion,
+the initial rates of amine formation we summarize inTable 2
+are higher or comparable to this value.
+In OaTA variants designed for2a and 3a, mutation W58L
+relieved steric hindrance in the large binding pocket and gave a
+760-fold increase in activity with2a (3 mU/mg) and 210-fold
+increase in activity with 3a (0.7 mU/mg) compared to the
+parent.23 Replacing Trp58 of OaTA also promoted activity
+with other aliphatic and aromatic ketones, as seen with
+mutants W58L and W58A.
+23,57 In Vf TA, the corresponding
+Trp57 was mutated to Phe or Cys in several designs for the
+synthesis of hydrophobic bulky amines.
+15,20 In the redesign of
+Vf TA for asymmetric synthesis of (1 S)-1-(1,1′-biphenyl-2-
+yl)ethanamine, the best variant-containing mutation W57F
+exhibited 1716-fold higher activity in comparison to the wild-
+type Vf TA.20 Mutation W57G was beneﬁcial for the activity of
+Vf TA toward diﬀerent aliphatic amines,58 while W57F gave
+improved activity with diﬀerent aliphatic aldehydes and (R)-
+ethyl 5-methyl 3-oxooctanoate. 18,59,60 The corresponding
+position in CvTA is Trp60, and mutation W60C improved
+the activity in the deamination of (S)-1-phenylethylamine and
+the amination of a series of ketones.61 ω-TA mutants in which
+the position equivalent to Phe86 ofPjTA is mutated have been
+reported as well. Phe86 ﬂanks the small binding pocket and
+was mutated to Leu to produce several variants of CvTA
+(F88L) and Vf TA (F85L) that have higher activity with1a
+and gave higher yield of1b.17,33 Replacement of Phe86 to the
+smaller Leu was enough to create room for the propyl group of
+1b in the small binding pocket. WhenVf TA was engineered to
+produce 1b, the best variant-containing mutation F85L gave
+53% yield. Similarly, the best variant ofCvTA possessed the
+corresponding mutation F88L and exhibited 99% conversion
+in the synthesis of 1b. Other small residues that improved
+activity in the synthesis of bulky amines when replacing Phe86
+are Ala
+11,18,60 and Val.15
+The computational approach presented in this work avoids
+multiple design iterations and instead uses the Rosetta energy
+function in a single dock-and-design step. Rosetta found
+solutions that overlap with rational design approaches, pointing
+at the conserved Trp and Phe residues in the large and small
+binding pocket, respectively, as hotspots for selectivity
+engineering of the well-studied fold type Iω-TAs. The results
+show that it is possible to rapidly design transaminase variants
+with improved activity in the production of bulky amines. The
+structures predicted by Rosetta design calculations are in
+agreement with experimental 3D structures as determined by
+protein crystallography and explain the observed changes in
+activity. We advocate that active site redesign by covalent
+docking of external aldimines with simultaneous sequence
+optimization o ﬀers a cheap and straightforward design
+methodology that can be applied to broaden the substrate
+scope of transaminases.
+■ ASSOCIATED CONTENT
+*sı Supporting Information
+The Supporting Information is available free of charge at
+https://pubs.acs.org/doi/10.1021/acscatal.1c02053.
+Substrate and intermediate structures, experimental
+details, chromatograms, docking structures, description
+of libraries, results of MD simulations, and crystallo-
+graphic data (PDF)
+■ AUTHOR INFORMATION
+Corresponding Author
+Dick B. Janssen− Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen, AG Groningen 9747
+Groningen, The Netherlands;
+orcid.org/0000-0002-0834-
+2043; Email: d.b.janssen@rug.nl
+Authors
+Qinglong Meng − Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen, AG Groningen 9747
+Groningen, The Netherlands
+Carlos Ramírez-Palacios − Biotransformation and
+Biocatalysis, Groningen Biomolecular Sciences and
+Biotechnology Institute (GBB), University of Groningen, AG
+Groningen 9747 Groningen, The Netherlands; Molecular
+Dynamics, Groningen Biomolecular Sciences and
+Biotechnology Institute (GBB), University of Groningen, AG
+Groningen 9747 Groningen, The Netherlands;
+orcid.org/
+0000-0003-2724-0760
+Nikolas Capra − Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen, AG Groningen 9747
+Groningen, The Netherlands
+Mattijs E. Hooghwinkel− Biotransformation and
+Biocatalysis, Groningen Biomolecular Sciences and
+Biotechnology Institute (GBB), University of Groningen, AG
+Groningen 9747 Groningen, The Netherlands
+Sebastian Thallmair − Molecular Dynamics, Groningen
+Biomolecular Sciences and Biotechnology Institute (GBB),
+University of Groningen, AG Groningen 9747 Groningen,
+The Netherlands; Frankfurt Institute for Advanced Studies,
+Frankfurt am Main 60438, Germany
+Henriëtte J. Rozeboom− Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen, AG Groningen 9747
+Groningen, The Netherlands
+Andy-Mark W. H. Thunnissen− Biotransformation and
+Biocatalysis, Groningen Biomolecular Sciences and
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10744
+Biotechnology Institute (GBB), University of Groningen, AG
+Groningen 9747 Groningen, The Netherlands; orcid.org/
+0000-0002-1915-9850
+Hein J. Wijma− Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen, AG Groningen 9747
+Groningen, The Netherlands;
+orcid.org/0000-0003-0891-
+6972
+Siewert J. Marrink− Molecular Dynamics, Groningen
+Biomolecular Sciences and Biotechnology Institute (GBB),
+University of Groningen, AG Groningen 9747 Groningen,
+The Netherlands;
+orcid.org/0000-0001-8423-5277
+Complete contact information is available at:
+https://pubs.acs.org/10.1021/acscatal.1c02053
+Author Contributions
+Q.M. and C.R.-P. contributed equally. Q.M. constructed
+mutants and performed the biocatalytic experiments. C.R.-P.
+performed the computational work. N.C., H.J.R., and A-
+M.W.H.T. solved the crystal structures. M.E.H. contributed to
+biocatalytic experiments. All authors discussed the results.
+Q.M., C.R.-P., and N.C. wrote the manuscript. D.B.J., S.J.M.,
+H.J.W., and S.T. revised the manuscript. D.B.J. supervised the
+project.
+Notes
+The authors declare no competingﬁnancial interest.
+■ ACKNOWLEDGMENTS
+Q.M. thanks the China Scholarship Council for a Ph.D.
+fellowship. C.R.P. thanks CONACYT for the doctoral
+fellowship. Part of this project has received funding from the
+European Union’s Horizon 2020 Programme (Marie Curie
+Actions-ITN ES-Cat) under GA no. 722610, which supported
+N.C. The research of H.J.W. was supported by the Dutch
+Ministry of Economic A ﬀairs through BE-Basic, grant
+FS02.005. We thank the Center for Information Technology
+of the University of Groningen for providing access to the
+Peregrine high-performance computing cluster. We thank the
+staﬀ of Diamond Light Source at Oxford for the excellent
+support and beamtime allocation.
+■ ABBREVIATIONS
+ω-TA, ω-transaminase; PLP, pyridoxal 5-phosphate; PMP,
+pyridoxamine 5-phosphate; PjTA-R6, stabilized ω-TA from
+Pseudomonas jessenii; IPA, isopropylamine;CvTA, ω-TA from
+Chromobacterium violaceum; Vf TA, ω-TA fromVibrio ﬂuvialis;
+OaTA, ω-TA from Ochrobactrum anthropi; dRFU/dT, change
+in ﬂuorescence versus temperature
+■ REFERENCES
+(1) Kelly, S. A.; Pohle, S.; Wharry, S.; Mix, S.; Allen, C. C. R.;
+Moody, T. S.; Gilmore, B. F. Application ofω-Transaminases in the
+Pharmaceutical Industry. Chem. Rev. 2018, 118, 349−367.
+(2) Eliot, A. C.; Kirsch, J. F. Pyridoxal Phosphate Enzymes:
+Mechanistic, Structural, and Evolutionary Considerations.Annu. Rev.
+Biochem. 2004, 73, 383−415.
+(3) Koszelewski, D.; Tauber, K.; Faber, K.; Kroutil, W. ω-
+Transaminases for the synthesis of non-racemic α-chiral primary
+amines. Trends Biotechnol. 2010, 28, 324−332.
+(4) Mathew, S.; Yun, H. ω-Transaminases for the Production of
+Optically Pure Amines and Unnatural Amino Acids.ACS Catal.2012,
+2, 993−1001.
+(5) Gomm, A.; O ’Reilly, E. Transaminases for Chiral Amine
+Synthesis. Curr. Opin. Chem. Biol.2018, 43, 106−112.
+(6) Bornscheuer, U. T.; Huisman, G. W.; Kazlauskas, R. J.; Lutz, S.;
+Moore, J. C.; Robins, K. Engineering the Third Wave of Biocatalysis.
+Nature 2012, 485, 185−194.
+(7) Slabu, I.; Galman, J. L.; Lloyd, R. C.; Turner, N. J. Discovery,
+Engineering, and Synthetic Application of Transaminase Biocatalysts.
+ACS Catal. 2017, 7, 8263−8284.
+(8) Savile, C. K.; Janey, J. M.; Mundorff, E. C.; Moore, J. C.; Tam,
+S.; Jarvis, W. R.; Colbeck, J. C.; Krebber, A.; Fleitz, F. J.; Brands, J.;
+Devine, P. N.; Huisman, G. W.; Hughes, G. J. Biocatalytic
+Asymmetric Synthesis of Chiral Amines from Ketones Applied to
+Sitagliptin Manufacture. Science 2010, 329, 305−309.
+(9) Weiß, M. S.; Pavlidis, I. V.; Spurr, P.; Hanlon, S. P.; Wirz, B.;
+Iding, H.; Bornscheuer, U. T. Protein-Engineering of an Amine
+Transaminase for the Stereoselective Synthesis of a Pharmaceutically
+Relevant Bicyclic Amine.Org. Biomol. Chem.2016, 14, 10249−10254.
+(10) Guo, F.; Berglund, P. Transaminase Biocatalysis: Optimization
+and Application. Green Chem. 2017, 19, 333−360.
+(11) Land, H.; Ruggieri, F.; Szekrenyi, A.; Fessner, W. D.; Berglund,
+P. Engineering the Active Site of an ( S)-Selective Amine Trans-
+aminase for Acceptance of Doubly Bulky Primary Amines.Adv. Synth.
+Catal. 2020, 362, 812−821.
+(12) Pavlidis, I. V.; Weiß, M. S.; Genz, M.; Spurr, P.; Hanlon, S. P.;
+Wirz, B.; Iding, H.; Bornscheuer, U. T. Identification of (S)-Selective
+Transaminases for the Asymmetric Synthesis of Bulky Chiral Amines.
+Nat. Chem. 2016, 8, 1076−1082.
+(13) Weiß, M. S.; Pavlidis, I. V.; Spurr, P.; Hanlon, S. P.; Wirz, B.;
+Iding, H.; Bornscheuer, U. T. Amine Transaminase Engineering for
+Spatially Bulky Substrate Acceptance.ChemBioChem 2017, 18, 1022−
+1026.
+(14) Kuipers, R. K.; Joosten, H. J.; Van Berkel, W. J. H.; Leferink, N.
+G. H.; Rooijen, E.; Ittmann, E.; Van Zimmeren, F.; Jochens, H.;
+Bornscheuer, U.; Vriend, G.; Martins Dos Santos, V. A. P.; Schaap, P.
+J. 3DM: Systematic Analysis of Heterogeneous Superfamily Data to
+Discover Protein Functionalities.Proteins: Struct., Funct., Bioinf.2010,
+78, 2101−2113.
+(15) Genz, M.; Melse, O.; Schmidt, S.; Vickers, C.; Dörr, M.; van
+den Bergh, T.; Joosten, H.-J.; Bornscheuer, U. T. Engineering the
+Amine Transaminase from Vibrio fluvialis towards Branched-Chain
+Substrates. ChemCatChem 2016, 8, 3199−3202.
+(16) Kiss, G.; Çelebi-Ölçüm, N.; Moretti, R.; Baker, D.; Houk, K. N.
+Computational Enzyme Design. Angew. Chem., Int. Ed. 2013, 52,
+5700−5725.
+(17) Voss, M.; Das, D.; Genz, M.; Kumar, A.; Kulkarni, N.; Kustosz,
+J.; Kumar, P.; Bornscheuer, U. T.; Höhne, M. In Silico Based
+Engineering Approach to Improve Transaminases for the Conversion
+of Bulky Substrates.ACS Catal. 2018, 8, 11524−11533.
+(18) Sirin, S.; Kumar, R.; Martinez, C.; Karmilowicz, M. J.; Ghosh,
+P.; Abramov, Y. A.; Martin, V.; Sherman, W. A Computational
+Approach to Enzyme Design: Predicting ω-Aminotransferase
+Catalytic Activity Using Docking and MM-GBSA Scoring.J. Chem.
+Inf. Model. 2014, 54, 2334−2346.
+(19) Cassimjee, K. E.; Manta, B.; Himo, F. A quantum chemical
+study of theω-transaminase reaction mechanism.Org. Biomol. Chem.
+2015,
+13, 8453−8464.
+(20) Dourado, D. F. A. R.; Pohle, S.; Carvalho, A. T. P.; Dheeman,
+D. S.; Caswell, J. M.; Skvortsov, T.; Miskelly, I.; Brown, R. T.; Quinn,
+D. J.; Allen, C. C. R.; Kulakov, L.; Huang, M.; Moody, T. S. Rational
+Design of a (S)-Selective-Transaminase for Asymmetric Synthesis of
+(1S)-1-(1,1′-biphenyl-2-yl)ethanamine. ACS Catal. 2016, 6, 7749−
+7759.
+(21) Han, S.-W.; Kim, J.; Cho, H.-S.; Shin, J.-S. Active Site
+Engineering of ω-Transaminase Guided by Docking Orientation
+Analysis and Virtual Activity Screening.ACS Catal. 2017, 7, 3752−
+3762.
+(22) Han, S.-W.; Park, E.-S.; Dong, J.-Y.; Shin, J.-S. Expanding
+Substrate Specificity ofω-Transaminase by Rational Remodeling of a
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10745
+Large Substrate-Binding Pocket.Adv. Synth. Catal.2015, 357, 2712−
+2720.
+(23) Han, S.-W.; Park, E.-S.; Dong, J.-Y.; Shin, J.-S. Mechanism-
+Guided Engineering of ω-Transaminase to Accelerate Reductive
+Amination of Ketones.Adv. Synth. Catal.2015, 357, 1732−1740.
+(24) Binter, A.; Oberdorfer, G.; Hofzumahaus, S.; Nerstheimer, S.;
+Altenbacher, G.; Gruber, K.; Macheroux, P. Characterization of the
+PLP-Dependent Aminotransferase NikK fromStreptomyces tendaeand
+Its Putative Role in Nikkomycin Biosynthesis. FEBS J. 2011, 278,
+4122−4135.
+(25) Bolon, D. N.; Mayo, S. L. Enzyme-like Proteins by
+Computational Design. Proc. Natl. Acad. Sci. U.S.A. 2001, 98,
+14274−14279.
+(26) Richter, F.; Leaver-Fay, A.; Khare, S. D.; Bjelic, S.; Baker, D. De
+Novo Enzyme Design Using Rosetta3. PLoS One 2011, 6,
+No. e19230.
+(27) Gordon, S. R.; Stanley, E. J.; Wolf, S.; Toland, A.; Wu, S. J.;
+Hadidi, D.; Mills, J. H.; Baker, D.; Pultz, I. S.; Siegel, J. B.
+Computational Design of anα-Gliadin Peptidase. J. Am. Chem. Soc.
+2012, 134, 20513−20520.
+(28) Privett, H. K.; Kiss, G.; Lee, T. M.; Blomberg, R.; Chica, R. A.;
+Thomas, L. M.; Hilvert, D.; Houk, K. N.; Mayo, S. L. Iterative
+Approach to Computational Enzyme Design. Proc. Natl. Acad. Sci.
+U.S.A. 2012, 109, 3790−3795.
+(29) Das, R.; Baker, D. Macromolecular Modeling with Rosetta.
+Annu. Rev. Biochem.2008, 77, 363−382.
+(30) Wijma, H. J.; Floor, R. J.; Bjelic, S.; Marrink, S. J.; Baker, D.;
+Janssen, D. B. Enantioselective Enzymes by Computational Design
+and in Silico Screening.Angew. Chem., Int. Ed.2015, 54, 3726−3730.
+(31) Morin, A.; Meiler, J.; Mizoue, L. S. Computational Design of
+Protein-Ligand Interfaces: Potential in Therapeutic Development.
+Trends Biotechnol. 2011, 29, 159−166.
+(32) Meng, Q.; Capra, N.; Palacio, C. M.; Lanfranchi, E.; Otzen, M.;
+Van Schie, L. Z.; Rozeboom, H. J.; Thunnissen, A.-M. W. H.; Wijma,
+H. J.; Janssen, D. B. Robust ω-Transaminases by Computational
+Stabilization of the Subunit Interface.ACS Catal. 2020, 10, 2915−
+2928.
+(33) Nobili, A.; Steffen-Munsberg, F.; Kohls, H.; Trentin, I.;
+Schulzke, C.; Höhne, M.; Bornscheuer, U. T. Engineering the Active
+Site of the Amine Transaminase from Vibrio fluvialis for the
+Asymmetric Synthesis of Aryl-Alkyl Amines and Amino Alcohols.
+ChemCatChem 2015, 7, 757−760.
+(34) Telzerow, A.; Paris, J.; Håkansson, M.; González-Sabín, J.; Ríos-
+Lombardía, N.; Schürmann, M.; Gröger, H.; Morís, F.; Kourist, R.;
+Schwab, H.; Steiner, K. Amine Transaminase from Exophiala
+Xenobiotica-Crystal Structure and Engineering of a Fold IV
+Transaminase that Naturally Converts Biaryl Ketones. ACS Catal.
+2019, 9, 1140−1148.
+(35) Pressnitz, D.; Fuchs, C. S.; Sattler, J. H.; Knaus, T.; Macheroux,
+P.; Mutti, F. G.; Kroutil, W. Asymmetric Amination of Tetralone and
+Chromanone Derivatives Employing ω-Transaminases. ACS Catal.
+2013, 3, 555−559.
+(36) Calvelage, S.; Dörr, M.; Höhne, M.; Bornscheuer, U. T. A
+Systematic Analysis of the Substrate Scope of (S)- and (R)-Selective
+Amine Transaminases. Adv. Synth. Catal.2017, 359, 4235−4243.
+(37) Dong, L.; Meng, Q.; Ramírez-Palacios, C.; Wijma, H. J.;
+Marrink, S. J.; Janssen, D. B. Asymmetric Synthesis of Optically Pure
+Aliphatic Amines with an Engineered Robust ω-Transaminase.
+Catalysts 2020, 10, 1310.
+(38) Krieger, E.; Dunbrack, R. L.; Hooft, R. W. W.; Krieger, B.
+Assignment of Protonation Sta tes in Proteins and Ligands:
+Combining pKa Prediction with Hydrogen Bonding Network
+Optimization. Methods Mol. Biol.2012, 819, 405−421.
+(39) Klamt, A. Conductor-like Screening Model for Real Solvents: A
+New Approach to the Quantitative Calculation of Solvation
+Phenomena. J. Phys. Chem.1995, 99, 2224−2235.
+(40) Jakalian, A.; Jack, D. B.; Bayly, C. I. Fast, Efficient Generation
+of High-Quality Atomic Charges. AM1-BCC Model: II. Parameter-
+ization and Validation.J. Comput. Chem.2002, 23, 1623−1641.
+(41) Ericsson, U. B.; Hallberg, B. M.; DeTitta, G. T.; Dekker, N.;
+Nordlund, P. Thermofluor-Based High-Throughput Stability Opti-
+mization of Proteins for Structural Studies.Anal. Biochem. 2006, 357,
+289−298.
+(42) Boivin, S.; Kozak, S.; Meijers, R. Optimization of Protein
+Purification and Characterization Using Thermofluor Screens.Protein
+Expression Purif. 2013, 91, 192−206.
+(43) Winter, G.; Waterman, D. G.; Parkhurst, J. M.; Brewster, A. S.;
+Gildea, R. J.; Gerstel, M.; Fuentes-Montero, L.; Vollmar, M.; Michels-
+C l a r k ,T . ;Y o u n g ,I .D . ;S a u t e r ,N .K . ;E v a n s ,G .D I A L S :
+Implementation and Evaluation of a New Integration Package.Acta
+Crystallogr., Sect. D: Struct. Biol.2018, 74,8 5−97.
+(44) Evans, P. R.; Murshudov, G. N. How Good Are My Data and
+What Is the Resolution? Acta Crystallogr., Sect. D: Biol. Crystallogr.
+2013, 69, 1204−1214.
+(45) Winn, M. D.; Ballard, C. C.; Cowtan, K. D.; Dodson, E. J.;
+Emsley, P.; Evans, P. R.; Keegan, R. M.; Krissinel, E. B.; Leslie, A. G.
+W.; McCoy, A.; McNicholas, S. J.; Murshudov, G. N.; Pannu, N. S.;
+Potterton, E. A.; Powell, H. R.; Read, R. J.; Vagin, A.; Wilson, K. S.
+Overview of the CCP4 suite and current developments. Acta
+Crystallogr., Sect. D: Biol. Crystallogr.2011, 67, 235−242.
+(46) Murshudov, G. N.; Skubák, P.; Lebedev, A. A.; Pannu, N. S.;
+Steiner, R. A.; Nicholls, R. A.; Winn, M. D.; Long, F.; Vagin, A. A.
+REFMAC5 for the Refinement of Macromolecular Crystal Structures.
+Acta Crystallogr., Sect. D: Biol. Crystallogr.2011, 67, 355−367.
+(47) Emsley, P.; Lohkamp, B.; Scott, W. G.; Cowtan, K. Features
+and development of Coot.Acta Crystallogr., Sect. D: Biol. Crystallogr.
+2010, 66, 486−501.
+(48) Lilkova, E.The PyMOL Molecular Graphics System, Version 2.0;
+Schrödinger, LLC, 2015.
+(49) Jha, R. K.; Chakraborti, S.; Kern, T. L.; Fox, D. T.; Strauss, C.
+E. M. Rosetta Comparative Modeling for Library Design: Engineering
+Alternative Inducer Specificity in a Transcription Factor. Proteins:
+Struct., Funct., Bioinf.2015, 83, 1327−1340.
+(50) Börner, T.; Rämisch, S.; Bartsch, S.; Vogel, A.; Adlercreutz, P.;
+Grey, C. Three in One: Temperature, Solvent and Catalytic Stability
+by Engineering the Cofactor-Binding Element of Amine Trans-
+aminase.
+ChemBioChem 2017, 18, 1482−1486.
+(51) Ladbury, J. E. Just add water! The effect of water on the
+specificity of protein-ligand binding sites and its potential application
+to drug design.Chem. Biol. 1996, 3, 973−980.
+(52) Abel, R.; Young, T.; Farid, R.; Berne, B. J.; Friesner, R. A. Role
+of the Active-Site Solvent in the Thermodynamics of Factor Xa
+Ligand Binding. J. Am. Chem. Soc.2008, 130, 2817−2831.
+(53) Wahl, J.; Smieško, M. Thermodynamic Insight into the Effects
+of Water Displacement and Rearrangement upon Ligand Modifica-
+tions Using Molecular Dynamics Simulations.ChemMedChem 2018,
+13, 1325−1335.
+(54) Smith, R. H. B.; Dar, A. C.; Schlessinger, A.PyVOL: A PyMOL
+Plugin for Visualization, Comparison, and Volume Calculation of Drug-
+Binding Sites; bioRxiv, 2019.
+(55) Goldberg, R. N. Standards in Biothermodynamics.Perspect. Sci.
+2014, 1,7 −14.
+(56) Leman, J. K.; Weitzner, B. D.; Lewis, S. M.; Adolf-Bryfogle, J.;
+Alam, N.; Alford, R. F.; Aprahamian, M.; Baker, D.; Barlow, K. A.;
+Barth, P.; Basanta, B.; Bender, B. J.; Blacklock, K.; Bonet, J.; Boyken,
+S. E.; Bradley, P.; Bystroff, C.; Conway, P.; Cooper, S.; Correia, B. E.;
+Coventry, B.; Das, R.; De Jong, R. M.; DiMaio, F.; Dsilva, L.;
+Dunbrack, R.; Ford, A. S.; Frenz, B.; Fu, D. Y.; Geniesse, C.;
+Goldschmidt, L.; Gowthaman, R.; Gray, J. J.; Gront, D.; Guffy, S.;
+Horowitz, S.; Huang, P.-S.; Huber, T.; Jacobs, T. M.; Jeliazkov, J. R.;
+Johnson, D. K.; Kappel, K.; Karanicolas, J.; Khakzad, H.; Khar, K. R.;
+Khare, S. D.; Khatib, F.; Khramushin, A.; King, I. C.; Kleffner, R.;
+Koepnick, B.; Kortemme, T.; Kuenze, G.; Kuhlman, B.; Kuroda, D.;
+Labonte, J. W.; Lai, J. K.; Lapidoth, G.; Leaver-Fay, A.; Lindert, S.;
+Linsky, T.; London, N.; Lubin, J. H.; Lyskov, S.; Maguire, J.;
+Malmström, L.; Marcos, E.; Marcu, O.; Marze, N. A.; Meiler, J.;
+Moretti, R.; Mulligan, V. K.; Nerli, S.; Norn, C.; Ó’Conchúir, S.;
+Ollikainen, N.; Ovchinnikov, S.; Pacella, M. S.; Pan, X.; Park, H.;
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10746
+Pavlovicz, R. E.; Pethe, M.; Pierce, B. G.; Pilla, K. B.; Raveh, B.;
+Renfrew, P. D.; Burman, S. S. R.; Rubenstein, A.; Sauer, M. F.; Scheck,
+A.; Schief, W.; Schueler-Furman, O.; Sedan, Y.; Sevy, A. M.;
+Sgourakis, N. G.; Shi, L.; Siegel, J. B.; Silva, D.-A.; Smith, S.; Song,
+Y.; Stein, A.; Szegedy, M.; Teets, F. D.; Thyme, S. B.; Wang, R. Y.-R.;
+Watkins, A.; Zimmerman, L.; Bonneau, R. Macromolecular Modeling
+and Design in Rosetta: Recent Methods and Frameworks. Nat.
+Methods 2020, 17, 665−680.
+(57) Kim, H.-G.; Han, S.-W.; Shin, J.-S. Combinatorial Mutation
+Analysis ofω-Transaminase to Create an Engineered Variant Capable
+of Asymmetric Amination of Isobutyrophenone. Adv. Synth. Catal.
+2019, 361, 2594−2606.
+(58) Cho, B.-K.; Park, H.-Y.; Seo, J.-H.; Kim, J.; Kang, T.-J.; Lee, B.-
+S.; Kim, B.-G. Redesigning the substrate specificity of ω-amino-
+transferase for the kinetic resolution of aliphatic chiral amines.
+Biotechnol. Bioeng. 2008, 99, 275−284.
+(59) Genz, M.; Vickers, C.; van den Bergh, T.; Joosten, H.-J.; Dörr,
+M.; Höhne, M.; Bornscheuer, U. Alteration of the Donor/Acceptor
+Spectrum of the (S)-Amine Transaminase fromVibrio fluvialis. Int. J.
+Mol. Sci. 2015, 16, 26953−26963.
+(60) Midelfort, K. S.; Kumar, R.; Han, S.; Karmilowicz, M. J.;
+McConnell, K.; Gehlhaar, D. K.; Mistry, A.; Chang, J. S.; Anderson,
+M.; Villalobos, A.; Minshull, J.; Govindarajan, S.; Wong, J. W.
+Redesigning and Characterizing the Substrate Specificity and Activity
+of Vibrio fluvialis Aminotransferase for the Synthesis of Imagabalin.
+Protein Eng., Des. Sel.2013, 26,2 5−33.
+(61) Cassimjee, K. E.; Humble, M. S.; Land, H.; Abedi, V.; Berglund,
+P. Chromobacterium violaceum ω-transaminase variant Trp60Cys
+shows increased specificity for (S)-1-phenylethylamine and 4 ′-
+substituted acetophenones, and follows Swain-Lupton parameter-
+isation. Org. Biomol. Chem.2012, 10, 5466−5470.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://doi.org/10.1021/acscatal.1c02053
+ACS Catal. 2021, 11, 10733−10747
+10747

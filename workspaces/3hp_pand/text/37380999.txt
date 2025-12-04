@@ -1,0 +1,1210 @@
+RESEARCH Open Access
+© The Author(s) 2023. Open Access  This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, 
+sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and 
+the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this 
+article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included 
+in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will 
+need to obtain permission directly from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by/4.0/. The 
+Creative Commons Public Domain Dedication waiver (http://creativecommons.org/publicdomain/zero/1.0/) applies to the data made available 
+in this article, unless otherwise stated in a credit line to the data.
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+https://doi.org/10.1186/s12934-023-02123-0
+Microbial Cell Factories
+*Correspondence:
+Pau Ferrer
+Pau.Ferrer@uab.cat
+Full list of author information is available at the end of the article
+Abstract
+Background Production of 3-hydroxypropionic acid (3-HP) through the malonyl-CoA pathway has yielded promising 
+results in Pichia pastoris (Komagataella phaffii), demonstrating the potential of this cell factory to produce this platform 
+chemical and other acetyl-CoA-derived products using glycerol as a carbon source. However, further metabolic 
+engineering of the original P . pastoris 3-HP-producing strains resulted in unexpected outcomes, e.g., significantly 
+lower product yield and/or growth rate. To gain an understanding on the metabolic constraints underlying these 
+observations, the fluxome (metabolic flux phenotype) of ten 3-HP-producing P . pastoris strains has been characterized 
+using a high throughput 13C-metabolic flux analysis platform. Such platform enabled the operation of an optimised 
+workflow to obtain comprehensive maps of the carbon flux distribution in the central carbon metabolism in a 
+parallel-automated manner, thereby accelerating the time-consuming strain characterization step in the design-
+build-test-learn cycle for metabolic engineering of P . pastoris.
+Results We generated detailed maps of the carbon fluxes in the central carbon metabolism of the 3-HP producing 
+strain series, revealing the metabolic consequences of different metabolic engineering strategies aimed at improving 
+NADPH regeneration, enhancing conversion of pyruvate into cytosolic acetyl-CoA, or eliminating by-product (arabitol) 
+formation. Results indicate that the expression of the POS5 NADH kinase leads to a reduction in the fluxes of the 
+pentose phosphate pathway reactions, whereas an increase in the pentose phosphate pathway fluxes was observed 
+when the cytosolic acetyl-CoA synthesis pathway was overexpressed. Results also show that the tight control of the 
+glycolytic flux hampers cell growth due to limited acetyl-CoA biosynthesis. When the cytosolic acetyl-CoA synthesis 
+pathway was overexpressed, the cell growth increased, but the product yield decreased due to higher growth-
+associated ATP costs. Finally, the six most relevant strains were also cultured at pH 3.5 to assess the effect of a lower 
+pH on their fluxome. Notably, similar metabolic fluxes were observed at pH 3.5 compared to the reference condition 
+at pH 5.
+High throughput 13C-metabolic flux analysis 
+of 3-hydroxypropionic acid producing Pichia 
+pastoris reveals limited availability of acetyl-
+CoA and ATP due to tight control of the 
+glycolytic flux
+Albert Fina1, Pierre Millard2, Joan Albiol1, Pau Ferrer1* and Stephanie Heux2
+Page 2 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+Background
+The methylotrophic yeast Pichia pastoris  (syn. Komaga-
+taella phaffii) has gained a lot of attention in the recent 
+years due to its increased use in metabolic engineering 
+applications [1–3]. Recent studies have shown the great 
+potential of P. pastoris to produce 3-HP [ 4, 5]. 3-HP is 
+a bulk chemical with a large interest due to its multiple 
+applications. It was listed among the top-value added 
+products to be obtained from biomass by the Department 
+of Energy of the United States [6]. 3-HP can be converted 
+to acrylic acid, which is used to produce superabsorbent 
+plastics, as well as to other chemicals of interest, such as 
+malonic acid or 1,3-propanediol [6, 7].
+3-HP production in P. pastoris  has recently been 
+achieved by heterologously expressing the bi-functional 
+enzyme malonyl-CoA reductase (MCR) from Chloro-
+flexus aurantiacus [4]. Further strain optimization based 
+on rational strain engineering resulted in somewhat lim -
+ited improvement (ca. 50% increase) of product yield [ 5] 
+compared to similar strategies to increase the production 
+of 3-HP in other yeasts [ 8, 9]. So far, the highest 3-HP 
+production reported in P. pastoris is 37.1 g L− 1 of 3-HP at 
+a volumetric productivity of 0.71 g L − 1 h− 1 in a fed-batch 
+culture using glycerol as a carbon source [5].
+One of the advantages of using P. pastoris to produce 
+3-HP is its ability to grow at a low pH. Performing the 
+cultures at an acidic pH allows the organic acids extrac -
+tion from the fermentation media using non-toxic sol -
+vents. This process is simpler, and it generates less waste 
+products than classical downstream processes [ 10, 11]. 
+Moreover, in situ product recovery systems can be imple-
+mented, avoiding reaching toxic levels of 3-HP [ 12]. 
+However, while the cultivation of P. pastoris at pH as low 
+as 3 has been widely studied as a strategy to minimise 
+the activity of some endogenous proteases [ 13, 14], there 
+are no previous studies on the impact of low pH on the 
+fluxome of P. pastoris.
+Recent advances in the field of synthetic biology allow 
+the generation of a high number of recombinant micro -
+bial strains in a short amount of time within a single 
+metabolic engineering project. Typically, the strains are 
+tested in small scale cultivation systems such as microti -
+ter plates or shake flasks, and the best performing ones 
+are further characterized at a bioreactor scale. However, 
+due to the development of high throughput (HT) biore -
+actor platforms, it is now possible to characterize a whole 
+set of genotypic variants at the fluxomic level providing 
+the most complete and systematic description of the met-
+abolic state of a cell [15–17]. A strain’s fluxome is a result 
+derived from the combination of its genome, transcrip -
+tome, proteome, and metabolome, and the regulatory 
+interactions between these components. Thus, fluxomics 
+can be used to identify regulatory mechanisms that may 
+be hampering a strain’s performance [18, 19].
+13C-Metabolic Flux Analysis ( 13C-MFA) is the most 
+widespread technique for the quantification of the fluxes 
+[20]. It consists in using a 13C-labelled substrate as tracer 
+to latter infer the metabolic reaction rates. HT analysis 
+of multiple strains has focused on stationary 13C-MFA 
+(i.e., cells are collected at a metabolic and isotopic steady 
+state) because the sampling protocol is easier to autom -
+atize compared to instationary 13C-MFA, as there is a 
+remarkably lower number of samples to process and 
+analyse [16]. The use of 13C-MFA for the characterization 
+of P. pastoris fluxes has been largely reported using glu -
+cose, glycerol, or combinations of thereof with methanol 
+[21–23]. Nonetheless, the exploitation of HT 13C-MFA 
+tools and methodologies for the characterisation of P. 
+pastoris metabolism remains largely unexplored. In this 
+study, we have applied a workflow that allows the char -
+acterisation of the fluxome of multiple strains in parallel. 
+Such workflow integrates all relevant steps from experi -
+mental design to data acquisition and processing, and 
+flux calculation (Fig.  1), providing detailed supporting 
+information to facilitate its transferability to other inves -
+tigations. Notably, the workflow includes the generation 
+of a genome-scale reduced metabolic model applying a 
+compression protocol to a previously described Genome 
+Scale Metabolic (GSM) model of P. pastoris [23, 24]. The 
+aim of this study was to understand the impact of differ -
+ent genetic modifications into the fluxome of a set of P. 
+pastoris strains that produce 3-HP using glycerol as a sole 
+carbon source. The fluxomics analyses provided mean -
+ingful insights of the bottlenecks of this yeast’s metabo -
+lism towards 3-HP production. Moreover, the fluxome of 
+the 3-HP producing strains was also characterized at pH 
+Conclusions This study shows that existing fluoxomics workflows for high-throughput analyses of metabolic 
+phenotypes can be adapted to investigate P . pastoris, providing valuable information on the impact of genetic 
+manipulations on the metabolic phenotype of this yeast. Specifically, our results highlight the metabolic robustness 
+of P . pastoris’s central carbon metabolism when genetic modifications are made to increase the availability of NADPH 
+and cytosolic acetyl-CoA. Such knowledge can guide further metabolic engineering of these strains. Moreover, 
+insights into the metabolic adaptation of P . pastoris to an acidic pH have also been obtained, showing the capability of 
+the fluoxomics workflow to assess the metabolic impact of environmental changes.
+Keywords Fluxomics, 13C-Metabolic flux analysis, Pichia pastoris, Komagataella phaffii, High throughput, 
+3-hydroxypropionic acid, acetyl-CoA
+Page 3 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+3.5, a relevant condition for industrial production of car -
+boxylic acids.
+Materials and methods
+Strains
+The P. pastoris  strains used in this study are listed in 
+Table 1. These were all derived from the parental strain 
+X-33 (Invitrogen-Thermo Fisher Scientific, MA, USA), 
+which was used as a reference strain for this study. The 
+construction of all strains has been previously described 
+elsewhere [4, 5].
+Model generation
+The genome scale model iMT1026v3 [ 24, 26] was com -
+pressed using CellNetAnalyzer 2021.1 [ 27] in Matlab 
+R2020b (Matlab inc., Mathworks, MA, USA). A con -
+textualized core model was generated conserving the 
+reactions, metabolites, and phenotypes that had been 
+previously described for P. pastoris grown on glycerol as 
+sole carbon source [ 23]. Additionally, D-arabitol secre -
+tion was conserved, as it has been previously reported 
+that theses strains produce D-arabitol as by-product in 
+both batch and fed-batch cultures [ 4]. Cytosolic acetate 
+production was also kept during model compression, as 
+cytosolic acetate is used as substrate for 3-HP produc -
+tion. The models and scripts to compress iMT1026v3 
+model into a core model can be found in the Supplemen -
+tary File S1.
+The newly generated core model was manually curated 
+considering relevant literature-based knowledge. First, 
+production of isoleucine consumes mitochondrial pyru -
+vate instead of 2-(α-hydroxyethyl)thiamine diphosphate. 
+The production of lysine uses mitochondrial acetyl-CoA 
+and α-ketoglutarate from the cytosol, instead of vice 
+versa. Finally, alanine production is derived from mito -
+chondrial pyruvate, instead of cytosolic pyruvate [ 28–
+30]. In addition, as biosynthesis of glutamate, glutamine, 
+Table 1 Strains used in this study. The genotype indicates the 
+overexpressed genes with the corresponding promoter, and the 
+deleted genes
+Strain name Genotype Reference
+X-33 Invitrogen-Thermo 
+Fisher Scientific
+PpHP1 pGAP_mcrCa [4]
+PpHP2 pGAP_mcr-NCa pGAP_mcr-CCa [4]
+PpHP5 pGAP_mcr-NCa pGAP_mcr-CCa
+pGAP_cPOS5Sc (Genbank’s [25] 
+accession number ON52858*)
+[4]
+PpHP6 pGAP_mcr-NCa pGAP_mcr-CCa 
+pGAP_ACC1Yl pGAP_cPOS5Sc
+[4]
+PpHP8 pGAP_mcr-NCa pGAP_mcr-CCa 
+pGAP_mcr-CCa pGAP_ACC1Yl 
+pGAP_cPOS5Sc
+[5]
+PpHP13 pGAP_mcr-NCa pGAP_mcr-CCa 
+pGAP_mcr-CCa pGAP_ACC1Yl 
+pGAP_cPOS5Sc pTEF1_acsSe
+L641P
+[5]
+PpHP15 pGAP_mcr-NCa pGAP_mcr-CCa 
+pGAP_mcr-CCa pGAP_ACC1Yl 
+pGAP_cPOS5Sc ∆ArDH
+[5]
+PpHP17 pGAP_mcr-NCa pGAP_mcr-CCa 
+pGAP_mcr-CCa pGAP_ACC1Yl 
+pGAP_cPOS5Sc pTEF1_acsSe
+L641P 
+∆ArDH
+[5]
+PpHP18 pGAP_mcr-NCa pGAP_mcr-CCa 
+pGAP_mcr-CCa pGAP_ACC1Yl 
+pGAP_cPOS5Sc pTEF1_acsSe
+L641P 
+∆ArDH pPDC1_PDC1
+[5]
+*Available from: https://www.ncbi.nlm.nih.gov/nuccore/ON528582 .
+Fig. 1 Diagram illustrating the complete workflow for conducting high 
+throughput metabolic flux profiling on a set of Pichia pastoris strains. The 
+diagram encompasses all essential steps, starting from model generation 
+and C-source labelling optimization to metabolic flux calculation
+ 
+Page 4 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+aspartate, and asparagine may take place in both the 
+cytoplasm and the mitochondria, both pathways were 
+included. Finally, the non-oxidative branch of the pen -
+tose phosphate pathway was described using the half-
+reactions model, which considers the kinetic mechanism 
+of the transketolase and transaldolase reactions [ 31]. The 
+3-HP production pathway from cytosolic acetate was also 
+included.
+All the necessary files to generate the new core model 
+(PpaCore_3HP.mat) from the GSM model can be found 
+in the Supplementary File S2. The final core stoichiomet-
+ric model contains 151 species and 145 reactions.
+For 13C-flux calculations, some of the amino acid bio -
+synthetic reactions were manually lumped to reduce the 
+number of overall reactions and metabolites. Some of the 
+intermediary metabolites of the lumped reactions were 
+present in the biomass production reactions. The stoi -
+chiometry of the biomass formation equation was cor -
+rected to remove these metabolites. These modifications 
+can be found in the Supplementary File S3. This model 
+was converted into FTBL (Flux TaBuLar) format [20, 32]. 
+The reactions producing 3-HP from cytosolic acetate 
+(the closest intermediary metabolite to malonyl-CoA 
+in the core model) were introduced, and carbon atom 
+transitions were added for all reactions to simulate label 
+propagation. The final core isotopic model for the P. p a s-
+toris 3-HP producing strains, which contains 113 species 
+and 123 reactions, can be found in the Supplementary 
+File S4 (PpaCore_3HP.ftbl ). The FTBL model can also 
+be obtained from BIOMODELS [ 33], accession number: 
+MODEL2210090004.
+In silico design of 13C-labelling experiments
+The context-specific core model of P. pastoris metabolism 
+including the 3-HP formation reactions ( PpaCore_3HP.
+ftbl) was used to calculate the optimal isotopic composi -
+tion of the substrate using IsoDesign v1.2.1 [34]. IsoDesign 
+uses influx_si [35] to calculate the precision of the fluxes 
+for each (mixture of) label input to be tested.
+To determine the optimal label input, the 13C-glycerol 
+combinations yielding the highest number of fluxes 
+with a SD < 1 was calculated. The commercially avail -
+able 13C-labelled glycerol variants include 1- 13C-glycerol, 
+2-13C-glycerol, 1,3-13C-glycerol, and U- 13C-glycerol. The 
+substrate combinations were ranked based on the sum of 
+SDs of the reactions with a SD < 1. Afterwards, the sub -
+strates providing the highest precision of the fluxes of the 
+upper glycolysis (UG) and the pentose phosphate path -
+way (PPP) were ranked. The IsoDesign results indicated 
+that the best substrate combination consisted of 20% 
+1-13C-glycerol and 80% 2- 13C-glycerol (Supplementary 
+File S5).
+Media, cultivation conditions, and automated sampling
+Seed cultures for the mini-bioreactor cultivations were 
+prepared as follows: 50 mL falcon tubes containing 5 mL 
+YPG (1% w/v yeast extract, 2% w/v peptone, and 1% v/v 
+glycerol) medium were inoculated from cryostock and 
+incubated overnight at 30 oC and 200  rpm. The over -
+night cultures were transferred to a 250 mL shake flask 
+containing 25 mL YPG at a starting OD 600 of 1 and sub -
+sequently grown for 8  h at 30 oC and 200  rpm. The cul -
+tures were harvested at the exponential phase and used 
+to inoculate the mini-bioreactor cultures.
+A HT fluxomics platform consisting of 48 mini bio -
+reactors was used for the cultivation and the sampling 
+[36]. Briefly, the 50-mL bioreactors of this platform are 
+equipped with pH and dissolved oxygen sensors for pro -
+cess monitoring and control. The bioreactors are agitated 
+using a magnetic stirrer bar and they are designed to be 
+aerated through the headspace of each reactor to avoid 
+the accumulation of CO2.
+The batch medium contained 1.8  g L − 1 citric acid, 
+0.02 g L − 1 CaCl2 · 2 H 2O, 12.6 g L − 1 (NH4)2HPO4, 0.5 g 
+L− 1 MgSO 4 · 7 H 2O, 0.9  g L − 1 KCl, 0.4  mg L − 1 biotin, 
+and 4.6 ml L − 1 of PTM1 trace salts [ 37]. The pH of the 
+medium was adjusted to 5 or 3.5 using HCl. The batch 
+medium was supplemented with 0.5  g L − 1 glycerol 
+labelled at position 1 and 2  g L − 1 glycerol labelled at 
+position 2 (20% 1- 13C-glycerol and 80% 2- 13C-glycerol). 
+Labelled substrates were obtained from Innovachem SAS 
+(France). All the components of the medium except for 
+the trace salts, the biotin, and the labelled glycerol were 
+mixed and autoclaved. The other components were filter-
+sterilized using a syringe filter with 0.2 μm pore size and 
+introduced into the batch medium under sterile condi -
+tions. Each bioreactor was filled with 15 mL of medium.
+All the strains listed in Table  1 were tested in tripli -
+cate in bioreactor cultures at pH 5. The cultures were 
+inoculated at a starting OD 600 of 0.025. The strains X-33, 
+PpHP1, PpHP6, PpHP8, PpHP15, and PpHP18 were 
+tested in triplicate at pH 3.5. The cultures were inocu -
+lated at a starting OD 600 of 0.05. The temperature was 
+set to 28oC. The stirring rate was set to 2200 rpm. The air 
+flow into the sterile gas cover, which ensures identical gas 
+distribution into the head spaces of all the 48 bioreactors, 
+was controlled to 104 mL min− 1 per bioreactor by a mass 
+flow controller (Aalborg Instruments, NY, USA).
+Automated sampling was programmed to measure the 
+OD600 off-line every two hours for the first 16 h of culti -
+vation. After 16  h of cultivation, sampling of the OD 600 
+was performed every hour (during the exponential phase 
+of the cultures). From the 16 to the 24  h of cultivation, 
+250 µL samples were withdrawn hourly from each cul -
+ture for supernatant analysis. The samples were placed 
+on 96-well plates with a 0.45  μm filter bottom and vac -
+uum filtered immediately. A final supernatant sample 
+Page 5 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+was withdrawn after 27 h cultivation. After 27 h cultiva -
+tion, OD600 samples were withdrawn every 2.5 h for 10 h. 
+Sampling and OD 600 data from the mini-bioreactor cul -
+tures can be found on Supplementary File S6. When each 
+culture reached an OD 600 above 1, a 500 µL sample was 
+withdrawn from the culture. The samples were quenched 
+on 3.5 mL quenching solution (40% v/v acetonitrile, 40% 
+v/v methanol, 20% water and 0.1 M formic acid) at -20oC. 
+Samples were stored at -20 oC between 1 and 3  h until 
+further processing.
+Analyses
+Exometabolites analysis with NMR
+Glycerol, 3-HP , and D-arabitol were quantified from 
+the filtered supernatant samples using Nuclear Mag -
+netic Resonance (NMR). 180 µL of sample and 20 µL of 
+10 mM TSP (3-(trimethylsilyl)-[2,2,3,3- 2H4]-propionic 
+acid sodium salt) were mixed. TSP was used as internal 
+standard and quantified using a commercial succinate 
+solution at 1  g L − 1 (43,057, Sigma Aldrich, MO, USA). 
+1D-1  H analyses were carried out on a Bruker Advance 
+III 800  MHz spectrometer (Bruker BioSpin, Germany) 
+equipped with a 5  mm CQPI cryoprobe. Samples were 
+analysed at 280 K using a 30 o pulse sequence with water 
+suppression (zgpr30), with a relaxation delay of 7 s. Top -
+Spin v3.6.4 (Bruker BioSpin, Germany) was used for the 
+analysis of the NMR spectra. Commercial succinate at 1 g 
+L− 1 (43,057, Sigma Aldrich, MO, USA) was used for the 
+re-quantification of TSP . All data was corrected based on 
+the quantification of succinate. The peak integration data 
+from the NMR analyses can be found in Supplementary 
+File S7.
+Sample processing and analysis of the 13C-proteinogenic 
+amino acids using LC/MS
+Quenched samples were vortexed for 30  s and centri -
+fuged at 5,000  g for 5  min in a swing-rotor centrifuge. 
+Pellets were dried using a Rotavapor (Büchi, Switzerland). 
+The biomass was treated with 150 µL 6 N HCl at 110 °C 
+for 16 h. The acid was evaporated in the rotavapor. Each 
+sample was washed using 100 µL milliQ water and sub -
+sequently dried in the rotavapor. This step was repeated 
+twice to eliminate all the acid traces. Finally, the pellets 
+were resuspended on 200 µL milliQ water. The samples 
+were centrifuged at 10,000  g for 5  min to eliminate the 
+biomass debris. 40 µL of supernatant (containing the 
+amino acids) were diluted onto 460 µL milliQ water.
+The diluted amino acids were analyzed using a previ -
+ously described HPLC-MS method [ 38]. The UHPLC 
+Vanquish (Thermo Fisher Scientific, MA, USA) was 
+coupled to a mass spectrometry (MS) detector Orbitrap 
+Q-Exactive plus with a heated electrospray ionization 
+source (Thermo Fisher Scientific). HPLC-MS was used 
+with a precolumn Discovery HS F5 Supelguard Cartridge 
+of 20 × 2.1  mm with particle size 5  μm (Supelco Belle -
+fonte, PA, USA) and a column Discovery HS F5 HPLC 
+column of 150 × 2.1 mm with particle size 5 μm (Supelco 
+Bellefonte). Solvent A consisted of 0.1% v/v formic acid 
+in ultrapure water and solvent B of 0.1% v/v formic acid 
+in acetonitrile. The flow rate of the eluent was set to 0.25 
+mL min − 1, and the temperature of the sampler and the 
+column were set to 4 and 30  °C, respectively. Solvent B 
+set points were varied as follows: 0 min: 2%; 2 min: 2%; 
+10  min: 5%; 16  min: 35%; 20  min: 100%; 24  min: 100%. 
+Finally, the set points of the initial conditions (2% solvent 
+B) were set for 6 min before the injection of the next sam-
+ple. The injection volume was 5 µL.
+The MS detector was set to detect the positive ions 
+on FTMS mode. The resolution was set to 70,000 (at 
+m/z = 400), the capillary temperature to 320  °C, and the 
+source heater temperature to 300 °C. Sheath gas and aux-
+iliary gas flow rates were set to 40 and 10 arbitrary units, 
+respectively. The S-lens RF level was set to 40% and the 
+source voltage to 5  kV. The MS was set to measure the 
+exact mass of all carbon isotopologues of all the amino 
+acids (Supplementary File S8).
+The isotopologue distribution of the amino acids was 
+corrected considering the isotopologue labelling of the 
+inoculum and the natural abundance of all isotopes using 
+IsoCor v2.2.0 ( https://github.com/MetaSys-LISBP/Iso-
+Cor) [39]. Raw and processed data can be found in Sup -
+plementary file S9.
+Bioprocess parameters
+The OD 600 and the NMR supernatant analyses results 
+were used to calculate the growth rate (µ) and the spe -
+cific production or consumption rates (q-rates) for glyc -
+erol, 3-HP , and D-arabitol. To this end, PhysioFit v1.0.2 
+(https://github.com/MetaSys-LISBP/PhysioFit) was used 
+[40]. The absorbance at OD 600 was correlated to the bio -
+mass concentration using a constant conversion factor 
+for all the strains, the rationale being that all the strains 
+used in this study shared the same conversion factor in 
+the culture conditions used. This assumption is sup -
+ported by experimental data from our previous studies 
+[4, 5], where the conversion factor of the biomass absor -
+bance (OD600) to the cell dry weight (CDW) was statis -
+tically identical for strains PpHP6, PpHP8, and PpHP18 
+in batch cultures using the same growth medium. The 
+conversion factor value was derived from calculating the 
+µ (which is independent from the conversion factor) of 
+the triplicate cultures of the reference strain (X-33) at 
+pH 5. Afterwards, the genome scale model iMT1026v3 
+was used to calculate the uptake rate of glycerol at such 
+growth rate (0.21 h − 1) considering a non-growth associ -
+ated ATP consumption of 2.51 mmol g CDW
+−1 h − 1 [ 24], 
+which resulted 3.4 mmolGlyc gCDW
+−1 h− 1. This calculation 
+was done in Matlab using the CobraToolbox v2.26.0 [41]. 
+Page 6 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+Finally, the conversion factor that correlates the experi -
+mental data and the computational results was calculated 
+to be 0.563 g CDW/OD600. The biomass yield for strain 
+X-33 using this calculated conversion factor resulted in 
+0.73 gCDW gGlyc
+−1, which falls within the reported experi -
+mental values [24].
+The biomass concentration data can be found together 
+with the OD600 data in Supplementary File S6.
+The bioprocess parameters results calculated using 
+PhysioFit can be found in the Supplementary File S10.
+13C-Flux calculation
+Flux calculations were performed from metabolic and 
+isotopic steady-state data using influx_si v5.3.0 ( https://
+influx-si.readthedocs.io, [ 35]) and the previously 
+obtained FTBL format model. The bioprocess parameters 
+and the corrected data of the isotopologue distribution 
+of the amino acids were used as input data. All fluxes 
+could be determined accurately from the extracellular 
+fluxes and labelling data except for fluxes through the 
+MDHc, MDHm, Tr_AKGMALtm and Tr_AKGOAAtm 
+reactions.
+All fluxes were normalized to the rate of the substrate 
+uptake rate. A sensitivity analysis was performed using 
+the Monte-Carlo method with 100 independent simu -
+lations. Statistical analysis (chi-square test) was used to 
+determine sufficient goodness of the fit (based on a 95% 
+confidence level) for each experiment. The average fluxes 
+and associated standard deviations of the mean were 
+calculated from the biological replicates with sufficient 
+goodness of the fit.
+Throughout this study, the reference guidelines for the 
+calculation of fluxes derived from 13C-data have been fol-
+lowed [42]. Therefore, all the relevant data is adequately 
+shared to the community for reproducibility and further 
+analyses.
+Flux distributions were visualized using Omix v2.0.7 
+(Omix Gmbh, Germany) [ 43]. The figures show the aver -
+age absolute or relative fluxes and the standard deviation 
+of the triplicates.
+Flux balance analysis
+Flux Balance Analysis (FBA) [ 44] was performed using 
+the CobraToolbox v2.26.0 in Matlab R2020b and the pre-
+viously described PpaCore_3HP.mat model. The experi -
+mental confidence intervals obtained from the Monte 
+Carlo analyses were used as upper and lower bounds 
+for each flux. Afterwards, FBA was performed using the 
+maximization of the flux of the ATP of maintenance reac-
+tion (ATPM) as objective function. This is the objective 
+function resulting in the best description of the intracel -
+lular fluxes of a cell culture growing on a batch culture 
+with excess of substrate [ 45]. FBA results were also used 
+to calculate the ATP and NADPH balance by summing 
+fluxes through all producing and consuming reactions 
+for each strain. The Matlab script, the input file with 
+the Monte Carlo results, and the FBA results file can be 
+found in the Supplementary File S11.
+Results and discussion
+HT cultivation bioprocess parameters
+The series of previously available 3-HP-producing P. p a s-
+toris strains[4, 5] were grown in glycerol batch cultures at 
+pH 5 using a HT 13C-fluxomics platform [ 36]. The stoi -
+chiometry of the engineered reactions and correspond -
+ing enzymes in the 3-HP-producing P. pastoris  strains 
+are depicted in Fig.  2. Strain engineering strategies were 
+aimed at increasing the delivery of the substrates of the 
+malonyl-CoA to 3-HP pathway (i.e., cytosolic acetyl-
+CoA, malonyl-CoA, and NADPH), and the reduction of 
+the production of the main by-product (D-arabitol).
+Measurement of the extracellular metabolites and the 
+biomass concentration allowed calculating the biopro -
+cess parameters (specific substrate consumption and 
+(by)products production rates (q-rates) and µ max) for 
+each strain (Fig.  3), which is a prerequisite for metabolic 
+flux calculations. Results were consistent with previ -
+ously reported cultivation data [ 4, 5]. In a nutshell, com -
+parison between strains PpHP1 and PpHP2 reveals that 
+dissection of MCR from C. aurantiacus  into each of its 
+two subunits resulted in increased specific malonyl-
+CoA reductase activity [ 4, 46], hence leading to a 10-fold 
+increase in the 3-HP yield. The overexpression of the 
+genes encoding for an acetyl-CoA carboxylase from Yar-
+rowia lipolytica  ( ACC1Yl) and a cytosolic version of the 
+mitochondrial NADH kinase from Saccharomyces cere -
+visiae (cPOS5) in strain PpHP6 led to a further increase 
+in 3-HP yield by enhancing the conversion of acetyl-CoA 
+into malonyl-CoA (3-HP’s metabolic precursor) and 
+NADPH supply, respectively. In addition, the expression 
+of a second copy of the gene encoding the C-terminal 
+domain of MCR yielded the highest 3-HP-producing 
+strain (PpHP8), which was also the slowest growing strain 
+and the strain producing the largest amount of D-arabitol 
+in batch cultures. As previously reported, the overexpres-
+sion of the genes encoding for the cytosolic acetyl-CoA 
+synthesis pathway (i.e., acsSe
+L641P and PDC1, Fig. 2) in the 
+strain PpHP8 (yielding strain PpHP18), aimed to increase 
+the conversion of pyruvate to cytosolic acetyl-CoA, 
+restored the growth rate, but the 3-HP yield dropped 
+drastically [ 5]. These results pointed at a limitation of 
+resources in PpHP8 when growing at maximal growth 
+rate [5], thereby resulting in an opposite trend between 
+biomass and product yields.
+Results in Fig.  3 also show that not only the growth 
+rate of strain PpHP8 was remarkably lower than the 
+growth rate of the reference strain (0.13 h− 1 and 0.22 h− 1, 
+respectively), but also the substrate uptake rate (2.10 and 
+Page 7 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+3.37 mmol gCDW − 1 h − 1). In fact, the glycerol specific 
+uptake rate (q S) of PpHP8 was significantly lower than 
+the mean qS value observed for the rest of strains (based 
+on a one-way ANOVA test, p = 0.02). A high activity of 
+the malonyl-CoA to 3-HP pathway probably led to a 
+reduced availability of acetyl-CoA for this strain. Acetyl-
+CoA plays a central role on the biosynthesis of precur -
+sors, and it plays a key role in physiological regulation 
+processes, such as the acylation of histones [ 47]. Growth 
+defects have also been reported in S. cerevisiae  strains 
+harbouring a high acetyl-CoA carboxylase activity, where 
+depletion of acetyl-CoA was described as the most likely 
+cause of hampered growth [ 48]. Moreover, the observed 
+increase in the growth rate and the uptake rate when 
+acsSe
+L641P was overexpressed support this hypothesis.
+Strikingly, the biomass yield for PpHP8-derived strains 
+overexpressing acsSe
+L641P (PpHP13, ppHP17), and PDC1 
+plus acsSe
+L641P (PpHP18) were lower than the biomass 
+yield of strain PpHP8.
+Notably, all strains showed production of D-arabitol 
+under the tested conditions. This by-product is typically 
+produced due to an imbalance on the NADPH regen -
+eration [4, 5], resulting in reduced biomass and product 
+yields. Strikingly, deletion of the main D-arabitol dehy -
+drogenase encoding gene ( ArDH) in strains PpHP15 and 
+PpHP17 resulted in increased growth rates but reduced 
+3-HP production, compared to their corresponding 
+parental strains (PpHP8 and PpHP13, respectively).
+Fluxome ofP . pastoris3-HP-producing strains at pH 5
+The bioprocess parameters of the series of strains 
+obtained from batch cultivations and the amino acids iso-
+topologue distributions derived from the corresponding 
+labelling experiments were used to calculate the intracel -
+lular fluxes. The fluxome of each strain can be found in 
+the Supplementary File S12 (see also Supplementary File 
+S13 for a summary of the results).
+The metabolic flux profile of the reference strain (X-33) 
+obtained using the HT robotic platform is comparable to 
+the previously reported results for the same strain grow -
+ing in glycerol chemostats on a similar medium [ 23]. 
+Noticeably, the fluxes of the upper glycolysis (UG) and 
+pentose phosphate pathway (PPP) in our batch experi -
+ments (i.e., at µ max) were higher than the ones observed 
+in chemostat cultures at lower growth rates (0.10 and 
+0.16 h− 1), coherent with the positive correlation between 
+Fig. 2 Metabolic pathway from pyruvate to 3-HP through cytosolic acetyl-CoA and malonyl-CoA in P . pastoris. The reactions catalysed by all the enzymes 
+linked to overexpressed or deleted genes are displayed. Enzyme abbreviations: Pdc1: Pyruvate decarboxylase 1; Ald: Endogenous cytosolic aldehyde de-
+hydrogenase; ACSSe
+L641P: Acetyl-CoA synthase from Salmonella enterica harbouring the point mutation L641P to avoid post-translational inhibition of the 
+enzyme by acetylation; Acc1Yl: Acetyl-CoA carboxylase from Y . lipolytica; MCR-CCa: C-terminal domain of the malonyl-CoA reductase from C. aurantiacus; 
+MCR-NCa: N-terminal domain of the malonyl-CoA reductase from C. aurantiacus; cPos5Sc: NADH kinase from S. cerevisiae located on the cytosol; ArDH: 
+Arabitol dehydrogenase. Green and red arrows and enzyme abbreviations indicate whether the corresponding genes were overexpressed or deleted, 
+respectively
+ 
+Page 8 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+growth rate and the UG and PPP fluxes previously 
+observed in glycerol chemostats (Additional Figure S1). 
+Similarly, fluxes of the lower glycolysis (LG) and the tri -
+carboxylic acid (TCA) cycle reactions were lower than 
+the ones observed in chemostat cultures at lower growth 
+rates, also coherent with the reported inverse correla -
+tion between growth rate and LG and TCA cycle fluxes. 
+Lower LG and TCA cycle fluxes are consistent with 
+increased UG and PPP fluxes, as already reported [ 23].
+To facilitate comparison of metabolic flux distributions 
+amongst strains, a heat map illustrating the fold-change 
+between the relative fluxes (i.e., normalised to the spe -
+cific glycerol uptake rate) of each recombinant strain 
+compared to the relative fluxes of the reference strain 
+cultivated at pH 5 is shown in Fig.  4. The most drastic 
+changes were observed in the relative fluxes through the 
+UG and PPP reactions. First, when the MCR activity was 
+increased by expressing separately the two MCR domains 
+(i.e., PpHP2 compared to PpHP1), the fluxes of the UG 
+and PPP increased noticeably (10 ∼25%). Such trend can 
+be explained by increased NADPH requirements, as 
+NADPH is used as the electron donor for the two consec-
+utive reactions catalysed by MCR. When the gene encod-
+ing the heterologous cytosolic NADH kinase ( cPOS5Sc) 
+was overexpressed (PpHP5), the observed fluxes of the 
+UG and PPP reactions were 15 ∼30% lower compared 
+to PpHP2. It is well known that the NADPH/NADP + 
+ratio controls the fluxes towards the oxidative branch 
+of the PPP [ 49]. In addition, overexpression of cPOS5 
+in P. pastoris provides the cell with an additional source 
+of NADPH, leading to a higher NADPH/NADP + ratio 
+[50]. Therefore, decrease of UG and PPP fluxes in PpHP5 
+compared to PpHP2 was consistent with an increased 
+NADPH/NADP+ ratio.
+No major changes were observed when ACC1Yl was 
+overexpressed (i.e., in strain PpHP6, compared to strain 
+PpHP5). For the strain PpHP8, which harboured an addi-
+tional copy of the gene encoding for MCR-C Ca, the high-
+est fluxes towards 3-HP production were observed, while 
+the UG and PPP fluxes were the lowest among all strains. 
+Such observation agrees with the results for the strain 
+PpHP5, as the increase in the NADPH requirements due 
+to production of 3-HP followed independent trends with 
+the fluxes of the oxidative branch of the PPP .
+Heterologous expression of acsSe
+L641P in strain PpHP8 
+(i.e., generating strain PpHP13) led to a drastic switch in 
+the strain’s fluxome. The relative fluxes through the UG 
+and PPP increased remarkably in PpHP13, while showing 
+a lower relative flux towards 3-HP production compared 
+to PpHP8 or PpHP6 strains. Moreover, the biomass 
+yield of PpHP13 was lower. Therefore, considering the 
+NADPH requirements for biomass and 3-HP produc -
+tion, increased production of NADPH through the PPP 
+seems unfounded. Deletion of the gene encoding for 
+Fig. 3 Bioprocess parameters of the parental P . pastoris strain and nine 3-HP-producing strains cultivated in glycerol batch mini bioreactor cultures at pH 
+5. Orange bars show the biomass yield, grey bars show the 3-HP yield, green bars show the D-arabitol yield, blue diamond depict the µ max, and yellow 
+circles show the substrate uptake rate (qS). Standard deviation of the replicates is depicted
+ 
+Page 9 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+the NADPH-dependent arabitol dehydrogenase enzyme 
+(ArDH) in strains PpHP8 and PpHP13 (i.e., obtaining 
+strains PpHP15 and PpHP17, respectively) led to minor 
+changes in the strains’ fluxomes under the tested growth 
+conditions. Finally, overexpression of PDC1 in PpHP17 
+(resulting in PpHP18) led to the highest relative flux 
+through the UG and PPP . However, neither the biomass 
+yield nor the 3-HP yield were affected (Fig. 3).
+Changes in the fluxes through LG and the TCA cycle 
+reactions followed the opposite trend to the UG and the 
+Fig. 4 Reaction flux Log2 fold-change between each one of the ten 3-HP-producing recombinant strains compared to the reference strain (X-33). All co-
+lours are referred to the − 1 to + 1 colour scale, except the flux of the ‘MCR’ reaction, where the upper boundary of the colour scale is set to + 4. Moreover, in 
+the case of ‘MCR’ , the Log2 fold-change of the fluxes is referred to the flux of strain PpHP1. YX/S is the biomass to substrate yield. The reaction stoichiometry 
+corresponding to each reaction abbreviation can be found in the Supplementary File S3
+ 
+Page 10 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+PPP . Small differences in the fluxes through the glyoxylate 
+cycle were also observed. However, as the absolute values 
+of these fluxes were low (below 0.025 mmol mmol− 1 h− 1), 
+absolute changes of these fluxes did not have an impact 
+on the strain’s biomass and product yields.
+Further comparison of the absolute flux distributions 
+(i.e., non-normalised to the glycerol specific uptake rate) 
+in the reference and the 3-HP-producing strains PpHP8 
+and PpHP18 (Fig. 5) provided additional insights.
+Fig. 5 Flux map for the reference (X-33), PpHP8, and PpHP18 strains growing in glycerol batch cultures at pH 5. The average and the standard deviation 
+of the absolute fluxes for each triplicate experiment are displayed. Fluxes are given in mmol gCDW − 1 h− 1. Abbreviations: G6P: Glucose-6-phosphate; 
+F6P: Fructose-6-phosphate; FBP: Fructose bisphosphate; Glyc: Glycerol; DHAP: Dihydroxyacetone phosphate; G3P: Glyceraldehyde-3-phosphate; R5P: 
+Ribose-5-phosphate; S7P: Sedoheptulose-7-phosphate; E4P: Erythrose-4-phosphate; ABT: D-arabitol; E2: glycolaldehyde moiety of the non-oxidative PPP 
+reactions; E3: dihydroxyacetone moiety of the non-oxidative PPP reactions; 13DPG: 1,3-Bisphosphoglycerate; 3PG: 3-phosphoglycerate; 2PG: 2-phospho-
+glycerate; PEP: Phosphoenolpyruvate; Pyr: Pyruvate; Acald: Acetaldehyde: Ac: Acetate; AcCoA: Acetyl-CoA; MalCoA: Malonyl-CoA; 3-HP: 3-Hydroxypropi -
+onic acid: CIT: Citrate; ICIT: Isocitrate; αKG: α-ketoglutarate; SUCC: Succinate; FUM: Fumarate; MAL: Malate; OAA: Oxaloacetate; GLX: Glyoxylate
+ 
+Page 11 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+First, overexpression of the 3-HP production pathway 
+led to a higher pyruvate decarboxylase flux at the pyru -
+vate node in PpHP8 compared to the reference strain 
+(0.30 mmol g CDW
+−1 h − 1 and 0.12 mmol g CDW
+−1 h − 1, 
+respectively). The overexpression of ACS Se
+L641P and Pdc1 
+in strain PpHP8 did not result in a higher flux towards 
+cytosolic acetyl-CoA in strain PpHP18, as the absolute 
+flux values for the two strains were identical (0.30 mmol 
+gCDW
+−1 h − 1). Compared to the reference strain, overex -
+pression of the cytosolic acetyl-CoA production path -
+way in strain PpHP18 did not increase the LG fluxes. All 
+these findings agree with previous results in S. cerevisiae, 
+where the overexpression of PDC1 led to a higher flux 
+towards this pathway without increasing the glycolytic 
+flux [ 51]. It is well described that the glycolytic flux is 
+tightly controlled in yeast S. cerevisiae, and the glycolytic 
+flux cannot be increased by overexpressing individual 
+enzymes [52]. In the case of P. pastoris, increased glyco -
+lytic fluxes have only been described under low oxygen 
+availability [ 53] or when a transcription factor control -
+ling the expression of all the glycolytic genes was over -
+expressed [ 54]. Therefore, as pyruvate is pulled into the 
+production of 3-HP , but the glycolytic flux and the uptake 
+of glycerol do not increase, the overall ATP yield of the 
+3-HP-producing strains decreases.
+Strain PpHP18 has remarkably higher UG and PPP 
+fluxes than strain PpHP8 (Fig.  5). The UG and PPP have 
+a low carbon and energy yield. Therefore, while PDC1 is 
+being overexpressed, the energy requirements in strain 
+PpHP18 sinked the pyruvate into the TCA cycle for 
+ATP generation, hampering the flux toward cytosolic 
+acetyl-CoA and, ultimately, reducing the 3-HP yield. On 
+the contrary, as PpHP8 grew at a lower rate, the energy 
+requirements of the strain were reduced, leaving more 
+substrate available to produce 3-HP .
+Overall, comparison of absolute flux distributions sug -
+gests that to further increase the 3-HP yield in strain 
+PpHP8, the glycolytic fluxes would need to be signifi -
+cantly increased. Moreover, results also point to high 
+ATP requirements in strain PpHP18 are the cause of the 
+differences between these two strains.
+ATP and NADPH producing/consuming fluxes of the 
+3-HP-producing P . pastoris strains
+The results from the previous section show that the 
+fluxes through the PPP decreased when a heterologous 
+cytosolic NADH kinase was expressed. Consistently, 
+NADPH production rates calculated from the 13C-flux 
+data (Fig. 6A) indicate that the NADPH produced by the 
+glucose-6-phosphate dehydrogenase (G6PDH) reaction 
+Fig. 6  A. Production and consumption rates of NADPH (estimated from the 13C-MFA results) and specific glycerol uptake rates for each strain. B. FBA 
+results. The y-axis on the left side shows the sum of the fluxes for the main ATP-consuming reactions. The y-axis on the right side shows the percentage 
+of pyruvate entering the mitochondria and the TCA cycle. To do so, the ratio of the fluxes of PYK (the main cytosolic pyruvate producing reaction) and 
+PDH was calculated. Abbreviations: G6PDH, glucose-6-phosphate dehydrogenase; GAME, growth associated maintenance energy; NGAME, non-growth 
+associated maintenance energy; UG/PPP: upper glycolysis and pentose phosphate pathway reactions; Acetyl-CoAcyt: Cytosolic acetyl-CoA production 
+pathway; VPDH/PYK: Ratio between the fluxes of the pyruvate dehydrogenase (PDH) and the pyruvate kinase (PYK) reactions
+ 
+Page 12 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+was lower than the actual NADPH requirements in some 
+of the strains overexpressing the cPOS5 gene (i.e., strains 
+PpHP5, PpHP6, andPpHP8), supporting that the NADH 
+kinase reaction contributed to cover the cell’s NADPH 
+requirements.
+Strains PpHP13, PpHP17, and PpHP18, which over -
+express the cytosolic acetyl-CoA production pathway 
+(i.e., Pdc1 and ACS Se
+L641P), also produced more NADPH 
+through the oxidative branch of the PPP than the actual 
+cell requirements. The substantial increase in the fluxes 
+through UG and PPP for such strains coincided with 
+an increase in the specific glycerol uptake rate and the 
+growth rate (Fig.  6A, and Fig.  3), but the biomass yield 
+decreased (Fig.  3). Despite the large standard deviation 
+of the fluxes through the UG and PPP fluxes in strains 
+PpHP13, PpHP17, and PpHP18, it can be concluded 
+that these strains did not benefit from the heterolo -
+gous expression of the cPos5, while PpHP5, PpHP6, and 
+PpHP8 do. NADPH production by NADH kinase is more 
+efficient in terms of both carbon and ATP conservation 
+than the use of the UG and PPP , which would explain the 
+reduction in the biomass and 3-HP yield in the strains 
+PpHP13, PpHP17, and PpHP18.
+To corroborate the consistency of the observed meta -
+bolic fluxes, FBA was used to verify the redox and energy 
+conservation of the 13C-MFA results. The maximiza -
+tion of the flux through the ATP sink reaction (ATPM) 
+was used as an objective function. This is the function 
+best describing the intracellular fluxes of a cell culture 
+growing on a batch culture with an excess of substrate 
+[45]. Consequently, the resulting flux values are based 
+on in vivo data, and at the same time, they fulfil the bio -
+logical function of optimizing the biomass yield. FBA 
+results confirmed that both redox and energy balances 
+could be conserved at the given experimental fluxes. The 
+FBA results were also used to calculate the ATP balance 
+(Fig. 6).
+A higher ATP of maintenance for strains PpHP13, 
+PpHP17, and PpHP18 was observed, as depicted in 
+Fig.  6B, being PpHP18 the strain with the highest ATP 
+requirements among all strains. Conversely, the calcu -
+lated ATP requirement for strain PpHP8 was the lowest, 
+particularly due to the lowest growth associated mainte -
+nance energy (GAME) requirements, as it is the slowest 
+growing strain.
+Figure 6B shows there is a direct correlation between 
+the overall ATP requirements of the strain and the frac -
+tion of pyruvate that was directed into the TCA cycle 
+for ATP production. While 47.1% of the pyruvate was 
+channelled into the mitochondria in the reference 
+strain, 32.1% was directed through the same pathway 
+in strain PpHP8. The mitochondrial transport of pyru -
+vate raised to 40.2% and 41.9% when the cytosolic ace -
+tyl-CoA pathway was expressed (strains PpHP13 and 
+PpHP18, respectively) to compensate for the higher ATP 
+requirements.
+Altogether, these results show the correlation between 
+acetyl-CoA availability, growth rate, ATP requirements, 
+and flux distribution at the pyruvate node, and their 
+impact on the 3-HP production yield. Acetyl-CoA deple -
+tion in strain PpHP8 hampered growth rate. When the 
+cytosolic acetyl-CoA biosynthetic pathway was overex -
+pressed (strains PpHP13, PpHP17, and PpHP18), growth 
+rate increased. Increase in the growth rate increased ATP 
+requirements, which increased channelling of pyruvate 
+into the TCA cycle, hampering the 3-HP product yield.
+Fluxome of P . pastoris strains at pH 3.5
+It has been reported that a pH of 3.5 (i.e., 1 unit below 
+the pKa of 3-HP) was optimal for the further downstream 
+processing of 3-HP by solvent extraction [ 12]. Therefore, 
+the reference strain (X-33) as well as some 3-HP-produc -
+ing strains (i.e., PpHP1, PpHP6, PpHP8, PpHP15, and 
+PpHP18) were further tested at pH 3.5.
+No remarkable differences in the fluxome between 
+the two conditions were observed for the reference 
+strain (Fig.  7A). In contrast, higher UG and PPP fluxes 
+were observed at pH 3.5 than at pH 5 in strains PpHP1, 
+PpHP6, PpHP8, PpHP15 (See Fig.  7B). In addition, a 
+higher production of D-arabitol was also observed in 
+most strains when growing at low pH (Fig.  7B and Addi-
+tional Figure S2).
+The fold-change of the relative fluxes of each recom -
+binant strain compared to the reference strain (Fig.  7C) 
+showed that the impact of each genetic modification in 
+the flux of each strain followed a similar trend at pH 5 
+and pH 3.5 (Figs.  4 and 7B, respectively). 3-HP was pro -
+duced at pH 3.5, but the yield was slightly lower than 
+the one achieved at pH 5 for all the tested strains. For 
+instance, the highest 3-HP producing strain at both pH 
+values was PpHP8, which produced 3-HP at a yield of 
+0.084 ± 0.007 Cmol Cmol − 1 at pH 3.5 (0.081 ± 0.006  g 
+g− 1), which is 23% lower than the product yield of the 
+same strain at pH 5. See Additional Figure S3 for the 
+comparison of the fluxes at pH 5 and 3.5 for this strain.
+Regarding the NADPH production and consumption 
+fluxes for each strain, the same trends were also observed 
+at pH 3.5 (Additional Figure S4), that is, NADPH require-
+ments in strain PpHP8 exceeded NADPH production 
+from the PPP , meaning the flux through the cytosolic 
+NADH kinase reaction compensated for that difference. 
+In contrast, the NADPH production through the PPP in 
+strain PpHP18 greatly exceeded the requirements. More -
+over, the substrate uptake rate also followed the same 
+trend for all the strains in both pH conditions (Additional 
+Figure S4).
+Altogether, these results contribute to the understand -
+ing of the adaptation of this yeast to a low pH at a fluxome 
+Page 13 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+Fig. 7  A. Flux map with the relative fluxes for the parental strain grown at pH 5 and pH 3.5. Metabolite abbreviations can be found in the caption of Fig. 5. 
+B. Log2 fold-change of the relative fluxes at a culture pH of 3.5 of the strains X-33, PpHP1, PpHP6, PpHP8, PpHP15, and PpHP18 compared to the same 
+strains grown at pH 5. The colour scale describes the Log2 fold-change at a -2 to 2 range. C. Log2 fold-change of the relative fluxes at a culture pH of 3.5 
+of the strains PpHP1, PpHP6, PpHP8, PpHP15, and PpHP18 compared to the parental strain. The colour scale describes the Log 2 fold-change at a -1 to 1 
+range. ‘MCR’ fluxes fold-change are compared to PpHP1. The upper bound of the colour scale of the ‘MCR’ flux is set to 4
+ 
+Page 14 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+level. Production of D-arabitol at acidic pH was increased 
+for all the 3-HP-producing strains (from 2 to 20-fold). P. 
+pastoris produces D-arabitol under several stress condi -
+tions, such as under hypoxia or osmotic stress [ 53, 55]. 
+Thus, higher D-arabitol production at a lower pH is prob-
+ably due to a stress response. Moreover, the biomass yield 
+at pH 3.5 was lower for most strains (Fig.  7B), indicating 
+a higher ATP requirement for maintenance. Such results 
+have already been described in other yeasts grown at 
+lower pH, such as S. cerevisiae , where the decrease in 
+the biomass yield was also attributed to an increase in 
+the ATP of maintenance [ 56]. Moreover, the 3-HP yield 
+was lower than the one of the same strains at pH 5, con -
+sistently with previous studies describing 3-HP produc -
+tion in S. cerevisiae  grown at pH 3.5 [ 57]. The observed 
+decrease in the product yield when the ATP usage 
+increases confirms that ATP is a limiting factor towards 
+increasing the 3-HP yield. Similarly, increased D-arabitol 
+production, which is a NADPH sink, can also explain the 
+decrease in the 3-HP yield observed at low pH.
+Still, as metabolic flux profiles at pH 3.5 remained 
+mostly unchanged compared to those at pH 5, it is likely 
+that strain engineering strategies at both pH will have the 
+same outcome.
+Conclusions
+This study describes the parallel characterization of a set 
+of 3-HP-producing P. pastoris recombinant strains at two 
+relevant process conditions (pH 5 and pH 3.5) using a 
+HT approach that has allowed to save time and resources 
+compared to conventional strain-by-strain sequential 
+approach. Overall, we show, step-by-step, the setup of an 
+optimized workflow for HT metabolic flux profiling of 
+Pichia pastoris. It provides meaningful insights regarding 
+the impact of each genetic perturbation on the metabolic 
+flux distribution of the 3-HP producing strain, point -
+ing to a competition for energy and carbon resources 
+for either cell growth or 3-HP production as the major 
+cause of the observed phenotypes, regardless of the pH 
+of the culture. Thus, it is concluded that both acetyl-CoA 
+and ATP limitations are the main bottlenecks hamper -
+ing 3-HP production in P. pastoris . To overcome such 
+bottlenecks, a strategy to increase the glycolytic fluxes 
+(e.g., rewiring the regulatory mechanisms of this pathway 
+and/or selecting cultivation conditions that favour higher 
+glycolytic fluxes) should be addressed. Overall, this study 
+will contribute towards the improvement of P. pastoris  
+strains and bioprocess engineering strategies to produce 
+3-HP and other acetyl-CoA-derived products. Impor -
+tantly, this study showcases the potential of automated 
+fluoxomics workflows for accelerated strain characteri -
+sation in the context of the so-called Design-Build-Test-
+Learn cycle for metabolic engineering of industrially 
+relevant microorganisms, beyond model organisms. To 
+this end, we also provide an end-to-end description of the 
+fluxomics workflow, as well as sharing the raw and pro -
+cessed datasets following the guidelines of good practices 
+in publishing 13C-metabolic flux analyses studies, with 
+the aim of contributing spreading the use of fluxomics 
+analyses in P. pastoris.
+Supplementary Information
+The online version contains supplementary material available at https://doi.
+org/10.1186/s12934-023-02123-0.
+Additional Figure 1. Flux maps of the parental P . pastoris strain (X-33) 
+growing on methanol. Comparison of the flux map obtained in this 
+study (batch mini bioreactor) with the previously reported flux maps in 
+chemostat cultures (https://doi.org/10.1016/j.nbt.2019.01.005). Additional 
+Figure S2. Bioprocess parameters of the parental P . pastoris strain and 
+nine 3-HP-producing strains cultivated in glycerol batch mini bioreactor 
+cultures at pH 3.5. Additional Figure S3. Flux map with the relative fluxes 
+for the PpHP8 strain grown at pH 5 and pH 3.5. Additional Figure S4. 
+Production and consumption rates of NADPH and specific glycerol uptake 
+rates for each strain at pH 3.5.
+Acknowledgements
+Not applicable.
+Author contributions
+All authors contributed to the study conception and design of experiments. 
+AF and SH performed the mini-bioreactor cultures. AF performed the analyses 
+and calculations. AF wrote the first draft of the manuscript. All authors critically 
+reviewed the manuscript and approved its final version.
+Funding
+This work was funded by project PID2019-104666GB-I00 from the Spanish 
+Ministry of Science and Innovation; 2017-SGR-1462 from the Agència de 
+Gestió d’Ajuts Universitaris i de Recerca (AGAUR) of the Catalan Government. 
+AF PhD scholarship was funded with FPU grant (FPU17/05434) from the 
+Spanish Ministry of Science. AF was granted with a Short-Term Fellowship 
+(8853) from the European Molecular Biology Organization (EMBO) for a 
+research stay at the Toulouse Biotechnology Institute.
+Data availability
+The datasets supporting the conclusions of this article are included within the 
+article and its additional files. The Files can be downloaded from https://doi.
+org/10.34810/data673. The additional figures can be downloaded from the 
+Electronic Supplementary materials.
+Declarations
+Competing interests
+The authors declare no competing interests.
+Ethics approval and consent to participate
+Not applicable.
+Consent for publication
+Not applicable.
+Author details
+1Department of Chemical, Biological and Environmental Engineering, 
+Universitat Autònoma de Barcelona, Bellaterra, Catalonia 08193, Spain
+2TBI, Université de Toulouse, CNRS, INRAE, INSA, Toulouse 31077, France
+Received: 10 March 2023 / Accepted: 27 May 2023
+
+Page 15 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+References
+1. Schwarzhans JP , Luttermann T, Geier M, Kalinowski J, Friehs K. Towards sys-
+tems metabolic engineering in Pichia pastoris. Biotechnol Adv. 2017. https://
+doi.org/10.1016/j.biotechadv.2017.07.009.
+2. Peña DA, Gasser B, Zanghellini J, Steiger MG, Mattanovich D. Metabolic engi-
+neering of Pichia pastoris. Metab Eng. 2018;50:2–15. https://doi.org/10.1016/j.
+ymben.2018.04.017.
+3. De S, Mattanovich D, Ferrer P , Gasser B. Established tools and emerging trends 
+for the production of recombinant proteins and metabolites in Pichia pasto-
+ris. Essays Biochem. 2021;65:293–307. https://doi.org/10.1042/EBC20200138.
+4. Fina A, Brêda GC, Pérez-Trujillo M, Freire DMG, Almeida RV, Albiol J, Ferrer 
+P . Benchmarking recombinant Pichia pastoris for 3-hydroxypropionic acid 
+production from glycerol. Microb Biotechnol. 2021;14:1671–82. https://doi.
+org/10.1111/1751-7915.13833.
+5. Fina A, Heux S, Albiol J, Ferrer P . Combining metabolic engineering and mul-
+tiplexed screening methods for 3-hydroxypropionic acid production in Pichia 
+pastoris. Front Bioeng Biotechnol. 2022;10:942304. https://doi.org/10.3389/
+fbioe.2022.942304.
+6. Werpy T, Petersen G. Top value added chemicals from biomass volume I - 
+results of screening for potential candidates from sugars and synthesis gas. 
+U.S. Department of Energy; 2004. https://doi.org/10.2172/15008859.
+7. della Pina C, Falletta E, Rossi M. A green approach to chemical building 
+blocks. The case of 3-hydroxypropanoic acid. Green Chem. 2011;13:1624. 
+https://doi.org/10.1039/c1gc15052a.
+8. Kildegaard KR, Jensen NB, Schneider K, Czarnotta E, Özdemir E, Klein T, Maury 
+J, Ebert BE, Christensen HB, Chen Y, Kim IK, Herrgård MJ, Blank LM, Forster J, 
+Nielsen J, Borodina I. Engineering and systems-level analysis of Saccharo-
+myces cerevisiae for production of 3-hydroxypropionic acid via malonyl-CoA 
+reductase-dependent pathway. Microb Cell Fact. 2016;15:53. https://doi.
+org/10.1186/s12934-016-0451-5.
+9. Takayama S, Ozaki A, Konishi R, Otomo C, Kishida M, Hirata Y, Matsumoto T, 
+Tanaka T, Kondo A. Enhancing 3-hydroxypropionic acid production in combi-
+nation with sugar supply engineering by cell surface-display and metabolic 
+engineering of Schizosaccharomyces pombe. Microb Cell Fact. 2018;17:176. 
+https://doi.org/10.1186/s12934-018-1025-5.
+10. van Maris AJA, Konings WN, van Dijken JP , Pronk JT. Microbial export of 
+lactic and 3-hydroxypropanoic acid: implications for industrial fermenta-
+tion processes. Metab Eng. 2004;6:245–55. https://doi.org/10.1016/j.
+ymben.2004.05.001.
+11. López-Garzón CS, Straathof AJJ. Recovery of carboxylic acids produced by 
+fermentation. Biotechnol Adv. 2014;32:873–904. https://doi.org/10.1016/j.
+biotechadv.2014.04.002.
+12. Chemarin F, Athès V, Bedu M, Loty T, Allais F, Trelea IC, Moussa M. Towards an 
+in situ product recovery of bio-based 3-hydroxypropionic acid: influence of 
+bioconversion broth components on membrane-assisted reactive extrac-
+tion. J Chem Technol Biotechnol. 2019;94:964–72. https://doi.org/10.1002/
+jctb.5845.
+13. Koganesawa N, Aizawa T, Shimojo H, Miura K, Ohnishi A, Demura M, 
+Hayakawa Y, Nitta K, Kawano K. Expression and purification of a small 
+cytokine growth-blocking peptide from armyworm Pseudaletia separata 
+by an optimized fermentation method using the methylotrophic yeast 
+Pichia pastoris. Protein Expr Purif. 2002;25:416–25. https://doi.org/10.1016/
+S1046-5928(02)00036-0.
+14. Damasceno LM, Pla I, Chang HJ, Cohen L, Ritter G, Old LJ, Batt CA. An 
+optimized fermentation process for high-level production of a single-chain 
+fv antibody fragment in Pichia pastoris. Protein Expr Purif. 2004;37:18–26. 
+https://doi.org/10.1016/j.pep.2004.03.019.
+15. Heux S, Meynial-Salles I, O’Donohue MJ, Dumon C. White biotechnol-
+ogy: state of the art strategies for the development of biocatalysts for 
+biorefining. Biotechnol Adv. 2015;33:1653–70. https://doi.org/10.1016/j.
+biotechadv.2015.08.004.
+16. Heux S, Bergès C, Millard P , Portais JC, Létisse F. Recent advances in high-
+throughput 13C-fluxomics. Curr Opin Biotechnol. 2017;43:104–9. https://doi.
+org/10.1016/j.copbio.2016.10.010.
+17. Teworte S, Malcı K, Walls LE, Halim M, Rios-Solis L. Recent advances in fed-
+batch microscale bioreactor design. Biotechnol Adv. 2022;55:107888. https://
+doi.org/10.1016/j.biotechadv.2021.107888.
+18. Kohlstedt M, Becker J, Wittmann C. Metabolic fluxes and beyond - sys-
+tems biology understanding and engineering of microbial metabolism. 
+Appl Microbiol Biotechnol. 2010;88:1065–75. https://doi.org/10.1007/
+s00253-010-2854-2.
+19. Wasylenko TM, Stephanopoulos G. Metabolomic and 13C-metabolic flux anal-
+ysis of a xylose-consuming Saccharomyces cerevisiae strain expressing xylose 
+isomerase. Biotechnol Bioeng. 2015;112:470–83. https://doi.org/10.1002/
+bit.25447.
+20. Wiechert W, Möllney M, Petersen S, de Graaf AA. A universal framework 
+for 13C metabolic flux analysis. Metab Eng. 2001;3:265–83. https://doi.
+org/10.1006/mben.2001.0188.
+21. Ferrer P , Albiol J. 2014. 13C-Based metabolic flux analysis of recom-
+binant Pichia pastoris. Methods Mol Biol 1191, 291–313. https://doi.
+org/10.1007/978-1-4939-1170-7_17.
+22. Rußmayer H, Buchetics M, Gruber C, Valli M, Grillitsch K, Modarres G, Guerra-
+sio R, Klavins K, Neubauer S, Drexler H, Steiger M, Troyer C, al, Chalabi A, 
+Krebiehl G, Sonntag D, Zellnig G, Daum G, Graf AB, Altmann F, Koellensperger 
+G, Hann S, Sauer M, Mattanovich D, Gasser B. Systems-level organization of 
+yeast methylotrophic lifestyle. BMC Biol. 2015;13:80. https://doi.org/10.1186/
+s12915-015-0186-5.
+23. Tomàs-Gamisans M, Ødum ASR, Workman M, Ferrer P , Albiol J. Glycerol 
+metabolism of Pichia pastoris (Komagataella spp.) characterised by 13C-based 
+metabolic flux analysis. N Biotechnol. 2019;50:52–9. https://doi.org/10.1016/j.
+nbt.2019.01.005.
+24. Tomàs-Gamisans M, Ferrer P , Albiol J. Fine-tuning the P . pastoris iMT1026 
+genome-scale metabolic model for improved prediction of growth on meth-
+anol or glycerol as sole carbon sources. Microb Biotechnol. 2018;11:224–37. 
+https://doi.org/10.1111/1751-7915.12871.
+25. Clark K, Karsch-Mizrachi I, Lipman DJ, Ostell J, Sayers EW. GenBank Nucleic 
+Acids Res. 2016;44:D67–D72. https://doi.org/10.1093/nar/gkv1276.
+26. Tomàs-Gamisans M, Ferrer P , Albiol J. Integration and validation of the 
+genome-scale metabolic models of Pichia pastoris: a comprehensive update 
+of protein glycosylation pathways, lipid and energy metabolism. PLoS ONE. 
+2016;11:e0148031. https://doi.org/10.1371/journal.pone.0148031.
+27. Klamt S, Saez-Rodriguez J, Gilles ED. Structural and functional analysis of 
+cellular networks with CellNetAnalyzer. BMC Syst Biol. 2007;1:2. https://doi.
+org/10.1186/1752-0509-1-2.
+28. Gombert AK, dos Santos MM, Christensen B, Nielsen J. Network identification 
+and flux quantification in the central metabolism of Saccharomyces cerevisiae 
+under different conditions of glucose repression. J Bacteriol. 2001;183:1441–
+51. https://doi.org/10.1128/JB.183.4.1441-1451.2001.
+29. Solà A, Maaheimo H, Ylönen K, Ferrer P , Szyperski T. Amino acid biosynthesis 
+and metabolic flux profiling of Pichia pastoris. Eur J Biochem. 2004;271:2462–
+70. https://doi.org/10.1111/j.1432-1033.2004.04176.x.
+30. Lehnen M, Ebert BE, Blank LM. A comprehensive evaluation of constrain-
+ing amino acid biosynthesis in compartmented models for metabolic flux 
+analysis. Metab Eng Commun. 2017;5:34–44. https://doi.org/10.1016/j.
+meteno.2017.07.001.
+31. Kleijn RJ, van Winden WA, van Gulik WM, Heijnen JJ. Revisiting the 13C-label 
+distribution of the non-oxidative branch of the pentose phosphate pathway 
+based upon kinetic and genetic evidence. FEBS J. 2005;272:4970–82. https://
+doi.org/10.1111/j.1742-4658.2005.04907.x.
+32. Wiechert W, de Graaf AA. Bidirectional reaction steps in metabolic networks. 
+Biotechnol Bioeng. 1997;55:101–35.
+33. Chelliah V, Juty N, Ajmera I, Ali R, Dumousseau M, Glont M, Hucka M, Jalowicki 
+G, Keating S, Knight-Schrijver V, Lloret-Villas A, Natarajan KN, Pettit JB, Rodri-
+guez N, Schubert M, Wimalaratne SM, Zhao Y, Hermjakob H, le Novère N, 
+Laibe C. BioModels: ten-year anniversary. Nucleic Acids Res. 2015;43:D542–8. 
+https://doi.org/10.1093/nar/gku1181.
+34. Millard P , Sokol S, Letisse F, Portais J-C. IsoDesign: A software for optimizing 
+the design of 13C-metabolic flux analysis experiments. Biotechnol Bioeng. 
+2014;111:202–8. https://doi.org/10.1002/bit.24997/abstract.
+35. Sokol S, Millard P , Portais JC. Influx_s: increasing numerical stability and preci-
+sion for metabolic flux analysis in isotope labelling experiments. Bioinformat-
+ics. 2012;28:687–93. https://doi.org/10.1093/bioinformatics/btr716.
+36. Heux S, Juliette P , Stéphane M, Serguei S, Jean-Charles P . A novel platform for 
+automated high-throughput fluxome profiling of metabolic variants. Metab 
+Eng. 2014;25:8–19. https://doi.org/10.1016/j.ymben.2014.06.001.
+37. Maurer M, Kühleitner M, Gasser B, Mattanovich D. Versatile modeling and 
+optimization of fed batch processes for the production of secreted heter-
+ologous proteins with Pichia pastoris. Microb Cell Fact. 2006;5:37. https://doi.
+org/10.1186/1475-2859-5-37.
+38. Heuillet M, Bellvert F, Cahoreau E, Letisse F, Millard P , Portais JC. Methodology 
+for the validation of isotopic analyses by mass spectrometry in stable-isotope 
+labeling experiments. Anal Chem. 2018;90:1852–60. https://doi.org/10.1021/
+acs.analchem.7b03886.
+Page 16 of 16
+Fina et al. Microbial Cell Factories          (2023) 22:117 
+39. Millard P , Delépine B, Guionnet M, Heuillet M, Bellvert F, Létisse F. IsoCor: 
+isotope correction for high-resolution MS labeling experiments. Bioinformat-
+ics. 2019;35:4484–7. https://doi.org/10.1093/bioinformatics/btz209.
+40. Peiro C, Millard P , de Simone A, Cahoreau E, Peyriga L, Enjalbert B, Heux 
+S. Chemical and metabolic controls on dihydroxyacetone metabolism 
+lead to suboptimal growth of Escherichia coli. Appl Environ Microbiol. 
+2019;85:e00768–19. https://doi.org/10.1128/AEM.00768-19.
+41. Schellenberger J, Que R, Fleming R, Thiele I, Orth J, Feist A, Zielinski D, Bordbar 
+A, Lewis N, Rahmanian S, Kang J, Hyduke D, Palsson B. Quantitative prediction 
+of cellular metabolism with constraint-based models: the COBRA Toolbox 
+v2.0. Nat Protoc. 2011;6:1290–307. https://doi.org/10.1038/nprot.2011.308.
+42. Crown SB, Antoniewicz MR. Publishing 13C metabolic flux analysis studies: 
+a review and future perspectives. Metab Eng. 2013;20:42–8. https://doi.
+org/10.1016/j.ymben.2013.08.005.
+43. Droste P , Miebach S, Niedenführ S, Wiechert W, Nöh K. Visualizing multi-omics 
+data in metabolic networks with the software omix - a case study. BioSys-
+tems. 2011;105:154–61. https://doi.org/10.1016/j.biosystems.2011.04.003.
+44. Orth JD, Thiele I, Palsson BØO. What is flux balance analysis? Nat Biotechnol. 
+2010;28:245–8. https://doi.org/10.1038/Nbt.1614.
+45. Schuetz R, Kuepfer L, Sauer U. Systematic evaluation of objective functions 
+for predicting intracellular fluxes in Escherichia coli. Mol Syst Biol. 2007;3:119. 
+https://doi.org/10.1038/msb4100162.
+46. Liu C, Wang Q, Xian M, Ding Y, Zhao G. 2013. Dissection of malonyl-coenzyme 
+A reductase of Chloroflexus aurantiacus results in enzyme activity improve-
+ment. PLoS ONE 8, e75554.
+47. Shi L, Tu BP . Acetyl-CoA and the regulation of metabolism: mechanisms and 
+consequences. Curr Opin Cell Biol. 2015;33:125–31. https://doi.org/10.1016/j.
+ceb.2015.02.003.
+48. Pereira H, Azevedo F, Domingues L, Johansson B. Expression of Yarrowia 
+lipolytica acetyl-CoA carboxylase in Saccharomyces cerevisiae and its effect 
+on in-vivo accumulation of Malonyl-CoA. Comput Struct Biotechnol J. 
+2022;20:779–87. https://doi.org/10.1016/j.csbj.2022.01.020.
+49. Christodoulou D, Kuehne A, Estermann A, Fuhrer T, Lang P , Sauer U. Reserve 
+flux capacity in the pentose phosphate pathway by NADPH binding is con-
+served across kingdoms. iScience. 2019;19:1133–44. https://doi.org/10.1016/j.
+isci.2019.08.047.
+50. Tomàs-Gamisans M, Andrade CCP , Maresca F, Monforte S, Ferrer P , Albiol 
+J. Redox engineering by ectopic overexpression of NADH kinase in 
+recombinant Pichia pastoris (Komagataella phaffii): impact on cell physiology 
+and recombinant production of secreted proteins. Appl Environ Microbiol. 
+2020;86:e02038–19. https://doi.org/10.1128/AEM.02038-19.
+51. van Hoek P , Flikweert MT, van der Aart QJM, Steensma HY, van Dijken JP , Pronk 
+JT. Effects of pyruvate decarboxylase overproduction on flux distribution at 
+the pyruvate branch point in Saccharomyces cerevisiae. Appl Environ Micro-
+biol. 1998;64:2133–40. https://doi.org/10.1128/aem.64.6.2133-2140.1998.
+52. Schaaff I, Heinisch J, Zimmerman F. Overexpression of glycolytic enzymes in 
+yeast. Yeast. 1989;5:285–90.
+53. Baumann K, Carnicer M, Dragosits M, Graf AB, Stadlmann J, Jouhten P , 
+Maaheimo H, Gasser B, Albiol J, Mattanovich D, Ferrer P . A multi-level study 
+of recombinant Pichia pastoris in different oxygen conditions. BMC Syst Biol. 
+2010;4:141. https://doi.org/10.1186/1752-0509-4-141.
+54. Ata Ö, Rebnegger C, Tatto NE, Valli M, Mairinger T, Hann S, Steiger MG, Çalık P , 
+Mattanovich D. A single Gal4-like transcription factor activates the Crabtree 
+effect in Komagataella phaffii. Nat Commun. 2018;9:4911. https://doi.
+org/10.1038/s41467-018-07430-4.
+55. Dragosits M, Stadlmann J, Graf A, Gasser B, Maurer M, Sauer M, Kreil DP , 
+Altmann F, Mattanovich D. The response to unfolded protein is involved in 
+osmotolerance of Pichia pastoris. BMC Genomics. 2010;11:207. https://doi.
+org/10.1186/1471-2164-11-207.
+56. Hakkaart X, Liu Y, Hulst M, el Masoudi A, Peuscher E, Pronk J, van Gulik W, 
+Daran-Lapujade P . Physiological responses of Saccharomyces cerevisiae to 
+industrially relevant conditions: slow growth, low pH, and high CO2 levels. 
+Biotechnol Bioeng. 2020;117:721–35. https://doi.org/10.1002/bit.27210.
+57. Borodina I, Kildegaard KR, Jensen NB, Blicher TH, Maury J, Sherstyk S, Schnei-
+der K, Lamosa P , Herrgård MJ, Rosenstand I, Öberg F, Forster J, Nielsen J. Estab-
+lishing a synthetic pathway for high-level production of 3-hydroxypropionic 
+acid in Saccharomyces cerevisiae via β-alanine. Metab Eng. 2015;27:57–64. 
+https://doi.org/10.1016/j.ymben.2014.10.003.
+Publisher’s Note
+Springer Nature remains neutral with regard to jurisdictional claims in 
+published maps and institutional affiliations.

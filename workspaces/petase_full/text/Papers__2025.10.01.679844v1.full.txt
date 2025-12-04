@@ -1,0 +1,850 @@
+1 
+ 
+Title: Robust cellular transformations of PET deconstruction products by import of glycol 1 
+esters 2 
+Authors: Roman M. Dickey 1,2, Esun Selvam 1,2, Erha Andini 1,2, Priyanka Nain1, Dionisios G. 3 
+Vlachos1,2, Aditya M. Kunjapur1,2* 4 
+Affiliations: 1Department of Chemical & Biomolecular Engineering, University of Delaware, 5 
+Newark, DE 19716 6 
+2Center for Plastics Innovation, University of Delaware, Newark, DE 19716 7 
+ 8 
+*Correspondence: Correspondence to A.M.K. at kunjapur@udel.edu 9 
+ 10 
+Abstract:  11 
+Efforts to transform polyethylene terephthalate (PET) deconstruction products using live 12 
+cells have been limited by terephthalic acid (TPA) uptake. Here, we used an intracellular 13 
+carboxylate reduction assay to show that apparent TPA uptake in E. coli cells that lack a dedicated 14 
+TPA transporter sharply increases between pH 5 -6. Furthermore, we discovered that glycol ester 15 
+deconstruction products, mono(2 -hydroxyethyl) terephthalate (MHET) and bis(2 -hydroxyethyl) 16 
+terephthalate (BHET), surprisingly each result in rapid pH -independent uptake. We exploited 17 
+glycol ester uptake along with deletion of 22 cellular oxidoreductases to design intracellular 18 
+hydrolysis routes for synthesis of upcycled reduction products from BHET at >90% yields, and 19 
+from real PET wastes after tandem catalytic glycolysis and cell -based valorization at >80% 20 
+combined yields. Our work has important ramifications for PET utilization by cells and adds new 21 
+perspectives on the evolution of the PETase/MHETase system.  22 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+2 
+ 
+Main Text:  23 
+Introduction 24 
+While society relies on synthetic polymers , the growth in plastic waste is a  global 25 
+environmental problem  that is estimated to reach 1 21 million metric tons by 2050 without 26 
+intervention1. Polyethylene terephthalate (PET) is an exemplary plastic that is one of the most 27 
+abundantly produced polyester and is widely applied in single use. Chemical recycling of PET via 28 
+catalytic or enzymatic routes can completely hydrolyze all ester bonds, forming terephthalic acid 29 
+(TPA) and ethylene glycol (EG) , or generate  alternative deconstruction products, bis(2-30 
+hydroxyethyl) terephthalic acid  (BHET) and  mono(2-hydroxyethyl) terephthalic acid (MHET)  31 
+(Fig 1A). In the context of PET recycling or upcycling, a fter the discovery of a PET hydrolase 32 
+(PETase) and a MHET hydrolase (MHETase) from Ideonella sak aiensis, the biocatalysis 33 
+community has largely focused on discovering or engineering enzymes that catalyze complete 34 
+deconstruction of PET to TPA and EG  with increased efficiency 2. A smaller number of  efforts 35 
+have reported engineering assimilation or valorization of TPA or EG  by microbial cells 3–7; 36 
+however, the use of cell-based biocatalysts for deconstruction or transformation of deconstructed 37 
+PET has lagged considerably behind chemical or enzymatic alternatives8. This is despite the ability 38 
+of whole cells to facilitate a larger number of valorizing transformations while also obviating the 39 
+need for cell lysis and enzyme purification , thus potentially lowering catalyst costs at industrial 40 
+scales. Given the polymeric nature of the feedstock, some initial deconstruction steps must occur 41 
+in an extracellular environment; however, we sought to critically examine the conventional notion 42 
+that complete extracellular hydrolysis to TPA and EG would be beneficial for cellular 43 
+transformations.  44 
+A key bottleneck in these processes is slow cellular uptake of TPA. In bioconversion and 45 
+upcycling strategies, TPA is commonly prioritized due to its carbon richness compared to EG and 46 
+potential to serve as a precursor for value -added aromatic compounds. However, as TPA cannot 47 
+readily diffuse through microbial cell membranes at neutral pH, the expression of TPA transporter 48 
+genes is thought to be essential to TPA catabolism or upcycling 9. Thus, the design of cell-based 49 
+TPA transformations typically involves the expression and engineering of an active TPA 50 
+transporter or less often methods to alter cell permeability. In Pseudomonas putida, heterologous 51 
+expression of tpaK, which encodes an MFS-type TPA transporter from Rhodococcus jostii, was 52 
+used to achieve β-ketoadipic acid production from catalytically depolymerized PET4. Interestingly, 53 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+3 
+ 
+the authors observed that secretion tags were not required for BHET conversion, speculating that 54 
+either the PETase/MHETase might exit cells, that BHET might enter cells passively, or that a 55 
+native transporter might allow BHET uptake.  Given the prominence of Escherichia coli in 56 
+synthetic biology and industrial processes, it is an attractive host for  TPA transformations or 57 
+utilization. Recently, adaptive laboratory evolution (ALE) of E. coli with heterologous expression 58 
+of the TpaK transporter from R. jostii and genes for TPA assimilation reinforced the notion that 59 
+TPA transport is limiting even after heterologous expression of transporters 10. To avoid active 60 
+TPA transport, alternative approaches to enhance cell membrane permeability and/or TPA uptake 61 
+have been employed including modification of membrane proteins11,  lowering culture pH (5.5) or 62 
+using chemical additives12. However, these strategies can decrease downstream pathway activity 63 
+cell viability, limiting their practical relevance13. 64 
+We wondered if we could avoid the challenge of TPA uptake by instead targeting the 65 
+alternative deconstruction products, the glycol esters MHET and BHET, as starting substrates for 66 
+intracellular transformations (Fig. 1B). We used a carboxylic acid reductase (CAR) to modify the 67 
+carboxylates present in both TPA and MHET  as a proxy for detecting cellular uptak e and to 68 
+produce terephthalaldehyde (TPAL), which is a  valuable monomer with uses in thermosets14–16, 69 
+polyspiroacetals17, polymeric organic frameworks 18,  nanocomposites 19, and other polymer 70 
+reactions20–23, as well as in the production of new Schiff Bases ligands24–26. The reactive aldehyde 71 
+functionality of TPAL also enables potential biosynthe tic routes to numerous alternative 72 
+chemistries27–29, including to the valuable di amine para-xylylenediamine (PXDA or pXYL), 73 
+which has an estimated market size of USD ~1 billion30–35. 74 
+Here, we report the enhanced uptake of BHET and MHET, and we exploit this finding for 75 
+the design of whole cell cascades capable of upcycling PET deconstruction products at neutral pH. 76 
+We show that MHET is efficiently transported intracellularly and converted toward its aldehyde 77 
+(2-hydroxyethyl 4-formylbenzoate, or MHET-ald) at neutral and acidic pH; however, TPA uptake 78 
+and conversion toward its corresponding aldehydes (4 -formylbenzoic acid, FBA , and TPAL) is 79 
+strictly limited to acidic conditions (pH <  6.2). To enable intracellular hydrolysis of BHET and 80 
+MHET for subsequent transformations , we screen published PETases  and cutinases for general 81 
+intracellular “ETase” activity under ambient conditions. We then show that coupling our selected 82 
+PETase and CAR enzymes within the same cell enable s the biosynthesis of TPAL at high yields. 83 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+4 
+ 
+Finally, we show that this PETase-CAR system can be coupled with an ω-transaminase for high-84 
+yield biosynthesis of pXYL from products of catalytic glycolysis using real PET textile and bottle 85 
+waste streams. Overall, our work has significant ramifications for those interested in supplying 86 
+PET deconstruction products to cellular catalysts, whether for valorization or for catabolism. 87 
+Results 88 
+Cellular uptake of TPA is controlled by pH 89 
+To measure apparent uptake of carboxylate group containing PET deconstruction products 90 
+into E. coli, we created an enzyme -coupled assay based on heterologous expression of a CAR 91 
+shown in vitro to possess activity on our candidate substrates (CAR from Mycobacterium avium, 92 
+MaCAR)36 (Fig. 2A). To retain desired aldehyde products for eventual upcycling reactions, we 93 
+expressed MaCAR in the previously engineered E. coli RARE.Δ16 strain designed for TPAL 94 
+retention37. We supplemented TPA, MHET, as well as mono-substituted carboxylates FBA (the 95 
+single reduction product of TPA) and 4 -hydroxymethylbenzoic acid (HMBA, a potential over-96 
+reduction product), to cells expressing MaCAR at a starting pH of 7.5  under aerobic culturing 97 
+conditions. To ensure that all potential intermediates are collected in the supernatant, we performed 98 
+a methanol -based extraction of all collected samples. We observed full conversion of MHET, 99 
+FBA, and HMBA to their respective aldehydes after 4 h, indicating these substrates are readily 100 
+imported by cells (Fig. 2B). However, we observed no conversion of the dicarboxylic acid TPA, 101 
+consistent with this step being a bottleneck. Interestingly, we did observe the full conversion of 102 
+TPA after 24 h, suggesting a delayed uptake relative to monocarboxylic acids. Given that others 103 
+have briefly observed that pH can play a role in TPA uptake11, we monitored culture pH alongside 104 
+TPA conversion as a function of time. We found that pH decreases correlated to TPA conversion 105 
+(Fig. 2C), suggesting a simple explanation for the delay. To collect further supporting evidence, 106 
+we saw that buffering the culture media abrogated TPA conversion (Fig. S1), and that lowering 107 
+initial culture pH accelerated TPA uptake and conversion (Fig. 2D).  108 
+To more extensively study how pH affects TPA and MHET import, we transitioned from 109 
+growing cells to resting cells , allowing for a more controlled reaction . However, we found that 110 
+resting cells of the engineered RARE.Δ16 host rapidly oxidized TPAL, which is a phenomenon 111 
+not present in growing cells  and could counteract carboxylate reduction  (Fig. 2E-F). To negate 112 
+this, we further engineered the RARE.Δ16  to include knockouts of 6 aldehyde dehydrogenases 113 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+5 
+ 
+that have been shown to mitigate aryl aldehyde oxidation38, generating the ROAR.Δ22 strain. We 114 
+found that the ROAR.Δ22 host increased TPAL (4.2-fold) and MHET -ald ( 3.7-fold) 115 
+concentrations compared to RARE.Δ16 after 4 h (Fig. 2G, Fig. S2). The strain exhibited negligible 116 
+fitness difference nor sensitivity of aldehyde retention in various reaction media (pH and glucose 117 
+concentration) (Fig. S2-5). We resuspended resting cells of ROAR.Δ22 that expressed MaCAR 118 
+with TPA or MHET at starting pH  ranging from 4.8 -7.5 in increments of 0.2  (Fig. 2H). As 119 
+expected, TPA conversion increased as we lowered pH, until TPA precipitated out of solution at 120 
+pH 5.0 and 4.8  (Fig. 2I). We could only  observe TPA conversion at pH 6.2 or lower , with a 121 
+maximum conversion of 92% at pH 5.2, indicating that TPA uptake can occur in acidic pHs. The 122 
+observed TPA uptake  correlates well with the predicted  formation of the partially deprotonated 123 
+TPA, highlighting the possibility that the mono -protonated form of TPA is accepted by native 124 
+transporters (Fig. S6). Excitingly, we observed the full conversion of MHET towards MHET -ald 125 
+at all pH tested (Fig. 2J), and we sought to investigate the design of new transformation routes 126 
+that would exploit this finding. 127 
+Screening of “ETase” activity to enhance cellular uptake of PET deconstruction products 128 
+Because these experiments showed that MHET uptake was fast and unaffected by reaction 129 
+pH, we hypothesized that intracellular expression  of selective esterases (here designated as 130 
+“ETases” for potential activity on PET, BHET, MHET, and/or MHET-ald) could facilitate 131 
+complete ester hydrolysis after uptake (Fig. 3A). We desired an ETase that had activity on BHET, 132 
+MHET and MHET-ald at 30°C for intracellular TPA production with limited membrane leakage 133 
+that could lead to TPA production extracellularly 39,40. We screened 10 previously engineered 134 
+ETases on BHET, MHET and MHET-ald.  We selected five engineered variants of the Ideonella 135 
+sakaiensis PETase (FAST41, HOT42, Dura43, Themo-Stable: denoted here as Thermo44 and TS45) 136 
+two leaf-branch compost cutinase variants  (LCC39, LCC-ICCG: denoted here as ICCG 46), two 137 
+variants of bacterium HR29  PETase (BhrPETase47 and Turbo48) and one metagenome-derived 138 
+PETase (PES-H1:denoted here as PES49). While many of these enzymes were primarily studied at 139 
+elevated temperatures for PET deconstruction, we sought to measure ETase activity under ambient 140 
+conditions (Table S1). 141 
+We expressed each ETase initially in RARE.Δ16 in growing cells to track cell viability and 142 
+to test activity on supplemented BHET, MHET and MHET-ald. We observed a wide range of TPA 143 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+6 
+ 
+production when cultures were supplemented with BHET and MHET, indicating differences in 144 
+substrate specificity  and activity  between engineered variants , as well as the robust uptake of 145 
+BHET (Fig. 3B-C). Analysis of the ETase activity allowed us to characterize several BHET-146 
+selective ETases, such as  FAST, PES and D URA, which had high BHET conversion and low 147 
+MHET conversion. We also observed several generalist ETases such as BHR, Turbo, LCC, ICCG, 148 
+and HOT, with high conversion of both BHET and MHET. Surprisingly, we noticed that our entire 149 
+library of ETases had activity on MHET-ald (Fig. 3D-E), and obtained higher conversion s on 150 
+MHET-ald than MHET  (Fig. S7-8). After profiling ETase specificity , we noticed a subset of 151 
+ETases has substantial effects to overexpression (BHR, Turbo, ICCG and PES) with others having 152 
+minor effects (Thermo, TS, LCC, Dura, HOT and FAST) (Fig. 3F). Considering both activity and 153 
+toxicity, FAST showed promise for further applications. 154 
+Coupling ETase and CAR to explore the enhanced uptake of BHET and MHET  155 
+After identification of viable ETases, we reasoned that by expressing FAST and MaCAR 156 
+together in one-pot we could produce TPAL from BHET and MHET at neutral pH in growing cells 157 
+(Fig. 3G). We compared expression of FAST and MaCAR in separate cells (Cell A and Cell B , 158 
+respectively) as against expression in the same cell (Cell C) . We hypothesized that expression of 159 
+FAST and MaCAR in the same cell could directly result in TPAL, potentially fully circumventing 160 
+TPA accumulation. First, we showed that supplemented TPA is not consumed under well-buffered 161 
+conditions (Fig. 3H). We then tested if supplying MHET or BHET would yield TPAL. Excitingly, 162 
+we observed TPAL synthesis in all reaction conditions starting from MHET and BHET, indicating 163 
+both strategies are viable alternatives to avoid challenges posed by TPA uptake. Using Cell C, we 164 
+obtained high TPAL yields of 82.7% or 98.0% from 5 mM MHET or BHET, respectively (Fig. 165 
+3I-J). Using Cell A and B in co-culture, we found that a 1:1 inoculation ratio resulted in optimum 166 
+TPAL yields of 82.6% and 68.8% from MHET and BHET, respectively. To further highlight our 167 
+approach, we tested both strategies in resting cells with MHET or BHET as our starting substrates. 168 
+We again saw TPAL production in all our reaction conditions starting from 5 mM MHET or BHET 169 
+(Fig. S9). We observed high TPAL yields of 77% or 88% from MHET or BHET, respectively 170 
+using Cell C . These results indicate that coupling intercellular TPA  synthesis to downstream 171 
+enzymatic transformations can effectively enable TPA valorization using cells. 172 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+7 
+ 
+Whole cell valorization towards diamines starting from PET intermediate deconstruction 173 
+products 174 
+Having designed efficient routes from alternative PET deconstruction products to the 175 
+highly reactive platform molecule TPAL , we next designed a whole cell cascade for the 176 
+biosynthesis of the difunctionalized amine, para-xylylenediamine (pXYL). To do this, we used a 177 
+transaminase from Chromobacterium violaceum, which has been shown to accept PET-derived 178 
+aldehydes36. Additionally, we co-expressed an alanine dehydrogenase from Bacillus subtilis  179 
+(AlaDH) to recycle pyruvate back to the alanine amine donor. We first investigated the operating 180 
+pH range of CvTA  in resting whole cells . We noticed that as reaction pH is lowered, para-181 
+aminomethyl benzoic acid (pAMBA) accumulates, presumably via endogenous oxidation  (Fig 182 
+4A). We observed that the amination of 5 mM TPAL had an optimal conversion to pXYL at pH 183 
+7.5, resulting in a 90% conversion after 1 h (Fig. 4B). These results highlight a unique challenge 184 
+if we were to start with TPA as an initial substrate as low pH is needed for TPA uptake, but higher 185 
+pH is optimal for amination. Despite our progress with alternative PET deconstruction products, 186 
+we chose to investigate addressing this when starting from TPA by employing a one-pot, two-step 187 
+approach (Fig. 4C) in which the reaction is pH-adjusted from that optimal for TPA to that optimal 188 
+for CvTA. For this reaction, we supplemented 5 mM TPA at a starting pH of 7.5 or 5.2. For the 189 
+pH 5.2 case, after 2 h we increased pH to 7.5 with NaOH. After which, cells expressing CvTA and 190 
+AlaDH (Cell D) were supplemented in both conditions and the reactions were ran for an additional 191 
+2 h. As expected, when starting at a pH of 7.5, we observed no TPA conversion  (Fig. 4D).  192 
+However, when starting at a pH of 5.2, we obtained a 97% conversion to the desired  diamine 193 
+pXYL (Fig. 4E).  194 
+While we achieve d high conversion to pXYL from TPA  using pH adjustment, we next 195 
+aimed to produce amines without pH adjustment using MHET or BHET as starting substrates. For 196 
+direct comparisons of pXYL conversion from TPA to that of our proposed cascade starting from 197 
+MHET or BHET, we continued to run our reactions in a one-pot two-step approach, meaning that 198 
+Cell D was added after 2 h. We ran reactions using our Cell C as well as the best performing Cell 199 
+A:B ratio to generate TPAL from MHET and BHET. Using Cells A, B and D, we obtained pXYL 200 
+yields of 80.5% from MHET or 57.4% from BHET (Fig. 4 F, G). With Cell C and D, we observed 201 
+high pXYL yields of 93.1% from MHET or 95.9% from BHET. We also examined whether we 202 
+could selectively  biosynthesize the  antifibrinolytic drug , para-aminomethyl benzoic acid 203 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+8 
+ 
+(pAMBA) from our intermediate deconstruction products 50. As MaCAR has been shown to have 204 
+minimal activity on pAMBA, we hypothesized that we could  target pAMBA synthesis using a 205 
+one-pot one-step approach36. We found that our t hree-cell approach at a cellular ration of 1:10:2 206 
+of Cells A:B:D resulting in 83% yield pAMBA from 5 mM MHET (Fig. S10).  207 
+Reaction scaleup and upcycling of post-consumer PET waste 208 
+Given that coupling FAST and MaCAR in the same cell showed high  TPAL and pXYL 209 
+yields at 5 mM concentrations of either MHET or BHET, we investigated the ability of  our 210 
+upcycling cascade for either substrate at elevated substrate loading of 10, 20, or 40 mM. We ran 211 
+these reactions at an increased glucose concentration (80 mM) to ensure sufficient co-factors for 212 
+carboxylate reduction. For either substrate, we sampled at 4 and 8 h. We observed high yields of 213 
+TPAL in just 4 h with each concentration tested for both supplemented MHET (10 mM: 77%; 20 214 
+mM: 83%; 40 mM: 80%) and BHET (10 mM: 77%; 20 mM: 79%; 40 mM: 79%) (Fig. S11). At 8 215 
+h, we found the yield at 40 mM increased slightly for MHET (84%) and BHET (89%).  216 
+After successfully achieving TPAL production at increased substrate loading, we scaled up 217 
+our cascade to a 10 mL reaction volume (from 300 µL) and used intermediate PET deconstruction 218 
+substrates from glycolysis of  post-consumer textile or plastic  waste (Fig. 5A). Using previously 219 
+established methods, we performed catalytic glycolysis on a 100% polyester red T-shirt resulting 220 
+in mixture of 78% BHET, 21% MHET and 1% TPA 51. We also conducted glycolysis on a post-221 
+consumer PET plastic bottle that resulted in a mixture of 99% BHET and 1% MHET mixture 52. 222 
+We next ran our one -pot two -step method to target pXYL production  starting from these  223 
+deconstruction products. Both solid residues were resuspended in our cellular reaction buffer at an 224 
+estimated 40 mM concentration.  We supplemented Cell C for 8 h and then added Cell D and let 225 
+the reaction run for an addition 8 h for a total of 16 h. We were excited to see the full conversion 226 
+of deconstruction products in both reactions, with pXYL yields of 89.5% or 90.5% from polyester 227 
+textile waste or post-consumer PET plastic waste, respectively  (Fig. 5B, C ). As both PET 228 
+deconstruction and upcycling steps resulted in high yields, our tandem chemical deconstruction 229 
+and biological upcycling strategy resulted in overall pXYL yields of >80%.  230 
+Discussion 231 
+Prior pioneering work reporting tandem catalytic and biological processes focused on 232 
+deconstruction to TPA  alongside heterologous expression of  TPA transporter s4,53. Our work 233 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+9 
+ 
+reinforces the value of tandem hybrid processes and provides greater reasoning for their efficient 234 
+performance. Based on our findings, an entirely cellular alternative could also be designed where 235 
+a secreted ETase is chosen for the ability to selectively  produce glycol esters for subsequent 236 
+intracellular processing by a complementary intracellular ETase. Collectively, our results 237 
+showcase the industrial promise of bypassing TPA as a substrate, harnessing intracellular ETases, 238 
+exploiting extensive strain engineering for TPAL retention, and interfacing engineered bacterial 239 
+cells with catalytic glycolysis for robust hybrid PET valorization. 240 
+The cellular transport of various PET deconstruction products revealed in this study, if 241 
+similar for other bacteria, offers new perspectives on why known natural PET degrading bacteria 242 
+such as  Ideonella sakaiensis utilize a two -enzyme (PETase-MHETase) system for PET 243 
+assimilation. Naturally observed PETases tend to generate MHET, which  may leverage aromatic 244 
+carboxylate transporters for cellular entry that could be widespread across environmental bacteria. 245 
+As a result, MHETase secretion may not be strictly necessary for natural PET assimilators . 246 
+However, based on sequence conservation of the signal peptide on characterized MHETases and 247 
+uncharacterized homologs, we expect MHETase secretion to be the norm. Given that, another 248 
+plausible explanation is  that MHETase secretion accompanied by evolution of a dedicated TPA 249 
+transporter, while less efficient for the PET assimilator,  may have been an evolutionary solution 250 
+to mitigate the formation of MHET as a common good that other bacteria containing promiscuous 251 
+hydrolases could utilize. 252 
+Materials and methods 253 
+ 254 
+Strains and plasmids 255 
+Escherichia coli strains and plasmids used are listed in Table S1. Molecular cloning and 256 
+vector propagation were performed in DH5α (NEB). Polymerase chain reaction (PCR) based DNA 257 
+replication was performed using KOD XTREME Hot Start Polymerase (MilliporeSigma) for 258 
+plasmid backbones. Cloning was performed using Gibson Assembly. Oligos for PCR 259 
+amplification and translational knockouts are shown in Table S2. Oligos were purchased from 260 
+Integrated DNA Technologies (IDT). The DNA sequence and translated sequence of proteins 261 
+overexpressed in this paper are found in Table S3. The pORTMAGE-Ec1 recombineering plasmid 262 
+was kindly provided by Timothy Wannier and George Church of Harvard Medical School. 263 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+10 
+ 
+Chemicals 264 
+The following compounds were purchased from MilliporeSigma: sodium borate 265 
+decahydrate, sodium phosphate dibasic anhydrous, chloramphenicol, kanamycin sulfate, dimethyl 266 
+sulfoxide (DMSO), boric acid, L-alanine, and HEPES. D-glucose and m-toluic acid. The following 267 
+compounds were purchased from Alfa Aesar: agarose and ethanol were purchased. The following 268 
+compounds were purchased from Fisher Scientific: isopropyl ß -D-1-thiogalactopyranoside 269 
+(IPTG), acetonitrile, sodium chloride, trifluoroacetic acid, LB Broth powder (Lennox), and LB 270 
+Agar powder (Lennox). A MOPS EZ rich defined medium kit was purchased from Teknova. Taq 271 
+DNA ligase was purchased from GoldBio. Anhydrotetracycline (aTc) was purchased from 272 
+Cayman Chemical.  Phusion DNA polymerase and T5 exonuclease were purchased from New 273 
+England BioLabs (NEB). Sybr Safe DNA gel stain was purchased from Invitrogen. The following 274 
+compounds were purchased from TCI America: Pyridoxal 5’ -phosphate (PLP), ortho-275 
+phthalaldehyde and 3-mercaptopropionic acid. 276 
+Culture conditions 277 
+Cultures were grown in LB -Lennox medium (LB: 10 g/L bacto tryptone, 5 g/L sodium 278 
+chloride, 5 g/L yeast extract) or MOPS EZ rich defined media (Teknova M2105) with 2% glucose 279 
+(MOPS media). To prepare cells for resting cell assays, confluent overnight cultures of E. coli 280 
+strains were used to inoculate 200 mL cultures in LB media in 1 L baffled shake flasks. The 281 
+cultures were grown at 37°C until mid -exponential phase (OD600 = 0.5–0.8) and then dropped to 282 
+18°C overnight for 18 h. Cells were then pelleted and used or frozen at −80°C. Cells used in this 283 
+study were stored at −80°C for less than 24 h.  284 
+Aldehyde Stability Assays 285 
+For testing stability in metabolically active cells under aerobic growth conditions, cultures 286 
+of each E. coli strain to be tested were inoculated from a frozen stock and grown to confluence 287 
+overnight in 5 mL of LB media. Confluent overnight cultures were then used to inoculate 288 
+experimental cultures to an initial starting OD600 of 0.01 in 400 µL volumes in a 96-deep-well plate 289 
+(Thermo Scientific™ 260251) and grown at 37°C. Cultures were supplemented with 5 mM of 290 
+aldehyde (prepared in 100 mM stocks in 100% DMSO) at mid -exponential phase (OD600 = 0.5-291 
+0.8). Cultures were then incubated at 30°C with shaking at 1000 RPM and an orbital radius of 3 292 
+mm. Samples were taken by pipetting 25 µL from the cultures into 125 µL of a 1:4 1 M HCl to 293 
+methanol mixture. Samples were then centrifuged in a different 96 -deep-well plate and the 294 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+11 
+ 
+extracellular broth was collected. Compounds were quantified over a 24 h period using HPLC with 295 
+samples collected at 4 h and 24 h.  296 
+For resting cell stability testing, cell pellets were thawed and then washed with 200 mM 297 
+HEPES, pH 7.5 buffer. The mass of cell pellets was then measured, and the pellets were 298 
+resuspended in 200 mM HEPES, pH 5.8 and 7.5 and at a wet cell weight of 50 mg/mL. The 299 
+resuspended resting cells were then aliquoted into 96 -deep-well plates and supplemented with 5 300 
+mM aldehydes of interest (prepared in 100 mM stocks in DMSO) at a reaction volume of 400 µL. 301 
+Resting cells were then incubated at 30°C with shaking at 1000 RPM and an orbital radius of 3 302 
+mm. Samples were taken by pipetting 25 µL from the cultures into 125 µL of a 1:4 1 M HCl to 303 
+methanol mixture. Samples were then centrifuged in a different 96 -deep-well plate and the 304 
+extracellular broth was collected. Compounds were quantified over a 20 h period using HPLC with 305 
+samples collected at 4 h and 20 h. 306 
+Growing cell assays 307 
+For metabolically active CAR assays, pZE plasmids expressing MaCAR and the Sfp 308 
+protein from Bacillus subtilis  were transformed into RARE.Δ16 cultures. Strains were then 309 
+inoculated from a frozen stock and grown to confluence overnight in 5 mL of LB media with 50 310 
+µg/mL kanamycin. Confluent overnight cultures were then used to inoculate experimental cultures 311 
+in a 96-deep-well plate initial starting OD600 of 0.05 in 300 µL in MOPS media with 10 mM MgCl2 312 
+and 50 µg/mL kanamycin at pH 7.5. For experiments testing the effect of starting pH, the starting 313 
+pH of the MOPS media was titrated to pH ranging from 7.4 -6.75. For experiments testing media 314 
+buffering capacity, 100 mM monobasic dihydrogen phosphate were added to cultures. At mid -315 
+exponential phase, we induced each culture then supplied 5 mM acid substrate (prepared in 100 316 
+mM stocks in 100% DMSO) . Cultures were then incubated at 30°C with shaking at 1000 RPM 317 
+and an orbital radius of 3 mm. Samples were taken by pipetting 25 µL from the cultures into 125 318 
+µL of a 1:4 1 M HCl to methanol mixture. Samples were then centrifuged in a different 96 -deep-319 
+well plate and the extracellular broth was collected. Compounds were quantified over a 24 h period 320 
+using HPLC with samples collected at 4 h and 24 h. For pH tracking experiments, confluent 321 
+overnight cultures were then used to inoculate 3 mL of MOPs media in 14 mL culture tubes. 322 
+Cultures were supplemented with 5 mM of TPA (prepared in a 100 mM stock in DMSO) at mid 323 
+exponential phase. Cultures were then incubated at 30°C in a rotor drum (Thermo Scientific Cel -324 
+Gro Tissue Culture Rotator) at maximum speed. Sampling was done as previously mentioned. 325 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+12 
+ 
+Compounds were quantified and the pH was measured for 24 h with timepoints at 0 h, 4 h, 8 h, 20 326 
+h, and 24 h using HPLC. 327 
+For metabolically active ETase assays, pET -28a(+) plasmids expressing each ETase 328 
+variant were transformed into RARE.Δ16. Confluent overnight cultures were then used to 329 
+inoculate experimental cultures in a 96-deep-well plate initial starting OD600 of 0.05 in 300 µL in 330 
+MOPS media with 10 mM MgCl2 and 50 µg/mL kanamycin at pH 7.5. At mid-exponential phase, 331 
+we induced each culture then supplied 5 mM BHET, MHET or MHET -ald (prepared in 100 mM 332 
+stocks in 100% DMSO). Cultures were then incubated at 30°C with shaking at 1000 RPM and an 333 
+orbital radius of 3 mm. Sampling was done as previously mentioned. Compounds were quantified 334 
+over a 24 h period using HPLC with samples collected at 4 h and 24 h. 335 
+For metabolically active ETase and CAR coupled assays, pACYC-FAST PETase and pZE-336 
+MaCAR plasmids were co -transformed into RARE.Δ16. Confluent overnight cultures of pET -337 
+28a(+)-FAST PETase (Cell A), pZE-MaCAR (Cell B) and pACYC-FAST PETase + pZE-MaCAR 338 
+(Cell C) were then used to inoculate experimental cultures in a monoculture, expressing the dual 339 
+plasmid, or a coculture, expressing FAST and MaCAR in separate strains at varying inoculation 340 
+ratios. Cultures had an initial starting OD600 of 0.05 in 300 µL in MOPS media with 10 mM MgCl2 341 
+and respective antibiotics (Cell C: 17 µg/mL chloramphenicol and 25 µg/mL kanamycin, coculture 342 
+and monocultures of Cell A and B: 50 µg/mL kanamycin) at pH 7.5. At mid -exponential phase, 343 
+we induced each culture induced (Cell A and B: 0.1 µg/mL aTc; Cell C: 0.1 µg/mL aTc and 1 mM 344 
+IPTG) then supplied 5 mM MHET or TPA (prepared in 100 mM stocks in 100% DMSO). Cultures 345 
+were then incubated at 30°C. Sampling was done as previously mentioned . Compounds were 346 
+quantified over a 24 h period using HPLC with samples collected at 8 h and 24 h. 347 
+Growth rate and protein production assay 348 
+For growth rate testing of engineered strains, confluent overnight cultures were used to 349 
+inoculate experimental cultures in LB or MOPS media at 100x dilution in 200 µL volumes in a 350 
+Greiner clear bottom 96 well plate (Greiner 655090). Cultures were grown for 24 h in a Spectramax 351 
+i3x plate reader with medium plate shaking at 37 °C and readings at 600 nm taken every 10 min 352 
+to determine growth rate of each strain. For growth rate in shake flasks, confluent overnight 353 
+cultures were used to inoculate experimental cultures in 50 mL of LB media at 100x dilution in 354 
+250 mL shake flasks. Cultures were grown for 9 h at 37 °C and 250 RPMs and readings at 600 nm 355 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+13 
+ 
+were taken every 30 min to determine growth rate of each strain using a BioMate160 356 
+spectrophotometer. 357 
+For growth rate testing with ETase overexpression, confluent overnight cultures were used 358 
+to inoculate experimental cultures in MOPS media with 50 µg/mL kanamycin at 100x dilution in 359 
+200 µL volumes in a Greiner clear bottom 96 well plate (Greiner 655090). Cultures were grown 360 
+for 3 h in a Spectramax i3x plate reader with medium plate shaking at 37 °C with absorbance 361 
+readings at 600 nm taken every 10 min to determine growth rate of each strain. Cultures were then 362 
+induced with 1 mM IPTG and dropped to 30 °C for an additional 21 h.  363 
+TPA protonation state calculation 364 
+The protonation state of TPA was calculated using Henderson-Hasselbalch relationship using the 365 
+pKa1 = 3.54 and pK a2 = 4.46. The following equations were then used to plot the fraction of 366 
+protonated species at the pH range of interest (pH 4.0-8.0) in Fig. S6: 367 
+(1) D =1+10 (pH − pKa1) +10 (2pH − pKa1 − pKa2) where D is the denominator fractional abunbances 368 
+(2) αTPA = 1 / D where αTPA is the fraction of fully protonated TPA 369 
+(3) αTPA- = 10(pH - pKa1) / D where αTPA- is the fraction of partially protonated TPA 370 
+(4) αTPA2- = 10(2pH - pKa1 - pka2) / D where αTPA2- is the fraction of fully deprotonated TPA 371 
+Translational genomic knockouts 372 
+Translational knockouts to the RARE.Δ16 were performed using 10 rounds of multiplexed 373 
+automatable genome engineering (MAGE) where stop codons were introduced into the genomic 374 
+sequence for each aldehyde dehydrogenase target in the upstream portion of the gene. Construction 375 
+of ROARΔ22 was done using the same oligos that were listed for the ROAR.Δ12 strain. MAGE 376 
+was performed using the pORTMAGE -Ec1 recombineering plasmid.  Briefly, bacterial cultures 377 
+were inoculated with 1:100 dilution in 3 mL of LB media with 30 μg/mL kanamycin (Kan) and 378 
+grown at 37°C until OD 600 of 0.4 -0.6 was reached. Then, the proteins responsible for 379 
+recombineering were induced with 1 mM m-toluic acid and cultures were grown at 37°C for an 380 
+additional 15 min. Cells were then prepared for electroporation by washing 1 mL three times with 381 
+refrigerated 10% glycerol and then resuspending in 50 µL of 10% glycerol with each knockout 382 
+oligo within a subset added at 1 µM. Cells were then electroporated and recovered in 3 mL of LB 383 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+14 
+ 
+with 30 µg/mL kanamycin to be used for subsequent rounds. Preliminary assessment of knockouts 384 
+was performed using mascPCR (multiplexed allele specific colony PCR) and confirmed using 385 
+Sanger Sequencing. ROAR.Δ22 was cured of the pORTMAGE -Ec1 plasmid following 386 
+confirmation of genomic knockouts. 387 
+Resting whole cell assays 388 
+To prepare cells for resting cell assays, pET-28a(+)-FAST ETase (Cell A), pZE -MaCAR 389 
+(Cell B), and pACYC-CvTA-AlaDH (Cell D) were transformed into ROAR.Δ22. pACYC- FAST 390 
+ETase and pZE-MaCAR (Cell C) were also co-transformed into ROAR.Δ22. Confluent overnight 391 
+cultures were used to inoculate 200 mL cultures in LB media antibiotics (Cell A and B: 50 µg/mL 392 
+kanamycin; Cell C: 25 µg/mL kanamycin and 17 µg/mL chloramphenicol; Cell D: 34 µg/mL 393 
+chloramphenicol) with 1 L baffled shake flasks. The cultures were grown at 37°C until mid -394 
+exponential phase and then induced (Cell A and B: 0.1 µg/mL aTc; Cell C: 0.1 µg/mL aTc  and 1 395 
+mM IPTG; Cell D: 1 mM IPTG). After induction the temperature was dropped to 18°C overnight 396 
+for 18 h. Cells were then pelleted, and the mass of the cell pellets were then measured. Cells were 397 
+used immediately after overexpression or frozen at −80°C. Cells used in this study were stored at 398 
+-80°C for less than 24 h. All cells were washed with 200 mM HEPES, pH 7.5 buffer prior to use. 399 
+Reactions unless otherwise noted were performed at a reaction volume of 400 µL in 1 mL deep -400 
+well plates.  401 
+To assay MaCAR (Cell B) in resting cells, cells were resuspended in buffer with 200 mM 402 
+HEPES or 200 mM MES (dependent on starting pH), 25 mM glucose, 10 mM magnesium chloride 403 
+at pH 5.2-7.5. The resuspended resting cells were then aliquoted into 96-deep-well plates at a wet 404 
+cell weight of 50 mg/mL and supplemented with 5 mM substrate of interest (prepared in 100 mM 405 
+stocks in DMSO) at a reaction volume of 400 µL. Resting cells were then incubated at 30°C with 406 
+shaking at 1000 RPM and an orbital radius of 3 mm. Samples were taken by pipetting 25 µL from 407 
+the cultures into 125 µL of a 1:4 1 M HCl to methanol mixture. Samples were then centrifuged in 408 
+a different 96 -deep-well plate and the extracellular broth was collected. Compounds were 409 
+quantified over a 4 h period using HPLC with samples collected at 2 h and 4 h. 410 
+To assay FAST ETase and MaCAR (Cell A+B and Cell C) in resting cells, cells were 411 
+resuspended in buffer with 200 mM HEPES, 25 mM glucose, 10 mM magnesium chloride at a pH 412 
+7.5. The resuspended resting cells were then aliquoted to a total wet cell weight of 50 mg/mL at 413 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+15 
+ 
+varying ratios of FAST ETase to MaCAR cells. Reaction mixture was supplemented with 5 mM 414 
+BHET, MHET or TPA at a volume of 400 µL. Resting cells were then incubated at 30°C. Sampling 415 
+was done was previously mentioned. Compounds were quantified over a 4 h period using HPLC 416 
+with samples collected at 2 h and 4 h. 417 
+To assay Cell C with high substrate loading, cells were resuspended in buffer with 400 mM 418 
+HEPES, 75 mM glucose, 10 mM MgCl 2 at pH 7.5. Cells were supplemented with 10, 20, or 40 419 
+mM of BHET or MHET at a cell concentration of 50 mg WCW/mL and at a volume of 400 µL. 420 
+Compounds were quantified over an 8 h period using HPLC with samples collected at 4 h and 8 421 
+h. 422 
+To assay CvTA-AlaDH (Cell D) in resting cells, cells were resuspended in buffer with 200 423 
+mM HEPES or 200 mM MES, 25 mM glucose, 10 mM MgCl2, 100 mM L-alanine, 50 mM NH4Cl 424 
+and 1 mM PLP at pH 5.8-8.0. The resuspended resting cells were then aliquoted to a total wet cell 425 
+weight of 50 mg/mL and supplemented with 5 mM TPAL. Resting cells were then incubated at 426 
+30°C. Sampling was done was previously mentioned. Compounds were quantified using HPLC at 427 
+2 h. 428 
+To assay Cell B and D in a one-pot two-step method, cells were resuspended in buffer with 429 
+200 mM HEPES, 200 mM MES, 25 mM glucose, 10 mM MgCl 2, 100 mM L -alanine, 50 mM 430 
+NH4Cl and 1 mM PLP at a pH of 5.2 or 7.5. To start the reaction, Cell B was added to the reaction 431 
+mixture at 50 mgWCW/mL and at a starting pH of 5.2 or 7.5. The cells were then supplemented with 432 
+5 mM TPA disodium salt and incubated at 30°C. After 2 h, the low starting pH reaction mixtures 433 
+were treated to 7.5 using NaOH. Also, at 2 h both starting pH reactions were supplemented with 434 
+50 mgWCW/mL of CvTA cells. The reactions were then ran for an additional 2 h. Sampling was 435 
+done was previously mentioned. Compounds were quantified at 4 h using HPLC. 436 
+To assay Cell A+B, Cell C and Cell D in one-pot with resting cells, cells were resuspended 437 
+in buffer with 200 mM HEPES, 25 mM glucose, 10 mM MgCl2, 100 mM L-alanine, 50 mM NH4Cl 438 
+and 1 mM PLP at a pH of 7.5.  For pXYL targeted reactions,  Cells A and B were added to the 439 
+reaction mixture at different ratios (1:2, 1:1. 2:1, 1:5 and 1: 10 of Cell A: Cell B) with a total cell 440 
+concentration of 50 mgWCW/mL. Cell C was also added at a cell concentration of 50 mg WCW/mL. 441 
+The cells were then supplemented with 5 mM BHET, MHET or TPA and incubated at 30°C. After 442 
+2 h, 50 mgWCW/mL of Cell D was added and the reaction was then ran for an additional 2 h. 443 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+16 
+ 
+Sampling was done was previously mentioned. Compounds were quantified at 4 h using HPLC.  444 
+For pAMBA targeted reactions, Cells A, B and D were added to the reaction mixture at different 445 
+ratios (2:1:1, 1:2:1. 1:10:2, and 1:1:2 of Cell A: Cell B: Cell D) with a total cell concentration of 446 
+50 mgWCW/mL. Cells C and D were also added at different ratios (10:1, 5:1 and 1:1 of Cell C: 447 
+CellD) with a total cell concentration of 50 mgWCW/mL. The cells were then supplemented with 5 448 
+mM MHET and incubated at 30°C. Sampling was done was previously mentioned. Compounds 449 
+were quantified at 4 h using HPLC. 450 
+Amine production from real PET glycolysis products 451 
+To assay Cell C using real PET glycolysis deconstruction products, cells were resuspended 452 
+in buffer with 400 mM HEPES, 75 mM glucose, 10 mM MgCl 2, 200 mM L -alanine, 100 mM 453 
+NH4Cl and 1 mM PLP at pH 7.8.  Solid PET glycolysis products were resuspended in 500 µL 454 
+DMSO and added to the reaction mixture at a targeted 40 mM BHET concentration. Reactions 455 
+were conducted using a 50 mL conical tube with a total reaction volume of 10 mL. Sampling was 456 
+done was previously mentioned. Compounds were quantified over an 8 h period using HPLC with 457 
+samples collected at 4 h and 8 h. 458 
+PET glycolysis 459 
+Plastic PET glycolysis experiments were carried out under previously optimized 460 
+conditions52 using a Monowave 450 microwave reactor (Anton Paar GmbH), equipped with an in-461 
+built IR sensor and an external Ruby thermometer for precise temperature control, Commercial 462 
+PET beverage bottles (Coca -Cola) were washed with water, dried, and cut into ~4 mm × 4 mm 463 
+square pieces prior to use. 464 
+In a typical experiment, 500 mg of PET flakes, 5 mL of ethylene glycol (EG), and 5 mg of 465 
+catalyst were added to a microwave reaction vial. Commercial ZnO nanopowder (<5 μm particle 466 
+size, Sigma-Aldrich) was used as the catalyst. The contents of the vial were thoroughly mixed 467 
+using a vortex mixer to ensure uniform dispersion of ZnO in EG. The vial was then placed in the 468 
+microwave reactor, which was programmed to maintain a constant temperature of 210°C for 15 469 
+minutes with a stirring speed of 600 rpm. 470 
+After the reaction, the vial was rapidly cooled to room temperature. Subsequently, 100 mL 471 
+of distilled water was added to extract BHET. Unreacted PET and higher molecular weight 472 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+17 
+ 
+oligomers were removed by filtration using Whatman filter paper. The filtrate, containing water -473 
+soluble products, was analysed by high-performance liquid chromatography (HPLC). 474 
+The residual water in the product solution was evaporated under vacuum (72 mbar) at 40°C 475 
+using a rotary evaporator. BHET was then crystallized by cooling the concentrated solution 476 
+overnight at 4°C in a refrigerator, following the addition of a small volume of distilled water. The 477 
+resulting BHET crystals were collected by filtration using a glass filter, thoroughly washed to 478 
+remove any residual EG, and dried overnight at 80°C. 479 
+The conversion of PET is calculated as follows: 480 
+PET Conversion (%) =
+WPET,i − WPET,f
+WPET,i
+× 100 (1) 481 
+WPET,i corresponds to the initial weight of PET and W PET,f to the weight of the unreacted PET, 482 
+obtained via filtration. The yield of the BHET is defined as: 483 
+BHET Yield (%) =  
+molBHET
+molPET
+× 100  (2) 484 
+molPET  =  
+WPET,i
+MWPET−RU
+  (3) 485 
+Textile depolymerization experiments were carried out at previously optimized 486 
+conditions51. Depolymerization experiments were performed on a Monowave 450 microwave 487 
+reactor (Anton Paar GmbH). This batch microwave reactor controls the temperature, time, and 488 
+maximum set power. Typically, 500 mg of textiles, 5 mL of EG, and 5 mg of the catalyst were 489 
+placed in a microwave reaction vial. The vial was inserted into the microwave reactor, and the 490 
+reactor was programmed to maintain a constant temperature. On completion of a reaction, the 491 
+reaction vial was allowed to cool down rapidly to room temperature. 100 mL of distilled water was 492 
+added to separate BHET and oligomers. The unreacted polymer and larger oligomers were 493 
+removed using a Whatman filter paper. The residual water from the product solution was then 494 
+evaporated under vacuum (72 mbar) at 60 °C using a rotary evaporator, and the resulting BHET 495 
+was crystallized by cooling the residual solution overnight to 4 °C in a refrigerator after the 496 
+addition of a small amount of distilled water to the residue. The resultant crystals were filtered 497 
+using a glass filter and dried at 80 °C. 498 
+HPLC analysis 499 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+18 
+ 
+TPAL, 4HMB, 4HMBA, BDM  and pXYL were quantified using reverse -phase high -500 
+performance liquid chromatography (HPLC) with an Agilent 1260 Infinity with a Zorbax Eclipse 501 
+Plus-C18 column with a guard column installed. Amines were derivatized with ortho-502 
+pthalaldehyde and 3-mercaptopropionic acid and identified using reverse-phase high-performance 503 
+liquid chromatography (RP-HPLC) with an Agilent 1260 Infinity with a Zorbax Eclipse Plus-C18 504 
+column with a guard column installed. The methods for detection of TPAL, 4HMB, 4HMBA, 505 
+BDM and pXYL were described previously36. 506 
+  507 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+19 
+ 
+References: 508 
+1. Pottinger, A. S. et al. Pathways to reduce global plastic waste mismanagement and greenhouse 509 
+gas emissions by 2050. Science 386, 1168–1173 (2024). 510 
+2. Liu, F. et al. Current advances in the structural biology and molecular engineering of PETase. 511 
+Front. Bioeng. Biotechnol. 11, (2023). 512 
+3. Taek Kim, H. et al. Biological Valorization of Poly(ethylene terephthalate) Monomers for 513 
+Upcycling Waste PET. ACS Sustain. Chem. Amp Eng. 7, 19396–19406 (2019). 514 
+4. Werner, A. Z. et al.  Tandem chemical deconstruction and biological upcycling of 515 
+poly(ethylene terephthalate) to β -ketoadipic acid by Pseudomonas putida  KT2440. Metab. 516 
+Eng. 67, 250–261 (2021). 517 
+5. Diao, J., Hu, Y., Tian, Y., Carr, R. & Moon, T. S. Upcycling of poly(ethylene terephthalate) 518 
+to produce high-value bio-products. Cell Rep. 42, (2023). 519 
+6. Dissanayake, L. & Jayakody, L. N. Engineering Microbes to Bio -Upcycle Polyethylene 520 
+Terephthalate. Front. Bioeng. Biotechnol. 9, (2021). 521 
+7. Johnson, N. W. et al. A biocompatible Lossen rearrangement in Escherichia coli. Nat. Chem. 522 
+17, 1020–1026 (2025). 523 
+8. Gopal, M. R. & Kunjapur, A. M. Harnessing biocatalysis to achieve selective functional group 524 
+interconversion of monomers. Curr. Opin. Biotechnol. 86, 103093 (2024). 525 
+9. Vermaas, J. V. et al. Passive membrane transport of lignin -related compounds. Proc. Natl. 526 
+Acad. Sci. 116, 23117–23123 (2019). 527 
+10. Li, T. & Crook, N. Construction of a Heterologous Pathway in Escherichia coli for 528 
+Terephthalate Assimilation. 2025.02.25.640003 Preprint at 529 
+https://doi.org/10.1101/2025.02.25.640003 (2025). 530 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+20 
+ 
+11. Li, Y. et al.  Metabolic engineering of Escherichia coli  for upcycling of polyethylene 531 
+terephthalate waste to vanillin. Sci. Total Environ. 957, 177544 (2024). 532 
+12. Sadler, J. C. & Wallace, S. Microbial synthesis of vanillin from waste poly(ethylene 533 
+terephthalate). Green Chem. 23, 4665–4672 (2021). 534 
+13. Valenzuela-Ortega, M., Suitor, J. T., White, M. F. M., Hinchcliffe, T. & Wallace, S. Microbial 535 
+Upcycling of Waste PET to Adipic Acid. ACS Cent. Sci. 9, 2057–2063 (2023). 536 
+14. Wang, S. et al.  Recyclable, Malleable, and Strong Thermosets Enabled by Knoevenagel 537 
+Adducts. J. Am. Chem. Soc. 146, 9920–9927 (2024). 538 
+15. Granado, L., Tavernier, R., Foyer, G., David, G. & Caillol, S. Catalysis for highly thermostable 539 
+phenol-terephthalaldehyde polymer networks. Chem. Eng. J. 379, 122237 (2020). 540 
+16. Granado, L. et al. Toward Sustainable Phenolic Thermosets with High Thermal Performances. 541 
+ACS Sustain. Chem. Eng. 7, 7209–7217 (2019). 542 
+17. Sonmez, H. B., Kuloglu, F. G., Karadag, K. & Wudl, F. Terephthalaldehyde - and 543 
+isophthalaldehyde-based polyspiroacetals. Polym. J. 44, 217–223 (2012). 544 
+18. Katsoulidis, A. P. et al.  Copolymerization of terephthalaldehyde with pyrrole, indole and 545 
+carbazole gives microporous POFs functionalized with unpaired electrons. J. Mater. Chem. A 546 
+1, 10465–10473 (2013). 547 
+19. Li, Z. et al. Removal and adsorption mechanism of tetracycline and cefotaxime contaminants 548 
+in water by NiFe2O4-COF-chitosan-terephthalaldehyde nanocomposites film. Chem. Eng. J. 549 
+382, 123008 (2020). 550 
+20. Brindell, G. D., Lillwitz, L. D., Wuskell, J. P. & Dunlop, A. P. Polymer Applications of Some 551 
+Terephthalaldehyde Derivatives. Prod. RD 15, 83–88 (1976). 552 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+21 
+ 
+21. Chung, Y., Hyun, K. H. & Kwon, Y. Fabrication of a biofuel cell improved by the π-conjugated 553 
+electron pathway effect induced from a new enzyme catalyst employing terephthalaldehyde. 554 
+Nanoscale 8, 1161–1168 (2015). 555 
+22. Díez, N., Mysyk, R., Zhang, W., Goikolea, E. & Carriazo, D. One -pot synthesis of highly 556 
+activated carbons from melamine and terephthalaldehyde as electrodes for high energy 557 
+aqueous supercapacitors. J. Mater. Chem. A 5, 14619–14629 (2017). 558 
+23. Choi, S.-H., Yashima, E. & Okamoto, Y. Synthesis of Polyesters from Terephthalaldehyde 559 
+and Isophthalaldehyde through Tishchenko Reaction Catalyzed by the Ethylmagnesium 560 
+Bromide-(−)-Sparteine Complex and Aluminum Alkoxides. Polym. J. 29, 261–268 (1997). 561 
+24. Weng, Q. et al. Controllable Synthesis and Biological Application of Schiff Bases from d -562 
+Glucosamine and Terephthalaldehyde. ACS Omega 5, 24864–24870 (2020). 563 
+25. Shaygan, S., Pasdar, H., Foroughifar, N., Davallo, M. & Motiee, F. Cobalt (II) Complexes 564 
+with Schiff Base Ligands Derived from Terephthalaldehyde and ortho -Substituted Anilines: 565 
+Synthesis, Characterization and Antibacterial Activity. Appl. Sci. 8, 385 (2018). 566 
+26. Gavali, L. V. et al. Novel terephthalaldehyde bis(thiosemicarbazone) Schiff base ligand and 567 
+its transition metal complexes as antibacterial Agents: Synthesis, characterization and 568 
+biological investigations. Results Chem. 7, 101316 (2024). 569 
+27. Kunjapur, A. & Prather, K. L. Microbial Engineering for Aldehyde Synthesis. Appl. Environ. 570 
+Microbiol. 81, 1892–1901 (2015). 571 
+28. Zhou, J., Chen, Z. & Wang, Y. Bioaldehydes and beyond: Expanding the realm of bioderived 572 
+chemicals using biogenic aldehydes as platforms. Curr. Opin. Chem. Biol. 59, 37–46 (2020). 573 
+29. Schober, L. et al. Enzymatic reactions towards aldehydes: An overview. Flavour Fragr. J. 38, 574 
+221–242 (2023). 575 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+22 
+ 
+30. Zhubanov, B. A., Kravtsova, V. D., Zhubanov, K. A., Abildin, T. S. & Bizhanova, N. B. p -576 
+Xylylenediamine and Its New Polyimides. Eurasian Chem.-Technol. J. 6, 45–50 (2004). 577 
+31. Stavila, E., Alberda van Ekenstein, G. O. R. & Loos, K. Enzyme -Catalyzed Synthesis of 578 
+Aliphatic–Aromatic Oligoamides. Biomacromolecules 14, 1600–1606 (2013). 579 
+32. Nanclares, J., Petrović, Z. S., Javni, I., Ionescu, M. & Jaramillo, F. Segmented polyurethane 580 
+elastomers by nonisocyanate route. J. Appl. Polym. Sci. 132, (2015). 581 
+33. Dataintelo. P xylylenediamine Market Report | Global Forecast From 2025 To 2033. 582 
+https://dataintelo.com/report/global-p-xylylenediamine-market. 583 
+34. Report, F. M. P -xylylenediamineMarket Size, Share, Growth | CAGR Forecast2032. Future 584 
+Market Report  https://www.futuremarketreport.com/industry-report/p-xylylenediamine-585 
+market/. 586 
+35. P Xylylenediamine Market Size, Growth, Share, & Analysis Report - 2033. 587 
+https://datahorizzonresearch.com/p-xylylenediamine-market-43216. 588 
+36. Gopal, M. R. et al.  Reductive Enzyme Cascades for Valorization of Polyethylene 589 
+Terephthalate Deconstruction Products. ACS Catal.  4778–4789 (2023) 590 
+doi:10.1021/acscatal.2c06219. 591 
+37. Dickey, R. M., Jones, M. A., Butler, N. D., Govil, I. & Kunjapur, A. M. Genome engineering 592 
+allows selective conversions of terephthalaldehyde to multiple valorized products in bacterial 593 
+cells. AIChE J. 69, e18230 (2023). 594 
+38. Butler, N. D., Anderson, S. R., Dickey, R. M., Nain, P. & Kunjapur, A. M. Combinatorial gene 595 
+inactivation of aldehyde dehydrogenases mitigates aldehyde oxidation catalyzed by E. coli 596 
+resting cells. Metab. Eng. (2023) doi:https://doi.org/10.1016/j.ymben.2023.04.014. 597 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+23 
+ 
+39. Britton, D. et al.  Protein-engineered leaf and branch compost cutinase variants using 598 
+computational screening and IsPETase homology. Catal. Today 433, 114659 (2024). 599 
+40. Fritzsche, S., Hübner, H., Oldiges, M. & Castiglione, K. Comparative evaluation of the 600 
+extracellular production of a polyethylene terephthalate degrading cutinase by 601 
+Corynebacterium glutamicum and leaky Escherichia coli in batch and fed -batch processes. 602 
+Microb. Cell Factories 23, 274 (2024). 603 
+41. Lu, H. et al. Machine learning-aided engineering of hydrolases for PET depolymerization. 604 
+Nature 604, 662–667 (2022). 605 
+42. Bell, E. L. et al. Directed evolution of an efficient and thermostable PET depolymerase. Nat. 606 
+Catal. 5, 673–681 (2022). 607 
+43. Cui, Y. et al. Computational Redesign of a PETase for Plastic Biodegradation under Ambient 608 
+Condition by the GRAPE Strategy. ACS Catal. 11, 1340–1350 (2021). 609 
+44. Son, H. F. et al.  Rational Protein Engineering of Thermo -Stable PETase from Ideonella 610 
+sakaiensis for Highly Efficient PET Degradation. (2019) doi:10.1021/acscatal.9b00568. 611 
+45. Zhong-Johnson, E. Z. L., Voigt, C. A. & Sinskey, A. J. An absorbance method for analysis of 612 
+enzymatic degradation kinetics of poly(ethylene terephthalate) films. Sci. Rep. 11, 928 (2021). 613 
+46. Tournier, V. et al. An engineered PET depolymerase to break down and recycle plastic bottles. 614 
+Nature 580, 216–219 (2020). 615 
+47. Xi, X. et al. Secretory expression in Bacillus subtilis and biochemical characterization of a 616 
+highly thermostable polyethylene terephthalate hydrolase from bacterium HR29. Enzyme 617 
+Microb. Technol. 143, 109715 (2021). 618 
+48. Cui, Y. et al.  Computational redesign of a hydrolase for nearly complete PET 619 
+depolymerization at industrially relevant high-solids loading. Nat. Commun. 15, 1417 (2024). 620 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+24 
+ 
+49. Pfaff, L. et al. Multiple Substrate Binding Mode-Guided Engineering of a Thermophilic PET 621 
+Hydrolase | ACS Catalysis. ACS Catal. 12, 9790–9800 (2022). 622 
+50. Banach, L. et al. Synthesis and Hemostatic Activity of New Amide Derivatives. Molecules 27, 623 
+2271 (2022). 624 
+51. Andini, E., Bhalode, P., Gantert, E., Sadula, S. & Vlachos, D. G. Chemical recycling of mixed 625 
+textile waste. Sci. Adv. 10, eado6827 (2024). 626 
+52. Selvam, E., Luo, Y., Ierapetritou, M., Lobo, R. F. & Vlachos, D. G. Microwave -assisted 627 
+depolymerization of PET over heterogeneous catalysts. Catal. Today 418, 114124 (2023). 628 
+53. Sullivan, K. P. et al. Mixed plastics waste valorization through tandem chemical oxidation and 629 
+biological funneling. Science 378, 207–211 (2022). 630 
+ 631 
+Acknowledgements:  632 
+The authors would like to thank the members of the University of Delaware Center for Plastics 633 
+Innovation for guidance and support on this project. 634 
+Funding:  635 
+We acknowledge support from the following funding source: The Center for Plastics Innovation, 636 
+an Energy Frontier Research Center funded by the U.S. Department of Energy (DOE), Office of 637 
+Science, Basic Energy Sciences, under Award No. # DE-SC0021166. 638 
+Author Contributions: 639 
+Conceptualization: RMD, AMK 640 
+Data curation: RMD, ES, EA 641 
+Methodology: RMD, ES, EA 642 
+Investigation: RMD, ES, EA, PN 643 
+Visualization: RMD 644 
+Funding acquisition: AMK 645 
+Project administration: AMK, DGV 646 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+25 
+ 
+Supervision: AMK, DGV 647 
+Writing – original draft: RMD, AMK 648 
+Writing – review & editing: RMD, AMK, ES, EA, DGV 649 
+Competing interests: 650 
+The authors declare the following competing financial interest(s) : RMD and AMK are co -651 
+inventors on a filed a provisional patent related to this work as well as inventors on a previously 652 
+filed patent application related to this enzymatic cascade.  653 
+Data and materials availability: 654 
+ All data are available in the main text or the supplementary materials. Strains and plasmids are 655 
+available upon request. 656 
+Supplementary Materials 657 
+Tables S1 to S4 658 
+Figs. S1 to S10 659 
+Supplementary references 660 
+  661 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+26 
+ 
+Figures 662 
+ 663 
+ 664 
+Fig. 1. The s trategy for biologically upcycling PET using cells based on alternative 665 
+deconstruction products  that exhibit better uptake . (A) The complete and alternative 666 
+deconstruction products of PET  shown in the context of our prior upcycling work performed in 667 
+vitro. (B) Summary of topics and cellular transformation routes investigated in th is work, 668 
+culminating in high-yield biosynthesis of TPAL, pAMBA, or pXYL from real PET wastes after 669 
+catalytic glycolysis. 670 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+27 
+ 
+ 671 
+Fig. 2. The influence of pH on apparent cellular uptake of TPA and MHET. (A) Experimental 672 
+design, which featured cells of the E. coli RARE.Δ16 strain expressing MaCAR cultured in MOPS 673 
+media with 10 mM MgCl 2 and 2 % glucose at pH of 7.4. Cells were induced at mid -exponential 674 
+phase (OD 600= 0.5 -0.7), dropped to 30 °C, and supplemented with 5 mM of carboxylic acid 675 
+substrate. (B) Endpoint assay showing the conversion of acid substrates to their corresponding 676 
+aldehydes after 4 h. ( C) Time course of the relationship between pH and TPAL production  from 677 
+supplemented TPA. (D) Variation of initial pH, which led to conversion of TPA to TPAL at 4 h. 678 
+Starting pH was measured before the addition of 5 mM TPA.  (E) Conceptual illustration showing 679 
+that e ndogenous aldehyde dehydrogenases (ALDHs) can mask TPA conversion  in r esting 680 
+RARE.Δ16 cells. (F) Time course of supplemented TPAL oxidation in resting RARE.Δ16  cells. 681 
+(G) The n ewly engineered E. coli ROAR.Δ22 strain limits oxidation and reduction of TPAL 682 
+compared to wild-type (MG1655) and previously engineered strains (RARE.Δ16 and ROAR.Δ12). 683 
+(H) ROAR.Δ22 cells with MaCAR enable efficient generation and stability of aldehydes (TPAL 684 
+from TPA and MHET -ald from MHET) to determine uptake of ( I) TPA and ( J) MHET at pH 685 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+28 
+ 
+ranges from 4.8 -7.5. Samples sizes are  n = 3 using biological replicates. Data shown are 686 
+mean ± s.d. 687 
+  688 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+29 
+ 
+ 689 
+Fig. 3. Evaluating ETase specificity on PET deconstruction products  for intracellular 690 
+hydrolysis. (A) Intercellular expression of ETases could allow for TPA to be produced within the 691 
+cell, preventing the need for active transport. Supplementation of 5 mM (B) BHET (C) MHET or 692 
+(E) MHET -ald to RARE.Δ16 cell expressing ETase variants in MOPS media. Endpoint 693 
+concentrations were measured after 24 h. (D) The conversion of a novel substate, MHET -ald, to 694 
+FBA. (F) Effect of ETase expression (induction indicated by dotted line at 3 h) on cellular growth. 695 
+(G) Evaluation of coupling FAST and MaCAR in growing cells in either separate strains (Cell A 696 
+and B respectively) or in the same strain (Cell C)  for the production of TPAL from ( H) TPA, (I) 697 
+MHET or ( J) BHET . Samples sizes are  n = 3 using biological replicates. Data shown are 698 
+mean ± s.d. 699 
+ 700 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+30 
+ 
+ 701 
+Fig. 4. Valorization towards para-xylylenediamine (pXYL) using enhanced uptake of MHET and 702 
+BHET. (A) Endogenous oxidation can limit pXYL production in resting cells . (B) pXYL 703 
+biosynthesis from TPAL at varying pH ranges. (C) One-pot two-step production of pXYL  from 704 
+TPA, MHET, and BHET. TPA was added to reactions mixtures of Cell B at a starting pH of (D) 705 
+7.5 or (E) 5.2. After 2 h, the reaction mixture was titrated if needed to 7.5 and Cell D was added.  706 
+(F) MHET and (G) BHET were added to Cell A, Cell B, Cell C as well as optimum ratio of Cell 707 
+A and B found previously. After 2 h, Cell D was added. Samples sizes are n = 3 using biological 708 
+replicates. Data shown are mean ± s.d. 709 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint 
+31 
+ 
+ 710 
+Fig. 5. Microbial upcycling of PET deconstruction products. (A) Depiction of our chemoenzymatic 711 
+platform for pXYL production starting from PET. Catalytic glycolysis was done on polyester 712 
+textile waste as well as PET plastic bottles . These products were then coupled with the proposed 713 
+whole cell cascade for the biosynthesis of pXYL. Cell C was  added to resuspended PET 714 
+deconstruction products from ( B) polyester textile waste (red shirt) and ( C) PET bottle. At 8 h, 715 
+Cell D was added, and the reaction was conducted for an additional 8 h. Samples sizes are n = 1.  716 
+ 717 
+(which was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. 
+The copyright holder for this preprintthis version posted October 1, 2025. ; https://doi.org/10.1101/2025.10.01.679844doi: bioRxiv preprint

@@ -1,0 +1,1993 @@
+Analysis of Poly(ethylene terephthalate) degradation kinetics
+of evolvedIsPETase variants using a surface crowding model
+Received for publication, December 31, 2023, and in revised form, February 10, 2024Published, Papers in Press, February 22, 2024,
+https://doi.org/10.1016/j.jbc.2024.105783
+En Ze Linda Zhong-Johnson1,*
+ , Ziyue Dong2, Christopher T. Canova3, Francesco Destro3
+ , Marina Cañellas4,
+Mikaila C. Hoffman5
+ , Jeanne Maréchal1,6
+ , Timothy M. Johnson7
+ , Maya Zheng1, Gabriela S. Schlau-Cohen5,
+Maria Fátima Lucas4, Richard D. Braatz3
+ , Kayla G. Sprenger2
+ , Christopher A. Voigt8, and Anthony J. Sinskey1,*
+From the 1Department of Biology, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA;2Department of
+Chemical and Biological Engineering, University of Colorado, Boulder, Colorado, USA;3Department of Chemical Engineering,
+Massachusetts Institute of Technology, Cambridge, Massachusetts, USA;4Zymvol Biomodeling SL, Barcelona, Spain;5Department
+of Chemistry, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA;6AgroParisTech, Palaiseau, France;7Plasma
+Science and Fusion Center, and8Department of Biological Engineering, Massachusetts Institute of Technology, Cambridge,
+Massachusetts, USA
+Reviewed by members of the JBC Editorial Board. Edited by Joseph Jez
+Poly(ethylene terephthalate) (PET) is a major plastic poly-
+mer utilized in the single-use and textile industries. The dis-
+covery of PET-degrading enzymes (PETases) has led to an
+increased interest in the biological recycling of PET in addition
+to mechanical recycling.IsPETase fromIdeonella sakaiensis is
+a candidate catalyst, but little is understood about its structure-
+function relationships with regards to PET degradation. To
+understand the effects of mutations onIsPETase productivity,
+we develop a directed evolution assay to identify mutations
+beneﬁcial to PET ﬁlm degradation at 30
+/C14 C. IsPETase also
+displays enzyme concentration-dependent inhibition effects,
+and surface crowding has been proposed as a causal phenom-
+enon. Based on total internal reﬂectance ﬂuorescence micro-
+scopy and adsorption experiments, IsPETase is likely
+experiencing crowded conditions on PET ﬁlms. Molecular
+dynamics simulations ofIsPETase variants reveal a decrease in
+active siteﬂexibility in free enzymes and reduced probability of
+productive active site formation in substrate-bound enzymes
+under crowding. Hence, we develop a surface crowding model
+to analyze the biochemical effects of three hit mutations
+(T116P, S238N, S290P) that enhanced ambient temperature
+activity and/or thermostability. Weﬁnd that T116P decreases
+susceptibility to crowding, resulting in higher PET degradation
+product accumulation despite no change in intrinsic catalytic
+rate. In conclusion, we show that a macromolecular crowding-
+based biochemical model can be used to analyze the effects of
+mutations on properties of PETases and that crowding
+behavior is a major property to be targeted for enzyme engi-
+neering for improved PET degradation.
+Poly(ethylene terephthalate) (PET) is a major plastic poly-
+mer composed of terephthalic acid (TPA) and ethylene glycol,
+which are joined by ester linkages. Due to the presence of the
+ester bonds in PET, it is more amenable to biodegradation and
+has become the most studied synthetic polymer for enzymatic
+depolymerization. Ideonella sakaiensis is a bacterium discov-
+ered in 2016 that consumes PET as a carbon source (1). It
+harbors the PET-degrading enzyme IsPETase, which is a
+member of the cutinase family and one of the fastest known
+enzymes for depolymerization of PET at room temperature (1).
+The enzyme releases soluble PET degradation products such
+as ethylene glycol, TPA, mono-2-hydroxyethyl terephthalate
+(MHET), bis(2-hydroxyethyl) terephthalate (BHET), and
+potentially oligomers (2). Many rational engineering efforts
+have been aimed at enhancingIsPETase thermostability and
+high temperature activity, and many directed evolution
+screening methods have been developed to identify variants
+with prolonged activity and/or better activity at elevated
+temperatures (3– 7). The thermostability ofIsPETase has thus
+been improved drastically to be on par with known thermo-
+stable PETases (also belonging mostly to the cutinase family)
+(3– 5). However, little is known about the biochemical impact
+of these mutations, other than improvements in stability and
+increased product yield over a given period of time at higher
+temperatures. Biochemical analyses of IsPETase kinetics are
+particularly difﬁcult due to a lack of kinetic models that can
+interpret the nonideal kinetic behaviors ofIsPETase and also
+account for variables that stem from the solid nature of the
+substrate. Thus, the effects of most of the activity mutations
+that have been identiﬁed remain largely unknown.
+Kinetic analysis is the standard method to study effects of
+mutations on catalytic activity. The kinetic models tradition-
+ally used for this purpose are the conventional Michaelis–
+Menten (
+convMM) model, in conditions of substrate-site
+excess, and the inverse Michaelis– Menten (invMM) model, in
+conditions of enzyme excess (8). However,IsPETase displays a
+concentration-dependent inhibition behavior where increasing
+enzyme concentrations eventually lead to decreased depoly-
+merization rates of solid PET, particularly at its optimal re-
+action pH of 9 (1, 2, 9, 10). This phenomenon, which herein
+will be referred to as the inhibition effect, has also been
+observed in cellulases and poly(hydroxyalkanoate) (PHA)
+* For correspondence: En Ze Linda Zhong-Johnson, enzhong@mit.edu;
+Anthony J. Sinskey,asinskey@mit.edu.
+RESEARCH ARTICLE
+J. Biol. Chem. (2024) 300(3) 105783 1
+© 2024 THE AUTHORS. Published by Elsevier Inc on behalf of American Society for Biochemistry and Molecular Biology. This is an open access article under the CC
+BY license (http://creativecommons.org/licenses/by/4.0/).
+depolymerases, suggesting that it is a general behavior
+observed in enzymatic degradation of solid substrates. The
+inhibition effect makes it complicated to interpret biochemical
+properties using the MM kinetic models, which assume ideal
+saturation behaviors. To adapt the
+invMM model toIsPETase,
+studies haveﬁt exclusively the increasing portion of the kinetic
+data with the invMM model (10). This approach cannot be
+used to explain the inhibition behavior exhibited byIsPETase
+nor predict the optimal enzyme concentration given a sub-
+strate concentration. Furthermore, it is unknown whether the
+ﬁtted parameters represent true biochemical properties of the
+considered enzymes (11, 12).
+The only known macroscopic kinetic model that captures
+the inhibition effect was proposed by Mukaiet al. (1993) to
+describe the kinetic pro ﬁles of poly(hydroxybutyrate) ﬁlm
+degradation by PHA depolymerases (13). According to the
+Mukai model, the degradation reaction requires the interac-
+tion between the catalytic domain of a surface-bound enzyme
+and an adjacent free substrate site, due to the multidomain
+nature of PHA depolymerases. As a result, in systems
+described by the Mukai model, the degradation rate eventually
+decreases as the site coverage increases, and the degradation
+reaction is completely halted at full site coverage. The model
+proposed by Mukaiet al.for multidomain PHA depolymerases
+cannot be directly applied to explain the inhibition effect of
+single-domain depolymerases, such asIsPETase, which do not
+require two adjacent binding sites to form an active complex
+(9, 13). Furthermore, the model was incomplete in that it did
+not take into account the effect of substrate concentration on
+reaction rate (13). Finally, the model makes the assumption
+that enzyme concentrations are in excess of substrate sites,
+which is not always true for a given system.
+The inhibition dynamics of the Mukai model can be loosely
+interpreted as a form of macromolecular crowding, where an
+enzyme requires enough physical space, in this case an adjacent
+binding site, to perform catalysis. Similarly, the coarse-grained
+simulation model developed by Ezakiet al. (2019) successfully
+described the inhibition effect for cellulase by accounting for the
+competition between the binding and catalytic domains for
+space on the substrate surface (11). Though the Ezaki model
+captures the inhibition effect, it requires as input single-
+molecule experimental rate constants, and it is not intended
+for ﬁtting macroscopic kinetic data. Crowding phenomena have
+also been observed in protein adsorption experiments, where
+increasing protein adsorption on a surface results in transition
+(such as reorientation) to more compact states due to crowding
+effects (14, 15). Interestingly, Avilanet al. (2023) reported that
+the inhibition effect ofIsPETase can be modulated by increasing
+the substrate surface area, which increases the enzyme con-
+centration at which the inhibition effect is observed; the authors
+proposed that these observations are likely due to a surface
+crowding (SC) phenomenon (9).
+More broadly, macromolecular crowding is a phenomenon
+where increasing concentrations of macromolecules decrease
+accessible volume and thus favor protein conformations that
+best compact into the available space (16– 18). The phenom-
+enon has been extensively investigated using molecular
+dynamics and coarse-grained simulations, which have shown
+that crowding causes larger reductions in enzyme activity for
+enzymes with larger conformational changes during catalysis
+(16, 18). Similarly, the intramolecular distances between resi-
+dues of a mesophilic protein was reduced upon addition of
+crowding agents, suggesting a more compact conformation,
+whereas the thermophilic counterpart was invariant in the
+presence of crowding agents (19). Macromolecular crowding
+effects have been observed experimentally using inert crowd-
+ing agents such as 100 g/L Ficoll 70 and 50 g/L bovine serum
+albumin (BSA), which suggests that a separation distance of
+/C24 10 nm between molecule centers results in crowding (20).
+In this study, WTIsPETase and the previously developed
+thermostable TS-PETase variant (S121E, D186H, N233C,
+R280A, S282C) were evolved using random- and semi-
+rational– directed evolution for improved activity at 30
+/C14 Ct o
+obtain a set of mutations for biochemical analysis (2, 7). To
+investigate how and if the isolated mutations enhancedIsPE-
+Tase catalytic activity, we develop a novel biochemical model
+based on macromolecular crowding for depolymerases that
+display inhibition effects. To support the SC hypothesis,
+IsPETase density on the PET surface is probed with total in-
+ternal reﬂectance ﬂuorescence microscopy and adsorption
+experiments. Furthermore, molecular dynamics simulations
+are performed to investigateIsPETase behavior under crowded
+and uncrowded conditions. Finally, using the SC model, we
+determine the catalytic rate and binding parameters of the
+evolved variants to gain mechanistic insights into the effects of
+the mutations on PET degradation and enzyme properties to
+be targeted for engineering.
+Results
+Directed evolution ofIsPETase identiﬁes mutations that
+enhance ambient temperature productivity and
+thermostability
+An in vitro– directed evolution screen was developed for the
+evolution of PET-degrading enzymes on PETﬁlms. Variants of
+IsPETase with a C-terminal His8-tagged were expressed in
+Escherichia coli, lysed, and screened for activity on BHET-agar
+plates. All wells displaying activity were semi-puriﬁed using
+Ni-NTA resin, yielding sufﬁciently pure protein that can be
+quantiﬁed using MicroBCA and normalized to 100 nM for the
+ﬁnal PET ﬁlm activity assay (A260/A280 ratios of elutions sug-
+gested nucleic acid contamination but had minimal impact on
+A
+260 readings after normalization) (Fig. S1B). The reaction
+supernatants are then transferred to a UV-transparent 384-
+well plate and product levels are measured in a plate reader
+using A260 (Fig. 1A). The activity assay allows all abiotic con-
+ditions such as buffer composition, pH, temperature, and
+substrate type to be varied (see detailed methods in SI).
+Using the described directed evolution assay, two random
+libraries and onein silico library were screened (total of 5400
+variants). The selection conditions were 30
+/C14 C and 50 mM
+glycine-NaOH pH 9, 50 mM NaCl, and 10% v/v DMSO
+(herein referred to as reaction buffer) with 0.25"-diameter
+amorphous PET ﬁlms as substrate (Goodfellow). WT
+Analysis of IsPETase kinetics using a surface crowding model
+2 J. Biol. Chem. (2024) 300(3) 105783
+
+IsPETase (WT) served as the template for theﬁrst random
+mutagenesis library, and several hit mutations were identiﬁed
+for known residues of interest such as R280S/H, Q119H, and
+N246D; these ultimately did not pass validation screens
+(Fig. S2, A and B)( 7, 21, 22). A novel mutation, T116P, was
+found to increase PET degradation product accumulation and
+the amount of eluted protein in the validation screens (Fig. 1,
+B and C). Interestingly, this mutation had been previously
+considered in computational design and was not selected (5).
+T116P also increased the amount of eluted protein in vali-
+dation screens when introduced into the thermostable variant
+TS-PETase (Fig. 1, B and C). The T116P mutation did not
+impact PET degradation in the TS-PETase background based
+on the screens, but kinetic assays of >99% puriﬁed TS-
+T116P-PETase (TSP-PETase) revealed a 30% improvement
+in maximum product accumulation rate compared to puriﬁed
+TS-PETase on 0.25”-diameter PET ﬁlms at 30
+/C14 C( Figs. 1, C
+and D; S2C and S3). TSP-PETase was used as the template for
+the second round of random directed evolution, and S238N
+was shown to further increase eluted protein in the screens
+and potentially enhanced activity (Fig. 1, B and C). Many
+mutations have been identi ﬁed at the S238 position with
+varying effects on product accumulation, substrate speciﬁcity,
+and thermostability (23– 26). Puriﬁed TSP-S238N-PETase had
+a cumulative 1.5
+/C14 C increase in thermostability compared to
+TS-PETase, though inclusion of S238N resulted in a small
+T116P
+S238N
+S290P
+B
+E
+C
+Culture in 96 well block and 
+lyse with CelLytic Express
+Purify with magnetic 
+Ni-NTA beads
+in 96-well PCR plate
+Quantify protein
+ with MicroBCA assay
+in 384-well plate
+Normalize enzyme concentration and
+assay activity in 
+96-well round-bottom plate
+Assay for activity in lysate on
+BHET agar plates
+A
+D
+TSTSP
+TSP S238NTSP S290
+TSPNP
+62
+64
+66
+68
+70
+72
+74
+0
+2
+4
+6
+8
+Variant
+Tm (oC)
+Maximum productivity
+(mA260/ min)
+WT
+WT T116P
+TSTSP
+TSP S238NTS S290P
+0
+5
+10
+15
+30
+45
+60
+Variant
+Relative protein yield  / ml culture
+(MicroBCA)
+WT
+WT T116P TSTSP
+TS
+P S238NTS S290P
+0.0
+0.5
+1.0
+1.5
+2.0
+Variant
+Relative A260
+Figure 1. Random- and semi-rational–directed evolution ofIsPETase identiﬁed three mutations that enhanced puriﬁcation yields with potential
+beneﬁts to activity.Thatched bars represent mutations fromin silicolibrary. TSP is TS-T116P-PETase.A, schematic of high-throughput– directed evolution
+screening procedure. B, relative protein elution yields (based on MicroBCA quantiﬁcation) of IsPETase variants in high-throughput validation screens. All
+yields were normalized to culture volume (per ml) and then to WT. Mean and SD are shown (n = 4 biological replicates shown incircles). C, relative product
+formation (A260) of hit mutants compared to WT based on high-throughput validation screens (2 h of incubation of semi-puriﬁed IsPETase variants with
+0.25”-diameter amorphous Goodfellow PETﬁlms at 30 /C14 C). Dashed lines indicate a fold-change of 1 for (B) and (C). D, melting temperature (Tm, black
+diamonds) and maximum product formation rate (bars) of fully puriﬁed TS-PETase variants against 0.25”-diameter amorphous Goodfellow PETﬁlms at 30/C14 C.
+Initial rates of reaction were determined using the bulk absorbance assay and enzyme concentrations between 10 to 400 nM were assayed (Fig. S2C).
+Enzyme concentration at maximum product formation rate: TS-PETase = 100 nM, 80 nM for all other variants. Mean and SD of three biological replicates
+(circles) are shown for (C) and (D). E, positions of mutations identiﬁed from directed evolution are shown on the structure of WT (PDB: 6EQE) (24). The
+catalytic triad is shown ingreen as ball-and-stick model.Purple: T116P; orange: S238N; red: S290P. PET, poly(ethylene terephthalate).
+Analysis of IsPETase kinetics using a surface crowding model
+J. Biol. Chem. (2024) 300(3) 105783 3
+reduction in maximum productivity compared to TSP-PETase
+(Figs. 1D and S2C).
+An in silicolibrary consisting of 95 TS-PETase variants was
+also selected with the overarching objective of enhancing
+enzyme activity and thermostability ( Fig. S2 D). Mutation
+S290P was found to increase elution yield in screens with no
+effects on product accumulation (Fig. 1, B and C). This mu-
+tation has also been recently identiﬁed by Shi et al. (2023),
+further validating the screen (22). S290P was introduced into
+TSP-S238N-PETase (TSP-S238N-S290P-PETase or TSPNP-
+PETase) and puriﬁed enzyme displayed another 1.5
+/C14 C in-
+crease in thermostability relative to TSP-S238N-PETase with
+slight reduction in maximum productivity on 0.25”-diameter
+PET ﬁlms (Figs. 1D and S3); the mutation was carried forward
+for further study due to the beneﬁts to thermostability and
+puriﬁcation. The locations of the three identiﬁed mutations are
+shown on the crystal structure ofIsPETase in Figure 1E (24).
+To determine the kinetic impacts of the isolated mutations, the
+inhibition effect was further investigated to develop a
+comprehensive biochemical model for mutation analysis.
+IsPETase likely experienced crowded conditions on the surface
+of PET
+Surface crowding has been previously proposed as the cause
+of the inhibition effect, where crowded environments led to
+decreased enzyme activity similar to effects of macromolecular
+crowding (9, 11, 17). To explore enzyme density on PETﬁlms
+during catalysis, puriﬁed IsPETase variants were incubated
+with 0.25”-diameter PET ﬁlms for 1.5 h at 30
+/C14 C and the
+concentration of residual IsPETase in solution was used to
+infer adsorption (Fig. S4, A– D)( 8). Intrinsic protein ﬂuores-
+cence allowed detection down to 10 nM of enzyme, but
+degradation products were found to artiﬁcially reduce ﬂuo-
+rescence signal (Fig. S4, E– G). Thus, sample measurements
+were corrected according to its estimated MHET concentra-
+tion, which is the major product (Fig. S4H). To avoid product
+interference and cross-validate the MHET-corrected mea-
+surements, twoﬂuorescently-tagged (Atto647N and SulfoCy5)
+TSP-PETase variants and inactive TSP-S160A-PETase were
+also assayed. However, the addition ofﬂuorescent tags may
+alter adsorption behavior, and the inactive variant cannot
+productively bind PET and may have reduced adsorption.
+With these caveats, average adsorption levels between 4 to 11
+pmol at 40 nM of total enzyme and 5 to 16 pmol at 80 nM of
+total enzyme were measured for all variants ( Fig. 2 A).
+Considering 4 pmol of adsorbed enzyme on a completely
+smooth PET surface, it equated to 5 nm separation distance
+between evenly distributed particle centers or 2.5 nm mean
+minimum distance between randomly distributed particle
+centers based on Monte Carlo simulations. However, the
+surface of PET is not completely smooth on the nanometer
+scale, and therefore the separation distances between mole-
+cules were likely larger (27). Intermolecular interactions be-
+tween enzymes as well as varying PET substrate accessibility
+across the surface can cause nonrandom distribution of mol-
+ecules, which will also affect separation distance.
+The enzyme density and distribution on the surface of PET
+were further explored using total internal reﬂection ﬂuores-
+cence microscopy (TIRF) with TSP-Atto647N. Though TSP-
+Atto647N showed the lowest adsorption in solution deple-
+tion experiments, Atto647N was chosen due to higher
+AB
+0 50 100 150 200 250
+0.0
+5.0 107
+1.0 108
+1.5 108
+2.0 108
+2.5 108
+256
+512
+1024
+2048
+4096
+TSP-Atto647N (pM)
+Enzyme density
+(molecules / cm2)
+Mean minimum
+separation distance (nm)
+WT TS
+TSPNP
+TSP
+TSP-SulfoCy5TSP-Atto647N
+TS
+P S160A
+WT TS
+TSPNP
+TSP
+TSP-SulfoCy5TSP-Atto647N
+TSP
+ S160A
+0
+5
+10
+15
+20
+25
+30
+35
+40
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+Variant
+Adsorbed Enzyme (pmol)
+40 nM 80 nM A260
+A260
+ns
+ns
+Figure 2. Adsorption ofIsPETase to amorphous PETﬁlms. A, solution depletion experiments were performed to determine amount of adsorbed enzyme
+molecules on the surface of 0.25”-diameter amorphous PETﬁlms (Goodfellow). Enzyme concentrations of 40 nM (gray bars) and 80 nM (blue bars) were
+incubated with or without theﬁlm for 1.5 h at 30/C14 C, andﬂuorescence of proteins was used to measure supernatant enzyme concentration.Black triangles
+show the corresponding A260 product reading for each sample after 1.5 h. Difference between TSP-PETase and TSP-SulfoCy5 were insigniﬁcant for both
+enzyme concentrations based on unpaired two-tailed studentt test (p > 0.1). Bars and error bars show mean and SD (n ≥ 3 biological replicates shown in
+circles). B, TIRF measurements of enzyme surface density and mean minimum separation distance between molecule centers on the surface of spun-coated
+PET thinﬁlms ([PET] = 5000 cm2/L) incubated with 0 to 200 pM of TSP-Atto647N. The mean and SD of the number of particles identiﬁed from eight equal
+quadrants (two locations on the PETﬁlm per enzyme concentration) are shown inblue squares. The mean and SD of the mean minimum separation distance
+from the eight quadrants are shown inpurple circles. PET, poly(ethylene terephthalate).
+Analysis of IsPETase kinetics using a surface crowding model
+4 J. Biol. Chem. (2024) 300(3) 105783
+
+resistance to photobleaching and to obtain a lower-bound
+density estimate (molecules within 214 nm also could not be
+distinguished) (28). TSP-Atto647N (/C24 98% tagged) at concen-
+trations of 0 to 500 pM were added to a PET-coated glass slide
+([PET] = 5000 cm
+2/L) and imaged under a TIRF microscope
+(Fig. S5). Individual molecules were indistinguishable by 500
+pM, while the mean minimum separation distance between
+enzyme centers was measured to be 400 nm at 200 pM
+(Figs. 2B and S5B). The distribution of enzyme particles on the
+spun-coated PET surface appeared to be random across all
+enzyme concentrations assayed ( Fig. S5 B). The onset of
+observable inhibition effects is reported to occur around 80 to
+120 nM of totalIsPETase with 630 cm
+2/L PETﬁlms, which is
+delayed to higher enzyme concentrations with increasing
+substrate concentrations (2, 9). If a linear increase in surface
+density (consistent with adsorption proﬁle in Fig. S4C) was
+assumed to estimate separation distance at 75 nM enzyme and
+5000 cm
+2/L PET, the simulated mean minimum separation
+distance of randomly distributed particle centers was found to
+be /C24 20 nm (Fig. S6). Compared to a separation distance of
+10 nm for crowding conditions induced by BSA and Ficoll 70
+solutions in literature, the solution depletion and TIRF ex-
+periments together supported thatIsPETase was likely expe-
+riencing crowded surface conditions over the enzyme-
+substrate concentration combinations where inhibition ef-
+fects were observed. Finally, the adsorption experiments sug-
+gested that the amount of free enzyme in the reaction was
+<90% of the total enzyme concentration and enzyme excess
+cannot be assumed in kinetic analyses at the lower enzyme
+concentrations.
+Molecular dynamics simulations suggest that crowding
+reduces frequency of productive catalytic site conformations
+To gain insights into macromolecular crowding effects on
+enzyme conformation and activity, we performed all-atom MD
+simulations of both free and PET-pentamer– bound WT and
+TS-PETase. The simulations were performed at an enzyme
+crowding concentration of 2 mM in solution (/C24 10 nm sepa-
+ration distance) to be representative of higher enzyme con-
+centrations expected on a crowded PET surface. We compared
+our results against respective control simulations of a single
+uncrowded IsPETase variant in both the free and pentamer-
+bound state (Fig. 3, A– C). All MD analyses were performed
+over the last 50 ns of the converged simulation trajectory for
+both crowding and control simulations, at which time we
+observed that each system had achieved equilibrium. This was
+indicated by convergence of the RMSD in enzyme conforma-
+tion and by complete monomer aggregation in crowding
+simulations. For uncrowded control simulations, results and
+error bars were reported as averages across three independent
+replica MD simulations. For crowding simulations, results and
+error bars were reported as averages across each of the eight
+enzymes in the simulation. The simulations demonstrated that
+crowding led to reduced overall enzymeﬂexibility and active
+site residue ﬂexibility in free enzymes, while hindering the
+formation of productive conformations in substrate-bound
+enzymes (Fig. 3, D and F).
+Under crowding conditions, it was observed that both WT
+and TS-PETase underwent aggregation through nonspeciﬁc
+attractive interactions, rendering them less mobile (Fig. 3C).
+Thus, the averageﬂexibility of all eight enzymes in the system
+was reduced when compared to that of a single enzyme from
+the control simulation, which can be attributed to enhanced
+protein– protein surface interactions stabilizing enzyme con-
+formations. The formation of protein-protein interfaces was
+stochastically driven and not related to speciﬁc residue in-
+teractions. An increase in the overall stability of individual
+enzymes can also be rationalized alongside inhibition behavior
+and longer enzyme life-times under the crowding hypothesis.
+The IsPETase active site is composed of the S160, D206, and
+H237 catalytic triad, which is responsible for the hydrolysis of
+the ester linkages in PET. No signiﬁcant change to the overall
+active site ﬂexibility based on active site residue backbone
+RMSD was observed between control and crowding conditions
+for both WT (0.41 Åversus 0.52 Å) and TS (0.39 Åversus
+0.33 Å) variants (Figs. 3D and S7C). To more comprehensively
+capture active site dynamics in the free enzyme, theﬂexibility
+of each catalytic triad residue was quantiﬁed using RMSF. The
+average RMSF of the three active site residues and their in-
+dividual side chains across all free enzyme MD systems were
+drastically reduced under crowding conditions for both vari-
+ants (Fig. 3,
+D and E). Notably, the changes in RMSF from
+control to crowding simulations of the isolated catalytic triad
+side chains were larger than for the entire residues (Figs. 3E
+and S7D), indicating that side chain mobility was the primary
+contributor to overall active siteﬂexibility in the free enzymes.
+The importance of side chain dynamics was further explored
+in simulations of substrate-boundIsPETase variants.
+We examined the effect of crowding on the frequency of
+productive active site formation in substrate-bound enzyme
+systems. Upon substrate binding, the catalytic triad residues
+were responsible for forming productive active site conforma-
+tions through hydrogen bond coupling between S160-H237 and
+D206-H237 (29). Hydrogen bonding of S160 OH with Ne2-H of
+H237 can be coupled to H237 Nδ1-H with either Oδ1o rOδ2o f
+D206 (Fig. 3A), promoting D206-H237 charge stabilization and
+S160 deprotonation to carry out nucleophilic attacks against
+PET ester linkages for hydrolysis (Fig. 3B)( 30). Thus, the
+probability of productive active site formation was quantiﬁed
+based on the frequency of simultaneous coupling of both
+hydrogen bond types in our MD simulations (3.5 Å donor-
+acceptor distance and 30
+/C14 angle cutoffs). Under crowding
+conditions, we found that the probabilities of the substrate-
+bound enzyme in forming productive active sites were greatly
+reduced for both WT (60.2% to 15.0%) and TS-PETase (39.1% to
+26.3%) (Figs. 3F and S7, E– G). Additionally, considerably lower
+probabilities of productive conformations were observed for
+uncrowded free enzyme compared to uncrowded substrate-
+bound enzyme for WT (18.7%versus 60.2%) and TS-PETase
+(22.2% versus 39.1%), while similar comparisons under crowd-
+ing conditions indicated no signiﬁcant differences between free
+and substrate-bound enzymes (Fig. 3, D and F).
+Analysis of IsPETase kinetics using a surface crowding model
+J. Biol. Chem. (2024) 300(3) 105783 5
+A C
+B
+D
+E
+F
+G
+Figure 3. Effects of crowding on the molecular dynamics ofIsPETase. A, overall structure of WTIsPETase (PDB ID: 6EQE) with the catalytic triad (S160,
+D206, and H237) shown in ball-and-stick model (24). Key atom groups participating in hydrogen bond coupling for active site stabilization are labeled in
+close-up. B, MD model of substrate-bound WTIsPETase (WT-PET5) with the PET oligomer (PET5) substrate docked to the substrate-binding pocket in an
+energy-minimized conﬁguration. C, initial andﬁnal conﬁgurations of substrate-bound WTIsPETase MD systems at the simulated crowding concentration of
+2 mM; water molecules are not shown.D, summary of catalytic triad residue stability,ﬂexibility, and observation of productive active site conformations for
+free IsPETase MD systems. Equilibrium active site RMSD, RMSF, side chain RMSF, and productive conﬁguration percentage were assessed upon system
+convergence between 200– 250 ns of simulation time. 99% conﬁdence intervals are reported.E, residue side chain RMSF of the catalytic triad for free
+IsPETase MD systems.F, summary of overall enzyme stability, active siteﬂexibility, and observation of productive active site conformations for substrate-
+bound IsPETase MD systems. Equilibrium enzyme backbone RMSD, active site RMSF, and productive conﬁguration percentage were assessed upon system
+convergence between 200 to 250 ns of simulation time. Productive conﬁgurations are characterized by catalytic triad hydrogen bond coupling (S160-H237
+& D206-H237) as illustrated in (A). 99% conﬁdence intervals are reported.G, hydrolysis of BHET into MHET after 1 h at 30/C14 C by 40 nM of WT and TS-PETase in
+0 to 400 mg/ml Ficoll 70. All data has been baseline corrected with BHET incubated in corresponding buffer without enzyme for 1 h at 30/C14 C. Each point
+represents the mean and error bars show SD (n = 3 biological replicates). BHET, bis(2-hydroxyethyl) terephthalate; MHET, mono-2-hydroxyethyl tere-
+phthalate; PET, poly(ethylene terephthalate).
+Analysis of IsPETase kinetics using a surface crowding model
+6 J. Biol. Chem. (2024) 300(3) 105783
+
+To experimentally evaluate the MD simulation results,
+crowding conditions were simulated in vitro with 100 to
+400 mg/ml of Ficoll 70, and the rate of hydrolysis of BHET into
+MHET by 40 nM of WT and TS-PETase were assayed. Ficoll
+70 is a polar sugar polymer that has been shown to minimally
+interact with proteins and often adopts a spherical shape of
+approximately 5 nm in diameter, which is similar in size to
+IsPETase (20, 31). WT and TS-PETase activity was unchanged
+up to 200 mg/ml Ficoll 70, which suggested that the enzyme
+was not inhibited by Ficoll 70 through protein– polymer in-
+teractions (Fig. 3G). Both variants displayed similar decrease in
+activity between 200 to 400 mg/ml Ficoll 70 (Fig. 3G). The
+decreased BHET conversion observed in Ficoll 70 crowding
+experiments agree with the MD simulations, both suggesting
+that crowding will lead to decreased activity ofIsPETase.
+An SC model for the analysis ofIsPETase activity
+Based on the adsorption data and molecular dynamics
+simulations, we propose a catalytic model that describes,
+through macromolecular crowding, the inhibition effect
+registered at highIsPETase concentrations. Since adsorption is
+likely much faster than catalysis, which is consistent with
+surface dynamics studies of PHL7 and LCC PETases, the two
+steps were modeled here as separate subsequent processes
+(32). Free enzymes E adsorb onto free substrate sitesN and
+form adsorbed enzymesEN:
+E þ N
+!
+ka
+kd
+EN (1)
+where ka is the adsorption kinetic constant and kd is the
+desorption kinetic constant.
+The total concentration in the system of enzymeET and of
+substrate sites NT are, respectively, given by:
+½ET /C138¼½ E/C138þ½ EN/C138 (2)
+½NT /C138¼½ N/C138þ½ EN/C138 : (3)
+Since NT cannot be directly measured, we introduced the
+parameter Γ, representing the number of sites per unit surface
+of the substrate:
+½NT /C138 ¼ Γ½N0/C138 (4)
+where N0 is the substrate surface concentration in the system
+(8). The parameter Γ depends on the enzyme variant and
+substrate type, as different mutants will have different
+abilities to access the substrate sites on the surface and
+different substrates types have different substrate sites ( 8).
+For example, PET chains are preferentially arranged in
+gauche conformation on the surface of amorphous
+Goodfellow PET ﬁlms at 30
+/C14 C and very few are in trans
+conformation, but a mutation to IsPETase will cause the
+active site to prefer trans conformation chains, thus
+decreasing the number of available substrate sites (lowered
+Γ) on that PET substrate (30, 33). Under the assumption that
+adsorption is much faster than catalysis, a quasi-steady-state
+assumption was postulated forEN (32):
+d½EN/C138
+dt ¼ ka½E/C138½ N/C138 −kd½EN/C138¼ 0: (5)
+Solving Eqs. 2, 3, and 5 for [EN],
+½EN/C138¼
+1
+2
+2
+4Γ½N0/C138þ½ ET /C138þ 1
+Ka
+−
+ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ/C18
+½ET /C138þ Γ½N0 /C138þ 1
+Ka
+/C19 2
+− 4½ET /C138 Γ½N0 /C138
+s 3
+5
+(6)
+where Ka = ka/kd is the adsorption equilibrium constant.
+Equation 6 allowed the direct computation of [EN ] from ET
+and N0, which were known experimental quantities.
+Adsorbed enzymesEN are present on the substrate surface
+in either an uncrowded con ﬁguration ENuc, performing
+catalysis with kinetic constantkcat,uc or in a crowded conﬁg-
+uration ENc, with lower catalytic rate constantkcat,c:
+ENuc þ Cn →
+kcat; uc
+ENuc þ Cn−1 þ P (7)
+ENc þ Cn →
+kcat; c
+ENc þ Cn−1 þ P (8)
+½EN/C138¼½ ENuc/C138þ½ ENc/C138 (9)
+where Cn is a polymer (ex: PET) chain of lengthn, Cn−1 is a
+polymer chain of lengthn– 1, and P is a soluble degradation
+product. In practice, the adsorbed enzymes would have a
+distribution of catalytic kinetic constants based on the local
+crowding conditions. However, since it was not possible to
+measure the distribution of the catalytic rate across the
+adsorbed enzyme population, we here lumped all enzymes that
+were affected by crowding intoEN
+c, which performed catalysis
+with kinetic constant kcat,c. The Supplementary Information
+further discusses this approximation.
+From Eqs. 7 and 8, the overall polymer degradation rate is
+d½P/C138
+dt ¼ kcat;uc½ENuc/C138þ kcat;c½ENc/C138 : (10)
+Assuming that the transition from uncrowded to crowded
+conﬁgurations (and vice versa) is much faster than catalysis, an
+equilibrium is quickly established betweenENuc and ENc:
+ENuc !
+kc
+kuc
+ENc (11)
+d½ENuc/C138
+dt ¼ − d½ENc/C138
+dt ¼ ruc− rc ¼ 0 (12)
+where kc (kuc) is the kinetic constant for the transition from
+uncrowded (crowded) to crowded (uncrowded) conﬁguration
+and rc (ruc) is the rate of transition from uncrowded
+Analysis of IsPETase kinetics using a surface crowding model
+J. Biol. Chem. (2024) 300(3) 105783 7
+(crowded) to crowded (uncrowded) enzyme con ﬁguration.
+The crowding and uncrowding reactions reported in Eq.11
+summarize a set of reactions that can lead to the transition
+from an uncrowded to a crowded con ﬁguration (and vice
+versa), as detailed in the Supplementary Information. Rates
+r
+c and ruc were computed, respectively, as (derivation in the
+Supplementary Information):
+rc ¼ kc½EN uc/C138½ EN/C138 (13)
+ruc ¼ kuc½ENc/C138ð½ NT /C138 −½EN/C138Þ (14)
+Solving the system of Eqs.9, 12 to 14 for [ENc] and [ENuc]:
+½ENuc/C138¼½ EN/C138 1 − θ
+Kcθ þ 1−θ (15)
+½ENc/C138¼½ EN/C138 Kcθ
+Kcθ þ 1 − θ (16)
+where Kc = kc/kuc is the crowding equilibrium parameter, and
+the site coverageθ is
+θ ¼ ½EN/C138
+½NT /C138 ¼ ½EN/C138
+Γ½N0/C138 : (17)
+The polymer degradation rate (Equation10) becomes
+d½P/C138
+dt ¼ kcat;uc
+1− θ þ cKcθ
+Kc θ þ 1 − θ ½EN/C138 (18)
+where c = kcat,c/kcat,uc represents the ratio between the catalytic
+rate constants of crowded and uncrowded enzyme conﬁgura-
+tions. Equation 18 can be reformulated as
+d½P/C138
+dt ¼ kapp½EN/C138 (19)
+where the apparent catalytic kinetic constantkapp represents
+the average catalytic rate per adsorbed enzyme (i.e. produc-
+tivity), which varies as a function ofθ due to crowding ac-
+cording to
+kapp ¼ kcat;uc
+1−θ þ cKcθ
+Kcθ þ 1−θ : (20)
+In the extreme scenarios ofθ = {0, 1},kapp becomes:
+kapp ¼
+/C26kcat;uc; for θ ¼ 0;
+kcat;c; for θ ¼ 1; (21)
+showing thatkcat,uc represents the maximum catalytic rate per
+adsorbed enzyme, corresponding to a site coverageθ = 0, while
+kcat,c represents the minimum catalytic rate per enzyme, which
+is achieved atθ = 1 where the detrimental effect of crowding
+on the catalytic rate per enzyme reaches its maximum. Equa-
+tion 20 clariﬁes the physical meaning ofK
+c, which represents
+how quickly the decay of the catalytic rate per enzyme from
+kcat,uc to kcat,c occurs with increasing site coverageθ due to
+crowding.
+The biochemical model of Equations6, 17 and 18, together
+with the ﬁtting parameters Ka, Kc, Γ, kcat,uc, and kcat,c repre-
+sents a closed form solution that, given the inputsET and N0,
+can predict the catalytic rate for a given mutant. We herein
+refer to this model as the SC model.
+Kinetic analysis of variants with the SC model
+We next used the SC model established by Equations6,
+17 and 18 to study the adsorption and catalytic behaviors of
+WT, TS-PETase, and the two evolved TS-PETase variants
+(TSP and TSPNP). The details of the parameter estimation
+approach are provided in theExperimental Methods section.
+Herein, we will refer to catalytic rate as the rate per enzyme
+molecule, while productivity is used to refer to the observed
+macroscopic product formation rate. The kinetic model
+appropriately captured the steady-state productivity of the
+IsPETases over a range of enzyme (10– 600 nM) and PET
+(200– 1900 cm
+2/L) loadings (Fig. 4) as measured using the
+bulk absorbance method (the relative rates were validated
+with HPLC upon reaction completion) (Figs. S8 and S9)( 2).
+Notably all four IsPETases displayed crowding behavior at
+30
+/C14 C. At low enzyme concentrations, productivity increased
+with increasing enzyme loading as more enzymes bound to
+PET. However, as the enzyme loading increased further,
+productivity slowed as the enzymes became crowded on the
+PET surface. The kinetic model also captured the steady-
+state adsorbed PETase concentrations (Equation 6), which
+began to plateau at higher enzyme loadings (Fig. S10). The
+estimated parameter values at 30
+/C14 C are summarized in
+Table 1.
+TSP- and TSPNP-PETase achieved the highest produc-
+tivity, followed by TS-PETase and WT, on both a total
+enzyme loading ( Fig. 4) and predicted adsorbed enzyme
+basis ( Fig. 5 , A and B). All TS-PETase – based variants
+demonstrated higher catalytic rates in uncrowded condi-
+tions k
+cat,uc and a larger Γ than the WT enzyme, which
+contributed to their higher productivity ( Table 1). Inter-
+estingly, TS-PETase had lower productivity than the TSP
+and TSPNP mutants despite having comparable k
+cat,uc and
+al a r g e rΓ (Table 1 ). This phenomenon suggested that
+introduction of T116P decreased TS-PETase susceptibility
+to crowding at 30
+/C14 C, in both kinetics of transition to
+crowded con ﬁgurations and kcat,c (TSP-PETase presented
+smaller Kc and larger kcat,c , respectively) ( Table 1 ). The
+S238N and S290P mutations had minimal impact on all
+kinetic parameters, thus their main contribution is to the
+thermostability of the enzyme. The model predictions of
+the speci ﬁc catalytic rate per enzyme as a function of
+bound enzyme (Fig. 5B) and the concentration of enzymes
+in crowded con ﬁgurations with respect to site coverage
+(Fig. 5 C) further supported that adsorbed WT and TS-
+PETase were the least and the most affected by crowd-
+ing, respectively. This was mainly due to WT having the
+Analysis of IsPETase kinetics using a surface crowding model
+8 J. Biol. Chem. (2024) 300(3) 105783
+
+lowest Γ and TS-PETase having the highest Γ based on
+model ﬁts to adsorption data, which dictated the extent of
+SC conditions experienced by each variant ( Table 1 ,
+Fig. S10).
+To further characterize the changes in the kinetic parame-
+ters and the associated mutations that could improve enzyme
+productivity, we computed s
+θi , the sensitivity of productivity
+with respect to the model parameters:
+A E
+B F
+CG
+DH
+nM
+nM cm2 / L
+cm2 / L
+cm2 / L
+g / Lmg / L 6 12 18 24
+mg / L 369 1 2 1 50
+nM
+0
+nM
+7.2 14.4 22.8 28.80
+cm2 / L
+WT
+TS TS
+TSP TSP
+TSPNP TSPNP
+WT
+0 100 200 300 400 500
+0
+2
+4
+6
+8
+mA260 / min
+200 cm2 / L
+500 cm2 / L
+1000 cm2 / L
+1500 cm2 / L
+1900 cm2 / L
+0 200 400 600 800
+0
+2
+4
+6
+8
+10
+12
+mA260 / min
+200 cm2 / L
+500 cm2 / L
+1000 cm2 / L
+1500 cm2 / L
+1900 cm2 / L
+0 500 1000 1500 2000
+0
+2
+4
+6
+8
+10
+12
+mA260 / min
+10 nM
+20 nM
+30 nM
+40 nM
+60 nM
+80 nM
+200 nM
+0 200 400 600 800
+0
+3
+6
+9
+12
+15
+mA260 / min
+200 cm2 / L
+500 cm2 / L
+1000 cm2 / L
+1500 cm2 / L
+1900 cm2 / L
+0 500 1000 1500 2000
+0
+3
+6
+9
+12
+15
+mA260 / min
+10 nM
+20 nM
+30 nM
+40 nM
+60 nM
+80 nM
+200 nM
+0 200 400 600 800
+0
+3
+6
+9
+12
+15
+Enzyme Loading
+mA260 / min
+200 cm2 / L
+500 cm2 / L
+1000 cm2 / L
+1500 cm2 / L
+1900 cm2 / L
+0 500 1000 1500 2000
+0
+3
+6
+9
+12
+15
+Substrate Loading
+mA260 / min
+10 nM
+20 nM
+30 nM
+40 nM
+60 nM
+200 nM
+80 nM
+0 500 1000 1500 2000
+0
+2
+4
+6
+8
+mA260 / min
+10 nM
+20 nM
+40 nM
+60 nM
+80 nM
+240 nM
+Figure 4. Initial rates ofIsPETase variants over 10 to 600 nM of enzyme and 200 to 1900 cm2/L (7.2–28.8 g/L) PET loading at 30/C14 C. All points
+represent the mean of three biological replicates and error bars show SD. Each replicate represents the rate of product accumulation between 30 to 210min
+of the enzyme reaction with amorphous PETﬁlm. A– D, ﬁt of SC model to initial rateversus enzyme concentration proﬁles. E– H, ﬁtted SC model to same
+kinetic data plotted as initial rateversus substrate concentration for representative enzyme concentrations. PET, poly(ethylene terephthalate); SC, surface
+crowding.
+Analysis of IsPETase kinetics using a surface crowding model
+J. Biol. Chem. (2024) 300(3) 105783 9
+sθi ¼ θi
+∂
+∂θi
+/C18 d½P/C138
+dt
+/C19
+θj≠θι; ET ; N0
+: (22)
+Sensitivities were computed at the enzyme concentration
+ET at maximum productivity for N0 = 500 cm2/L. For all
+variants, Γ was the parameter most correlated with
+maximum productivity, followed by kcat,uc and Kc. While Γ
+and kcat,uc were positively correlated with productivity, Kc
+showed a negative correlation, as expected ( Fig. 5D). The
+parameters kcat,c and Ka had a minor effect on maximum
+productivity.
+Crowding behavior may be masked at elevated reaction
+temperatures
+We used the SC model to study the effects of higher
+temperature on the adsorption and catalytic behaviors of
+t h et h r e eT S - P E T a s ev a r i a n t s .T h ek i n e t i cm o d e l
+appropriately captured the stea dy-state productivity of the
+variants over 20 to 1500 nM enzyme and same PET load-
+ings (200– 1900 cm
+2/ L )a t5 5/C14 C( Figs. 6 and S11). Similar to
+the 30 /C14 C conditions, TSP- and T SPNP-PETase achieved
+higher productivity than TS-PETase. That said, the overall
+productivity for all conditions and enzymes increased by
+roughly an order of magnitude compared to 30
+/C14 C( Fig. 4),
+driven by a combination of more enzyme binding sites (Γ)
+and faster uncrowded and crowded catalytic rate constants
+(kcat,uc , kcat,c ; Table 2). In contrast to 30 /C14 C, however, no
+enzymes displayed the characteristic inhibition effect
+attributable to enzyme crowding. As a result, TSP-PETase
+produced 2.4 mM of combined TPA and MHET after
+1 0 5m i na tas u b s t r a t el o a d i n go f2 8 . 8g / L( 1 9 0 0c m
+2/L) and
+1000 nM enzyme ( Fig. S12 ). To investigate the lack of
+observed inhibition, we assessed the 55 /C14 Cd a t au s i n gt h e
+SC and invMM models (Figs. 6 and S13). Bayesian infor-
+mation criterion analysis ( Table S3 ) indicated that the
+Table 1
+Fitted parameters from the SC kinetic model (30/C14 C)
+Parameter
+Value
+WT TS TSP TSPNP Units
+Ka 0.0290 0.00196 0.00579 0.00847 nM – 1
+Γ 0.0291 0.141 0.0859 0.0701 nmol cm – 2
+Kc 0.890 20.4 6.71 6.89 –
+kcat, uc 0.445 1.11 0.932 1.01 mA 260 min– 1 nM– 1
+kcat, c 0.0588 0.00441 0.0386 0.0555 mA 260 min – 1 nM– 1
+See Table S1 for 95% conﬁdence intervals.
+WT TS TSP TSPNP
+-2
+-1
+0
+1
+2
+3
+4
+Variant
+S  , i
+Ka
+Kc
+kcat, uc
+kcat, c
+A B
+C D
+0 2 04 06 08 0
+0
+1
+2
+3
+4
+Total Adsorbed Enzyme [EN]( n M )
+mA260 / min
+WT
+TS
+TSP
+TSPNP
+0 2 04 06 08 0
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+Total Adsorbed Enzyme [EN]( n M )
+mA260 / (min  [EN] )
+WT
+TS
+TSP
+TSPNP
+0.0 0.2 0.4 0.6 0.8 1.0
+0
+20
+40
+60
+80
+100
+Fractional Surface Coverage (θ)
+Percent Crowded Enzyme
+(ENc, %) WT
+TS
+TSP
+TSPNP
+Figure 5. Model-based analysis of catalytic activity ofIsPETase variants.A, model prediction of catalytic rateversus adsorbed enzyme concentration.B,
+model prediction of average catalytic rate (productivity) per enzyme versus adsorbed enzyme concentration. C, percentage of enzymes in crowded
+conﬁguration versus surface coverageθ. Red ‘×’ indicates the surface coverage at which inhibition effect is observed macroscopically for WT and TS-PETase.
+D, sensitivity of catalytic rate to the model parameters (Equation22) for each variant, evaluated at the enzyme concentrationET corresponding to the
+maximum productivity inFigure 4.I n(A and B), each variant has a different maximum value of adsorbed enzyme concentration, related toΓ (Eq. 4). In all
+simulations, [N0] = 500 cm2/L.
+Analysis of IsPETase kinetics using a surface crowding model
+10 J. Biol. Chem. (2024) 300(3) 105783
+
+additional parameters in th e SC model provided a signiﬁ-
+cant ﬁtting improvement over theinvMM model, suggesting
+that crowding was still needed to appropriately explain the
+kinetic behavior of the enzymes at high temperatures (34).
+The steady-state TSP-PETase adsorption data plateaued at
+a higher concentration at 55
+/C14 C( Fig. S14)t h a na t3 0/C14 C
+(Fig. S10C) and was appropriately described by the model.
+Discussion
+Macromolecular crowding is a known phenomenon that
+impacts protein dynamics in many ways from protein stability
+and conformation to catalytic activity (16, 35). The effects of
+crowding vary dramatically between crowding agents and the
+biochemistry of the protein itself. Here, we propose a model
+where a dilute enzyme solution phase can result in a crowded
+surface environment upon protein adsorption, leading to
+macromolecular crowding that can affect enzyme activity.
+Based on our MD simulations, one possible explanation is that
+A D
+B
+TS
+E
+TS
+C
+TSPTSP
+F
+TSPNP
+nM
+nM cm2 / L
+cm2 / L
+cm2 / L
+g / Lmg / L 14 28 42 580
+nM
+0 7.2 14.4 22.8 28.8
+Enzyme Loading
+0 500 1000 1500 2000
+0
+50
+100
+150
+200
+mA260 / min
+200 cm2 / L
+500 cm2 / L
+1000 cm2 / L
+1500 cm2 / L
+1900 cm2 / L
+0 500 1000 1500 2000
+0
+50
+100
+150
+200
+mA260 / min
+20 nM
+40 nM
+60 nM
+100 nM
+200 nM
+1500 nM
+300 nM
+600 nM
+1000 nM
+0 500 1000 1500 2000
+0
+100
+200
+300
+mA260 / min
+200 cm2 / L
+500 cm2 / L
+1000 cm2 / L
+1500 cm2 / L
+1900 cm2 / L
+0 500 1000 1500 2000
+0
+100
+200
+300
+mA260 / min
+20 nM
+40 nM
+60 nM
+100 nM
+200 nM
+1500 nM
+300 nM
+600 nM
+1000 nM
+0 500 1000 1500 2000
+0
+100
+200
+300
+mA260 / min
+200 cm2 / L
+500 cm2 / L
+1000 cm2 / L
+1500 cm2 / L
+1900 cm2 / L
+0 500 1000 1500 2000
+0
+100
+200
+300
+Substrate Loading
+mA260 / min
+20 nM
+40 nM
+60 nM
+100 nM
+200 nM
+1500 nM
+300 nM
+600 nM
+1000 nM
+TSPNP
+Figure 6. Initial rates ofIsPETase variants over 20 to 1500 nM of enzyme and 200 to 1900 cm2/L (7.2–28.8 g/L) PET loading at 55/C14 C. All points
+represent the mean initial rate of three biological replicates and error bars show SD. Initial rate was determined based on product formation between15 to
+105 min of the enzyme reaction with PETﬁlm. A– C, ﬁt of SC model to initial rateversus enzyme concentration.D– F, ﬁtted SC model to same kinetic data
+plotted as initial rateversus substrate concentration for each enzyme concentration. PET, poly(ethylene terephthalate); SC, surface crowding.
+Table 2
+Fitted parameters from the SC kinetic model (55/C14 C)
+Parameter
+Value
+TS TSP TSPNP Units
+Ka 0.00793 0.00832 0.00869 nM – 1
+Γ 0.214 0.228 0.269 nmol cm – 2
+Kc 21.2 22.8 22.5 –
+kcat, uc 3.77 4.71 4.23 mA 260 min– 1 nM– 1
+kcat, c 0.489 0.582 0.492 mA 260 min – 1 nM– 1
+See Table S2 for 95% conﬁdence intervals.
+Analysis of IsPETase kinetics using a surface crowding model
+J. Biol. Chem. (2024) 300(3) 105783 11
+sufﬁcient space for the necessary active site conformational
+changes during hydrolysis is required for optimal enzyme
+performance, which is consistent with reduced catalytic efﬁ-
+ciency under crowding. For free enzymes, active siteﬂexibility
+would allow easier transition to conformations that can readily
+bind to the substrate (36). Interestingly, active siteﬂexibility
+was inherently reduced upon substrate binding, resulting in
+minimal differences in active siteﬂexibility between crowded
+and uncrowded states (Fig. 3F). However, the frequency of
+productive conformations sampled by substrate-bound en-
+zymes was greatly reduced under crowding. Per residue side
+chain RMSF differences (Fig. 3E) and atomic separation dis-
+tance shifts between S160 OH and H237 N e2-H groups
+(Fig. S7 E) suggested that S160 mobility drove hydrogen
+bonding between S160 and H237 and limited productive site
+formation (Fig. S7, F and G). Thus, we can attribute the
+decreased frequency of productive enzyme con ﬁgurations
+under crowding to sterically induced stabilization of unfavor-
+able S160 positions. Notably, substrate-bound enzymes
+sampled more productive active site conﬁgurations compared
+to free enzymes, suggesting that substrate binding to the active
+site itself had an effect in stabilizing favorable S160 positions.
+The overall stability of substrate-bound enzyme was also
+affected by macromolecular crowding as evident from the
+reduced protein backbone RMSD (Fig. 3F). It was previously
+observed that increased enzyme concentrations led to
+decreased productivity, but the enzyme concentrations dis-
+playing inhibition behavior also sustained the reaction over
+longer periods of time (2). This observation is consistent with
+the crowding hypothesis, which can result in more compact
+conformations of IsPETase that may have led to increased
+enzyme stability, resulting in longer life times ofIsPETase at
+higher concentrations.
+Using enzyme crowding as the basis for the inhibition effect,
+we developed a two-state kinetic model of enzymatic catalysis
+of solid PET, which is referred to as the SC model. The model
+captured the expected shift in optimal enzyme concentration
+with increasing substrate concentration as previously observed
+by Avilan et al. (2023) (Fig. 4)( 9). Prior knowledge of a vari-
+ant’s adsorption to PET is required to estimate an upper bound
+for Γ and ﬁt K
+a. Direct measurement of substrate site density
+would result in an even more robust analysis, but it is
+extremely difﬁcult to determine and cannot be reliablyﬁtted
+using
+invMM andconvMM as previously done for other systems
+due to the inhibition effect (8). Therefore, the adsorption ca-
+pacity was used as the upper bound forﬁtting the number of
+substrate sites for each variant and the distinction between
+adsorption (Γads) and substrate site density ( Γkin) was not
+made. However, an enzyme may be able to adsorb to
+nonspeciﬁc sites, resulting in higher adsorption capacity than
+substrate site density, which may obscure analysis if the pro-
+portions are very different between variants for relative com-
+parisons (8, 37).
+Interestingly, the current SC model Equation 20 reduces
+down to the Mukai 1993 rate equation ifK
+c =1 ,kcat,c = 0, along
+with the inclusion of a substrate term, which shows that the
+models are related ( 13). The SC model is a more
+comprehensive model that removes several assumptions made
+in the Mukai model, such as enzyme excess, zero activity at full
+site coverage (likely true for two-domain but not necessarily
+for single-domain depolymerases), and that mutations had no
+effect on enzyme susceptibility to crowding (13). Thus, the
+proposed SC model provides more detailed insights into ef-
+fects of mutations and is likely more broadly applicable to all
+solid-substrate depolymerases. Formally assessing the SC
+model’s applicability to multidomain enzymes would require
+collecting analogous datasets to those presented inFigures 4
+and 6 and can be the focus of a future study.
+The SC model showed that the true catalytic capacity will
+never be experimentally observed in macroscopic experiments
+due to crowding, which may also explain the discrepancy be-
+tween single-molecule (uncrowded) and macroscopic rate
+measurements for cellulases (11). Furthermore, it suggested
+that ﬁtting with MM models will underestimate intrinsic cat-
+alytic rate (
+convMM, invMM, and general MMﬁts of increasing
+portion of data can be found inFigs. S15 and S16, Tables S4
+and S5). The SC model also revealed that WTkcat,c was the
+least impacted by crowding, partly due to its lowered
+adsorption capacity compared to the TS variants (fewer en-
+zymes on the surface to induce similar levels of crowded
+conformations) (Fig. 5, B and C). This result could appear
+counter intuitive to observations from kinetic data where WT
+displayed a 28% productivity inhibition at 400 nM total
+enzyme while TS-PETase only had 12% inhibition at 400 nM,
+highlighting the importance of coupling adsorption equilib-
+rium experiments to kinetic analysis for complete data inter-
+pretation. Adsorption experiments showed that WT
+approached full site coverage faster due to its lowΓ and high
+K
+a; thus the model predicted a more pronounced macroscopic
+effect of crowding as loss of uncrowded complexes were not
+compensated by an increase in total adsorbed enzyme, while
+the opposite was predicted for TS-PETase (Fig. 7). Therefore,
+at a given enzyme loading, WT productivity was the most
+sensitive to crowding at a macroscopic scale, despite individual
+enzymes maintaining the highest catalytic activity in crowded
+conﬁgurations. On the contrary, TS-PETase productivity was
+most resistant to crowding, as the high crowding effects were
+compensated with a higher adsorption capacity (Fig. 5C).
+The SC model predicts that the most desirable mutations for
+improving enzymatic PET degradation will (i) increaseΓ and (ii)
+the k
+cat,uc, while (iii) decreasingKc. This is consistent with re-
+ports where fusion of a polymer-binding module to PET-
+hydrolases increased enzyme productivity (increased Γ)
+(38– 43). However, it was also found that a few hydrophobic
+modules, which greatly increased the productivity of some
+thermostable PET-hydrolases, sometimes resulted in lowered
+IsPETase productivity (38, 41, 42). This could be due to a large
+increase inΓ that resulted in a large population of crowded WT-
+fusion enzymes, which led to lower productivity due to sus-
+ceptibility of the WT-fusion to crowding effects (reducedk
+cat,c
+and likely increasedKc). On the contrary, inhibition effects are
+less commonly observed in thermostable PET-hydrolases,
+suggesting that increasing their binding capacity is more likely
+to lead to an increase in observed productivity (9).
+Analysis of IsPETase kinetics using a surface crowding model
+12 J. Biol. Chem. (2024) 300(3) 105783
+
+In conclusion, we present a kinetic model based on the
+hypothesis of macromolecular crowding on the solid substrate
+surface during enzymatic depolymerization. The phenomenon
+is applicable to many ambient-temperature solid-substrate
+depolymerases and may also be relevant for high-temperature
+reactions, which are very important for future bio-economies
+such as biorecycling and biovalorization of food wastes
+(9, 11, 13). The implications of the model will likely have large
+impacts on enzyme engineering for improved yields, as
+decreasing crowding tendency alone can boost productivity of
+the enzymes. Analysis of kinetic data using the model will
+allow identiﬁcation of the types of mutations that provide
+resistance to crowding, which can then be probed using pro-
+tein dynamics methods such as NMR to better understand the
+structure-function relationships of crowding behavior. Finally,
+fundamental knowledge of structure-crowding relationships
+will allow predictions of beneﬁcial mutations and improve the
+efﬁciency of a large number of critical bioprocesses.
+Experimental methods
+Cloning and plasmid constructs
+All plasmids used in this study were generated using the
+pET21a+ backbone (2). Brieﬂy, IsPETase (residues 28– 290) was
+codon optimized for expression in E. coli and cloned into
+pET21a+ with a C-terminal His-tag using PCR with Phusion
+polymerase (New England BioLabs) and primers listed in
+Table S6. The PCR fragments were joined together using NEB-
+uilder HiFi DNA Assembly Mix (New England BioLabs). All
+constructs contained a His
+6-tag except for plasmids used for
+directed evolution, which had a C-terminal His8-tag. The C-ter-
+minal His8-tag was introduced into the pET21a- IsPETase
+plasmid using pET21a His8 F/R primers. Plasmids were propa-
+gated using E. coli TOP10F0 (New England BioLabs) in
+LB+100 μg/ml carbenicillen medium (herein referred to as
+LB+Carb). Site-directed mutagenesis was performed as previ-
+ously described to introduce T116P, S238N, and S290P into the
+TS-PETase background (Table S6)( 2). The LPETGG Sortase
+recognition tag was introduced in front of the C-terminal His
+6-tag
+for Sortase-tagging ofﬂuorescent peptides onto the C-terminus
+of TSP-PETase (primers: pET21a Srt F andIsPETase Srt R,
+Table S6).
+Cloning of directed evolution libraries
+In silicomutant libraries of TS-PETase were synthesized by
+Twist Biosciences and cloned into the pET21a+ plasmid.
+Round one– directed evolution library was generated using
+WT IsPETase as template and the following PCR conditions
+for aﬁnal reaction of 50μl: 2μl of 10 mM dGTP/dATP, 10μl
+of 10 mM dCTP/dTTP, 10 μl 55 mM MgCl
+2,5 μl1m M
+MnCl2,3 μlo f1 0 μM IsPETase mut F/R, 2 fmol template
+DNA, 1μl GoTaq Polymerase, and 33.6μl water (44). The PCR
+was ampliﬁed 20 cycles. Round two– directed evolution library
+was generated using TSP-PETase as template and the
+following PCR conditions: 5 μl 10× GeneMorph II buffer,
+100 ng template DNA, 2.5 ng/μl IsPETase mut F/R, 1μlo f
+40 mM dNTP, 1μl GeneMorph II polymerase (Agilent), and
+37.5 μl water. The PCR was ampliﬁed 23 cycles to aim for 0 to
+4.5 mutations/fragment. The pET21a+His
+8 backbone was
+ampliﬁed with Phusion polymerase and pET21a F/R. The PCR
+products were DpnI-digested for 6 h at 37/C14 C and gel puriﬁed
+(Zymo DNA Gel Puriﬁcation Kit). Ligation was performed
+using NEBuilder HiFi DNA assembly mix at a 1:1 M ratio of
+insert to backbone (New England BioLabs) at 50
+/C14 C for 6 h. All
+primer sequences are listed inTable S6.
+In silico–directed evolution
+A disulﬁde bridge at N233C-S282C was introduced into the
+crystal structure ofIsPETaseS121E/D186H/R280A (PDB: 6IJ6) (7).
+The ﬁnal structure was minimized to account for the effect of
+the additional mutations and protonated accordingly at pH 9
+using Yasara software (http://www.yasara.org) and H++ web-
+server (http://newbiophysics.cs.vt.edu/H++/) to generate the
+TS-PETase structure for in silico evolution (45, 46). Several
+computational methodologies were employed to computa-
+tionally evolve TS-PETase, each targeting distinct parts of the
+enzyme’s structure, namely distal positions and the active site
+(see Supplementary Information for detailed methods).
+Puriﬁcation of IsPETase variants for biochemical analysis
+pET21a+-IsPETase-His
+6 constructs were transformed into
+E. coli T7 Express using heat shock as described in Supple-
+mentary Information. Three to four transformants were grown
+overnight in 10 ml LB+Carb at 37 /C14 C and 200 rpm. The
+WT TSA B
+20 40 60 80 100 150 200 300 400
+0
+10
+20
+30
+Total Enzyme (nM)
+rate ENuc
+rate ENc
+Adsorbed Enzyme (nM)
+[ENuc]
+[ENc]
+20 40 60 80 100 150 200 300 400
+0
+1
+2
+3
+Total Enzyme (nM)
+mA260 / min
+Figure 7. Predicted impacts of crowding on WT and TS-PETase at 30/C14 C. Contribution of uncrowded (ENuc) and crowded (ENc) enzymes to the observed
+productivity (mA260/min) based on the SC model for (A) WT and (B) TS-PETase. Bars show rate contributions (left axis) and triangles show absolute con-
+centrations of each species predicted by the SC model (right axis). Predictions were made using [N0] = 500 cm2/L. SC, surface crowding.
+Analysis of IsPETase kinetics using a surface crowding model
+J. Biol. Chem. (2024) 300(3) 105783 13
+overnight starter was inoculated 1:100 into 1L Terri ﬁc
+Broth+100 μg/ml carbenicillen (TB+Carb) and grown at 37/C14 C
+and 200 rpm for 3.5 h; then protein expression was induced
+with 1 mM isopropylβ-d-1-thiogalactopyranoside and grown
+overnight at 16
+/C14 C and 200 rpm. The culture was centrifuged
+at 5000 rpm for 10 min at 4/C14 C and medium removed. The cell
+pellet was resuspended to aﬁnal volume of 50 ml in 50 mM
+Hepes pH 7.2, 50 mM NaCl, 20 mM imidazole (resuspension
+buffer). 0.5 mg of DNaseI was added to the suspension and the
+cells were sonicated at 4
+/C14 C. The lysate was centrifuged for
+30 min at 10 k rpm and 4/C14 C, and the supernatant wasﬁltered
+through a 0.22μm ﬁlter. The supernatant was incubated with
+1 ml of Ni-NTA agarose resin (Thermo Fisher Scientiﬁc) for
+2 h (overnight for WT) at 4/C14 C with shaking in a 50 ml falcon
+tube. The lysate wasﬂowed through a gravity column, and the
+resin was washedﬁve times with 10 ml of resuspension buffer.
+The elution buffer (50 mM Hepes pH 7.2, 50 mM NaCl,
+300 mM imidazole) was ﬂowed through the column until
+minimal signal was detected at A
+280. The elutions were incu-
+bated at room temperature for 2 h to precipitate contaminants
+(for TS-PETase variants only) and then pooled for size-
+exclusion chromatography. Five milliliters of pooled elution
+(maximum 50 mg of protein based on A
+280) was ﬂowed
+through a PrepGrade S75 Hi-Load column (Cytiva) (running
+buffer: 25 mM Hepes pH 7.2, 50 mM NaCl) and fractions were
+collected in 2.5 ml intervals. All fraction peaks were collected
+and ran on SDS-PAGE gels, which were stained with Coo-
+massie blue R250 (10% acetic acid, 40% methanol, 50% water);
+percent purity was assessed using the Fiji densitometry tool
+(47). The fractions with IsPETase that corresponded to the
+monomeric size of the protein were pooled and dialyzed into
+50 mM glycine-NaOH pH 9, 50 mM NaCl overnight at 4
+/C14 C.
+S75 puriﬁcation results in removal of all residual protein and
+nucleic acid contaminants. The amount of protein was
+determined using DC protein assay (Bio-Rad) in a 96-well
+microplate according to manufacturer directions.
+Differential scanning ﬂuorimetry
+Thermostabilities of puriﬁed enzymes were measured using
+differential scanning ﬂuorimetry. Enzyme concentrations be-
+tween 15 to 25 μM were mixed with SyproOrange (1:1000
+dilution from stock) to aﬁnal volume of 10 μl in a 96-well
+qPCR plate. Theﬂuorescence intensity was measured using a
+Bio-Rad CFX96 Real-Time PCR machine (FRET channel)
+from 10 to 95
+/C14 C with 5 s incubation steps for every 0.5/C14 C
+increment.
+Enzyme kinetic experiments
+All bulk absorbance kinetic experiments were performed as
+previously described in 1.5 ml microfuge tubes (GeneMate)
+(2). Amorphous PETﬁlm substrates (Goodfellow USA, ES30-
+FM-000145) were cut to their respective surface areas:
+2 × 5 mm, 5 × 5 mm, 10 × 5 mm, 15 × 5 mm, 19 × 5 mm. The
+0.25”-diameter amorphous PET ﬁlms were custom cut by
+Goodfellow (ES30-FM-000145). All PET ﬁlms were washed
+once in 100% isopropanol, followed by three washes in 70%
+ethanol and air dried. Triplicate reactions were run for each
+substrate size and enzyme concentration with shaking at
+200 rpm. All reactions were performed with the following
+reaction buffer: 50 mM glycine-NaOH pH 9, 50 mM NaCl,
+10% v/v dimethyl sulfoxide (DMSO); the buffer was warmed to
+the reaction temperature prior to the experiment. A total
+volume of 1 ml of enzyme in reaction buffer was incubated
+with PET, and 1.25μl of reaction supernatant was taken for
+measurement on the NanoDrop1000 (Thermo Fisher Scienti-
+ﬁc) at each time point (every 30 min for 30
+/C14 C, 15 min for
+55 /C14 C).
+Sortase A-tagging of TSP-PETase
+TSP-PETase containing a C-terminal LPETGG-His 6-tag
+was expressed inE. coli T7 Express and puriﬁed as described
+above. The following procedure was performed in the dark.
+GGGYK-C(Atto647N)-T(amide) peptide (Millipore Sigma) or
+GGGYK-K(SulfoCy5)-T(amide) peptide (21st Century Bio-
+chemicals) were used in the tagging reactions. Forty micro-
+grams of Sortase A (SrtA) was incubated with 200μl of Ni-
+NTA agarose slurry (Thermo Fisher Scientiﬁc) in 150 mM
+Hepes pH 7.2, 150 mM NaCl, 10 mM CaCl
+2 and loaded onto a
+2 ml gravity column. Peptide (28μM) and enzyme (20μM) (or
+7 and 5 μM for TIRF experiments, respectively) were mixed
+together to aﬁnal volume of 3 ml andﬂowed over the gravity
+column containing SrtA andﬂow-through was collected. The
+ﬂow-through wasﬂowed over the columnﬁve more times. The
+column was washed with 3 ml of 7μM peptide and fraction
+collected. The ﬂow-through was dialyzed into 500 ml of
+50 mM glycine-NaOH pH 9, 50 mM NaCl three times at 4/C14 C
+using 10 kDa-cutoff dialysis tubing (ThermoFisher Scientiﬁc).
+The dialyzed sample was analyzed using ﬂuorescence SDS-
+PAGE (Alexa 647 or Cy5 setting, Bio-Rad ChemiDoc MP) to
+ensure proper tagging and removal of peptide. Tagging per-
+centage was calculated using A
+646 to determine concentration
+of ﬂuorescent molecules and DC protein assay to measure
+total enzyme concentration.
+IsPETase adsorption to PETﬁlms
+IsPETase at various concentrations was incubated with or
+without 0.25”-diameter amorphous PET ﬁlms (Goodfellow
+USA, ES30-FM-000145) in 1 ml of reaction buffer in 1.5 ml
+microfuge tubes (GeneMate). The tubes were placed in a 30
+/C14 C
+incubator and shaken at 200 rpm for 1.5 h (45 min for 55/C14 C).
+Fluorescence was measured in three technical replicates for
+each sample: 250 μl/well of reaction supernatant was trans-
+ferred to a UV-transparent ﬂat-bottom black plate (Greiner
+Bio-One) and intrinsic protein ﬂuorescence was measured
+(280/345 nm). Fluorescently tagged TSP-PETase was
+measured at 646/672 nm (SulfoCy5) and 646/675 nm
+(Atto647N). A
+260 was also measured to determine relative
+product concentrations in the supernatant. For intrinsicﬂuo-
+rescence measurements, MHET concentration was calculated
+based on the A
+260 value and the expected reduction inﬂuo-
+rescence was determined based on the MHET 280/345 nm
+ﬂuorescence standard curve ( Fig. S4 G). The expected
+Analysis of IsPETase kinetics using a surface crowding model
+14 J. Biol. Chem. (2024) 300(3) 105783
+
+ﬂuorescence loss was added onto the 280/345 nmﬂuorescence
+signal of the corresponding sample, and the corrected value
+was used to interpolate enzyme concentration using the pro-
+tein ﬂuorescence standard curve (10 – 1000 nM) for each
+variant. The rawﬂuorescence intensity of the reaction without
+PET was used to interpolate enzyme concentration using the
+same standard curves. The difference in enzyme concentration
+between the reaction with PET and without PET was used to
+calculate the amount of adsorbed enzyme onto the PETﬁlm.
+Spin-coating of PET thinﬁlms onto glass slides
+Amorphous PET ﬁlm (Goodfellow, ES30-FM-000145) was
+dissolved in 85% triﬂuoroacetic acid at 2% w/v and immedi-
+ately used for spin-coating. 1”-diameter circular glass slides
+(170 μm thick, #1.5H) were cleaned with 70% ethanol and
+placed in the center of the spin-coater stage. Dynamic spin-
+coating was performed at 3 k rpm with 100μl of PET solu-
+tion for each glass slide for 60 s. A thinﬁlm of PET was found
+to form over the glass slide that can be peeled off. TSP-
+Atto647N was also spotted onto the spun-coated glass slides
+and product formation (A
+260) was detected, showing successful
+coating.
+TIRF microscopy
+0 to 500 pM solution of TSP-Atto647N in 50 mM glycine-
+NaOH pH 9, 50 mM NaCl, 10% v/v DMSO was applied to a
+PET-coated glass slide. A sealed chamber using 0.5”-diameter
+O-ring and vacuum grease was constructed with 2 glass slides
+(one PET-coated and one uncoated) to prevent evaporation
+during sample imaging; each chamber contained 250 μlo f
+sample. The sample was imaged in a single-molecule TIRF
+microscope with 638 nm excitation. The laser power was
+reduced to 0.9 to 1.0 mW at the objective to reduce PET
+background auto-ﬂuorescence (32). See Supplementary Infor-
+mation for microscope details.
+TIRF data processing and analysis
+Identiﬁcation and extraction of individual ﬂuorescence
+traces from camera images, as well as sorting of molecules
+were achieved using single-molecule platform for automated
+analysis (SPARTAN), a data analysis software tool created for
+sCMOS data sets (48). The SPARTAN software has been
+modiﬁed to disable automated background corrections.
+Molecule detection parameters were set to auto-detection
+sensitivity between 6 to 15 depending on image, and mini-
+mum distance between overlapping molecules was set to zero
+to detect all molecules on the surface; sensitivity was lowered
+to ensure sufﬁcient molecule detection or increased to avoid
+background noise detection. SPARTAN produces a list of x-y
+coordinates for all detected molecules, which were used to
+count the number of molecules in each quadrant of theﬁeld of
+view (56 μm-diameter). This was done for each enzyme con-
+centration at two different locations on the surface. Number of
+molecules detected in buffer controls were subtracted from
+total number of detected molecules in enzyme samples by
+randomly removing coordinates (total number of coordinates
+removed equaled number of molecules detected in blank) from
+the lists prior to separation distance determination. Using
+Fortran code, the distance between each coordinate and all
+other coordinates were calculated and the minimum separa-
+tion distance was determined for each enzyme concentration
+and quadrant in theﬁeld of view. The result is a distribution of
+minimum distances for all of the points. The mean of the
+distribution is recorded as the mean minimum distance be-
+tween points. The mean minimum distance from each of the
+eight quadrants for each enzyme concentration was used to
+determine SD.
+Molecular dynamics simulations ofIsPETase variants with PET
+substrate and macromolecular crowding
+The initial conﬁguration for control enzyme monomer MD
+simulations was generated by centering the free or substrate-
+bound IsPETase variant in an orthorhombic box. A minimum
+distance of 3 nm was set between the enzyme and the edge of
+the box to prevent self-interaction across the periodic boundary
+conditions. Enzyme crowding simulations were set up by
+placing eight identical freeIsPETase or substrate-boundIsPE-
+Tase conﬁgurations in a 188 × 188 × 188 Å
+3 box spaced evenly
+apart. This results in approximately 94 Å between every enzyme
+pair’s center-of-masses corresponding to a 2 mM concentration.
+All systems were solvated with the TIP3P water model (49)a n d
+the total system charge was neutralized using chlorine ions. TS-
+PETase model was attained by performingin silicomutagenesis
+of the WTIsPETase crystal structure (24) (PDB ID: 6EQE) in
+PyMOL (50) and parametrized with the AMBER14SB forceﬁeld
+(51). PET pentamer substrate model used in docking and MD
+simulations was parametrized using the General Amber Force
+Field 2 (GAFF2) (52). Molecular docking of the PET substrate
+to theIsPETase variants was performed in AutoDock Vina (53),
+with a chosen PET conﬁguration that is consistent with previ-
+ously reported docking experiments (6, 24). MD simulations
+were performed in GROMACS (54). Following energy mini-
+mization and equilibration steps, MD production simulations
+for all systems were performed for 250 ns in the NPT ensemble
+at 300K and 1 bar. Constant temperature and pressure were
+maintained by a velocity rescale thermostat ( 55)a n da
+Parrinello-Rahman barostat (56), respectively. All simulations
+utilized a 2 fs time step with the LINCS (57) algorithm to
+constrain bonding between hydrogen and heavy atoms. Long-
+range electrostatic interactions were calculated using Particle
+Mesh Ewald summation with a 1.2 nm cutoff (58). From 250 ns
+MD simulations of the free and substrate-bound IsPETase
+variants under crowding and control conditions, protein
+structure equilibrium was observed in all systems after 200 ns so
+all analysis was performed over theﬁnal 50 ns of simulation
+trajectories. Simulation trajectories were post-processed in
+GROMACS and visualized with Visual Molecular Dynamics
+(59). RMSD and RMSF were performed with their respective
+built-in GROMACS functions. Hydrogen bonding calculation
+among enzyme catalytic triad residues (29) (S160, D206, and
+H237) was performed with 3.5 Å donor-acceptor distance and
+30
+/C14 angle cutoffs using the HBonds plugin tool in VMD. The
+Analysis of IsPETase kinetics using a surface crowding model
+J. Biol. Chem. (2024) 300(3) 105783 15
+occurrence of hydrogen bonds for the D206-H237 residue pair
+is counted for either Oδ1o rO δ2o fD 2 0 6h y d r o g e nb o n d i n g
+with Nδ1-H of H237. Quantiﬁcation of sampled productive
+active site conformations from hydrogen bonding analysis of
+catalytic triad residues was carried out similarly as outlined in
+the work of Guoet al.on IsPETase mutants (30).
+Macromolecular crowding with Ficoll 70
+Ficoll 70 was dissolved in 50 mM glycine-NaOH pH 9,
+50 mM NaCl, 10% v/v DMSO (reaction buffer) at a concen-
+tration of 400 mg/ml and subsequently diluted to 100, 200, and
+300 mg/ml using reaction buffer. All buffers were centrifuged
+at 5000 rpm for 1 min to remove air bubbles. BHET, at aﬁnal
+concentration of 500μM, was added to all buffer conditions
+and incubated with 40 nM of IsPETase (or no enzyme for
+blank controls) in 500μl reactions for 1 h at 30
+/C14 C. Reactions
+were stopped 1:1 with 200 mM phosphate pH 2.5 buffer and
+ﬁltered for HPLC analysis (SeeSupplementary Informationfor
+HPLC methods).
+Parameter estimation for kinetic model
+The biochemical kinetic model established by Equations6,
+17 and 18 contains ﬁve ﬁtting parameters (Ka, Kc, Γ, kcat,uc, and
+kcat,c). Parameters wereﬁt in two steps for each of the studied
+enzymes. In the ﬁrst step, adsorption parameters (Ka and Γ)
+were ﬁt using maximum-likelihood estimation in the log space
+of the parameters (60).
+bθ ¼ argθ min ðy−~yðθÞÞT V−1
+e ðy−~yðθÞÞ (23)
+where bθ is a vector of the estimated parameters,y is a vector
+containing the experimental observations, ~y (θ) is a vector
+containing model predictions with parameter setθ, andVe
+−1 is
+the measurement uncertainty covariance matrix. These
+adsorption parameters then served as priors for the second
+step ofﬁtting, in which allﬁve parameters (Ka, Kc, Γ, kcat,uc, and
+kcat,c) were ﬁt using maximum a posteriori estimation in the
+log space of the parameters
+bθ ¼ argθ min ðy−~yðθÞÞT V −1
+e ðy−~yðθÞÞþðθ−μÞT V −1
+μ ðθ−μÞ
+(24)
+where μ is a vector of the parameter values predicted in the
+prior step andVμ is a matrix of the covariance of the param-
+eters ﬁt in the prior step. This formulation instills a penalty for
+adjusting the parametersﬁt in previous steps. The values forμ
+and Vμ are set such that the parameters beingﬁt for theﬁrst
+time in the second or third steps do not instill any cost.
+Optimization and simulation were performed using Math-
+Works MATLAB software. Optimization was performed using
+a multi-start approach with an interior point algorithm and
+2000 random initialization points for each enzyme. All pa-
+rameters were scaled by log(θ) during optimization to improve
+the speed of searching the parameter space and to constrain
+parameter values to positive values.
+Data availability
+All raw data are available upon request (enzhong@mit.edu).
+Supporting information—This article contains supporting informa-
+tion (61– 67).
+Acknowledgments—The authors thank Barbara Imperiali and Soumi
+Gousch for providing GGGYK-K(SulfoCy5)-T(amide) and for
+demonstration of SrtA-tagging. PET spin-coating was done in
+Professor Caroline Ross’ Lab (Department of Materials Science
+and Engineering, MIT) with help from Runze Liu. Circular
+Dichroism was performed at the Biophysical Instrumentation
+Facility at Massachusetts Institute of Technology.
+Author contributions—E. Z. L. Z.-J. conceptualization; E. Z. L. Z.-J.,
+Z. D., C. T. C., F. D., M. C., and T. M. J. methodology; E. Z. L. Z.-J.,
+C. T. C., and F. D. formal analysis; E. Z. L. Z.-J. validation; E. Z. L. Z.-
+J., Z. D., M. C., M. C. H., J. M., T. M. J., and M. Z. investigation; E. Z.
+L. Z.-J., Z. D., C. T. C., F. D., and M. C. writing– original draft; M. C.
+H. writing– review and editing; E. Z. L. Z.-J. visualization; E. Z. L. Z.-
+J., M. F. L., C. A. V., and A. J. S. funding acquisition; G. S. S.-C., M. F.
+L., R. D. B., K. G. S., C. A. V., and A. J. S. supervision.
+Funding and additional information—This work was funded by the
+MIT Ally of Nature Fund and DARPA HR0011-20-2-0049. The
+TIRF measurements were supported by NIH Award
+#R35GM148287. M. C. H. also acknowledges an NSF GRFP for
+support. The content is solely the responsibility of the authors and
+does not necessarily represent the ofﬁcial views of the National
+Institutes of Health.
+Conﬂict of interest—The authors declare that they have no conﬂicts
+of interest with the contents of this article.
+Abbreviations—The abbreviations used are: BHET, bis(2-
+hydroxyethyl) terephthalate; MHET, mono-2-hydroxyethyl
+terephthalate; PET, poly(ethylene terephthalate); PHA, poly(-
+hydroxyalkanoate); SC, surface crowding; SPARTAN, single-mole-
+cule platform for automated analysis; TIRF, total internal reﬂection
+ﬂuorescence microscopy; TPA, terephthalic acid.
+References
+1. Yoshida, S., Hiraga, K., Takehana, T., Taniguchi, I., Yamaji, H., Maeda, Y.,
+et al. (2016) A bacterium that degrades and assimilates poly(ethylene
+terephthalate). Science 351, 1196–1199
+2. Zhong-Johnson, E. Z. L., Voigt, C. A., and Sinskey, A. J. (2021) An
+absorbance method for analysis of enzymatic degradation kinetics of
+poly(ethylene terephthalate) ﬁlms. Sci. Rep. 11, 928
+3. Bell, E. L., Smithson, R., Kilbride, S., Foster, J., Hardy, F. J., Ramachan-
+dran, S.,et al. (2022) Directed evolution of an efﬁcient and thermostable
+PET depolymerase. Nat. Catal. 5, 673–681
+4. Lu, H., Diaz, D. J., Czarnecki, N. J., Zhu, C., Kim, W., Shroff, R.,et al.
+(2022) Machine learning-aided engineering of hydrolases for PET depo-
+lymerization. Nature 604, 662–667
+5. Cui, Y., Chen, Y., Liu, X., Dong, S., Tian, Y., Qiao, Y., et al. (2021)
+Computational redesign of a PETase for plastic biodegradation under
+ambient condition by the GRAPE strategy.ACS Catal. 11, 1340–1350
+6. Joo, S., Cho, I. J., Seo, H., Son, H. F., Sagong, H.-Y., Shin, T. J.,et al. (2018)
+Structural insight into molecular mechanism of poly(ethylene tere-
+phthalate) degradation. Nat. Commun. 9, 382
+7. Son, H. F., Cho, I. J., Joo, S., Seo, H., Sagong, H.-Y., Choi, S. Y.,et al.
+(2019) Rational protein engineering of thermostable PETase from
+Analysis of IsPETase kinetics using a surface crowding model
+16 J. Biol. Chem. (2024) 300(3) 105783
+
+Ideonella sakaiensis for highly efﬁcient PET degradation.ACS Catal. 9,
+3519–3526
+8. Kari, J., Andersen, M., Borch, K., and Westh, P. (2017) An inverse
+Michaelis–Menten approach for interfacial enzyme kinetics.ACS Catal.
+7, 4904–4914
+9. Avilan, L., Lichtenstein, B. R., Koenig, G., Zahn, M., Allen, M. D., Oli-
+veira, L., et al. (2023) Concentration-dependent inhibition of mesophilic
+PETases on poly(ethylene terephthalate) can be eliminated by enzyme
+engineering. Chemsuschem 16, e202202277
+10. Bååth, J. A., Borch, K., Jensen, K., Brask, J., and Westh, P. (2021)
+Comparative biochemistry of four polyester (PET) hydrolases. Chem-
+BioChem 22, 1627–1637
+11. Ezaki, T., Nishinari, K., Samejima, M., and Igarashi, K. (2019) Bridging the
+micro-macro gap between single-molecular behavior and bulk hydrolysis
+properties of cellulase.Phys. Rev. Lett.122, 098102
+12. Shibafuji, Y., Nakamura, A., Uchihashi, T., Sugimoto, N., Fukuda, S.,
+Watanabe, H., et al. (2014) Single-molecule imaging analysis of elemen-
+tary reaction steps of Trichoderma reesei Cellobiohydrolase I (Cel7A)
+hydrolyzing crystalline cellulose I α and IIII. J. Biol. Chem. 289,
+14056–14065
+13. Mukai, K., Yamada, K., and Doi, Y. (1993) Kinetics and mechanism of
+heterogeneous hydrolysis of poly[(R)-3-hydroxybutyrate] ﬁlm by PHA
+depolymerases. Int. J. Biol. Macromol.15, 361–366
+14. Rabe, M., Verdes, D., and Seeger, S. (2011) Understanding protein adsorption
+phenomena at solid surfaces.Adv. Colloid Interface Sci.162,8 7–106
+15. Minton, A. P. (1999) Adsorption of globular proteins on locally planar
+surfaces. II. Models for the effect of multiple adsorbate conformations on
+adsorption equilibria and kinetics.Biophys. J. 76, 176–187
+16. Kuznetsova, I. M., Turoverov, K. K., and Uversky, V. N. (2014) What
+macromolecular crowding can do to a protein. Int. J. Mol. Sci. 15,
+23090–23140
+17. Skóra, T., Popescu, M. N., and Kondrat, S. (2021) Conformation-
+changing enzymes and macromolecular crowding.
+Phys. Chem. Chem.
+Phys. 23, 9065–9069
+18. Dong, H., Qin, S., and Zhou, H.-X. (2010) Effects of macromolecular
+crowding on protein conformational changes. PLoS Comput. Biol. 6,
+e1000833
+19. Mikaelsson, T., Ådén, J., Wittung-Stafshede, P., and Johansson, L. B.-Å.
+(2014) Macromolecular crowding effects on two homologs of ribosomal
+protein S16: protein-dependent structural changes and local interactions.
+Biophys. J. 107, 401–410
+20. Zhou, H.-X., Rivas, G., and Minton, A. P. (2008) Macromolecular
+crowding and con ﬁnement: biochemical, biophysical, and potential
+physiological consequences. Annu. Rev. Biophys.37, 375–397
+21. Lee, S. H., Seo, H., Hong, H., Park, J., Ki, D., Kim, M.,et al. (2023) Three-
+directional engineering ofIsPETase with enhanced protein yield, activity,
+and durability. J. Hazard. Mater.459, 132297
+22. Shi, L., Liu, P., Tan, Z., Zhao, W., Gao, J., Gu, Q.,et al. (2023) Complete
+depolymerization of PET wastes by an evolved PET hydrolase from
+directed evolution. Angew. Chem. Int. Ed Engl.62, e202218390
+23. Crnjar, A., Griñen, A., Kamerlin, S. C. L., and Ramírez-Sarmiento, C. A.
+(2023) Conformational selection of a tryptophan side chain drives the
+generalized increase in activity of PET hydrolases through a Ser/Ile
+double mutation. ACS Org. Inorg. Au3, 109–119
+24. Austin, H. P., Allen, M. D., Donohoe, B. S., Rorrer, N. A., Kearns, F. L.,
+Silveira, R. L.,et al. (2018) Characterization and engineering of a plastic-
+degrading aromatic polyesterase. Proc. Natl. Acad. Sci. U. S. A. 39,
+201718804–201718808
+25. Sevilla, M. E., Garcia, M. D., Perez-Castillo, Y., Armijos-Jaramillo, V.,
+Casado, S., Vizuete, K.,et al. (2023) Degradation of PET bottles by an
+engineered Ideonella sakaiensis PETase. Polymers(Basel) 15, 1779
+26. Castro-Rodríguez, J. A., Rodríguez-Sotres, R., and Farrés, A. (2023) De-
+terminants for an efﬁcient enzymatic catalysis in poly(ethylene tere-
+phthalate) degradation. Catalysts 13, 591
+27. Casimiro, J., Lepoittevin, B., Boisse-Laporte, C., Barthés-Labrousse, M.-
+G., Jegou, P., Brisset, F., et al. (2012) Introduction of primary amino
+groups on poly(ethylene terephthalate) surfaces by ammonia and a mix of
+nitrogen and hydrogen plasma. Plasma Chem. Plasma Process. 32
+,
+305–323
+28. Zheng, Q., Jockusch, S., Zhou, Z., and Blanchard, S. C. (2014) The
+contribution of reactive oxygen species to the photobleaching of organic
+ﬂuorophores. Photochem. Photobiol. 90, 448–454
+29. Hedstrom, L. (2002) Serine protease mechanism and speciﬁcity. Chem.
+Rev. 102, 4501–4524
+30. Guo, B., Vanga, S. R., Lopez-Lorenzo, X., Saenz-Mendez, P., Ericsson, S.
+R., Fang, Y.,et al. (2022) Conformational selection in biocatalytic plastic
+degradation by PETase.Acs Catal. 12, 3397–3409
+31. Georgalis, Y., Philipp, M., Aleksandrova, R., and Krüger, J. K. (2012) Light
+scattering studies on Ficoll PM70 solutions reveal two distinct diffusive
+modes. J. Colloid Interface Sci.386, 141–147
+32. Rennison, A. P., Nousi, A., Westh, P., Marie, R., and Møller, M. S. (2024)
+Unveiling PET hydrolase surface dynamics throughﬂuorescence micro-
+scopy. ChemBioChem 25, e202300661
+33. Wei, R., Song, C., Gräsing, D., Schneider, T., Bielytskyi, P., Böttcher, D.,
+et al. (2019) Conformationalﬁtting of aﬂexible oligomeric substrate does
+not explain the enzymatic PET degradation.Nat. Commun. 10,1 –4
+34. Llorente, F., Martino, L., Delgado, D., and López-Santiago, J. (2021) On
+the computation of marginal likelihood via MCMC for model selection
+and hypothesis testing: an extensive review.SIAM Rev 65,3 –58
+35. Zimmerman, S. B., and Minton, A. P. (1993) Macromolecular crowding:
+biochemical, biophysical, and physiological consequences. Annu. Rev.
+Biophys. Biomol. Struct.22,2 7–65
+36. TSOU, C. (1998) Active siteﬂexibility in enzyme catalysis.Ann. N. York
+Acad. Sci. 864,1 –8
+37. Kari, J., Schiano-di-Cola, C., Hansen, S. F., Badino, S. F., Sørensen, T. H.,
+Cavaleiro, A. M.,et al. (2020) A steady-state approach for inhibition of
+heterogeneous enzyme reactions.Biochem. J. 477
+, 1971–1982
+38. Ribitsch, D., Yebra, A. O., Zitzenbacher, S., Wu, J., Nowitsch, S., Stein-
+kellner, G., et al. (2013) Fusion of binding domains to Thermobiﬁda
+cellulosilytica cutinase to tune sorption characteristics and enhancing
+PET hydrolysis. Biomacromolecules 14, 1769–1776
+39. Ribitsch, D., Acero, E. H., Przylucka, A., Zitzenbacher, S., Marold, A.,
+Gamerith, C., et al. (2015) Enhanced cutinase-catalyzed hydrolysis of
+polyethylene terephthalate by covalent fusion to hydrophobins. Appl.
+Environ. Microbiol. 81, 3586–3592
+40. Puspitasari, N., Tsai, S.-L., and Lee, C.-K. (2020) Fungal hydrophobin
+RolA enhanced PETase hydrolysis of polyethylene terephthalate.Appl.
+Biochem. Biotechnol. 147,1 –12
+41. Xue, R., Chen, Y., Rong, H., Wei, R., Cui, Z., Zhou, J.,et al. (2021) Fusion
+of chitin-binding domain fromChitinolyticbacter meiyuanensisSYBC-H1
+to the Leaf-branch Compost Cutinase for enhanced PET hydrolysis.
+Front. Bioeng. Biotechnol.9, 762854
+42. Dai, L., Qu, Y., Huang, J.-W., Hu, Y., Hu, H., Li, S.,et al. (2021) Enhancing
+PET hydrolytic enzyme activity by fusion of the cellulose-binding domain
+of cellobiohydrolase I from Trichoderma reesei.J. Biotechnol.334,4 7–50
+43. Zhang, Y., Wang, L., Chen, J., and Wu, J. (2013) Enhanced activity toward
+PET by site-directed mutagenesis of Thermobiﬁda fusca cutinase–CBM
+fusion protein. Carbohydr. Polym. 97, 124–129
+44. Arnold, F. H., and Georgiou, G. (2003)Directed Evolution Library Cre-
+ation. Humana Press, Totowa, NJ
+45. Krieger, E., and Vriend, G. (2014) YASARA View—molecular graphics for
+all devices —from smartphones to workstations. Bioinformatics 30,
+2981–2982
+46. Anandakrishnan, R., Aguilar, B., and Onufriev, A. V. (2012) H++ 3.0:
+automating pK prediction and the preparation of biomolecular structures
+for atomistic molecular modeling and simulations.Nucleic Acids Res.40,
+W537–W541
+47. Schindelin, J., Arganda-Carreras, I., Frise, E., Kaynig, V., Longair, M.,
+Pietzsch, T., et al. (2012) Fiji: an open-source platform for biological-
+image analysis. Nat. Methods 9, 676–682
+48. Juette, M. F., Terry, D. S., Wasserman, M. R., Altman, R. B., Zhou, Z.,
+Zhao, H., et al. (2016) Single-molecule imaging of non-equilibrium mo-
+lecular ensembles on the millisecond timescale. Nat. Methods 13,
+341–344
+Analysis of IsPETase kinetics using a surface crowding model
+J. Biol. Chem. (2024) 300(3) 105783 17
+49. Mark, P., and Nilsson, L. (2001) Structure and dynamics of the TIP3P,
+SPC, and SPC/E water models at 298 K.J. Phys. Chem. A105, 9954–9960
+50. Schrödinger, L. The PyMOL Molecular Graphics System, Version 1.8.6.2.
+51. M a i e r ,J .A . ,M a r t i n e z ,C . ,K a s a v a j h a l a, K., Wickstrom, L., Hauser, K. E., and
+Simmerling, C. (2015) ff14SB: improving the accuracy of protein side chain and
+backbone parameters from ff99SB.J. Chem. Theory Comput.11, 3696–3713
+52. Wang, M. S., Palmer, L. B., Schwartz, J. D., and Razatos, A. (2004)
+Evaluating protein attraction and adhesion to biomaterials with the
+atomic force microscope.Langmuir 20, 7753–7759
+53. Eberhardt, J., Santos-Martins, D., Tillack, A. F., and Forli, S. (2021)
+AutoDock Vina 1.2.0: new docking methods, expanded forceﬁeld, and
+python bindings. J. Chem. Info. Model.61, 3891–3898
+54. Abraham, M. J., Murtola, T., Schulz, R., Páll, S., Smith, J. C., Hess, B.,et al.
+(2015) GROMACS: high performance molecular simulations through multi-
+level parallelism from laptops to supercomputers.SoftwareX 1,1 9–25
+55. Bussi, G., Donadio, D., and Parrinello, M. (2007) Canonical sampling
+through velocity rescaling.J. Chem. Phys.126, 014101
+56. Parrinello, M., and Rahman, A. (1981) Polymorphic transitions in single
+crystals: a new molecular dynamics method.J. Appl. Phys.52, 7182–7190
+57. Hess, B., Bekker, H., Berendsen, H. J. C., and Fraaije, J. G. E. M. (1997)
+LINCS: a linear constraint solver for molecular simulations.J. Comput.
+Chem. 18, 1463–1472
+58. Darden, T., York, D., and Pedersen, L. (1993) Particle mesh Ewald: an
+N⋅log(N) method for Ewald sums in large systems.J. Chem. Phys. 98,
+10089–10092
+59. Humphrey, W., Dalke, A., and Schulten, K. (1996) VMD: visual molecular
+dynamics. J. Mol. Graph.14,3 3–38
+60. Beck, J. V., and Arnold, K. J. (1977)Parameter Estimation in Engineering
+and Science, Wiley, New York
+61. Badino, S. F., Bååth, J. A., Borch, K., Jensen, K., and Westh, P. (2022)
+Adsorption of enzymes with hydrolytic activity on polyethylene tere-
+phthalate. Enzyme Microb.Technol.
+152, 109937
+62. Efron, B., and Tibshirani, R. J. (1994)An Introduction to the Bootstrap,
+CRC Press, Boca Raton, FL
+63. Musil, M., Stourac, J., Bendl, J., Brezovsky, J., Prokop, Z., Zendulka, J.,
+et al. (2017) FireProt: web server for automated design of thermostable
+proteins. Nucleic Acids Res.45, W393–W399
+64. Goldenzweig, A., Goldsmith, M., Hill, S. E., Gertman, O., Laurino, P.,
+Ashani, Y.,et al. (2016) Automated structure- and Sequence-based design
+of proteins for high bacterial expression and stability. Mol. Cell 63,
+337–346
+65. Trott, O., and Olson, A. J. (2010) AutoDock Vina: improving the speed
+and accuracy of docking with a new scoring function, efﬁcient optimi-
+zation, and multithreading.J. Comput. Chem.31, 455–461
+66. Ollikainen, N., de Jong, R. M., and Kortemme, T. (2015) Coupling protein
+side-chain and backbone ﬂexibility improves the Re-design of protein-
+Ligand speciﬁcity. PLoS Comput. Biol.11, e1004335
+67. Dresser, L., Hunter, P., Yendybayeva, F., Hargreaves, A. L., Howard, J. A.
+L., Evans, G. J. O.,et al. (2021) Amyloid-β oligomerization monitored by
+single-molecule stepwise photobleaching.Methods 193,8 0–95
+Analysis of IsPETase kinetics using a surface crowding model
+18 J. Biol. Chem. (2024) 300(3) 105783

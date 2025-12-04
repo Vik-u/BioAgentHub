@@ -1,0 +1,887 @@
+SCIEX OS Software
+For the Echo® MS+ System with the ZenoTOF 7600/7600+ System
+Feature Guide
+RUO-IDV-05-15796-B November 2024
+This document is provided to customers who have purchased SCIEX equipment to use in the operation of
+such SCIEX equipment. This document is copyright protected and any reproduction of this document or
+any part of this document is strictly prohibited, except as SCIEX may authorize in writing.
+Software that may be described in this document is furnished under a license agreement. It is against the
+law to copy, modify, or distribute the software on any medium, except as specifically allowed in the license
+agreement. Furthermore, the license agreement may prohibit the software from being disassembled,
+reverse engineered, or decompiled for any purpose. Warranties are as stated therein.
+Portions of this document may make reference to other manufacturers and/or their products, which may
+contain parts whose names are registered as trademarks and/or function as trademarks of their respective
+owners. Any such use is intended only to designate such products as those manufacturers' products and
+does not imply any right and/or license to use or permit others to use such manufacturers' and/or their
+product names as trademarks.
+SCIEX warranties are limited to those express warranties provided at the time of sale or license of its
+products and are the sole and exclusive representations, warranties, and obligations of SCIEX. SCIEX
+makes no other warranty of any kind whatsoever, expressed or implied, including without limitation,
+warranties of merchantability or fitness for a particular purpose, whether arising from a statute or
+otherwise in law or from a course of dealing or usage of trade, all of which are expressly disclaimed,
+and assumes no responsibility or contingent liability, including indirect or consequential damages, for any
+use by the purchaser or for any adverse circumstances arising therefrom.
+(GEN-IDV-09-10816-E)
+For Research Use Only. Not for use in Diagnostic Procedures.
+Trademarks and/or registered trademarks mentioned herein, including associated logos, are the property
+of AB Sciex Pte. Ltd., or their respective owners, in the United States and/or certain other countries (see
+sciex.com/trademarks).
+AB Sciex™ is being used under license.
+Echo, Echo MS, and Echo MS+ are trademarks or registered trademarks of Labcyte, Inc. in the United
+States and other countries, and are being used under license.
+© 2024 DH Tech. Dev. Pte. Ltd.
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+2/28
+Feature Guide
+RUO-IDV-05-15796-B
+Contents
+1 Acquisition with an Echo
+®
+ MS+ System................................................................................. 4
+MS Method................................................................................................................................4
+Source and Gas Parameters................................................................................................4
+Parameters for TOF MS Experiments..................................................................................5
+Parameters for MRMHR Algorithm Experiments...................................................................7
+AE Method................................................................................................................................ 8
+Batch....................................................................................................................................... 11
+Automatic Calibration (Optional)............................................................................................. 13
+Output Configuration File (Optional)....................................................................................... 14
+System Preparation.................................................................................................................14
+2 Target Lists..............................................................................................................................17
+Create a Target List.................................................................................................................17
+Configure Project Default Settings..........................................................................................22
+Create an MS Method to Use As a Template..........................................................................23
+Create a Processing Method to Be Used as a Template........................................................ 24
+3 Data Visualization................................................................................................................... 25
+Contact Us..................................................................................................................................27
+Addresses............................................................................................................................... 27
+Customer Training...................................................................................................................27
+Online Learning Center...........................................................................................................27
+SCIEX Support........................................................................................................................27
+Cybersecurity.......................................................................................................................... 27
+Documentation........................................................................................................................27
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+3/28
+Acquisition with an Echo® MS+
+System 1
+This section supplies information about the use of the SCIEX OS software to acquire acoustic
+ejection-mass spectrometry (AEMS) data. The section gives descriptions of the MS method and
+AE method parameters, batches, batch calibration, and system preparation.
+MS Method
+Source and Gas Parameters
+The Echo® MS probe on the OptiFlow Turbo V ion source operates with the open port interface
+(OPI) on the Echo® MS+ system to aspirate, nebulize, and ionize samples and then supply
+the samples to the ZenoTOF 7600 mass spectrometer. A narrow range of source and gas
+parameters is recommended for this workflow.
+Figure 1-1 Source and Gas Parameters
+Table 1-1 Source and Gas Parameters
+Parameter Comments
+Ion source gas 1
+(psi)
+Set the pressure for ion source gas 1. Ion source gas 1 pulls the carrier
+solvent from the OPI port to the ion source. Set to 90. Lower values might
+cause leaks in the OPI.
+Ion source gas 2
+(psi)
+Set the pressure for ion source gas 2. This gas dissolves the carrier solvent
+in the ion source. Optimize the Ion source gas 2 (psi) value for the
+composition and flow rate of the carrier solvent. A starting value of 50 is
+recommended.
+Acquisition with an Echo® MS+ System
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+4/28
+Feature Guide
+RUO-IDV-05-15796-B
+Table 1-1 Source and Gas Parameters (continued)
+Parameter Comments
+Curtain gas (psi) Set the pressure for the gas for the Curtain Gas interface. This gas helps
+prevent contamination of the ion optics. Use the highest possible value that
+does not decrease sensitivity. Higher values decrease contamination with a
+small decrease in signal intensity.
+CAD gas Set the pressure in the collision cell. For TOF MS experiments, set to 7 for
+collisional cooling of the ions. For TOF MS/MS experiments, optimize the
+CAD gas value for fragmentation of the analyte ions.
+Temperature
+(°C)
+Optimize the temperature for the composition and flow rate of the carrier
+solvent. A starting value of 300 is recommended. Temperature settings
+more than 400 are not recommended. High temperatures can decrease the
+life of the electrode and can also cause lower sensitivity for thermally labile
+compounds.
+Parameters for TOF MS Experiments
+Figure 1-2 TOF MS Parameters
+Table 1-2 TOF MS Parameters
+Parameter Comments
+Polarity Identify the ionization mode. Select Positive or Negative. Polarity switching
+is not available.
+TOF start mass
+(Da)
+Identify the mass at the start of the target mass range. The TOF start mass
+(Da) must be less than the TOF stop mass (Da).
+TOF stop mass
+(Da)
+Identify the mass at the end of the target mass range. The TOF stop mass
+(Da) must be more than the TOF start mass (Da).
+Accumulation
+time (s)
+Identify the time that is required for the mass spectrometer to acquire one
+TOF MS spectrum. A starting value of 0.08 is recommended.
+Acquisition with an Echo® MS+ System
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+5/28
+Table 1-2 TOF MS Parameters (continued)
+Parameter Comments
+Spray voltage
+(V)
+Identify the voltage to be applied to the probe electrode. Optimize the spray
+voltage for the composition and flow rate of the carrier solvent. To maximize
+the life of the electrode, do not use a value more than 4500.
+Declustering
+potential (V)
+Identify the voltage to be applied at the orifice to minimize the formation
+of ion clusters. Different compounds might have different optimum
+declustering potentional (DP) values. The DP value is used for the full mass
+range.
+DP spread (V) Type a value for the DP spread (DPS). Together with the Declustering
+potential (V), this parameter controls the DP that is applied to the ions. The
+DP is increased gradually from a low value of DP – DPS to a high value of
+DP + DPS.
+ITC mode Select Dynamic or Fixed. In dynamic mode, the ion flow is continuously
+monitored and automatically adjusted to prevent damage to the detector.
+In fixed mode, the user sets a value in the ITC field. Dynamic mode adds
+27 ms to the cycle time, to monitor the ion flow before the start of the
+experiment.
+Note: Dynamic mode is only available for TOF MS experiments.
+Collision energy
+(V)
+Identify the voltage to be applied in the collision cell. In TOF MS
+experiments, a low value is used to move ions through the collision cell
+without fragmentation.
+CE spread (V) This parameter is not usually used in TOF MS experiments.
+ITC Identify the percentage of ions that will go into the mass spectrometer.
+When fixed mode is in use, monitor the ion intensity. Start with a low value
+and increase the value in small increments until the signal strength gets to
+the required minimum. If the expected ion intensity is not known, then use
+dynamic mode. Consistent high ion intensity or short periods of very high
+ion intensity can cause permanent damage to the detector.
+Note: This parameter is applicable when ITC mode is set to Fixed.
+Acquisition with an Echo® MS+ System
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+6/28
+Feature Guide
+RUO-IDV-05-15796-B
+Parameters for MRMHR Algorithm Experiments
+Figure 1-3 MRMHR Algorithm Parameters
+Table 1-3 MRMHR Algorithm Parameters
+Parameter Comments
+Q1 resolution Identify the resolution of the Q1 quadrupole. Select Unit, Open, Low, or
+High. Unit supplies a Q1 mass selection of approximately ±0.7 Da. Open
+and Low supply a wider Q1 mass selection. High supplies a narrower Q1
+mass selection.
+ITC Identify the percentage of ions that will go into the mass spectrometer.
+In MRMHR algorithm experiments, this parameter is usually set to 100 to
+maximize analyte sensitivity.
+Zeno pulsing Select to enable Zeno pulsing. Zeno pulsing is a unique feature of the
+ZenoTOF 7600/7600+ mass spectrometer. When activated, this feature
+makes the duty cycle better and increases signal strength.
+Apply TOF start/
+stop mass
+Select to set the TOF mass range manually. If this option is not selected,
+then a default mass range of 20 Da centered on the specified fragment ion
+is used.
+TOF Start Mass
+(Da)
+Identify the mass at the start of the target mass range. The TOF Start Mass
+(Da) must be less than the TOF Stop Mass (Da).
+TOF Stop Mass
+(Da)
+Identify the mass at the end of the target mass range. The TOF Stop Mass
+(Da) must be more than the TOF Start Mass (Da).
+Accumulation
+Time (sec)
+Identify the time that is required for the mass spectrometer to acquire one
+TOF MS/MS spectrum. A starting value of 0.01 is recommended.
+Declustering
+potential (V)
+Identify the voltage to be applied at the orifice to minimize the formation
+of ion clusters. In MRMHR algorithm experiments, declustering potential is
+identified for each row in the transition table.
+Acquisition with an Echo® MS+ System
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+7/28
+Table 1-3 MRMHR Algorithm Parameters (continued)
+Parameter Comments
+Collision energy
+(V)
+Identify the voltage to be applied in the collision cell. In TOF MS/MS and
+MRMHR experiments, this voltage breaks the precursor ions into fragments.
+Optimize collision energy (CE) to maximize the intensity of a fragment.
+CE Spread (V) Identify the CE spread (CES). Together with the Collision energy (V)
+parameter, this parameter controls the CE that is applied to the precursor
+ion in a Product Ion scan. The CE is increased gradually from a low value
+(CE – CES in positive polarity) to a high value (CE + CES in positive
+polarity).
+AE Method
+The acoustic ejection (AE) method supplies the settings used for operation of the Echo® MS+
+system.
+Figure 1-4 AE Method: Standard
+Acquisition with an Echo® MS+ System
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+8/28
+Feature Guide
+RUO-IDV-05-15796-B
+Figure 1-5 AE Method: Wide
+Table 1-4 AE Method Parameters
+Parameter Description
+Estimated
+Duration
+Shows the expected duration of the plate run time, calculated with the
+Interval (ms) and other factors that have an effect on the run time. The
+estimated duration is supplied for both 384-well and 1,536-well plates. The
+calculation does not include equilibration or batch calibration time.
+Carrier Solvent To identify the composition of the carrier solvent, select the percentage of
+Methanol, Acetonitrile, and Water.
+Flow Rate (µL/
+min)
+Optimize the flow rate for the system. The electrode and the composition of
+the carrier solvent have an effect on the optimum flow rate. If the electrode
+or the composition of the carrier solvent changes, then this value must be
+optimized again.
+Acquisition with an Echo® MS+ System
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+9/28
+Table 1-4 AE Method Parameters (continued)
+Parameter Description
+Fluid Class Select the sample matrix that is in the sample well. Different options are
+available for different plate types. Options include the following:
+• AQ (Aqueous): Used for aqueous solutions.
+• SP (Surfactant Phase): Used for solutions with a low surface tension,
+such as aqueous solutions with surfactants, for example Triton X-100,
+or organic-aqueous mixtures. This option is only available for 384-well
+plates. This option cannot be used with 1536-well plates because of the
+sample evaporation that occurs during analysis.
+• DMSO (Dimethyl sulfoxide): Used for solvents that contain between 70%
+and 100% DMSO.
+Peak Type Select Standard or Wide mode.
+• Standard: The AE system ejects droplets very quickly to make a narrow
+peak.
+• Wide: The user can identify the rate of droplet ejection to make peaks
+that are wider than in standard mode. Wider peaks supply more data
+points across the peak and support longer cycle times in the MS method.
+Wide peak mode is applicable to multidroplet ejections only.
+Ejection Vol (nL) Identify the total volume of the sample to be dispensed by the Echo® MS+
+system, in increments of 2.5 nL.
+Note: The system ejects droplets of 2.5 nL.
+When the Peak Type is Wide, the minimum value for Ejection Vol (nL) is
+5.
+Interval (ms) Identify the time between sample ejections. The software uses the Rep
+Rate (Hz) and Ejection Vol (nL) to calculate a minimum Interval (ms).
+Rep Rate (Hz) Identify the droplet ejection repeat (rep) rate, in Hz. Ejection Vol (nL) and
+Rep Rate (Hz) control the widths of the peaks.
+Acquisition with an Echo® MS+ System
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+10/28
+Feature Guide
+RUO-IDV-05-15796-B
+Batch
+Figure 1-6 Batch
+Note: The following columns are not applicable to the analysis of data acquired with an Echo®
+MS+ system, and can be hidden with the View option: Rack Type, Rack Position, Plate
+Position, and Injection Volume (µL).
+Table 1-5 Batch Columns
+Column Name Description Field Value Requirements
+Sample Name The name of the
+sample
+Less than 252 characters.
+Note: During post-acquisition splitting of the
+data, the well position is added to the start of
+the sample name: for example A1-Sample1.
+MS Method The name of the MS
+method
+Select an MS method from the list for the
+active project.
+Note: The same MS method must be used for
+all samples in the batch.
+AE Method The name of the AE
+method
+Select an AE method from the list for the
+active project.
+Note: The same AE method must be used for
+all samples in the batch.
+Plate Type 384PP or 1536LDV Only one Plate Type can be used in a batch.
+Only plates from Beckman Life Sciences that
+are qualified for use with an Echo® MS+
+system can be used with the Echo® MS+
+system.
+Acquisition with an Echo® MS+ System
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+11/28
+Table 1-5 Batch Columns (continued)
+Column Name Description Field Value Requirements
+Well Position 384PP: A1 to P24
+1536LDV: A1 to AF48
+A Well Position can only be sampled once for
+each row.
+Sample Type Blank, Standard,
+Double blank,
+QualityControl,
+Solvent, and
+Unknown
+Sample type information is saved in the data
+file and can be used during processing.
+Data File The name of the file
+to which the acquired
+data is saved
+All data acquired by a batch must be kept in
+the same Data File.
+Note: The same data file must be used for all
+samples in the batch.
+Processing Method The name of
+the method that
+will be used for
+automatic processing
+after acquisition is
+completed.
+The processing method must be compatible
+with the MS method used to acquire data.
+Note: The same processing method must be
+used for all samples in the batch.
+Results File The name of the file to
+which the processed
+results are saved
+Results files are kept in the Results
+subfolder of the active project.
+Note: The same Results file must be used for
+all samples in the batch.
+Note: Use a different Results file for each
+batch. We do not recommend that the Results
+files be used more than once.
+Note: If a target list file is used, then the
+Results file is saved in txt format. If a target
+list file is not used, then two Results files are
+saved, in txt and qsession format.
+Acquisition with an Echo® MS+ System
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+12/28
+Feature Guide
+RUO-IDV-05-15796-B
+Table 1-5 Batch Columns (continued)
+Column Name Description Field Value Requirements
+Marker Well Marker well: True
+Other wells: False
+(default)
+Select only one Marker Well in each batch.
+Select a well with contents that supply a
+sufficiently strong MS signal for barcode
+recognition during data splitting. If the peak
+shape has excessive tailing, then data splitting
+might not occur.
+Target List The name of the
+Target List file, with
+the csv extension
+(Optional) Identify the Target List file. If the
+file is not in the Batch folder for the active
+project, then include the full file path. Refer to
+the section: Target Lists.
+Automatic Calibration (Optional)
+If automatic calibration is used, it must be done at the start of the batch. Calibration cannot be
+done between samples.
+The calibrant delivery system (CDS) is used to calibrate the ZenoTOF 7600/7600+ system when
+it is configured with the Echo® MS+ system.
+The user can select the applicable ion reference table and edit the table for the contents of the
+CDS reservoir and the specific calibration ions required.
+To do automatic calibration at the start of the batch, select the Auto-Calibrate check box.
+The calibration occurs in two phases:
+• Cal: Initial CDS calibration, with the selected ion reference table
+• Cal Phase 2: Equilibration, which removes traces of the CDS solution
+Figure 1-7 Batch - Automatic Calibration Editor Dialog
+Acquisition with an Echo® MS+ System
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+13/28
+Output Configuration File (Optional)
+Use the EchoExportColumnConfig.xml file to customize the path in which the Results text
+files will be written, the columns to be included in the Results text files, and the order of the
+columns.
+The default EchoExportColumnConfig.xml file is in the SCIEX OS Data/common-
+project-area folder. To change the settings, edit this file, or make and edit a copy of the
+file in the project folder or the Quantitation Results folder for the project.
+Note: Three templates are available in the SCIEX OS Data\common-project-area\Echo
+MS\Example Export Column Configuration folder:
+• EchoExportColumnConfig-1
+• EchoExportColumnConfig-CompoundQC
+• EchoExportColumnConfig-Intact
+Table 1-6 Elements in the Output File
+Element Description
+Path Identify the path to which the Results text file will be saved. Multiple paths
+can be identified to save multiple copies of the output file.
+Note: A copy of the Results text file is saved in the Quantitation
+Results folder for the project.
+Order Identify the order for the column in the Results text file. Type a unique
+number for each column. Type 0 for the first column.
+Visible Identify if the column is included in the Results text file. Type true to
+include the column. Type false to exclude the column.
+System Preparation
+For MRMHR algorithm and information-dependent acquisition (IDA) experiments where different
+ions are monitored for different wells, to make sure that the correct ions are monitored for each
+well, the software requires the time between droplet ejection and detection (transfer time). The
+transfer time is calculated and saved every time data splitting occurs.
+If the system has not operated recently, or if the electrode or carrier solvent has been changed,
+then the system runs a short batch to calculate the transfer time. Before the batch to calibrate
+the transfer time is run, make sure that the time for system equilibration has been a minimum of
+30 minutes.
+Acquisition with an Echo® MS+ System
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+14/28
+Feature Guide
+RUO-IDV-05-15796-B
+To calibrate the transfer time, do this:
+1. Open the Status panel.
+2. Click Equilibrate.
+The System Preparation dialog opens.
+Figure 1-8 System Preparation Dialog: Transfer Time Tab
+3. Open the Transfer Time tab, and then use the following table complete the fields:
+Table 1-7 Transfer Time Tab
+Field Description
+MS Method Select an MS method from the list for the active project. Any MS method
+can be used to adjust the transfer time. A TOF MS method usually gives
+the best result.
+Acquisition with an Echo® MS+ System
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+15/28
+Table 1-7 Transfer Time Tab (continued)
+Field Description
+AE Method Select the AE method that will be used for acoustic ejection-mass
+spectrometry (AEMS) analysis from the list for the active project. The
+AE method makes sure that the transfer time is calibrated correctly for
+the sample transfer conditions in the AEMS analysis. Make sure that the
+value for Ejection Vol (nL) in the selected method is sufficient to supply
+a strong signal that is almost the same as the intensity of the marker
+well.
+Note: Adjust the transfer time before a different AE method is used.
+Plate Type Select a plate that is applicable to the Echo® MS system. Options
+include the following:
+• 384PP
+• 1536LDV
+Well Position Identify the position of a well that contains a sample concentration that
+will give a significant signal in the mass spectrometer. A marker well is
+recommended. Options include the following:
+• 384PP: A1 to P24
+• 1536LDV: A1 to AF48
+4. Click OK.
+A batch with 15 samples is automatically created and submitted. After the batch completes,
+the new transfer time is calculated and saved as a system default.
+Acquisition with an Echo® MS+ System
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+16/28
+Feature Guide
+RUO-IDV-05-15796-B
+Target Lists 2
+Usually, a batch used with the Echo® MS+ system acquires one analyte or set of analytes for
+all of the samples. If a different target analyte must be specified for each row, column, or well
+position, in MRMHR algorithm workflows, for example, then a target list must be used. For TOF
+MS data, the target list identifies the analytes of interest for each well, and this information is
+used during processing of the data. A target list can also be used to identify the analytes of
+interest in MRMHR algorithm and IDA experiments during acquisition. The analyte information in
+the target list is used to update the MS method during acquisition.
+The target list is a csv file. The file contains analyte information that can be used in the following
+areas:
+• For the analyte information for mass reconstruction of intact proteins and large biomolecules
+• In the inclusion list for IDA experiments
+To use a target list, do these procedures:
+• Create a Target List
+• Configure Project Default Settings
+• Create an MS Method to Use As a Template
+• Create a Processing Method to Be Used as a Template
+Create a Target List
+Each row of a target list file contains mass information for a single well and compound. Multiple
+rows can contain the same compound. Multiple rows can contain the same well position.
+Note: Example target lists for different workflows are available in the SCIEX OS
+Data\common-project-area\Echo MS\Example Target List folder.
+• Create a target list file in csv format, and then save it in the Batch subfolder of the folder for
+the project where it will be used.
+Note: The target list file can use commas or periods as the decimal separators. The Results
+file created during automatic processing uses periods as the decimal separators.
+Note: Make sure that the text, capitalization, and spacing in the field names are the same as
+in the following table.
+Target Lists
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+17/28
+Table 2-1 Field Names in the Target List File
+Field Description
+Well Identify one well position in each row, with no spaces. Available values
+include the following:
+• 384PP: A1 to P24
+• 1536LDV: A1 to AF48
+Transfer Time
+Tolerance
+Identify the number of seconds to be added to adjust the start and
+end of the monitoring window for a sample. This parameter is used
+in workflows, such as the following, where different transitions are
+monitored for different well positions:
+• MRM HR workflows where transitions are monitored by well
+• IDA workflows where inclusion lists are monitored by well
+The transfer time tolerance can be negative, but the absolute value of
+the transfer time must not be more than half of the ejection interval used
+in the AE method.
+Offset Identify the number of seconds that the scheduled acquisition window
+will be moved around a possible peak position. A positive value moves
+the window to the right. A negative value moves the window to the left.
+Group Identify the applicable group name for the compound.
+Name Identify the Compound ID of the compound.
+IS Name Identify the name of the internal standard to be used for quantitation
+calculations for the compound. Only one internal standard can be used
+for each compound.
+IS Identify if the compound is an internal standard. Available values include
+the following:
+• True
+• False
+Formula Identify the elemental formula for the compound. Peptides can have
+single-letter amino acids and modifications. To identify specific isotopes,
+include the weight of the isotope, such as [2H], [18O], or [15N], in
+square brackets before the symbol. For example, identify heavy water
+(D2O) as [2H]2O.
+Adduct/Charge If a formula is specified, then identify the adduct and charge state, such
+as [M+H]+ or [M+H]–. All adducts supported in the Analytics workspace
+of the SCIEX OS software are supported in target lists.
+Target Lists
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+18/28
+Feature Guide
+RUO-IDV-05-15796-B
+Table 2-1 Field Names in the Target List File (continued)
+Field Description
+Comment Supply more information for the row entry. As many as 128 characters
+can be used.
+Precursor Mass
+(Da)
+Identify the mass of the precursor ion. The applicable range is from 5 to
+2,250, with as many as 5 decimal places.
+TOF Start Mass
+(Da)
+Identify the mass at the start of the target mass range for a TOF MS/MS
+experiment. The TOF Start Mass (Da) must be less than the TOF Stop
+Mass (Da).
+This parameter is used if Apply TOF start/stop mass is selected in the
+MS method to be used as a template.
+TOF Stop Mass
+(Da)
+Identify the mass at the end of the target mass range for a TOF MS/MS
+experiment. The TOF Stop Mass (Da) must be more than the TOF
+Start Mass (Da).
+This parameter is used if Apply TOF start/stop mass is selected in the
+MS method to be used as a template.
+Fragment Mass
+(Da)
+Type the fragment mass to be used in the processing method. The
+default scan range for a TOF MS/MS method is 20 Da, ±10 Da from the
+specified fragment mass.
+Note: If Apply TOF start/stop mass is selected in the MS method to be
+used as a template, then the TOF Start Mass (Da) and TOF Stop Mass
+(Da) set in the target list are used as the TOF MS/MS scan range.
+Accumulation
+Time (sec)
+Adjust the accumulation time of the target transition to optimize the total
+scan time. The accumulation time is the time required for the mass
+spectrometer to acquire one TOF MS/MS data point. The accumulation
+time has an effect on the number of points across a peak. The
+applicable range is from 0.005 to 50. Typical values are from 0.01 to
+0.100.
+Declustering
+potential (V)
+Identify the voltage to be applied to the orifice to minimize the formation
+of ion clusters. The declustering potential (DP) can be specified for each
+row of the transition table. The applicable range is from 0 to 300.
+Note: DP spread (V) is set in the MS method.
+Collision
+Energy (V)
+Identify the voltage to be applied to the collision cell. Collision energy
+(CE) is usually optimized to maximize the intensity of a fragment. The
+applicable range is from 0 to 150.
+Target Lists
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+19/28
+Table 2-1 Field Names in the Target List File (continued)
+Field Description
+CE Spread (V) Identify the value to be used to increase the CE gradually. Together with
+the Collision Energy (V) parameter, the CE spread (CES) parameter
+controls the CE that is applied to the precursor ion in a Product Ion
+scan.
+For example, in positive polarity, the CE is increased gradually from
+CE – CES to CE + CES.
+The applicable range is from 0 to 150.
+Fragmentation
+Mode
+Identify one of the following fragmentation modes:
+• CID: In collisional-induced dissociation (CID) mode, fragment ions
+are made by vibrational excitation of the precursor ion caused by
+collisions with gas molecules in the Q2 collision cell.
+• EAD: In electron-activated dissociation (EAD) mode, the precursor
+ions in the EAD cell are exposed to electrons to cause dissociation of
+the precursor ion to fragment ions.
+• EAD (conventional trapping): Conventional trapping is an EAD
+mode that is most applicable for academic studies of reaction
+kinetics. EAD mode supplies more control of the load time and
+reaction time (electron irradiation duration) steps. In EAD mode,
+these steps are optimized to occur at the same time, which increases
+the sensitivity approximately two times. In EAD (conventional
+trapping) mode, these steps are done consecutively. Selected
+precursors are introduced in the EAD cell for a specified load time,
+the electron beam is applied for a specified reaction time, and then
+products are ejected from the EAD cell.
+Tip! If accurate and predictable control of the reaction time is
+required, then use EAD (conventional trapping) mode.
+Electron KE
+(eV)
+Identify the electron kinetic energy (KE) of the irradiating electron beam.
+The electron KE is the same as the DC bias between the electron
+source and the electron-activated (EA) rod electrodes in the electron-
+activated dissociation (EAD) cell. This parameter is applicable when
+Fragmentation Mode is set to EAD or EAD (conventional trapping).
+Target Lists
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+20/28
+Feature Guide
+RUO-IDV-05-15796-B
+Table 2-1 Field Names in the Target List File (continued)
+Field Description
+ETC (%) Identify the electron transfer coefficient (ETC). This parameter controls
+the fraction of electrons let into the EAD cell. The range is from 0% to
+100%. The parameter is applicable when Fragmentation Mode is set to
+EAD or EAD (conventional trapping).
+Tip! To use the type of precursor species that is analyzed and the
+product ions that are acquired to control the type of EAD reaction, use
+this parameter.
+EAD RF (Da) Identify a value between 0 Da and 300 Da. This parameter controls the
+RF level to keep precursor and fragment ions in the EAD cell.
+Note: To detect product ions with a higher m/z, increase EAD RF (Da).
+The detection of product ions with a lower m/z might decrease.
+Reaction time
+(ms)
+Identify the reaction time for electron irradiation. In EAD mode, this
+parameter also controls the load time.
+Tip! If precursor consumption is not sufficient after optimization of the
+electron beam current, then increase the reaction time.
+Time Bins to
+Sum
+Identify the number of data points to be added together. The range for
+small molecules or peptides is 4 to 6. The start value for intact protein
+analysis (> 20 kDa) is 40.
+Channel 1 to
+Channel 4
+Identify the analog-to-digital converter (ADC) channels. Each channel
+counts ions. If all four of the channels are selected, which is the default
+value, then all four of the channels are added together for the total ion
+count.
+Expected MW
+(Da)
+Mass Reconstruction workflow: Identify the expected molecular weight
+for the component, in Da.
+m/z Range for
+XIC Start (Da)
+Mass Reconstruction workflow: Identify the start mass for the XIC range.
+m/z Range for
+XIC Stop (Da)
+Mass Reconstruction workflow: Identify the end mass for the XIC range.
+Reconstruction
+Start Mass (Da)
+Mass Reconstruction workflow: Identify the mass at which
+reconstruction will start, in Da.
+Target Lists
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+21/28
+Table 2-1 Field Names in the Target List File (continued)
+Field Description
+Reconstruction
+Stop Mass (Da)
+Mass Reconstruction workflow: Identify the mass at which
+reconstruction will stop, in Da.
+Configure Project Default Settings
+During automatic processing, the software gets the processing method parameters, for example,
+XIC width (Da), Gaussian Smooth Width (points), and Noise % for Baseline (%), from the
+default settings for the project. If a processing method will be used as a template for automatic
+processing, then configure the project default settings to optimize peak integration over the full
+analysis. Different ejection volumes and peak widths in the AE method require different values
+for the processing parameters.
+The information in the project default settings is saved in the processing method to be used as a
+template.
+Note: When the project default settings are changed in the Analytics workspace, the changes
+are not used for saved processing methods. To apply the changes, update the project default
+settings, and then create a new processing method. The new processing method will use the
+updated project default settings. Use this new processing method for automatic processing.
+1. In the Analytics workspace, click Projects > Project default settings.
+Target Lists
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+22/28
+Feature Guide
+RUO-IDV-05-15796-B
+Figure 2-1 Quantitative Processing Window
+2. Configure the parameters.
+For detailed descriptions of the parameters, refer to the document: SCIEX OS Help System.
+3. Click Apply.
+4. Click Close.
+Create an MS Method to Use As a Template
+• In the MS Method workspace, create an MS method to use as a template. Refer to the
+document: SCIEX OS Help System.
+• For TOF MS experiments, create an MS method that has the applicable source and gas
+parameters and TOF MS experiment parameters.
+• For MRM HR experiments, create an MS method that has the applicable source and gas
+parameters, TOF MS experiment parameters, and TOF MS/MS experiment parameters,
+such as the Q1 resolution, ITC, and Zeno pulsing settings.
+Target Lists
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+23/28
+Note: The Mass Table information, such as Compound ID, Group Name, Precursor Ion,
+TOF Start Mass (Da) and TOF Stop Mass (Da) or Fragment ion (Da), Accumulation time
+(s), Declustering potential (V), Collision energy (V), and CE spread (V), is contained
+in a target list file. This information replaces information in the MS method to use as a
+template, and thus supplies a well-based processing method for TOF MS experiments and
+both acquisition and processing methods for TOF MS/MS experiments.
+Create a Processing Method to Be Used as a
+Template
+The information in the target list file and the project default settings replaces the information in
+the processing method that is used as a template. Refer to the section: Configure Project Default
+Settings.
+• In the Analytics workspace, create a processing method. Refer to the document: SCIEX OS
+Help System.
+Target Lists
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+24/28
+Feature Guide
+RUO-IDV-05-15796-B
+Data Visualization 3
+Use this procedure to use heat maps to visualize acoustic ejection (AE) data that was acquired
+with an Echo® MS+ system.
+1. Open the Explorer workspace.
+2. Click File > Open Echo MS Results File.
+The Open dialog opens. It shows the Quantitation Results folder in the active project.
+3. Browse to the Results text file that contains the AE data, and then click Open.
+4. (Optional) To configure the display options for the window, click 
+  (Settings), customize
+the settings, and then click Save & Close.
+5. (Optional) Select the applicable filtering options.
+6. In the Column field, select the column in the Results text file to show.
+The list includes all of the columns in the Results text file.
+Tip! Configure an output configuration file to select the fields to be included in the Results
+text file. Refer to the section: Output Configuration File (Optional).
+7. (Optional) For numeric columns, set the range. The following options are available:
+• Automatic: Select to show the lowest value in the data with the color on the left side of
+the color map and the highest value in the data with the color on the right side of the
+color map.
+• Default: If a default range is available, then select this option to use the default range. To
+identify a default range, first set a manual range, and then click Save as Default.
+Note: When the user sets a default range, the default range is used for all Results text
+files in the active project.
+• Manual: Select to set a manual range. All values that are less than the value at the low
+end of the range are shown with the color on the left side of the color map. All values that
+are more than the value at the high end of the range are shown in the color on the right
+side of the color map.
+Note: Values typed in scientific notation format are changed to decimal format.
+8. To show results for a well, click the well.
+9. To open the data in the Analytics workspace, click 
+  (Open in Analytics).
+Data Visualization
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+25/28
+Note: If the related file information is not found, then the Open in Analytics dialog opens.
+Complete the fields in this dialog, and then click Open.
+The workspace might take up to 1 minute to open. The time required is related to the size of
+the Results text file.
+Data Visualization
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+26/28
+Feature Guide
+RUO-IDV-05-15796-B
+Contact Us
+Addresses
+Made in Singapore
+AB Sciex Pte. Ltd.
+Blk33, #04-06 Marsiling Industrial Estate Road 3
+Woodlands Central Industrial Estate, Singapore 739256
+SCIEX
+Headquarters AB Sciex LLC
+500 Old Connecticut Path
+Framingham, Massachusetts 01701
+USA
+Customer Training
+• Global: sciex.com/contact-us
+Online Learning Center
+• SCIEX Now Learning Hub
+SCIEX Support
+SCIEX and its representatives have a global staff of fully-trained service and technical
+specialists. They can supply answers to questions about the system or any technical issues
+that might occur. For more information, go to the SCIEX website at sciex.com or use one of the
+following links to contact us.
+• sciex.com/contact-us
+• sciex.com/request-support
+Cybersecurity
+For the latest guidance on cybersecurity for SCIEX products, visit sciex.com/productsecurity.
+Documentation
+This version of the document supersedes all of the previous versions of this document.
+Contact Us
+Feature Guide
+RUO-IDV-05-15796-B
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+27/28
+To find software product documentation, refer to the release notes or software installation guide
+that comes with the software.
+To find hardware product documentation, refer to the documentation that comes with the system
+or component.
+The latest versions of the documentation are available on the SCIEX website, at sciex.com/
+customer-documents.
+Note: To request a free, printed version of this document, contact sciex.com/contact-us.
+Contact Us
+SCIEX OS Software For the Echo® MS+ System with
+the ZenoTOF 7600/7600+ System
+28/28
+Feature Guide
+RUO-IDV-05-15796-B

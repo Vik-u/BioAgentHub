@@ -1,0 +1,955 @@
+www.chembiochem.org
+Mining Thermophile Genomes for New PETases with
+Exceptional Thermostabilities Using Sequence
+Similarity Networks
+Zhenyu Hu, Kody Klupt, David L. Zechel, Zongchao Jia, and Graeme Howe*
+Enzymatic hydrolysis of polyethylene terephthalate (PET) is a prom-
+ising technology for advancing a circular PET economy. Several
+PET-degrading α/β hydrolases have been identified, but the full
+potential of this enzyme family to catalyze PET hydrolysis remains
+largely unexplored. To address this, sequence similarity networks
+are employed to investigate theα/β hydrolase fold-5 subfamily
+(IPR029059) for new PETases. Priority is given to sequences from
+thermophiles, as thermostable enzymes are likely more suitable for
+industrial applications. Ten enzymes with≈20% sequence identity
+to the well-known LCC-PETase are identified, and seven are suc-
+cessfully overexpressed and purified for in vitro characterization.
+Each enzyme catalyzes the hydrolysis of p-nitrophenyl bu-
+tyrate, a mimic of trimeric PET, and emulsified PET nanoparticles.
+Notably, three enzymes are also capable of hydrolyzing PET films.
+Novel PETases exhibit melting temperatures (Tm) exceeding 55 °C
+and only modest losses of activity after incubation at 70 °C for 24 h.
+The crystal structure of AroC (Tm =85 °C) is resolved to 2.2 Å,
+revealing several salt bridges that likely confer thermostability,
+and a unique loop that is conserved among the PETases described
+here. These novel enzymes will enable engineering campaigns to
+generate thermostable and catalytically efficient PETases for use as
+industrial biocatalysts.
+1. Introduction
+Polyethylene terephthalate (PET) is a thermoplastic polymer syn-
+thesized through the condensation reaction of ethylene glycol
+(EG) and terephthalic acid (TPA). PET is widely utilized for its
+exceptional properties including chemical inertness, thermal
+stability, durability, tensile strength, and light weight. These qual-
+ities make it an ideal material for applications in food packaging,
+medical devices, and electrical equipment. [1] PET production
+accounts for ≈8% of the world’s annual plastic production, but
+less than 50% of PET waste is currently recycled.[2] The chemical
+inertness of PET waste renders these materials extremely difficult
+to degrade, such that these materials represent a severe concern
+for our environment. Several PET recycling methods have been
+established, including mechanical, chemical, and thermal recy-
+cling.[3] Each method has drawbacks, including excessive energy
+requirements and the poor quality of recycled products.
+This renders PET recycling economically uncompetitive with the
+production of “virgin” PET materials from fresh feedstocks of
+EG and TPA, which are generally derived from petrochemicals.[4]
+Biocatalytic hydrolysis of PET is emerging as a viable route for
+PET recycling.[5] The first unambiguous description of a“PETase”
+capable of catalyzing the hydrolysis of PET was reported in 2005,
+when Müller et al. isolated a cutinase (TfH) from Thermobifida
+fusca DSM43793 that depolymerized PET films by 54% after
+21 days of incubation at 55 °C.[6] Another important development
+was the isolation and characterization of a cutinase (HiC) from
+the thermophilic fungus Humilica insolens that was maximally
+active at 70–80 °C and could achieve nearly quantitative degra-
+dation of amorphous PET films after 96 h at similarly elevated
+temperatures.[7] In 2012, Kanaya et al. identified a thermostable
+cutinase (LCC-PETase) that was produced by an unidentified
+prokaryote from leaf compost and belonged to theα/β hydrolase
+fold-5 subgroup (IPR029059) of theα/β hydrolase superfamily.[5]
+This discovery was followed by Yoshida et al., who iso-
+lated and characterized a mesophilic PETase and MHETase
+(dubbed IsPETase and IsMHETase, respectively) that enabled
+Ideonella sakaiensis to metabolize and grow on PET wastes.[8]
+IsPETase-catalyzed hydrolysis of PET was found to produce
+mono(2-hydroxyethyl) terephthalate (MHET) as the major prod-
+uct, while IsMHETase was shown to convert MHET to TPA and
+EG. Both enzymes belong to the α/β-hydrolase superfamily
+and share the conserved catalytic triad of His-Asp-Ser residues
+that typify this class of enzyme.[9] It has been proposed that
+differences in the “lid domains” of IsPETase and IsMHETase are
+responsible for the substrate specificities of these enzymes.[9]
+Recent studies have focused on improving the thermostabil-
+ity and efficiency of PETases to make them useful against
+real-world PET waste at industrial scales. As the glass transition
+Z. Hu, D. L. Zechel, G. Howe
+Department of Chemistry
+Queen’s University
+Kingston, ON, Canada
+E-mail: graeme.howe@queensu.ca
+K. Klupt, Z. Jia
+Department of Biomedical and Molecular Sciences
+Queen’s University
+Kingston, ON, Canada
+Supporting information for this article is available on the WWW under https://
+doi.org/10.1002/cbic.202500065
+© 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH. This is
+an open access article under the terms of the Creative Commons Attribution-
+NonCommercial License, which permits use, distribution and reproduction in
+any medium, provided the original work is properly cited and is not used for
+commercial purposes.
+ChemBioChem 2025, 26, e202500065 (1 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065
+temperature (Tg) of dry PET is 70–80 °C,[10] PETases that function
+at similarly elevated temperatures are desirable, since at these
+temperatures, individual strands of PET are thought to be more
+accessible to enzyme active sites. Even when considering the
+water-induced crystallization effects that reduce the effective
+Tg of PET[11] (recent studies place the surface glass transition
+temperature of PET in water at Tg = 40–45 °C[12]), increasingly
+stable PETases are desirable to prolong the useful lifetime of
+the biocatalyst. Directed evolution and genome mining studies
+have identified variant PETases with enhanced thermostabili-
+ties and catalytic efficiencies, including LCC ICCG[13] LCCWCCG,[13]
+PHL7,[14] HOT-PETase,[15] and Fast-PETase.[16] Remarkably, one
+such engineered PETase can break down 90% of 20 kg of PET
+waste (pretreated with extrusion and micronization) in less than
+three days.[8,17]
+Although early adopters are now implementing enzymatic
+PET recycling systems on industrial scales,[18] significant questions
+about the nature and evolution of these enzymes remain. We
+were interested in assessing how widespread PET-active enzymes
+are within theα/β hydrolase superfamily. Recent works have also
+investigated the diversity of sequences that enable enzymatic
+PET depolymerization,[19] with one study employing bioinformat-
+ics and machine learning to identify more than 70 putative
+thermotolerant PETases comprising seven distinct phylogenetic
+groups.[20] While most of the 38 sequences confirmed to be active
+against PET were annotated as carboxylic ester hydrolases
+(EC3.1.1.-) or cutinases (EC3.1.1.74), more distantly related
+proteins (i.e., peptidases (EC3.1.1.74)) were also among those
+confirmed to be active against PET. Recent bioprospecting efforts
+by Fan et al.[21] have also demonstrated the diversity of sequ-
+ences that are active against PET by mining the ≈2.5 million
+unique sequences in their Global Ocean Microbiome Protein
+Catalogue for proteins with homology to IsPETase. Nearly
+1,600 such proteins were identified within this collection that
+could be grouped into seven distinct clades with no dependence
+on the geographic location of sampling sites. Six proteins were
+prioritized for in vitro characterization based on their association
+with extremophiles or extreme ecological niches, and three
+of these proteins catalyzed PET hydrolysis, suggesting that a
+significant proportion of the 1,600 putative PETases are authentic
+PET-degrading enzymes. Intriguingly, the activities of the novel
+PETases mined from the genomes of the ocean microbiome were
+enhanced by high salt concentrations, likely reflecting the halo-
+philic nature of the corresponding host marine microbes.
+Given the importance of thermostability for efficient PET
+processing, we used targeted genome mining to search for novel
+PET-active α/β hydrolases from thermophilic microorganisms. As
+mutations introduced through directed evolution to enhance
+activity are often accompanied by compensatory decreases in sta-
+bility of the protein,[22] we envisioned that the identification of
+novel, naturally stable PETases would enable more extensive
+explorations of sequence space while still retaining sufficient
+stability for industrial purposes. To complement the previously
+described search forIsPETase homologs,[21] we used LCC-PETase
+as the seed sequence to construct sequence similarity networks
+(SSNs) and identified ten genes from thermophiles that encoded
+putative PETases. This work presents structural and biochemical
+analysis of these novel enzymes against PET and structurally
+related substrates. Each evaluated protein exhibited significant
+thermostability, potentially making them useful starting points
+for directed evolution campaigns aiming to produce new
+PETases that are both stable and catalytically efficient. Finally,
+the apparent “hit rate” for PETases within the α/β hydrolase
+fold-5 subfamily highlights the underappreciated prominence of
+PET-degrading activity in Nature and the effectiveness of genome
+mining for finding new PETases.
+2. Results and Discussion
+2.1. Genome Mining for Thermostable PETases Using
+Sequence Similarity Networks
+The LCC-PETase[17] (accession ID: G9BY57) was used as the seed
+sequence for constructing a PETase SSN. First, the InterProScan
+webtool[23] was used to verify that LCC-PETase is a member of
+IPR029059 (α/β-hydrolase fold-5 subfamily). At an alignment
+score of 45 (corresponding to a %ID cut-off of≈26%), LCC-PETase
+was partitioned into a small cluster of≈80 unannotated genes
+(Figure 1, forest green), none of which were from thermophiles.
+In contrast, the largest cluster (Figure 1, red) contained several
+candidate genes encoding putative thermophilic enzymes.
+Genes were initially prioritized based on 1) conservation of the
+LCC-PETase catalytic triad (Ser165, Asp210, His242; LCC-PETase
+numbering) and 2) the reported growth temperature of the host
+organisms. AlphaFold2 [24] was then used to generate struc-
+tural predictions for proteins of interest, and each prediction
+was aligned with the experimentally derived structure of
+LCC-PETase (PDB ID: 6THS) using the MatchMaker function
+of ChimeraX.[25] As expected for members of theα/β-hydrolase
+fold-5 subfamily, the overall folds of predicted structures
+exhibited very low global root mean square deviation (RMSD)
+when superimposed with LCC-PETase (Table S1, Supporting
+Information). These structural alignments were also used to
+Figure 1. SSN for theα/β hydrolase fold-5 subfamily (IPR029059) constructed
+at an alignment score of 45 (%ID cutoff≈26%). The proteins studied in this
+work ( ) were contained in the large, red cluster, whereas LCC-PETase ()
+was found in the smaller, forest green cluster.
+ChemBioChem 2025, 26, e202500065 (2 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065
+evaluate the predicted active site architecture in proteins of inter-
+est. In each of the ten enzymes selected for experimental char-
+acterization ( Table 1), the residues comprising the putative
+catalytic triad were found to be essentially coincident with the
+corresponding residues in LCC-PETase (Figure S1 and S2,
+Supporting Information). The ten enzymes exhibit 18–22%ID with
+LCC-PETase, and 30–60%ID with one another (Table 1, Figure S1,
+Supporting Information), thus providing a diverse sequence
+space to explore for thermostable PETases.
+2.2. Esterase Activity with an Activated Substrate
+Each PETase was overexpressed inE. coliwith N-terminal His6 tags
+and purified by immobilized metal affinity chromatography (IMAC)
+(Figure S3, Supporting Information). Repeated attempts to overex-
+press and purify TrmO, AroL, and NaTrm were unsuccessful, and
+since TrmN could only be partially purified by IMAC, kinetic
+comparisons with that protein should be interpreted with caution.
+The purified enzymes were first tested for their capacity to hydro-
+lyze esters withp-nitrophenyl butyrate (pNPB) as a substrate.[26]
+Since most characterized PETases (including both IsPETase
+and LCC-PETase) have been shown to be maximally active at
+slightly alkaline conditions,[18,27] each purified enzyme was tested
+for hydrolytic activity againstpNPB at pH values of 8 and 9 (50 mM
+Tris–HCl, 30 °C). All tested enzymes catalyzed the hydrolysis of
+pNPB and exhibited standard Michaelis–Menten behavior, except
+for BelC, which could not be saturated with substrate (Figure S4,
+Supporting Information). Likewise, with the exception of BelC, the
+catalytic efficiencies (kcat/KM) of each enzyme at pH 8 and 9 were
+similar (Table 2). BelC is a significantly more efficient catalyst for
+the hydrolysis ofpNPB at pH 8 (kcat/KM =5100 M/C0 1 s/C0 1), although
+this appears to be derived from a lowerKM value (KM =70 μM).
+While this could be interpreted as an increased affinity for
+the substrate, the lowerKM value may also arise from an accumu-
+lation of the acyl-enzyme intermediate due to rate-limiting
+deacylation.[28]
+2.3. Evaluation of Protein Thermostabilities
+Melting temperatures (Tm) of the purified enzymes were measured
+using variable temperature circular dichroism spectroscopy.[29]
+Gratifyingly, each protein tested was at least moderately thermo-
+stable, withTm values ranging from 57 to 85 °C (Table 1, Figure S5,
+Supporting Information). Notably, several proteins (i.e., TrmA, OcnT,
+AroC, TrmN, and TrmD) exhibited thermostability in excess of
+the reported growth temperature of the source bacterium. For
+instance, although AroC was sourced from an organism with a
+maximal reported growth temperature of 65 °C, theTm value for
+purified AroC was significantly higher (Tm =85 °C).
+Having established theTm values and esterase activity of the
+enzymes, we next examined the stabilities of these proteins over
+time. Given that PET has aTg ≈ 70 °C, PET-degrading enzymes that
+Table 1. Database identifiers and source organisms for proteins discussed in this work. Maximum reported growth temperatures of these organisms are
+presented alongside the melting temperature (Tm) and the percent identity matrix illustrating the interrelatedness of each protein.
+a)Maximum reported growth temperatures taken from references.[48] b)Tm values determined by variable temperature CD spectroscopy (see Section 4,
+Methods and Materials).c)Values obtained using the Clustal Omega multiple sequence alignment webtool.d)nd = not determined.
+ChemBioChem 2025, 26, e202500065 (3 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065
+remain stable and active at similarly elevated temperatures would
+likely be ideal for biocatalytic PET recycling.[18] Therefore, we incu-
+bated each enzyme at temperatures between 70 and 100 °C,
+while removing aliquots at various time points to measure
+residual hydrolytic activity against pNPB at 30 °C. Gratifyingly,
+all of the enzymes retained at least 70% of their initial activity
+over 24 h at 70 °C (Figure 2). Remarkably, several of the enzymes
+exhibited even greater thermostabilities. While AroC and BelC
+lost 25% and 40% activity, respectively, following 24 h at 80 °C,
+OcnT, TrmA, and TrmH lost only≈10% activity under the same
+conditions (Figure 2B–D), while TrmD showed no significant loss
+of activity (Figure 2F). Likewise, while 24 h at 90 °C caused TrmA to
+lose half of its initial activity (Figure 2B), OcnT retained nearly
+100% of the initial activity, while AroC and TrmH retained
+≈90% of the initial activity. Finally, we examined the impact of
+boiling the enzymes for one hour. While TrmD lost about 80%
+of the initial activity after this treatment, TrmA and TrmH lost only
+≈20% and≈25% activity, respectively. Remarkably, OcnT retained
+100% activity after one hour at 100 °C. Interestingly, these results
+show that highTm values do not necessarily correspond to the
+active lifetime of an enzyme at a given temperature. For example,
+the Tm value of OcnT (Tm = 74 °C) is lower than that of both TrmA
+and TrmD (Tm = 79 °C), and yet OcnT is active at elevated temper-
+atures for longer periods than either TrmA or TrmD (Figure 2).
+Notably, a recent study also described several PETases that
+appeared to remain stable and active at temperatures exceeding
+the melting temperatures of these proteins.[30]
+2.4. Characterization of PETase Activity
+We next examined the hydrolytic activity of the enzymes
+against a closer structural mimic of PET. We synthesized 3PET
+Figure 2. Residual hydrolytic activities againstpNPB were measured as a function of the length of incubation at various temperatures (70 °C (yellow),
+80 °C (black), 90 °C (blue), or 100 °C (green)). A) AroC, B) TrmA, C) TrmH, D) OcnT, E) BelC, and F) TrmD were incubated at a given temperature for the
+indicated time before residual activities were measured at pH 8.0 (50 mM Tris–HCl), 30 °C.
+Table 2. Michaelis–Menten kinetic parameters for the enzyme-catalyzed hydrolysis ofpNPB at pH 8 and pH 9. All data were collected at 30 °C.
+Protein pH = 8p H = 9
+kcat [s/C0 1] KM [mM] kcat/KM [/C2 102 M s/C0 1] kcat [s/C0 1] KM [mM] kcat/KM [/C2 102 M s/C0 1]
+AroC 0.22 (0.01) 0.46 (0.08) 4.8 (0.9) 0.26 (0.06) 0.4 (0.1) 6 (2)
+OcnT 0.92 (0.08) 0.9 (0.2) 10 (2) 1.4 (0.2) 1.2 (0.2) 12 (2)
+TrmA 0.29 (0.02) 1.4 (0.3) 2.1 (0.5) 0.47 (0.03) 1.2 (0.1) 3.9 (0.4)
+TrmD 0.11 (0.01) 0.49 (0.08) 2.2 (0.4) 0.5 (0.1) 2.0 (0.6) 2.4 (0.9)
+TrmH 0.25 (0.04) 1.3 (0.3) 1.9 (0.5) 0.34 (0.07) 1.2 (0.3) 2.8 (0.9)
+TrmN 0.20 (0.05) 0.5 (0.1) 4 (1) 0.53 (0.08) 1.3 (0.2) 4.1 (0.9)
+BelC 0.36 (0.04) 0.07 (0.01) 51 (9) nd a) nda) 12 (1)b)
+a)nd = not determined. b)Value obtained from the slope of a plot of initial rates collected at low [pNPB].
+ChemBioChem 2025, 26, e202500065 (4 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065
+(bis(benzoyloxyethyl) terephthalate) to serve as a mimic of a trimer
+of PET (Scheme S1, Supporting Information).[31] Although 3PET is
+sparingly water-soluble, aqueous emulsions of this compound can
+be produced, and the decrease in turbidity as 3PET is converted to
+the water-soluble benzoic acid, TPA, and EG can provide a simple
+assay of PETase activity.[32] Initial rates were obtained by recording
+OD600 values over time following addition of the enzyme. Six of the
+purified enzymes were tested against 3PET at pH 8 (50 mM
+Tris-HCl) and 45 °C, and each was found to catalyze a reduction
+in turbidity over 16 h. BelC and OcnT gave the highest initial rates
+of clearance in the first hour (Table 3), consistent with the relative
+catalytic efficiencies observed withpNPB as substrate (Table 2).
+While kcat/KM values obtained with pNPB suggested that BelC
+and OcnT were the most efficient hydrolases, the agreement
+between the trends in activities obtained with 3PET andpNPB
+is generally poor, likely reflecting the significant structural differ-
+ences of these substrates.
+Having observed enzyme-catalyzed clearance of the 3PET
+emulsions, we next assayed both the benchmark PETase LCCICCG
+and the putative PETases against authentic PET plastics. First,
+PET nanoparticles were made into an aqueous emulsion with hex-
+afluoroisopropanol.[33] Each enzyme was added to the solution and
+the mixture was incubated at 65 °C for one hour. The amount of
+TPA released from the PET emulsion was quantified using a previ-
+ously established assay[34] that employs Fenton chemistry to con-
+vert TPA into the fluorescent 2-hydroxyterephthlate (Table 4). The
+novel enzymes evaluated here produced variable quantities
+of TPA, with OcnT, TrmA, and TrmH being the most effective,
+while AroC and TrmD did not catalyze the release of statistically
+significant quantities of TPA. While the results in Table 4 demon-
+strate that a subset of the novel PETases identified here catalyze
+the release of TPA from emulsified PET, these enzymes are consid-
+erably less efficient catalysts for this process than LCCICCG.A s
+LCCICCG is an engineered PETase, it is not particularly surprising that
+the naturally occurring proteins described are less efficient
+PETases.
+A comparison of the results in Table 3 and 4 also suggests
+interesting differences in the apparent specificities of the novel
+enzymes toward 3PET and emulsified PET nanoparticles. Most
+notably, the clearance assay with 3PET indicates BelC and
+OcnT are the most efficient enzymes (Table 3), whereas the
+Fenton-based assays that specifically detect TPA suggest that
+BelC is minimally active and OcnT is a relatively efficient catalyst
+(Table 4). This result would be consistent with MHET being the
+major product of the BelC-catalyzed degradation of PET, as
+the Fenton-based assay will only detect TPA released from the
+polymer. In contrast, results presented in Table 4 suggest that
+TPA is the major product of the OcnT-catalyzed PET hydrolysis.
+These results mirror previous observations that different
+PETases will produce different distributions of MHET, TPA, and
+EG during the catalyzed degradation of PET.[35]
+2.5. Characterization of PETases against PET Film
+As useful PETases will need to be active on real-world postcon-
+sumer PET, the enzymes were next evaluated for their ability to
+degrade PET films. Each enzyme (final concentration 1 nM) was
+incubated with amorphous PET film (Goodfellow) for seven
+days at 65 °C and pH 8 (50 mM Tris–HCl). Every 24 h, an aliquot
+was removed and analyzed by ultra-performance liquid
+chromatography-mass spectrometry (UPLC-MS). This same anal-
+ysis was also conducted using LCCICCG, although the assay with
+this protein was conducted over two days, due to the superior
+performance of this catalyst. Of the novel proteins characterized
+here, only BelC, OcnT, and TrmN were found to be active against
+PET film, whereas no products of PET hydrolysis were detected
+with the remaining enzymes. Over the course of this incubation,
+these three enzymes clearly catalyzed the formation of varying
+levels of TPA, MHET, and bis(2-hydroxyethyl) terephthalate
+(BHET) (Figure 3). BelC and TrmN were found to release MHET
+as the major product during the initial portions of the assay, with
+TPA gradually accumulating over the course of the week
+(Figure 3A,B). This“burst” of MHET production was also observed
+with LCCICCG, consistent with previous examinations of the prod-
+uct profile associated with this benchmark PETase (Figure S10,
+Supporting Information). Intriguingly, the product profile associ-
+ated with the OcnT-catalyzed depolymerization of PET film sug-
+gested that this enzyme releases TPA as the major product over
+the course of the assay (Figure 3C). Each of these enzymes was
+also found to produce low and relatively constant concentrations
+of BHET. The observation that BelC produces MHET almost exclu-
+sively early in the reaction with PET film, while OcnT produces
+TPA as the major product, is consistent with results obtained with
+the TPA-specific activity assay against emulsified PET nanopar-
+ticles (Table 4).
+The residual activity of BelC, TrmN, and OcnT was also assayed
+during the PET film degradation study, whereby an aliquot of the
+reaction mixture was removed at the beginning and end of the
+one-week assay. The residual hydrolytic activity of each enzyme
+was then assayed againstpNPB (Figure 3). These enzymes were
+found to exhibit widely variable levels of residual activity follow-
+ing the one-week assay at 65 °C, with BelC, TrmN, and OcnT
+retaining ≈25%, 50%, and 90% activities, respectively. Of the three
+enzymes active against PET film, BelC exhibited the lowestTm
+but was also the most efficient enzyme against bothpNPB and
+3PET. BelC was also the most efficient of these enzymes against
+PET film, releasing ≈80 μMo fT P Aa n d≈25 μMo fM H E To v e r
+Table 3. Initial rates of clearance of an aqueous emulsion of 3PET. All data
+were collected at pH 8.0 (50 mM Tris-HCl), 45 °C. Standard deviations derived
+from triplicate measurements are provided in brackets.
+Protein AroC OcnT TrmA TrmD TrmN BelC
+μmol3PET/
+(mgEnzyme*h) /C2 104
+19.0
+(0.3)
+44.0
+(0.4)
+12.0
+(0.2)
+5.20
+(0.08)
+9.0
+(0.1)
+42.0
+(0.4)
+Table 4. Quantification of TPA released from an aqueous PET emulsion.
+Reactions were done at pH 8.0 (50 mM Tris-HCl), 65 °C. Standard deviations
+derived from triplicate measurements are provided in brackets.
+Protein AroC OcnT TrmA TrmD TrmH TrmN BelC ICCG
+μmolTPA/
+(mgenzyme*h) /C2 102
+2.4
+(2.4)
+11
+(1)
+4.8
+(1.2)
+0.2
+(0.4)
+3.6
+(0.2)
+1.0
+(0.1)
+0.2
+(0.1)
+45
+(4)
+ChemBioChem 2025, 26, e202500065 (5 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065
+the course of the week-long assay (Figure 3A). The high efficiency
+that BelC exhibited onpNPB, 3PET emulsions, and PET films may
+provide some confidence that small molecule mimics of PET can
+serve as useful compounds to enable comparative kinetic analyses
+of PETases. In contrast, OcnT is more stable than BelC, and corre-
+spondingly, OcnT catalyzed the release of only≈8 μMo fT P Aa n da
+miniscule amount of MHET under identical conditions (Figure 3C).
+The quantity of degradants released from the PET film was
+then used to determine the extent of depolymerization of the
+substrate by LCCICCG and the three novel enzymes found to be
+active against films. Although BelC, TrmN, and OcnT are unam-
+biguously active against PET film, the week-long treatment with
+each enzyme resulted in only 1.2%/C6 0.2%, 0.44%/C6 0.03%, and
+0.08% /C6 0.01% depolymerization, respectively. While these
+enzymes might serve as useful seed sequences for directed
+evolution campaigns to generate PETases with altered properties,
+each protein is significantly less efficient at depolymerization
+than engineered LCCICCG. In fact, LCCICCG was shown to achieve
+nearly quantitative depolymerization of postconsumer PET waste
+after only 24 h under similar conditions.[13] A more direct compar-
+ison was facilitated by incubating LCC ICCG with amorphous
+PET film at 65 °C and pH 8 (50 mM Tris-HCl) for two days. After
+this shortened assay, LCCICCG had depolymerized 32%/C6 3% of
+the film substrate, demonstrating the substantial difference
+in efficiencies separating BelC, TrmN, and OcnT from this engi-
+neered PETase.
+Since AroC, TrmA, TrmD, and TrmH were apparently unable to
+hydrolyze PET film, the level of residual activity of each protein
+was assayed against pNPB following the week-long incubation.
+While TrmD was largely inactive following the incubation
+with the film, the three remaining proteins retained significant
+levels of hydrolytic activity the 7-day reaction at 65 °C (Figure
+S9, Supporting Information). The lack of reactivity toward PET film
+by these enzymes may reflect differences in substrate specificity
+as well as access to the PET polymer chain. Both the PET emulsion
+assay and PET film assays were conducted at a temperature
+below the Tg of PET. At this temperature, the emulsified PET
+nanoparticles would likely be more accessible to the enzymes
+than the PET film. In this context, it is notable that the Auclair
+lab has recently demonstrated that the commercial cutinase
+HiC is able to hydrolyze highly crystalline PET under moist-solid
+conditions.[36]
+2.6. Structural Characterization of AroC
+We also attempted to structurally characterize several of the pro-
+teins described here to better understand their activities and
+thermostabilities. While all proteins were subjected to crystalliza-
+tion screening, conditions could only be identified for the growth
+of high-quality AroC crystals. This protein is not active on PET film
+and is minimally active on PET nanoparticles (Table 4), but the
+enzyme does exhibit a remarkably highTm (85 °C, Table 1) and
+catalyzes the hydrolysis of 3PET (Table 3). As such, structural char-
+acterization of AroC was pursued to gain insight into the thermo-
+stability of this protein and, potentially, the stabilities of the
+other hydrolases were described here. Additionally, the experi-
+mentally determined structure of AroC could be compared with
+the predicted structure of this protein to ensure that AlphaFold2
+can accurately predict the structures of the α/β hydrolase
+fold-5 subfamily members that could not be crystallized.
+The structure of AroC was resolved to a resolution of 2.25 Å
+(PDB: 9EH6) (Figure 4). The enzyme crystallized as a homodimer,
+with each monomer exhibiting the canonical α/β hydrolase
+Figure 3. Evaluating hydrolytic activity against PET film. Product distributions
+obtained with A) BelC, B) TrmN, and C) OcnT are shown over the course of
+one week of reaction with PET film at 65 °C, pH 8. Data points are as follows:
+TPA (yellow square), MHET (black sphere), BHET (blue triangle), residual
+enzyme activity toward pNPB (green sphere).
+ChemBioChem 2025, 26, e202500065 (6 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065
+fold made up of eightβ-strands arranged into a central mixed
+β-sheet that is flanked by sixα-helices (Figure 4A).[37] AroC has
+an additional N-terminalα-helix (residues A30QALASL36) that serves
+as a seventh flankingα-helix (Figure S1, Supporting Information).
+The AroC structure was then compared to the X-ray crystal struc-
+ture of a mutant LCC-PETase in which the catalytic serine was
+mutated to an alanine (PDB: 7VVE). The structures exhibited an
+RMSD of 1.11 Å between 93 pruned atom pairs (8.16 Å across
+all 193 pairs; Figure 4B) and the catalytic triad residues were effec-
+tively coincident (Figure S2A, Supporting Information). However,
+AroC has a distinctive loop (residues G208WYGEQPGDNPATIS222)
+that folds over the active site (Figure 4B) that is not shared with
+LCC-PETase (Figure S1, Supporting Information).
+AlphaFold2 was then used to predict the structure of AroC, and
+this prediction was compared to the X-ray crystal structure. The
+alignment of the two structures exhibited a global RMSD of only
+0.672 Å, suggesting that AlphaFold2 accurately predicts the struc-
+tures ofα/β hydrolase fold-5 subfamily. As such, the structures of
+the nine other proteins described in this work were predicted
+and aligned with the experimentally derived structure of AroC.
+This comparison indicated that each protein harbors the distinctive
+loop (G208–S222; AroC numbering) that is absent in LCC-PETase, and a
+multiple sequence alignment demonstrated significant sequence
+conservation within and immediately preceding this loop:
+F207GxY(G/E)xQx(G/E)DxxxxI(S/T)222 (AroC numbering, Figure S11,
+Supporting Information). While this conservation is intriguing, the
+role of this loop is not entirely clear: of the 13 first shell active site
+residues that LCC-PETase is predicted to use to interact with a model
+of a PET trimer,[13] AroC shares 4 identical residues, and 6 others that
+are similar in polarity and size (Figure 4C,D, Figure S1, Supporting
+Information). F207 of AroC is predicted to make a conserved
+π-interaction with a terephthalate group, whereas Y210 and H125
+are predicted to replicate H-bonds to ester linkages, and G68, L177,
+Y152, and L127 are homologs to residues in LCC-PETase that form
+hydrophobic contacts with the substrate (Figure 4D).
+Next, the predicted structures of BelC, OcnT, TrmA, TrmD,
+TrmH, TrmN, along with the X-ray crystal structure of AroC, were
+used to rationalize the thermostability of the enzymes. The
+number of salt bridges present on the surface of each protein
+was determined and compared to theTm value for each protein
+(Figure 5). In general, theTm of the enzyme correlates well with
+Figure 4. A) The X-ray crystal structure of AroC (PDB: 9EH6) with catalytic triad shown as sticks. B) Alignment of AroC (blue) with LCC-PETase
+(PDB: 7VVE, yellow) bound to MHET (gray sticks). C) Alignment of AroC and LCC-PETase active sites. MHET is shown in gray, AroC residues in blue sticks.
+D) Schematic of LCC-PETase active site residues predicted to interact with a trimeric oligomer of PET.[13] LCC-PETase residues shown in black, corresponding
+AroC residues given in blue. Hydrogen bonds, hydrophobic contacts, and aromatic interactions are shown as black dashed bonds, green curves, and
+magenta hashed bonds, respectively.
+Figure 5. Correlation between PETaseTm values and the number of surface
+salt bridges. The number of salt bridges was determined from the X-ray
+crystal structure of AroC, and AlphaFold2 structures for the remaining
+enzymes.
+ChemBioChem 2025, 26, e202500065 (7 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065
+the number of surface salt bridges on the exterior of the protein,
+with TrmD and BelC havingTm values higher than expected. This
+is consistent with the finding that salt bridges are more abundant
+in hyper-thermostable proteins. [38] At higher temperatures,
+the energetic penalty associated with desolvation of charged
+residues decreases significantly, such that salt bridges are largely
+stabilizing at elevated temperatures.[33] While the observed cor-
+relation between thermostability and the number of salt bridges
+is not exact, it does implicate these ionic interactions as being at
+least partially responsible for imbuing the enzymes described
+here with exceptional thermostabilities.
+3. Conclusion
+In this study, we made use of SSNs to mine theα/β hydrolase
+family for novel PET-degrading enzymes from thermophilic
+organisms. This approach proved to be highly efficient: out of
+ten genes encoding putative thermophilic PETases from α/β
+hydrolase_5 subfamily, seven soluble proteins were purified
+and shown to be active toward a trimeric mimic of PET and
+PET nanoparticles, and three of these enzymes were also capable
+of degrading PET film. Given that these proteins were quite dis-
+similar to LCC-PETase (%ID = 18–22%), results presented here
+also suggest that PET-active proteins may be more widely distrib-
+uted across theα/β hydrolase family than previously appreciated.
+Each new PETase described here also exhibited high thermo-
+stabilities, and structural analysis demonstrated a correlation
+between the number of surface salt-bridges with observedTm val-
+ues. With advancements in the understanding of PETase mech-
+anisms, these naturally thermostable PETase variants can serve as
+scaffolds for directed evolution to engineer variants that are both
+thermostable and catalytically efficient. Overall, this work not only
+expands our knowledge in enzymatic PET degradation but also
+provides a template for the discovery of extremozymes for other
+applications.
+4. Experimental Section
+General
+Chemicals used to make media and buffers were obtained from
+Bioshop. Genes encoding PETases were synthesized into expression
+vectors by BioBasic (Canada). In cases where SignalP 6.0 predicted
+signal peptides, the corresponding portion of the gene was
+removed.[39] The genes were codon optimized for expression in
+E. coli a n dc l o n e di n t ot h eN d e Ia n dX h o Is i t e so fp E T - 2 6 b(þ)t o
+encode each enzyme with an C-terminal His6-tag. Optimized gene
+sequences are given in the Supplementary Information (Table S4,
+Supporting Information). Unless otherwise stated, all cultivation
+media for E. coli was supplemented with 50 μgm L/C0 1 kanamycin.
+Plysurf A210G surfactant was obtained from Dr. Sofia Lemak and
+Prof. Alexander F. Yakunin (University of Toronto). PET film was
+purchased from GoodFellow, PET nanoparticles were purchased
+from Nanochemazone, and Ni2þ Sepharose high-performance resin
+was purchased from Cytiva.E. coliBL21(DE3) and LOBSTR cells were
+obtained from New England Biosciences and Fisher Scientific,
+respectively.
+SSN Analysis
+LCC-PETase (accession ID: G9BY57) was analyzed by the InterProScan
+webtool to assign this e nzyme to the IPR029059 ( α/β-hydrolase
+fold-5) family. The Enzyme Function Initiative’sE n z y m eS i m i l a r i t yT o o l
+(EFI-EST)[40] was then used to conduct an all-by-all BLAST for all members
+of this protein family. An alignment score of 45 was used to visualize the
+resulting network in Cytoscape 3.9.1. Sequences contained in this net-
+work that were from thermophileswere identified using Cytoscape’s
+ability to filter nodes on the basis of the name of the host organism.
+Protein Expression and Purification
+Plasmids encoding PETases were transformed into chemically compe-
+tent E. coli cells by heat shock and plated onto lysogeny broth
+(LB)-agar supplemented with 50 μgm L/C0 1 kanamycin. AroC, TrmA,
+and OcnT were expressed in E. coli BL21(DE3) cells, while TrmD,
+TrmN, BelC, and TrmH were expressed in E. coli LOBSTR cells.
+Following overnight growth, a single colony was picked and used
+to inoculate 10 mL of sterile LB media. The next day, this overnight
+culture was used to inoculate 1 L of LB. The culture was allowed to
+grow at 37 °C and 180 rpm until an OD600 of 0.6–0.8 was reached.
+After incubating the cells on ice for 10 min, expression was then
+induced by the addition of isopropyl β-D-1-thiogalactopyranoside
+to a final concentration of 0.5 mM. The culture was then shaken
+at 37 °C and 180 rpm for an additional 3 h before the
+cells were harvested by centrifugation at 4 °C and 4000 /C2 g for
+10 min. Harvested cells were resuspended in binding buffer
+(20 mM Tris–HCl, pH 7.6, 100 mM NaCl, 20 mM imidazole, 10% glycerol
+v/v) and lysed by three passes through an EmulsiFlex C-5 homogenizer
+(Avestin, Ottawa) at 10,000 –15,000 psi. Cellular debris was then
+removed by centrifugation at 16,000/C2 g for 1 hr and the supernatant
+was loaded onto a Ni2þ-NTA resin that had been preequilibrated with
+binding buffer. The column was then washed with 10–15 column vol-
+umes (CVs) of binding buffer followed by elution of the protein of inter-
+est with 3–5 CVs of elution buffer (20 mM Tris–HCl, pH 7.6, 100 mM
+NaCl, 500 mM imidazole, 10% glycerol v/v). Fractions containing pure
+enzyme were determined by SDS-PAGE, pooled and concentrated
+using a 10 kDa MWCO centrifugal filter unit. Concentrated samples
+were buffer exchanged into storage buffer (40 mM Tris–HCl, pH 7.6,
+100 mM NaCl, and 10% glycerol v/v) using a PD-10 desalting column
+or a 10 kDa MWCO centrifugal filter unit. Protein concentrations were
+measured by absorbance at 280 nm using extinction coefficients
+calculated for each protein using the ProtParam tool from Expasy.[41]
+Enzyme Activity Assays withpNPB
+Reactions to assay esterase activity were performed in 976μL5 0 m M
+Tris-HCl (pH 8 or 9) equilibrated at 30 °C. Aliquots of 20μL pNPB dis-
+solved in acetone were added to achieve the desired final substrate
+concentrations. The reaction was initiated by the addition of 4μL
+concentrated enzyme, and reaction progress was monitored by
+absorbance at 405 nm using an Agilent Technologies G9864A spec-
+trometer. Spontaneous rates of hydrolysis were measured prior to
+adding enzyme and subtracted from the observed enzymatic rate.
+Initial rates were measured at substrate concentrations between
+≈0.2/C2 and ≈5/C2 the final KM values, where possible. Plots of initial
+rates versus substrate concentration were fit to the Michaelis
+Menten equation using Origin Lab 2024. Values ofkcat were deter-
+mined using calculated enzyme extinction coefficients for enzyme
+concentrations and ε405 = 18,000 M/C0 1 cm/C0 1 for p-nitrophenolate.[42]
+Tm Measurements of Enzymes
+Protein samples (300μL of 1 mg mL/C0 1) were loaded into a quartz
+cuvette (Hellma USA Inc., round cylindrical cuvette, 1 mm pathlength)
+ChemBioChem 2025, 26, e202500065 (8 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065
+and placed into a Chirascan V100 CD spectroscopy instrument
+(Applied Photophysics Ltd.). Samples were incrementally heated from
+20 to 90 °C in 2.5 °C steps. Ellipticity was measured as a function of
+temperature between 180 and 260 nm. The melting temperature (Tm)
+is the temperature at which the fraction unfolded (Fu) and fraction
+folded (F) are equal. Fraction unfolded is calculated using the equa-
+tion Fu = (Fo /C0 F)/(Uf /C0 F) whereFo is the ellipticity value at each tem-
+perature, F is the ellipticity value at low temperature, andUf is the
+ellipticity value at the highest temperature.
+Enzyme Thermostability Analysis
+Aliquots of enzyme at 100μM in storage buffer (40 mM Tris–HCl, pH
+7.6, 100 mM NaCl, 10% glycerol v/v) were placed in a water bath set at
+the desired temperature for 0 to 24 h. At a given time, an aliquot of
+enzyme was removed, centrifuged at 8500 rpm for 1 min, then placed
+on ice. 4μL of supernatant was then used to initiate the hydrolysis of
+0.5 mMpNPB at 30 °C in 1 mL 50 mM Tris–HCl, pH 8. Initial rates were
+measured in triplicate with three individual aliquots.
+3PET Synthesis[43]
+3PET was synthesized as described previously (Scheme S1, Supporting
+Information), and purified by flash silica gel chromatography using tol-
+uene: ethyl acetate 5:1 (v/v). NMR spectroscopic analysis of pure
+3PET (Figure S6, Supporting Information) matched the literature
+description.[43]
+Enzyme Activity Assay with 3PET
+A 3PET emulsion was formed by dissolving 0.1 g of 3PET in 5 mL of
+acetone and adding 20 mg of the surfactant Plysurf A210G. The mix-
+ture was poured into 20 mL of Tris–HCl (50 mM, pH 8) and suspended
+by sonication at maximum frequency (Fisher Scientific Sonic
+Dismembrator Model 100) on ice for 30 min. The solution was then
+stirred at 60 °C for 30 min, followed by stirring at room temperature
+overnight to be ready for use. The 3PET emulsion was diluted with
+50 mM Tris–HCl (pH 8.0) to a final OD600 of ≈1. Then, 150μL of the
+diluted 3PET emulsion was added to each well of a 96-well plate
+along with 50μL of enzyme solution to achieve a final concentration
+of 15–400 μM. The plate was shaken (180 rpm) at 45 °C for 72 h using
+a BioTek Synergy H1 plate reader, and OD600 was recorded every
+10 min. Triplicate measurements of the initial OD600 of a 3PET emul-
+sion were recorded before these mixtures were centrifuged at
+13,000 rpm for 10 min to collect the 3PET in the emulsion.
+Residues were then dried in a 60 °C oven for≈11 h before being
+weighed. The mass of the collected 3PET was then correlated to
+the OD600 to convert OD600 measurements to approximate masses
+of 3PET.[33]
+Enzyme Activity Assay with PET Nanoparticles
+The quantitation of TPA released from PET nanoparticles during enzy-
+matic hydrolysis was determined by oxidatively converting TPA
+to the fluorescent compound 2-hydroxyterephthalate as described
+previously.[33] PET nanoparticles were dissolved in 1,1,1,3,3,3-
+hexafluoro-2-propanol (HFIP) and then added dropwise into water
+while sonicating on ice at maximum frequency (Fisher Scientific
+Sonic Dismembrator Model 100). HFIP was subsequently removed
+by rotary evaporation. 10μL aliquots of the PET emulsion were dis-
+pensed into 96-well plates along with 1–10 μL of enzyme solution (to
+a final concentration of 1μM) and a sufficient volume of 500 mM
+sodium phosphate buffer (pH 8) to bring the total volume to
+200 μL. The 96-well plate was then placed in a temperature-
+controlled shaker (Labnet Vortemp 56) for incubation at 65 °C with
+shaking at 800 rpm for 60 min. Plates were then centrifuged at
+2,844 /C2 g and 4 °C for 15 min before transferring 150μL of the super-
+natant into a black 96-well plate. Prior to measurements, 25μLo f
+5 mM EDTA and 25μL of 5 mM FeSO4 were added to initiate the oxi-
+dation of TPA, and the plates were incubated at room temperature
+for at least 10 min before fluorescence readings were recorded on a
+BioTek Synergy H1 plate reader (λex = 314 nm,λem = 421 nm). A stan-
+dard curve of fluorescence versus known concentrations of TPA con-
+verted to 2-hydroxyterepthlalate through the Fenton reaction
+was used to quantify the enzymatic TPA product (Figure S7,
+Supporting Information).
+PET Film Assay
+Goodfellow PET film (ES30-FM-000145, 0.25 mm thickness, transpar-
+ent, amorphous) was cut into 2 mg discs of 6 mm diameter with a
+standard paper hole punch. The PET discs were placed in a microcen-
+trifuge tube containing 50 mM Tris–HCl, pH8 followed by adding
+enzymes to a final concentration of 1 nM for a total reaction volume
+of 1 mL. The reaction was incubated in a Labnet Vortem p56 shaker at
+65 °C for 7 days at 800 rpm. Aliquots of 27μL were removed from the
+reactions each day and mixed with 3μL DMSO to assist solubilization
+of the products of hydrolysis. Samples were sonicated for 5 min and
+then centrifuged at 21,000/C2 g for 10 min. The solutions were then
+resolved on a Cortecs T3 UPLC reverse phase column (1.6 μm,
+2.1 /C2 100 mm) using a Waters Acquity UPLC-MS H class system.
+A1 0μL aliquot of the sample was injected and resolved using a gra-
+dient of 89:1:10 to 55:35:10 water/acetonitrile/1% formic acid over
+11 min with a flow rate of 0.3 mL min/C0 1. The hydrolysis products
+(TPA, MHET, and BHET) were detected by absorbance at 240 nm
+and quantified by comparison to standard curves (Figure S8,
+Supporting Information). The depolymerization percentage of PET
+was calculated based on the initial mass of the PET film (2 mg) used
+in the experiment. The mass was divided by the molecular weight of
+the PET repeating unit (192.18 g mol/C0 1) to determine the theoretical
+100% conversion amount in moles. For each enzyme, the total
+amount of UPLC-detected depolymerized products — terephthalic
+acid (TPA), mono(2-hydroxyethyl) terephthalate (MHET), and
+bis(2-hydroxyethyl) terephthalate (BHET)— was summed in moles.
+This total was then divided by the theoretical 100% conversion
+amount to obtain the percentage of PET depolymerization.
+AroC X-ray Crystallography
+Purified AroC was concentrated to 10 mg mL/C0 1 in 40 mM Tris-HCl, pH
+7.6, 100 mM NaCl. Crystallization conditions were screened using the
+Index HT screening kit (Hampton Research Corp) and the final protein
+crystallization condition after refinement for crystal growth was
+100 mM sodium acetate at pH 4.5 with 8% PEG3350. Protein crystals
+were stored in liquid nitrogen and data collection was performed at
+the Canadian Light Source synchrotron. Data was auto-processed
+with XDS and scaled to a maximum resolution of 2.25 Å (Table S3,
+Supporting Information). The AlphaFold2 predicted structure of
+AroC was utilized for molecular replacement using MOLREP as part
+of the CCP4 suite.[44] Water molecules were resolved, and refinement
+was completed using REFMAC.[45] Coot[46] was used for structure ver-
+ification and manual refinement to fit the structure into the observed
+electron density map.[47] The final structure was deposited into the
+Protein Data Bank as 9EH6.
+Acknowledgements
+The authors are grateful to John Habib, Katherine Withnall for their
+assistance with protein production and crystallization. The authors
+are grateful for the assistance of Dr. Laura van Staalduinen for her
+ChemBioChem 2025, 26, e202500065 (9 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065
+guidance with crystal refinement. The authors thank Dr. Sofia
+Lemak and Prof. Alexander Yakunin for generously providing
+samples of PlySurf A210G andE. Coli LOBSTR cells. The authors
+are grateful to the Natural Sciences and Engineering Research
+Council of Canada and Genome Canada for financial support of
+this research.
+Conflict of Interest
+The authors declare no conflict of interest.
+Data Availability Statement
+The data that support the findings of this study are available in
+the supplementary material of this article.
+Keywords: bioinformatics · enzyme catalysis · polyethylene
+terephthalate biodegradation · sequence similarity networks ·
+thermostable
+[1] a) F. Awaja, D. Pavel,Eur. Polym. J.2005, 41, 1453; b) L. De Vos, B. Van de
+Voorde, L. Van Daele, P. Dubruel, S. Van Vlierberghe,Eur. Polym. J.2021,
+161, 110840.
+[2] A. Chamas, H. Moon, J. Zheng, Y. Qiu, T. Tabassum, J. H. Jang, M. Abu-Omar,
+S. L. Scott, S. Suh,ACS Sustainable Chem. Eng.2020, 8,3 4 9 4 .
+[3] E. Barnard, J. J. Rubio Arias, W. Thielemans, Green Chem. 2021,
+23, 3765.
+[4] M. Cronshaw, in Energy in Perspective (Ed: M. Cronshaw), Springer
+International Publishing, Cham2021, pp. 179–187.
+[5] R. Gao, H. Pan, J. Lian,Enzyme Microb. Technol.2021, 150, 109868.
+[6] R.-J. Müller, H. Schrader, J. Profe, K. Dresler, W.-D. Deckwer,Macromol.
+Rapid Commun. 2005, 26, 1400.
+[7] Å. M. Ronkvist, W. Xie, W. Lu, R. A. Gross, Macromolecules 2009, 42,
+5128.
+[8] S. Yoshida, K. Hiraga, T. Takehana, I. Taniguchi, H. Yamaji, Y. Maeda,
+K. Toyohara, K. Miyamoto, Y. Kimura, K. Oda, Science 2016,
+351, 1196.
+[9] S. Boneta, K. Arafet, V. Moliner,J. Chem. Inf. Model.2021, 61, 3041.
+[10] P. J. Holdsworth, A. Turner-Jones,Polymer 1971, 12, 195.
+[11] A. B. Desai, G. L. Wilkes,J. Polym. Sci. Polym. Symp.1974, 46, 291.
+[12] a) E. Akram, Y. Cao, H. Xing, Y. Ding, Y. Luo, R. Wei, Y. Zhang,Chin. J. Catal.
+2024, 60, 284; b) N. A. Tarazona, R. Wei, S. Brott, L. Pfaff, U. T. Bornscheuer,
+A. Lendlein, R. Machatschek,Chem Catal. 2022, 2, 3573.
+[13] V. Tournier, C. M. Topham, A. Gilles, B. David, C. Folgoas, E. Moya-Leclair,
+E. Kamionka, M. L. Desrousseaux, H. Texier, S. Gavalda, M. Cot, E. Guemard,
+M. Dalibey, J. Nomme, G. Cioci, S. Barbe, M. Chateau, I. Andre,
+S. Duquesne, A. Marty,Nature 2020, 580, 216.
+[14] P. K. Richter, P. Blázquez-Sánchez, Z. Zhao, F. Engelberger, C. Wiebeler,
+G. Künze, R. Frank, D. Krinke, E. Frezzotti, Y. Lihanova, P. Falkenstein,
+J. Matysik, W. Zimmermann, N. Sträter, C. Sonnendecker, Nat.
+Commun. 2023, 14, 1905.
+[15] E. L. Bell, R. Smithson, S. Kilbride, J. Foster, F. J. Hardy, S. Ramachandran,
+A. A. Tedstone, S. J. Haigh, A. A. Garforth, P. J. R. Day, C. Levy, M. P. Shaver,
+A. P. Green,Nat. Catal. 2022, 5, 673.
+[16] H. Lu, D. J. Diaz, N. J. Czarnecki, C. Zhu, W. Kim, R. Shroff, D. J. Acosta,
+B. R. Alexander, H. O. Cole, Y. Zhang, N. A. Lynd, A. D. Ellington,
+H. S. Alper,Nature 2022, 604, 662.
+[17] S. Sulaiman, S. Yamato, E. Kanaya, J. J. Kim, Y. Koga, K. Takano, S. Kanaya,
+Appl. Environ. Microbiol.2012, 78, 1556.
+[18] G. Arnal, J. Anglade, S. Gavalda, V. Tournier, N. Chabot, U. T. Bornscheuer,
+G. Weber, A. Marty,ACS Catal. 2023, 13, 13156.
+[19] H. Seo, H. Hong, J. Park, S. H. Lee, D. Ki, A. Ryu, H.-Y. Sagong, K.-J. Kim,
+Science 2025, 387, eadp5637.
+[20] E. Erickson, J. E. Gado, L. Avilán, F. Bratti, R. K. Brizendine, P. A. Cox, R. Gill,
+R. Graham, D.-J. Kim, G. König, W. E. Michener, S. Poudel, K. J. Ramirez,
+T. J. Shakespeare, M. Zahn, E. S. Boyd, C. M. Payne, J. L. DuBois,
+A. R. Pickford, G. T. Beckham, J. E. McGeehan,Nat. Commun. 2022, 13,
+7850.
+[21] J. Chen, Y. Jia, Y. Sun, K. Liu, C. Zhou, C. Liu, D. Li, G. Liu, C. Zhang,
+T. Yang, L. Huang, Y. Zhuang, D. Wang, D. Xu, Q. Zhong, Y. Guo,
+A. Li, I. Seim, L. Jiang, L. Wang, S. M. Y. Lee, Y. Liu, D. Wang,
+G. Zhang, S. Liu, X. Wei, Z. Yue, S. Zheng, X. Shen, S. Wang, et al.,
+Nature 2024, 633,3 7 1 .
+[22] J. D. Bloom, F. H. Arnold,Proc. Natl. Acad. Sci. U.S.A.2009, 106, 9995.
+[23] P. Jones, D. Binns, H.-Y. Chang, M. Fraser, W. Li, C. McAnulla, H. McWilliam,
+J. Maslen, A. Mitchell, G. Nuka, S. Pesseat, A. F. Quinn, A. Sangrador-Vegas,
+M. Scheremetjew, S.-Y. Yong, R. Lopez, S. Hunter,Bioinformatics 2014,
+30, 1236.
+[24] J. Jumper, R. Evans, A. Pritzel, T. Green, M. Figurnov, O. Ronneberger,
+K. Tunyasuvunakool, R. Bates, A. Žídek, A. Potapenko, A. Bridgland,
+C. Meyer, S. A. A. Kohl, A. J. Ballard, A. Cowie, B. Romera-Paredes,
+S. Nikolov, R. Jain, J. Adler, T. Back, S. Petersen, D. Reiman, E. Clancy,
+M. Zielinski, M. Steinegger, M. Pacholska, T. Berghammer,
+S. Bodenstein, D. Silver, O. Vinyals, et al.,Nature 2021, 596, 583.
+[25] E. C. Meng, T. D. Goddard, E. F. Pettersen, G. S. Couch, Z. J. Pearson,
+J. H. Morris, T. E. Ferrin,Protein Sci. 2023, 32, e4792.
+[26] a) T. Tsujita, H. Ninomiya, H. Okuda, J. Lipid Res. 1989, 30, 997;
+b) A. Distaso Marco, N. Chernikova Tatyana, R. Bargiela, C. Coscolín,
+P. Stogios, L. Gonzalez-Alfonso Jose, S. Lemak, N. Khusnutdinova
+Anna, J. Plou Francisco, E. Evdokimova, A. Savchenko, A. Lunev
+Evgenii, M. Yakimov Michail, V. Golyshina Olga, M. Ferrer, F. Yakunin
+Alexander, N. Golyshin Peter, Appl. Environ. Microbiol. 2023, 89,
+e01704.
+[27] a) A. Carniel, V. d. A. Waldow, A. M. d. Castro,Biotechnol. Adv. 2021, 52,
+107811; b) Y. Gao, Y. Zheng, Z. Qi, Y. Pan, Y. Zhou, S. You, R. Su, W. Qi,
+M. Wang, J. Chem. Technol. Biotechnol.2024, 99, 1860.
+[28] K. S. Anderson, K. A. Johnson,Chem. Rev. 1990, 90, 1131.
+[29] N. J. Greenfield, Nat. Protoc. 2006, 1, 2876.
+[30] S. H. Lee, M. Kim, H. Seo, H. Hong, J. Park, D. Ki, K.-J. Kim,ACS Catal.2024,
+14, 4108.
+[31] G. Fischer-Colbrie, S. Heumann, S. Liebminger, E. Almansa, A. Cavaco-Paulo,
+G. M. Guebitz,Biocatal. Biotransform.2004, 22,3 4 1 .
+[32] D. Ribitsch, S. Heumann, E. Trotscha, E. Herrero Acero, K. Greimel, R. Leber,
+R. Birner-Gruenberger, S. Deller, I. Eiteljoerg, P. Remler, T. Weber,
+P. Siegert, K. H. Maurer, I. Donelli, G. Freddi, H. Schwab, G. M. Guebitz,
+Biotechnol. Progr. 2011, 27, 951.
+[33] S. Farah, T. Tsach, A. Bentolila, A. J. Domb,Talanta 2014, 123, 54.
+[34] L. Pfaff, D. Breite, C. P. S. Badenhorst, U. T. Bornscheuer, R. Wei,Methods
+Enzymol. 2021, 648, 253.
+[35] K. Chen, Y. Hu, X. Dong, Y. Sun,ACS Catal. 2021, 11, 7358.
+[36] S. Kaabel, J. P. D. Therien, C. E. Deschênes, D. Duncan, T. Frišˇci´c, K. Auclair,
+Proc. Natl. Acad. Sci. U. S. A.2021, 118, e2026452118.
+[37] M. Nardini, B. W. Dijkstra,Curr. Opin. Struct. Biol.1999, 9, 732.
+[38] S. Kumar, C. J. Tsai, B. Ma, R. Nussinov, J. Biomol. Struct. Dyn. 2000,
+17, 79.
+[39] F. Teufel, J. J. Almagro Armenteros, A. R. Johansen, M. H. Gíslason, S. I. Pihl,
+K. D. Tsirigos, O. Winther, S. Brunak, G. von Heijne, H. Nielsen, Nat.
+Biotechnol. 2022, 40, 1023.
+[40] J. A. Gerlt, J. T. Bouvier, D. B. Davidson, H. J. Imker, B. Sadkhin, D. R. Slater,
+K. L. Whalen,Biochim. Biophys. Acta.2015, 1854, 1019.
+[41] E. Gasteiger, C. Hoogland, A. Gattiker, S. e. Duvaud, M. R. Wilkins,
+R. D. Appel, A. Bairoch, in The Proteomics Protocols Handbook
+(Ed: J. M. Walker), Humana Press, Totowa, NJ2005, pp. 571–607.
+[42] Y.-Y. Zhang, Z.-Q. Mei, J.-W. Wu, Z.-X. Wang, J. Biol. Chem. 2008, 283,
+26591.
+[43] G. Fischer-Colbrie, S. Heumann, S. Liebminger, E. Almansa, A. Cavaco-Paulo,
+G. M. Guebitz,Biocatal. Biotransform.2009, 22,3 4 1 .
+[44] A. Vagin, A. Teplyakov,J. Appl. Crystallogr.1997, 30, 1022.
+[45] G. N. Murshudov, A. A. Vagin, E. J. Dodson,Acta Crystallogr., Sect. D: Biol.
+Crystallogr. 1997, 53, 240.
+[46] P. Emsley, K. Cowtan, Acta Crystallogr., Sect. D: Biol. Crystallogr. 2004,
+60, 2126.
+[47] a) L. Potterton, J. Agirre, C. Ballard, K. Cowtan, E. Dodson,
+P. R. Evans, H. T. Jenkins, R. Keegan, E. Krissinel, K. Stevenson,
+A. Lebedev, S. J. McNicholas, R. A. Nicholls, M. Noble, N. S. Pannu,
+C. Roth, G. Sheldrick, P. Skubak, J. Turkenburg, V. Uski, F. von Delft,
+D. Waterman, K. Wilson, M. Winn, M. Wojdyr,Acta Crystallogr., Sect. D:
+Biol. Crystallogr. 2018, 74, 68; b) W. Kabsch, Acta Crystallogr., Sect. D:
+Biol. Crystallogr. 2010, 66, 125.
+[48] a) P. Grégoire, M.-L. Fardeau, M. Joseph, S. Guasco, F. Hamaide, S. Biasutti,
+V. Michotey, P. Bonin, B. Ollivier,Syst. Appl. Microbiol. 2011, 34, 494; b)
+ChemBioChem 2025, 26, e202500065 (10 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065
+H. S. Jayasinghearachchi, B. Lal,Int. J. Syst. Evol. Microbiol.2011, 61, 554;
+c) V. Kale, S. H. Björnsdóttir, O. H. Friðjonsson, S. K. Petursdottir,
+S. Omarsdottir, G. O. Hreggviðsson, Int. J. Syst. Evol. Microbiol. 2013,
+63, 1149; d) K. Mavromatis, N. Ivanova, I. Anderson, A. Lykidis,
+S. D. Hooper, H. Sun, V. Kunin, A. Lapidus, P. Hugenholtz, B. Patel,
+PLoS One 2009, 4, e4192; e) N. M. Mesbah, D. B. Hedrick,
+A. D. Peacock, M. Rohde, J. Wiegel, Int. J. Syst. Evol. Microbiol. 2007,
+57, 2507; f ) K. Mori, H. Kim, T. Kakegawa, S. Hanada, Extremophiles
+2003, 7, 283; g) Y. Sekiguchi, T. Yamada, S. Hanada, A. Ohashi,
+H. Harada, Y. Kamagata, Int. J. Syst. Evol. Microbiol. 2003, 53, 1843;
+h) S. Yabe, Y. Aiba, Y. Sakai, M. Hazaka, A. Yokota, Int. J. Syst. Evol.
+Microbiol. 2010, 60, 1794; i) T. Yamada, H. Imachi, A. Ohashi,
+H. Harada, S. Hanada, Y. Kamagata, Y. Sekiguchi, Int. J. Syst. Evol.
+Microbiol. 2007, 57, 2299–2306.
+Manuscript received: March 10, 2025
+Revised manuscript received: March 11, 2025
+Version of record online: April 7, 2025
+ChemBioChem 2025, 26, e202500065 (11 of 11) © 2025 The Author(s). ChemBioChem published by Wiley-VCH GmbH
+ChemBioChem
+Research Article
+doi.org/10.1002/cbic.202500065

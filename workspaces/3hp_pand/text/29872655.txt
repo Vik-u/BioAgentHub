@@ -1,0 +1,1019 @@
+ORIGINAL RESEARCH
+published: 22 May 2018
+doi: 10.3389/fbioe.2018.00063
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 1 May 2018 | Volume 6 | Article 63
+Edited by:
+Rodrigo Ledesma-Amaro,
+Imperial College London,
+United Kingdom
+Reviewed by:
+Jian-Zhong Liu,
+Sun Yat-sen University, China
+Jean Marie François,
+UMR5504 Laboratoire d’Ingénierie
+des Systèmes Biologiques et des
+Procédés (LISBP), France
+*Correspondence:
+Christopher T. Workman
+cwor@dtu.dk
+Irina Borodina
+irbo@biosustain.dtu.dk
+†Present Address:
+Niels B. Jensen, Evolva Biotech A/S,
+Copenhagen, Denmark
+Fredrik K. Öberg, Novo Nordisk A/S,
+Målov, Denmark
+Jochen Förster, Carlsberg A/S,
+Copenhagen, Denmark
+Specialty section:
+This article was submitted to
+Synthetic Biology,
+a section of the journal
+Frontiers in Bioengineering and
+Biotechnology
+Received: 23 February 2018
+Accepted: 30 April 2018
+Published: 22 May 2018
+Citation:
+Maury J, Kannan S, Jensen NB,
+Öberg FK, Kildegaard KR, Forster J,
+Nielsen J, Workman CT and
+Borodina I (2018) Glucose-Dependent
+Promoters for Dynamic Regulation of
+Metabolic Pathways.
+Front. Bioeng. Biotechnol. 6:63.
+doi: 10.3389/fbioe.2018.00063
+Glucose-Dependent Promoters for
+Dynamic Regulation of Metabolic
+Pathways
+Jérôme Maury1, Soumya Kannan2, Niels B. Jensen1†, Fredrik K. Öberg1†,
+Kanchana R. Kildegaard1, Jochen Forster1†, Jens Nielsen1, Christopher T. Workman2* and
+Irina Borodina1*
+1 Novo Nordisk Foundation Center for Biosustainability, Technical University of Denmark, Lyngby, Denmark,2 Department of
+Biotechnology and Biomedicine, Technical University of Denmark, Lyngby, Denmark
+For an industrial fermentation process, it can be advantage ous to decouple cell growth
+from product formation. This decoupling would allow for the rapid accumulation of
+biomass without inhibition from product formation, after w hich the fermentation can be
+switched to a mode where cells would grow minimally and prima rily act as catalysts
+to convert substrate into desired product. The switch in fer mentation mode should
+preferably be accomplished without the addition of expensi ve inducers. A common cell
+factory Saccharomyces cerevisiaeis a Crabtree-positive yeast and is typically fermented
+at industrial scale under glucose-limited conditions to av oid the formation of ethanol.
+In this work, we aimed to identify and characterize promoter s that depend on glucose
+concentration for use as dynamic control elements. Through analysis of mRNA data of
+S. cerevisiaegrown in chemostats under glucose excess or limitation, we i dentiﬁed 34
+candidate promoters that strongly responded to glucose pre sence or absence. These
+promoters were characterized in small-scale batch and fed- batch cultivations using
+a quickly maturing rapidly degrading green ﬂuorescent prot ein yEGFP3-Cln2 PEST as
+a reporter. Expressing 3-hydroxypropionic acid (3HP) path way from a set of selected
+regulated promoters allowed for suppression of 3HP product ion during glucose-excess
+phase of a batch cultivation with subsequent activation in g lucose-limiting conditions.
+Regulating the 3HP pathway by the ICL1 promoter resulted in 70% improvement of 3HP
+titer in comparison to PGK1 promoter.
+Keywords: inducible promoters, dynamic regulation, yeast Saccharomyces cerevisiae, strain engineering,
+3-hydroxypropionic acid
+INTRODUCTION
+Budding yeast, Saccharomyces cerevisiae, is widely used for the production of fuels, chemicals, food
+ingredients, food and beverages, and pharmaceuticals (
+Nielsen and Jewett, 2008; Hong and Nielsen,
+2012). S. cerevisiae is further being exploited for production of many new products, e .g., farnesene,
+butanol, resveratrol or melatonin ( Hong and Nielsen, 2012; Shin et al., 2012; Germann et al., 2016 ;
+Meadows et al., 2016 ) and many more are under development. The enabling technolog y in the
+development of yeast cell factories is metabolic engineerin g, which is the introduction of directed
+genetic modiﬁcations with the objective to improve the perfor mance of the cell factory ( Nielsen
+and Jewett, 2008 ). Development of cell factories that can meet the high requir ements for yield, titer
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+and productivity, generally requires multiple rounds of meta bolic
+engineering. In connection with implementation of cell fact ories
+for industrial production, it is necessary to scale-up the pro cess,
+and the ﬁnal process will typically involve subsequent rounds of
+cultivation at diﬀerent conditions ( Figure 1). A typical process
+could comprise a large-scale main cultivation in a so-called
+continuous or fed-batch mode in which at least one substrate
+is growth limiting, such as in the resveratrol process (
+Shin
+et al., 2012 ). Usually, a number of serial cultivations in batch
+mode precede the main cultivation step in order to propagate
+the inoculum. In principle, serial cultivation steps aim at
+building up biomass while for the ﬁnal-stage cultivation it is
+desirable to re-direct the metabolic ﬂuxes such that the prod uct
+of interest is formed at high yield and rate (
+Borodina and
+Nielsen, 2014) (Figure 1). Constraints are therefore very diﬀerent
+between the seed train, which prioritizes strain stability, eﬃcient
+biomass production, process convenience and robustness, and
+the main cultivation step, often referred to as the “productio n
+phase, ” where maximal yield and product formation rate are
+ultimate goals. The bioprocess is therefore imposing a number
+of constraints on strain design that need to be taken into acc ount
+early in process development.
+In order to better match expression of metabolic pathways
+to changing conditions in the cells or in the fermentation
+process, a number of research groups have recently developed
+strategies for dynamic regulation. As opposed to static up- or
+FIGURE 1 |Schematic view of an optimized industrial process. The top p anel illustrates the progression of fermentation settings from the seed train to full scale
+production. The lower panel illustrates the corresponding metabolic ﬂuxes and the switch from biomass generation to pro duct formation.
+down-regulations, dynamic regulation allows for re-balan cing
+ﬂuxes along with changing conditions. Dynamic gene expressi on
+proﬁles allow trade-oﬀs between growth and production
+to be better managed and can help avoid build-up of
+undesired intermediates (
+Brockman and Prather, 2015b ). In their
+review, Brockman and Prather (2015b) provide experimental
+demonstration of the beneﬁts arising from dynamic control
+on production of a number of chemicals. Farmer and Liao
+improved the yield of lycopene production by 18-fold in E. coli
+by implementing a sensor responding to the build-up of acetyl-
+phosphate (
+Farmer and Liao, 2000 ). By modulating protein levels
+of glucokinase via a genetic inverter, Solomon et al. redire cted
+glucose into gluconate production and improved titers by 30%
+(
+Solomon et al., 2012 ). Using a metabolic toggle switch in E. coli
+to conditionally downregulate citrate synthase expression, Soma
+et al. redirected acetyl-CoA into isopropanol production with
+an improvement on titer and yield of more than 3-fold (
+Soma
+et al., 2014 ). Dahl et al. used whole-genome transcript arrays
+to identify promoters that respond to the accumulation of a
+toxic intermediate of the isoprenoid biosynthetic pathway, i. e.,
+farnesyl di-phosphate (FPP), and used the identiﬁed promoters t o
+regulate FPP formation and improve amorphadiene production
+two-fold over constitutive or inducible promoters (
+Dahl et al.,
+2013). Lo et al. presented a synthetic gene circuit that decouples
+E. coli cell growth from metabolite production through a two-
+layered circuit based on two genetic sensor controller modul es:
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 2 May 2018 | Volume 6 | Article 63
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+one sensing feedstock substrate, the other one sensing nutr ients
+(Lo et al., 2016 ). By delaying enzyme expression until cells
+have depleted key nutrients and attained high cell densities , the
+system positively impacted conversion of hydroxycinnamic ac ids
+and oleic acid into value-added compounds ( Lo et al., 2016 ).
+Conditional degradation of essential enzymes has also been
+exploited to stop elongation of fatty acids and improve octano ate
+production (
+Torella et al., 2013 ), or to increase yield and titer
+of myo-inositol production ( Brockman and Prather, 2015a ).
+Conditional degradation of enzymes is an eﬃcient method for
+rapidly depleting an enzyme of interest even at slow growth
+rates where removal via dilution is slow (
+Brockman and Prather,
+2015b).
+Dynamic regulation has also been employed in a number
+of cases in budding yeast. On/oﬀ regulation systems like
+those making use of native repressible promoters like MET3
+promoter, responding to the concentration of methionine, or
+HXT1 promoter reacting to glucose concentration were used
+to redirect the ﬂux in the ergosterol biosynthetic pathway an d
+improve production of isoprenoids of commercial interest (
+Ro
+et al., 2006; Asadollahi et al., 2008; Scalcinati et al., 201 2). David et
+al. demonstrated the beneﬁts of hierarchical dynamic contr ol on
+3-hydroxypropionic acid (3HP) production ( David et al., 2016 ).
+Here, a two-layered control with a growth stage control, bas ed
+on a carbon source responsive promoter, and an intracellular
+metabolite concentration control, based on a malonyl-CoA
+sensor, allowed for a suﬃcient build-up of biomass in the ini tial
+growth phase while gradually redirecting metabolism toward
+3HP production in the production phase (
+David et al., 2016 ).
+David et al. report a 10-fold increase in 3HP production ( David
+et al., 2016 ). More recently, dynamic control was used to establish
+the production of very long chain fatty acid-derived (VLCFA)
+compounds in S. cerevisiae . Production suﬀered from impaired
+biomass formation caused by deprivation of essential precurs ors
+C22-CoA (
+Yu et al., 2017 ). Dynamic control, based on carbon-
+source regulated promoters, was used to relieve the competiti on
+between VLCFA product formation and cell-growth associated
+processes. This strategy divided the process in a production pha se
+and a cell growth phase and resulted in an increase of docosano l
+production of almost 4-fold. After further optimization, a ti ter of
+83.5 mg/L was achieved which represents a 80-fold improvement
+compared to the control strain (
+Yu et al., 2017 ).
+The aim of our study is to increase the number of genetic
+elements that can be used by metabolic engineers for dynamic
+control of metabolic pathways. As industrial fermentation
+processes often comprise diﬀerent phases ( Figure 1), we
+embarked on identifying and characterizing a set of native y east
+promoters that can be used to control expression of metabolic
+pathways in a dynamic manner, and will positively impact
+production of value-added chemicals in an industrially rele vant
+context. In order for our tools to be potentially applicable to
+various kinds of industrial production processes, from bulk t o
+high value-added products, it was decided to use elements alr eady
+present in the cultivation medium to drive transient expressi on
+of genes. Amongst others, glucose is a nutrient often used as
+a carbon source. Furthermore concentrations of glucose lar gely
+diﬀer in the seed train, usually operated as batch, and the ﬁnal
+stage fermentation where glucose is often fed in limiting am ounts
+to avoid overﬂow metabolism. Glucose was thus identiﬁed as
+the element that will trigger the dynamic regulation of gene
+expression in our system.
+Through analysis of genome-wide transcription datasets
+retrieved from the Gene Expression Omnibus (GEO) database
+(GEO database), a number of promoters were identiﬁed, cloned
+upstream of a quickly maturing, rapidly degrading green
+ﬂuorescent protein yEGFP3-Cln2 PEST and integrated into S.
+cerevisiae genome. Promoter activity was then characterized
+in microscale batch and fed-batch conditions. As a proof of
+the concept, the most promising promoters for transient gene
+expression were successfully applied to control the production of
+3-hydroxypropionic acid.
+MATERIALS AND METHODS
+Analysis of Transcriptome Data
+Transcription data was retrieved from the GEO database, using
+the R package GEOquery (
+Davis and Meltzer, 2007 ), for a
+microarray study comparing diﬀerent nutrient limited chemost at
+cultivations of CEN.PK113-7D (accession GDS777) ( Tai et al.,
+2005). The summarized expression values provided by the
+authors were log2 transformed before applying a linear model
+(LIMMA) to identify diﬀerentially expressed genes between
+the glucose-limited experiments and the other nutrient limi ted
+experiments for the aerobic series of chemostat cultivations .
+The diﬀerential expression proﬁles (log2-fold-change of glucos e-
+limited vs. others) for HXT1, TEF1, ADH1, MAL12 genes were
+used to ﬁnd other correlated genes using the Pearson correlat ion
+coeﬃcient and test for signiﬁcance.
+Cloning of the Selected Promoters
+Upstream of a Reporter Gene:
+yEGFP3-Cln2PEST and Integration Into
+S. cerevisiaeGenome
+Primers for PCR ampliﬁcation and Uracil excision mediated
+cloning of the diﬀerent promoters into the integrative vector
+pCFB0125 were designed and are listed as Table S1. As the
+length of promoter regions is not always well deﬁned, the
+promoter sequence length was either deﬁned based on previous
+reports or as starting approximately 1,000 bp upstream of the
+start codon (ATG) when no reference in the literature could
+be identiﬁed. In order to closely follow promoter activity,
+promoters were cloned upstream of a quickly maturing and
+rapidly degrading green ﬂuorescent protein encoding gene:
+yEGFP3-Cln2PEST (
+Mateus and Avery, 2000 ). yEGFP3-Cln2PEST,
+as reporter gene, was ampliﬁed using the following primers:
+uGFP_fw: ATCTGTCAU AAA ACA ATGTCTAAAGGTGAA
+GAATTATTC and uGFP_rv: CACGCGAUTCATATTACTTGG
+GTATTGCCC) with pCFB0058 (pFA6a-yEGFP3-CLN2-PEST-
+natMX6, EUROSCARF). Uracil excision was used as cloning
+method to combine the diﬀerent promoter-yEGFP3-Cln2 PEST
+expression cassettes together onto pCFB0125. pCFB0125 is a
+pESC-URA-ccdB vector devoid of its 2micron replication origin ,
+which makes it a non replicative vector that will integrate at
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 3 May 2018 | Volume 6 | Article 63
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+the URA3 locus upon linearization. Standard Uracil excision
+cloning conditions were used, as described previously ( Jensen
+et al., 2014 ). After veriﬁcation of successful cloning, each and
+every vector was linearized by digestion with restriction e nzyme
+StuI (FastDigest ® , Thermo Scientiﬁc) or EcoRV (FastDigest ® ,
+Thermo Scientiﬁc) in the case of the vector bearing promoter
+pMAL32. Digested, linearized, vectors were transformed into S.
+cerevisiae CEN.PK 113-5D. Transformants were selected on agar
+plates containing SC-Ura medium and were used for cultivation
+experiments.
+Construction of 3-hydroxypropionic Acid
+S. cerevisiaeProducing Strains
+All strains from this study were derived from S. cerevisiae
+CEN.PK102-5B MATa ura3-52 his31 leu2-3/112 MAL2-8c
+SUC2 obtained from Peter Kötter (Johann Wolfgang Goethe-
+University Frankfurt, Germany). This strain was further
+modiﬁed by integration of single copy integrative vectors
+pCFB0380 (PTEF1-SeACS_L641P; PPGK1-ALD6; KlLEU2) and
+pCFB0382 (PTEF1-PDC1; SpHIS5). The latter strain is the
+parent strain for the 3HP producing strains of this study.
+Four Plasmids were constructed based on pCFB0343 (PTEF1-
+ACC1**; PPGK1/CaMCR; KlURA3; insertion site Easyclone X-
+2). More details about the Easyclone plasmid set and integrati on
+sites can be found at
+Jensen et al. (2014) . Backbone vector
+fragment was prepared for USER cloning by PCR using
+primers vec_open_mid_ptrTEF1-PGK1 and vec_open_CaMCR
+and template pCFB0343. Three promoter containing fragments
+were prepared by PCR using S. cerevisiae genomic DNA
+as template and primers pHXT7_switch and pHXT7_rev for
+promoter pHXT7, pADH2_switch and pADH2_rev for promoter
+PADH2, and primers pICL1_switch and pICL1_rev for promoter
+pICL1. Primer sequences can be found in Table 1.
+By combining, under standard uracil exclusion cloning
+conditions (
+Jensen et al., 2014 ), backbone vector prepared as
+described above and insert PHXT7, PADH2 or PICL1, one
+obtains three single integrative vectors pCFB0728 (PTEF1-
+ACC1**; PHXT7-CaMCR; insertion site Easyclone X-2),
+pCFB0727 (PTEF1-ACC1**; PADH2-CaMCR; insertion site
+Easyclone X-2) and pCFB0729 (PTEF1-ACC1**; PICL1-CaMCR;
+insertion site Easyclone X-2), respectively. After transfo rming
+TABLE 1 |DNA sequences of PCR primers for USER cloning.
+Promoter Primer
+vec_open_mid ATGCGAUGCACACACCATAGCTTCAAAATG
+ptrTEF1-PGK1
+vec_open_CaMCR ATCTGTCAUAAAACAATGAGTGGTACAGGTAGATTAGC
+pHXT7_switch ATCGCAUCCGTGGAAATGAGGGGTATGC
+pHXT7_rev ATGACAGAUTTTTTGATTAAAATTAAAAAAACTTTTTGTTTT TG
+pADH2_switch ATCGCAUCGCAGGCGGGAAACCATCCA
+pADH2_rev ATGACAGAUTGTGTATTACGATATAGTTAATAGTTGATAGTT G
+pICL1_switch ATCGCAUTTCCATTCATCCGAGCGATCAC
+pICL1_rev ATGACAGAUTTTTCGTTGACTTTTTGTTATGTTATGC
+strain S. cerevisiae CEN.PK102-5B MATa ura3-52 his31
+leu2-3/112 MAL2-8c SUC2 X-3::PTEF1-SeACS_L641P; PPGK1-
+ALD6; KlLEU2 X-4::PTEF1-PDC1; SpHIS5 with integrative
+vector pCFB0343, pCFB0728, pCFB0727, or pCFB0729, 4
+strains are obtained that bear pPGK1-CaMCR, pHXT7-CaMCR,
+pADH2-CaMCR or pICL1-CaMCR, at integration site X-2
+respectively.
+Cultivation
+Strains bearing the diﬀerent promoter-yEGFP3-Cln2 PEST
+expression cassettes were cultivated in two diﬀerent conditi ons:
+(1) in batch mode with mineral medium containing glucose
+as sole carbon source (
+Jensen et al., 2014 ); (2) in fed-batch
+mode with synthetic fed-batch medium for S. cerevisiae M-
+Sc.syn-1000 purchased from m2p-labs GmbH (Baesweiler,
+Germany). M-Sc.syn-1000 medium was supplemented
+with the supplied vitamins solution (ﬁnal 1% v/v) and the
+enzyme mix (ﬁnal concentration 0.5% v/v) immediately prior
+to use.
+Mineral medium contained (L −1): 7.5 g (NH4) 2SO4, 14.4 g
+KH2PO4, 0.5 g MgSO 4-7H2O, 22 g dextrose, 2 mL trace metals
+solution, and 1 mL vitamins. The pH of the medium was adjusted
+to 6 prior to autoclavation. Vitamin solution was added to the
+medium after autoclavation. Trace metals solution was adde d
+after autoclavation. Trace metals solution contained (L −1): 4.5 g
+CaCl2-2H2O, 4.5 g ZnSO 4-7H2O, 3 g FeSO 4-7H2O, 1 g H 3BO3,
+1 g MnCl 2-4H2O, 0.4 g Na 2MoO4-2H2O, 0.3 g CoCl 2-6H2O, 0.1
+g CuSO 4-5H2O, 0.1 g KI, 15 g EDTA. The trace metals solution
+was prepared by dissolving all the components except EDTA in
+900 mL ultrapure water at pH 6. The solution was then gently
+heated and EDTA was added. In the end, the pH was adjusted to
+4, and the solution volume was adjusted to 1 L and autoclaved
+(121◦C in 20 min). This solution was stored at + 4◦C. Vitamin
+solution contained (L-1): 50 mg biotin, 200 mg p-aminobenzoi c
+acid, 1 g nicotinic acid, 1 g Capantothenate, 1 g pyridoxine-HC l,
+1 g thiamine-HCl, 25 g myo-inositol. Biotin was dissolved in 2 0
+mL 0.1 M NaOH and 900 mL water is added. pH was adjusted to
+6.5 with HCl and the rest of the vitamins were added. pH was
+re-adjusted to 6.5 just before and after adding m-inositol. T he
+ﬁnal volume was adjusted to 1 L, sterile-ﬁltered and stored a t
++ 4◦C.
+Composition of M-Sc.syn-1000, vitamin solution and enzyme
+mix are proprietary and were not disclosed to us.
+The main diﬀerence between the mineral medium and
+the synthetic M-Sc.syn-1000 used here deals with the carbon
+source that each contains. In mineral medium used for batch
+cultivations, glucose is present as at a starting concentrat ion of
+20g.L−1 while synthetic medium M-Sc.syn-1000, used for fed-
+batch, contains a solubilized glucose polymer which, due to th e
+activity of glucose releasing enzymes, allows for the slow r elease
+of glucose monomers and limits biomass production.
+All cultivations were performed at 30 ◦C with 1,000 rpm in
+the microbioreactor system BioLector (m2p-labs). Forty eig ht
+cultivations were run in parallel in FlowerPlates (m2p-labs) with
+a working volume of 1.1 mL per well. Biomass growth (light
+scattering units, LSU) and ﬂuorescence (relative ﬂuorescen ce
+units, RFU) were monitored online approximately every 12 min.
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 4 May 2018 | Volume 6 | Article 63
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+Outlier Removal and Data Correction
+Some cultivations were removed before further analysis due t o
+data quality or failure of the cultivation to proceed normally .
+Background Correction and Alignment of
+Measurements
+To correct the biomass measurements for background signal,
+we calculated the growth rates µ via two diﬀerent methods and
+compared them for various possible backgrounds to determine
+the optimal background value. The ﬁrst method is derived from
+Poulsen et al. (2003) , and is known as the log of slope (LOS)
+method.
+Poulsen et al. (2003) note that experimental data that can
+be described by an exponential function sometimes contains a n
+oﬀset, giving a function of the form
+b = b0 ·exp(µ t) + c (1)
+Where b is biomass and t is time, µ is growth rate, c is the
+background, b0 is the initial value of of b at t = 0. In order to
+remove the background and calculate µ , take the derivative with
+respect to t and take the natural log to get
+log
+( db
+dt
+)
+= log(b0µ ) + µ t (2)
+Thus, the slope of any rectilinear section of the LOS plot will be
+the speciﬁc growth rate µ .
+Here, we extend this past what is described by
+Poulsen et al.
+(2003) by taking the derivative of Equation (2) with respect to
+time and further simplifying with the chain rule to get:
+µ = d
+dt
+(
+log
+( db
+dt
+))
+= d2b
+dt
+/ db
+dt (3)
+Thus, we see that if we have a function describing the data,
+assuming an underlying exponential dependence on t, dividing
+the second derivative of this function by the ﬁrst derivativ e
+will give us µ . This expression for µ is not dependent on the
+magnitude of b and is thus independent of background.
+The second method of calculating growth rate is simply the
+deﬁnition of a growth rate normalized to population size:
+µ = db/ dt
+b (4)
+This method is commonly applied for calculating growth rate of
+cell populations (
+Ronen et al., 2002; De Jong et al., 2010; Rudge
+et al., 2016 ). As this depends directly on b, it is thus dependent on
+background.
+It was observed that the biomass proﬁles of batch cultures
+exhibit a slight peak at the diauxic shift ( Altintas et al., 2016 ;
+Figure 3B). For each biomass proﬁle, the time of the peak was
+identiﬁed by determining the time at which light scattering began
+decreasing. If no peak was found, the peak was artiﬁcially set
+to 10 h for batch cultures and 33 h for fed-batch cultures. A
+window of 7.5 to 0.5 h before the diauxic shift peak for batch
+cultures and 20.5 to 1.5 h before the diauxic shift peak for
+fed-batch cultures was then used to calculate growth rates vi a
+each of the two methods described above in Equations (3) and
+(4). These time windows were chosen as the growth curves
+appeared approximately exponential in these regions, which is
+an assumption of the LOS method. Derivatives were computed
+numerically from a smoothing spline ﬁt to the data. The ﬁrst
+and last 6 points of the calculated growth rates were trimmed t o
+account for edge eﬀects of the smoothing spline and the sum of
+squared errors (SSE) between the remaining growth rate proﬁl es
+were compared. The growth rate calculation via the Equation ( 4)
+was repeated for a range of background values from 0 to 13 for
+batch cultures and 0 to 10 for fed-batch and compared for each
+value to growth rate calculated via Equation (3). The backgr ound
+value giving the minimum SSE for each biomass proﬁle was
+chosen.
+To correct for background ﬂuorescence, we used ﬂuorescence
+measurements from a control strain (p0125) cultivated under the
+same conditions as experimental strains. These measurement s
+were used to deﬁne a function relating control ﬂuorescence
+(autoﬂuorescence) as a function of biomass, which we will ca ll
+fc(b). For each experimental strain, each biomass measurement
+was input into fc(b) to obtain the autoﬂuorescence for that
+amount of biomass. This autoﬂuorescence was then subtracte d
+from the corresponding experimental ﬂuorescence associated
+with that biomass measurement. This process was carried out
+for all biomass/ﬂuorescence measurements in each experimen tal
+strain, resulting in a background-corrected ﬂuorescence pr oﬁle
+for each replicate.
+In order to compare replicates we aligned the growth
+curves such that landmark events occur at the same time.
+This is necessary as the lag phase may last diﬀerent amounts
+of time for diﬀerent cultivation experiments even when the
+pattern of biomass accumulation is the same after entry to
+exponential phase. In this case we are interested in the diauxi c
+shift so we used this as the landmark with which to align
+the growth curves. As previously described we identiﬁed the
+diauxic shift peak and determined the diﬀerence between this
+landmark and a reference time, which we set to be at 15 h for
+batch cultures and 30 h for fed-batch cultures. This diﬀerenc e
+was subtracted from the entire set of times corresponding
+to both biomass and ﬂuorescence measurements to determine
+the corrected times; moving forward, we only use data from
+corrected times greater than 0. A similar procedure for growt h
+curve alignment is discussed by
+van Ditmarsch and Xavier
+(2011).
+Promoter Activities in Small-Scale Batch
+Cultivations
+Background-corrected biomass and ﬂuorescence proﬁles were
+input into the PromAct model (
+Kannan et al., 2018 ) using a
+protein maturation rate of 0.45 h−1 as described for EGFP
+(Heim et al., 1995 ) and a protein degradation rate of 0.5 h−1
+as described for yEGFP3-Cln2 PEST (Mateus and Avery, 2000 ).
+mRNA degradation rate was set as 1
+3 h−1 based on genome-wide
+estimates of mRNA degradation in S. cerevisiae (Munchel et al.,
+2011; Neymotin et al., 2014 ).
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 5 May 2018 | Volume 6 | Article 63
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+The promoter activity proﬁles were cropped to 35 h for batch
+and 60 h for fed-batch cultures on the corrected time scale fo r
+standardization. Lag phase was identiﬁed as when the rate of
+change of the average biomass proﬁle over all replicates from
+a given promoter ﬁrst surpassed 0.5 LSU per h. The diauxic
+shift was identiﬁed as the time between the characteristic pe ak,
+identiﬁed as where the derivative of the average biomass proﬁ le
+over all replicates becomes crosses 0, to when the derivative next
+surpasses 0.5 LSU per h following this peak. For batch cultures,
+the stationary phase was also identiﬁed using the same peak
+detection method as with the diauxic shift identiﬁcation, a s a
+similar characteristic peak is seen. A similar method for gro wth
+phase identiﬁcation was used by
+Altintas et al. (2016) . “Early” and
+“Late” designations in Figure 4 indicate the ﬁrst and second half
+of each growth phase, respectively.
+Measurement of 3-hydroxipropionic Acid
+Concentration
+Strains expressing CaMCR (malonyl-CoA reductase from
+Chloroﬂexus aurantiacus ) for the production of 3HP were
+cultivated in FlowerPlates in the BioLector, in the same
+conditions as described above, in batch and fedbatch modes.
+Samples for 3HP measurement were taken during the course
+of the cultivations, 3HP concentration was measured using a
+dedicated enzyme assay. The enzyme assay was performed as
+described in the supplementary materials of
+Borodina et al.
+(2015).
+RESULTS
+Selection of Promoters Through Analysis
+of Genome-Wide Transcription Datasets
+In order to identify promoters with glucose-dependent
+expression proﬁles, we searched the literature for genome-
+wide expression datasets comparing glucose-limited and gluc ose
+excess conditions.
+Boer et al. (2003) characterized the speciﬁc
+transcriptional responses of S. cerevisiae cells growing at steady
+state in chemostats under growth limitation by carbon, nitr ogen,
+phosphorus, or sulfur. We performed an analysis of this dataset
+in order to directly compare gene expression levels in the gluc ose
+limiting condition to the average of expression levels obser ved
+while not glucose limited (e.g., combining the results from the
+sulfur, the phosphorus and the nitrogen limiting conditions)
+which we describe as “glucose excess” conditions.
+The 2D histogram ( Figure 2B) displays the comparison of
+gene expression levels between glucose-limited and glucose
+excess conditions. The volcano plot ( Figure 2A) displays the
+genes found signiﬁcantly diﬀerently expressed between gluco se-
+limited and glucose excess conditions. Four archetypes of
+gene expression were identiﬁed for their known roles and are
+represented in Figure 2: (1) TEF1 archetype with constitutive
+expression in both conditions, (2) HXT1 archetype with high
+expression in glucose-excess and low expression in glucose-
+limiting conditions, (3) ADH2, and (4) MAL12 archetypes
+with low expression in glucose-excess and high expression in
+glucose limiting conditions. As some of the archetypes are
+not diﬀerentially expressed in this comparison, e.g., TEF1,
+the identiﬁed genes correlated with them are most often not
+diﬀerentially expressed in this comparison. By contrast, genes
+signiﬁcantly correlated to ADH2 and HXT1 were among the most
+diﬀerentially expressed in glucose-excess vs. glucose limitin g
+conditions.
+From the archetype correlation analysis, 34 genes were
+identiﬁed with diverse expression proﬁles in respect to dynami c
+regulation of gene expression. Promoter regions from all 34
+genes were cloned (or attempted) as reported in the materials
+and methods section. Although not all were expected to
+be signiﬁcantly diﬀerentially expressed, 20 genes were found
+signiﬁcantly up-regulated in glucose limiting conditions an d
+5 genes were signiﬁcantly down-regulated in glucose excess
+conditions (p < 0.05 after Benjamini-Hochberg correction).
+Characterization of Promoter Activities in
+Microfermentations
+Microscale Batch Cultivations
+Batch cultivations were followed until stationary phase was
+reached. As presented in Figure 3, the two classical growth phases
+of a S. cerevisiae batch fermentation, where glucose is the sole
+carbon source, were clearly observed with a glucose growth phas e
+followed by an ethanol growth phase separated by a diauxic shift
+(
+Monod, 1941 ). A few typical proﬁles of promoter activity are
+presented in Figure 3: constitutive expression, i.e., TEF1, high
+expression in glucose-excess conditions, i.e., PGK1 and TDH3,
+activation at low glucose concentration, i.e., HXK1, HXT7, and
+MAL12 or expression when growing on ethanol in the absence
+of glucose, i.e., ADH2, ICL1, and ACS1. None of the promoters
+tested showed sustained activity in stationary phase, likely due to
+the lack of metabolic activity in the absence of carbon sourc es.
+Promoter activities of other promoters tested can be found in
+Figure S1.
+A heat map and cluster analysis were applied to all
+promoter activities in the batch condition ( Figure 4). The
+cluster analysis reveals a tight correlation between promote r
+activities experimentally determined here and the gene
+expression categories deﬁned from the analysis of genome-
+wide transcription data presented in Figure 2, which reﬂects
+that the diﬀerent promoters cloned upstream of yEGFP3-
+Cln2PEST respond mostly in a similar fashion as when they are
+in their native context. Globally, two main branches appear,
+at the top of the ﬁgure promoters active in glucose excess
+conditions, and at the bottom can be observed promoters
+activating at low glucose concentration or when glucose is
+absent ( Figure 4). This cluster analysis grouped proﬁles by
+archetype group in all but 6 cases where cluster grouping
+seemed to contradict with the gene expression data. This
+was observed for the promoters of ISF1, FDH1, FOX2, RGI2,
+YIG1, and EGO4 (Figure 4). In the case of EGO4, ( RGI2
+YIL057C), and FOX2, this may be explained by their unclear
+promoter activity patterns (Figure S1). The three others, ISF1,
+FDH1, and YIG1, clearly behave in opposite fashion compared
+to what was expected from the gene expression analysis
+(Figure 2).
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 6 May 2018 | Volume 6 | Article 63
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+FIGURE 2 |Comparison of expression levels between glucose excess and glucose limiting cultivation conditions. (A) Volcano plot with a 2D histogram of gene
+counts, (B) plot of expression levels in glucose limiting vs. glucose ex cess conditions with a 2D histogram of gene counts. The four g ene expression archetypes
+identiﬁed are represented: (1) TEF1 archetype (red) with constitutive expression in both condi tions, (2) HXT1 archetype (green) with high expression in glucose-excess
+and low expression in glucose-limiting conditions, (3) ADH2 (light blue), and (4) MAL12 (orange) archetypes with low expression in glucose-excess and high
+expression in glucose limiting conditions.
+Microscale Fed-Batch Cultivations
+In this microscale fed-batch cultivation, realized using t he
+glucose slow release technology Feed-In-Time (m2p-labs), t wo
+main growth phases are observed: (1) an initial phase until
+approximately 25 h of cultivation where residual glucose is st ill
+present at a low level (2) a glucose-limiting growth phase afte r
+25 h of cultivation where biomass growth is limited by the slo w
+release of glucose ( Figure 5).
+In terms of promoter activity, two major activity proﬁles
+appear: (1) promoters characterized by a higher and sustained
+activity in the ﬁrst growth phase that remain active in the sec ond
+phase, although to a lower extent (e.g., TEF1, PGK1, TDH3,
+HXT7, MAL12); and (2) promoters that strongly activate at the
+onset of glucose limiting phase and that quickly become at mos t
+weakly active or inactive ( ADH2, ACS1, ICL1).
+Based on the outcome of promoter activity characterization,
+it was decided to run a proof of concept study and test a subset
+of promoters for transient expression and controlled producti on
+of a commercially relevant compound, with the objective of
+restricting its production only in “production” phase in fed-b atch
+and not during the seed train phases carried on as batch.
+Proof of Concept Study: Dynamic
+Regulation of 3-hydroxypropionic Acid
+(3HP) Production
+3HP is a platform chemical that can be converted into
+acrylic acid, 1,3-propanediol, malonic acid, and other
+valuable chemicals. In 2011, the world annual production
+of acrylic acid was 5000 kMT and the market size was USD
+11.5 billion (
+Borodina et al., 2015 ). Acrylic acid-derived
+products include superabsorbent polymers used in diapers
+and incontinence products, plastics, coatings, adhesives,
+elastomers, and paints (
+Borodina et al., 2015 ). In biological
+systems, 3HP can be synthesized via at least four diﬀerent
+intermediates: glycerol, lactate, malonyl-CoA or β -alanine
+(
+Kumar et al., 2013 ). Production of 3HP based on the β -
+alanine or the malonyl-CoA have been reported in S. cerevisiae
+(Chen et al., 2014; Borodina et al., 2015; Kildegaard et al.,
+2016). Furthermore, Kildegaard et al. reported a reduced
+growth rate of the strains expressing the malonyl-CoA route
+for 3HP production, especially in the case where pathway
+genes were integrated in multiple copies (
+Kildegaard et al.,
+2016).
+In an attempt to control production of 3HP via the
+malonyl-CoA route, with the objective to drive 3HP productio n
+only in “production” phase in fed-batch and not during
+the seed train phases carried on as batch, three promoters
+were selected based on their expression proﬁles: p HXT7,
+pADH2, and p ICL1. They were selected for their weak (if
+not absent) expression in cultivation with excess of glucose
+and their induction in glucose limiting conditions ( Figure 3).
+Promoters of HXT7, ADH2, and ICL1 were then cloned
+upstream of the gene encoding bi-functional malonyl-CoA
+reductase from Chloroﬂexus aurantiacus (CaMCR), which is
+the only heterologous enzyme necessary for producing 3HP
+via the malonyl-CoA route in S. cerevisiae . As a reference,
+CaMCR was expressed under the control of p PGK1, a promoter
+which is both active in glucose excess and glucose limiting
+conditions ( Figures 3, 5). When p PGK1 is controlling the
+expression of CaMCR, a clear accumulation of 3HP is observed
+already at the early stages of growth on glucose in the batch
+condition ( Figure 6). This is clearly not the case when the
+(glucose-) regulated promoters p HXT7, p ADH2 and p ICL1 are
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 7 May 2018 | Volume 6 | Article 63
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+FIGURE 3 |Activity of various promoters in batch cultivations. Gray s haded areas are low-growth phases. Red shading represents o ne standard deviation from the
+mean promoter activity over all replicates at each time poin t (see Table S2). Blue shading represents one standard devia tion from the mean biomass value over all
+replicates at each time point.
+controlling CaMCR expression, as here production of 3HP
+remains below detection limit of the assay ( Figure 6). In the
+fed-batch cultivation condition, where all promoters are be ing
+activated, 3HP production is restored. Expressing CaMCR from
+the regulated ICL1 promoter resulted in a 1.7-fold increase in
+3HP production when compared to the constitutive expression
+from PGK1 promoter (Figure 6).
+It is clearly demonstrated here that production of a metaboli te
+of interest can be turned on and oﬀ by using a set of dynamicall y
+activated promoters. Furthermore, turning oﬀ 3HP production
+in growth phases of batch fermentation did not aﬀect the
+ﬁnal production titer in the fed-batch condition, and was
+even beneﬁcial, especially when p ICL1 controlled expression of
+CaMCR.
+DISCUSSION
+In this study, speciﬁc genome-wide expression datasets were
+analyzed in order to identify genes characterized by diﬀerent
+expression patterns in glucose excess as compared to glucose
+limiting conditions. Four archetypes of gene expression were
+deﬁned. A number of genes with expression patterns qualiﬁed as
+interesting were selected and their promoters cloned upstream
+of a quickly maturing rapidly degrading GFP. Destabilized
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 8 May 2018 | Volume 6 | Article 63
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+FIGURE 4 |Comparison of promoter activities. Clustering of dynamic
+promoter activity proﬁles summarized by the average activit y in 8
+non-overlapping time windows representing the growth phas es in batch
+cultivations. Time windows were deﬁned as follows: Early lag 0.50–1.50, Late
+lag 1.50–3.00, Early glucose 3.00–9.25, Late glucose 9.25– 15.5, Diauxic shift
+15.5–17.0, Early ethanol 17.0–20.8, Late ethanol 20.8–24. 6, Stationary
+24.6–35.0.
+GFP variants are better suited for the study of transient gen e
+expression as native GFP variants have particularly long half -
+lives. In this study, it was decided to use yEGFP3-Cln2 PEST which
+is a destabilized variant of GFP that has successfully been us ed
+to monitor dynamic changes in gene expression in yeast ( Mateus
+and Avery, 2000 ). After characterizing promoter activities both
+in batch with glucose as sole carbon source and glucose-limi ting
+fedbatch conditions, a hand full of promoters were chosen for
+a proof of concept study where controlled production of the
+commercially relevant chemical 3HP was demonstrated.
+Comparing results from the genome-wide gene expression
+analysis and from the characterization of promoter activity in
+the batch cultivation conditions, it was interesting to not ice
+the correlation between the archetypes deﬁned for the genome -
+wide gene expression analysis ( Figure 2) and the clusters
+obtained for the promoter activity characterization ( Figure 4).
+This conﬁrmed that most of the promoters cloned upstream
+yEGFP3-Cln2PEST respond according to the archetype deﬁned
+for the gene they relate to. It also indicated that elements
+responsible for transcriptional regulation of those genes ar e
+present in the promoter sequence used in this study. This
+validated the promoter sequences that were chosen here.
+Discrepancies were observed though for six genes. For three
+of them, ISF1, FDH1, and YIG1, the promoter that was
+cloned triggered an expression pattern opposite to what was
+reported for the genome-wide gene expression analysis. This m ay
+indicate that the chosen promoter sequence is lacking regula tory
+elements otherwise present in the native promoter, or that DNA
+structure at the integration site aﬀects activity pattern of t hese
+promoters.
+Taking a look at promoter activities measured during the
+microscale fedbatch cultivation, it appeared that while some
+promoters were only activated at the onset of glucose limitatio n
+(e.g., promoters of ACS1, ADH2, ICL1, SFC1, SPG4 ), others
+were characterized by a much wider expression time window,
+with an early activation (e.g., promoters of HXT7, MAL12,
+FMP3) ( Figure 5). This may be explained by the fact that the
+latter promoters are active already in the phase where residua l
+glucose is present but at a low concentration. This early phase
+of the microscale fedbatch experiment is an intermediary phas e
+caused by the technology employed here, i.e., the Feed-In-Ti me
+technology as a low amount of free glucose is initially present i n
+the medium and acts as a carbon source until the slow enzymati c
+release of glucose from the polymer takes over and triggers
+glucose limitation. The low concentration of glucose in this
+early phase may still allow for activation of the above-mentio ned
+promoters (Figure 5).
+Surprisingly, promoters like ADH2, ICL1, or ACS1 were
+characterized by a burst of expression at the onset of the
+glucose limiting phase. These promoter activity proﬁles
+suggest a rapid increase and decrease in their activity altho ugh
+they appear to maintain some activity for roughly 10 h
+after activation. This was not necessarily expected as the
+corresponding genes were clearly maintaining expression in
+the glucose limited continuous cultivation of the genome-
+wide gene expression analysis ( Figure 2). It further underlines
+the necessity for testing genetic elements for controlled
+expression in conditions as close as possible to the intended
+bioprocess.
+Beneﬁts of dynamic control of metabolic pathways have
+been demonstrated before, as described in the introduction .
+Nevertheless, this study further conﬁrms that transient ac tivation
+of a metabolic pathway does not negatively impact production of
+a compound of interest, here 3HP , but rather beneﬁts productio n
+performance, as shown here in the case where ICL1 promoter
+restricts expression of CaMCR to the microscale fedbatch
+cultivation stage ( Figure 6). Even-though other factors, e.g.,
+timing of MCR expression, substrate availability or pathway
+intermediate concentrations may also contribute to the bene ﬁts
+observed on 3HP production, it is surprising that such a sudden
+and short expression timespan triggered by ICL1 promoter
+can result in superior production of the compound of interest
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 9 May 2018 | Volume 6 | Article 63
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+FIGURE 5 |Activity of various promoters in fed-batch cultivations. G ray shaded areas are low-growth phases. Red shading represe nts one standard deviation from
+the mean activity over all replicates (see Table S3). Blue sh ading represents one standard deviation from the mean bioma ss value over all replicates at each time point.
+as compared to longer expression timespan as in the case of
+pHXT7 or p PGK1. This certainly raises the question whether
+sudden, short but high expression bursts at the onset of chang ing
+conditions could not be suﬃcient to sustain eﬃcient producti on
+of chemicals of interest. Reducing the timespan of expression o f
+a promoter may be beneﬁcial to the overall production process
+as it may restrict the loads of energy spent on transcription an d
+translation of the speciﬁc gene only to a brief time-window.
+Recently Christiano et al. measured 8.8–12 h as median half li ves
+of proteins in S. cerevisiae (
+Christiano et al., 2014 ). Therefore,
+once synthesized the functional protein would still remain i n the
+cells even though the promoter of its gene, hence transcriptio n
+and translation of that gene, would be oﬀ during most of
+the cultivation. Promoters like ICL1, ADH2, ACS1, combined
+with other synthetic biology tools that could expand mRNA
+half-lives, e.g., sequences improving mRNA stability (
+Curran
+et al., 2013; Yamanishi et al., 2013 ), may certainly play an active
+role.
+CONCLUSION
+Through analysis of gene expression data, promoters showing
+speciﬁc responses to glucose excess or limitation were identi ﬁed.
+DNA sequences of these promoters were cloned upstream of
+a quickly maturing and rapidly degrading green ﬂuorescent
+protein to allow the study of promoter activities. Dynamics of
+promoter activities for a number of promoters in batch with
+glucose as sole carbon source, or glucose limiting condition s
+were analyzed. A subset of promoters, p ADH2, p ICL1, and
+pHXT7, were demonstrated as suitable for dynamic control
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 10 May 2018 | Volume 6 | Article 63
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+FIGURE 6 |Effect of dynamic control of gene expression on 3HP producti on. 3HP production in A: batch and B: fed-batch cultivations for p PGK1, p HXT7, p ICL1, or
+pADH2 driving production of CaMCR. Error bars on 3HP levels repres ent standard error of the mean, n = 3. The gray ribbon on Biomass represents plus/minus one
+standard deviation. 3HP concentration is in g/L and Biomass i s measured in light scattering units (LSU).
+of production of a commercially relevant compound, i.e.,
+3HP , in S. cerevisiae . The set of promoters and the dynamic
+promoter activity proﬁling presented here will contribute
+to the molecular biology toolbox available to metabolic
+engineers.
+AUTHOR CONTRIBUTIONS
+IB and JM conceived the design of the study. JN contributed with
+initial ideas about the project and discussions on the possible
+promoter set for evaluation. JM, NJ, FÖ, and KK performed
+DNA work. JM generated the strains and performed small
+scale cultivations. JM and CW performed the transcriptome
+data analysis. JF participated in the design of the study
+and interpretation of initial results. SK and CW performed
+dynamic promoter activity analyses. SK, CW, and JM analyzed
+the data. SK, JM, IB, and CW drafted the manuscript and
+all authors contributed to preparing the ﬁnal version of the
+manuscript.
+FUNDING
+The Novo Nordisk Foundation for ﬁnancial support (Novo
+Nordisk Foundation, Grant Number NNF10CC1016517,
+http://www.novonordiskfonden.dk). The Denmark-America
+Foundation & Fulbright Commission.
+SUPPLEMENTARY MATERIAL
+The Supplementary Material for this article can be found
+online at: https://www.frontiersin.org/articles/10.338 9/fbioe.
+2018.00063/full#supplementary-material
+REFERENCES
+Altintas, A., Martini, J., Mortensen, U. H., and Workman, C. T. (2016 ).
+Quantiﬁcation of oxidative stress phenotypes based on high-th roughput
+growth proﬁling of protein kinase and phosphatase knockouts. FEMS Yeast Res.
+16:fov101. doi: 10.1093/femsyr/fov101
+Asadollahi, M. A., Maury, J., Møller, K., Nielsen, K. F., Schalk, M., Clark, A.,
+et al. (2008). Production of plant sesquiterpenes in Saccharomyces cerevisiae :
+eﬀect of ERG9 repression on sesquiterpene biosynthesis. Biotechnol. Bioeng. 99,
+666–677. doi: 10.1002/bit.21581
+Boer, V. M., De Winde, J. H., Pronk, J. T., and Piper, M. D. W. (2003 ). The genome-
+wide transcriptional responses of Saccharomyces cerevisiae grown on glucose in
+aerobic chemostat cultures limited for carbon, nitrogen, phosphorus, or sulfur.
+J. Biol. Chem. 278, 3265–3274. doi: 10.1074/jbc.M209759200
+Borodina, I., Kildegaard, K. R., Jensen, N. B., Blicher, T. H., Mau ry, J., Sherstyk, S.,
+et al. (2015). Establishing a synthetic pathway for high-level pro duction of 3-
+hydroxypropionic acid in Saccharomyces cerevisiae via β -alanine. Metab. Eng.
+27, 57–64. doi: 10.1016/j.ymben.2014.10.003
+Borodina, I., and Nielsen, J. (2014). Advances in metabolic engi neering of yeast
+Saccharomyces cerevisiae for production of chemicals. Biotechnol. J. 9, 609–620.
+doi: 10.1002/biot.201300445
+Brockman, I. M., and Prather, K. L. (2015a). Dynamic knockdown of E. coli
+central metabolism for redirecting ﬂuxes of primary metabolites. Metab. Eng.
+28, 104–113. doi: 10.1016/j.ymben.2014.12.005
+Brockman, I. M., and Prather, K. L. J. (2015b). Dynamic metabolic en gineering:
+new strategies for developing responsive cell factories. Biotechnol. J. 10,
+1360–1369. doi: 10.1002/biot.201400422
+Chen, Y., Bao, J., Kim, I. K., Siewers, V., and Nielsen, J. (2014 ). Coupled
+incremental precursor and co-factor supply improves 3-hydroxypropionic
+acid production in Saccharomyces cerevisiae . Metab. Eng. 22, 104–109.
+doi: 10.1016/j.ymben.2014.01.005
+Christiano, R., Nagaraj, N., Fröhlich, F., and Walther, T. C. (201 4). Global
+proteome turnover analyses of the Yeasts S. cerevisiae and S. pombe . Cell Rep.
+9, 1959–1965. doi: 10.1016/j.celrep.2014.10.065
+Curran, K. A., Karim, A. S., Gupta, A., and Alper, H. S. (2013). Use of ex pression-
+enhancing terminators in Saccharomyces cerevisiae to increase mRNA half-life
+and improve gene expression control for metabolic engineering applicati ons.
+Metab. Eng. 19, 88–97. doi: 10.1016/j.ymben.2013.07.001
+Dahl, R. H., Zhang, F., Alonso-Gutierrez, J., Baidoo, E., Batth, T . S.,
+Redding-Johanson, A. M., et al. (2013). Engineering dynamic pat hway
+regulation using stress-response promoters. Nat. Biotechnol. 31, 1039–1046.
+doi: 10.1038/nbt.2689
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 11 May 2018 | Volume 6 | Article 63
+Maury et al. Glucose-Dependent Promoters for Dynamic Regulation
+David, F., Nielsen, J., and Siewers, V. (2016). Flux control at t he Malonyl-CoA node
+through hierarchical dynamic pathway regulation in Saccharomyces cerevisiae.
+ACS Synthet. Biol. 5, 224–233. doi: 10.1021/acssynbio.5b00161
+Davis, S., and Meltzer, P. S. (2007). GEOquery: a bridge between the gene
+expression omnibus (GEO) and BioConductor. Bioinformatics 23, 1846–1847.
+doi: 10.1093/bioinformatics/btm254
+De Jong, H., Ranquet, C., Ropers, D., Pinel, C., and Geiselmann, J. (2010).
+Experimental and computational validation of models of ﬂuorescent
+and luminescent reporter genes in bacteria. BMC Syst. Biol. 4:55.
+doi: 10.1186/1752-0509-4-55
+Farmer, W. R., and Liao, J. C. (2000). Improving lycopene production in
+Escherichia coli by engineering metabolic control. Nat. Biotechnol. 18, 533–537.
+doi: 10.1038/75398
+Germann, S. M., Baallal Jacobsen, S. A., Schneider, K., Harrison, S . J., Jensen,
+N. B., Chen, X., et al. (2016). Glucose-based microbial production o f the
+hormone melatonin in yeast Saccharomyces cerevisiae . Biotechnol. J. 11,
+717–724. doi: 10.1002/biot.201500143
+Heim, R., Cubitt, A. B., and Tsien, R. Y. (1995). Improved green ﬂuore scence.
+Nature 373, 663–664. doi: 10.1038/373663b0
+Hong, K. K., and Nielsen, J. (2012). Metabolic engineering of Saccharomyces
+cerevisiae: a key cell factory platform for future bioreﬁneries. Cell. Mol. Life Sci.
+69, 2671–2690. doi: 10.1007/s00018-012-0945-1
+Jensen, N. B., Strucko, T., Kildegaard, K. R., David, F., Maury, J ., Mortensen,
+U. H., et al. (2014). EasyClone: method for iterative chromosomal inte gration
+of multiple genes in Saccharomyces cerevisiae . FEMS Yeast Res. 15, 238–248.
+doi: 10.1111/1567-1364.12118
+Kannan, S., Sams, T., Maury, J., and Workman, C. T. (2018). Recons tructing
+dynamic promoter activity proﬁles from reporter gene data. ACS Synth. Biol.
+7, 832–841. doi: 10.1021/acssynbio.7b00223
+Kildegaard, K. R., Jensen, N. B., Schneider, K., Czarnotta, E., Özdemir, E., Klein, T.,
+et al. (2016). Engineering and systems-level analysis of Saccharomyces cerevisiae
+for production of 3-hydroxypropionic acid via malonyl-CoA reductase-
+dependent pathway. Microb. Cell Fact. 15:53. doi: 10.1186/s12934-016-0451-5
+Kumar, V., Ashok, S., and Park, S. (2013). Recent advances in bi ological
+production of 3-hydroxypropionic acid. Biotechnol. Adv. 31, 945–961.
+doi: 10.1016/j.biotechadv.2013.02.008
+Lo, T.-M., Chng, S. H., Teo, W. S., Cho, H.-S., and Chang, M. W. (2 016). A two-
+layer gene circuit for decoupling cell growth from metabolite producti on. Cell
+Syst. 3, 133–143. doi: 10.1016/j.cels.2016.07.012
+Mateus, C., and Avery, S. V. (2000). Destabilized green ﬂuoresce nt protein for
+monitoring dynamic changes in yeast gene expression with ﬂow cyto metry.
+Yeast 16, 1313–1323.
+Meadows, A. L., Hawkins, K. M., Tsegaye, Y., Antipov, E., Kim, Y ., Raetz, L., et al.
+(2016). Rewriting yeast central carbon metabolism for industria l isoprenoid
+production. Nature 537, 694–697. doi: 10.1038/nature19769
+Monod, J. (1941). Recherches sur la Croissance des Cultures Bactériennes . Ph.D.
+thesis, Université de Paris.
+Munchel, S. E., Shultzaberger, R. K., Takizawa, N., and Weis, K . (2011). Dynamic
+proﬁling of mRNA turnover reveals gene-speciﬁc and system-wide regulat ion
+of mRNA decay. Mol. Biol. Cell 22, 2787–2795. doi: 10.1091/mbc.E11-01-0028
+Neymotin, B., Athanasiadou, R., and Gresham, D. (2014). Determin ation
+of in vivo RNA kinetics using RATE-seq. RNA 20, 1645–1652.
+doi: 10.1261/rna.045104.114
+Nielsen, J., and Jewett, M. C. (2008). Impact of systems biology on metabolic
+engineering of Saccharomyces cerevisiae . FEMS Yeast Res. 8, 122–131.
+doi: 10.1111/j.1567-1364.2007.00302.x
+Poulsen, B. R., Ruiter, G., Visser, J., and Iversen, J. J. L. (2 003). Determination of
+ﬁrst order rate constants by natural logarithm of the slope plot exempliﬁe d
+by analysis of Aspergillus niger in batch culture. 25, 565–571. Biotechnol. Lett .
+doi: 10.1023/A:1022836815439
+Ro, D.-K., Paradise, E. M., Ouellet, M., Fisher, K. J., Newman, K. L., Ndungu, J. M.,
+et al. (2006). Production of the antimalarial drug precursor artemisin ic acid in
+engineered yeast. Nature 440, 940–943. doi: 10.1038/nature04640
+Ronen, M., Rosenberg, R., Shraiman, B. I., and Alon, U. (2002). As signing
+numbers to the arrows: parameterizing a gene regulation network by usin g
+accurate expression kinetics. Proc. Natl. Acad. Sci. U.S.A. 99, 10555–10560.
+doi: 10.1073/pnas.152046799
+Rudge, T. J., Brown, J. R., Federici, F., Dalchau, N., Phillips, A., Ajioka, J. W., et al.
+(2016). Characterization of intrinsic properties of promoters. 5, 89– 98. ACS
+Synth. Biol. doi: 10.1021/acssynbio.5b00116
+Scalcinati, G., Knuf, C., Partow, S., Chen, Y., Maury, J., Schalk , M., et al. (2012).
+Dynamic control of gene expression in Saccharomyces cerevisiae engineered for
+the production of plant sesquitepene α -santalene in a fed-batch mode. Metab.
+Eng. 14, 91–103. doi: 10.1016/j.ymben.2012.01.007
+Shin, S. Y., Jung, S. M., Kim, M. D., Han, N. S., and Seo, J. H. (201 2). Production of
+resveratrol from tyrosine in metabolically engineered Saccharomyces cerevisiae.
+Enzyme Microb. Technol. 51, 211–216. doi: 10.1016/j.enzmictec.2012.06.005
+Solomon, K. V., Sanders, T. M., and Prather, K. L. (2012). A dynami c metabolite
+valve for the control of central carbon metabolism. Metab. Eng. 14, 661–671.
+doi: 10.1016/j.ymben.2012.08.006
+Soma, Y., Tsuruno, K., Wada, M., Yokota, A., and Hanai, T. (2014 ).
+Metabolic ﬂux redirection from a central metabolic pathway toward a
+synthetic pathway using a metabolic toggle switch. Metab. Eng. 23, 175–184.
+doi: 10.1016/j.ymben.2014.02.008
+Tai, S. L., Boer, V. M., Daran-Lapujade, P., Walsh, M. C., De Wind e,
+J. H., Daran, J.-M., et al. (2005). Two-dimensional transcriptome an alysis
+in chemostat cultures: Combinatorial eﬀects of oxygen availabilit y and
+macronutrient limitation in Saccharomyces cerevisiae . J. Biol. Chem. 280,
+437–447. doi: 10.1074/jbc.M410573200
+Torella, J. P., Ford, T. J., Kim, S. N., Chen, A. M., Way, J. C., and Si lver, P. A. (2013).
+Tailored fatty acid synthesis via dynamic control of fatty acid e longation. Proc.
+Natl. Acad. Sci. U.S.A. 110, 11290–11295. doi: 10.1073/pnas.1307129110
+van Ditmarsch, D., and Xavier, J. B. (2011). High-resolution time series of
+Pseudomonas aeruginosa gene expression and rhamnolipid secretion
+through growth curve synchronization. BMC Microbiol. 11:140.
+doi: 10.1186/1471-2180-11-140
+Yamanishi, M., Ito, Y., Kintaka, R., Imamura, C., Katahira, S., Ik euchi, A.,
+et al. (2013). A genome-wide activity assessment of terminator reg ions in
+Saccharomyces cerevisiae provides a “terminatome” toolbox. ACS Synth. Biol.
+2, 337–347. doi: 10.1021/sb300116y
+Yu, T., Zhou, Y. J., Wenning, L., Liu, Q., Krivoruchko, A., Siew ers, V., et
+al. (2017). Metabolic engineering of Saccharomyces cerevisiae for production
+of very long chain fatty acid-derived chemicals. Nat. Commun. 8:15587.
+doi: 10.1038/ncomms15587
+Conﬂict of Interest Statement: The authors declare that the research was
+conducted in the absence of any commercial or ﬁnancial relations hips that could
+be construed as a potential conﬂict of interest.
+Copyright © 2018 Maury, Kannan, Jensen, Öberg, Kildegaard, Forst er, Nielsen,
+Workman and Borodina. This is an open-access article distri buted under the terms
+of the Creative Commons Attribution License (CC BY). The use , distribution or
+reproduction in other forums is permitted, provided the orig inal author(s) and the
+copyright owner are credited and that the original publicati on in this journal is cited,
+in accordance with accepted academic practice. No use, dist ribution or reproduction
+is permitted which does not comply with these terms.
+Frontiers in Bioengineering and Biotechnology | www.front iersin.org 12 May 2018 | Volume 6 | Article 63

@@ -1,0 +1,1570 @@
+Robust ω‑Transaminases by Computational Stabilization of the
+Subunit Interface
+Qinglong Meng, Nikolas Capra, Cyntia M. Palacio, Elisa Lanfranchi, Marleen Otzen, Luc Z. van Schie,
+Henriëtte J. Rozeboom, Andy-Mark W. H. Thunnissen, Hein J. Wijma, and Dick B. Janssen*
+Cite This: ACS Catal. 2020, 10, 2915−2928 Read Online
+ACCESS Metrics & More Article Recommendations *sı Supporting Information
+ABSTRACT: Transaminases are attractive catalysts for the production
+of enantiopure amines. However, the poor stability of these enzymes
+often limits their application in biocatalysis. Here, we used a framework
+for enzyme stability engineering by computational library design
+(FRESCO) to stabilize the homodimeric PLP fold type Iω-transaminase
+from Pseudomonas jessenii . A large number of surface-located point
+mutations and mutations predicted to stabilize the subunit interface were
+examined. Experimental screening revealed that 10 surface mutations out
+of 172 tested were indeed stabilizing (6% success), whereas testing 34
+interface mutations gave 19 hits (56% success). Both the extent of
+stabilization and the spatial distribution of stabilizing mutations showed
+that the subunit interface was critical for stability. After mutations were
+combined, 2 very stable variants with 4 and 6 mutations were obtained,
+which in comparison to wild type (T
+m
+app =6 2°C) displayedTm
+app values
+of 80 and 85°C, respectively. These two variants were also 5-fold more active at their optimum temperatures and tolerated high
+concentrations of isopropylamine and cosolvents. This allowed conversion of 100 mM acetophenone to (S)-1-phenylethylamine
+(>99% enantiomeric excess) with high yield (92%, in comparison to 24% with the wild-type transaminase). Crystal structures mostly
+conﬁrmed the expected structural changes and revealed that the most stabilizing mutation, I154V, featured a rarely described
+stabilization mechanism: namely, removal of steric strain. The results show that computational interface redesign can be a rapid and
+powerful strategy for transaminase stabilization.
+KEYWORDS: transaminase, biocatalysis, computational design, thermostability, protein engineering, subunit interface
+■ INTRODUCTION
+ω-Transaminases (ω-TAs) and amine transaminases (ATAs)
+are highly attractive biocatalysts to synthesize optically pure
+chiral amines, which are important intermediates in the
+synthesis of pharmaceuticals and other ﬁne chemicals.1−3 In
+the transaminase (TA) reaction, the pyridoxal 5′-phosphate
+(PLP) cofactor of the enzyme serves as a molecular shuttle to
+transfer an amino group from a donor (usually an amine or
+amino acid) to an acceptor (a ketone, aldehyde, or keto acid)
+(Scheme 1). The overall reaction consists of two parts, each
+involving several chemical steps.4 In the ﬁrst half-reaction the
+conserved lysine that forms a Schiﬀ base with the PLP cofactor
+in the native protein (internal aldimine, E-PLP) is displaced by
+the amino donor. This gives an external aldimine, and via
+subsequent quinonoid and ketimine intermediates the amino
+group of the donor is transferred to the PLP, yielding the
+aminated pyridoxamine 5′-phosphate (PMP)−enzyme inter-
+mediate (E:PMP). The deaminated donor is released as a
+ketone, aldehyde, or keto acid. After this, in the second half-
+reaction, the amino acceptor binds and reacts with the E:PMP
+intermediate to form a ketimine, which subsequently
+Received: December 3, 2019
+Revised: January 31, 2020
+Published: January 31, 2020
+Scheme 1. Isopropylamine-Driven Transamination Reaction
+Research Articlepubs.acs.org/acscatalysis
+© 2020 American Chemical Society
+2915
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+This is an open access article published under a Creative Commons Non-Commercial No
+Derivative Works (CC-BY-NC-ND) Attribution License, which permits copying and
+redistribution of the article, and creation of adaptations, all for non-commercial purposes.
+decomposes via a quinonoid and an external aldimine. Finally,
+the enzyme’s lysine replaces the aminated acceptor, which is
+released, and the E:PLP enzyme is re-formed.
+TAs can also convert prochiral ketones or keto acids to the
+corresponding amines with the nitrogen on a chiral carbon
+atom. This enables the production of enantiopure compounds
+by asymmetric catalysis if the reaction proceeds fast enough
+with high product enantioselectivity. This requires not only
+high enzyme activity but also enzyme robustness. Bioprocess
+conditions that should be tolerated include high reactant
+concentrations, the presence of cosolvents to increase reactant
+solubility, high temperature to accelerate reaction rates, and
+general stability to enable enzyme reuse.
+5 Thus, to make TAs
+more suitable for application, improving enzyme stability is of
+key importance.
+6
+Many of the TAs with attractive activities for synthetic
+applications are grouped as class III TAs in the PLP fold-type I
+family of enzymes.
+7 These mostly dimeric enzymes are
+composed of identical subunits, and residues from both
+subunits contribute to the identical active sites. The stability of
+an enzyme of this class was recently improved by engineering
+cofactor binding,
+8 on the basis of the notion that the aminated
+form of the cofactor PMP may be lost from the enzyme active
+site, followed by irreversible denaturation.
+9,10 As in other
+enzymes, subunit dissociation may occur during inactivation.11
+It likely triggers local unfolding and exposure of hydrophobic
+patches which can aggregate, causing irreversible loss of
+activity. Furthermore, subunit dissociation could expose the
+hydrophilic PMP intermediate to solvent, causing cofactor loss.
+This suggests that strengthening intersubunit interactions may
+be used as a way to obtain more stable TAs. In agreement with
+these observations, we were not very successful with initial
+attempts to stabilize the TA used in this report by substituting
+surface-located residues in ﬂexible regions identi ﬁed by
+molecular dynamics simulations.
+To test the hypothesis that interface mutations might
+stabilize TA, we investigated the recently described class IIIω-
+TA from Pseudomonas jessenii (PjTA), which exhibits low
+stability even during storage at room temperature, and we
+compared the eﬀect of surface-located mutations to mutations
+at the subunits interface.PjTA is a homodimeric PLP fold-type
+I enzyme with subunits of 456 amino acids.
+12 The enzyme
+catalyzes the deamination of 6-aminohexanoate, which is the
+ﬁrst intermediate in the bacterial degradation of the industrial
+nylon precursor caprolactam. The structures of the apoenzyme,
+external aldimine with 6-aminohexanoate, and PMP-bound
+enzyme were solved by protein crystallography.
+12
+In recent years, the power of structure-based enzyme
+engineering has grown signiﬁcantly due to the development
+of computer algorithms that can quantitatively predict the
+stability eﬀects of mutations and designed sequences.
+13−16
+Using appropriate scoring functions, amino acid rotamer
+libraries, and search algorithms toﬁnd low-energy solutions,
+computational tools can search for potentially stabilizing
+mutations within the vast sequence space accessible by random
+mutagenesis.
+17 For example, energy calculations with the
+RosettaDesign program were used to identify three variants of
+yeast cytosine deaminase, the apparent melting temperature
+(T
+m
+app) of which was increased by 10°C.18 Another approach
+focused on computational optimization of charge −charge
+interactions on the protein surface, and this method was
+successfully applied to increase theT
+m
+app of acylphosphatase
+and of Cdc42 GTPase by 10 °C.19,20 Lee et al. increased
+stability of β-glucosidase A by 16 °Ci n Tm
+app by the
+computational design of salt bridges.21 Positions for a disulﬁde
+bond were identi ﬁed by MD simulation to improve the
+stability of haloalkane dehalogenase. 22 A combination of
+phylogenetic analysis for enzyme stabilization, usually called
+the consensus approach,
+23−25 and computational methods was
+reported by Bednar et al. (FireProt)26 and Goldenzweig et al.
+(PROSS).27 In this way, the thermostability of a dehalogenase
+was increased by 24°C.26 Stabilization of tetrameric glucose
+dehydrogenases by toward-consensus mutations at subunit
+interfaces was reported by Vázquez-Figueroa et al.,
+28 in one
+case enhancingTm
+app by up to 35°C, although most mutations
+had a small eﬀect. Interface optimization through sequential
+rounds of rational design was described by Bosshart et al.,29
+increasing unfolding temperature of a homodimericD-tagatose
+3-epimerase by 23°C.
+Our group has explored a computational workﬂow called
+FRESCO (framework for rapid enzyme stabilization by
+computational libraries).
+30 Brieﬂy, a large number of
+potentially stabilizing mutations is predicted by folding energy
+calculations and then all possible point mutations areﬁltered
+by high-throughput molecular dynamics (MD) simulations and
+visual inspection to construct a small library. Veri ﬁed
+mutations are combined, giving large increases in stability.
+This strategy has been applied to several enzymes:
+30−37 e.g.,
+the Tm
+app of a monomeric haloalkane dehalogenase and a
+peptide amidase was increased by 23°C with a 10% success
+rate among the tested mutations.31,32
+In this report, we examined the use of the FRESCO
+workﬂow to improve the stability of PjTA. In view of the
+dimeric structure and role of the PLP cofactor, we paid special
+attention to mutations at the subunit interface, as stabilization
+of multimeric enzymes may be achieved by preventing
+dissociation.
+11,28,29 In combination with phylogenetic data,
+we predicted and experimentally conﬁrmed multiple stabilizing
+mutations, mostly at the interface, which were combined to
+obtain two robust variants. The stabilized PjTAs showed
+higher activity at their new higher temperature optima,
+enhanced cosolvent compatibility, and better isopropylamine
+(IPA)-driven conversion of acetophenone to ( S)-1-phenyl-
+ethylamine ((S)-1-PEA). The structural basis of the enhanced
+stability was revealed by protein crystallography.
+■ MATERIALS AND METHODS
+Materials. The chemicals sodium pyruvate, (S)-1-PEA, and
+IPA were purchased from Sigma-Aldrich. Acetophenone was
+obtained from Acros Organics. PLP was purchased from Fisher
+Scientiﬁc. The stain SYPRO Orange was purchased from Life
+Technologies. Other chemicals were of analytical grade purity.
+Computational Design of Stabilizing Mutations. To
+design potentially stabilizing mutations inPjTA, we followed
+the FRESCO protocol.
+30,37 First, we calculated the eﬀects on
+free energy of folding (ΔΔGfold) for point mutations at all
+positions in the protein, substituting with all proteinogenic
+amino acids except cysteine. The X-ray structures used were
+PjTA-apo, the apoenzyme with phosphate bound (6G4C, 1.87
+Å resolution with an R
+free of 0.184); PjTA-as, the apoenzyme
+with succinate bound (6G4B, resolution 1.80 Å,Rfree = 0.203),
+and PjTA-plp, the PLP-bound enzyme (6G4D, 2.15 Å
+resolution, Rfree = 0.261). For each point mutation, the
+ΔΔGfold value was calculated using Rosetta38 with the Row 3
+protocol (options: -ddg::local_opt_only true−ddg::opt_radius
+8.0−ddg::weight_ ﬁle soft_rep_design -ddg::iterations 50-
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2916
+ddg::min_cst false-ddg::mean true-ddg::min false-ddg::sc_mi-
+n_only false-ddg::ramp_repulsive false). The same calculations
+were performed with FoldX
+39 using its standard settings. All
+FoldX calculations were repeated ﬁve times to obtain better
+averaging (Table S4). For both the FoldX and the Rosetta
+protocol, the results over the three dimeric TA structures were
+averaged.
+To eliminate mutations that are unlikely to be stabilizing, we
+used visual inspection of MD trajectories, which is a standard
+part of the FRESCO procedure and described in detail
+elsewhere.
+37 For each mutant, a 3D structure was predicted by
+FoldX using the crystal structure of the wild-typePjTA-plp as
+the template. The modeled structure of each mutant was the
+starting point forﬁve independent YASARA MD simulations40
+of each 100 ps. The visual inspections, which were also
+recently described in detail, result in the dismissal of mutations
+causing solvent exposure of hydrophobic side chains,
+introduction of unsatis ﬁed H-bond donors and acceptors,
+increased ﬂexibility, and other structural problems. Scripts and
+detailed protocols for the FRESCO procedure are available via
+https://groups.google.com/forum/ #!forum/fresco-
+stabilization-of-proteins. Using this procedure, a computation-
+ally designed library of 226 variants was obtained for
+experimental veriﬁcation.
+For the consensus approach, homologues of PjTA were
+searched using Blast and the nonredundant protein database at
+the NCBI. In total 179 homologous protein sequences were
+retrieved and used for multiple sequence alignment (MSA),
+using ConSurf to calculate a consensus sequence.
+41 For each
+position in the sequence, the most abundant amino acid was
+identiﬁed as the consensus amino acid. ThePjTA sequence
+diﬀered at 91 positions from the consensus sequence. The
+structures of all the individual back-to-consensus point
+mutations were visually inspected as described above to
+discard mutations with structural defects. This way, a small
+library with 10 potentially stabilizing point mutations was
+selected.
+Several computational analyses were done independently
+from the selection process of mutants for experimental
+characterization. We examined the use of more stringent
+energetic criteria for mutant selection, similar to the protocol
+published by Bednar et al. under the acronym FireProt.
+26 It
+uses the same FoldX settings as FRESCO (see above) with the
+Row 16 protocol of Rosetta. The prediction accuracy of the
+computationally more expensive Row 16 protocol is
+comparable to that of the Row 3 protocol used for FRESCO
+(for a large benchmark set of mutations with knownΔΔG
+fold
+values the correlation coeﬃcient R was 0.68 for the Row 3
+protocol and 0.69 for the Row 16 protocol).38 The settings for
+this protocol were -ddg::weight_ﬁle soft_rep_design -ddg::it-
+erations 20-ddg::local_opt_o nly false-ddg::min_cst true
+-ddg::mean false -ddg::min tru e-ddg::sc_min_only false-
+ddg::ramp_repulsive true. These settings diﬀer from the Row
+3 protocol (shown above); the Row 16 protocol uses energy
+minimization of the entire protein, while the Row 3 protocol
+performs energy minimization only on amino acid side chains
+that are within 8 Å of the mutated residue.
+B-ﬁtter rankings of potential target positions inPjTA were
+generated according to the manual provided by the Reetz
+group ( http://www.kofo.mp g.de/en/research/
+biocatalysis).
+42,43 The B factors of all non-hydrogen atoms of
+each residue were averaged for each position using the three
+aforementioned X-ray structures. Positions with the highest
+average B factor obtained the highest ranks.
+To evaluate the existence of strain in the wild-typePjTA at
+position Ile154, YASARA-St ructure molecular modeling
+software was used.44 The highest resolution X-ray structure
+of wild-type PjTA (6G4B) was taken. For both subunits,ﬁrst
+the dihedral angle of interest (of Ile154 the following atoms: C,
+Cα,C β, and Cγ1) was measured as well as the total van der
+Waals (Lennard−Jones) energy and dihedral energy of the
+protein. Subsequently, this dihedral was set to the nearest ideal
+value (−60°), after which those energies were measured again.
+The diﬀerence between both energies before and after setting
+the dihedral was reported. The employed force- ﬁeld was
+Amber14.
+45 For the detection of strain eﬀects, the advantage of
+the use of this forceﬁeld is that it has simple separate terms for
+van der Waals (Lennard−Jones) and dihedral energies.
+Genetic Engineering, Enzyme Expression, and Puri-
+ﬁcation. The vector pET-20b (+)-His-PjTA, containing an in-
+frame fusion of thePjTA gene with the ATG start codon, was
+described in our previous work.12 Mutations of PjTA were
+created by QuikChange site-directed mutagenesis. Primers
+were designed by the QuikChange Primer Design Program of
+Agilent Technologies. The mutations were veriﬁed by DNA
+sequencing (Euroﬁns Genomics). For library screening, we
+used small-scale enzyme production. Con ﬁrmed mutated
+plasmids were transformed into E. coli BL21(DE3) for
+expression. Single colonies were picked and grown overnight
+in 96-deep-well plates. Next, the cultures were transferred to
+24-deep-well plates containing Terriﬁc Broth (TB) medium
+with 100μg/mL ampicillin and growth was continued at 37°C
+until the OD
+600 value reached 0.6. Then the cultures were
+cooled to 24°C and IPTG was added to a concentration of 1
+mM. After further growth at 24°C for 16 h, the cells were
+harvested by centrifugation at 3000g for 30 min and the pellets
+were washed and suspended with lysozyme solution (1 mg/mL
+lysozyme, 0.5 mg/mL DNase, 10 mM MgCl
+2, 20 mM Tris-
+HCl, 150 mM NaCl, 20μM PLP, pH 7.5). The suspensions
+were kept at−80 °C for 45 min and thawed under tap water to
+disrupt the cells. The plates were centrifuged at 3000g for 45
+min at 4 °C, and some of the supernatant was used to
+determine enzyme production by SDS-PAGE. The remainder
+of the supernatants was loaded on AcroWell 96-well ﬁlter
+plates (Pall, USA) containing TALON metal a ﬃnity
+chromatography resin (Clontech, USA). Elution was con-
+ducted with buﬀer containing 20 mM Tris-HCl, 150 mM
+NaCl, 500 mM imidazole, and 20 μM PLP, pH 7.5. The
+desalting step was done with a multiwell gravity column PD
+MultiTrap G-25 (GE, U.K.) to remove imidazole. Enzymes
+were stored in buﬀer (50 mM potassium phosphate, pH 8.0) at
+−20 °C until use.
+Selected promising variants were expressed and puriﬁed on a
+larger scale. After inoculation and overnight growth of
+precultures, the cells were transferred to 500 mL of TB
+medium (100 μg/mL ampicillin) and cultures were shaken at
+37 °C. When the OD
+600 value reached 0.6, the temperature was
+lowered to 24°C, and induction was started by addition of 1
+mM of IPTG. After 16 h of growth the cells were collected at
+7000g for 30 min and the pellets were washed and suspended
+in buﬀer (20 mM Tris-HCl, 500 mM NaCl, 20μM PLP, pH
+7.5). After sonication (15 min, 5 s intervals), the lysate was
+centrifuged at 36000g for 45 min at 4°C. The supernatant was
+loaded onto a 5 mL HisTrap column (GE Healthcare,
+Sweden) and the enzyme was isolated with an AKTA puriﬁer
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2917
+using a linear gradient of 0 to 500 mM imidazole in buﬀer.
+Fractions containing the enzyme as judged by SDS-PAGE were
+pooled and desalted in phosphate buﬀer (50 mM potassium
+phosphate, pH 8.0) with Econo-Pac 10DG columns (Bio-Rad,
+USA). The purity was checked by SDS-PAGE, and the protein
+was quantiﬁed with the Bradford assay. Puriﬁed enzymes were
+stored in aliquots at−80 °C in 50 mM potassium phosphate,
+pH 8.0.
+Thermal Shift Assays. T
+m
+app values were determined by
+the ﬂuorescence-based Thermoﬂuor assay.46 Speciﬁcally, 5 μL
+of 50-fold diluted SYPRO orange and 20μL of 0.5 mg/mL
+enzyme solution were placed in an IQ 96-well PCR plate (Bio-
+Rad, USA) and mixed thoroughly in the wells. The plates were
+sealed with Microseal B adhesive sealer (Bio-Rad, USA) and
+heated from 20 to 99°C in a MyiQ real-time PCR machine
+(Bio-Rad, USA) with a linear gradient of increasing temper-
+ature (1 °C/min). The temperature at the maximum rate of
+ﬂuorescence change (dRFU/dT) was taken asT
+m
+app.47
+Activity Assays and (S)-1-PEA Synthesis. TA activities
+were measured by following the formation of acetophenone
+from (S)-1-PEA at 37°C in 96-well MTP format. The reaction
+mixtures contained the substrates (S)-1-PEA and pyruvate at
+varying concentrations, 0.05 mM PLP, and 0.02 mg/mL of
+puriﬁed enzyme in 50 mM potassium phosphate buﬀer, pH
+8.0. The formation of acetophenone was detected at 245 nm
+(extinction coeﬃcient 12 mM
+−1 cm−1).48
+The synthesis of ( S)-1-PEA from acetophenone was
+conducted at a concentration of 1 M IPA as amino donor
+and 20 or 100 mM acetophenone in 50 mM potassium
+phosphate, pH 8.0, containing 20% DMSO, 0.5 mM PLP, and
+1 mg/mL of enzyme. Reactions were done at the enzyme’s
+temperature optimum. The formation of ( S)-1-PEA was
+measured by HPLC. Samples from reaction mixtures with
+enzymes were quenched by adding half a volume of 10%
+perchloric acid to samples taken at diﬀerent reaction times, and
+precipitates were removed by centrifugation. Next, 200μLo f
+the supernatant of each sample was transferred to an HPLC
+vial for analysis. The formation of (S)-1-PEA was analyzed
+using a Crownpack CR (+) column (Daicel, Japan) with 0.6
+mL/min perchloric acid (pH 1.5) for elution and detection at
+210 nm.
+49 Under these conditions, (S)-1-PEA eluted at 21 min
+with clear separation from (R)-1-PEA (27 min).
+Crystal Structures.PjTA variants R4 and R6 were further
+puriﬁed by size exclusion chromatography using a Super-
+dex200 10/300 column (GE Healthcare, Sweden), equilibrated
+with 20 mM HEPES, pH 7.5, 100 mM NaCl, and 20μM PLP.
+The puriﬁed enzymes were concentrated to∼10 mg/mL using
+a Vivaspin Turbo 4 10Kﬁlter unit (Sartorius). Hanging drop
+vapor diﬀusion experiments were set up in 24-well LINBRO
+plates (Molecular Dimensions Ltd.) by mixing 1 μL of the
+protein solution with 1μL of the reservoir solution containing
+0.7−1.0 M sodium succinate, pH 7.6, similarly as used
+previously for crystallizing the wild-typePjTA.
+12 Single PjTA
+R4 crystals appeared after 2 days and grew to an average size of
+0.3 × 0.3 × 0.2 mm
+3. Their yellow color indicated that PLP
+was bound. Large single yellow crystals were also obtained for
+R6 (average size 0.5× 0.4 × 0.2 mm
+3) but required a lower
+protein concentration of 5 mg/mL. Prior to data collection,
+crystals were soaked in a cryoprotectant solution containing
+1.2 M succinate, pH 7.6, 0.1 mM PLP, and 30% glycerol. X-ray
+diﬀraction data for R4 were collected in house using Cu Kα
+radiation from a Bruker Microstar rotating-anode generator
+equipped with Helios MX mirrors. For R6, X-ray diﬀraction
+data were collected at beamline ID30A-3 at the European
+Synchrotron Radiation Facility (Grenoble, France). The
+diﬀraction data for R4 and R6 were indexed and integrated
+using iMOSFLM
+50 and XDS,51 respectively, and then scaled
+and merged using Aimless52 from the CCP4 software suite.53
+The crystals of R4 and R6 belonged to the same space group as
+for wild-type PjTA, with nearly identical unit cell dimensions,
+allowing the wild-type crystal structure (PDB entry 6G4B) to
+be directly used for initial reﬁnement and electron-density map
+calculations. Subsequently, the structures were adjusted by
+model building to replace the side chains of the mutated
+residues. A few cycles of re ﬁnement using RefMac5,
+54
+alternated with model building and water placement using
+Coot,55 were suﬃcient to complete the structures. A summary
+of data collection and model reﬁnement statistics is provided in
+Table S1. Figures were produced with PyMol.56
+■ RESULTS AND DISCUSSION
+Computational Library Design.In view of the instability
+of dimeric class III TAs 9 and the importance of enzyme
+robustness for biocatalytic applications, we investigated the
+possibility to enhance the stability of the homodimericPjTA
+by protein engineering. For this we chose the FRESCO
+workﬂow, which was used earlier by us and others to increase
+the thermostability of dimeric limonene epoxide hydrolase
+(ΔT
+m
+app =3 5 °C),30 monomeric haloalkane dehalogenase
+(ΔTm
+app =2 3 °C),31 monomeric peptide amidase (ΔTm
+app =
+23 °C),32 monomeric xylanase ( ΔTm
+app =1 4 °C),33
+monomeric HMF oxidase (ΔTm
+app =1 1 °C),34 monomeric
+cyclohexanone monooxygenase (ΔTm
+app =1 3 °C),35 and a
+tetrameric halohydrin dehalogenase (ΔTm
+app =2 8°C).36 First,
+all possible point mutations were subjected to folding energy
+calculations. FoldX and Rosetta predicted 385 and 883
+potentially stabilizing point mutations (ΔΔG
+fold < −2.5 kJ/
+(mol subunit)), respectively, with some overlap. To further
+computationally enrich this virtual library, all 1028 diﬀerent
+mutants substituted at 222 diﬀerent positions were subjected
+to MD simulations and brief on-screen inspection. Discarding
+mutants with structural defects or increased local ﬂexibility
+yielded a reduced virtual library of 226 point mutations at 114
+diﬀerent positions which qualiﬁed for experimental testing.
+This set included 20 buried mutations, 172 surface mutations,
+32 interface mutations, and 2 mutations located at both the
+surface and the interface (Table S2).
+After multiwell plate format QuikChange mutagenesis and
+transformation to E. coli BL21(DE3), 204 of the 226
+sequenced mutants gave expression of enzyme in soluble
+form as shown by SDS-PAGE. For the 22 other sequence-
+veriﬁed variants, the gels showed that no target protein was
+produced and also no signal was found in Thermoﬂuor assays
+after His-tag puri ﬁcation in multiwell format. We initially
+tested a set of surface-located mutations, hoping toﬁnd useful
+variants, but the stabilizing eﬀect was small. When all 204
+expressed mutants were tested, 29 signiﬁcantly stabilizing point
+mutations were discovered in Thermoﬂuor assays (ΔT
+m
+app ≥
++1 °C, from triplicate assays) and these were distributed over
+16 diﬀerent positions (Table 1). Of the conﬁrmed stabilizing
+mutations, 17 were located at the subunit interface and 10
+mutations were located at the surface; 2 additional mutations
+(E74I and N78K) were located at the border of the surface and
+the interface. These numbers show that of the 172 predicted
+surface mutations that were not at the interface, only 6% were
+stabilizing, whereas of the selected 34 interface mutations, 56%
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2918
+improved thermostability. Moreover, the degree of stabilization
+by surface mutations was modest (+1°C ≤ ΔTm
+app <+ 3°C),
+except for mutation E74I (+5.5°C), which is partially at the
+interface. The interface mutations caused a much larger
+increase in stability, with 74% of the interface-located
+stabilizing mutations giving ΔT
+m
+app ≥ +3 °C( Figure 1).
+Thus, interface point mutations stabilizedPjTA much better
+than surface mutations, which conﬁrms the hypothesis that
+subunit interactions are crucial to TA stability.
+These results indicate that mutations stabilizing the interface
+can be rapidly discovered by computational design. The high
+abundance (56%) of experimentally con ﬁrmed stabilizing
+mutations in a small set of only 34 interface mutants suggests
+that, for proteins where stability is due to subunit dissociation,
+it is possible to strongly reduce the library size for experimental
+testing in comparison to usual random directed evolution
+protocols. The high success rate also compares favorably to
+that of FRESCO mutations which are selected without
+focusing on suspected sensitive regions (success percentages
+of ca. 10−20% for 8 diﬀerent proteins including the current
+target (Table S3)). This suggests that focusing on sensitive
+regions in computational thermostability engineering can
+strongly reduce laboratory screening.
+For PjTA it transpires that the interface is far more relevant
+for stabilization than other areas and the most stabilizing
+mutation G98M (+4°C) ofω-TA fromVariovorax paradoxus
+was also at the interface.
+57 However, this is not a general
+phenomenon for multimeric enzymes. For example, for a
+tetrameric halohydrin dehalogenase two critical regions were
+observed.
+36 One of these critical regions was indeed at a
+subunit interface, but the other equally important region was at
+the surface. In a dimeric limonene epoxide hydrolase that was
+also targeted by FRESCO, several of the most stabilizing
+mutations were also not at the interface.
+30 Focusing exclusively
+on the subunit interfaces in those enzymes would have missed
+many strongly stabilizing mutations.
+With other methods, it also remains challenging to predict
+the region that is critical for thermostability. A well-known
+approach is theB-ﬁtter method, which predicts critical residues
+on the basis of high B factors.
+42,43 However, in the case of
+PjTA, only 1 out of the 16 positions where stabilizing
+mutations were observed showed a signiﬁcantly high B factor
+in the wild-type crystal structures (Table S2). Thus, most of
+these mutations would escape discovery by the B-ﬁtter
+approach for stability engineering. After averaging and ranking
+of B factors in the wild-type crystal structures, only E38K/Q
+(T
+m
+app = 1.5/2.0 °C) had a high ranking according to itsB
+factor (rank 25). All other stabilizing residues with the highest
+B factor appeared after the 30th rank, which is outside the
+proposed threshold.
+43 Nevertheless, focusing on highB factor
+regions did yield mutations that improve the stability of
+Chromobacterium violaceumTA (CvTA).
+58 For the one enzyme
+that has been improved both by FRESCO and by theB-ﬁtter
+approach (halohydrin dehalogenase), the two approaches
+found diﬀerent stabilizing mutations,
+36,59 indicating that they
+may be complementary.
+Unlike in earlier work with FRESCO, we averaged the
+results of the FoldX and Rosetta calculations obtained with
+three diﬀerent X-ray structures instead of taking results from a
+Table 1. Stabilizing Point Mutations Discovered inPjTA
+mutation location origin ΔΔGfold (kJ/mol)a ΔTm
+app (°C)b
+P9A surface Rosetta −4.3 2
+P9K surface Rosetta −7.4 1.5
+E38K surface Rosetta −9.9 1.5
+E38Q surface Rosetta −5.5 2
+A60V interface consensus 4
+E74I surface,
+interface
+FoldX,
+Rosetta
+−7.8, −11.2 5.5
+N78K surface,
+interface
+Rosetta −4.1 1
+F86W interface Rosetta −12.9 4
+S87D interface FoldX −3.0 7
+S87H interface Rosetta −15.1 1
+S87N interface FoldX,
+Rosetta
+−4.1, −9.9 1.5
+S87Q interface FolX,
+Rosetta
+−3.8, −4.8 1
+K89A interface Rosetta −4.4 2
+K89F interface FoldX,
+Rosetta
+−6.2, −19.0 6
+K89L interface FoldX −7.4 4.5
+K89M interface FoldX −3.7 3.5
+K89W interface Rosetta −15.9 3.5
+K89Y interface Rosetta −16.6 4
+S94A interface Rosetta −9.4 8
+S110Q surface FoldX,
+Rosetta
+−3.8, −4.7 1
+M128F interface FoldX,
+Rosetta
+−5.0, −15.5 4.5
+P139 K surface Rosetta −3.2 1
+N149G surface FoldX −3.0 2.5
+I154D interface Rosetta −3.2 4
+I154N interface Rosetta −7.0 3.5
+I154V interface Rosetta,
+consensus
+−10.3 9
+L227V surface consensus 1
+L319F interface FoldX,
+Rosetta
+−6.9, −4.9 4
+A393R surface FoldX −3.9 1.5
+M419I surface Rosetta −6.2 1
+M419L surface Rosetta −4.2 1.5
+aThe ΔΔGfold energies are calculated by FoldX and/or the Rosetta
+Row 3 protocol; values are per monomer.bThe ΔTm
+app value of wild-
+type PjTA (WT) is 62°C.
+Figure 1. Spatial distribution of PjTA point mutations inﬂuencing
+thermostability. The colored spheres indicate the highest positive
+ΔT
+m
+app observed at a position. Yellow spheres indicate that no
+stabilization was observed.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2919
+single structure. A retrospective analysis showed that 3 out of
+the 31 stabilizing mutations could have been missed if only a
+single input structure were used: I154D with 6G4B and P9A
+and P139K with 6G4C. These substitutions just fail the chosen
+threshold of−2.5 kJ/(mol subunit) for experimental character-
+ization (Table S4). Template selection and averaging can
+inﬂuence calculated ΔΔGfold values and mutant selection,
+although the eﬀect was small in this case.
+Another approach to reduce the number of computationally
+designed mutations that need to be screened experimentally is
+the use of stricter criteria for predictedΔΔGfold values, as in
+the Fireprot protocol.26 Our standard protocol usesΔΔGfold ≤
+−2.5 kJ mol−1 per subunit for both FoldX and Rosetta. When
+only mutations were accepted withΔΔGfold ≤− 4.184 kJ mol−1
+for FoldX and ΔΔGfold ≤− 8.368 kJ mol −1 for Rosetta
+(FireProt criteria), only 28 instead of 226 mutations would
+qualify for experimental testing. Of those 28, 5 were indeed
+stabilizing (Table S2). The stricter energy criteria only slightly
+improved the fraction of successful mutations (from 14 to
+17%), and the smaller set of 28 still included mutations that
+decrease thermostability. It should be noted that FoldX and
+Rosetta predict ΔΔG
+fold at ambient temperature and not
+ΔTm
+app, which is far more diﬃcult to model and is not strongly
+correlated to ΔΔGfold.
+We also explored the use of consensus mutations to stabilize
+PjTA. First, we used Blast searches to ﬁnd homologues of
+PjTA in the nonredundant protein database of the NCBI, and
+179 diﬀerent sequences were chosen. A consensus sequence,
+obtained by ConSurf,41 diﬀered from PjTA at 91 positions.
+After point mutants with structural defects were discarded by
+visual inspection, a small library containing 10 potentially
+stabilized mutants was constructed and their stabilities were
+measured in the laboratory (Table S5). This yielded three
+conﬁrmed stabilizing mutations (all withΔT
+m
+app ≥ +1 °C; see
+Table 1), one of which was at the surface and two were at the
+interface. The interface mutation I154V is one of only two
+mutations shared between the FRESCO library and the
+consensus set, and with +9°C it gave the largestΔTm
+app value.
+Other stabilizing mutations are not shared, and about half of
+the mutations found by FRESCO are neither at positions that
+are strongly conserved among a set of 226 homologous TAs
+nor at positions wherePjTA deviates from strongly conserved
+residues in the consensus sequence, as indicated by ConSurf
+calculations (Figure S5). The results of comparing diﬀerent
+strategies for enzyme stabilization will be strongly dependent
+on the way strategies are implemented and on the particular
+system under investigation. In the case of TAs we expect that
+the structure-based design of small libraries focusing on
+Figure 2.ΔTm
+app values and catalytic activities ofPjTA variants containing interface-stabilizing mutations. Activities were determined by measuring
+acetophenone formation from (S)-1-PEA with pyruvate as the amino acceptor (seeMaterials and Methods). WT had an activity of 13 U/mg (1 U
+equals 1 μmol/min). WT is shown as a green bar. The I154V mutants served as a template for adding mutations.
+Figure 3.Catalytic activities andΔTm
+app values ofPjTA double mutants. Activities were determined by measuring acetophenone formation from
+(S)-1-PEA with pyruvate as the amino acceptor. WT is shown as a green bar. Double mutants shown in red were selected as templates for further
+combination mutants.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2920
+mutations that stabilize the interface will be particularly
+eﬀective.
+Since most of the eﬀective mutations are at the subunit
+interface and are close to the active site, there was a risk that
+they reduce activity or show antagonistic eﬀects. When the
+eﬀect of the individual stabilizing interface mutations on
+catalytic activity at 37°C was examined, it appeared that most
+of them indeed gave somewhat lower activity in comparison to
+wild-type PjTA ( Figure 2 ). Gratifyingly, we also found
+interface mutations that strongly enhanced catalytic activity:
+i.e., K89F, S87N, M128F, L319F and I154V (Figure 2). I154V
+was especially eﬀective, as it increased the activity by a factor of
+3.5 and had a large positive eﬀect on T
+m
+app. Stabilizing the
+subunit interface not only increased stability but could also
+improve activity.
+Combining Stabilizing Mutations.In order to engineer
+a highly stable PjTA, we rationally combined con ﬁrmed
+stabilizing mutations. Some interface mutations that enhanced
+stability but lowered activity were included, since it was
+considered that the activity could be recovered when
+mutations were combined. In the case of diﬀerent stabilizing
+mutations at the same position, the mutation giving the most
+favorable eﬀect onΔT
+m
+app was selected. For example, mutation
+I154V, which gave +9 °C and 3.5-fold greater activity, was
+prioritized over I154N and I154D ( Figure 2). The I154V
+mutation was included in all combination mutants. For
+position Ser87, variant S87D gave the bestΔT
+m
+app value (+7
+°C) and S87N was the best for activity (1.2-fold increase);
+therefore, both were examined in combinations. Finally, nine
+interface stabilizing mutations, eight surface mutations, and
+two mutations that were partially at the interface were selected
+for combination.
+On examination ofPjTA variants carrying diﬀerent pairs of
+stabilizing mutations, it a ppeared that most mutations
+combined well with I154V, yielding several double mutants
+with ΔT
+m
+app value of +9 to +17 °C, with the exception of
+I154V + S110Q, which only displayed a 2°C increase (Figure
+3). In addition, activities improved by up to 5.4-fold over wild-
+type PjTA. The only less active double mutant was I154V +F
+86W (Figure 3). After it was shown that this combination
+strategy is feasible, 8 double mutants with decent activity and
+improved stability (I154V + E38Q, I154V + S87N, I154V +
+A60V, I154V + P9A, I154V + K89F, I154V + S87D, I154V +
+M128F and I154V + F86W) were selected as templates for
+introducing further mutations, resulting in triple mutants, 4-
+fold mutants, 5-fold mutants, and 6-fold mutants (Figures S1−
+S4). This yielded 27 diﬀerent mutants with improved activity
+and stability.
+From the set of combination mutants, six variants each with
+four to six mutations were selected for temperature−activity
+proﬁling, since it was considered possible that activity in some
+variants would be lower at the standard assay temperature of
+37 °C but would improve at higher temperatures. For all six
+variants, the optimum temperature was increased, reaching
+values of 60−70 °C for some mutants, about 20−30 °C higher
+than the wild-type PjTA optimum temperature (37 °C)
+(Figure 4). The activities at the new optimal temperatures of
+the robust mutants R4 (P9A + E38Q + S87D + I154V), R5
+(P9A + E38Q + A60V + S87D + I154V) and R6 (P9A + E38Q
++ A60V + S87N + M128F + I154V) were up to 5-fold higher
+than the wild-type activity at 37°C( Table 2). There was a 6.8-
+fold diﬀerence in activity at 37°C between mutants R4 and
+R6, while their activities were almost the same at their
+respective optimum temperatures, pointing to quite diﬀerent
+temperature dependences. Furthermore, the individual muta-
+tions of these two variants clearly showed additive eﬀects on
+ΔT
+m
+app when they were combined. Therefore, these two robust
+PjTA variants R4 and R6 were selected for further study
+(Table 2).
+The Tm
+app values of R4 and R6 (80 and 85°C measured by
+thermal shift assays) are in the range of values (Tm
+app >8 0°C)
+observed for enzymes from thermophilic organisms. 60 The
+impressive thermostability of the combination mutants and
+prominence of stabilizing interface mutations suggest that
+subunit dissociation is an important step in the irreversible
+inactivation pathway.
+29 It has been proposed by Börner et al.9
+for three diﬀerent TAs that dissociation from the enzyme of
+the aminated cofactor PMP formed in theﬁrst half reaction
+(Scheme 1) is a key step in activity loss, and strengthening of
+cofactor binding indeed enhanced stability.8 In PjTA, loss of
+the PLP or PMP cofactor will require dissociation of the dimer
+or partial protein unfolding, since the cofactor is buried
+between the two monomers and the phosphate group of each
+cofactor is bound by both subunits (Figure S6). Enhanced
+cofactor binding and increasing dimer stability are compatible
+mechanisms.
+Stabilized PjTAs Have Higher Activity, Thermo-
+stability, and Cosolvent Resistance.The catalytic proper-
+ties of R4 and R6 were determined by initial rate assays in
+which (S)-1-PEA was used as the amino donor and pyruvate as
+the amino acceptor (Table 3). With these substrates, both
+stabilized variants showed a 4−5-fold higher k
+cat value than
+wild-type PjTA at their optimum temperatures, while theKM
+values for ( S)-1-PEA and pyruvate were both slightly
+increased. The kcat/KM values at their optimum temperatures
+were improved in comparison to wild-typePjTA, for both the
+amino donor and acceptor. With a higherkcat and lower KM,
+variant R6 was slightly better for (S)-1-PEA conversion than
+R4.
+To further examine the robustness of the selected mutants,
+the stabilities at high temperature were measured. The
+enzymes were incubated at di ﬀerent temperatures (30 −80
+°C) for 2 h. After they were cooled for 5 min at 4°C, samples
+were withdrawn for activity assays at their optimum temper-
+atures. From 30 to 40°C, no diﬀerence in stability was found
+between wild-typePjTA and mutants (Figure 5). Interestingly,
+during incubation at 30 °C for 2 h, the activities of both
+mutants increased, which may be due to enzyme refolding.
+Above 40 °C both the R4 and R6 variants were more stable
+than wild-type PjTA, and the activities of the mutants only
+dropped slightly until 70 °C. For the wild-type PjTA, no
+Figure 4.Temperature−activity proﬁle of WT and stabilized variants
+of PjTA. Activities were determined by measuring acetophenone
+formation from (S)-1-PEA with pyruvate as the amino acceptor.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2921
+activity was found with enzyme incubated at 60°C or higher.
+Mutant R6 was always slightly more stable than R4. The
+increased stability observed in these thermal shock assays for
+R4 and R6 correlated with the enhancedTm
+app values obtained
+from thermal shift assays (Table 3).
+Another important aspect of enzyme robustness is stability
+in the presence of organic solvents. Two often-used organic
+solvents were examined, dimethyl sulfoxide (DMSO) and
+methanol. The variants R4 and R6 were incubated with 20%
+cosolvent at 30°C. After 2 h, samples were withdrawn to assay
+for ( S)-1-PEA deamination at the respective optimum
+temperatures in buﬀer without additional solvent. We found
+almost no activity loss with the stable variants (Figure 6A). In
+contrast, the wild-typePjTA activity dropped by approximately
+48% and 20% after 2 h incubation with 20% DMSO and 20%
+methanol, respectively.
+In view of the robustness of R4 and R6 in DMSO and
+methanol, deamination reactions were also conducted in the
+presence of 20% cosolvent. Both R4 and R6 were much more
+active than wild-typePjTA, the highest activity being observed
+for R6 (Figure 6B). We also found that methanol is a more
+suitable cosolvent for deamination reactions in comparison to
+DMSO, for both variants as well as for wild-typePjTA.
+Table 2. Properties of Selected StabilizedPjTA Variants
+speciﬁc activity (U/mg)
+variant mutations optimum temp ( °C) 37 °C temp opt Tm
+app (°C) PDB
+WT 37 13 ± 0.1 13 ± 0.1 62 6G4B-F
+R1 P9A + E38Q + S87D + M128F + I154V 70 2.7 ± 0.1 14.5 ± 0.2 86
+R2 P9A + E38Q + S87N + M128F + I154V 70 1.8 17.7 ± 0.8 86
+R3 P9A + E38Q + A60V + S87D + M128F + I154V 70 6.7 ± 0.1 32.5 ± 18 6
+R4 P9A + E38Q + S87D + I154V 60 37.7 48 ± 1.7 80 6TB0
+R5 P9A + E38Q + A60V + S87D + I154V 60 24.8 ± 0.1 47.2 ± 1.2 81
+R6 P9A + E38Q + A60V + S87N + M128F + I154V 70 5.5 ± 0.1 47.7 ± 0.2 85 6TB1
+Table 3. Kinetic Properties of WT and Two Stabilized Variants
+(S)-1-PEA pyruvate
+enzyme Tm
+app (°C) kcat (s−1) KM (mM)a kcat/KM (mM−1 s−1) KM (mM) kcat/KM (mM−1 s−1)
+WT 62 12.7 ± 0.1 9.6 ± 1.2 1.4 ± 0.1 4.4 ± 0.5 3.0 ± 0.3
+R4 80 56.7 ± 1.0 13.1 ± 1.6 4.4 ± 0.6 10.6 ± 1.6 5.5 ± 0.9
+R6 85 58.2 ± 0.8 11.5 ± 1.7 5.2 ± 0.8 13.5 ± 1.8 4.4 ± 0.6
+aInitial rates were determined by measuring acetophenone formation with varying concentrations (0−32 mM) of (S)-1-PEA as the amino donor
+and 50 mM pyruvate as the amino acceptor or with 50 mM (S)-1-PEA as the mino donor and varying concentrations (0−32 mM) of pyruvate as
+the amino acceptor.
+Figure 5.Comparison of thermal stabilities of WT and thermostable
+variants R4 and R6. Enzymes were incubated at the indicated
+temperatures for 2 h, and the assays were carried out after dilution of
+the enzymes in the buﬀer (50 mM potassium phosphate, pH 8.0).
+Activities were determined by measuring acetophenone formation
+from (S)-1-PEA with pyruvate as the amino acceptor. The remaining
+activity was measured at the optimum temperature of each individual
+variant.
+Figure 6.Enhanced stability ofPjTA variants in cosolvents. The remaining activity was measured at the optimum temperature of each individual
+variant. (A) Residual (S)-1-PEA deamination activity after incubation with DMSO or methanol as cosolvent (20% v/v) of wild-typePjTA and
+variants R4 and R6. The enzymes were preincubated at 30°C in cosolvents for 2 h prior to assays. The assays were carried out after dilution of the
+enzymes in cosolvent-free buﬀer. (B) Eﬀect of cosolvents on (S)-1-PEA deamination activities. Activities were measured in the presence of 20%
+cosolvent.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2922
+The stability increases makePjTA a highly robust enzyme,
+also in comparison with the well-studied dimericω-TAs from
+C. violaceum (CvTA) and Vibrio ﬂuvialis (Vf TA). Whereas
+wild-type PjTA seems more unstable than some of its
+homologues, the R4 and R6 mutants ofPjTA have surpassed
+other ω-TAs in stability. Engineered homotetramericPseudo-
+monas sp. ω-TA, investigated by Börner et al.,9 still had lost
+activity after a 2 h incubation at 62°C, while R4 and R6 were
+still active (Figure 5). Similarly, no activity loss was found for
+R4 and R6 upon incubation for 2 h in 20% DMSO or 20%
+methanol ( Figure 6 A), whereas thermostable ω-TA from
+Thermomicrobium roseum (ω-TATR) retained only about 50%
+or 75% activity, respectively.60
+Increased IPA Tolerance in Amine Synthesis.In view
+of the stability of R4 and R6, we also examined the tolerance to
+a high concentration of IPA, a preferred cheap amino donor for
+ω-TA-catalyzed reactions.61,62 Tolerance is important because
+IPA needs to be used in excess over the acceptor for the
+eﬃcient production of amines, especially in case of unfavorable
+reaction equilibria. To determine the tolerance of the R4 and
+R6 variants, reactions were done with an IPA concentration of
+1 M, which is 50-fold higher than the concentration of the
+amino acceptor acetophenone. After 20 h of incubation at each
+optimum temperature, the conversions of acetophenone to
+(S)-1-PEA were 84% and 93% for R4 and R6, respectively, in
+comparison to 35% conversion with the wild-type PjTA
+(Figure 7A). The initial rates were higher for the mutants, in
+the case of both R4 (60μM/min) and R6 (63μM/min), in
+comparison to wild-type PjTA (20 μM/min). Thus, the two
+robust mutants accepted IPA better as an amino donor and
+gave a 2.5-fold increase in yield. The enantioselectivities were
+not changed (ee >99%, for both wild-typePjTA and the two
+variants). Mutants of a TA fromRuegeria sp. TM1040 (PDB:
+3FCR) that show very good conversion of acetophenone and
+2-bromoacetophenone were reported by Dawood et al.
+63 In
+that case, three to four mutations were introduced in the active
+site to enhance activity in reactions with IPA as the amino
+donor. The improvement may be related to better acceptance
+of the ketone substrate, reducing the lifetime of the vulnerable
+PMP-enzyme intermediate in the catalytic cycle. Reduced
+dissociation of the PMP-enzyme was also proposed for the
+transaminase mutants engineered by Börner et al.
+8,9 Thus,
+three ways of improving TAs for better ketone or aldehyde to
+amine conversion with IPA as amine donor emerge: reducing
+dissociation of the native enzyme assembly into subunits,
+enhancing binding of the PLP cofactor, and improving the
+binding and reaction of the ketone or aldehyde amine acceptor.
+To further verify the robustness of R4 and R6, the amination
+reaction was also conducted with cosolvents. In the reaction,
+the amino donor IPA was kept at 1 M and 100 mM
+acetophenone substrate was dissolved with 20% DMSO. After
+a 20 h reaction time, the conversions of acetophenone to (S)-
+1-PEA were 75% and 92% for R4 and R6, respectively, in
+comparison to 24% conversion with the wild-type PjTA
+(Figure 7B). Thus, the performance of two robust variants was
+indeed better with cosolvents. Especially for R6, the fraction of
+conversion remained the same even though the substrate
+concentration was 5-fold higher.
+Crystal Structures of Robust PjTA Variants. To
+understand the structural basis of the enhanced thermostability
+and to assess the reliability of the computational prediction
+methods, structures were determined for the R4 and R6
+variants. The crystal structures were re ﬁned to 1.95 Å
+resolution with an R factor of 0.139 (R
+free = 0.172) for R4
+and to 1.85 Å resolution with anR factor of 0.144 (Rfree =
+0.173) for R6. Both crystal structures contain the PLP cofactor
+as an internal aldimine, covalently linked to Lys287. They have
+good stereochemistry, and no signi ﬁcant di ﬀerences were
+observed in overall backbone conformation between the wild-
+type and mutant PjTA structures. All mutated residues
+displayed well-deﬁned electron density, allowing unambiguous
+assignment of their side-chain conformations and a clear
+analysis of interactions with neighboring residues.
+Mutation P9A, present in both variants, is located at the N-
+terminus of a shortα-helix (Figure 8A,B). The experimental
+and predicted structures for this mutation are in excellent
+agreement, revealing no signiﬁcant diﬀerences in local protein
+structure. The mutation occurs at the second residue
+composing the α-helix (α1), located at the N-terminus of
+the protein. The hydrophobic side chain of Pro9 is fully
+exposed to solvent, and its substitution with a small methyl
+group is expected to improve protein surface solvation.
+Furthermore, unlike the amide group of Pro9, the backbone
+amide group of Ala9 is able to form a hydrogen bond with
+water, as is evident from the crystal structures of R4 and R6.
+Thus, the improvement in stability of the P9A mutation is
+explained by a combination of reduced exposed hydrophobic
+surface and improved protein−water interactions.
+Mutation E38Q also occurs at the protein surface. In the
+crystal structures of the mutants, residue Gln38 adopts a side
+chain rotamer diﬀerent from that predicted (Figure 8C,D), but
+Figure 7. Conversion of acetophenone to (S)-1-PEA by WT and the two robust variants R4 and R6. In all cases, the concentration of the IPA
+amino donor was 1 M, the PLP concentration was 0.5 mM, and enzymes were added at 1 mg/mL. The reactions were measured at the optimum
+temperature of each individual variant. (A) Initial concentration of acetophenone 20 mM. (B) Initial concentration of acetophenone 100 mM with
+20% DMSO.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2923
+in both conformations the side chain forms a hydrogen bond
+with the hydroxyl group of Tyr43. In the wild-type crystal
+structure, residue Glu38 due to a salt bridge with Arg36 does
+not form hydrogen bonds with neighboring residues, so that
+the enhancement in stability can partially be explained by
+improved hydrogen-bonding interactions on the surface. In
+addition, the removal of the negative charge by the E38Q
+mutation reduces unfavorable electrostatic interactions on the
+protein surface (Figure 8E), which may also contribute to
+better protein stability.
+17
+Mutation A60V was obtained by the consensus approach. In
+comparison to the alanine residue in the wild-type structure,
+Val60 in the R6 crystal structure forms additional apolar van
+der Waals contacts with the side chains of Phe64 and Phe82′;
+the latter are not present in the wild type. The stabilizing eﬀect
+of the mutation can thus be attributed to improved
+hydrophobic packing interactions of side chains at or near
+the dimer interface.
+For mutation M128F, occurring only in R6, the experimental
+and predicted structures are in excellent agreement. The
+improvement in stability is clearly related to the new T-shaped
+π−π interaction between Phe128 and Phe113 (Figure 9A).
+The contribution to stability of the Ser87 mutants (S87D in
+R4, S87N in R6) is related to improved contacts at the dimer
+interface. In the R4 crystal structure, the side chain of Asp87
+shows alternate conformations. In one of the conformations
+the carboxylate forms a salt bridge with Arg417′, similar to the
+salt bridge in the predicted structure of the S87D mutant
+(Figure 9B). The formation of a salt bridge at the dimer
+interface is consistent with the signiﬁcant increase inT
+m
+app for
+this mutation. Also, Asn87 in the R6 crystal structure interacts
+with Arg417′, but via a hydrogen bond (Figure 9C), which is
+normally a weaker interaction, consistent with the smaller
+increase inT
+m
+app for mutation S87N. In the predicted structure
+containing the S87N mutation, the side chain of Arg417 ′
+points away from Asn87 toward the active site. In this
+conﬁguration the Arg417′ guanidinium group is exposed to
+solvent. This indicates that the small improvement in stability
+for S87N could also be due to improved solvation of the
+Arg417′ side chain. Diﬀerences in interactions of Arg417′ may
+also explain the opposite eﬀects on activity observed for the
+Figure 8. Structural analysis of the mutations P9A and E38Q. (A)
+Wild-type PjTA crystal structure showing Pro9 and surrounding
+residues (sticks) after the α-helical N-cap, stabilized by hydrogen
+bonds within the helix (gray dashed lines). A water forming a
+hydrogen bond with the carbonyl oxygen of Pro9 is shown as a red
+sphere. Distances are in Å. (B) A similar representation of the R4
+crystal structure showing Ala9 as sticks and interacting waters as red
+spheres. Waters form a hydrogen-bonding network with the backbone
+and the side chains of residues at the N-terminus of the helix, which is
+not observed in the wild-type structure. (C) Overlay of the R4 crystal
+structure (cyan) with the predicted structure (purple), showing the
+hydrogen-bond interactions of Gln38 with Tyr43 (dashed gray lines).
+(D) Similar overlay of the R4 crystal structure (cyan) with the wild-
+type crystal structure (green). Distances are in Å. (E) Comparison of
+the electrostatic surface around residue 38 (arrow) in wild-typePjTA
+(left) and in the R4 variant (right). The E38Q mutation results in a
+more even distribution of positive (blue) and negative (red) surface
+charges, highlighted in the boxed area.
+Figure 9. Structural analysis of mutations M128F, S87D, and S87N.
+(A) Overlay of the R6 crystal structure (orange) with the predicted
+structure (purple) and wild-type crystal structure (green), showing
+mutation M128F and neighboring residue Phe113 (sticks). The
+phenyl rings of Phe128 and Phe113 are ideally positioned for a T-
+shaped π−π interaction. (B) Overlay of R4 crystal structure (chain A
+in cyan, chain B in yellow) with the predicted structure (purple),
+showing how Asp87 forms a salt bridge with the arginine switch
+Arg417′ across the dimer interface. (C) Overlay of the R6 crystal
+structure (chain A in orange, chain B in pale green) with the predicted
+structure (purple), showing how Arg417 ′ in R6 adopts a
+conformation similar to that in R4 by forming a hydrogen bond
+with Asn87. The interaction is absent in the predicted structure,
+where Arg417′ has a diﬀerent conformation facing the active site.
+Distances are given in Å.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2924
+two mutations. The arginine is strictly conserved inω-TAs and
+plays an important role in catalysis by a conformational change
+called an arginine switch, which enables dual substrate
+recognition.
+64 During conversion of ( S)-1-PEA in PjTA,
+Arg417′ needs to move out of the active site tunnel to allow
+binding of the substrate’s phenyl group. However, during the
+second half-reaction it moves in to interact with the
+carboxylate group of pyruvate, facilitating its conversion toL-
+Ala. Thus, the lower activity caused by the S87D mutation is
+consistent with the formation of a salt bridge with Arg417′,a s
+it deprives the active site of a residue involved in the catalysis,
+while the increase in activity for the S87N mutation may be
+related to an increase inﬂexibility of the Arg417′ side chain.
+Finally, for mutation I154V the crystal structures reveal
+conformations agreeing with the predicted structure (Figure
+10A,B). This strongest stabilizing mutation simply shortened
+the side chain by a methyl group, suggesting that the original
+methyl group made unfavorable interactions. It indeed appears
+that in the wild type Ile154 is under strain; the dihedral angle
+among its C, Cα,C β, and Cγ1 atoms is an unfavorable−90.4°.
+The e ﬀect of the dihedral angle was modeled using an
+Amber14 force ﬁeld (which has clear and separate terms for
+van der Waals interactions and dihedral energies). Setting said
+dihedral angle to an ideal −61°, identical with the dihedral
+angle in the structure of R4 and R6, indeed lowered the
+dihedral energies (ΔE
+dihedral = −2 kJ/(mol subunit)), while the
+steric clashes increased tremendously (ΔEvan der Waals=7 × 102
+kJ/(mol subunit)). Inspection shows that Ile154 has to adopt
+the strained dihedral angle to diminish steric clashes with
+His321′ and Phe323′ (Figure 10C). Thus, a relief of steric
+strain at the interface can explain the strong stabilizing eﬀect of
+this subtle mutation. The 3.5-fold increase in catalytic activity
+by I154V could be due to eﬀects on the tunnel leading to the
+active site. The I154V mutation causes a shift of 0.6 Å of
+residue Tyr151 toward Tyr20, decreasing the shape of the
+active-site entrance tunnel ( Figure 10 D) with no major
+backbone changes. These small changes caused by the I154V
+mutation remodeling the tunnel shape might inﬂuence the
+access of cosolvent or substrates to the active site and inﬂuence
+catalytic activity. Enhanced resistance of a dehalogenase
+toward cosolvents was also attributed to tunnel mutations by
+Koudelakova et al.
+65
+Because mutation I154V was also found by the consensus
+approach, it is less likely that the same substitution can be
+applied to closely related proteins. Indeed, a valine is already
+present in the homologousOchrobactrum anthropi TA (PDB
+5GHF, 63% sequence identity, Val154),
+66 Vf TA (4E3Q, 40%
+identity, Val153), whereas inCvTA (4AH3, 40% identity),58,67
+Ser154 is present at the corresponding position; in all cases the
+local bond angles do not suggest strain. Furthermore, the
+subunit interfacial areas of these three TAs are similar, as is
+apparent from an analysis using PISA
+68 (5250, 5300, and 4800
+Å2 for PjTA, CvTA, and Vf TA, respectively), whereas it is
+smaller for OaAT (∼4000 Å2).
+The crystal structures thus reveal that the biophysical nature
+of the stabilizing eﬀects of the designed mutations is diverse.
+Most of the observed eﬀects are in agreement with known
+biophysical interactions that contribute to the stability of
+folded proteins, including mutations stabilizing subunit
+interfaces.
+11 Surprisingly, the largest contribution to enhanced
+stability is made by substitution I154V, which eliminates strain
+that is present in the wild-type protein. Enhanced stability by
+reduced strain is rarely reported, and its discovery by energy
+calculations and molecular dynamics illustrates the power of
+computational tools.
+■ CONCLUSIONS
+In this work, we used computational design, bioinformatics,
+and laboratory screening to discover mutations that enhanced
+the thermostability, cosolvent resistance, IPA compatibility,
+and catalytic activity of the recently discovered dimeric class III
+transaminase (TA) fromP. jessenii (PjTA). The mainﬁndings
+are (1) mutations that stabilize the interface had a much larger
+positive eﬀect on PjTA stability in comparison to buried or
+surface mutations and (2) stabilizing mutations at the interface
+could be predicted with a high success rate with the
+computational design tools used in the FRESCO workﬂow.
+The conﬁrmed individual mutations could be combined and
+showed cooperative eﬀects, and the ﬁnal enzymes can be
+considered thermophilic in view of their optimum temperature.
+Figure 10.Structural analysis of mutation I154V. (A) Overlay of the
+R4 crystal structure (chain A in cyan, chain B in yellow) and predicted
+structure (purple). (B) Comparison of the intersubunit contact
+(yellow dashed line) between Ile154 and Phe323′ in the wild-type
+structure (green) and between Val154 and Phe323′ in the R4 crystal
+structure (cyan, yellow). Dihedral angles are shown for the wild type
+(orange) and for R4 (yellow), illustrating the elimination of strain by
+the I154V mutation. (C) Comparison of Ile154 (green) from the wild
+type against a simulated Ile rotamer (blue) with its ideal dihedral
+angle, showing how the wild type adopts a strained conformation to
+reduce steric clashes with His321′ and Phe323′. (D) Comparison of
+residues forming the active-site entrance tunnel in the wild-type and
+R4 crystal structures, showing how the I154V mutation causes a slight
+shift in the position of the Tyr151 side chain. The shift aﬀects the
+shape of the tunnel leading to the cofactor binding site. Distances are
+in Å.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2925
+The importance of improving interface interactions for
+better ω-TA stability agrees with observations that inactivation
+is accompanied by subunit dissociation. Crystal structures of
+the stabilizedPjTA enzymes showed that the mutations can be
+explained by improved biophysical interactions: additional
+hydrogen bonding or salt-bridge interactions (S87D/N,
+E38Q), increased hydrophobic interactions (A60V), introduc-
+tion ofπ-stacking (M128F), reduced exposure of hydrophobic
+surface (P9A), redistribution of electrostatic surface charge
+(E38Q), and relief of steric strain (I154V).
+The stabilizing mutations replace residues that show no high
+B factors in the crystal structures and were mostly not
+discovered by testing a set of consensus mutations. In general,
+structures predicted and used by the FoldX and Rosetta energy
+calculations agreed with the crystal structures, with the
+exception of Arg417′ in the R6 variant. The use of more
+stringent energy criteria for selecting mutations did not give a
+signiﬁcant increase in the percentage of stabilizing mutations
+among the selected variants.
+The two most robust variants showed increased perform-
+ance in acetophenone amination reactions, better tolerance to
+cosolvents, compatibility with high levels of the amino donor
+(IPA), and improved product yield, while the enantioselectivity
+was fully retained. The results suggest that the use of this
+computational workﬂow to discover stabilizing mutations and
+optimize subunit interfaces in multimeric enzymes will help to
+create stable biocatalysts for use in green chemistry.
+■ ASSOCIATED CONTENT
+*sı Supporting Information
+The Supporting Information is available free of charge at
+https://pubs.acs.org/doi/10.1021/acscatal.9b05223.
+Information on all FRESCO and consensus approach
+mutations, success percentages of the FRESCO libraries
+generated for eight diﬀerent enzymes, graphs showing
+the stability and activities of triple mutants, 4-fold
+mutants, 5-fold mutants, and 6-fold mutants, and
+positions of mutations in the structure and along the
+sequence (PDF)
+■ AUTHOR INFORMATION
+Corresponding Author
+Dick B. Janssen− Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen 9747 AG Groningen, The
+Netherlands;
+orcid.org/0000-0002-0834-2043;
+Email: d.b.janssen@rug.nl
+Authors
+Qinglong Meng − Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen 9747 AG Groningen, The
+Netherlands
+Nikolas Capra− Biotransformation and Biocatalysis, Groningen
+Biomolecular Sciences and Biotechnology Institute (GBB),
+University of Groningen 9747 AG Groningen, The Netherlands
+Cyntia M. Palacio− Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen 9747 AG Groningen, The
+Netherlands
+Elisa Lanfranchi − Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen 9747 AG Groningen, The
+Netherlands
+Marleen Otzen − Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen 9747 AG Groningen, The
+Netherlands
+Luc Z. van Schie− Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen 9747 AG Groningen, The
+Netherlands
+Henrië tte J. Rozeboom− Biotransformation and Biocatalysis,
+Groningen Biomolecular Sciences and Biotechnology Institute
+(GBB), University of Groningen 9747 AG Groningen, The
+Netherlands
+Andy-Mark W. H. Thunnissen− Biotransformation and
+Biocatalysis, Groningen Biomolecular Sciences and
+Biotechnology Institute (GBB), University of Groningen 9747
+AG Groningen, The Netherlands
+Hein J. Wijma− Biotransformation and Biocatalysis, Groningen
+Biomolecular Sciences and Biotechnology Institute (GBB),
+University of Groningen 9747 AG Groningen, The Netherlands
+Complete contact information is available at:
+https://pubs.acs.org/10.1021/acscatal.9b05223
+Author Contributions
+Q.M. and C.M.P. performed the wet-lab experimental work
+and collected the data. L.Z.v.S. designed and constructed
+consensus mutants. M.O. and E.L. supported the experimental
+work and contributed protocols. N.C., H.J.R., and A.-
+M.W.H.T. solved the crystal structures. H.J.W. and Q.M.
+designed the mutants. Q.M., N.C., and C.M.P. wrote the
+manuscript. D.B.J. and H.J.W. revised the manuscript. D.B.J.
+supervised the project. All authors have given approval to the
+ﬁnal version of the manuscript.
+Notes
+The authors declare no competingﬁnancial interest.
+■ ACKNOWLEDGMENTS
+Q.M. thanks the China Scholarship Council for a Ph.D.
+fellowship. Part of this project has received funding from the
+European Union’s Horizon 2020 Programme (Marie Curie
+Actions-ITN ES-Cat) under GA No. 722610, which supported
+N.C. C.M.P. was supported by Erasmus Mundus, Eurotango II.
+The work of M.O., E.L., and H.J.W. was supported by the
+Dutch Ministry of Economic Aﬀairs through BE-Basic, grant
+FS02.005. We thank the staﬀ of the ESRF at Grenoble for
+excellent onsite support and beam time allocation.
+■ ABBREVIATIONS
+TA, transaminase; ATA, amine transaminase; ω-TAs, ω-
+transaminases; CvTA, TA from Chromobacterium violaceum;
+Vf TA, TA fromVibrio ﬂuvialis; PjTA, TA fromPseudomonas
+jessenii; PLP, pyridoxal 5′-phosphate; PMP, pyridoxamine 5′-
+phosphate; Tm
+app, apparent melting temperature; (S)-1-PEA,
+(S)-1-phenylethylamine; IPA, isopropylamine; MSA, multiple
+sequence alignment
+■ REFERENCES
+(1) Slabu, I.; Galman, J. L.; Lloyd, R. C.; Turner, N. J. Discovery,
+Engineering, and Synthetic Application of Transaminase Biocatalysts.
+ACS Catal. 2017, 7, 8263−8284.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2926
+(2) Kelly, S. A.; Pohle, S.; Wharry, S.; Mix, S.; Allen, C. C. R.;
+Moody, T. S.; Gilmore, B. F. Application ofω-Transaminases in the
+Pharmaceutical Industry. Chem. Rev. 2018, 118, 349−367.
+(3) Patil, M. D.; Grogan, G.; Bommarius, A.; Yun, H. Recent
+Advances in ω-Transaminase-Mediated Biocatalysis for the Enantio-
+selective Synthesis of Chiral Amines.Catalysts 2018, 8, 254.
+(4) Eliot, A. C.; Kirsch, J. F. Pyridoxal Phosphate Enzymes:
+Mechanistic, Structural, and Evolutionary Considerations.Annu. Rev.
+Biochem. 2004, 73, 383−415.
+(5) Stepankova, V.; Bidmanova, S.; Koudelakova, T.; Prokop, Z.;
+Chaloupkova, R.; Damborsky, J. Strategies for Stabilization of
+Enzymes in Organic Solvents.ACS Catal. 2013, 3, 2823−2836.
+(6) Bornscheuer, U. T.; Huisman, G. W.; Kazlauskas, R. J.; Lutz, S.;
+Moore, J. C.; Robins, K. Engineering the Third Wave of Biocatalysis.
+Nature 2012, 485, 185−194.
+(7) Schiroli, D.; Peracchi, A. A Subfamily of PLP-Dependent
+Enzymes Specialized in Handling Terminal Amines.Biochim. Biophys.
+Acta, Proteins Proteomics2015, 1854, 1200−1211.
+(8) Börner, T.; Rämisch, S.; Bartsch, S.; Vogel, A.; Adlercreutz, P.;
+Grey, C. Three in One: Temperature, Solvent and Catalytic Stability
+by Engineering the Cofactor-Binding Element of Amine Trans-
+aminase. ChemBioChem 2017, 18, 1482−1486.
+(9) Börner, T.; Rämisch, S.; Reddem, E. R.; Bartsch, S.; Vogel, A.;
+Thunnissen, A-M. W. H.; Adlercreutz, P.; Grey, C. Explaining
+Operational Instability of Amine Transaminases: Substrate-Induced
+Inactivation Mechanism and Influence of Quaternary Structure on
+Enzyme-Cofactor Intermediate Stability.ACS Catal. 2017, 7, 1259−
+1269.
+(10) Chen, S.; Berglund, P.; Humble, M. S. The Effect of Phosphate
+Group Binding Cup Coordination on the Stability of the Amine
+Transaminase from Chromobacterium violaceum. Mol. Catal. 2018,
+446, 115−
+123.
+(11) Fernandez-Lafuente, R. Stabilization of Multimeric Enzymes:
+Strategies to Prevent Subunit Dissociation.Enzyme Microb. Technol.
+2009, 45, 405−418.
+(12) Palacio, C. M.; Rozeboom, H. J.; Lanfranchi, E.; Meng, Q.;
+Otzen, M.; Janssen, D. B. Biochemical Properties of aPseudomonas
+Aminotransferase Involved in Caprolactam Metabolism. FEBS J.
+2019, 286, 4086−4102.
+(13) Das, R.; Baker, D. Macromolecular Modeling with Rosetta.
+Annu. Rev. Biochem.2008, 77, 363−382.
+(14) Richter, F.; Leaver-Fay, A.; Khare, S. D.; Bjelic, S.; Baker, D. De
+Novo Enzyme Design using Rosetta3.PLoS One2011, 6, No. e19230.
+(15) Goldenzweig, A.; Fleishman, S. J. Principles of Protein Stability
+and Their Application in Computational Design.Annu. Rev. Biochem.
+2018, 87, 105−129.
+(16) Musil, M.; Konegger, H.; Hon, J.; Bednar, D.; Damborsky, J.
+Computational Design of Stable and Soluble Biocatalysts.ACS Catal.
+2019, 9, 1033−1054.
+(17) Eijsink, V. G.; Bjørk, A.; Gåseidnes, S.; Sirevåg, R.; Synstad, B.;
+van den Burg, B.; Vriend, G. Rational Engineering of Enzyme
+Stability. J. Biotechnol. 2004, 113, 105−120.
+(18) Korkegian, A.; Black, M. E.; Baker, D.; Stoddard, B. L.
+Computational Thermostabilization of an Enzyme.Science 2005, 308,
+857−860.
+(19) Schweiker, K. L.; Makhatadze, G. I. Protein Stabilization by the
+Rational Design of Surface Charge-Charge Interactions.Methods Mol.
+Biol. 2009, 490, 261−283.
+(20) Gribenko, A. V.; Patel, M. M.; Liu, J.; McCallum, S. A.; Wang,
+C.; Makhatadze, G. I. Rational Stabilization of Enzymes by
+Computational Redesign of Surface Charge-Charge Interactions.
+Proc. Natl. Acad. Sci. U. S. A.2009, 106, 2601−2606.
+(21) Lee, C. W.; Wang, H. J.; Hwang, J. K.; Tseng, C. P. Protein
+Thermal Stability Enhancement by Designing Salt Bridges: A
+Combined Computational and Experimental Study.PLoS One 2014,
+9, No. e112751.
+(22) Pikkemaat, M. G.; Linssen, A. B.; Berendsen, H. J.; Janssen, D.
+B. Molecular Dynamics Simulations as a Tool for Improving Protein
+Stability. Protein Eng., Des. Sel.2002, 15, 185−192.
+(23) Porebski, B. T.; Buckle, A. M. Consensus Protein Design.
+Protein Eng., Des. Sel.2016, 29, 245−251.
+(24) Lehmann, M.; Kostrewa, D.; Wyss, M.; Brugger, R.; D’Arcy, A.;
+Pasamontes, L.; van Loon, A. P. From DNA Sequence to Improved
+Functionality: Using Protein Sequence Comparisons to Rapidly
+Design a Thermostable Consensus Phytase. Protein Eng., Des. Sel.
+2000, 13,4 9−57.
+(25) Lehmann, M.; Loch, C.; Middendorf, A.; Studer, D.; Lassen, S.
+F.; Pasamontes, L.; van Loon, A. P.; Wyss, M. The Consensus
+Concept for Thermostability Engineering of Proteins: Further Proof
+of Concept. Protein Eng., Des. Sel.2002, 15, 403−411.
+(26) Bednar, D.; Beerens, K.; Sebestova, E.; Bendl, J.; Khare, S.;
+Chaloupkova, R.; Prokop, Z.; Brezovsky, J.; Baker, D.; Damborsky, J.
+FireProt: Energy- and Evolution-Based Computational Design of
+Thermostable Multiple-Point Mutants.PLoS Comput. Biol.2015, 11,
+No. e1004556.
+(27) Goldenzweig, A.; Goldsmith, M.; Hill, S. E.; Gertman, O.;
+Laurino, P.; Ashani, Y.; Dym, O.; Unger, T.; Albeck, S.; Prilusky, J.;
+Lieberman, R. L.; Aharoni, A.; Silman, I.; Tawfik, D. S.; Fleishman, S.
+J. Automated Structure- and Sequence-Based Design of Proteins for
+High Bacterial Expression and Stability.Mol. Cell2016, 63, 337−346.
+(28) Vázquez-Figueroa, E.; Chaparro-Riggers, J.; Bommarius, A. S.
+Development of a thermostable glucose dehydrogenase by a structure-
+guided consensus concept.ChemBioChem 2007, 8, 2295−2301.
+(29) Bosshart, A.; Panke, S.; Bechtold, M. Systematic Optimization
+of Interface Interactions Increases the Thermostability of a Multi-
+meric Enzyme. Angew. Chem., Int. Ed.2013, 52, 9673−9676.
+(30) Wijma, H. J.; Floor, R. J.; Jekel, P. A.; Baker, D.; Marrink, S. J.;
+Janssen, D. B. Computationally Designed Libraries for Rapid Enzyme
+Stabilization. Protein Eng., Des. Sel.2014, 27,4 9−58.
+(31) Floor, R. J.; Wijma, H. J.; Colpa, D. I.; Ramos-Silva, A.; Jekel, P.
+A.; Szymański, W.; Feringa, B. L.; Marrink, S. J.; Janssen, D. B.
+Computational Library Design for Increasing Haloalkane Dehaloge-
+nase Stability. ChemBioChem 2014, 15, 1660−1672.
+(32) Wu, B.; Wijma, H. J.; Song, L.; Rozeboom, H. J.; Poloni, C.;
+Tian, Y.; Arif, M. I.; Nuijens, T.; Quaedflieg, P. J. L. M.; Szymanski,
+W.; Feringa, B. L.; Janssen, D. B. Versatile Peptide C-Terminal
+Functionalization via a Computationally Engineered Peptide Amidase.
+ACS Catal. 2016, 6, 5405
+−5414.
+(33) Bu, Y.; Cui, Y.; Peng, Y.; Hu, M.; Tian, Y.; Tao, Y.; Wu, B.
+Engineering Improved Thermostability of the GH11 Xylanase from
+Neocallimastix patriciarum via Computational Library Design. Appl.
+Microbiol. Biotechnol. 2018, 102, 3675−3685.
+(34) Martin, C.; Ovalle Maqueo, A.; Wijma, H. J.; Fraaije, M. W.
+Creating a More Robust 5-Hydroxymethylfurfural Oxidase by
+Combining Computational Predictions with a Novel Effective Library
+Design. Biotechnol. Biofuels 2018, 11, 56.
+(35) Fürst, M. J. L. J.; Boonstra, M.; Bandstra, S.; Fraaije, M. W.
+Stabilization of Cyclohexanone Monooxygenase by Computational
+and Experimental Library Design. Biotechnol. Bioeng. 2019, 116,
+2167−2177.
+(36) Arabnejad, H.; Dal Lago, M.; Jekel, P. A.; Floor, R. J.;
+Thunnissen, A-M. W. H.; Terwisscha van Scheltinga, A. C.; Wijma, H.
+J.; Janssen, D. B. A Robust Cosolvent-Compatible Halohydrin
+Dehalogenase by Computational Library Design. Protein Eng., Des.
+Sel. 2016, 30, 173−187.
+(37) Wijma, H. J.; Fürst, M. J. L. J.; Janssen, D. B. A Computational
+Library Design Protocol for Rapid Improvement of Protein Stability:
+FRESCO. Methods Mol. Biol.2018, 1685,6 9−85.
+(38) Kellogg, E. H.; Leaver-Fay, A.; Baker, D. Role of Conforma-
+tional Sampling in Computing Mutation-Induced Changes in Protein
+Structure and Stability.Proteins: Struct., Funct., Genet.2011, 79, 830−
+838.
+(39) Guerois, R.; Nielsen, J. E.; Serrano, L. Predicting Changes in
+the Stability of Proteins and Protein Complexes: A Study of More
+than 1000 Mutations.J. Mol. Biol.2002, 320, 369−387.
+(40) Krieger, E.; Darden, T.; Nabuurs, S. B.; Finkelstein, A.; Vriend,
+G. Making Optimal Use of Empirical Energy Functions: Force-Field
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2927
+Parameterization in Crystal Space. Proteins: Struct., Funct., Genet.
+2004, 57, 678−683.
+(41) Ashkenazy, H.; Abadi, S.; Martz, E.; Chay, O.; Mayrose, I.;
+Pupko, T.; Ben-Tal, N. ConSurf 2016: an Improved Methodology to
+Estimate and Visualize Evolutionary Conservation in Macromole-
+cules. Nucleic Acids Res.2016, 44, W344−W350.
+(42) Reetz, M. T.; Carballeira, J. D.; Vogel, A. Iterative Saturation
+Mutagenesis on the Basis of B Factors as a Strategy for Increasing
+Protein Thermostability.Angew. Chem., Int. Ed.2006, 45, 7745−7751.
+(43) Reetz, M. T.; Soni, P.; Fernández, L.; Gumulya, Y.; Carballeira,
+J. D. Increasing the Stability of an Enzyme Toward Hostile Organic
+Solvents by Directed Evolution Based on Iterative Saturation
+Mutagenesis Using the B-FIT Method.Chem. Commun. (Cambridge,
+U. K.) 2010, 46, 8657−8658.
+(44) Krieger, E.; Vriend, G. YASARA View - Molecular Graphics for
+all Devices - from Smartphones to Workstations.Bioinformatics 2014,
+30, 2981−2982.
+(45) Maier, J. A.; Martinez, C.; Kasavajhala, K.; Wickstrom, L.;
+Hauser, K. E.; Simmerling, C. ff14SB: Improving the Accuracy of
+Protein Side Chain and Backbone Parameters from ff99SB.J. Chem.
+Theory Comput. 2015, 11, 3696−3713.
+(46) Ericsson, U. B.; Hallberg, B. M.; DeTitta, G. T.; Dekker, N.;
+Nordlund, P. Thermofluor-Based High-Throughput Stability Opti-
+mization of Proteins for Structural Studies.Anal. Biochem. 2006, 357,
+289−298.
+(47) Boivin, S.; Kozak, S.; Meijers, R. Optimization of Protein
+Purification and Characterization Using Thermofluor Screens.Protein
+Expression Purif. 2013, 91, 192−206.
+(48) Schätzle, S.; Höhne, M.; Redestad, E.; Robins, K.; Bornscheuer,
+U. T. Rapid and Sensitive Kinetic Assay for Characterization ofω-
+Transaminases. Anal. Chem. 2009, 81, 8244−8248.
+(49) Mathew, S.; Nadarajan, S. P.; Chung, T.; Park, H. H.; Yun, H.
+Biochemical Characterization of Thermostableω-Transaminase from
+Sphaerobacter thermophilus and Its Application for Producing
+Aromatic β- and γ-Amino Acids. Enzyme Microb. Technol. 2016,
+87−88,5 2−60.
+(50) Battye, T. G.; Kontogiannis, L.; Johnson, O.; Powell, H. R.;
+Leslie, A. G. iMOSFLM: a New Graphical Interface for Diffraction-
+Image Processing with MOSFLM. Acta Crystallogr., Sect. D: Biol.
+Crystallogr. 2011, 67, 271−281.
+(51) Kabsch, W. XDS. Acta Crystallogr., Sect. D: Biol. Crystallogr.
+2010, D66, 125−132.
+(52) Evans, P. R.; Murshudov, G. N. How Good are my Data and
+What is the Resolution? Acta Crystallogr., Sect. D: Biol. Crystallogr.
+2013, D69, 1204−1214.
+(53) Winn, M. D.; Ballard, C. C.; Cowtan, K. D.; Dodson, E. J.;
+Emsley, P.; Evans, P. R.; Keegan, R. M.; Krissinel, E. B.; Leslie, A. G.;
+McCoy, A.; McNicholas, S. J.; Murshudov, G. N.; Pannu, N. S.;
+Potterton, E. A.; Powell, H. R.; Read, R. J.; Vagin, A.; Wilson, K. S.
+Overview of the CCP4 Suite and Current Developments. Acta
+Crystallogr., Sect. D: Biol. Crystallogr.2011, D67, 235−242.
+(54) Murshudov, G. N.; Vagin, A. A.; Dodson, E. J. Refinement of
+Macromolecular Structures by the Maximum-Likelihood Method.
+Acta Crystallogr., Sect. D: Biol. Crystallogr.1997, D53, 240−255.
+(55) Emsley, P.; Lohkamp, B.; Scott, W. G.; Cowtan, K. Features
+and Development of Coot.Acta Crystallogr., Sect. D: Biol. Crystallogr.
+2010, D66, 486−501.
+(56) The PyMOL Molecular Graphics System, ver. 2.1.0; Schrödinger,
+LLC.
+(57) Buss, O.; Muller, D.; Jager, S.; Rudat, J.; Rabe, K. S.
+Improvement in the Thermostability of aβ-Amino Acid Converting
+ω-Transaminase by Using FoldX.ChemBioChem 2018, 19, 379−387.
+(58) Land, H.; Campillo-Brocal, J. C.; Svedendahl Humble, M.;
+Berglund, P. B-factor Guided Proline Substitutions inChromobacte-
+rium violaceum Amine Transaminase: Evaluation of the Proline Rule
+as a Method for Enzyme Stabilization.
+ChemBioChem 2019, 20,
+1297−1304.
+(59) Wang, X.; Lin, H.; Zheng, Y.; Feng, J.; Yang, Z.; Tang, L.
+MDC-Analyzer-Facilitated Combinatorial Strategy for Improving the
+Activity and Stability of Halohydrin Dehalogenase fromAgrobacterium
+radiobacter AD1. J. Biotechnol. 2015, 206,1 −7.
+(60) Mathew, S.; Deepankumar, K.; Shin, G.; Hong, E. Y.; Kim, B.-
+G.; Chung, T.; Yun, H. Identification of Novel Thermostable ω-
+Transaminase and Its Application for Enzymatic Synthesis of Chiral
+Amines at High Temperature.RSC Adv. 2016, 6, 69257−69260.
+(61) Park, E. S.; Dong, J. Y.; Shin, J. S.ω-Transaminase-Catalyzed
+Asymmetric Synthesis of Unnatural Amino Acids Using Isopropyl-
+amine as an Amino Donor.Org. Biomol. Chem.2013, 11, 6929−6933.
+(62) Kelefiotis-Stratidakis, P.; Tyrikos-Ergas, T.; Pavlidis, I. V. The
+Challenge of Using Isopropylamine as an Amine Donor in
+Transaminase Catalysed Reactions. Org. Biomol. Chem. 2019, 17,
+1634−1642.
+(63) Dawood, A. W. H.; Weiß, M. S.; Schulz, C.; Pavlidis, I. V.;
+Iding, H.; de Souza, R. O. M. A.; Bornscheuer, U. T. Isopropylamine
+as Amine Donor in Transaminase-Catalyzed Reactions: Better
+Acceptance through Reaction and Enzyme Engineering.ChemCatCh-
+em 2018, 10, 3943−3949.
+(64) Hirotsu, K.; Goto, M.; Okamoto, A.; Miyahara, I. Dual
+Substrate Recognition of Aminotransferases. Chem. Rec. 2005, 5,
+160−172.
+(65) Koudelakova, T.; Chaloupkova, R.; Brezovsky, J.; Prokop, Z.;
+Sebestova, E.; Hesseler, M.; Khabiri, M.; Plevaka, M.; Kulik, D.; Kuta-
+Smatanova, I.; Rezacova, P.; Ettrich, R.; Bornscheuer, U. T.;
+Damborsky, J. Engineering Enzyme Stability and Resistance to an
+Organic Cosolvent by Modification of Residues in the Access Tunnel.
+Angew. Chem., Int. Ed.2013, 52, 1959−1963.
+(66) Han, S.-W.; Kim, J.; Cho, H.-S.; Shin, J.-S. Active Site
+Engineering of Omega-Transaminase Guided by Docking Orientation
+Analysis and Virtual Activity Screening.ACS Catal. 2017, 7, 3752−
+3762.
+(67) Kaulmann, U.; Smithies, K.; Smith, M. E. B.; Hailes, H. C.;
+W a r d ,J .M .S u b s t r a t eS p e c t r u mo f
+ω-Transaminase from
+Chromobacterium violaceum DSM30191 and its Potential for
+Biocatalysis. Enzyme Microb. Technol.2007, 41, 628−637.
+(68) Krissinel, E.; Henrick, K. Inference of Macromolecular
+Assemblies from Crystalline State.J. Mol. Biol.2007, 372, 774−797.
+ACS Catalysis pubs.acs.org/acscatalysis Research Article
+https://dx.doi.org/10.1021/acscatal.9b05223
+ACS Catal. 2020, 10, 2915−2928
+2928

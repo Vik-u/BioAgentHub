@@ -1,0 +1,678 @@
+RESEARCHARTICLE APPLIEDPHYSICALSCIENCES
+Functional enzyme–polymer complexes
+Curt Waltmanna, Carolyn E. Millsb,1, Jeremy Wanga,1, Baofu Qiaoa , John M. Torkelsona,b, Danielle Tullman-Ercekb , and Monica Olvera de la Cruza,b,c,d,2
+Contributed by Monica Olvera de la Cruz; received October 25, 2021; accepted February 21, 2022; reviewed by Andrew Spakowitz and Sarah Perry
+Engineered and native enzymes are poised to solve challenges in medicine, bioreme-
+diation, and biotechnology. One important goal is the possibility of upcycling poly-
+mers using enzymes. However, enzymes are often inactive in industrial, nonbiological
+conditions. It is particularly difficult to protect water-soluble enzymes at elevated
+temperatures by methods that preserve their functionality. Through atomistic and
+coarse-grained molecular dynamics simulations that capture protein conformational
+change, we show that an enzyme, PETase (polyethylene terephthalate [PET]), can
+be stabilized at elevated temperatures by complexation with random copolymers into
+nanoscaleaggregatesthatdonotprecipitateintomacroscopicphases.Wedemonstrated
+the efficiency of the method by simulating complexes of random copolymers and the
+enzyme PETase, which depolymerizes PET, a highly used polymer. These polymers are
+more industrially viable than peptides and can target specific domains on an enzyme.
+We design the mean composition of the random copolymers to control the polymer–
+enzyme surface contacts and the polymer conformation. When positioned on or near
+the active site, these polymer contacts can further stabilize the conformation of the
+active site at elevated temperatures. We explore the experimental implications of this
+active site stabilization method and show that PETase-random copolymer complexes
+have enhanced activity on both small molecule substrates and solid PET films. These
+results provide guidelines for engineering enzyme–polymer complexes with enhanced
+enzyme functionality in nonbiological environments.
+enzymes|complexcoacervation |randomcopolymers |coarse-grainedmolecularsimulations |GoMartini
+Enzymes have the potential to tremendously impact the fields of pharmacology
+(1,2),biotechnology(3),andbioremediation(4).Theyareespeciallyusefulforupcycling
+plastics (5), which are currently polluting oceans (6–8) and freshwater supplies harming
+both humans (9) and animals (10, 11). Enzymes such as lipases (12), cutinases (13,
+14), hydrolases (15), and cytochrome P450 (16, 17) can catalyze a growing number of
+reactionsduetoadvancesinenzymeengineering(17,18).Inadditiontoengineeringnew
+catalytic functions, attempts have been made to increase enzyme efficiency by creating
+multienzyme complexes (19, 20), immobilizing them on two-dimensional surfaces (3,
+16, 21–23), embedding them in plastics (4), and modifying the amino acid composition
+of enzymes to increase their thermal stability (24, 25). Stabilizing these enzymes is
+crucial for applications in nonbiological conditions such as elevated temperatures and
+pressures. Here, we investigate how complexation with random copolymers can enhance
+the high-temperature stability of the enzyme PETase (polyethylene terephthalate [PET])
+(26), which degrades PET. PET is a glassy polymer at room temperature. Therefore,
+for PETase to function effectively, the temperature should be raised aboveT
+g (70 ◦C)
+(27), which would normally denature the enzyme. Our simulations demonstrate the
+relationship between polymer composition and protein–polymer structure as well as
+the spatial correlations between chemically different monomers and the heterogeneous
+protein surface. We then show how the structure of the protein–polymer complex can
+impact the catalytic function of the enzyme, especially at elevated temperatures. Finally,
+we provide experimental verification of this enhanced catalytic activity of PETase in the
+presence of random copolymers.
+Charged polymers have been used to encapsulate and stabilize proteins through either
+macroscopic segregation (28, 29) or microphase separation into nanoscale aggregates
+that do not precipitate into macroscopic phases (15, 30, 31). This approach works on
+a wide variety of proteins including engineered proteins with nonbiological functions
+(17, 32), because protein–polymer interactions can be altered in many ways to enhance
+complexation (33, 34) including by modifying the charge of the proteins themselves
+(35, 36). Phase separation through engineering protein charge distribution has also been
+demonstrated in vivo (37) in cellular bodies known as membraneless organelles (38)
+(MLOs). MLOs are composed of proteins, nucleic acids, and small molecule metabolites
+(39) and are often formed from intrinsically disordered proteins (IDPs) or proteins
+with intrinsically disordered regions (IDRs). IDPs control the MLO composition based
+Significance
+Theuseofbiologicalenzyme
+catalystscouldhavehuge
+ramiﬁcationsforchemical
+industries.However,these
+enzymesareofteninactivein
+nonbiologicalconditions,suchas
+hightemperatures,presentin
+industrialsettings.Here,weshow
+thattheenzymePETase
+(polyethyleneterephthalate
+[PET]),withpotentialapplication
+inplasticrecycling,isstabilizedat
+elevatedtemperaturethrough
+complexationwithrandom
+copolymers.Wedemonstratethis
+throughsimulationsand
+experimentsondiﬀerenttypesof
+substrates.Oursimulationsalso
+providestrategiesfordesigning
+moreenzymaticallyactive
+complexesbyalteringpolymer
+compositionandenzymecharge
+distribution.
+Author aﬃliations: aDepartment of Materials Science
+and Engineering, Northwestern University, Evanston, IL
+60208;
+bDepartment of Chemical and Biological Engi-
+neering, Northwestern University, Evanston, IL 60208;
+cDepartment of Chemistry, Northwestern University,
+Evanston, IL 60208; and dDepartment of Physics and
+Astronomy,NorthwesternUniversity,Evanston,IL60208
+Authorcontributions:C.W.,C.E.M.,J.W.,B.Q.,J.M.T.,D.T.-E.,
+and M.O.d.l.C. designed research; C.W., C.E.M., and J.W.
+performedresearch;C.W.,C.E.M.,J.W.,B.Q.,andM.O.d.l.C.
+analyzed data; and C.W., C.E.M., J.W., B.Q., J.M.T., D.T.-E.,
+andM.O.d.l.C.wrotethepaper.
+Reviewers: A.J.S., Stanford University; and S.P., University
+ofMassachusettsAmherst.
+Theauthorsdeclarenocompetinginterest.
+Copyright © 2022 the Author(s). Published by PNAS.
+This article is distributed under CreativeCommons
+Attribution-NonCommercial-NoDerivatives License 4.0
+(CCBY-NC-ND).
+1C.E.M.andJ.W.contributedequallytothiswork.
+2To whom correspondence may be addressed. Email:
+m-olvera@northwestern.edu.
+This article contains supporting information online at
+https://www.pnas.org/lookup/suppl/doi:10.1073/pnas.
+2119509119/-/DCSupplemental.
+PublishedMarch21,2022.
+PNAS 2022 Vol. 119 No. 13 e2119509119 https://doi.org/10.1073/pnas.2119509119 1of6
+A
+B C
+D E
+Fig. 1. Description and models of PETase and the random copolymers.
+(A)GoMartinimodelofPETaseinmagentawiththeactivesiteingray.( B)The
+secondary structure of PETase is shown with the same color scheme as inA.
+The active site is shown using the van der Waals representation to highlight
+the cleft-like binding pocket for PET. (C) Surface representation of PETase.
+(D) Chemical and Martini description of the methacrylate-based random
+copolymers. Hydrophobic beads are tan, while hydrophilic beads are blue,
+andnegativelychargedbeadsarecyan. F
+H,FL,and F− refertothepercentage
+of the respective monomer in the random copolymers. (E) Snapshot of the
+Martinirandomcopolymermodelwiththecolorscorrespondingto D.
+on specific interactions that originate from the IDP sequence
+(40) and this spatial organization helps to regulate the internal
+biochemistry of cells. Inspired by IDPs, we design a microphase
+separated protein–polymer complex using random copolymers.
+These random copolymers contain monomers with a common
+backbone but different side chains that can be polar, nonpo-
+lar, or charged. The monomers, shown in Fig. 1D and E,a r e
+oligo-ethyl glycol methacrylate with a length of nine ethyl glycol
+units(OEGMA-9),ethylhexylmethacrylate(EHMA),andsulfo-
+propyl methacrylate (SPMA). Due to their methyl methacrylate
+backbone, they are inexpensive to randomly polymerize in large-
+scale, industrial processes. They have also been used in previous
+computational and experimental studies of polymer complexes
+withproteinsincludinghorseradishperoxide,glucoseoxidase,and
+organophosphorus hydrolase as well as small organic molecules
+(32,41).Further,amphiphilicrandomcopolymersarewellsuited
+to complex with the heterogeneous polar and nonpolar surfaces
+of proteins (42) including PETase. Thus, in addition to the
+electrostaticattractionbetweenthepolymerandprotein,thepolar
+andnonpolargroupsoftherandomcopolymerscanself-optimize
+(43),maximizingtheirinteractionswithproteinsurfacedomains,
+making this complexation quite general (32, 42, 44).
+In the present study, we explore how complexation with ran-
+dom copolymers can affect the conformation, and thus the func-
+tion, of PETase especially at temperatures the enzyme does not
+experience in vivo. We achieve this by varying the mean polymer
+composition, which controls the polymer–protein surface inter-
+actions. This, in turn, affects complex formation and the spatial
+distributionofcontactsonthesurfaceoftheenzyme.Whilethere
+havebeenpreviousstudiesofprotein–polymercomplexation(33,
+45), experimental studies are inherently limited in the direct ob-
+servation of surface correlations (46) and previous computational
+studies have used coarse models that did not include charges
+(42) or vary the mean composition (32). Other models (47)
+were used to study PETase and cytochrome P450 in the context
+of macroscopic complexes instead of nanoscale complexes and
+they were also unable to study the effect of the polymers on the
+conformationoftheenzymeactivesite,whichweshowisaffected
+by the spatial distribution of protein–polymer contacts at both
+room and elevated temperatures. Specifically, we demonstrate
+that when these PETase-random copolymer complexes have an
+abundance of polymer-active site contacts, they can have less
+perturbed active sites than the protein by itself and remain stable
+as the temperature is increased.
+1. Results and Discussion
+A.PETaseStructureatElevatedTemperature. PETasedenatures
+as temperature is increased, leading to detectable decreases in
+activity above room temperature (24, 25). In Fig. 2A, all-atom
+molecular dynamics simulations demonstrate the deformation of
+the active site at elevated temperatures. We use protein rmsd
+(48) to measure the conformation of the protein relative to the
+energy-minimized crystal structure, not including rotational or
+translationaldiffusion.Wemeasuretheconformationofthewhole
+protein as well as the active site using a previously published
+definition of the seven active site residues (26). This provides
+metrics for the behavior of the whole protein and the active site,
+whoseconformationrelativetothecrystalstructurecorrelateswith
+enzymatic activity (49).
+As shown in Fig. 2A, there is an upward trend for both the
+whole protein and active site rmsd values as the temperature
+increases and PETase activity decreases. The active site rmsd at
+330 K is an outlier—despite decreasing from 320 K, it is still
+higherthan298or310K.Inagreementwithstudieshighlighting
+the flexibility of the active site (49), we see that the active site
+is more perturbed by increases in temperature (especially at the
+AB
+Fig. 2. (A andB) Comparison of the GoMartini PETase (B) alone to atomistic
+simulations (A) and to the GoMartini PETase complexed with random com-
+polymers as the temperature is increased (B). rmsd is used to measure the
+conformation relative to the crystal structure with higher values signifying
+moredeformation.( A)Resultsfortheatomisticmodelshowageneralincrease
+in the rmsd of the protein as well as the active site as is expected based on
+known decreases in activity with increasing temperature. (B) The GoMartini
+modelshowsanincreaseinrmsdforthewholeproteinandtheactivesiteat
+320 K, but at 350 K the active site rmsd decreases, unlike the entire protein
+backbone. The active site rmsd may be inaccurate at high temperatures, but
+canstillbeusedasabaselinetomeasurethethermalstabilityofthePETase–
+polymer complexes. In these complexes, temperature dependence of the
+wholeproteinandactivesiteconformationisnearlyeliminated.
+2of6 https://doi.org/10.1073/pnas.2119509119 pnas.org
+highest temperatures) when compared to the whole protein. In
+the following sections where random copolymers complex with
+PETase,weusetheGoMartini(50)modelofPETase,whichagrees
+reasonablywellwiththetemperature-dependentconformationof
+atomistic PETase (Fig. 2A). As shown in Fig. 2B,t h eG o M a r t i n i
+PETase also shows an upward trend for both rmsd values with
+temperature as well as larger increases for the active site than for
+thewholeprotein.Althoughthermsdvaluesaredifferentbetween
+the atomistic and GoMartini models, they are also measured on
+different time scales, 10 ns for the atomistic results and 300 ns
+fortheGoMartiniresults(see SI Appendix, Materials and Methods
+for more details), with longer times potentially leading to further
+perturbation of the protein structure. The ability to access these
+longertimescalesisagreatadvantageoftheGoMartinimodel.In
+agreementwithatomisticsimulations,theGoMartinimodeldoes
+haveanoticeableincreaseat320K.However,at350K,theactive
+sitermsddecreasesinsteadofincreasing.Here,themodelisfailing
+to accurately predict the active site behavior of PETase, although
+the whole protein rmsd displays the correct trend. Despite this
+issue, the GoMartini model still provides a baseline that can be
+compared to the case of polymer complexation to evaluate the
+abilityofthepolymerstostabilizetheactivesite.Thisissueisalso
+mitigated by restricting our analysis of the active site to 320 K in
+some cases (see Fig. 6C).
+B.Enzyme–PolymerComplexation. Sincethestabilizationofen-
+zymes through microphase complexation depends on the struc-
+ture of the adsorbed random copolymers, we seek to understand
+how to control the adsorption through mean composition of
+t h ep o l y m e r .W em e a s u r et h ea d s o r p t i o nv i at h en u m b e ro f
+contacts between the polymer and the enzyme at three temper-
+atures. The results at 298 K are shown in Fig. 3. The trends
+observed at this temperature continue at higher temperatures
+(SI Appendix,F i g .S 1).
+A
+BC
+Fig. 3. RandomcopolymercomplexationwiththePETaseproteinfordiﬀer-
+entmeanpolymercompositions. FH isthepercentageofhydrophobicEHMA,
+F− isthepercentageofnegativelychargedSPMA,and FL isthepercentageof
+hydrophilicOEGMA-9.Thesepercentagessumto100andthus FL,whichisnot
+displayed,is100– FH –F−.(A)Thenumberofcontactsisshownasafunction
+of composition at 298 K. A maximum is observed at very low percentages of
+EHMA and higher percentages of SPMA, while a local minimum is observed
+at F
+H = 20%. (B) Simulation snapshot of a wrapped polymer conformation,
+which occurs at low values ofFH and is characterized by a high percentage
+of contacts between the enzyme and polymer backbone. (C) Simulation
+snapshotofaglobularpolymerconformation,whichoccursathighvaluesof
+F
+H andischaracterizedbymicelle-likebehavioroftheamphiphilicpolymers.
+A
+B
+Fig. 4. HydrophobicinteractionsaﬀectPETase-randomcopolymercomplex-
+ation. (A) The fraction of contacts that involve hydrophobic polymer beads.
+Therearetwolocalmaxima,oneatverylow FH wherethepolymerbackbone
+wraps around the protein surface and one at highFH where the EHMA
+increasesthebaselinehydrophobicfractionofthepolymer.( B)Thefractionof
+thesehydrophobiccontactsthatoccuronthehydrophobicsurfaceofPETase
+is lower than the hydrophobic surface fraction of PETase. This struggle to
+optimize the interaction could be related to ill-deﬁned hydrophobic domains
+due to partially hydrophobic amino acids in the Martini model. However,
+polar–polarinteractionsseemtobeoptimizedandthisincreasesaschargeis
+added,whiletheoppositeoccursforhydrophobic–hydrophobicinteractions.
+As shown in Fig. 3A, the mean compositions with the most
+contacts between polymers and protein tend to be those with a
+relatively high percentage of negatively charged SPMA,F
+−,a n d
+alowerpercentageofhydrophobicEHMA, FH .Thus,additional
+hydrophobic EHMA monomers are unnecessary for the polymer
+to complex with the hydrophobic domains of the protein surface
+since the polymer backbone is already hydrophobic.
+Thisisfurtherillustratedin Fig.4 A by thefractionofprotein–
+polymercontactsthatinvolveahydrophobicpolymerbeadeither
+from the backbone of the polymer or from the side chains. Local
+maximaofthefractionofhydrophobiccontactsoccuratboththe
+highestandthelowestvaluesof F
+H .Theselow FH conformations
+wrap around the PETase surface (Fig. 3B), as opposed to higher
+FH compositions that lead to globular polymer conformations
+(Fig. 3C). Thus, the wrapped conformation of the lowFH ran-
+domcopolymersallowsthehydrophobicbackbonetomoreeasily
+access the protein surface, leading to more hydrophobic and total
+protein–polymer contacts. The connectivity of the hydrophobic
+backboneandhydrophobicglobularconformationsseemstolead
+to the creation of contacts with both the polar and hydropho-
+bic parts of the protein as shown by the weaker hydrophobic
+correlations between polymer and protein (Fig. 4B). The polar
+correlations are stronger, possibly due to reduced connectivity of
+the polar side chains and the ability to interact with the aqueous
+solvent instead of the protein surface. We note this analysis is
+highly sensitive to how the hydrophobicity of different beads is
+defined (SI Appendix, sections B.3 and C.3).
+The number of polymer–enzyme contacts grew as F
+− in-
+creased, especially for wrapped conformations. This increased
+attraction between the enzyme and the random copolymers is
+PNAS 2022 Vol. 119 No.13 e2119509119 https://doi.org/10.1073/pnas.2119509119 3of6
+A
+B D
+C
+Fig. 5. Includingnegativelychargedmonomersincreasescontactwithposi-
+tivesurfacedomains.( A andB)PETasewithonlythesurfacepotentialandwith
+additional contacts (ACs) overlaid, respectively. One can see that the yellow
+and cyan sites, which are preferred whenF− = 10%, are overwhelmingly on
+the positive part of the protein due to the addition of negative charge to the
+polymer. (C and D) A rotated orientation of the protein. The full dataset for
+this,moremethoddescription,andhigher-temperatureresultscanbefound
+inSI Appendix,Fig.S2 .
+intuitivesincePETasehasa+6netcharge.Theincreaseincontacts
+occurs on the positively charged part of the surface as shown in
+Fig. 5. Thus, the charge of the polymer influences the spatial
+distribution of the polymer on the dipolar PETase surface (26)
+andtheoverallnumberofcontacts.Thereisalsosomecompetition
+between optimizing charged and hydrophobic interactions as the
+addition of charge slightly weakens the hydrophobic correlations
+(Fig.4B).Thesecontactswerebiasedtoaspecificproteindomain
+despite the randomness of the polymer sequence, suggesting that
+using more controlled polymerization or peptide engineering is
+not necessary to intentionally contact these charged domains. It
+alsosuggeststhattheinversecanbeachieved;i.e.,acertainprotein
+domain could be targeted by engineering the surface potential.
+Experimentshavealsodemonstratedthatproteinchargedomains
+are crucial in macrophase behavior of protein–polyelectrolyte
+complexes (29, 45). This is also true of polymer blockiness (51–
+53), or the tendency of like monomers to be grouped together
+in the polymer sequence, in phase separation of polyelectrolyte
+complexes especially as ionic conditions are varied (54–56).
+C. Stability of the Complexed Enyzme.In Fig. 2B,w em e a s u r e
+howcomplexationaffectstheconformationoftheproteinatroom
+and elevated temperatures, using the rmsd values for the protein
+andtheactivesite.Thesermsdvaluesareameasureoftheprotein
+conformation relative to the PETase crystal structure with lower
+values representing less perturbed active sites and thus a more
+active enzyme.
+We find that the random copolymers are very effective at pre-
+venting PETase from deforming as the temperature is increased.
+This is shown by the rmsd values for the active site and the whole
+protein averaged over all polymer compositions and compared
+withtheresultsforPETasewithoutpolymers(Fig.2 B).Thermsd
+values as a function of temperature with polymers bound are al-
+mostflatforthewholeproteinandtheactivesite;theactualvalues
+for the active site and the whole protein are only slightly greater
+than those for the protein alone at 298 K. The perturbations
+caused by polymer binding are less than the perturbations seen at
+elevatedtemperaturesasat320K.Thus,thestabilityoftheactive
+site is much improved with the addition of polymers. The distri-
+bution of active site rmsd values at 320 K shows that for nearly
+every polymer composition the active site rmsd is lower than that
+without polymers (SI Appendix,F i g .S 3A). The rmsd values for
+the active site also have a much broader range when compared to
+the values of the whole protein (SI Appendix,F i g .S 3B). Further,
+this range includes some active site rmsd values that are lower
+at room temperature with polymers than without. This wide
+range of rmsd values for the active site is not well explained by
+trends in mean polymer composition (SI Appendix,F i g .S 4). To
+explain the wide range of active site behavior we look at the
+location of the contacts for those compositions where active sites
+arelessperturbedthanthePETasealoneatroomtemperatureand
+compare to compositions where active sites are more perturbed
+than the PETase alone at room temperature (Fig. 6). We find
+that less perturbed compositions have significantly more contacts
+near or on the active site of the enzyme at both 298 K (Fig. 6C)
+and 320 K (Fig. 6D). This suggests that contacts on the active
+site stabilize instead of perturb the active site. Thus, although
+we found a correlation between polymer contacts on the positive
+section of the enzyme and mean polymer composition in Fig. 5,
+these contacts were not concentrated on the active site, which
+explains the absence of correlation between mean polymer com-
+position and active site conformation (SI Appendix,F i g .S 4). In
+other words, the composition of the polymers (especially charge)
+biases the spatial distribution of contacts, but it does not bias
+these contacts to the active site, where they provide stability. This
+does not necessarily have to be the case for PETase or any given
+enzyme, since previous work has shown that complexation can
+be influenced by engineering the net charge on various proteins
+(35, 36). A similar strategy could be used to change the charge
+distributionneartheactivesite.Thus,wesuggestthatengineering
+thespatialdistributionofchargesneartheactivesitecouldincrease
+theactivityofanenzyme–polymercomplexbybiasingthecharged
+polymers near the active site and stabilizing the active site. While
+A
+BCD
+Fig. 6. Lessperturbedactivesitesarestabilizedbyadditionalcontactsnear
+the active site. (A) The distribution of active site rmsds at 298 and 320 K.
+The less perturbed active sites are colored in blue while the more perturbed
+active sites are colored in red. Each point refers to a diﬀerent polymer
+composition and the line refers to PETase alone at 298 K. These are the
+groupsbeingcomparedin C andD.(B)SurfacerepresentationofPETasewith
+no excess contacts shown for comparison. (C)C o m p a r i s o na t2 9 8Ks h o w s
+many ACs around the active sites for less perturbed compositions. These
+contacts stabilize the active site instead of further perturbing it at 320 K (D)
+aswell.Thefulldatasetforthisandmoremethoddescriptioncanbefoundin
+SI Appendix,Fig.S6 .
+4of6 https://doi.org/10.1073/pnas.2119509119 pnas.org
+activesitestabilizationduetolocalcontactsmaynotbecompletely
+general,previousstudieshaveillustratedthattheadditionofpoly-
+merstoenzymescanenhancetheactivityatelevatedtemperatures
+in water (15, 57), suggesting the phenomenon extends beyond
+PETase. Moreover, most active sites are partially hydrophobic
+(58–61), suggesting that polymers with hydrophobic groups can
+stabilize the active site with local contacts as shown here.
+D. Activity of Enzyme–Polymer Complexes on Small Molecule
+and Solid Substrates.We performed experiments to assess the
+impact of active site stabilization on enzyme activity. We first
+examinedthetemperaturesatwhichourPETase/copolymercom-
+plexes are stable. We incubated PETase or PETase/copolymer
+mixtures at a range of temperatures (4 to 50
+◦C )f o r1ha n d
+assayed esterase activity at room temperature against the small
+molecule substrate, p-nitrophenyl acetate (Fig. 7A). Here, we
+used a small molecule substrate to avoid confounding effects of
+temperature on PETase’s PET degrading activity (an established
+phenomenon) (24, 25). The copolymer used in these studies has
+am e a nc o m p o s i t i o nw i t hF
+H = 43%and F− = 12%,w i t h i n
+t h en o r m a lr a n g eo fFH in the simulations and a reasonably
+similarvalueof F− (seeMaterials and Methodsforfurtherdetail).
+Interestingly, we found that for all incubation temperatures, the
+specific esterase activity of PETase was enhanced in the presence
+of copolymer and that this activity enhancement increased at
+highercopolymerconcentrations(Fig.7 A).Ourdataalsoindicate
+that PETase activity in PETase/copolymer complexes is stable
+at temperatures up to 40
+◦C. Notably, this is less than the
+glass transition temperature of PET (70◦C). While the activity
+enhancement with the addition of copolymer could improve the
+utility of the enzyme, further thermal stabilization of the PETase
+enzymeislikelyneededtorealize thefullpotentialofthissystem.
+Forexample,polymerswithsidegroupsthatpenetratePETcould
+be used to decrease itsT
+g .
+Next, we examined the activity of PETase/copolymer com-
+plexes on solid PET as a substrate over 5 h at 35◦C( F i g .7B).
+ThepresenceofcopolymerenhancestheactivityofPETasetoward
+PET, similar to the results obtained with our small molecule
+activity assay. We confirmed that none of the formulations tested
+exhibited any decrease in esterase activity after incubation at 35
+◦Cf o r5h( SI Appendix,F i g .S 8), suggesting that the enhanced
+enzyme activity with copolymer is not due to changes in the
+temporal stability of the enzyme. Thus, our experimental data
+suggestthatPETaseactivityisimproveduponadditionofcopoly-
+merregardlessofthesubstrate.Theseresults,inconjunctionwith
+our simulation studies, suggest that copolymer binding impacts
+AB
+Fig. 7. Activity of PETase and PETase/copolymer complexes at two diﬀerent
+PETase:copolymer molar ratios. (A) Speciﬁc activity against small molecule
+substratep-nitrophenylacetateafter1hincubationatvarioustemperatures.
+ErrorbarsrepresentSDoverthreereplicateexperiments.( B)PETdegradation
+activityover5hat35
+◦C.Errorbarsrepresentthe95%conﬁdenceintervalon
+activityvalues.
+activesiteconformation,thusalteringPETaseactivity.Weobserve
+a wide distribution of active site conformations in simulations
+in the presence of copolymer compared to the naked enzyme
+(Fig. 2C). While some of these active site conformations may
+be less active than the native enzyme, we hypothesize that there
+may be a few active conformations present at any given time
+that confer substantially higher enzyme activity. An alternative
+hypothesis is that the random copolymers interact favorably with
+the substrate, leading to an increase in local substrate concentra-
+tion. Indeed, it has been shown that these random copolymers
+can bind hydrophobic small molecules (41) and that IDRs in
+proteins, similar to the random copolymers in Fig. 4B,p r o m o t e
+higher-order assembly (62). However, because the increase in
+PETase activity appears to be independent of substrate (solid
+PET or aqueous p-nitrophenyl acetate), it is more likely that the
+interactionsresponsibleforthisactivityenhancementarebetween
+the PETase and the random copolymer rather than the random
+copolymer and the substrate.
+2. Conclusions and Outlook
+Theabilitytousevarioustypesofenzymesinindustrialconditions
+could dramatically impact biotechnology, pharmacology, and
+bioremediation. Here, we show the following: 1) PETase is
+functionally stabilized by complexation with industrially scalable
+random copolymers. We demonstrate this through simulations
+of whole protein and active site conformations and using
+experiments measuring enzyme activity in response to thermal
+challenge. 2) This effect is further enhanced when random
+copolymers form more contacts with the enzyme active site.
+3) Polymer composition biases the conformation and location of
+the random copolymers on a protein despite the randomness of
+the polymer sequences. Thus, engineering the surface potential
+of the protein, using standard protein mutation or modification
+techniques, could bias polymers to bind near the active site,
+further increasing enzyme activity. This approach may be
+compatible with a variety of enzymes as long as their surfaces can
+beengineeredwithoutmisfolding.However,theuseofcopolymer
+complexation to modify active site conformation does not
+necessitatefurtherproteinmutationormodificationasthediverse
+functional groups on the copolymer should permit binding to a
+varietyofproteinsurfaces.Further,thisapproachcanalsobeused
+in the absence of information on the sequence and structure of
+an enzyme. Thus, this strategy has the potential to be a widely
+accessible route to increasing enzyme functionality, especially
+given that it requires only a random polymerization. Future
+experiments using substrates with various physical properties
+could elucidate the role of interactions between substrates and
+random copolymers, opening another avenue for engineering
+enzyme activity via complexation with copolymers. These
+interactionscouldbecontrolledbyusingmonomerswithspecific
+affinitiesandpromoteassemblyonsolidsubstrateslikePETfilms.
+Complexationwithrandomcopolymersisawelcomeaddition
+totheenzymeengineeringtoolbox,offeringanorthogonal,versa-
+tilestrategyforincreasingfunctionalityeitherinconjunctionwith
+or independent of other protein engineering techniques.
+Materials and Methods
+Copolymer Production and Puriﬁcation. The random copolymer used in
+this study was synthesized and puriﬁed as described inSI Appendix.B a s e do n
+previous work with the same monomer set showing that reactivity ratios of
+these monomers are close to 1, we assume ideal random incorporation (32).
+PNAS 2022 Vol. 119 No.13 e2119509119 https://doi.org/10.1073/pnas.2119509119 5of6
+The polymer was characterized by gel permeation chromatography (GPC) and
+hydrogen NMR (HNMR) and found to be 170 kDa (D= 1.3), with 45% OEGMA-
+9, 43% EHMA, and 12% SPMA, mol/mol. Details of these characterizations can be
+found inSI Appendix.
+Protein Production. PETase was expressed and puriﬁed as described in
+SI Appendix.
+PETase Activity after Thermal Challenge. PETase and PETase/random
+copolymer samples were prepared as described inSI Appendix. These samples
+were either refrigerated at 4◦C or incubated in a Bio-Rad C1000 thermal cycler
+set to the speciﬁed temperature (20, 30, 40, or 50◦C) for 1 h. Samples were
+then brought to room temperature and assayed for esterase activity using small
+molecule substrate p-nitrophenyl acetate as described inSI Appendix.
+PETase Activity on PET Films.PETase and PETase/random copolymer solu-
+tions were prepared in 20-mL glass scintillation vials as described inSI Appendix.
+To measure PET degradation, PET discs 0.2 mm thick and 1.27 cm in diameter
+were submerged in the PETase-containing solutions and incubated at 35
+◦Cf o r
+1 to 5 h. MHET production in each vial was determined by measuring solution
+absorbance at 242 nm. Further details can be found inSI Appendix.
+DataAvailability. All study data are included in this article and/orSI Appendix.
+ACKNOWLEDGMENTS. We thank the the Department of Energy, Ofﬁce of Ba-
+sic Energy Sciences for ﬁnancial support under Contract DE-FG02-08ER46539.
+M.O.d.l.C. thanks the Sherman Fairchild Foundation for computational support.
+C.W., B.Q., J.W., and M.O.d.l.C. thank the Center for Computation and Theory
+of Soft Materials for support. B.Q. was funded by the Center for Hierarchical
+Materials Design. J.M.T., M.O.d.l.C., C.E.M. and D.T.-E. were funded by a Cornew
+Innovation Award through the Chemistry of Life Processes Institute at North-
+western University. This work made use of the Integrated Molecular Structure
+Education and Research Center NMR facility at Northwestern University, which
+has received support from the Soft and Hybrid Nanotechnology Experimental
+Resource (NSF ECCS-2025633) and Northwestern University.This work also made
+use of the Keck Biophysics Facility (aqueous GPC) at Northwestern University,
+which is supported by the Robert H.Lurie Comprehensive Cancer Center (National
+Cancer Institute P30 Cancer Center Support Grant CA060553).
+1. M. J. Coon, Cytochrome P450: Nature’s most versatile biological catalyst.Annu. Rev. Pharmacol.
+Toxicol.45, 1–25 (2005).
+2. C. A. Martinez, S. G. Rupashinghe, Cytochrome P450 bioreactors in the pharmaceutical industry:
+Challenges and opportunities.C u r r .T o p .M e d .C h e m .13, 1470–1490 (2013).
+3. H. V. Sureka, A. C. Obermeyer, R. J. Flores, B. D. Olsen, Catalytic biosensors from complex coacervate
+core micelle (c3m) thin ﬁlms.ACS Appl. Mater. Interfaces11, 32354–32365 (2019).
+4. C. DelRe et al., Near-complete depolymerization of polyesters with nano-dispersed enzymes.Nature
+592, 558–563 (2021).
+5. L. M. Blank, T. Narancic, J. Mampel, T. Tiso, K. O’Connor, Biotechnological upcycling of plastic waste and
+other non-conventional feedstocks in a circular economy.Curr. Opin. Biotechnol.62, 212–219 (2020).
+6. A. C ´ozar et al., Plastic debris in the open ocean.P r o c .N a t l .A c a d .S c i .U . S . A .111, 10239–10244 (2014).
+7. K. L. Law et al., Plastic accumulation in the North Atlantic subtropical gyre.Science 329, 1185–1188
+(2010).
+8. J. R. Jambeck et al., Marine pollution. Plastic waste inputs from land into the ocean.Science 347,
+768–771 (2015).
+9. K. D. Cox et al., Human consumption of microplastics.Environ. Sci. Technol.53, 7068–7074 (2019).
+10. J. B. Lambet al., Plastic waste associated with disease on coral reefs.Science 359, 460–462 (2018).
+11. I. A. Kaneet al., Seaﬂoor microplastic hotspots controlled by deep-sea circulation.Science 368,
+1140–1145 (2020).
+12. A. Suet al., Cutinases as stereoselective catalysts: Speciﬁc activity and enantioselectivity of cutinases
+and lipases for menthol and its analogs.Enzyme Microb. Technol.133, 109467 (2020).
+13. A. N. Shirkeet al., Stabilizing leaf and branch compost cutinase (lcc) with glycosylation: Mechanism
+and effect on pet hydrolysis.Biochemistry 57, 1190–1200 (2018).
+14. A. M. Ronkvist, W. Xie, W. Lu, R. A. Gross, Cutinase-catalyzed hydrolysis of poly(ethylene terephthalate).
+Macromolecules 42, 5128–5138 (2009).
+15. C. E. Mills, A. Obermeyer, X. Dong, J. Walker, B. D. Olsen, Complex coacervate core micelles for the
+dispersion and stabilization of organophosphate hydrolase in organic solvents.Langmuir 32,
+13367–13376 (2016).
+16. S. B. Lamb, D. C. Lamb, S. L. Kelly, D. C. Stuckey, Cytochrome P450 immobilisation as a route to
+bioremediation/biocatalysis. FEBS Lett.431, 343–346 (1998).
+17. K. Chen, F. H. Arnold, Engineering cytochrome p450s for enantioselective cyclopropenation of internal
+alkynes. J. Am. Chem. Soc.142, 6891–6895 (2020).
+18. F. H. Arnold, Directed evolution: Bringing new chemistry to life.Angew. Chem. Int. Ed. Engl.57,
+4143–4148 (2018).
+19. N. C. Dubey, B. P . Tripathi, Nature inspired multienzyme immobilization: Strategies and concepts.ACS
+Appl. Bio. Mater.4, 1077–1114 (2021).
+20. B. C. Knottet al., Characterization and engineering of a two-enzyme system for plastics
+depolymerization. P r o c .N a t l .A c a d .S c i .U . S . A .117, 25476–25485 (2020).
+21. L. A. Wollenberget al., The use of immobilized cytochrome P4502C9 in PMMA-based plug ﬂow
+bioreactors for the production of drug metabolites.Appl. Biochem. Biotechnol.172, 1293–1306
+(2014).
+22. J. Ducharme, K. Auclair, Use of bioconjugation with cytochrome P450 enzymes.Biochim. Biophys.
+Acta. Proteins Proteomics1866, 32–51 (2018).
+23. A. Su, A. Shirke, J. Baik, Y. Zou, R. Gross, Immobilized cutinases: Preparation, solvent tolerance and
+thermal stability.Enzyme Microb. Technol.116, 33–40 (2018).
+24. H. F. Sonet al., Rational protein engineering of thermo-stable PETase fromIdeonella sakaiensisfor
+highly efﬁcient PET degradation.ACS Catal.9, 3519–3526 (2019).
+25. Y. Cuiet al., Computational redesign of a PETase for plastic biodegradation under ambient condition
+by the GRAPE strategy.ACS Catal.11, 1340–1350 (2021).
+26. H. P . Austinet al., Characterization and engineering of a plastic-degrading aromatic polyesterase.Proc.
+Natl. Acad. Sci. U.S.A.115, E4350–E4357 (2018).
+27. J. P . Jog, Crystallization of polyethyleneterephthalate.J. Macromol. Sci. Part C35, 531–553 (1995).
+28. X. Miet al., Thermostabilization of virusesvia complex coacervation.Biomater. Sci.8, 7082–7092
+(2020).
+29. W. C. Blocher McTigue, S. L. Perry, Design rules for encapsulating proteins into complex coacervates.
+Soft Matter15, 3089–3103 (2019).
+30. A. C. Obermeyer, C. E. Mills, X. H. Dong, R. J. Flores, B. D. Olsen, Complex coacervation of
+supercharged proteins with polyelectrolytes.Soft Matter12, 3570–3581 (2016).
+31. J. M. Horn, R. A. Kapelner, A. C. Obermeyer, Macro- and microphase separated protein-polyelectrolyte
+complexes: Design parameters and current progress.Polymers (Basel)11, 578 (2019).
+32. B. Panganibanet al., Random heteropolymers preserve protein function in foreign environments.
+Science 359, 1239–1243 (2018).
+33. R. A. Kapelner, V. Yeong, A. C. Obermeyer, Molecular determinants of protein-based coacervates.Curr.
+Opin. Colloid Interface Sci.52, 101407 (2021).
+34. A. Huanget al., Predicting protein–polymer block copolymer self-assembly from protein properties.
+Biomacromolecules 20, 3713–3723 (2019).
+35. R. A. Kapelner, A. C. Obermeyer, Ionic polypeptide tags for protein phase separation.Chem. Sci.
+(Camb.) 10, 2700–2707 (2019).
+36. C. S. Cummings, A. C. Obermeyer, Phase separation behavior of supercharged proteins and
+polyelectrolytes. Biochemistry 57, 314–323 (2018).
+37. V. Yeong, E. G. Werth, L. M. Brown, A. C. Obermeyer, Formation of biomolecular condensates in
+bacteria by tuning protein electrostatics.ACS Cent. Sci.6, 2301–2310 (2020).
+38. S. F. Banani, H. O. Lee, A. A. Hyman, M. K. Rosen, Biomolecular condensates: Organizers of cellular
+biochemistry. Nat. Rev. Mol. Cell Biol.18, 285–298 (2017).
+39. T. J. Nottet al., Phase transition of a disordered nuage protein generates environmentally responsive
+membraneless organelles.Mol. Cell57, 936–947 (2015).
+40. C. W. Paket al., Sequence determinants of intracellular phase separation by complex coacervation of a
+disordered protein.Mol. Cell63, 72–85 (2016).
+41. J. Wang, C. Waltmann, H. Umana-Kossio, M. Olvera de la Cruz, J. M. Torkelson, Heterogeneous
+charged complexes of random copolymers for the segregation of organic molecules.ACS Cent. Sci.7,
+882–891 (2021).
+42. T. D. Nguyen, B. Qiao, M. Olvera de la Cruz, Efﬁcient encapsulation of proteins with random
+copolymers. P r o c .N a t l .A c a d .S c i .U . S . A .115, 6578–6583 (2018).
+43. S. Mao, Q. J. MacPherson, S. S. He, E. Coletta, A. J. Spakowitz, Impact of conformational and chemical
+correlations on microphase segregation in random copolymers.Macromolecules 49, 4358–4368
+(2016).
+44. B. Qiao, F. Jim´enez- ´Angeles, T. D. Nguyen, M. Olvera de la Cruz, Water follows polar and nonpolar
+protein surface domains.P r o c .N a t l .A c a d .S c i .U . S . A .116, 19274–19281 (2019).
+45. S. Kimet al., Effect of protein surface charge distribution on protein–polyelectrolyte complexation.
+Biomacromolecules 21, 3026–3037 (2020).
+46. C. DelReet al., Rational design of a synthetic peg-like polymer for protein stabilization.Biophys. J.
+112, 59a (2017).
+47. A. Cardellini, F. Jim´enez- ´Angeles, P . Asinari, M. Olvera de la Cruz, A modeling-based design to
+engineering protein hydrogels with random copolymers.ACS Nano15, 16139–16148 (2021).
+48. V. N. Maiorov, G. M. Crippen, Size-independent comparison of protein three-dimensional structures.
+Proteins 22, 273–283 (1995).
+49. T. Feckeret al., Active site ﬂexibility as a hallmark for efﬁcient pet degradation byI. sakaiensispetase.
+Biophys. J.114, 1302–1312 (2018).
+50. A. B. Poma, M. Cieplak, P . E. Theodorakis, Combining the MARTINI and structure-based coarse-grained
+approaches for the molecular dynamics studies of conformational transitions in proteins.J. Chem.
+Theory Comput.13, 1366–1374 (2017).
+51. A. M. Rumyantsevet al., Controlling complex coacervation via random polyelectrolyte sequences.ACS
+Macro Lett.8, 1296–1302 (2019).
+52. T. K. Lytle, L. W. Chang, N. Markiewicz, S. L. Perry, C. E. Sing, Designing electrostatic interactions via
+polyelectrolyte monomer sequence.ACS Cent. Sci.5, 709–718 (2019).
+53. C. E. Sing, S. L. Perry, Recent progress in the science of complex coacervation.Soft Matter16,
+2885–2914 (2020).
+54. M. Ghasemi, S. Friedowitz, R. G. Larson, Analysis of partitioning of salt through doping of
+polyelectrolyte complex coacervates.Macromolecules 53, 6928–6945 (2020).
+55. M. Ghasemi, R. G. Larson, Role of electrostatic interactions in charge regulation of weakly dissociating
+polyacids. Prog. Polym. Sci.112, 101322 (2021).
+56. S. Friedowitz, A. Salehi, R. G. Larson, J. Qin, Role of electrostatic correlations in polyelectrolyte charge
+association. J. Chem. Phys.149, 163335 (2018).
+57. M. Kimet al., Enhanced activity and stability of organophosphorus hydrolase via interaction with an
+amphiphilic polymer.Chem. Commun. (Camb.)50, 5345–5348 (2014).
+58. D. Blaha-Nelson, D. M. Kr¨u g e r ,K .S z e l e r ,M .B e n - D a v i d ,S .C .L .K a m e r l i n ,A c t i v es i t eh y d r o p h o b i c i t ya n d
+the convergent evolution of paraoxonase activity in structurally divergent enzymes: The case of serum
+paraoxonase 1.J. Am. Chem. Soc.139, 1155–1167 (2017).
+59. W. B. L. Alkema, A. J. Dijkhuis, E. De Vries, D. B. Janssen, The role of hydrophobic active-site residues in
+substrate speciﬁcity and acyl transfer activity of penicillin acylase.Eur. J. Biochem.269, 2093–2100
+(2002).
+60. P . W. Snyderet al., Mechanism of the hydrophobic effect in the biomolecular recognition of
+arylsulfonamides by carbonic anhydrase.P r o c .N a t l .A c a d .S c i .U . S . A .108, 17889–17894 (2011).
+61. S. Goswami, S. Das, S. Datta, Understanding the role of residues around the active site tunnel towards
+generating a glucose-tolerantβ-glucosidase fromAgrobacterium tumefaciens5A. Protein Eng. Des.
+Sel. 30, 523–530 (2017).
+62. C. Waltmann, R. Asor, U. Raviv, M. Olvera de la Cruz, Assembly and stability of simian virus 40
+polymorphs. ACS Nano14, 4430–4443 (2020).
+6of6 https://doi.org/10.1073/pnas.2119509119 pnas.org

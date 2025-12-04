@@ -1,0 +1,733 @@
+Current Research in Structural Biology 7 (2024) 100130
+Available online 5 February 2024
+2665-928X/© 2024 The Author(s). Published by Elsevier B.V. This is an open access article under the CC BY-NC-ND license (http://creativecommons.org/licenses/by-
+nc-nd/4.0/).
+Contentslistsavailableat ScienceDirect
+Current Research in Structural Biology
+journal homepage: www.journals.elsevier.com/current-research-in-structural-biology
+Research Article
+Assessment of Kaistella jeonii esterase conformational dynamics inresponse 
+to poly(ethylene terephthalate) binding
+EdersonSalesMoreiraPinto a, ArthurToniettoMangini a, LorenzoChavesCostaNovo a, 
+FernandoGuimaraesCavatao a, MathiasJ.Krause d, MarcioDorn a,b,c,∗
+a Center for Biotechnology, Federal University of Rio Grande do Sul, Av. Bento Gonçalves, 9500, Buildings 43421, Porto Alegre, RS, Brazil
+b Institute of Informatics, Federal University of Rio Grande do Sul, Av. Bento Gonçalves, 9500, Building 43424, Porto Alegre, RS, Brazil
+c National Institute of Science and Technology -F o r e n s i c Science, Porto Alegre, RS, Brazil
+d Institute for Applied and Numerical Mathematics, Karlsruhe Institute of Technology, Englerstraße 2, D-76131, Karlsruhe, BW, Germany
+A R T I C L E I N F O A B S T R A C T
+Edited by A. Wlodawer
+Keywords:
+Molecular dynamics simulation
+PETase
+Bioremediation
+Biodegradation
+PET
+The pervasive presence of plastic in the environment has reached a concerning scale, being identiﬁed in many 
+ecosystems. Bioremediation is the cheapest and most eco-friendly alternative to remove this polymer from 
+aﬀected areas. Recent work described that a novel cold-active esterase enzyme extracted from the bacteria 
+Kaistella jeonii could promiscuously degrade PET. Compared to the well-known PETase from Ideonella sakaiensis, 
+this novel esterase presents a low sequence identity yet has a remarkably similar folding. However, enzymatic 
+assays demonstrated a lower catalytic eﬃciency. In this work, we employed a strict computational approach 
+to investigate the binding mechanism between the esterase and PET. Understanding the underlying mechanism 
+of binding can shed light on the evolutive mechanism of how enzymes have been evolving to degrade these 
+artiﬁcial molecules and help develop rational engineering approaches to improve PETase-like enzymes. Our 
+results indicate that this esterase misses a disulﬁde bridge, keeping the catalytic residues closer and possibly 
+inﬂuencing its catalytic eﬃciency. Moreover, we describe the structural response to the interaction between 
+enzyme and PET, indicating local and global eﬀects. Our results aid in deepening the knowledge behind the 
+mechanism of biological catalysis of PET degradation and as a base for the engineering of novel PETases.
+1. Introduction
+Plastic pollution is not only an emergent threat to human health 
+and biodiversity but is nearing an irreversible point (MacLeod et al., 
+2021). Plastic residues are found globally in food, water, and in almost 
+every ecosystem (Carr et al., 2016; Revel et al., 2018; Allouzi et al., 
+2021; MacLeod et al., 2021; Howard and McCarthy, 2023). Remark-
+ably, poly(ethylene terephthalate) (PET)-based plastics are one of the 
+most used in packaging industries because of their durability (Maurya 
+et al., 2020). Amidst the mass-produced plastic, recycling only takes 
+place for a diminutive share (Howard and McCarthy, 2023). The re-
+maining plastic reaches the environment and negatively impacts its 
+surroundings and diverse life forms (Maurya et al., 2020). In response 
+to the challenges of plastic pollution, cost-eﬀective and eco-friendly 
+bioremediation is gaining prominence (Sharma et al., 2018). Ongoing 
+* Corresponding author at: Center for Biotechnology, Federal University of Rio Grande do Sul, Av. Bento Gonçalves, 9500, Buildings 43421, Porto Alegre, RS, 
+Brazil.
+E-mail address: mdorn@inf.ufrgs.br(M.Dorn).
+URL: https://sbcb.inf.ufrgs.br(M.Dorn).
+advancements in microbial enzymes, genetic engineering, and enzyme 
+immobilization emphasize the potential of enzymatic remediation in 
+this ﬁeld (Sharma et al., 2018). Currently, cutinases are the main en-
+zymes used for plastic degradation (Egmond and de Vlieg, 2000; Mau-
+rya et al., 2020).
+In 2016, Yoshida et al. (2016) described that Ideonella sakaiensis
+could degrade PET. The characterization of the enzyme IsPETase en-
+abled several studies for protein engineering (Son et al., 2019; Cui et 
+al., 2021) and, until now, is one of the most eﬀective enzymes for PET 
+degradation. Simulations using Molecular Dynamics (MD) were con-
+ducted to understand and optimize the IsPETase activity (Fecker et al., 
+2018; Chen et al., 2021), giving more information about enzyme charac-
+teristics crucial for protein engineering. MD gives atomistic information 
+about the dynamic molecular mechanism that determines the protein 
+stability, function, and protein-ligand interaction and is a reliable strat-
+https://doi.org/10.1016/j.crstbi.2024.100130
+Received 11 December 2023; Received in revised form 21 January 2024; Accepted 29 January 2024
+Current Research in Structural Biology 7 (2024) 100130
+2
+E.S.M. Pinto, A.T. Mangini, L.C.C. Novo et al.
+Fig. 1.A) Structure of the esterase (PET30), highlighting the disulﬁde bridge formed by residues Cys262 and Cys285, and the catalytic residues Ser153, Asp198, 
+and His230. B) Chemical formula representing PET monomer and PETase degradation products, MHET and BHET. C) Schematics of the general reaction mechanism 
+of esterases, depicting the expected reaction of the esterase’s catalytic triad.
+egy to access a protein’s molecular behavior (Childers and Daggett, 
+2017). Therefore, using MD can provide substantial data for enzyme 
+management in bioremediation.
+In 2022, a new esterase was described from Kaistella jeonii (PET30) 
+that showed PET degradation activity (Zhang et al., 2022). PET30
+Fig. 1A, classiﬁed as an esterase (serine protease) with EC 3.1 designa-
+tion, represents a hydrolase acting speciﬁcally on ester bonds. Enzymes 
+denoted as “PETases” can degrade PET by cleaving the ester bonds 
+of the polymer into Mono-2-hydroxyethyl terephthalate (MHET) and 
+Bis(2-hydroxyethyl) terephthalate (BHET) Fig. 1B. In alignment with 
+this enzymatic function, PET30 likely falls under the EC sub-subtype 1 
+(EC 3.1.1), akin to cutinases, lipases, and carboxylesterases known for 
+their PETase activity. Positioned within the 𝛼/𝛽 hydrolase superfamily, 
+alongside enzymes like lipases and esterases, PET30 features a distinc-
+tive Gly – x1 – Ser – x2 – Gly motif (Gly151 – Trp152 – Ser153 – Met154 
+– Gly155) at its active site. Strikingly, this motif mirrors the identi-
+cal sequence found in IsPETase (Gly158 – Trp159 – Ser160 – Met161 
+– Gly162), further underlining the structural similarity between these 
+PET-degrading enzymes (Joo et al., 2018).
+A notable feature of PET30 is its catalytic triad, a deﬁning charac-
+teristic of 𝛼/𝛽 hydrolases. Comprising the residues Asp-His-SerFig. 1C, 
+this triad underscores PET30’s enzymatic functionality. When aligned 
+with IsPETase structure, PET30 reveals a less hydrophobic environ-
+ment surrounding its catalytic pocket, providing an initial distinction 
+between these structurally akin enzymes.
+Despite a relatively low sequence identity of 34% with IsPETase, 
+PET30’s tertiary structure mirrors its PET-degrading counterpart. Dis-
+playing a canonical 𝛼/𝛽-fold, PET30 features a central twisted 𝛽-sheet 
+comprising ten 𝛽-strands, ﬂanked by seven 𝛼-helices on either side -a  
+structural arrangement similar to IsPETase (Zhang et al., 2022).
+In this work, noting the performance of PET degradation and some 
+common characteristics with IsPETase, we observe the potential use of 
+this new esterase on the bioremediation of PET. Furthermore, the report 
+of the enzyme’s molecular mechanism could give more information on 
+cutinase’s evolutionary pathway toward PET degradation. Therefore, 
+we use a classic MD to understand and compare the protein’s molecular 
+behavior with the IsPETase literature available.
+2. Methodology
+2.1. Protein structure, modeling, and validation
+We retrieved the initial structure of PET30 from the Protein Data 
+Bank (PDB) under the identiﬁer 7PZJ(Berman et al., 2000). Due to the 
+absence of the initial segment (residues 1-27), a comparative modeling 
+approach was employed. The structure was subjected to the Robetta 
+server (Kim et al., 2004) for structure modeling and reﬁnement. The 
+resultant model comprises residues 1 to 299, integrating the recon-
+structed N-terminal segment. The accuracy and reliability of the gen-
+erated model were assessed through various validation tools (Bowie et 
+al., 1991; Lüthy et al., 1992; Colovos and Yeates, 1993; Laskowski et 
+al., 1993; Hooft et al., 1996; Pontius et al., 1996; Williams et al., 2018) 
+to ensure its suitability for subsequent analyses.
+2.2. Ensemble docking and initial simulation
+The molecular structure of PET was modeled using Marvin JS (Csiz-
+madia, 1999) in a trimer format. Next, we submitted the structure to 
+the LigParGen server (Jorgensen and Tirado-Rives, 2005; Dodda et al., 
+2017a,b), which generates parameters for bonds, angles, dihedrals, and 
+Lennard-Jones interactions for the selected forceﬁeld (FF). We use the 
+1.14*CM1A option for partial charge parameters. The server also pro-
+vided topology ﬁles compatible with GROMACS for further simulations.
+We employed AutoDock Tools 1.5.7 (Sanner et al., 1999) and 
+AutoDock Vina 1.2.3 (Trott and Olson, 2010; Eberhardt et al., 2021) 
+software for molecular docking of the PET molecule into the esterase 
+structure. A grid box was strategically positioned at the central coor-
+dinates of the catalytic residues, namely Ser153, Asp198, and His230. 
+Current Research in Structural Biology 7 (2024) 100130
+3
+E.S.M. Pinto, A.T. Mangini, L.C.C. Novo et al.
+To mimic the native state of the residues, we protonated the nitrogen 𝛿
+of His230 while concurrently deprotonating the nitrogen 𝜖. The dimen-
+sions of the grid box were set to encompass the entire active enzyme 
+center, with a grid size of 26 Å on the x-axis, 21.5 Å on the y-axis, 
+and 16.3 Å on the z-axis. Subsequently, we imported the ligand into 
+AutoDock Vina, which generated ten diﬀerent poses. The resultant con-
+formation of the ligand, as generated by AutoDock Vina, was employed 
+in subsequent molecular dynamics simulations.
+We conducted Molecular Dynamics (MD) simulations using the 
+GROMACS package version 2021.5 (Lindahl et al., 2022). The system 
+was positioned within a cubic simulation box, and a disulﬁde bridge 
+formation between CYS 262 and CYS 285 was conﬁgured. The force 
+ﬁeld employed for these simulations was OPLS-AA/M (Robertson et al., 
+2015). We opted to perform serial minimization steps to ensure an op-
+timal starting conﬁguration. The ﬁrstminimization step was a vacuum 
+minimization utilizing the Steepest Descent (SD) algorithm, followed by 
+a series of minimization steps in water. The solvation process employed 
+the TIP3P water model and Na+ and Cl− ions in a concentration of 0.15 
+M. The second minimization step occurredtreating the non-bonded in-
+teractions with a Cut-oﬀ and the SD algorithm; the third minimization 
+step used Particle Mesh Ewald (PME) for long-range interactions and; 
+the ﬁnal minimization step employed PME in combination with the 
+Conjugate Gradient algorithm.
+We use the 100 resulting frames from the 100ns simulation to select 
+the best protein-ligand interaction. Performing catalytic center RMSD, 
+we select the most divergent structures. We use 𝜋-stacking and distance 
+analysis to decide the best catalytic triad (Ser153-His230-Asp-198) co-
+ordination with PET. With the elected structure, we performed a new 
+Docking following the conditions above. This process created a protein-
+ligand complex, forming the foundation for subsequent MD simulations.
+We ran a 100 ns simulation for the ensemble docking and ex-
+tracted one structure per nanosecond. Next, we calculated the Root 
+Mean Square Deviation (RMSD) of the catalytic center, including all the 
+residues described as relevant for the substrate accommodation, and se-
+lected the ones presenting the higher values of RMSD. We submitted 
+each structure for molecular docking and ﬁltered them by the number 
+and types of interactions, proximity to the catalytic residues, and the 
+ﬁnal conﬁguration pose of PET, based on the IsPETase literature. The 
+selected structure was used to generate the protein-ligand complex for 
+the starting point of subsequent Molecular Dynamics (MD) simulations.
+2.3. Molecular dynamics simulations
+In this phase, we assembled the simulations in two distinct systems: 
+one dedicated to elucidating the behavior of the free esterase, denoted 
+as PET30𝐹, and the other involving the PET trimer bound at the binding 
+pocket, referred to as PET30𝐵.
+We selected the OPLS-AA/M FF and used the water molecules TIP4P 
+model. We added Na+ and Cl− ions to maintain a neutralized system, 
+mimicking a physiological condition of 0.15 M. An additional energy 
+minimization step was executed, employing the Steepest Descent al-
+gorithm. The LINCS (Linear Constraint Solver) algorithm was utilized 
+to constrain covalent bond lengths during the equilibration phase. In 
+the NVT ensemble, the V-rescale thermostat heated the system to 300 
+K over 1 ns. Subsequently, in the NPT ensemble equilibration, the 
+Parrinello-Rahman barostat maintained a pressure of 1 bar over 1 ns. 
+Finally, the production step was performed for 1μ s simulation. Each 
+system underwent ﬁve replicas of simulations, giving a total of 10 μs. 
+Essential analyses were conducted, such as RMSD, Root Mean Square 
+Fluctuation (RMSF), Radius of Gyration (R𝑔), Solvent Accessible Sur-
+face Areas (SASA), hydrogen bond analysis (HB), and Dictionary of 
+Secondary Structure of the Protein (DSSP). The Supplementary Material 
+contains information regarding the details of general trajectory analy-
+ses.
+2.4. Principal component analysis and free energy proﬁle
+A multi-step process was executed to conduct Principal Component 
+Analysis (PCA). We used the trajectories of the ﬁve replicas of each 
+system separately, removing rotational and translational motions from 
+the trajectories. Employing theCovar module in Gromacs, a covariance 
+matrix was systematically generated based on the Cartesian coordinates 
+of the protein backbone atoms over the trajectory. The obtained co-
+variance matrix was then subjected to eigenvalue-eigenvector analysis 
+using the Anaeig module. This analytical step identiﬁes the principal 
+components (PCs) of motion inherent in the system. We projected the 
+entire simulation trajectory onto the identiﬁed principal components 
+using the trajectory and the calculated eigenvectors. To construct the 
+Free Energy Proﬁle, we used the MD-Davis Python library (Maity and 
+Pal, 2022) with PC1 and PC2 as input.
+3. Results and discussion
+The decision to model the initial 27 residues segment was driven by 
+the acknowledgment of the limitations in available structural informa-
+tion, the potential impact of the missing segment on overall dynamics, 
+and the pragmatic choice to adhere to evolutionarily selected sequences 
+for a comprehensive exploration of PET30’s behavior in MD simula-
+tions. This strategy was critical for a more nuanced understanding of 
+the protein’s structural dynamics and functional implications.
+Both systems, PET30𝐹, and PET30𝐵, were simulated in quintupli-
+cate to avoid drawing conclusions based on low-probability events due 
+to speciﬁc local minima captured by one single trajectory (Knapp et al., 
+2018). Each replica composing the energy landscape associated with 
+the global movement of PET30 systems can be considered equally rele-
+vant. However, each one depicts a diﬀerent ensemble of local minima. 
+This way, we must be careful when drawing conclusions based on the 
+average of the ﬁve replicas or if the analysis requires consideration 
+of speciﬁc energy minima, i.e., analyzing the event occurring in each 
+replica separately.
+Moreover, we take into consideration the eﬀect of the molecular 
+docking method. Docking estimates the binding pose between the pro-
+tein and the ligand. However, the protein remains rigid during the 
+docking process. Since there is no structure of PET30 co-crystallized 
+with PET, we know that our initial PET30𝐵 system is an approximation. 
+Employing molecular docking to generate an initial protein-ligand com-
+plex structure for MD simulations justiﬁes the diﬃculty of the system 
+achieving an optimal conformation of interaction. Thus, we observe dif-
+ferent PET30𝐵 replicas exploring distinct levels of interaction with PET. 
+Replica 1 shows the PET ligand leaving the binding pocket but even-
+tually returning; replicas 2 and 5 show the ligand eventually leaving 
+and staying out, interacting with a diﬀerent portion of the protein and; 
+replicas 3 and 4 keep the ligand tightly bound at the binding pocket 
+throughout the whole simulationSFig.13,20-22.
+3.1. Structural proﬁling of PET30: insights and comparison with IsPETase
+The whole structure of PET30 comprises 366 residues in total. How-
+ever, PDB 7PZJ missed the initial 27 residues and the C-terminal 300-
+366; thus, we performed a modeling step. Zhang et al. (Zhang et al., 
+2022) demonstrated at a web lab that PET30 keeps its catalytic activity 
+unaltered even after removing residues 300 to 366 (called PET30ΔPorC 
+in their work); thus, we removed the ﬁnal modeled segment and kept 
+the ﬁrst 27 residues (validation results found in SFig.1-4). Comparing 
+the structure of our model with IsPETase (PDB 6EQE (Austin et al., 
+2018)), the superposition is notable, and the structure’s alignment re-
+sults in a 0.735 RMSD valueFig. 2A.
+IsPETase has a core 𝛽-sheet composed of 9 𝛽-strands (𝛽1-𝛽9), sur-
+rounded by 7 distinct 𝛼-helix (𝛼1-𝛼7) and loops connecting each sec-
+ondary structure element. PET30’s 𝛽-sheet core exhibits an extra 𝛽-
+strand close to the C-terminal end, labeled as 𝛽10 Fig. 2B. Two addi-
+tional helices appeared after we modeled the initial segment of PET30, 
+Current Research in Structural Biology 7 (2024) 100130
+4
+E.S.M. Pinto, A.T. Mangini, L.C.C. Novo et al.
+Fig. 2.A) Structure of PET30 model (green cyan) aligned to IsPETase structure (red). The catalytic residues of PET30 (Ser153, Asp198, His230) colored in yellow, 
+and IsPETase represented (Ser160, Asp206, and His237) in green; auxiliary residues of PET30 (Phe80, Met154, and Tyr178) depicted in blue, and auxiliary residues 
+from IsPETase (Tyr81, Met161, and Trp185) marked as pink. A disulﬁde bridge (only present in the IsPETase) is illustrated as orange. B) Structure of the PET30 
+model, depicting each secondary structure individually. Pet 30 core has a 𝛽-sheet composed of ten 𝛽-strands, named 𝛽1 to 𝛽10 from the N-terminal end; and nine 
+𝛼-helices, naming 𝛼1’ and 𝛼1’ the modeled helices, and 𝛼1 to 𝛼7 the correspondent helices with IsPETase structure.
+which we called 𝛼1’ and 𝛼2”. This naming choice is based on two con-
+siderations. First, considering these helices come before the canonical 
+ones, we wanted to keep the original numbering of 𝛼1 to 𝛼7. Addi-
+tionally, MD results demonstrate that these helices are not stable. DSSP 
+analysis shows that 𝛼1’, composed of residues 2-13, quickly turns into 
+coil structure; 𝛼1”, comprising residues 15-27, reduces its helix struc-
+ture size, with residues 15-18 and 25-27 presenting as a coil for 85% of 
+the time; whereas residues 19-24 keeps it helical structure for over 60% 
+of the time.
+Furthermore, a comparison between PET30 and IsPETase structures 
+reveals key distinguished features. First, IsPETase exhibits two disulﬁde 
+bridges (Han et al., 2017), while PET30 is described only with one. The 
+extra bridge of IsPETase connects two loops that harbor the catalytic 
+residues Asp and His, guaranteeing that they do not get too far apart. 
+In the position where the analogous Cys residues should be, we ﬁnd a 
+Gly and a Val instead. In this sense, we measured the distance between 
+Gly195 and Val232 over time. Disulﬁde bonds typically have a length 
+of 2.05 Å, with 3.0 Å being used as the PDB database’s cutoﬀ for disul-
+ﬁdes (Sun et al., 2017). From our simulations, we observed that the 
+PET30𝐹 Gly195-Val232 distance starts at 3.0 Å apart, but this distance 
+varies, sometimes increasing until 5.0 Å. For PET30𝐵, the distance is 
+even more prominent, starting at 3.0 Å and reaching 6.0 Å around 300 
+ns, staying at this distance for almost all the simulationFig. 3D. From 
+these insights, it can be inferred that the absence of the expected disul-
+ﬁde bridge in PET30 introduces greater ﬂexibility and variability in the 
+Gly195-Val232 distance, potentially inﬂuencing the enzyme’s catalytic 
+eﬃciency in PET degradation. Since the presence of the PET molecule 
+further increases the distance between the residues, it is reasonable to 
+assume that the amount of stress over the loop by the presence of the 
+ligand aﬀects the PET30 catalytic process. This structural distinction 
+oﬀers a plausible explanation for the observed diﬀerences in catalytic 
+performance between PET30 and IsPETase. It indicates the importance 
+of the disulﬁde bridge in modulating enzymatic activity in the context 
+of PET degradation.
+One notable structural feature is a conserved string of four Gly 
+residues composing the initial segment of the helix 𝛼4 (Gly155-Gly156-
+Gly157-Gly158), also present in the IsPETase. Furthermore, PET30 has 
+an additional four Gly-residues motif at the initial segment of the he-
+lix 𝛼6 (Gly238-Gly239-Gly240-Gly241). Given that Gly residues’ lack 
+of side-chain provides them with increased ﬂexibility, they tend to de-
+crease helix stability. This decrease in helix stability occurs because 
+Gly residues are, in fact, so ﬂexible that the entropy eﬀect accentuates 
+enough to drive the structural change from a deﬁned secondary struc-
+ture to a loop (Imai and Mitaku, 2005). Surprisingly, DSSP analysis 
+reveals that (Gly)4𝛼4 stays as a helix 100% of the time. Diversely, three 
+out of 4 Gly residues in the helix 𝛼6 remain as helix for about 35% of 
+the time, and the rest show coil behavior.
+Another divergence arises when comparing the binding site of 
+PET30 and IsPETase. While IsPETase’s binding motif involves Tyr87-
+Met161-Trp185 (Tyr-Met-Trp), PET30 substitutes two residues, adopt-
+ing Phe80-Met154-Tyr178 (Phe-Met-Tyr) as its auxiliary residues. In-
+triguingly, a mutational study of PET30 has illuminated the critical role 
+of speciﬁc residues in its catalytic function. Mutants PET30(Phe80Tyr) 
+and PET30(Tyr178Trp), as well as a variant featuring both mutations, 
+exhibited a loss of activity in degrading PET. These ﬁndings highlight 
+the delicate interplay between the binding motif and catalytic activity 
+Current Research in Structural Biology 7 (2024) 100130
+5
+E.S.M. Pinto, A.T. Mangini, L.C.C. Novo et al.
+Fig. 3.Measurement of the distance between signiﬁcant residues over time. The PET30𝐹 represented in color black and PET30𝐵 depicted in red A) Distance between 
+hydrogen atom HD1 from His230 and the oxygen atom OD1 from Asp198. B) Distance between hydrogen atom HG from Ser153 and the nitrogen 𝜖 atom from 
+His230. C) Distance between hydrogen atom HD1 from His230 and the oxygen atom OD2 from Asp198. D) Minimal distance between residues Gly195 and Val232, 
+where the IsPETase structure has an extra disulﬁde bridge.
+in PET-degrading enzymes, emphasizing the intricate relationship be-
+tween sequence, structure, and function in these signiﬁcant proteins. 
+The role of the auxiliary residues in PET30 will be discussed in more 
+depth later.
+3.2. The halting of the catalytic triad: when it is time to hold their ground
+As shown in Fig. 1C, the enzyme-substrate complex should have a 
+speciﬁc residue coordination. The hydrogen from N𝛿 of His230 pairs 
+with the oxygen from the Asp198 residue; the hydrogen belonging to 
+the hydroxyl group of Ser153 aligns with the N𝜖 of His230 and; the 
+oxygen from the hydroxyl group of Ser153 interacts with a carbon from 
+the ester group of the substrate molecule. In this sense, we assessed the 
+distance among these groups throughout the simulations.
+In the presence of the PET molecule, there is a notable reduction in 
+the distance between the hydrogen bonded to the nitrogen delta (N𝛿) of 
+His230 and the oxygens from Asp198, suggesting a coordinated inter-
+actionFig. 3A,C. Additionally, the hydrogen from the Ser153 hydroxyl 
+group consistently maintains closer proximity to the nitrogen epsilon 
+(N𝜖) of His230 in PET30𝐵 compared to PET30𝐹, providing further ev-
+idence of coordination among catalytic residues Fig. 3B. Although the 
+distance between Ser153 and the PET molecule remains relatively con-
+stant across replicas 3 and 4, their distances vary from the PET center 
+of mass SFig.27. Examination of the dihedral distribution of Ser153
+SFig.23 reveals a ﬂipping behavior concurrent with shifts of the PET 
+molecule within the binding pocket.
+Furthermore, RMSD (Fig. 4A) and RMSF (Fig. 4E) demonstrate a 
+slightly increased overall backbone position variation relative to the ini-
+tial structure and ﬂexibility for PET30𝐵. However, the catalytic residues 
+situated in speciﬁc regions of the protein either do not change their de-
+gree of ﬂexibility compared to PET30𝐹 or even become less ﬂexible 
+in the presence of PET. Moreover, we measured the distance between 
+the catalytic residues. This result is consistent with previous observa-
+tions from IsPETase. Studies of IsPETase demonstrate the importance of 
+certain regions becoming more ﬂexible while retaining the rigidity of 
+other regions to maintain catalytic eﬃciency, such as the ﬂexibility of 
+Ser214 and Trp185, demonstrated by Liu et al. (2022). They showed 
+that Ser214 provides a minor steric hindrance, giving more ﬂexibility 
+at the Trp185 site of isPETase, which is beneﬁcial to the wobbling of 
+the Trp185 site and stable binding to the PET aromatic ring. For PET30, 
+the analogous residues by alignment are His206, respective to Ser214, 
+and Tyr178, respective to Trp185. Zhang et al. (2022)tested the muta-
+tion Ser214His and observed that while it improved thermostability, it 
+also decreased the catalytic eﬃciency, suggesting that this could be a 
+potential mutation to improve PET30 eﬃciency. The implication of the 
+interaction with Tyr178, one of the auxiliary residues, will be discussed 
+next.
+3.3. The role of the auxiliary residues: the sidekicks step into the spotlight
+Our simulation reveals a signiﬁcant feature of the auxiliary residues 
+during the interaction between PET30 and PET. ΔRMSF (Fig. 4E) re-
+veals that the catalytic triad residues lessen their ﬂexibility, and the 
+three auxiliary residues become more rigid -o r at least keep the same 
+level of ﬂexibility of PET30𝐹 -despite the slight overall shifting of RMSF 
+towards higher ﬂexibility. This observation suggests that these residues 
+attain some level of coordination. To investigate this mechanism fur-
+ther, we observed the distances of Phe80-Met154, Phe80-Tyr178, and 
+Met154-Tyr178 and their distance to the PET molecule.
+Distinct diﬀerences between PET30𝐹 and PET30𝐵 emerge when 
+considering simulations where the PET molecule remains tightly bound 
+to the binding pocket and those where it detaches. In PET30𝐹 replicas 
+and replicas 1, 2, and 5 of PET30𝐵 (where PET detaches brieﬂy), the dis-
+tance between Phe80 and Tyr178 exhibits considerable variation over 
+time. In contrast, replicas 3 and 4 of PET30𝐵 maintain a consistently 
+close distance of approximately 6 Å throughout the entire simulation. 
+Upon closer examination of PET30𝐵 replicas 3 and 4 and their interac-
+tion with each auxiliary residue and PET, it becomes evident that Phe80 
+and Tyr178 maintain a more stable distance from PET than Met154. 
+This observation might be because Phe80 and Tyr174 can interact with 
+PET through 𝜋-𝜋 stacking.
+Furthermore, DSSP analysisSFig.9 indicates that Phe80 and Tyr178 
+remain closely associated in the presence of PET despite adopting a 
+coil conformation. This observation indicates the PET molecule’s inﬂu-
+ence in coordinating these residues, as evidenced by their distinctive 
+Current Research in Structural Biology 7 (2024) 100130
+6
+E.S.M. Pinto, A.T. Mangini, L.C.C. Novo et al.
+Fig. 4.MD trajectory analyses. The PET30𝐹 is represented in black, and the PET30𝐵 is depicted in red. Each graph characterizes the average result of the ﬁve 
+replicas. A) RMSD result. B) SASA result. C) Rg result. D) HB results. On the left, the graph considers the distance of 0.35 nm and the angle of 30◦; on the right, the 
+graph considers only the distance of 0.35 nm. E) ΔRMSF result. ΔRMSF is calculated as RMSF PET30𝐵 -RMSF PET30𝐹 . Positive values indicate higher ﬂexibility of 
+the PET30𝐵 whereas negative values reveal higher ﬂexibility of PET30𝐹 . The regions representing the 𝛽-strands are colored in cyan, and the regions indicating the 
+𝛼-helices are colored in violet. The red lines indicate the catalytic residues and the dark blue lines indicate the auxiliary residues.
+behavior. Additionally, despite being in a coil conformation, Phe80 and 
+Tyr178 tend to hold together when interacting with PET. This observa-
+tion further underscores the coordinating eﬀect of the PET molecule on 
+these auxiliary residues.
+3.4. Taking the wrong avenue: when the PET molecule gets lost around the 
+protein
+The initially available PET30 structure exhibited a catalytic pocket 
+conformation unsuitable for binding, as demonstrated by incongruent 
+results from molecular docking compared to literature expectations 
+Tournier et al. (2020)( s e e Supplementary Materials). Then, ensem-
+ble docking was employed to generate PET30 structures more aligned 
+with the anticipated binding conformation. Poses exhibiting character-
+istics such as an open pocket and proper alignment of catalytic and 
+auxiliary residues were selectively chosen. Comparative analysis of var-
+ious docking results utilizing diﬀerent PET30 conformations revealed 
+a more suitable outcome than the initial docking attempt with the na-
+tive PDB structure. Notably, discrepancies in the alignment of catalytic 
+residues, especially coordination of the catalytic residues, in the origi-
+nal structure were rectiﬁed in the ﬁnal structure, demonstrating correct 
+alignment and optimal distance. The selected docking result was then 
+utilized in our MD simulations, exhibiting the PET molecule adopting 
+an optimal conformation within the catalytic pocket. These simulations 
+conﬁrmed the eﬃcacy of the reﬁned approach in capturing the biolog-
+ically relevant enzyme-substrate binding conformation within a short 
+timeframe.
+Our ﬁrst concern was how long the PET molecule would stay in 
+contact with the binding site SFig.27. Since our simulations reach the 
+microsecond scale, an unbinding event is expected. Generally, residence 
+time varies from picoseconds to milliseconds (Huang and Caﬂisch, 
+2011), and the PET30 binding site is entirely external to the protein 
+structure, composing a shallow pocket. From our simulations, we ob-
+served the unbinding of PET in 2 out of 5 replicas, which we kept to 
+calculate the averages of each analysis. Replica 2 shows the unbinding 
+occurring around 300 ns, where PET leaves the binding pocket, cir-
+cles the protein, and lodges in a pocket close to the N- and C-termini 
+junctions. Replica 5 shows the ﬁrst unbinding event occurring around 
+270 ns, and the PET molecule relocates a few angstroms away from the 
+binding pocket but returns to the binding pocket around 300 ns. Later, 
+the PET leaves again, around 400 ns. Here, we note that close to the 
+binding pocket, a helix, formed by residues 180-185, and an adjacent 
+coil, consisting of residues 205-212, are arranged into a road-like pat-
+tern, where the PET molecule starts trailing. Most of these residues are 
+polar, and only two are aromatic (His206 and His210); we notice that 
+Tyr211 is aromatic, but it is the only residue in the helix that keeps 
+interacting with the inside residues of the protein, never ﬂipping to in-
+teract with the PET molecule. The PET molecule slowly crawls from 
+the binding pocket until it starts interacting with the last residues of 
+this sideway avenue. However, around 470 ns, it starts moving back-
+ward and stops at a position interacting with the initial residues from 
+the road (180-182 from the coils and 205-212 from the helix) (Supple-
+mentary Material Movie-PET30B5). Replica 1 also shows an unbinding 
+around 50 ns, but the PET molecules return to the binding pocket at 
+300 ns and stay there until the end of the simulation. Replicas 3 and 4 
+maintain the PET molecule tightly bound close to the catalytic site all 
+the time.
+Current Research in Structural Biology 7 (2024) 100130
+7
+E.S.M. Pinto, A.T. Mangini, L.C.C. Novo et al.
+3.5. Simulations aftermath: contrasting PET30𝐹 and PET30𝐵 dynamics
+Next, we will highlight the main observations distinguishing PET30𝐹
+and PET30𝐵. RMSD analysis (Fig. 4A) revealed that PET30𝐵 exhibits a 
+slightly higher overall backbone position variation than PET30𝐹, par-
+ticularly after 100 ns, reaching a signiﬁcant diﬀerence of 0.5 nm at 
+approximately 900 ns. This observation suggests that the presence of 
+PET introduces a subtle yet cumulative eﬀect on the structure dynamics 
+of PET30.
+Moreover, ΔRMSF analysis (Fig. 4E) indicate nuanced diﬀerences 
+in the ﬂexibility of PET30𝐹 and PET30𝐵. While the overall ΔRMSF dif-
+ference is minimal (approximately 0.1 nm), certain regions crucial for 
+the catalytic mechanism exhibited signiﬁcant variations. Notably, the 
+catalytic triad residues (Ser153, Asp198, and His230) showed distinct 
+ﬂexibility patterns, indicating the inﬂuence of PET binding on their dy-
+namics.
+In the modeled segment (residues 1 to 27), PET30𝐵 displayed higher 
+ﬂexibility, particularly around residue 21, showcasing a signiﬁcant con-
+trast of 1.3 nm compared to PET30𝐹. Interestingly, the auxiliary residue 
+Phe80 region exhibited a marked decrease in ﬂexibility in PET30𝐵, sug-
+gesting a potential role in ligand accommodation. Regions surrounding 
+catalytic residues displayed consistent ﬂexibility, emphasizing the intri-
+cate interplay between ligand binding and enzymatic function.
+DSSP analysis unveils distinct secondary structure variations be-
+tween PET30𝐹 and PET30𝐵 systems (see SFig.9). Speciﬁcally, in 𝛽-
+strand 3 (residues 219-228), the last four residues (225-228) exhibit 
+ﬂuctuating conformations between coil and 𝛽-sheet throughout the sim-
+ulation. PET30𝐵 maintains a more prolonged 𝛽-sheet conformation in 
+this segment than PET30𝐹. Also, residues 229-233, including the cat-
+alytic residue His230, alternate between 𝛼-helix and coil conformations. 
+PET30𝐵 consistently favors the 𝛼-helix conformation, which is more 
+extended than PET30𝐹 in this region. Furthermore, DSSP analysis re-
+veals a structural diﬀerence in residue 288, forming a 𝛽-turn between 
+𝛽-strands 𝛽9 and 𝛽10. In the presence of the ligand, this residue adopts 
+a coil conformation exclusively, contrasting with PET30𝐹, where it spo-
+radically assumes a 𝛽-sheet conformation. This observation aligns with 
+the dRMSF results, indicating reduced ﬂexibility in the absence of the 
+ligand. Residues 226-228, forming a loop between 𝛽-strand 𝛽8 and he-
+lix 𝛼6, exhibit a 𝛽-strand conformation more frequently (25% of the 
+time) in the presence of the PET molecule, compared to the free en-
+zyme state (15% of the time). The ﬂexibility analysis of residue 152, 
+adjacent to the catalytic Ser153, shows a balanced distribution between 
+helix, 𝛽-sheet, and coil conformations, consistent across both PET30𝐹
+and PET30𝐵. Notably, the helix 𝛼2 (residues 83-96) displays dynamic 
+variations over time, with residue 83 evenly splitting between helix 
+and coil, residues 84-88 favoring helix (55% of the time), residues 89-
+94 consistently adopting a helix conformation, residue 95 displaying a 
+75% helix conformation, and residue 96 favoring a coil conformation 
+(90% of the time).
+Furthermore, PCA revealed substantial distinctions between the 
+PET30𝐹 and PET30𝐵 systems Fig. 5A,B. While the initial positions of 
+each replica were nearly identical, with minor diﬀerences arising dur-
+ing equilibration, a noticeable divergence in energy distribution became 
+evident. Each replica portrayed a unique distribution, and our analyses 
+depicted two distinct pieces of information: clusters formed by the tra-
+jectory of each replica and clusters formed by the density of points.
+The PC1 vs PC2 plot for PET30𝐹 displayed a more continuous land-
+scape, suggesting that the enzyme ﬂuctuates more freely among energy 
+minima when unbound. In contrast, the PC1 vs PC2 plot for PET30𝐵 ex-
+hibited a more distinctive cluster, with some clusters entirely isolated 
+from others. These ﬁndings indicate that the enzyme adopts speciﬁc 
+conformations during interaction with the PET molecule. A compar-
+ison of the density plots revealed that PET30𝐵 had a higher density 
+at speciﬁc points, while PET30𝐹 exhibited lower density with more 
+distributed points. Notably, points from replicas 2 and 5 in PET30𝐵
+remained closer to the initial position. Furthermore, looking into the 
+movies showing the principal movements captured in PCA of PET30𝐹
+and PET30𝐵 (Supplementary material Movie-PCA-PET30𝐹 and Movie-
+PET30𝐵), we observe that when the PET molecule is present, the cat-
+alytic residues Ser152 and Asp198 hold theirposition close together. At 
+the same time, His230 moves, closing its distance to the other catalytic 
+residues, indicating increased coordination among them. On the other 
+hand, in the absence of PET, the residues Asp198 and His230 ﬂuctuate 
+more, suggesting a lower level of coordination compared to PET30𝐵.
+In the context of the free energy proﬁle generated from the prob-
+ability distributions of PC1 and PC2, a signiﬁcant diﬀerence emerged 
+between PET30𝐹 and PET30𝐵. The global minimum energy for PET30𝐹
+was -17.1 kJ/mol, whereas PET30𝐵 reached -19.2 kJ/mol, indicat-
+ing a diﬀerence of 2.1 kJ/mol. Furthermore, PET30𝐵 exhibited four 
+well-separated small clusters, each reaching approximately -15 kJ/mol. 
+In contrast, PET30𝐹 displayed a more scattered energy distribution, 
+featuring one large cluster at -10 kJ/mol, four clusters within the 
+larger one reaching -11 kJ/mol, and three smaller clusters reaching -
+14 kJ/mol, where one of them contains the global minimum cluster.
+The outcomes obtained from the R𝑔 analysis (Fig. 4C) demonstrate 
+a consistent similarity between PET30𝐹 and PET30𝐵, indicating virtu-
+ally identical values. Both systems exhibit a slight compaction trend 
+throughout the simulation. In the context of hydrogen bond analysis, 
+it is observed that both PET30𝐹 and PET30𝐵 maintain a comparable 
+number of internal hydrogen bonds (Fig. 4D), with these numbers ex-
+hibiting no signiﬁcant variation throughout the simulation. SASA anal-
+ysis (Fig. 4B) reveals a marginal increase in the overall surface area of 
+the protein when interacting with the PET molecule. Notably, around 
+the 800 ns mark, the SASA values for PET30𝐹 and PET30𝐵 converge, 
+suggesting a comparable surface area in the simulation. These ﬁnd-
+ings collectively suggest that the structural behavior variation between 
+PET30𝐹 and PET30𝐵 is nuanced, and importantly, the presence of PET 
+does not exert an abrasive impact on this enzyme.
+4. Conclusions
+PET30, identiﬁed as an esterase, exhibits activity in degrading PET, 
+albeit with a lower catalytic eﬃciency than IsPETase. Nevertheless, our 
+MD investigation reveals a favorable interaction between PET30 and 
+PET. Furthermore, studying an enzyme with reduced catalytic eﬃciency 
+provides a unique perspective on the evolution of plastic-degrading en-
+zymes, shedding light on the ongoing process of adaptation toward PET 
+degradation. The comparatively lower catalytic eﬃciency of PET30 sig-
+niﬁes a stage in its evolutionary trajectory, suggesting that this enzyme 
+is still ﬁne-tuning its mechanisms for optimal PET degradation. This 
+perspective contributes to our understanding of the dynamic nature of 
+enzyme evolution in the context of plastic degradation, paving the way 
+for future endeavors in designing more robust and eﬃcient biocatalysts 
+for addressing environmental challenges posed by synthetic polymers.
+In conclusion, our ﬁndings demonstrate the intricate interplay be-
+tween PET30 and PET, providing a molecular-level understanding of 
+how the enzyme responds to and interacts with its substrate. These in-
+sights contribute valuable knowledge for the rational design of enzymes 
+with enhanced PET-degrading capabilities, thereby advancing eﬀorts in 
+combating plastic pollution.
+Declaration of competing interest
+The authors declare that they have no known competing ﬁnancial 
+interests or personal relationships that could have appeared to inﬂuence 
+the work reported in this paper.
+Data availability
+No data was used for the research described in the article.
+Current Research in Structural Biology 7 (2024) 100130
+8
+E.S.M. Pinto, A.T. Mangini, L.C.C. Novo et al.
+Fig. 5.PCA and energy proﬁle. A) 2D plot of PCA from PET30𝐹, depicting PC1 in the x-axis and PC2 in the y-axis, colored by the density of points. Structures of 
+the four most representative clusters are shown. B) 2D plot of PCA from PET30𝐵, depicting PC1 in the x-axis and PC2 in the y-axis, colored by the density of points. 
+Structures of the four most representative clusters are shown. C) Free energy proﬁle derived from PET30𝐹 PCA. D) Free energy proﬁle derived from PET30𝐵 PCA.
+Acknowledgement
+This work was supported by grants from the Fundação de Amparo 
+à Pesquisa do Estado do Rio Grande do Sul -F A P E R G S [19/2551-
+0001906-8], Conselho Nacional de Desenvolvimento Cientíﬁco e Tec-
+nológico -C N P q [314082/2021-2, 440279/2022-4 and 408154/2022-
+5]], and the Coordenação de Aperfeiçoamento de Pessoal de Nível Su-
+perior -[ P R O B R A L 88881.198766/2018-01]. This study was ﬁnanced 
+in part by the Coordenação de Aperfeiçoamento de Pessoal de Nível Su-
+perior - Brasil (CAPES) - Finance Code 001. This work was performed 
+on the HoreKa supercomputer funded by the Ministry of Science, Re-
+search and the Arts Baden-Württemberg and by the Federal Ministry of 
+Education and Research.
+Appendix A. Supplementary material
+Supplementary material related to this article can be found online 
+at https://doi .org /10 .1016 /j .crstbi .2024 .100130.
+References
+Allouzi, M.M.A., Tang, D.Y.Y., Chew, K.W., Rinklebe, J., Bolan, N., Allouzi, S.M.A., Show, 
+P.L., 2021. Micro (nano) plastic pollution: the ecological inﬂuence on soil-plant sys-
+tem and human health. Sci. Total Environ.788, 147815.
+Austin, H.P., Allen, M.D., Donohoe, B.S., Rorrer, N.A., Kearns, F.L., Silveira, R.L., Pol-
+lard, B.C., Dominick, G., Duman, R., El Omari, K., et al., 2018. Characterization and 
+engineering of a plastic-degrading aromatic polyesterase. Proc. Natl. Acad. Sci.115, 
+E4350–E4357.
+Berman, H.M., Westbrook, J., Feng, Z., Gilliland, G., Bhat, T.N., Weissig, H., Shindyalov, 
+I.N., Bourne, P.E., 2000. The protein data bank. Nucleic Acids Res.28, 235–242.
+Bowie, J.U., Lüthy, R., Eisenberg, D., 1991. A method to identify protein sequences that 
+fold into a known three-dimensional structure. Science253, 164–170.
+Carr, S.A., Liu, J., Tesoro, A.G., 2016. Transport and fate of microplastic particles in 
+wastewater treatment plants. Water Res.91, 174–182.
+Chen, K., Hu, Y., Dong, X., Sun, Y., 2021. Molecular insights into the enhanced perfor-
+mance of ekylated petase toward pet degradation. ACS Catal.11, 7358–7370.
+Childers, M.C., Daggett, V., 2017. Insights from molecular dynamics simulations for com-
+putational protein design. Mol. Syst. Des. Eng.2, 9–33.
+Colovos, C., Yeates, T.O., 1993. Veriﬁcation of protein structures: patterns of nonbonded 
+atomic interactions. Protein Sci.2, 1511–1519.
+Csizmadia, P., 1999. Marvinsketch and Marvinview: molecule applets for the world wide 
+web. In: Proc. of ECSOC-3, the 3rd Int Electr Conf on Synthetic Organic Chem, 
+September 1–30, p.367 ˛a369.
+Cui, Y., Chen, Y., Liu, X., Dong, S., Tian, Y., Qiao, Y., Mitra, R., Han, J., Li, C., Han, 
+X., et al., 2021. Computational redesign of a petase for plastic biodegradation under 
+ambient condition by the grape strategy. ACS Catal.11, 1340–1350.
+Dodda, L.S., Cabeza de Vaca, I., Tirado-Rives, J., Jorgensen, W.L., 2017a. Ligpargen web 
+server: an automatic opls-aa parameter generator for organic ligands. Nucleic Acids 
+Res.45, W331–W336.
+Dodda, L.S., Vilseck, J.Z., Tirado-Rives, J., Jorgensen, W.L., 2017b. 1.14* cm1a-lbcc: 
+localized bond-charge corrected cm1a charges for condensed-phase simulations. J. 
+Phys. Chem. B121, 3864–3870.
+Eberhardt, J., Santos-Martins, D., Tillack, A.F., Forli, S., 2021. Autodock vina 1.2. 0: new 
+docking methods, expanded force ﬁeld, and python bindings. J. Chem. Inf. Model.61, 
+3891–3898.
+Egmond, M.R., de Vlieg, J., 2000. Fusarium solani pisi cutinase. Biochimie 82, 
+1015–1021.
+Fecker, T., Galaz-Davison, P., Engelberger, F., Narui, Y., Sotomayor, M., Parra, L.P., 
+Ramírez-Sarmiento, C.A., 2018. Active site ﬂexibility as a hallmark for eﬃcient pet 
+degradation by I. Sakaiensis petase. Biophys. J.114, 1302–1312.
+Han, X., Liu, W., Huang, J.W., Ma, J., Zheng, Y., Ko, T.P., Xu, L., Cheng, Y.S., Chen, C.C., 
+Guo, R.T., 2017. Structural insight into catalytic mechanism of pet hydrolase. Nat. 
+Commun.8, 2106.
+Hooft, R.W., Vriend, G., Sander, C., Abola, E.E., 1996. Errors in protein structures. Na-
+ture381, 272.
+Howard, S.A., McCarthy, R.R., 2023. Modulating bioﬁlm can potentiate activity of novel 
+plastic-degrading enzymes. NPJ Bioﬁlms Microbiomes9, 72.
+Huang, D., Caﬂisch, A., 2011. The free energy landscape of small molecule unbinding. 
+PLoS Comput. Biol.7, e1002002.
+Imai, K., Mitaku, S., 2005. Mechanisms of secondary structure breakers in soluble pro-
+teins. Biophysics1, 55–65.
+Joo, S., Cho, I.J., Seo, H., Son, H.F., Sagong, H.Y., Shin, T.J., Choi, S.Y., Lee, S.Y., Kim, 
+K.J., 2018. Structural insight into molecular mechanism of poly (ethylene terephtha-
+late) degradation. Nat. Commun.9, 382.
+Jorgensen, W.L., Tirado-Rives, J., 2005. Potential energy functions for atomic-level sim-
+ulations of water and organic and biomolecular systems. Proc. Natl. Acad. Sci. 102, 
+6665–6670.
+Kim, D.E., Chivian, D., Baker, D., 2004. Protein structure prediction and analysis using 
+the robetta server. Nucleic Acids Res.32, W526–W531.
+Knapp, B., Ospina, L., Deane, C.M., 2018. Avoiding false positive conclusions in molecular 
+simulation: the importance of replicas. J. Chem. Theory Comput.14, 6127–6138.
+Current Research in Structural Biology 7 (2024) 100130
+9
+E.S.M. Pinto, A.T. Mangini, L.C.C. Novo et al.
+Laskowski, R.A., MacArthur, M.W., Moss, D.S., Thornton, J.M., 1993. Procheck: a program 
+to check the stereochemical quality of protein structures. J. Appl. Crystallogr. 26, 
+283–291.
+Lindahl, Abraham, Hess, van der Spoel, 2022. Gromacs 2021.5. https://doi .org /10 .5281 /
+zenodo .5850051.
+Liu, Y., Liu, Z., Guo, Z., Yan, T., Jin, C., Wu, J., 2022. Enhancement of the degradation 
+capacity of ispetase for pet plastic degradation by protein engineering. Sci. Total 
+Environ.834, 154947.
+Lüthy, R., Bowie, J.U., Eisenberg, D., 1992. Assessment of protein models with three-
+dimensional proﬁles. Nature356, 83–85.
+MacLeod, M., Arp, H.P.H., Tekman, M.B., Jahnke, A., 2021. The global threat from plastic 
+pollution. Science373, 61–65.
+Maity, D., Pal, D., 2022. MD DaVis: interactive data visualization of protein molecular 
+dynamics. Bioinformatics38, 3299–3301.
+Maurya, A., Bhattacharya, A., Khare, S.K., 2020. Enzymatic remediation of polyethylene 
+terephthalate (pet)–based polymers for eﬀective management of plastic wastes: an 
+overview. Front. Bioeng. Biotechnol.8, 602325.
+Pontius, J., Richelle, J., Wodak, S.J., 1996. Deviations from standard atomic volumes as 
+a quality measure for protein crystal structures. J. Mol. Biol.264, 121–136.
+Revel, M., Châtel, A., Mouneyrac, C., 2018. Micro (nano) plastics: a threat to human 
+health? Curr. Opin. Environ. Sci. Health1, 17–23.
+Robertson, M.J., Tirado-Rives, J., Jorgensen, W.L., 2015. Improved peptide and pro-
+tein torsional energetics with the opls-aa force ﬁeld. J. Chem. Theory Comput. 11, 
+3499–3509.
+Sanner, M.F., et al., 1999. Python: a programming language for software integration and 
+development. J. Mol. Graph. Model.17, 57–61.
+Sharma, B., Dangi, A.K., Shukla, P., 2018. Contemporary enzyme based technologies for 
+bioremediation: a review. J. Environ. Manag.210, 10–22.
+Son, H.F., Cho, I.J., Joo, S., Seo, H., Sagong, H.Y., Choi, S.Y., Lee, S.Y., Kim, K.J., 2019. 
+Rational protein engineering of thermo-stable petase from ideonella sakaiensis for 
+highly eﬃcient pet degradation. ACS Catal.9, 3519–3526.
+Sun, M.a., Wang, Y., Zhang, Q., Xia, Y., Ge, W., Guo, D., 2017. Prediction of reversible 
+disulﬁde based on features from local structural signatures. BMC Genomics18, 1–10.
+Tournier, V., Topham, C., Gilles, A., David, B., Folgoas, C., Moya-Leclair, E., Kamionka, 
+E., Desrousseaux, M.L., Texier, H., Gavalda, S., et al., 2020. An engineered pet de-
+polymerase to break down and recycle plastic bottles. Nature580, 216–219.
+Trott, O., Olson, A.J., 2010. Autodock vina: improving the speed and accuracy of docking 
+with a new scoring function, eﬃcient optimization, and multithreading. J. Comput. 
+Chem.31, 455–461.
+Williams, C.J., Headd, J.J., Moriarty, N.W., Prisant, M.G., Videau, L.L., Deis, L.N., Verma, 
+V., Keedy, D.A., Hintze, B.J., Chen, V.B., et al., 2018. Molprobity: more and better 
+reference data for improved all-atom structure validation. Protein Sci.27, 293–315.
+Yoshida, S., Hiraga, K., Takehana, T., Taniguchi, I., Yamaji, H., Maeda, Y., Toyohara, K., 
+Miyamoto, K., Kimura, Y., Oda, K., 2016. A bacterium that degrades and assimilates 
+poly (ethylene terephthalate). Science351, 1196–1199.
+Zhang, H., Perez-Garcia, P., Dierkes, R.F., Applegate, V., Schumacher, J., Chibani, C.M., 
+Sternagel, S., Preuss, L., Weigert, S., Schmeisser, C., et al., 2022. The bacteroidetes ae-
+quorivita sp. and kaistella jeonii produce promiscuous esterases with pet-hydrolyzing 
+activity. Front. Microbiol.12, 803896.
