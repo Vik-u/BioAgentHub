@@ -2,7 +2,7 @@
 
 1. **Activate the project environment**
    ```bash
-   cd /Users/viku/Documents/UIUC/work/PETase
+   cd /path/to/BioAgentHub
    source .venv/bin/activate
    ```
 

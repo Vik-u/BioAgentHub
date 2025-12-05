@@ -84,7 +84,7 @@ uvicorn services.retrieval_service:app --host 0.0.0.0 --port 8000 --reload
 
 ## Inputs & Outputs
 
-- **Input**: PDFs under `Papers/`. Add new files and run `scripts/update_pipeline.py`.
+- **Input**: PDFs under `Papers/` (PETase) and topic PDFs under `data/<topic>/`. Add new files and run `scripts/update_pipeline.py`.
 - **Output**:
   - Text files (`KnowledgeGraph/text/*.txt`)
   - Metadata JSON (`KnowledgeGraph/metadata/*.json`)
@@ -115,7 +115,8 @@ Regardless of policy, the loop is identical:
 - **New PDFs**: run `python scripts/update_pipeline.py`. This rebuilds the entire knowledge stack so the agent immediately “sees” the new paper.
 - **Confidence**: treat FAISS avg + RL reward as quick sanity checks. If FAISS < 0.5, the answer likely needs better evidence. (KG confidence will populate once legacy edges are backfilled.)
 - **Benchmarking**: update `benchmark_questions.txt` to track coverage over your priority question set.
-- **LLM config**: `config/llm_config.json` controls whether we use local Ollama/GPT-OSS or a cloud API.
+- **LLM config**: `config/llm_config.json` defaults to the local Ollama setup; `config/llm_profiles.json` contains ready-to-copy profiles for Ollama and OpenAI (`OPENAI_API_KEY`), so you can swap by copying the desired profile into `llm_config.json`.
+- **Workspace portability**: metadata and vector store entries now reference PDFs via relative paths under `data/<topic>/`, so moving the repo won’t break retrieval.
 - **Protocol planning**: run `python scripts/build_protocols.py` followed by `python app/protocol_agent_cli.py "..."` for LangChain/LangGraph-generated experimental roadmaps.
 
 ## Roadmap
