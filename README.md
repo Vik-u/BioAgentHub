@@ -1,6 +1,6 @@
-# PETase Knowledge & RL System
+# BioAgentHub: RAG + RL + Protocols across Topics
 
-This workspace ingests PETase-related PDFs, extracts text + structured facts, builds a knowledge graph/vector store, and powers retrieval-augmented RL + LLM agents for planning new experiments and designs. It also supports topic-agnostic workspaces (data/*) and Biofoundry instrument-aware protocols.
+This workspace ingests scientific PDFs, builds text/vector workspaces (per-topic and combined), and powers retrieval-augmented RL + LLM agents for QA and protocol generation. PETase is just one topic; `workspaces/all_topics` provides the “meta” combined workspace. Biofoundry instrument-aware protocols are supported via instrument corpora.
 
 ## Repository Layout
 
