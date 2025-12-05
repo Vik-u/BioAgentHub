@@ -48,6 +48,27 @@ def load_policy(path: str | None):
     return model
 
 
+def ensure_workspace_env() -> Path:
+    """
+    Ensure WORKSPACE_ROOT points to a valid workspace.
+
+    When GRADIO runs without this, calls can silently fail. Default to all_topics if unset.
+    """
+    current = os.environ.get("WORKSPACE_ROOT")
+    if current:
+        return Path(current).expanduser().resolve()
+    default_ws = PROJECT_ROOT / "workspaces" / "all_topics"
+    if not default_ws.exists():
+        raise SystemExit(f"Workspace not found: {default_ws}")
+    os.environ["WORKSPACE_ROOT"] = str(default_ws)
+    return default_ws
+
+
+WORKSPACE_PATH = ensure_workspace_env()
+LOG_DIR = PROJECT_ROOT / "logs" / "protocol_runs"
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+
 def qa_handler(question: str, mode: str, seed: int, policy_path: str):
     question = (question or "").strip()
     if not question:
@@ -82,16 +103,30 @@ def protocol_handler(question: str, mode: str, max_instruments: int):
     question = (question or "").strip()
     if not question:
         return "Please enter a protocol prompt."
+    output = ""
     try:
         if mode == "Biofoundry-constrained (legacy)":
-            return run_instrument_protocol(question, top_n=int(max_instruments))
-        if mode == "Methodology-driven (papers)":
-            return run_protocol_agent_v2(question)
-        if mode == "Biofoundry instrument-constrained":
-            return run_instrument_protocol_v2(question)
-        return run_protocol_agent(question)
+            output = run_instrument_protocol(question, top_n=int(max_instruments))
+        elif mode == "Methodology-driven (papers)":
+            output = run_protocol_agent_v2(question)
+        elif mode == "Biofoundry instrument-constrained":
+            output = run_instrument_protocol_v2(question)
+        else:
+            output = run_protocol_agent(question)
     except Exception as exc:  # pragma: no cover
         return f"Protocol generation error: {exc}"
+    # Persist a copy so users can open it later.
+    try:
+        import datetime as _dt
+
+        stamp = _dt.datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = LOG_DIR / f"gradio_protocol_{stamp}.md"
+        with filename.open("w", encoding="utf-8") as handle:
+            handle.write(output)
+        output += f"\n\n_Saved to: {filename}_"
+    except Exception:
+        pass
+    return output
 
 
 def benchmark_handler(question_block: str, mode: str, seed: int, policy_path: str):
@@ -171,4 +206,5 @@ with gr.Blocks(title="PETase Research Dashboard") as demo:
 if __name__ == "__main__":  # pragma: no cover
     host = os.environ.get("GRADIO_SERVER_HOST", "0.0.0.0")
     port = int(os.environ.get("GRADIO_SERVER_PORT", "7860"))
-    demo.launch(server_name=host, server_port=port)
+    # Gradio 5.x: queue has no args; limit global concurrency via GRADIO_NUM_BACKLOG or env if needed.
+    demo.queue().launch(server_name=host, server_port=port)

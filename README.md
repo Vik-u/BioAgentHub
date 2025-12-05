@@ -40,17 +40,25 @@ app/                   # CLI, Gradio, unified chatbot
 
 ### Quick rebuild when new PDFs arrive
 - PETase KG: rerun the PETase steps above.
-- Topic workspaces: rerun `scripts/build_topic_workspaces.py` (idempotent).
+- Topic workspaces: rerun `scripts/build_topic_workspaces.py` (idempotent). Add a new topic under `data/<topic>` then rebuild to refresh `workspaces/<topic>` and `workspaces/all_topics`.
 
 ## Usage Guide
 
 ### Unified chatbot (QA + protocols across workspaces)
 ```bash
-python app/unified_chat.py --mode qa --use-llm
-python app/unified_chat.py --mode protocol --protocol-mode relaxed         # papers/methodology-driven
-python app/unified_chat.py --mode protocol --protocol-mode biofoundry      # instrument-constrained
+python app/unified_chat.py --mode qa --use-llm --workspace workspaces/all_topics
+python app/unified_chat.py --mode protocol --protocol-mode relaxed --workspace workspaces/all_topics
+python app/unified_chat.py --mode protocol --protocol-mode biofoundry --workspace workspaces/all_topics
 ```
-- Selects a workspace interactively (or `--workspace`). Sets `WORKSPACE_ROOT` and clears retrieval caches. Use `--alias-expansion` only for PETase topics.
+- Provide `--workspace` to skip the prompt; defaults are under `workspaces/`. `workspaces/all_topics` is the “meta” combined workspace; per-topic folders run the same retrieval/LLM stack with their own FAISS index. Sets `WORKSPACE_ROOT` and clears retrieval caches. Use `--alias-expansion` only for PETase topics.
+
+### Gradio dashboard
+```bash
+GRADIO_SERVER_NAME=127.0.0.1 GRADIO_SERVER_PORT=7860 WORKSPACE_ROOT=/path/to/workspaces/all_topics \
+  python app/gradio_dashboard.py
+```
+- Tabs: QA (RAG+RL+LLM), Protocol Designer (methodology vs instrument-constrained), Benchmark Metrics.
+- Protocol outputs are also saved to `logs/protocol_runs/gradio_protocol_<timestamp>.md` for persistence.
 
 ### PETase CLI chat (legacy)
 ```bash
@@ -72,6 +80,7 @@ python scripts/report_answer_metrics.py --mode llm --questions-file benchmark_qu
 uvicorn services.retrieval_service:app --host 0.0.0.0 --port 8000 --reload
 ```
 - Honors `WORKSPACE_ROOT` for swapping vector/graph; `USE_ALIAS_EXPANSION=0` to disable PETase-specific query boosts.
+- Uses the FAISS vector index (MiniLM) and optional PETase KG neighbors when present.
 
 ## Metrics Explained
 
@@ -109,6 +118,15 @@ Regardless of policy, the loop is identical:
 3. **Expected entity boost**: ensures question-specific enzymes appear.
 4. **Summarization**: GPT-OSS (when `--mode llm`) produces natural prose with inline citations.
 5. **Metrics logging**: FAISS/KG scores and RL reward are stored in `logs/rl_agent_runs.jsonl`.
+
+## Current Setup Snapshot
+
+- **Workspaces**: per-topic under `workspaces/<topic>` plus a combined `workspaces/all_topics` (use this for meta/agnostic runs). To ingest a new topic, add PDFs to `data/<topic>` and rerun `scripts/build_topic_workspaces.py --data-root data --workspace-root workspaces --model sentence-transformers/all-MiniLM-L6-v2`.
+- **Retrieval embedder**: FAISS indexes built with `sentence-transformers/all-MiniLM-L6-v2` (from PETaseAgent scripts). No multi-embedder comparisons are wired here yet.
+- **KG coverage**: PETase KG present (`KnowledgeGraph/graph.sqlite`, etc.). Other topics are vector-only (no KG/graph expansion).
+- **LLM**: Ollama `gpt-oss:20b` by default (`config/llm_config.json`). Switch via `config/llm_profiles.json` (OpenAI profile uses `OPENAI_API_KEY`).
+- **Protocol generation**: Methodology-driven and instrument-constrained agents pull from the same workspaces/instrument corpora; outputs also saved under `logs/protocol_runs/`.
+- **Gradio**: set `WORKSPACE_ROOT` + `GRADIO_SERVER_NAME/PORT` to launch; QA tab uses RAG+RL+LLM, Protocol tab uses protocol agents (not the QA RL loop).
 
 ## FAQ / Tips
 
