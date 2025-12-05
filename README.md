@@ -1,6 +1,6 @@
 # BioAgentHub: RAG + RL + Protocols across Topics
 
-This workspace ingests scientific PDFs, builds text/vector workspaces (per-topic and combined), and powers retrieval-augmented RL + LLM agents for QA and protocol generation. PETase is just one topic; `workspaces/all_topics` provides the “meta” combined workspace. Biofoundry instrument-aware protocols are supported via instrument corpora.
+This workspace ingests scientific PDFs, builds text/vector workspaces (per-topic and combined), and powers retrieval-augmented RL + LLM agents for QA and protocol generation. PETase is just one topic; other topics include `3hp_pand`, `c4c2_decarb`, `ired`, `retron`, `transaminase`, plus the combined `all_topics` workspace for “meta” runs. Biofoundry instrument-aware protocols are supported via instrument corpora.
 
 ## Repository Layout
 
