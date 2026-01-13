@@ -88,18 +88,18 @@ PDFs (data/<topic>/)
 Architecture:
 ```mermaid
 flowchart TD
-    PDFs["PDFs (data/<topic>/)"] -->|extract text/metadata| Text["text/*.txt\nmetadata/*.json\ncorpus_index.json"]
-    Text -->|embed| VecStore["vector_store\n(FAISS + metadata)"]
-    Text -->|heuristic edges| KGEdges["kg_edges.jsonl\n(+ graph_overview.json)"]
+    PDFs["PDFs (data/<topic>/)"] -->|extract text/metadata| Text["text/*.txt<br>metadata/*.json<br>corpus_index.json"]
+    Text -->|embed| VecStore["vector_store<br>(FAISS + metadata)"]
+    Text -->|heuristic edges| KGEdges["kg_edges.jsonl<br>(+ graph_overview.json)"]
     KGEdges -->|load| GraphDB["graph.sqlite"]
-    KGEdges -->|embed edges| KGVectors["kg_vector_store\n(FAISS + metadata)"]
-    VecStore --> Retrieval["Retrieval backend\n(services/retrieval_service)"]
+    KGEdges -->|embed edges| KGVectors["kg_vector_store<br>(FAISS + metadata)"]
+    VecStore --> Retrieval["Retrieval backend<br>(services/retrieval_service)"]
     GraphDB --> Retrieval
     KGVectors --> Retrieval
-    Retrieval --> QA["QA Agent (RL + LLM)\n(agents/rl_rag_agent)"]
-    Retrieval --> Proto["Protocol Agents\n(methodology / instrument)"]
-    QA --> Logs["logs/rl_agent_runs.jsonl\n+ answers"]
-    Proto --> ProtoLogs["logs/generated_protocols\nlogs/protocol_runs"]
+    Retrieval --> QA["QA Agent (RL + LLM)<br>(agents/rl_rag_agent)"]
+    Retrieval --> Proto["Protocol Agents<br>(methodology / instrument)"]
+    QA --> Logs["logs/rl_agent_runs.jsonl<br>+ answers"]
+    Proto --> ProtoLogs["logs/generated_protocols<br>logs/protocol_runs"]
 ```
 
 Timeline builder:
