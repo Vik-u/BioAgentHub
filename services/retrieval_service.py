@@ -22,7 +22,12 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from utils import enzyme_aliases  # noqa: E402
-from utils.kg_schema_utils import dedupe_preserve_order, expand_query_with_schema, load_schema  # noqa: E402
+from utils.kg_schema_utils import (  # noqa: E402
+    dedupe_preserve_order,
+    expand_query_with_schema,
+    load_schema,
+    schema_entity_candidates,
+)
 
 BASE = Path(__file__).resolve().parents[1]
 WORKSPACE_ROOT = Path(os.environ.get("WORKSPACE_ROOT", BASE / "KnowledgeGraph")).resolve()
@@ -32,11 +37,28 @@ LOG_DIR = BASE / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 TRAJECTORY_LOG = LOG_DIR / "retrieval_trajectories.jsonl"
 USE_ALIAS_EXPANSION = os.environ.get("USE_ALIAS_EXPANSION", "1") == "1"
+USE_ITERATIVE_EXPANSION = os.environ.get("USE_ITERATIVE_EXPANSION", "1") == "1"
 
 
 def should_use_petase_aliases(schema: Dict[str, Any]) -> bool:
     topic = str(schema.get("topic") or "").lower()
     return USE_ALIAS_EXPANSION and "petase" in topic
+
+
+def collect_expansion_terms(results: Sequence[Dict[str, Any]], schema: Dict[str, Any], max_terms: int = 4) -> List[str]:
+    """Mine top hits for schema entities to expand the query in a second pass."""
+    candidates = schema_entity_candidates(schema) + schema.get("metrics", []) + schema.get("substrates", [])
+    lowered_candidates = {c.lower(): c for c in candidates if c}
+    expansions: List[str] = []
+    for row in results:
+        text = row.get("text", "")
+        lower = text.lower()
+        for alias_lower, canonical in lowered_candidates.items():
+            if alias_lower in lower and canonical not in expansions:
+                expansions.append(canonical)
+                if len(expansions) >= max_terms:
+                    return expansions
+    return expansions
 
 
 class VectorSearchRequest(BaseModel):
@@ -78,16 +100,7 @@ class RetrievalBackend:
         vector = self.model.encode([text], normalize_embeddings=True)
         return vector.astype("float32")
 
-    def vector_search(self, query: str, top_k: int) -> List[Dict[str, Any]]:
-        schema = load_schema(WORKSPACE_ROOT)
-        if USE_ALIAS_EXPANSION:
-            if should_use_petase_aliases(schema):
-                normalized_query = enzyme_aliases.expand_query(query)
-            else:
-                normalized_query = expand_query_with_schema(query, schema)
-        else:
-            normalized_query = query
-        vector = self.embed(normalized_query)
+    def _search_embeddings(self, vector: np.ndarray, top_k: int) -> List[Dict[str, Any]]:
         if self.faiss_index is not None:
             distances, indices = self.faiss_index.search(vector, top_k)
         else:
@@ -99,6 +112,34 @@ class RetrievalBackend:
         for score, idx in zip(distances[0], indices[0]):
             doc = self.metadata[int(idx)]
             results.append({"score": float(score), **doc})
+        return results
+
+    def vector_search(self, query: str, top_k: int) -> List[Dict[str, Any]]:
+        schema = load_schema(WORKSPACE_ROOT)
+        if USE_ALIAS_EXPANSION:
+            if should_use_petase_aliases(schema):
+                normalized_query = enzyme_aliases.expand_query(query)
+            else:
+                normalized_query = expand_query_with_schema(query, schema)
+        else:
+            normalized_query = query
+
+        first_pass = self._search_embeddings(self.embed(normalized_query), max(top_k * 2, top_k))
+        if USE_ITERATIVE_EXPANSION:
+            expansions = collect_expansion_terms(first_pass, schema)
+            extras = [term for term in expansions if term.lower() not in normalized_query.lower()]
+            if extras:
+                expanded_query = normalized_query + " " + " ".join(extras)
+                second_pass = self._search_embeddings(self.embed(expanded_query), top_k * 2)
+                combined = {row["metadata"]["chunk_id"]: row for row in first_pass + second_pass}
+                reranked = sorted(combined.values(), key=lambda r: r.get("score", 0), reverse=True)
+                results = reranked[:top_k]
+                log_event(
+                    {"event": "vector_search_iterative", "query": query, "expanded_query": expanded_query, "results": results}
+                )
+                return results
+
+        results = first_pass[:top_k]
         log_event({"event": "vector_search", "query": query, "results": results})
         return results
 

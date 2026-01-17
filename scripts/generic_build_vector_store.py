@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
+import sys
 from pathlib import Path
 from typing import Dict, List
 
@@ -15,6 +17,14 @@ try:
     import faiss
 except Exception:  # pragma: no cover
     faiss = None
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from utils.kg_schema_utils import build_alias_lookup, filter_seed_candidates, load_schema  # noqa: E402
+
+enzyme_pattern = re.compile(r"\b([A-Za-z][A-Za-z0-9-]{2,}ase)\b", re.IGNORECASE)
 
 
 def load_metadata(workspace: Path) -> Dict[str, dict]:
@@ -45,6 +55,17 @@ def split_chunks(text: str, max_chars: int = 1200) -> List[str]:
     return parts or [text[:max_chars]]
 
 
+def extract_sources(text: str, alias_lookup: Dict[str, str]) -> List[str]:
+    lowered = text.lower()
+    hits: List[str] = []
+    for alias, canonical in alias_lookup.items():
+        if alias and alias in lowered:
+            hits.append(canonical)
+    for match in enzyme_pattern.finditer(text):
+        hits.append(match.group(1))
+    return filter_seed_candidates(hits)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workspace", type=Path, required=True, help="Workspace created via generic_extract_corpus.")
@@ -57,6 +78,8 @@ def main() -> None:
     if not text_dir.exists():
         raise SystemExit(f"Missing text directory: {text_dir}")
     meta_map = load_metadata(workspace)
+    schema = load_schema(workspace)
+    alias_lookup = build_alias_lookup(schema)
 
     docs = []
     for txt_path in sorted(text_dir.glob("*.txt")):
@@ -64,6 +87,7 @@ def main() -> None:
         chunks = split_chunks(text)
         meta = meta_map.get(txt_path.name, {})
         for idx, chunk in enumerate(chunks):
+            sources = extract_sources(chunk, alias_lookup)
             docs.append(
                 {
                     "text": chunk,
@@ -71,6 +95,8 @@ def main() -> None:
                         "chunk_id": f"{txt_path.stem}:{idx}",
                         "pdf_file": meta.get("pdf_file"),
                         "title": meta.get("title_candidate"),
+                        "source": sources[0] if sources else None,
+                        "sources": sources,
                     },
                 }
             )
