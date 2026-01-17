@@ -20,7 +20,7 @@ app = typer.Typer(add_completion=False)
 
 @app.command()
 def ask(
-    question: str = typer.Argument(..., help="Natural-language question for the PETase agent (LLM mode)."),
+    question: str = typer.Argument(..., help="Natural-language question for the topic agent (LLM mode)."),
     seed: int = typer.Option(7, help="Random seed for reproducibility."),
 ) -> None:
     result = run_agent(question, use_llm=True, seed=seed)

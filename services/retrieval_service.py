@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""FastAPI service that exposes SQLite + FAISS retrieval endpoints."""
+"""FastAPI service that exposes SQLite + FAISS retrieval endpoints for topic workspaces."""
 
 from __future__ import annotations
 
@@ -21,7 +21,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from utils.enzyme_aliases import expand_query, preferred_sources  # noqa: E402
+from utils import enzyme_aliases  # noqa: E402
+from utils.kg_schema_utils import dedupe_preserve_order, expand_query_with_schema, load_schema  # noqa: E402
 
 BASE = Path(__file__).resolve().parents[1]
 WORKSPACE_ROOT = Path(os.environ.get("WORKSPACE_ROOT", BASE / "KnowledgeGraph")).resolve()
@@ -31,6 +32,11 @@ LOG_DIR = BASE / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 TRAJECTORY_LOG = LOG_DIR / "retrieval_trajectories.jsonl"
 USE_ALIAS_EXPANSION = os.environ.get("USE_ALIAS_EXPANSION", "1") == "1"
+
+
+def should_use_petase_aliases(schema: Dict[str, Any]) -> bool:
+    topic = str(schema.get("topic") or "").lower()
+    return USE_ALIAS_EXPANSION and "petase" in topic
 
 
 class VectorSearchRequest(BaseModel):
@@ -73,7 +79,14 @@ class RetrievalBackend:
         return vector.astype("float32")
 
     def vector_search(self, query: str, top_k: int) -> List[Dict[str, Any]]:
-        normalized_query = expand_query(query) if USE_ALIAS_EXPANSION else query
+        schema = load_schema(WORKSPACE_ROOT)
+        if USE_ALIAS_EXPANSION:
+            if should_use_petase_aliases(schema):
+                normalized_query = enzyme_aliases.expand_query(query)
+            else:
+                normalized_query = expand_query_with_schema(query, schema)
+        else:
+            normalized_query = query
         vector = self.embed(normalized_query)
         if self.faiss_index is not None:
             distances, indices = self.faiss_index.search(vector, top_k)
@@ -121,7 +134,7 @@ class RetrievalBackend:
             return []
         results: List[Dict[str, Any]] = []
         seen = set()
-        for node in preferred_sources(list(seeds)):
+        for node in dedupe_preserve_order(seeds):
             if not node:
                 continue
             edges = self._fetch_edges(node, per_seed)
@@ -143,7 +156,7 @@ def get_backend() -> RetrievalBackend:
     return RetrievalBackend()
 
 
-app = FastAPI(title="PETase Retrieval Service")
+app = FastAPI(title="Topic Retrieval Service")
 
 
 @app.post("/vector_search")
