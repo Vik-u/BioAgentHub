@@ -137,7 +137,7 @@ Keep regular QA as the default unless you want the explicit state machine for de
 
 Composer robustness:
 - `QA_COMPOSER_RELAX=1` (default): attempts a JSON repair pass if the structured block composer returns invalid JSON.
-- `QA_RELAX_VALIDATION=1` (default): relaxes missing-citation checks for direct-answer bullets (ranked items still require evidence).
+- `QA_RELAX_VALIDATION=1`: relaxes missing-citation checks for direct-answer bullets (ranked items still require evidence). Default is strict (`QA_RELAX_VALIDATION=0`).
 - `QA_BLOCK_FALLBACK=1` (default): if the composer still fails, emit a minimal DirectAnswerBlock built from top evidence.
 Evidence tuning:
 - `QA_DENSE_TOP_K` (default 20): number of dense hits per query before fusion.
