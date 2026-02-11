@@ -291,19 +291,19 @@ PDFs (data/<topic>/)
 Architecture:
 ```mermaid
 flowchart TD
-    PDFs["PDFs (data/<topic>/)"] -->|extract text/metadata| Text["text/*.txt<br>metadata/*.json<br>corpus_index.json"]
-    Text -->|embed| VecStore["vector_store<br>(FAISS + metadata)"]
-    Text -->|schema agent (optional)| KGSchema["kg_schema.json"]
-    Text -->|schema-driven edges| KGEdges["kg_edges.jsonl<br>(+ graph_overview.json)"]
+    PDFs["PDFs\n(data/<topic>/)"] -->|extract text/metadata| Text["text/*.txt\nmetadata/*.json\ncorpus_index.json"]
+    Text -->|embed| VecStore["vector_store\nFAISS + metadata"]
+    Text -->|schema agent optional| KGSchema["kg_schema.json"]
+    Text -->|schema-driven edges| KGEdges["kg_edges.jsonl\n+ graph_overview.json"]
     KGEdges -->|load| GraphDB["graph.sqlite"]
-    KGEdges -->|embed edges| KGVectors["kg_vector_store<br>(FAISS + metadata)"]
-    VecStore --> Retrieval["Retrieval backend<br>(services/retrieval_service)"]
+    KGEdges -->|embed edges| KGVectors["kg_vector_store\nFAISS + metadata"]
+    VecStore --> Retrieval["Retrieval backend\nservices/retrieval_service"]
     GraphDB --> Retrieval
     KGVectors --> Retrieval
-    Retrieval --> QA["QA Agent (Planner + Blocks)<br>(agents/rl_rag_agent)"]
-    Retrieval --> Proto["Protocol Agents<br>(methodology / instrument)"]
-    QA --> Logs["outputs/logs/rl_agent_runs.jsonl<br>+ answers"]
-    Proto --> ProtoLogs["outputs/logs/protocol_v2_runs<br>outputs/logs/instrument_protocol_runs"]
+    Retrieval --> QA["QA Agent\nPlanner + Blocks\nagents/rl_rag_agent"]
+    Retrieval --> Proto["Protocol Agents\nmethodology / instrument"]
+    QA --> Logs["outputs/logs/rl_agent_runs.jsonl\n+ answers"]
+    Proto --> ProtoLogs["outputs/logs/protocol_v2_runs\noutputs/logs/instrument_protocol_runs"]
 ```
 See `docs/kg_agentic_architecture.md` for the agentic KG design and communication model.
 
