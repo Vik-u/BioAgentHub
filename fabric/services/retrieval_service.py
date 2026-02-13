@@ -5,19 +5,20 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sqlite3
 import sys
+from collections import Counter
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import faiss
 import numpy as np
 from fastapi import FastAPI
 from pydantic import BaseModel
-from sentence_transformers import SentenceTransformer
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -28,16 +29,35 @@ from utils.kg_schema_utils import (  # noqa: E402
     load_schema,
     schema_entity_candidates,
 )
+from utils.workspace_utils import resolve_workspace_root  # noqa: E402
+from utils.output_paths import logs_dir  # noqa: E402
+from fabric.services.embedding_backends import (  # noqa: E402
+    EmbedderUnavailable,
+    SentenceTransformerBackend,
+    OpenAIEmbeddingBackend,
+    load_embedding_backend,
+)
 
-BASE = Path(__file__).resolve().parents[1]
-WORKSPACE_ROOT = Path(os.environ.get("WORKSPACE_ROOT", BASE / "KnowledgeGraph")).resolve()
-VECTOR_DIR = WORKSPACE_ROOT / "vector_store"
-GRAPH_DB = WORKSPACE_ROOT / "graph.sqlite"
-LOG_DIR = BASE / "logs"
-LOG_DIR.mkdir(exist_ok=True)
+BASE = Path(__file__).resolve().parents[2]
+LOG_DIR = logs_dir()
 TRAJECTORY_LOG = LOG_DIR / "retrieval_trajectories.jsonl"
 USE_ALIAS_EXPANSION = os.environ.get("USE_ALIAS_EXPANSION", "1") == "1"
 USE_ITERATIVE_EXPANSION = os.environ.get("USE_ITERATIVE_EXPANSION", "1") == "1"
+BM25_MAX_DOCS = int(os.environ.get("QA_BM25_MAX_DOCS", "20000") or 20000)
+
+
+def _tokenize(text: str) -> List[str]:
+    return [tok for tok in re.findall(r"[a-z0-9]+", text.lower()) if len(tok) > 2]
+
+
+def _read_vector_config(vector_dir: Path) -> Dict[str, Any]:
+    config_path = vector_dir / "config.json"
+    if not config_path.exists():
+        return {}
+    try:
+        return json.loads(config_path.read_text())
+    except Exception:
+        return {}
 
 
 def should_use_petase_aliases(schema: Dict[str, Any]) -> bool:
@@ -84,23 +104,49 @@ def log_event(event: Dict[str, Any]) -> None:
 
 
 class RetrievalBackend:
-    def __init__(self) -> None:
-        if not VECTOR_DIR.exists():
-            raise FileNotFoundError(f"Vector store not found at {VECTOR_DIR}")
-        config_path = VECTOR_DIR / "config.json"
-        model_name = json.loads(config_path.read_text())["model"]
-        self.model = SentenceTransformer(model_name)
-        self.embeddings = np.load(VECTOR_DIR / "embeddings.npy")
-        self.metadata = [json.loads(line) for line in (VECTOR_DIR / "metadata.jsonl").open()]
-        faiss_index_path = VECTOR_DIR / "index.faiss"
+    def __init__(self, workspace_root: Path | str | None = None) -> None:
+        allow_noncanonical = os.environ.get("ALLOW_NONCANONICAL_WORKSPACE", "0") == "1"
+        self.workspace_root = resolve_workspace_root(
+            workspace_root=workspace_root,
+            allow_noncanonical=allow_noncanonical,
+        )
+        vector_dir = self.workspace_root / "vector_store"
+        graph_db = self.workspace_root / "graph.sqlite"
+        if not vector_dir.exists():
+            raise FileNotFoundError(f"Vector store not found at {vector_dir}")
+        config = _read_vector_config(vector_dir)
+        model_name = config.get("model") or os.environ.get("EMBEDDING_MODEL", "")
+        backend_name = config.get("embedding_backend") or os.environ.get("EMBEDDING_BACKEND", "sentence-transformers")
+        self.metadata = [json.loads(line) for line in (vector_dir / "metadata.jsonl").open()]
+        self.embedder = None
+        self.embedder_status = None
+        self.embedder_error = None
+        if model_name:
+            try:
+                self.embedder = load_embedding_backend(backend_name, model_name)
+                if isinstance(self.embedder, (SentenceTransformerBackend, OpenAIEmbeddingBackend)):
+                    self.embedder_status = self.embedder.status()
+            except Exception as exc:
+                self.embedder_error = f"{type(exc).__name__}: {exc}"
+        if self.embedder_status and not self.embedder_status.available and self.embedder_status.error:
+            self.embedder_error = self.embedder_status.error
+
+        self.embeddings = np.load(vector_dir / "embeddings.npy")
+        self.faiss_index = None
+        faiss_index_path = vector_dir / "index.faiss"
         self.faiss_index = faiss.read_index(str(faiss_index_path)) if faiss_index_path.exists() else None
-        self.graph = sqlite3.connect(GRAPH_DB) if GRAPH_DB.exists() else None
+        self.graph = sqlite3.connect(graph_db) if graph_db.exists() else None
+        self._bm25_index = None
 
     def embed(self, text: str) -> np.ndarray:
-        vector = self.model.encode([text], normalize_embeddings=True)
+        if self.embedder is None:
+            raise EmbedderUnavailable(self.embedder_error or "Embedding backend unavailable.")
+        vector = self.embedder.embed_texts([text])
         return vector.astype("float32")
 
     def _search_embeddings(self, vector: np.ndarray, top_k: int) -> List[Dict[str, Any]]:
+        if self.embeddings is None:
+            return []
         if self.faiss_index is not None:
             distances, indices = self.faiss_index.search(vector, top_k)
         else:
@@ -115,7 +161,7 @@ class RetrievalBackend:
         return results
 
     def vector_search(self, query: str, top_k: int) -> List[Dict[str, Any]]:
-        schema = load_schema(WORKSPACE_ROOT)
+        schema = load_schema(self.workspace_root)
         if USE_ALIAS_EXPANSION:
             if should_use_petase_aliases(schema):
                 normalized_query = enzyme_aliases.expand_query(query)
@@ -123,6 +169,16 @@ class RetrievalBackend:
                 normalized_query = expand_query_with_schema(query, schema)
         else:
             normalized_query = query
+
+        if self.embedder is None or self.embedder_error:
+            results = self.keyword_search(normalized_query, top_k)
+            log_event({
+                "event": "vector_search_fallback",
+                "query": query,
+                "results": results,
+                "embedder_error": self.embedder_error,
+            })
+            return results
 
         first_pass = self._search_embeddings(self.embed(normalized_query), max(top_k * 2, top_k))
         if USE_ITERATIVE_EXPANSION:
@@ -191,13 +247,82 @@ class RetrievalBackend:
         log_event({"event": "graph_neighbors_diverse", "seeds": list(seeds), "results": results})
         return results
 
+    def _build_bm25(self) -> None:
+        if self._bm25_index is not None:
+            return
+        docs = []
+        doc_lens = []
+        df = {}
+        max_docs = min(len(self.metadata), BM25_MAX_DOCS)
+        for doc in self.metadata[:max_docs]:
+            text = doc.get("text", "")
+            tokens = _tokenize(text)
+            docs.append(tokens)
+            doc_lens.append(len(tokens))
+            for tok in set(tokens):
+                df[tok] = df.get(tok, 0) + 1
+        avgdl = sum(doc_lens) / len(doc_lens) if doc_lens else 0.0
+        self._bm25_index = {
+            "docs": docs,
+            "doc_lens": doc_lens,
+            "df": df,
+            "avgdl": avgdl,
+            "doc_count": len(docs),
+        }
 
-@lru_cache(maxsize=1)
-def get_backend() -> RetrievalBackend:
-    return RetrievalBackend()
+    def keyword_search(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+        """Lightweight BM25 over a capped subset of the vector-store metadata."""
+        self._build_bm25()
+        index = self._bm25_index or {}
+        docs = index.get("docs", [])
+        if not docs:
+            return []
+        df = index.get("df", {})
+        avgdl = index.get("avgdl", 0.0)
+        doc_count = index.get("doc_count", 0)
+
+        k1 = 1.2
+        b = 0.75
+        q_tokens = _tokenize(query)
+        if not q_tokens:
+            return []
+        scores = []
+        for idx, tokens in enumerate(docs):
+            if not tokens:
+                continue
+            tf = Counter(tokens)
+            score = 0.0
+            dl = len(tokens)
+            for tok in q_tokens:
+                if tok not in tf:
+                    continue
+                df_tok = df.get(tok, 0)
+                idf = np.log((doc_count - df_tok + 0.5) / (df_tok + 0.5) + 1)
+                freq = tf[tok]
+                denom = freq + k1 * (1 - b + b * (dl / avgdl if avgdl else 1))
+                score += idf * ((freq * (k1 + 1)) / denom)
+            if score > 0:
+                scores.append((score, idx))
+        scores.sort(reverse=True, key=lambda pair: pair[0])
+        results = []
+        for score, idx in scores[:top_k]:
+            doc = self.metadata[idx]
+            results.append({"score": float(score), **doc})
+        log_event({"event": "keyword_search", "query": query, "results": results[:5]})
+        return results
 
 
-app = FastAPI(title="Topic Retrieval Service")
+@lru_cache(maxsize=None)
+def get_backend(workspace_root: str | Path | None = None) -> RetrievalBackend:
+    return RetrievalBackend(workspace_root)
+
+
+app = FastAPI(
+    title="Topic Retrieval Service",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json",
+)
 
 
 @app.post("/vector_search")
