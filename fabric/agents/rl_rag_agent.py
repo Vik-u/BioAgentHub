@@ -476,7 +476,7 @@ def _extract_doi_from_text_file(txt_path: Path) -> Optional[str]:
     if not txt_path.exists():
         return None
     try:
-        snippet = txt_path.read_text(encoding="utf-8", errors="ignore")[:8000]
+        snippet = txt_path.read_text(encoding="utf-8", errors="ignore")[:40000]
     except Exception:
         return None
     return _extract_doi(snippet)
@@ -1639,6 +1639,8 @@ def load_session_state(topic: str, session_id: str) -> Dict[str, Any]:
         "working_set_entities": [],
         "open_slots": [],
         "last_intent": "",
+        "last_question": "",
+        "last_answer_summary": "",
         "turn": 0,
     }
 
@@ -1678,6 +1680,10 @@ def update_session_state(
     state["working_set_entities"] = state.get("entity_memory", [])
     if intent:
         state["last_intent"] = intent
+    if question:
+        state["last_question"] = question
+    if summary_snippet:
+        state["last_answer_summary"] = summary_snippet
     state["turn"] = int(state.get("turn", 0)) + 1
     return state
 
@@ -1888,14 +1894,28 @@ def build_evidence_from_state(
     citations: List[Dict[str, Any]] = []
     evidence_to_citation: Dict[str, int] = {}
 
-    def register_evidence(source_id: str | None, paper: str | None, title: str | None, snippet: str | None) -> str:
+    citation_key_map: Dict[str, int] = {}
+
+    def register_evidence(
+        source_id: str | None,
+        paper: str | None,
+        title: str | None,
+        snippet: str | None,
+        paper_label: str | None = None,
+    ) -> str:
         evidence_id = f"E{len(evidence_items) + 1}"
-        citation_id = len(citations) + 1
         fields = resolve_citation_fields(paper, snippet)
+        citation_key = fields.get("doi") or fields.get("title") or paper or source_id or evidence_id
+        if citation_key in citation_key_map:
+            evidence_to_citation[evidence_id] = citation_key_map[citation_key]
+            return evidence_id
+        citation_id = len(citations) + 1
+        citation_key_map[citation_key] = citation_id
         citations.append(
             {
                 "id": citation_id,
                 "paper": Path(paper).name if paper else None,
+                "paper_label": paper_label,
                 "source_id": source_id or evidence_id,
                 "source_ids": [source_id or evidence_id],
                 "title": title or fields.get("title") or resolve_title(paper),
@@ -1909,13 +1929,15 @@ def build_evidence_from_state(
 
     def add_evidence(text: str, meta: Dict[str, Any]) -> None:
         source_id = meta.get("chunk_id") or meta.get("source") or meta.get("pdf_file") or meta.get("paper")
-        paper = meta.get("paper") or meta.get("pdf_file")
-        title = meta.get("title") or resolve_title(paper)
+        pdf_file = meta.get("pdf_file")
+        paper_label = Path(pdf_file).stem if pdf_file else meta.get("paper")
+        paper_source = pdf_file or meta.get("paper")
+        title = meta.get("title") or resolve_title(paper_source)
         if title and ("/" in title or "\\" in title):
             try:
                 title = Path(title).stem
             except Exception:
-                title = resolve_title(paper)
+                title = resolve_title(paper_source)
         if exclude_patterns:
             lowered = text.lower()
             for pattern in exclude_patterns:
@@ -1926,12 +1948,12 @@ def build_evidence_from_state(
                 for pattern in exclude_patterns:
                     if pattern and pattern.lower() in title_lower:
                         return
-        evidence_id = register_evidence(source_id, paper, title, text)
+        evidence_id = register_evidence(source_id, paper_source, title or paper_label, text, paper_label=paper_label)
         evidence_items.append(
             {
                 "evidence_id": evidence_id,
                 "title": title,
-                "paper": paper,
+                "paper": paper_label,
                 "source_id": source_id,
                 "text": text,
             }
@@ -2669,6 +2691,8 @@ def generate_draft_answer(
             f"Question: {question}\n"
             f"Intent: {plan.intent}\n"
             f"Session summary: {(session_state.get('rolling_summary') or '')[:400]}\n"
+            f"Last question: {session_state.get('last_question', '')}\n"
+            f"Last answer summary: {session_state.get('last_answer_summary', '')}\n"
         )
         if evidence_lines:
             prompt += "Evidence snippets:\n" + "\n".join(evidence_lines) + "\n"
@@ -2771,6 +2795,7 @@ def render_helpful_answer(
     quick, sections, grounding_stats = ground_and_tag_draft(draft, claims, evidence_items)
     grounding_stats["draft_fallback"] = bool(draft_meta.get("fallback_used"))
     grounding_stats["draft_repair_used"] = bool(draft_meta.get("repair_used"))
+    hide_inferred = os.environ.get("QA_HIDE_INFERRED", "1") == "1"
     quick = quick[:5]
     if len(quick) < 3:
         quick.extend(quick[: 3 - len(quick)])
@@ -2780,29 +2805,65 @@ def render_helpful_answer(
         sections = sections[:2]
     for section in sections:
         section.bullets = section.bullets[:4]
+
+    if hide_inferred:
+        quick_grounded = [b for b in quick if b.status == "grounded"]
+        if quick_grounded:
+            quick = quick_grounded
+        else:
+            quick = []
+        grounded_sections = []
+        for section in sections:
+            grounded = [b for b in section.bullets if b.status == "grounded"]
+            if grounded:
+                grounded_sections.append(GroundedSection(title=section.title, bullets=grounded))
+        sections = grounded_sections or []
     seed = _style_seed(session_id, question)
     missing_phrases = _pick_phrases("could_not_verify", seed, 3)
     next_phrases = _pick_phrases("next_steps", seed, 2)
 
-    def render_bullet(bullet: GroundedBullet) -> str:
+    show_status = os.environ.get("QA_SHOW_STATUS", "0") == "1"
+
+    def render_sentence(bullet: GroundedBullet) -> str:
         status = "Grounded" if bullet.status == "grounded" else "Inferred"
         cite_ids = bullet.citations or []
         if evidence_to_citation:
             cite_ids = [str(evidence_to_citation.get(cid)) for cid in cite_ids if evidence_to_citation.get(cid)]
+        cite_ids = [cid for cid in dict.fromkeys(cite_ids) if cid]
         cites = "".join([f"[{cid}]" for cid in cite_ids]) if cite_ids else ""
-        return f"- {bullet.text} [{status}] {cites}".strip()
+        text = bullet.text.rstrip()
+        if text and text[-1] not in ".!?":
+            text += "."
+        if show_status:
+            if cites:
+                return f"{text} ({status} {cites})"
+            return f"{text} ({status})"
+        if cites:
+            return f"{text} {cites}".strip()
+        return text
 
     lines: List[str] = []
-    lines.append("Quick Answer")
-    for bullet in quick[:5]:
-        lines.append(render_bullet(bullet))
+    lines.append("Answer")
+    if not quick:
+        lines.append("Summary: No grounded statements found in the current corpus for this question.")
+        if include_sources and citations:
+            lines.append("")
+            lines.append("Sources")
+            for entry in citations:
+                lines.append(f"[{entry.get('id')}] {_format_citation_entry(entry)}")
+        grounding_stats["grounded_bullets"] = grounding_stats.get("grounded", 0)
+        grounding_stats["partial_bullets"] = grounding_stats.get("partial", 0)
+        grounding_stats["inferred_bullets"] = grounding_stats.get("inferred", 0)
+        return "\n".join([line for line in lines if line]).strip(), grounding_stats
+    summary = " ".join(render_sentence(bullet) for bullet in quick[:3])
+    lines.append(f"Summary: {summary}".strip())
 
     lines.append("")
     lines.append("Details")
     for section in sections[:4]:
-        lines.append(section.title)
-        for bullet in section.bullets[:4]:
-            lines.append(render_bullet(bullet))
+        lines.append(f"{section.title}")
+        paragraph = " ".join(render_sentence(bullet) for bullet in section.bullets[:4])
+        lines.append(paragraph)
 
     # What couldn't be verified (max 3)
     unverified = []
@@ -2816,20 +2877,22 @@ def render_helpful_answer(
     unverified = list(dict.fromkeys(unverified))[:3]
     if not unverified:
         unverified = [""]
-    lines.append("")
-    lines.append("What I couldn't verify from your corpus")
-    for idx, text in enumerate(unverified[:3]):
-        prefix = missing_phrases[idx % len(missing_phrases)] if missing_phrases else "Could not verify"
-        if text:
-            lines.append(f"- {prefix}: {text}")
-        else:
-            lines.append(f"- {prefix}.")
+    include_gaps = os.environ.get("QA_INCLUDE_GAPS", "0") == "1"
+    if include_gaps:
+        lines.append("")
+        lines.append("Evidence gaps")
+        for idx, text in enumerate(unverified[:3]):
+            prefix = missing_phrases[idx % len(missing_phrases)] if missing_phrases else "Could not verify"
+            if text:
+                lines.append(f"- {prefix}: {text}")
+            else:
+                lines.append(f"- {prefix}.")
 
-    # Next steps (max 2)
-    lines.append("")
-    lines.append("Next steps")
-    for step in next_phrases[:2]:
-        lines.append(f"- {step}")
+        # Next steps (max 2)
+        lines.append("")
+        lines.append("Next steps")
+        for step in next_phrases[:2]:
+            lines.append(f"- {step}")
 
     if include_sources and citations:
         lines.append("")
@@ -3186,7 +3249,9 @@ def compose_blocks(
 
 
 def _format_citation_entry(citation: Dict[str, Any]) -> str:
-    title = citation.get("title") or "Unknown title"
+    title = citation.get("title") or citation.get("paper_label") or citation.get("paper") or "Unknown title"
+    if title and title.strip().lower().endswith(" from"):
+        title = title.rstrip().rstrip("from").rstrip()
     authors = citation.get("authors")
     year = citation.get("year")
     doi = citation.get("doi")
@@ -3200,6 +3265,9 @@ def _format_citation_entry(citation: Dict[str, Any]) -> str:
     parts.append(title)
     if doi:
         parts.append(f"DOI:{doi}")
+    paper_label = citation.get("paper_label") or citation.get("paper")
+    if paper_label:
+        parts.append(f"Source:{paper_label}")
     return " — ".join([p for p in parts if p])
 
 
@@ -3269,7 +3337,7 @@ def render_blocks_text(
 def render_dual_answer(helpful_answer: str, structured_answer: str) -> str:
     parts: List[str] = []
     if helpful_answer:
-        parts.append("Narrative answer")
+        parts.append("Readable answer")
         parts.append(helpful_answer.strip())
     if structured_answer:
         parts.append("KG-structured answer")
@@ -3548,7 +3616,7 @@ def run_qa(
                     session_id=session_id,
                     evidence_to_citation=evidence_to_citation,
                     citations=citations,
-                    include_sources=(output_mode == "answer_helpful"),
+                    include_sources=(output_mode in ("answer_helpful", "answer_dual")),
                 )
                 answer_for_verifier = helpful_answer
                 trace.append("render_helpful")
@@ -3717,7 +3785,7 @@ def run_qa(
                 session_id=session_id,
                 evidence_to_citation=evidence_to_citation,
                 citations=citations,
-                include_sources=(output_mode == "answer_helpful"),
+                include_sources=(output_mode in ("answer_helpful", "answer_dual")),
             )
             answer_for_verifier = helpful_answer
             trace.append("render_helpful")
@@ -4174,7 +4242,7 @@ def run_qa(
             session_id=session_id,
             evidence_to_citation=evidence_to_citation,
             citations=citations,
-            include_sources=(output_mode == "answer_helpful"),
+            include_sources=(output_mode in ("answer_helpful", "answer_dual")),
         )
         answer_for_verifier = helpful_answer
         trace.append("render_helpful")
