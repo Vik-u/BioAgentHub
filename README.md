@@ -114,6 +114,11 @@ Understanding-layer blocks are also validated; validation failures are treated a
 
 UI note: If a frontend cannot render blocks directly, the QA agent exposes a **text fallback renderer** that formats blocks + citations into readable Markdown.
 
+### Demo sanity outputs (test_hmmm)
+- Run `python test_hmmm/run_demos.py` to generate QA/protocol/biofoundry demo outputs.
+- Outputs are **timestamped** (e.g., `qa_chat_petase_YYYYMMDD_HHMMSS.md/.json`) and also mirrored to `*_latest.*` for quick access.
+- QA demo uses **readable answer mode** (no KG block) with inline citations; set `QA_INCLUDE_GAPS=1` to include evidence-gap/next-steps sections, `QA_SHOW_STATUS=1` to show Grounded/Inferred tags, and `QA_HIDE_INFERRED=0` to keep ungrounded sentences.
+
 ### Claims‑Lite (optional, behind a flag)
 When enabled, the QA agent extracts **atomic claim tuples** from top evidence chunks and composes blocks from claims instead of raw chunks.
 - Flag: `--use-claim-store` (default off)
