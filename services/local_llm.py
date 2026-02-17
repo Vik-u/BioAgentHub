@@ -15,6 +15,25 @@ from requests import RequestException
 CONFIG_PATH = Path(__file__).resolve().parents[1] / "config" / "llm_config.json"
 
 
+def _load_dotenv_if_present() -> None:
+    """Lightweight .env loader to ensure API keys are picked up without extra deps."""
+    env_path = CONFIG_PATH.parent.parent / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text().splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+        key, _, value = stripped.partition("=")
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and value and key not in os.environ:
+            os.environ[key] = value
+
+
+_load_dotenv_if_present()
+
+
 def _load_config() -> Dict[str, Any]:
     if CONFIG_PATH.exists():
         return json.loads(CONFIG_PATH.read_text())
@@ -29,6 +48,7 @@ def _load_config() -> Dict[str, Any]:
 CONFIG = _load_config()
 BACKEND = CONFIG.get("backend", "ollama").lower()
 DEFAULT_MODEL = CONFIG.get("model", "gpt-oss:20b")
+DEFAULT_SYSTEM_PROMPT = CONFIG.get("system_prompt", "You are a helpful research assistant.")
 TEMPERATURE = float(CONFIG.get("temperature", 0.2) or 0.2)
 
 
@@ -45,9 +65,11 @@ def _ping_ollama(host: str, timeout: float = 5.0) -> None:
         raise LocalLLMError(f"Ollama ping failed ({response.status_code}): {response.text}")
 
 
-def _call_ollama(prompt: str, model: str) -> str:
+def _call_ollama(prompt: str, model: str, system_prompt: Optional[str] = None) -> str:
     host = CONFIG.get("host", "http://127.0.0.1:11434")
     _ping_ollama(host)
+    if system_prompt:
+        prompt = f"{system_prompt}\n\n{prompt}"
     payload = {
         "model": model,
         "prompt": prompt,
@@ -70,7 +92,7 @@ def _call_ollama(prompt: str, model: str) -> str:
     raise LocalLLMError(f"Ollama request failed after retries: {last_exc}") from last_exc
 
 
-def _call_openai(prompt: str, model: str) -> str:
+def _call_openai(prompt: str, model: str, system_prompt: Optional[str] = None) -> str:
     api_base = CONFIG.get("api_base", "https://api.openai.com/v1")
     api_key_env = CONFIG.get("api_key_env", "OPENAI_API_KEY")
     api_key = os.environ.get(api_key_env)
@@ -80,7 +102,7 @@ def _call_openai(prompt: str, model: str) -> str:
     payload = {
         "model": model,
         "messages": [
-            {"role": "system", "content": "You are a helpful PETase research assistant."},
+            {"role": "system", "content": system_prompt or DEFAULT_SYSTEM_PROMPT},
             {"role": "user", "content": prompt},
         ],
         "temperature": TEMPERATURE,
@@ -96,7 +118,12 @@ def _call_openai(prompt: str, model: str) -> str:
     return data["choices"][0]["message"]["content"].strip()
 
 
-def generate(prompt: str, model: Optional[str] = None, temperature: Optional[float] = None) -> str:
+def generate(
+    prompt: str,
+    model: Optional[str] = None,
+    temperature: Optional[float] = None,
+    system_prompt: Optional[str] = None,
+) -> str:
     """Dispatch a prompt to the configured backend."""
     active_model = model or DEFAULT_MODEL
     if temperature is not None:
@@ -104,7 +131,7 @@ def generate(prompt: str, model: Optional[str] = None, temperature: Optional[flo
         TEMPERATURE = temperature
 
     if BACKEND == "ollama":
-        return _call_ollama(prompt, active_model)
+        return _call_ollama(prompt, active_model, system_prompt=system_prompt or DEFAULT_SYSTEM_PROMPT)
     if BACKEND in {"openai", "azure-openai"}:
-        return _call_openai(prompt, active_model)
+        return _call_openai(prompt, active_model, system_prompt=system_prompt or DEFAULT_SYSTEM_PROMPT)
     raise LocalLLMError(f"Unsupported backend: {BACKEND}")

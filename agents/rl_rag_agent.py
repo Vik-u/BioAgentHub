@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lightweight RL-driven RAG agent over the PETase retrieval stack."""
+"""Lightweight RL-driven RAG agent over a topic-specific retrieval stack."""
 
 from __future__ import annotations
 
@@ -22,11 +22,17 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from services import local_llm
 from services.retrieval_service import RetrievalBackend, get_backend, log_event
-from utils.enzyme_aliases import expected_entities_from_question, preferred_sources
+from utils.kg_schema_utils import (
+    expected_entities_from_question,
+    load_schema,
+    select_graph_seeds,
+    topic_label,
+)
 
 LOG_PATH = Path(__file__).resolve().parents[1] / "logs" / "rl_agent_runs.jsonl"
 ACTIONS = ("vector_search", "graph_expand", "summarize", "stop")
 DEFAULT_USE_LLM = os.environ.get("USE_LOCAL_LLM", "1") == "1"
+VECTOR_ONLY_RAG = os.environ.get("VECTOR_ONLY_RAG", "0") == "1"
 WORKSPACE_ROOT = Path(os.environ.get("WORKSPACE_ROOT", PROJECT_ROOT / "KnowledgeGraph")).resolve()
 TEXT_DIR = WORKSPACE_ROOT / "text"
 META_DIR = WORKSPACE_ROOT / "metadata"
@@ -72,8 +78,16 @@ def state_to_observation(state: AgentState | None) -> np.ndarray:
 
 
 class RetrievalEnvironment:
-    def __init__(self, backend: RetrievalBackend, max_steps: int = 6) -> None:
+    def __init__(
+        self,
+        backend: RetrievalBackend,
+        schema: Dict[str, Any],
+        graph_overview_path: Path,
+        max_steps: int = 6,
+    ) -> None:
         self.backend = backend
+        self.schema = schema
+        self.graph_overview_path = graph_overview_path
         self.max_steps = max_steps
         self.state: AgentState | None = None
 
@@ -94,16 +108,22 @@ class RetrievalEnvironment:
             reward += 0.2 if results else -0.1
             info = "vector_search"
         elif action == "graph_expand":
-            if not self.state.context:
+            context_sources = [
+                ctx.get("metadata", {}).get("source")
+                for ctx in self.state.context
+                if ctx.get("metadata", {}).get("source")
+            ]
+            seeds = select_graph_seeds(
+                context_sources,
+                self.state.question,
+                self.schema,
+                self.graph_overview_path,
+                max_seeds=6,
+            )
+            if not seeds:
                 reward -= 0.1
                 info = "graph_expand_failed"
             else:
-                context_sources = [
-                    ctx.get("metadata", {}).get("source")
-                    for ctx in self.state.context
-                    if ctx.get("metadata", {}).get("source")
-                ]
-                seeds = preferred_sources(context_sources)
                 neighbors = self.backend.graph_neighbors_diverse(seeds, top_k=10)
                 self.state.graph_nodes.extend(neighbors)
                 reward += 0.15 if neighbors else -0.05
@@ -128,10 +148,10 @@ class RetrievalEnvironment:
 
 
 class SimplePolicy:
-    def select(self, state: AgentState) -> str:
+    def select(self, state: AgentState, graph_available: bool) -> str:
         if not state.context:
             return "vector_search"
-        if len(state.graph_nodes) < 5:
+        if graph_available and len(state.graph_nodes) < 5:
             return "graph_expand"
         if state.steps >= 3:
             return "summarize"
@@ -176,7 +196,12 @@ def fetch_pdf_context(paper: str | None, sentence: str, window: int = 600) -> st
     return content[start:end].strip()
 
 
-def summarize_context(state: AgentState, use_llm: bool, question: str) -> Tuple[str, List[Dict[str, str]]]:
+def summarize_context(
+    state: AgentState,
+    use_llm: bool,
+    question: str,
+    schema: Dict[str, Any],
+) -> Tuple[str, List[Dict[str, str]]]:
     sentences = []
     evidence_blocks = []
     citations: List[Dict[str, str]] = []
@@ -225,19 +250,22 @@ def summarize_context(state: AgentState, use_llm: bool, question: str) -> Tuple[
         return "No evidence gathered.", []
 
     if use_llm:
-        expected_entities = expected_entities_from_question(question)
+        expected_entities = expected_entities_from_question(question, schema)
         evidence_text_lines = []
         for block in evidence_blocks:
             prefix = f"[{block['citation']}] " if block["citation"] else ""
             context_part = f"\n  Context: {block['context']}" if block["context"] else ""
             evidence_text_lines.append(f"- {prefix}{block['entry']}{context_part}")
         evidence_text = "\n".join(evidence_text_lines)
-        expected_text = ", ".join(expected_entities) if expected_entities else "the enzymes already cited"
+        expected_text = ", ".join(expected_entities) if expected_entities else "the entities already cited"
+        topic = topic_label(schema, WORKSPACE_ROOT)
+        focus = schema.get("focus_query") or "the topic"
         prompt = (
-            "You are a PETase research assistant. Read the evidence snippets (with citations like [1], [2]) and respond in natural paragraphs.\n"
+            f"You are a research assistant for {topic}. Read the evidence snippets (with citations like [1], [2]) and respond in natural paragraphs.\n"
             "Goals:\n"
             "- Summarize what is already known.\n"
-            "- Identify limitations or knowledge gaps (note if an expected enzyme is missing: "
+            f"- Keep the discussion focused on {focus}.\n"
+            "- Identify limitations or knowledge gaps (note if an expected entity is missing: "
             f"{expected_text}).\n"
             "- Recommend concrete computational and experimental next steps.\n"
             "Write fluid prose (no bullet headings) and reference citations inline using [n].\n"
@@ -288,12 +316,18 @@ def run_agent(
 ) -> Dict[str, Any]:
     random.seed(seed)
     backend = get_backend()
-    env = RetrievalEnvironment(backend)
+    schema = load_schema(WORKSPACE_ROOT)
+    if backend.graph is None and not VECTOR_ONLY_RAG:
+        raise SystemExit("KG graph not found for this workspace. Set VECTOR_ONLY_RAG=1 to run without KG.")
+    graph_overview_path = WORKSPACE_ROOT / "graph_overview.json"
+    env = RetrievalEnvironment(backend, schema, graph_overview_path)
     heuristic_policy = SimplePolicy()
     state = env.reset(question)
     done = False
     trajectory = []
     rewards = []
+
+    graph_available = backend.graph is not None and not VECTOR_ONLY_RAG
 
     while not done:
         if policy_model is not None:
@@ -301,7 +335,11 @@ def run_agent(
             action_idx, _ = policy_model.predict(obs, deterministic=True)
             action = ACTIONS[int(action_idx)]
         else:
-            action = heuristic_policy.select(state)
+            action = heuristic_policy.select(state, graph_available=graph_available)
+
+        # Action masking when graph is absent or disabled.
+        if action == "graph_expand" and not graph_available:
+            action = "summarize" if state.context else "vector_search"
         state, reward, done, info = env.step(action)
         trajectory.append({"action": action, "info": info, "context_size": len(state.context)})
         rewards.append(reward)
@@ -309,10 +347,10 @@ def run_agent(
             done = True
             break
 
-    expected = expected_entities_from_question(question)
+    expected = expected_entities_from_question(question, schema)
     if expected:
         augment_with_expected_entities(state, backend, expected)
-    answer, citations = summarize_context(state, use_llm, question)
+    answer, citations = summarize_context(state, use_llm, question, schema)
     metrics = compute_metrics(state, rewards)
     log_trajectory(question, trajectory, answer, rewards)
     log_event(
@@ -340,7 +378,7 @@ app = typer.Typer(add_completion=False)
 
 @app.command()
 def ask(
-    question: str = typer.Argument(..., help="Natural-language question for the PETase agent."),
+    question: str = typer.Argument(..., help="Natural-language question for the topic agent."),
     use_llm: bool = typer.Option(
         DEFAULT_USE_LLM,
         "--use-llm/--no-llm",
