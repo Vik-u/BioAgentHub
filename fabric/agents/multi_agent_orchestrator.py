@@ -22,7 +22,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from agents import rl_rag_agent  # noqa: E402
+from agents import rag_agent  # noqa: E402
 from agents.timeline_gap_agent import summarize_workspace  # noqa: E402
 from agents.protocol_agent_v2 import run_protocol_agent_v2  # noqa: E402
 from agents import hypothesis_planner  # noqa: E402
@@ -37,7 +37,7 @@ def run_multi_agent(query: str, workspace: Path, use_alias_expansion: bool) -> D
     ensure_workspace_env(workspace, use_alias_expansion)
 
     # QA agent (KG-first; will fail if KG missing unless vector-only env is set)
-    qa_result = rl_rag_agent.run_agent(query, use_llm=True)
+    qa_result = rag_agent.run_agent(query, use_llm=True)
 
     # Timeline + KG gap summary
     gap_summary = summarize_workspace(workspace)

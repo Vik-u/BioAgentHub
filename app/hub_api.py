@@ -16,7 +16,7 @@ os.environ.setdefault("TRANSFORMERS_NO_ADVISORY_WARNINGS", "1")
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
-from fabric.agents.rl_rag_agent import run_qa  # noqa: E402
+from fabric.agents.rag_agent import run_qa  # noqa: E402
 from utils.workspace_utils import list_topics  # noqa: E402
 
 

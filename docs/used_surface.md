@@ -2,7 +2,7 @@
 
 ## Canonical entrypoints (defined scope)
 - `forge/run_forge.py`
-- `fabric/agents/rl_rag_agent.py`
+- `fabric/agents/rag_agent.py`
 - `app/gradio_chatbot.py`
 - `app/qa_chat_langgraph.py`
 - `app/hub_api.py`
@@ -39,7 +39,7 @@ Evidence: static imports from canonical entrypoints and runtime path usage.
   - `services/generic_retrieval.py`
 - **Agent wrappers used by canonical CLIs/orchestrator**
   - `agents/__init__.py`
-  - `agents/rl_rag_agent.py`
+  - `agents/rag_agent.py`
   - `agents/protocol_agent_v2.py`
   - `agents/timeline_gap_agent.py`
   - `agents/hypothesis_planner.py`

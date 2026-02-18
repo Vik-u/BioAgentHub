@@ -12,7 +12,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from langgraph.graph import END, StateGraph
 from pydantic import BaseModel, Field
 
-from fabric.agents.rl_rag_agent import (
+from fabric.agents.rag_agent import (
     AgentState,
     BlockUnion,
     Claim,

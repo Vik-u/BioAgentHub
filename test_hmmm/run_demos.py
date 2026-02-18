@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from fabric.agents.rl_rag_agent import run_qa  # noqa: E402
+from fabric.agents.rag_agent import run_qa  # noqa: E402
 from fabric.agents.protocol_agent_v2 import run_protocol_agent_v2  # noqa: E402
 from fabric.agents.instrument_protocol_agent_v2 import run_instrument_protocol_v2  # noqa: E402
 from fabric.agents.biofoundry_protocol_orchestrator import run_biofoundry  # noqa: E402

@@ -13,7 +13,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 import typer
 
-from agents.rl_rag_agent import run_agent
+from agents.rag_agent import run_agent
 
 app = typer.Typer(add_completion=False)
 

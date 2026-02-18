@@ -51,7 +51,7 @@ export OPENAI_API_KEY="your_key_here"
 ### Environment troubleshooting
 - `AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'`: install `protobuf<5` (already pinned in `requirements.txt`).
 - `Pandas requires version '1.3.6' or newer of 'bottleneck'`: install `bottleneck>=1.3.6` (already pinned).
-- `ResolutionImpossible` for `requests`: `pydantic-ai` requires `requests>=2.32.3`; the repo now pins `requests>=2.32.3`.
+- `ResolutionImpossible` for `requests`: `pydantic-ai-slim[openai]` requires `requests>=2.32.3`; the repo now pins `requests>=2.32.3`.
 - `ModuleNotFoundError: No module named 'pypdfium2'`: install `pypdfium2` (required by `generic_extract_corpus.py` for PDF rendering/OCR).
 - `tesseract` not found: OCR fallback is disabled; install the system `tesseract` binary if you need OCR.
 
@@ -76,7 +76,7 @@ Key properties:
 Fabric is the agentic reasoning layer. It consumes Forge outputs from `workspaces/<topic>/` (KG, vectors, methodology KG, instrument graph) and runs QA, protocol generation, and biofoundry decision workflows. Fabric does **not** rebuild evidence or regenerate schemas.
 
 ## QA Pipeline (Planner → Retrieval → Structured Blocks)
-The QA agent (`fabric/agents/rl_rag_agent.py`) now uses a **Pydantic‑validated planner** and **structured JSON blocks** while keeping the retrieval stack intact.
+The QA agent (`fabric/agents/rag_agent.py`) now uses a **Pydantic‑validated planner** and **structured JSON blocks** while keeping the retrieval stack intact. The legacy name `fabric/agents/rl_rag_agent.py` remains as a deprecated shim for backward compatibility.
 
 ### Step 1 — Question Planner (Pydantic-validated)
 An LLM planner outputs a strict JSON plan:
@@ -192,11 +192,59 @@ Basic guardrails live under `tests/test_qa_blocks.py`:
 
 Run:
 ```bash
+pip install -e .[test]
+python tools/run_tests.py
+TEST_COLOR=1 python tools/run_tests.py
+python -m unittest -v
 python -m unittest tests/test_qa_blocks.py
 python -m unittest tests/test_claims_lite.py
 python -m unittest tests/test_qa_graph.py
 python -m unittest tests/test_answer_mode.py
 python -m unittest tests/test_output_mode.py
+```
+
+Notes:
+- `tools/run_tests.py` prints per-test status lines (`[PASS]`, `[FAIL]`, `[ERROR]`), and can use ANSI colors with `TEST_COLOR=1`.
+- `python -m unittest -v` lists every test name as it runs (built-in verbose mode).
+
+### LLM Integration Tests (Optional)
+By default, unit tests do not call real LLMs. A gated integration test exists at `tests/test_llm_integration.py`.
+
+Run with real LLMs:
+```bash
+USE_REAL_LLM=1 python tools/run_tests.py
+```
+
+Notes:
+- Requires a working LLM backend configured in `config/llm_config.json`.
+- For OpenAI, you must set `OPENAI_API_KEY` (or the key named by `api_key_env` in the config).
+- If `USE_REAL_LLM` is not set, the test is skipped.
+
+### Script Audits
+Static script audit (purpose + requirements):
+- `docs/script_audit.md`
+
+Runtime audit (CLI `--help` smoke):
+- `python tools/runtime_audit.py`
+- Results are written to `docs/runtime_audit.md`
+- Run this from your active venv so dependencies resolve cleanly.
+
+### Test Fixtures
+Lightweight fixtures live under `tests/fixtures/`. They are synthetic and do not include real PDFs.
+
+Current fixtures:
+- `tests/fixtures/workspace_tiny/` with minimal metadata, `kg_edges.jsonl`, and `timeline_edges.jsonl`.
+- Used by timeline tests to validate gap detection and year parsing without requiring full workspaces.
+
+### Coverage
+Coverage is measured with `coverage.py`. A minimum threshold is enforced via `fail_under` in `pyproject.toml`.
+The initial threshold is set to 15% so coverage can be tracked and raised over time.
+
+Run:
+```bash
+python -m coverage run -m unittest discover -s tests
+python -m coverage report --fail-under=60
+python -m coverage html
 ```
 
 ### Gradio QA UI (single instance)
@@ -275,7 +323,7 @@ PDFs (data/<topic>/)
    │
    └─ Agents:
          ├─ Retrieval backend (services/retrieval_service) uses vector_store + graph.sqlite
-         ├─ QA agent (agents/rl_rag_agent): planner + retrieval + structured blocks
+         ├─ QA agent (agents/rag_agent): planner + retrieval + structured blocks
          └─ Protocol agents (methodology/instrument) → outputs/logs/protocol_v2_runs, outputs/logs/instrument_protocol_runs
 ```
 
@@ -283,12 +331,12 @@ PDFs (data/<topic>/)
 - PETase (full build + QA, KG-first):
   ```bash
   python forge/scripts/build_topic_full.py --topic petase --pdf-dir data/petase --workspace workspaces/petase --auto-schema --focus-query "protein engineering"
-  WORKSPACE_ROOT=workspaces/petase USE_ALIAS_EXPANSION=1 python fabric/agents/rl_rag_agent.py ask "What mutations improve PETase thermostability?"
+  WORKSPACE_ROOT=workspaces/petase USE_ALIAS_EXPANSION=1 python fabric/agents/rag_agent.py ask "What mutations improve PETase thermostability?"
   ```
 - 3hp_pand (full build, KG-first):
   ```bash
   python forge/scripts/build_topic_full.py --topic 3hp_pand --pdf-dir data/3hp_pand --workspace workspaces/3hp_pand --auto-schema --focus-query "protein engineering"
-  WORKSPACE_ROOT=workspaces/3hp_pand USE_ALIAS_EXPANSION=0 python fabric/agents/rl_rag_agent.py ask "What are the key enzymes in the 3hp_pand pathway?"
+  WORKSPACE_ROOT=workspaces/3hp_pand USE_ALIAS_EXPANSION=0 python fabric/agents/rag_agent.py ask "What are the key enzymes in the 3hp_pand pathway?"
   ```
 
 ### Diagrams (Mermaid)
@@ -305,7 +353,7 @@ flowchart TD
     VecStore --> Retrieval["Retrieval backend<br>(services/retrieval_service)"]
     GraphDB --> Retrieval
     KGVectors --> Retrieval
-    Retrieval --> QA["QA Agent (Planner + Blocks)<br>(agents/rl_rag_agent)"]
+    Retrieval --> QA["QA Agent (Planner + Blocks)<br>(agents/rag_agent)"]
     Retrieval --> Proto["Protocol Agents<br>(methodology / instrument)"]
     QA --> Logs["outputs/logs/rl_agent_runs.jsonl<br>+ answers"]
     Proto --> ProtoLogs["outputs/logs/protocol_v2_runs<br>outputs/logs/instrument_protocol_runs"]
@@ -359,7 +407,7 @@ python agents/multi_agent_orchestrator.py --workspace workspaces/petase --query 
 ### QA (CLI)
 ```bash
 # One-shot QA (Typer CLI)
-WORKSPACE_ROOT=workspaces/petase python fabric/agents/rl_rag_agent.py ask "What mutations improve PETase thermostability?"
+WORKSPACE_ROOT=workspaces/petase python fabric/agents/rag_agent.py ask "What mutations improve PETase thermostability?"
 ```
 Use `--output-mode answer_dual` (recommended), `--use-claim-store` as needed, and `--use-langgraph-qa` only if you want graph-style logging.
 To persist session memory across turns, add `--chat` and reuse `--session-id`.
@@ -539,7 +587,7 @@ Data structures (canonical):
 - `kg_vector_store/config.json`: `{ "model", "embedding_backend", "document_count", "dimension", "embedding_file", "metadata_file", "faiss_index_file" }`.
 - `facts/facts.jsonl`: each line includes `head {raw,norm}`, `relation_type`, `tail {raw,norm}`, `raw_value`, `normalized_value`, `normalized_unit`, `evidence_text`, `provenance {source,pdf,page,bbox,topic}`, `confidence`.
 
-### B) QA agent (fabric/agents/rl_rag_agent.py)
+### B) QA agent (fabric/agents/rag_agent.py)
 Capabilities:
 - Planner -> retrieval -> structured block composition.
 - Optional BM25, rerank, verifier, claims-lite.
@@ -557,7 +605,7 @@ Outputs:
 - Per-turn artifacts under `outputs/qa_outputs/<topic>/<session_id>/<timestamp>/`.
 - QA trajectories under `outputs/logs/rl_agent_runs.jsonl`.
 
-Key CLI parameters (`python fabric/agents/rl_rag_agent.py ask "..."`):
+Key CLI parameters (`python fabric/agents/rag_agent.py ask "..."`):
 - `--use-llm/--no-llm`, `--temperature`
 - `--use-kg/--no-kg`, `--query-planner/--no-query-planner`, `--bm25/--no-bm25`
 - `--rerank/--no-rerank`, `--verifier/--no-verifier`
@@ -596,7 +644,7 @@ QA flag definitions (core):
 - `--chat/--no-chat` or `--chat-mode`: enable multi-turn memory.
 - `--session-id`: fixed session id for multi-turn continuity.
 - `--use-rl-policy`: run RL policy loop instead of deterministic QA.
-- `--policy-path`: pickled RL policy path (only loaded by `fabric/agents/rl_rag_agent.py` CLI).
+- `--policy-path`: pickled RL policy path (only loaded by `fabric/agents/rag_agent.py` CLI).
 - `--seed`: random seed for deterministic components.
 
 ### C) Protocol agent v2 (methodology-driven)
@@ -720,7 +768,7 @@ Swagger UI:
 
 Endpoints:
 - `GET /health`
-- `POST /qa` (see `QARequest` in `app/hub_api.py`; note: `policy_path` is accepted in the schema but not loaded by the API—use `fabric/agents/rl_rag_agent.py --policy-path` if you need a custom RL policy)
+- `POST /qa` (see `QARequest` in `app/hub_api.py`; note: `policy_path` is accepted in the schema but not loaded by the API—use `fabric/agents/rag_agent.py --policy-path` if you need a custom RL policy)
 - `POST /protocol_v2` with `{ "question": str, "workspace": str|null, "allow_noncanonical": bool, "alias_expansion": bool }`
 - `POST /biofoundry/generate` with `{ "topics": [str]|null, "use_kg": bool, "include_instruments": bool, "kg_top_k": int, "assay_evidence": bool, "llm_rationale": bool }`
 - `POST /multi_agent/run` with `{ "query": str, "workspace": str, "alias_expansion": bool }`
