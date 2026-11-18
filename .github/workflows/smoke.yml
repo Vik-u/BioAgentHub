@@ -1,0 +1,31 @@
+name: smoke
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: KG schema validation (fixture)
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from forge.agents.kg_schema_agent import normalize_schema
+
+          schema_path = Path('tests/fixtures/workspace_tiny/kg_schema.json')
+          schema = json.loads(schema_path.read_text())
+          normalized = normalize_schema(schema, 'tiny', 'fixture')
+          assert normalized.get('relation_keywords'), 'relation_keywords missing'
+          assert normalized.get('key_entities'), 'key_entities missing'
+          PY
+      - name: Run tests
+        run: pytest -q

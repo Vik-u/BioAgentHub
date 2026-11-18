@@ -7,6 +7,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+import sys
 from typing import Dict, Iterable, List
 
 SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
@@ -22,6 +23,12 @@ CONC_PATTERN = re.compile(r"(\d+\.?\d*)\s*(µ?M|mM|nM|mg/mL|%|wt%|v/v)", re.I)
 SPEED_PATTERN = re.compile(r"(\d+\.?\d*)\s*(rpm|×\s?g|xg)", re.I)
 ACTION_KEYWORDS = ["incubate", "centrifuge", "mix", "add", "purify", "wash", "lyse", "express", "induce"]
 OUTCOME_KEYWORDS = ["increase", "improve", "decrease", "yield", "activity", "stability", "thermostability", "conversion", "degradation"]
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from utils.numeric_normalization import discover_units_from_edges, normalize_edge_numeric  # noqa: E402
 
 
 def yield_sentences(text: str) -> Iterable[str]:
@@ -93,9 +100,11 @@ def main() -> None:
                                 "sentence": sentence[:500],
                             }
                         )
-    args.out_edges.write_text("\n".join(json.dumps(edge, ensure_ascii=False) for edge in edges))
+    _, _, alias_map = discover_units_from_edges(edges)
+    enriched = [normalize_edge_numeric(edge, alias_map) for edge in edges]
+    args.out_edges.write_text("\n".join(json.dumps(edge, ensure_ascii=False) for edge in enriched))
     summary: Dict[str, int] = {}
-    for edge in edges:
+    for edge in enriched:
         summary[edge["relation"]] = summary.get(edge["relation"], 0) + 1
     args.summary.write_text(json.dumps(summary, indent=2))
     print(f"Wrote {len(edges)} methodology edges to {args.out_edges}")

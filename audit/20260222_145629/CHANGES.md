@@ -1,0 +1,5 @@
+- Added minimal run tracking module: `utils/ops_tracking.py`.
+- Gitignored private audit payloads: `.gitignore` now includes `audit/_private/`.
+- Added KG audit scripts with tracking hooks: `tools/kg_noise_audit.py` and `tools/kg_exploitation_audit.py`.
+- Added fixture schema for CI smoke validation: `tests/fixtures/workspace_tiny/kg_schema.json`.
+- Added GitHub Actions workflows: `.github/workflows/smoke.yml` and `.github/workflows/audit-smoke.yml`.

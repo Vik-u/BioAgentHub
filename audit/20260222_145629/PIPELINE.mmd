@@ -1,0 +1,41 @@
+flowchart TD
+  subgraph Build
+    A[PDF/Text Corpus] --> B[forge/scripts/build_kg_edges.py]
+    B --> C[workspaces/<topic>/kg_edges.jsonl]
+    C --> D[forge/scripts/build_graph_store.py]
+    D --> E[workspaces/<topic>/graph.sqlite]
+    C --> F[forge/scripts/build_vector_store.py]
+    F --> G[workspaces/<topic>/vector_store]
+
+    H[methodology_full/*.json] --> I[forge/scripts/build_methodology_kg.py]
+    I --> J[workspaces/<topic>/methodology_kg_edges.jsonl]
+    J --> K[forge/scripts/build_methodology_edge_store.py]
+    K --> L[workspaces/<topic>/methodology_edge_store]
+
+    M[Instrument manuals] --> N[InstrumentGraph/kg_edges.jsonl]
+    N --> O[InstrumentGraph/instrument_graph.sqlite]
+    N --> P[InstrumentGraph/vector_store]
+  end
+
+  subgraph Retrieval
+    G --> R1[services.retrieval_service.py
+VectorSearch/BM25]
+    E --> R2[rag_agent.collect_kg_edge_evidence]
+    L --> R3[MethodologyRetrievalBackend.edge_search]
+    L --> R4[MethodologyRetrievalBackend.section_search]
+    O --> R5[instrument_retrieval.InstrumentRetrievalBackend]
+    P --> R6[instrument_retrieval.vector_search]
+  end
+
+  R2 --> QA[fabric/agents/qa_graph.py]
+  R3 --> P1[fabric/agents/protocol_agent_v2.py]
+  R4 --> P1
+  R5 --> IP[fabric/agents/instrument_protocol_agent_v2.py]
+  R6 --> IP
+
+  subgraph Audits
+    C --> A1[tools/kg_noise_audit.py]
+    J --> A1
+    N --> A1
+    E --> A2[tools/kg_exploitation_audit.py]
+  end

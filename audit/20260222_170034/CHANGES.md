@@ -1,0 +1,3 @@
+- Deterministic dimension model + dimension-aware unit canonicalization + adaptive clustering: `utils/numeric_normalization.py`.
+- Cross-paper consensus, stability metrics, gating, and DAG output: `tools/kg_numeric_audit.py`.
+- Audit artifacts refreshed: `audit/20260222_170034/SUMMARY.md`, `audit/20260222_170034/METRICS.json`, `audit/20260222_170034/PIPELINE.mmd`.

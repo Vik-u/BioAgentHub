@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from typing import List
+import os
 
 ALIAS_PRIORITY = [
     "FAST-PETase",
@@ -56,9 +57,10 @@ def preferred_sources(context_sources: List[str], extra: List[str] | None = None
     for source in context_sources:
         if source and source not in ordered:
             ordered.append(source)
-    for source in ALIAS_PRIORITY:
-        if source not in ordered:
-            ordered.append(source)
+    if os.environ.get("USE_ALIAS_EXPANSION", "1") == "1":
+        for source in ALIAS_PRIORITY:
+            if source not in ordered:
+                ordered.append(source)
     if extra:
         for source in extra:
             if source not in ordered:
@@ -67,6 +69,8 @@ def preferred_sources(context_sources: List[str], extra: List[str] | None = None
 
 
 def expected_entities_from_question(question: str) -> List[str]:
+    if os.environ.get("USE_ALIAS_EXPANSION", "1") != "1":
+        return []
     lower = question.lower()
     result: List[str] = []
     for key, vals in QUESTION_KEYWORDS.items():

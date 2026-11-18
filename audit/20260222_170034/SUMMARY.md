@@ -1,0 +1,38 @@
+**KG Numeric Audit Summary**
+- Pipeline snapshot:
+- Canonical units: `normalize_unit_token` + `build_unit_alias_map_by_dimension` (unicode normalize, casefold, punctuation stripping, symbol equivalence) grouped by `dimension_label`.
+- Dimension labels: `build_dimension_model` (token association from `relation_category` + local context) + `apply_dimension_model`; `UNKNOWN_DIMENSION` if confidence < p25 of label confidences.
+- Clustering: `cluster_numeric_values_adaptive` (median relative diff per slot).
+- Protocol routing (current): `gather_methodology_edges` → `_select_parameter_line` (VALID_NORMALIZED first, then RAW, scored by relevance, cluster_size, paper_diversity, section_priority, vector_score).
+- FAST_EMBED=1: `embed_texts` uses `hash_embed_texts` (token-hash bag-of-words) for contextual similarity; no embedding-based dimension inference.
+- KG files scanned: 19
+- Total edges: 234098
+- Duplicate ratio (exact row): 0.0137
+- Unit diversity (canonical): 2556
+- Dimension count: 7
+- Dimension-confident edges (% of numeric): 0.9970
+- Slot fill rate: 0.6218
+- Avg cluster size: 2.5870
+- Avg distinct paper count: 2.4967
+- Avg posterior confidence: 0.1527
+- Canonical units (before -> after): 3928 -> 2556
+- Slot fill rate (before -> after): 0.4347 -> 0.6218
+- Dimension-confident edges % (before -> after): 0.0042 -> 0.9970
+- Unit compression ratio (before -> after): n/a -> 0.9644
+- Cluster median (before -> after): n/a -> 1.0000
+- Multi-paper support % (before -> after): n/a -> 0.1030
+- Cross-paper graph components: 1 (nodes=141, edges=3577)
+- Canonical unit stability (methodology vs full Jaccard): 0.0160
+- Top dimensions coverage: concentration=0.50, temperature=0.29, volume=0.08, time=0.07, pH=0.04, percentage=0.01, speed=0.01, UNKNOWN_DIMENSION=0.00
+- Improvements detected: dimension_coverage
+- Top 10 canonical units (by frequency):
+- m
+- °C
+- %
+- pH
+- mL
+- A
+- min
+- nm
+- µL
+- µM

@@ -652,6 +652,8 @@ Capabilities:
 - Retrieves methodology sections + parameter edges.
 - Optionally augments with instrument evidence.
 - Generates a 2-section protocol (Experimental/Computational) via LLM.
+- Enforces structure/length/parameter coverage with a validation + retry loop (see details below).
+- Extracts safety notes from sources and injects them into the prompt for safety bullets.
 
 Inputs:
 - `WORKSPACE_ROOT` pointing to a topic workspace.
@@ -664,7 +666,23 @@ Outputs:
 - Markdown protocol string.
 - Logs in `outputs/logs/protocol_v2_runs/run_XXXXX.json` with fields:
   `question`, `experimental_sections`, `computational_sections`, `results_sections`,
-  `parameter_edges`, `instrument_evidence`, `answer`.
+  `parameter_edges`, `instrument_evidence`, `safety_notes`, `answer`, `validation_issues`.
+
+Validation + safety behavior:
+- The protocol agent runs a validator that checks:
+  - Required section headers and step counts.
+  - Minimum sentence counts for computational steps and experimental Actions.
+  - Presence of labeled sub-bullets in experimental steps.
+  - Concrete parameters (temps/times/volumes/etc.) when numeric evidence exists in sources.
+- If validation fails, the agent regenerates up to a small retry budget and logs remaining issues in `validation_issues`.
+- Safety bullets are populated only from extracted safety notes; the agent does not invent safety details.
+  If no explicit safety notes are found in sources, validation does not require safety details beyond the label.
+
+Resource notes:
+- The protocol agent sets `TOKENIZERS_PARALLELISM=false` and `RAYON_NUM_THREADS=1` to avoid
+  tokenizer thread-pool startup failures on constrained systems.
+- It also sets `OPENBLAS_NUM_THREADS=1`, `OMP_NUM_THREADS=1`, and `MKL_NUM_THREADS=1`
+  to prevent OpenBLAS thread initialization failures.
 
 Methodology store data structures:
 - `methodology_vector_store/metadata.jsonl`: lines like `{ "id", "section_type", "heading", "paper", "pdf_file", "text" }`.
